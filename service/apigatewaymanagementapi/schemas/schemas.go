@@ -15,34 +15,7 @@ const blob = "" +
 var set = smithy.SchemaSet{
 	Blob:       blob,
 	Namespaces: []string{"com.amazonaws.apigatewaymanagementapi"},
-	Records: []smithy.StaticRecord{
-		{StrOff: 47, Target: 0, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 115, Target: 1, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 70, Target: 2, Traits: 2, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 24, Target: 3, Traits: 3, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
-		{StrOff: 265, Target: 4, Traits: 3, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 174, Target: 5, Traits: 4, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
-		{StrOff: 280, Target: 6, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
-		{StrOff: 156, Target: 7, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 192, Target: 8, Traits: 6, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 249, Target: 9, Traits: 3, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 257, Target: 4, Traits: 7, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 240, Target: 4, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 93, Target: 12, Traits: 9, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 0, Target: 13, Traits: 10, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 273, Target: 4, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 47, Target: 15, Traits: 3, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 205, Target: 4, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 136, Target: 17, Traits: 3, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 205, Target: 4, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 115, Target: 19, Traits: 3, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 229, Target: 5, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 249, Target: 9, Traits: 14, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 217, Target: 5, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 70, Target: 23, Traits: 3, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 280, Target: 6, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
-		{StrOff: 205, Target: 4, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-	},
+	Len:        26,
 	Traits: []smithy.TraitSet{
 		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 			URI:  "/@connections/{ConnectionId}",
@@ -70,75 +43,75 @@ var set = smithy.SchemaSet{
 	},
 }
 
-var handles = [26]smithy.Schema{
-	smithy.NewStaticSchema(&set, 0, 0),
-	smithy.NewStaticSchema(&set, 1, 0),
-	smithy.NewStaticSchema(&set, 2, 0),
-	smithy.NewStaticSchema(&set, 3, 0),
-	smithy.NewStaticSchema(&set, 4, 0),
-	smithy.NewStaticSchema(&set, 5, 0),
-	smithy.NewStaticSchema(&set, 6, 0),
-	smithy.NewStaticSchema(&set, 7, 0),
-	smithy.NewStaticSchema(&set, 8, 0),
-	smithy.NewStaticSchema(&set, 9, 0),
-	smithy.NewStaticSchema(&set, 10, 0),
-	smithy.NewStaticSchema(&set, 11, 0),
-	smithy.NewStaticSchema(&set, 12, 0),
-	smithy.NewStaticSchema(&set, 13, 0),
-	smithy.NewStaticSchema(&set, 14, 0),
-	smithy.NewStaticSchema(&set, 15, 0),
-	smithy.NewStaticSchema(&set, 16, 0),
-	smithy.NewStaticSchema(&set, 17, 0),
-	smithy.NewStaticSchema(&set, 18, 0),
-	smithy.NewStaticSchema(&set, 19, 0),
-	smithy.NewStaticSchema(&set, 20, 0),
-	smithy.NewStaticSchema(&set, 21, 0),
-	smithy.NewStaticSchema(&set, 22, 0),
-	smithy.NewStaticSchema(&set, 23, 0),
-	smithy.NewStaticSchema(&set, 24, 0),
-	smithy.NewStaticSchema(&set, 25, 0),
+var all = [26]smithy.Schema{
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 47, Ord: 0, Target: 0, Traits: 0, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 115, Ord: 1, Target: 1, Traits: 1, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 70, Ord: 2, Target: 2, Traits: 2, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 24, Ord: 3, Target: 3, Traits: 3, StrLen: 23, Count: 0, Shape: uint8(smithy.ShapeTypeService), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 265, Ord: 4, Target: 4, Traits: 3, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 174, Ord: 5, Target: 5, Traits: 4, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 280, Ord: 6, Target: 6, Traits: 3, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeBlob), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 156, Ord: 7, Target: 7, Traits: 5, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 192, Ord: 8, Target: 8, Traits: 6, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 249, Ord: 9, Target: 9, Traits: 3, StrLen: 8, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 257, Ord: 10, Target: 4, Traits: 7, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 240, Ord: 11, Target: 4, Traits: 8, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 93, Ord: 12, Target: 12, Traits: 9, StrLen: 22, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 0, Ord: 13, Target: 13, Traits: 10, StrLen: 24, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 273, Ord: 14, Target: 4, Traits: 11, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 47, Ord: 15, Target: 15, Traits: 3, StrLen: 23, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 205, Ord: 16, Target: 4, Traits: 12, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 136, Ord: 17, Target: 17, Traits: 3, StrLen: 20, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 205, Ord: 18, Target: 4, Traits: 12, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 115, Ord: 19, Target: 19, Traits: 3, StrLen: 21, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 229, Ord: 20, Target: 5, Traits: 13, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 249, Ord: 21, Target: 9, Traits: 14, StrLen: 8, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 217, Ord: 22, Target: 5, Traits: 15, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 70, Ord: 23, Target: 23, Traits: 3, StrLen: 23, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 280, Ord: 24, Target: 6, Traits: 16, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeBlob), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 205, Ord: 25, Target: 4, Traits: 12, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
 }
 
-var DeleteConnection = &handles[0]
+var DeleteConnection = &all[0]
 
-var GetConnection = &handles[1]
+var GetConnection = &all[1]
 
-var PostToConnection = &handles[2]
+var PostToConnection = &all[2]
 
-var _ApiGatewayManagementApi = &handles[3]
+var _ApiGatewayManagementApi = &all[3]
 
-var ___string = &handles[4]
+var ___string = &all[4]
 
-var ___timestampIso8601 = &handles[5]
+var ___timestampIso8601 = &all[5]
 
-var _Data = &handles[6]
+var _Data = &all[6]
 
-var ForbiddenException = &handles[7]
+var ForbiddenException = &all[7]
 
-var GoneException = &handles[8]
+var GoneException = &all[8]
 
-var Identity = &handles[9]
-var Identity_SourceIp = &handles[10]
-var Identity_UserAgent = &handles[11]
+var Identity = &all[9]
+var Identity_SourceIp = &all[10]
+var Identity_UserAgent = &all[11]
 
-var LimitExceededException = &handles[12]
+var LimitExceededException = &all[12]
 
-var PayloadTooLargeException = &handles[13]
-var PayloadTooLargeException_Message = &handles[14]
+var PayloadTooLargeException = &all[13]
+var PayloadTooLargeException_Message = &all[14]
 
-var DeleteConnectionRequest = &handles[15]
-var DeleteConnectionRequest_ConnectionId = &handles[16]
+var DeleteConnectionRequest = &all[15]
+var DeleteConnectionRequest_ConnectionId = &all[16]
 
-var GetConnectionRequest = &handles[17]
-var GetConnectionRequest_ConnectionId = &handles[18]
+var GetConnectionRequest = &all[17]
+var GetConnectionRequest_ConnectionId = &all[18]
 
-var GetConnectionResponse = &handles[19]
-var GetConnectionResponse_ConnectedAt = &handles[20]
-var GetConnectionResponse_Identity = &handles[21]
-var GetConnectionResponse_LastActiveAt = &handles[22]
+var GetConnectionResponse = &all[19]
+var GetConnectionResponse_ConnectedAt = &all[20]
+var GetConnectionResponse_Identity = &all[21]
+var GetConnectionResponse_LastActiveAt = &all[22]
 
-var PostToConnectionRequest = &handles[23]
-var PostToConnectionRequest_Data = &handles[24]
-var PostToConnectionRequest_ConnectionId = &handles[25]
+var PostToConnectionRequest = &all[23]
+var PostToConnectionRequest_Data = &all[24]
+var PostToConnectionRequest_ConnectionId = &all[25]
 
-var ApiGatewayManagementApi = &smithy.ServiceSchema{Schema: &handles[3], Version: "2018-11-29"}
+var ApiGatewayManagementApi = &smithy.ServiceSchema{Schema: &all[3], Version: "2018-11-29"}

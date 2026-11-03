@@ -15,30 +15,7 @@ const blob = "" +
 var set = smithy.SchemaSet{
 	Blob:       blob,
 	Namespaces: []string{"com.amazonaws.marketplacereporting", "smithy.api"},
-	Records: []smithy.StaticRecord{
-		{StrOff: 23, Target: 0, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 0, Target: 1, Traits: 1, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
-		{StrOff: 91, Target: 2, Traits: 2, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 230, Target: 21, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 133, Target: 4, Traits: 3, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 230, Target: 21, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 152, Target: 6, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 190, Target: 7, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 190, Target: 8, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 243, Target: 7, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 46, Target: 10, Traits: 4, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 230, Target: 21, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 112, Target: 12, Traits: 5, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 230, Target: 21, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 69, Target: 14, Traits: 1, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 171, Target: 6, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 206, Target: 8, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 23, Target: 17, Traits: 1, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 222, Target: 21, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 171, Target: 6, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 206, Target: 8, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 237, Target: 21, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
-	},
+	Len:        22,
 	Traits: []smithy.TraitSet{
 		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 			URI:  "/getBuyerDashboard",
@@ -51,61 +28,61 @@ var set = smithy.SchemaSet{
 	},
 }
 
-var handles = [22]smithy.Schema{
-	smithy.NewStaticSchema(&set, 0, 0),
-	smithy.NewStaticSchema(&set, 1, 0),
-	smithy.NewStaticSchema(&set, 2, 0),
-	smithy.NewStaticSchema(&set, 3, 0),
-	smithy.NewStaticSchema(&set, 4, 0),
-	smithy.NewStaticSchema(&set, 5, 0),
-	smithy.NewStaticSchema(&set, 6, 0),
-	smithy.NewStaticSchema(&set, 7, 0),
-	smithy.NewStaticSchema(&set, 8, 1073741832),
-	smithy.NewStaticSchema(&set, 9, 0),
-	smithy.NewStaticSchema(&set, 10, 0),
-	smithy.NewStaticSchema(&set, 11, 0),
-	smithy.NewStaticSchema(&set, 12, 0),
-	smithy.NewStaticSchema(&set, 13, 0),
-	smithy.NewStaticSchema(&set, 14, 0),
-	smithy.NewStaticSchema(&set, 15, 0),
-	smithy.NewStaticSchema(&set, 16, 1073741832),
-	smithy.NewStaticSchema(&set, 17, 0),
-	smithy.NewStaticSchema(&set, 18, 0),
-	smithy.NewStaticSchema(&set, 19, 0),
-	smithy.NewStaticSchema(&set, 20, 1073741832),
-	smithy.NewStaticSchema(&set, 21, 0),
+var all = [22]smithy.Schema{
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 23, Ord: 0, Target: 0, Traits: 0, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 0, Ord: 1, Target: 1, Traits: 1, StrLen: 23, Count: 0, Shape: uint8(smithy.ShapeTypeService), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 91, Ord: 2, Target: 2, Traits: 2, StrLen: 21, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 230, Ord: 3, Target: 21, Traits: 1, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 133, Ord: 4, Target: 4, Traits: 3, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 230, Ord: 5, Target: 21, Traits: 1, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 152, Ord: 6, Target: 6, Traits: 1, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 190, Ord: 7, Target: 7, Traits: 1, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 190, Ord: 8, Target: 8, Traits: 1, StrLen: 16, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 243, Ord: 9, Target: 7, Traits: 1, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 46, Ord: 10, Target: 10, Traits: 4, StrLen: 23, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 230, Ord: 11, Target: 21, Traits: 1, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 112, Ord: 12, Target: 12, Traits: 5, StrLen: 21, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 230, Ord: 13, Target: 21, Traits: 1, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 69, Ord: 14, Target: 14, Traits: 1, StrLen: 22, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 171, Ord: 15, Target: 6, Traits: 1, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 206, Ord: 16, Target: 8, Traits: 1, StrLen: 16, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 23, Ord: 17, Target: 17, Traits: 1, StrLen: 23, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 222, Ord: 18, Target: 21, Traits: 1, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 171, Ord: 19, Target: 6, Traits: 1, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 206, Ord: 20, Target: 8, Traits: 1, StrLen: 16, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 237, Ord: 21, Target: 21, Traits: 1, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 8}),
 }
 
-var GetBuyerDashboard = &handles[0]
+var GetBuyerDashboard = &all[0]
 
-var _AWSMarketplaceReporting = &handles[1]
+var _AWSMarketplaceReporting = &all[1]
 
-var AccessDeniedException = &handles[2]
-var AccessDeniedException_message = &handles[3]
+var AccessDeniedException = &all[2]
+var AccessDeniedException_message = &all[3]
 
-var BadRequestException = &handles[4]
-var BadRequestException_message = &handles[5]
+var BadRequestException = &all[4]
+var BadRequestException_message = &all[5]
 
-var _DashboardIdentifier = &handles[6]
+var _DashboardIdentifier = &all[6]
 
-var _EmbeddingDomain = &handles[7]
+var _EmbeddingDomain = &all[7]
 
-var _EmbeddingDomains = &handles[8]
-var _EmbeddingDomains_member = &handles[9]
+var _EmbeddingDomains = &all[8]
+var _EmbeddingDomains_member = &all[9]
 
-var InternalServerException = &handles[10]
-var InternalServerException_message = &handles[11]
+var InternalServerException = &all[10]
+var InternalServerException_message = &all[11]
 
-var UnauthorizedException = &handles[12]
-var UnauthorizedException_message = &handles[13]
+var UnauthorizedException = &all[12]
+var UnauthorizedException_message = &all[13]
 
-var GetBuyerDashboardInput = &handles[14]
-var GetBuyerDashboardInput_dashboardIdentifier = &handles[15]
-var GetBuyerDashboardInput_embeddingDomains = &handles[16]
+var GetBuyerDashboardInput = &all[14]
+var GetBuyerDashboardInput_dashboardIdentifier = &all[15]
+var GetBuyerDashboardInput_embeddingDomains = &all[16]
 
-var GetBuyerDashboardOutput = &handles[17]
-var GetBuyerDashboardOutput_embedUrl = &handles[18]
-var GetBuyerDashboardOutput_dashboardIdentifier = &handles[19]
-var GetBuyerDashboardOutput_embeddingDomains = &handles[20]
+var GetBuyerDashboardOutput = &all[17]
+var GetBuyerDashboardOutput_embedUrl = &all[18]
+var GetBuyerDashboardOutput_dashboardIdentifier = &all[19]
+var GetBuyerDashboardOutput_embeddingDomains = &all[20]
 
-var AWSMarketplaceReporting = &smithy.ServiceSchema{Schema: &handles[1], Version: "2018-05-10"}
+var AWSMarketplaceReporting = &smithy.ServiceSchema{Schema: &all[1], Version: "2018-05-10"}

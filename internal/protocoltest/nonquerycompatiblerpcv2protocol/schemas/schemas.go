@@ -12,22 +12,19 @@ const blob = "" +
 var set = smithy.SchemaSet{
 	Blob:       blob,
 	Namespaces: []string{"aws.protocoltests.rpcv2cbor"},
-	Records: []smithy.StaticRecord{
-		{StrOff: 31, Target: 0, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 0, Target: 1, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
-	},
+	Len:        2,
 	Traits: []smithy.TraitSet{
 		{},
 	},
 }
 
-var handles = [2]smithy.Schema{
-	smithy.NewStaticSchema(&set, 0, 0),
-	smithy.NewStaticSchema(&set, 1, 0),
+var all = [2]smithy.Schema{
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 31, Ord: 0, Target: 0, Traits: 0, StrLen: 27, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 0, Ord: 1, Target: 1, Traits: 0, StrLen: 31, Count: 0, Shape: uint8(smithy.ShapeTypeService), Flags: 0}),
 }
 
-var NonQueryCompatibleOperation = &handles[0]
+var NonQueryCompatibleOperation = &all[0]
 
-var _NonQueryCompatibleRpcV2Protocol = &handles[1]
+var _NonQueryCompatibleRpcV2Protocol = &all[1]
 
-var NonQueryCompatibleRpcV2Protocol = &smithy.ServiceSchema{Schema: &handles[1], Version: "2025-06-20"}
+var NonQueryCompatibleRpcV2Protocol = &smithy.ServiceSchema{Schema: &all[1], Version: "2025-06-20"}

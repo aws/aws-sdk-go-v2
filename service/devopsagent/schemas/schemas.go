@@ -137,1660 +137,7 @@ const blob = "" +
 var set = smithy.SchemaSet{
 	Blob:       blob,
 	Namespaces: []string{"com.amazonaws.devopsagent", "smithy.api"},
-	Records: []smithy.StaticRecord{
-		{StrOff: 4173, Target: 0, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 4217, Target: 1, Traits: 1, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 3736, Target: 2, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 3736, Target: 3, Traits: 3, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 2907, Target: 4, Traits: 4, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 6712, Target: 5, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 1557, Target: 6, Traits: 6, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 4981, Target: 7, Traits: 7, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 4261, Target: 8, Traits: 8, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 3759, Target: 9, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 3759, Target: 10, Traits: 10, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 1586, Target: 11, Traits: 11, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 5044, Target: 12, Traits: 12, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 3782, Target: 13, Traits: 13, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 982, Target: 14, Traits: 14, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 3805, Target: 15, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 2932, Target: 16, Traits: 16, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 3851, Target: 17, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 5086, Target: 18, Traits: 18, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 6184, Target: 19, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 3874, Target: 20, Traits: 20, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 3874, Target: 21, Traits: 21, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 5647, Target: 22, Traits: 22, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 5667, Target: 23, Traits: 23, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 4415, Target: 24, Traits: 24, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 5687, Target: 25, Traits: 25, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 2982, Target: 26, Traits: 26, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 8101, Target: 27, Traits: 27, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 6802, Target: 28, Traits: 28, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 5149, Target: 29, Traits: 29, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 4437, Target: 30, Traits: 30, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 6838, Target: 31, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 4459, Target: 32, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 3032, Target: 33, Traits: 33, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 4481, Target: 34, Traits: 34, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 3499, Target: 35, Traits: 35, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 7584, Target: 36, Traits: 36, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 4503, Target: 37, Traits: 37, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 7601, Target: 38, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 2647, Target: 39, Traits: 39, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 2351, Target: 40, Traits: 40, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 1931, Target: 41, Traits: 41, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 2405, Target: 42, Traits: 42, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 6856, Target: 43, Traits: 43, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 2432, Target: 44, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 5787, Target: 45, Traits: 45, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 6874, Target: 46, Traits: 46, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 421, Target: 47, Traits: 47, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 556, Target: 48, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 6431, Target: 49, Traits: 49, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 5401, Target: 50, Traits: 50, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 4745, Target: 51, Traits: 51, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 2211, Target: 52, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 4104, Target: 53, Traits: 53, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 4104, Target: 54, Traits: 54, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 4127, Target: 55, Traits: 55, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 3232, Target: 56, Traits: 56, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 7180, Target: 57, Traits: 57, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 886, Target: 58, Traits: 58, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 42, Target: 59, Traits: 59, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 2239, Target: 60, Traits: 60, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 5443, Target: 61, Traits: 61, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 1789, Target: 62, Traits: 62, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 10271, Target: 63, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
-		{StrOff: 4855, Target: 64, Traits: 64, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11373, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3307, Target: 66, Traits: 63, StrLen: 24, Count: 15, Type: uint8(smithy.ShapeTypeUnion), Flags: 0, Hash: 1},
-		{StrOff: 12177, Target: 716, Traits: 63, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12326, Target: 776, Traits: 63, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8389, Target: 727, Traits: 63, StrLen: 16, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7873, Target: 727, Traits: 63, StrLen: 9, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11033, Target: 772, Traits: 63, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12183, Target: 720, Traits: 63, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8771, Target: 727, Traits: 63, StrLen: 15, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7873, Target: 743, Traits: 63, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10414, Target: 709, Traits: 63, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9635, Target: 711, Traits: 63, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8405, Target: 724, Traits: 63, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11409, Target: 747, Traits: 63, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9196, Target: 734, Traits: 63, StrLen: 14, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8453, Target: 749, Traits: 63, StrLen: 11, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8453, Target: 755, Traits: 63, StrLen: 16, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 590, Target: 82, Traits: 63, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 12316, Target: 573, Traits: 63, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 3667, Target: 84, Traits: 63, StrLen: 10, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 97, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12195, Target: 443, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11364, Target: 438, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10010, Target: 93, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10590, Target: 100, Traits: 63, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 5527, Target: 93, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 5527, Target: 94, Traits: 63, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8860, Target: 95, Traits: 63, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 84, Traits: 63, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8874, Target: 97, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 3667, Target: 98, Traits: 63, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 3427, Target: 1646, Traits: 63, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4876, Target: 100, Traits: 63, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
-		{StrOff: 12446, Target: 98, Traits: 63, StrLen: 3, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 12351, Target: 1647, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
-		{StrOff: 10238, Target: 103, Traits: 67, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 2217, Target: 104, Traits: 63, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11526, Target: 1096, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10557, Target: 419, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10873, Target: 116, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10893, Target: 226, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12165, Target: 110, Traits: 63, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 6640, Target: 110, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 11578, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11690, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 5547, Target: 113, Traits: 63, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
-		{StrOff: 12446, Target: 120, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12351, Target: 121, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10733, Target: 116, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8501, Target: 117, Traits: 63, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 7324, Target: 1095, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10046, Target: 113, Traits: 63, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 8888, Target: 120, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 7957, Target: 121, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8902, Target: 122, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8916, Target: 123, Traits: 63, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 3107, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11578, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11690, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11956, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11682, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 3036, Target: 129, Traits: 63, StrLen: 5, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11738, Target: 828, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11256, Target: 172, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11786, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 12061, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 3877, Target: 136, Traits: 63, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 12401, Target: 152, Traits: 63, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12068, Target: 185, Traits: 63, StrLen: 3, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11472, Target: 170, Traits: 63, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8516, Target: 140, Traits: 63, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 3742, Target: 141, Traits: 63, StrLen: 9, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12409, Target: 156, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7805, Target: 148, Traits: 63, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 11786, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 12061, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 9336, Target: 148, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 12276, Target: 151, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
-		{StrOff: 7068, Target: 165, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8930, Target: 151, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
-		{StrOff: 7973, Target: 152, Traits: 63, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12409, Target: 156, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12393, Target: 148, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 11786, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 9349, Target: 156, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 5567, Target: 157, Traits: 63, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12409, Target: 156, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11786, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 12061, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 5567, Target: 163, Traits: 63, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 157, Traits: 63, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9362, Target: 165, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 10249, Target: 166, Traits: 63, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11103, Target: 168, Traits: 63, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 129, Traits: 63, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4897, Target: 170, Traits: 63, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12449, Target: 140, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4463, Target: 172, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 9375, Target: 173, Traits: 63, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 175, Traits: 63, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7989, Target: 175, Traits: 63, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11256, Target: 172, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3331, Target: 178, Traits: 63, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12061, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 3331, Target: 182, Traits: 63, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 178, Traits: 63, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9388, Target: 184, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
-		{StrOff: 8531, Target: 185, Traits: 63, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12068, Target: 184, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
-		{StrOff: 4918, Target: 187, Traits: 63, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 189, Traits: 63, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 4918, Target: 189, Traits: 63, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 7068, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11526, Target: 1648, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 1514, Target: 192, Traits: 63, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 10214, Target: 1149, Traits: 63, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 9622, Target: 204, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11436, Target: 966, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9661, Target: 929, Traits: 63, StrLen: 13, Count: 21, Type: uint8(smithy.ShapeTypeUnion), Flags: 1, Hash: 11},
-		{StrOff: 10082, Target: 201, Traits: 63, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 3690, Target: 201, Traits: 63, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
-		{StrOff: 12446, Target: 230, Traits: 63, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 12351, Target: 227, Traits: 63, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 1514, Target: 204, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8005, Target: 205, Traits: 63, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 192, Traits: 63, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11586, Target: 207, Traits: 63, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 12428, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12431, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12434, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7941, Target: 211, Traits: 63, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 8341, Target: 831, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11238, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10381, Target: 533, Traits: 63, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 2881, Target: 831, Traits: 63, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2881, Target: 1149, Traits: 63, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 6658, Target: 217, Traits: 63, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 9308, Target: 1644, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3355, Target: 219, Traits: 63, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 8421, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11418, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10601, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4195, Target: 223, Traits: 63, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8037, Target: 224, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8021, Target: 225, Traits: 66, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
-		{StrOff: 10743, Target: 226, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 3713, Target: 227, Traits: 63, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 6047, Target: 1647, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
-		{StrOff: 6602, Target: 1117, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 8958, Target: 230, Traits: 63, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 0, Target: 1646, Traits: 63, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 0, Target: 1646, Traits: 63, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7414, Target: 233, Traits: 63, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 7431, Target: 234, Traits: 63, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10491, Target: 828, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 12047, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8546, Target: 239, Traits: 63, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 7431, Target: 240, Traits: 63, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 234, Traits: 63, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10307, Target: 242, Traits: 67, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8639, Target: 243, Traits: 67, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 7448, Target: 244, Traits: 68, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11373, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1847, Target: 246, Traits: 69, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11373, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9854, Target: 248, Traits: 63, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10933, Target: 835, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7482, Target: 250, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 7482, Target: 251, Traits: 63, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 250, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2024, Target: 253, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
-		{StrOff: 12446, Target: 250, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12351, Target: 256, Traits: 65, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7499, Target: 256, Traits: 67, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8561, Target: 257, Traits: 63, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 2621, Target: 258, Traits: 63, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 4811, Target: 456, Traits: 63, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 5002, Target: 260, Traits: 63, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 486, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11762, Target: 480, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6526, Target: 258, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 11618, Target: 265, Traits: 66, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
-		{StrOff: 11130, Target: 266, Traits: 63, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 12135, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11984, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11229, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11706, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12093, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11698, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12159, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4206, Target: 274, Traits: 67, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 10282, Target: 275, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 9866, Target: 276, Traits: 63, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1648, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 4327, Target: 278, Traits: 63, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12291, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11427, Target: 286, Traits: 63, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 198, Target: 281, Traits: 63, StrLen: 37, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10903, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11754, Target: 242, Traits: 65, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7216, Target: 299, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 10094, Target: 243, Traits: 65, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5065, Target: 286, Traits: 63, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 382, Target: 288, Traits: 67, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 4833, Target: 281, Traits: 63, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 3828, Target: 290, Traits: 63, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10853, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6526, Target: 288, Traits: 65, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 9890, Target: 293, Traits: 67, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 2957, Target: 294, Traits: 63, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 6165, Target: 295, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12421, Target: 297, Traits: 63, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 8069, Target: 297, Traits: 63, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 11998, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6766, Target: 299, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
-		{StrOff: 12446, Target: 1644, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12351, Target: 302, Traits: 65, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4371, Target: 302, Traits: 67, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 4507, Target: 303, Traits: 63, StrLen: 9, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 2},
-		{StrOff: 10010, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10491, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7890, Target: 1644, Traits: 63, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10022, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11283, Target: 437, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 437, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 8726, Target: 315, Traits: 63, StrLen: 15, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 11247, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6370, Target: 1644, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7435, Target: 313, Traits: 63, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 303, Traits: 63, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 2},
-		{StrOff: 8576, Target: 315, Traits: 63, StrLen: 15, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 9408, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11963, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11977, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11594, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11202, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11991, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8972, Target: 322, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8986, Target: 323, Traits: 63, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11093, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11553, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10711, Target: 1161, Traits: 63, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 9804, Target: 1158, Traits: 65, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10034, Target: 103, Traits: 65, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6260, Target: 329, Traits: 63, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11850, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12219, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11400, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11400, Target: 337, Traits: 63, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 7252, Target: 1644, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9252, Target: 831, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1497, Target: 204, Traits: 63, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6298, Target: 337, Traits: 63, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 9926, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12385, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6279, Target: 340, Traits: 63, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11418, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10612, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7252, Target: 1644, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9252, Target: 831, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1497, Target: 204, Traits: 63, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9427, Target: 346, Traits: 63, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 1527, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11517, Target: 351, Traits: 63, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 11063, Target: 354, Traits: 65, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12012, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8621, Target: 351, Traits: 63, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 11658, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12261, Target: 1646, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8117, Target: 354, Traits: 67, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 7186, Target: 355, Traits: 63, StrLen: 4, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 3},
-		{StrOff: 9609, Target: 1644, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12189, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12341, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7805, Target: 369, Traits: 63, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10214, Target: 379, Traits: 63, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 11770, Target: 383, Traits: 63, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 11283, Target: 225, Traits: 70, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 225, Traits: 70, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 8756, Target: 225, Traits: 70, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 10953, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6067, Target: 1644, Traits: 63, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12061, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 7198, Target: 374, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10293, Target: 369, Traits: 63, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10469, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10983, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11626, Target: 372, Traits: 63, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 355, Traits: 63, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 3},
-		{StrOff: 7533, Target: 374, Traits: 63, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12331, Target: 836, Traits: 63, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 10933, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7533, Target: 377, Traits: 63, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12331, Target: 836, Traits: 63, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 10783, Target: 379, Traits: 63, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 12075, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12141, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11112, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11634, Target: 383, Traits: 63, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 8053, Target: 1646, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9492, Target: 1646, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 5128, Target: 386, Traits: 63, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 486, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11762, Target: 480, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6526, Target: 449, Traits: 63, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 6369, Target: 391, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 5707, Target: 392, Traits: 63, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 7270, Target: 1644, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 5727, Target: 396, Traits: 63, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 7270, Target: 1644, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9182, Target: 1644, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7856, Target: 1644, Traits: 63, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 1167, Target: 402, Traits: 71, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11373, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6621, Target: 1644, Traits: 63, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5747, Target: 405, Traits: 63, StrLen: 20, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11346, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11754, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7270, Target: 1644, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11826, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 10304, Target: 412, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8636, Target: 413, Traits: 67, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 9902, Target: 414, Traits: 63, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 9479, Target: 1646, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11570, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 3897, Target: 417, Traits: 72, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11373, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10315, Target: 419, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 3007, Target: 420, Traits: 71, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11373, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6820, Target: 422, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 9453, Target: 423, Traits: 63, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 12373, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12377, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10763, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 2651, Target: 427, Traits: 63, StrLen: 13, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10491, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11842, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7805, Target: 1648, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 11283, Target: 437, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11003, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9791, Target: 1134, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7550, Target: 435, Traits: 63, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 427, Traits: 63, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8133, Target: 437, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
-		{StrOff: 11139, Target: 438, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 4525, Target: 439, Traits: 63, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 844, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8651, Target: 441, Traits: 63, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1021, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12123, Target: 443, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 4569, Target: 444, Traits: 63, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
-		{StrOff: 5254, Target: 445, Traits: 63, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10863, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10403, Target: 103, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10034, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1959, Target: 449, Traits: 63, StrLen: 28, Count: 6, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 4833, Target: 500, Traits: 63, StrLen: 22, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11794, Target: 490, Traits: 63, StrLen: 8, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 4},
-		{StrOff: 10034, Target: 445, Traits: 63, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10425, Target: 464, Traits: 63, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9687, Target: 471, Traits: 63, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4811, Target: 456, Traits: 63, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 235, Target: 456, Traits: 63, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 8469, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1987, Target: 458, Traits: 63, StrLen: 28, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 3523, Target: 1646, Traits: 63, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11157, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11914, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9842, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8944, Target: 1646, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 2751, Target: 464, Traits: 63, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11508, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11063, Target: 1090, Traits: 65, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6545, Target: 1644, Traits: 63, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4547, Target: 468, Traits: 63, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12346, Target: 527, Traits: 63, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 10678, Target: 525, Traits: 63, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 2015, Target: 471, Traits: 63, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12019, Target: 253, Traits: 63, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 1615, Target: 473, Traits: 63, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 6047, Target: 525, Traits: 63, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 2839, Target: 475, Traits: 63, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 486, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11762, Target: 480, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6526, Target: 449, Traits: 63, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 7652, Target: 480, Traits: 63, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 1644, Target: 481, Traits: 63, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11762, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9224, Target: 1644, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12346, Target: 527, Traits: 63, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 6047, Target: 525, Traits: 63, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 9466, Target: 486, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 1197, Target: 487, Traits: 63, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11238, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11762, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3943, Target: 490, Traits: 63, StrLen: 23, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 4},
-		{StrOff: 10903, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11754, Target: 242, Traits: 65, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7216, Target: 299, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 8469, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8357, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 918, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10094, Target: 243, Traits: 65, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6087, Target: 1647, Traits: 63, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
-		{StrOff: 12225, Target: 842, Traits: 63, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 272, Target: 500, Traits: 63, StrLen: 37, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10903, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11754, Target: 242, Traits: 65, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7216, Target: 299, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 10094, Target: 243, Traits: 65, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 918, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12225, Target: 842, Traits: 63, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 623, Target: 507, Traits: 63, StrLen: 33, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12213, Target: 997, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9280, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12040, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10973, Target: 831, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9687, Target: 253, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 2459, Target: 513, Traits: 63, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12346, Target: 527, Traits: 63, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 10678, Target: 525, Traits: 63, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 2043, Target: 516, Traits: 63, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 486, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11762, Target: 480, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6526, Target: 507, Traits: 63, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 2071, Target: 521, Traits: 63, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 6892, Target: 522, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7324, Target: 1091, Traits: 63, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 6892, Target: 525, Traits: 63, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 522, Traits: 63, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9914, Target: 527, Traits: 63, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 560, Target: 529, Traits: 63, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 10700, Target: 1129, Traits: 63, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 8325, Target: 187, Traits: 63, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 693, Target: 532, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 6946, Target: 533, Traits: 63, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 11949, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7686, Target: 535, Traits: 63, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10913, Target: 1649, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 8197, Target: 537, Traits: 63, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10436, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11265, Target: 540, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8197, Target: 540, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 5807, Target: 541, Traits: 63, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12243, Target: 391, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11882, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7342, Target: 545, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 3082, Target: 545, Traits: 63, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 8786, Target: 537, Traits: 63, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10166, Target: 537, Traits: 63, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 2777, Target: 548, Traits: 63, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 9765, Target: 658, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4591, Target: 550, Traits: 63, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5827, Target: 552, Traits: 67, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 5827, Target: 553, Traits: 63, StrLen: 20, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10034, Target: 552, Traits: 65, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11238, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12213, Target: 564, Traits: 63, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 9126, Target: 560, Traits: 63, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 10480, Target: 562, Traits: 63, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 9112, Target: 550, Traits: 63, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 4613, Target: 560, Traits: 63, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6355, Target: 562, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9000, Target: 564, Traits: 63, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 3116, Target: 1646, Traits: 63, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12452, Target: 1646, Traits: 63, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12454, Target: 1646, Traits: 63, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 522, Target: 568, Traits: 63, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 10034, Target: 553, Traits: 63, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4635, Target: 570, Traits: 63, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 6526, Target: 568, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 11148, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 2803, Target: 573, Traits: 63, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 8357, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10793, Target: 575, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 9014, Target: 576, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 11166, Target: 577, Traits: 63, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 12425, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12361, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 2099, Target: 580, Traits: 63, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 4833, Target: 588, Traits: 63, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4657, Target: 582, Traits: 63, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11866, Target: 597, Traits: 63, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 9700, Target: 293, Traits: 65, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2865, Target: 585, Traits: 63, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12225, Target: 593, Traits: 63, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 6526, Target: 580, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 309, Target: 588, Traits: 63, StrLen: 37, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10903, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11754, Target: 242, Traits: 65, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7216, Target: 299, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 10094, Target: 243, Traits: 65, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6374, Target: 593, Traits: 63, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6374, Target: 595, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5275, Target: 597, Traits: 63, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9518, Target: 599, Traits: 63, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11810, Target: 1122, Traits: 63, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 2355, Target: 601, Traits: 63, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11373, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11373, Target: 529, Traits: 63, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 2355, Target: 604, Traits: 63, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 601, Traits: 63, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10803, Target: 606, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 10803, Target: 607, Traits: 63, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 606, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 417, Target: 609, Traits: 63, StrLen: 35, Count: 14, Type: uint8(smithy.ShapeTypeEnum), Flags: 0, Hash: 5},
-		{StrOff: 11121, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10823, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11175, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12105, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9878, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6336, Target: 1646, Traits: 63, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6928, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6910, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6336, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7669, Target: 1646, Traits: 63, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8846, Target: 1646, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8181, Target: 1646, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6982, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6982, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4693, Target: 624, Traits: 63, StrLen: 8, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 11602, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12365, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12129, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12437, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11942, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9938, Target: 630, Traits: 63, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 624, Traits: 63, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 5296, Target: 632, Traits: 63, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 9294, Target: 967, Traits: 63, StrLen: 14, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 13},
-		{StrOff: 10645, Target: 845, Traits: 63, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 929, Target: 635, Traits: 63, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 3966, Target: 636, Traits: 63, StrLen: 23, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 12075, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6676, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9401, Target: 1646, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6730, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9414, Target: 1646, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 2127, Target: 642, Traits: 63, StrLen: 24, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 6},
-		{StrOff: 12405, Target: 635, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12421, Target: 655, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 7907, Target: 827, Traits: 63, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10513, Target: 422, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12356, Target: 1153, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4150, Target: 826, Traits: 63, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10214, Target: 636, Traits: 63, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 5464, Target: 1645, Traits: 66, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 9713, Target: 823, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 9154, Target: 322, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2127, Target: 653, Traits: 63, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 642, Traits: 63, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 6},
-		{StrOff: 5317, Target: 655, Traits: 63, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 9950, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8711, Target: 1646, Traits: 63, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 5867, Target: 658, Traits: 63, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 5485, Target: 635, Traits: 63, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9252, Target: 831, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2245, Target: 661, Traits: 63, StrLen: 14, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 7},
-		{StrOff: 9609, Target: 1644, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8437, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12237, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12189, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12341, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7805, Target: 677, Traits: 63, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10214, Target: 686, Traits: 63, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 11818, Target: 682, Traits: 63, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 10502, Target: 1650, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
-		{StrOff: 7788, Target: 1644, Traits: 63, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10190, Target: 1649, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11834, Target: 225, Traits: 70, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11283, Target: 225, Traits: 70, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 225, Traits: 70, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 12061, Target: 1650, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
-		{StrOff: 5338, Target: 677, Traits: 63, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12047, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12413, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7000, Target: 680, Traits: 63, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 661, Traits: 63, StrLen: 6, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 7},
-		{StrOff: 4679, Target: 682, Traits: 63, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 12365, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12129, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12437, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 5887, Target: 686, Traits: 63, StrLen: 20, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 11674, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11562, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11690, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12081, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11112, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7144, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7693, Target: 693, Traits: 63, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 12281, Target: 257, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12255, Target: 1168, Traits: 63, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 821, Target: 535, Traits: 63, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9042, Target: 697, Traits: 63, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12231, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12341, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10623, Target: 828, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10202, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9622, Target: 828, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8681, Target: 703, Traits: 63, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12231, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12341, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10623, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10202, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9622, Target: 1644, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 452, Target: 709, Traits: 63, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 8421, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1227, Target: 711, Traits: 63, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11890, Target: 391, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11754, Target: 391, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7396, Target: 831, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3282, Target: 1166, Traits: 63, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 1287, Target: 716, Traits: 63, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11400, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11400, Target: 337, Traits: 63, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 1527, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1257, Target: 720, Traits: 63, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 1527, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11517, Target: 351, Traits: 63, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 12012, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1317, Target: 724, Traits: 63, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11762, Target: 480, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6564, Target: 458, Traits: 63, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 2829, Target: 727, Traits: 63, StrLen: 26, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11762, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6564, Target: 458, Traits: 63, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10034, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7839, Target: 251, Traits: 63, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 1013, Target: 734, Traits: 63, StrLen: 31, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 486, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11762, Target: 480, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12213, Target: 997, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9280, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12040, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10973, Target: 831, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9687, Target: 253, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 3132, Target: 743, Traits: 63, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11238, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12213, Target: 564, Traits: 63, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2855, Target: 747, Traits: 63, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12225, Target: 595, Traits: 63, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 2155, Target: 749, Traits: 63, StrLen: 28, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 800, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11762, Target: 799, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6564, Target: 790, Traits: 63, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 10034, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 656, Target: 755, Traits: 63, StrLen: 33, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 800, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11762, Target: 799, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12213, Target: 997, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9280, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12040, Target: 831, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2486, Target: 762, Traits: 63, StrLen: 17, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 8},
-		{StrOff: 11436, Target: 966, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10656, Target: 909, Traits: 63, StrLen: 11, Count: 19, Type: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 10},
-		{StrOff: 12405, Target: 977, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6507, Target: 276, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 3643, Target: 66, Traits: 63, StrLen: 24, Count: 15, Type: uint8(smithy.ShapeTypeUnion), Flags: 1, Hash: 1},
-		{StrOff: 11364, Target: 438, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5485, Target: 635, Traits: 63, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 2486, Target: 772, Traits: 63, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10546, Target: 984, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4701, Target: 774, Traits: 63, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 762, Traits: 63, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 8},
-		{StrOff: 1702, Target: 776, Traits: 63, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12243, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11882, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1347, Target: 779, Traits: 63, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 275, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9739, Target: 548, Traits: 63, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 3989, Target: 782, Traits: 63, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10863, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10403, Target: 103, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10034, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1377, Target: 786, Traits: 63, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 10034, Target: 782, Traits: 63, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4833, Target: 801, Traits: 63, StrLen: 22, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10425, Target: 794, Traits: 63, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 1407, Target: 790, Traits: 63, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 3523, Target: 1646, Traits: 63, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11914, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9842, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 2183, Target: 794, Traits: 63, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11508, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11063, Target: 1090, Traits: 65, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6545, Target: 1644, Traits: 63, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3547, Target: 798, Traits: 63, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 6393, Target: 799, Traits: 63, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8696, Target: 800, Traits: 63, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 82, Target: 801, Traits: 63, StrLen: 39, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10903, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11754, Target: 242, Traits: 65, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7216, Target: 299, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 10094, Target: 243, Traits: 65, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 918, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12225, Target: 842, Traits: 63, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 3157, Target: 808, Traits: 63, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 800, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11762, Target: 799, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6526, Target: 786, Traits: 63, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 487, Target: 813, Traits: 63, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12213, Target: 997, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9280, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12040, Target: 831, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1731, Target: 817, Traits: 63, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 1437, Target: 818, Traits: 63, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 800, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11762, Target: 799, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6526, Target: 813, Traits: 63, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 2513, Target: 823, Traits: 63, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 12147, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12111, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 3571, Target: 826, Traits: 63, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 7018, Target: 827, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 10813, Target: 828, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 3182, Target: 829, Traits: 73, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11373, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2894, Target: 831, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 7703, Target: 832, Traits: 63, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10933, Target: 835, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12413, Target: 839, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 7036, Target: 835, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 9056, Target: 836, Traits: 63, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 3444, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11610, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9962, Target: 839, Traits: 63, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 12397, Target: 248, Traits: 63, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11499, Target: 1086, Traits: 63, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6383, Target: 842, Traits: 63, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 575, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4531, Target: 844, Traits: 63, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8213, Target: 845, Traits: 63, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 4150, Target: 826, Traits: 63, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5464, Target: 233, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 689, Target: 848, Traits: 63, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 11490, Target: 903, Traits: 63, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11355, Target: 883, Traits: 63, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 689, Target: 851, Traits: 63, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12301, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 12286, Target: 848, Traits: 63, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 9266, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 722, Target: 855, Traits: 63, StrLen: 33, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12301, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 12421, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1081, Target: 1644, Traits: 63, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11802, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9266, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 854, Target: 861, Traits: 63, StrLen: 32, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12301, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 12421, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7068, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6067, Target: 1647, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
-		{StrOff: 9266, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 7054, Target: 867, Traits: 63, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10458, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10568, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7378, Target: 1644, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9140, Target: 104, Traits: 63, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7720, Target: 872, Traits: 74, StrLen: 17, Count: 9, Type: uint8(smithy.ShapeTypeUnion), Flags: 0, Hash: 9},
-		{StrOff: 8816, Target: 889, Traits: 63, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7306, Target: 897, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7924, Target: 885, Traits: 63, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9238, Target: 892, Traits: 63, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12047, Target: 900, Traits: 63, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11337, Target: 882, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7822, Target: 855, Traits: 63, StrLen: 17, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7805, Target: 851, Traits: 63, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8373, Target: 861, Traits: 63, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 3207, Target: 882, Traits: 63, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 5927, Target: 883, Traits: 63, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10579, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 755, Target: 885, Traits: 63, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11023, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6107, Target: 905, Traits: 63, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9266, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 1044, Target: 889, Traits: 63, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11023, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9266, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 1467, Target: 892, Traits: 63, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11023, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11310, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10118, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9266, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 556, Target: 897, Traits: 63, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11023, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9266, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 4012, Target: 900, Traits: 63, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 7805, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9266, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 5947, Target: 903, Traits: 63, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 7068, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5967, Target: 905, Traits: 63, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10535, Target: 1649, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 10178, Target: 1649, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 10689, Target: 1649, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 160, Target: 909, Traits: 63, StrLen: 7, Count: 19, Type: uint8(smithy.ShapeTypeEnum), Flags: 0, Hash: 10},
-		{StrOff: 12099, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12266, Target: 1646, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8846, Target: 1646, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9830, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11642, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11121, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10823, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11175, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12105, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9878, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6336, Target: 1646, Traits: 63, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6928, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6910, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6336, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7669, Target: 1646, Traits: 63, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8846, Target: 1646, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8181, Target: 1646, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6982, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6982, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 5987, Target: 929, Traits: 63, StrLen: 20, Count: 21, Type: uint8(smithy.ShapeTypeUnion), Flags: 0, Hash: 11},
-		{StrOff: 11463, Target: 1014, Traits: 63, StrLen: 9, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12440, Target: 211, Traits: 63, StrLen: 3, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12177, Target: 329, Traits: 63, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12326, Target: 1004, Traits: 63, StrLen: 5, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11301, Target: 278, Traits: 63, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11033, Target: 981, Traits: 63, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7873, Target: 487, Traits: 63, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8389, Target: 473, Traits: 63, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7873, Target: 468, Traits: 63, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12183, Target: 340, Traits: 63, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8771, Target: 521, Traits: 63, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10130, Target: 294, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9635, Target: 217, Traits: 63, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10414, Target: 219, Traits: 63, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8405, Target: 481, Traits: 63, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11409, Target: 582, Traits: 63, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9196, Target: 513, Traits: 63, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8453, Target: 798, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8453, Target: 817, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12026, Target: 541, Traits: 63, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 1497, Target: 779, Traits: 63, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 473, Target: 951, Traits: 63, StrLen: 14, Count: 14, Type: uint8(smithy.ShapeTypeUnion), Flags: 0, Hash: 12},
-		{StrOff: 11301, Target: 290, Traits: 63, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11033, Target: 992, Traits: 63, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8389, Target: 260, Traits: 63, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7873, Target: 475, Traits: 63, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12183, Target: 346, Traits: 63, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8771, Target: 475, Traits: 63, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7873, Target: 570, Traits: 63, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10130, Target: 295, Traits: 63, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8405, Target: 386, Traits: 63, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11409, Target: 585, Traits: 63, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9635, Target: 711, Traits: 63, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9196, Target: 516, Traits: 63, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8453, Target: 808, Traits: 63, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8453, Target: 818, Traits: 63, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11193, Target: 966, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 6412, Target: 967, Traits: 63, StrLen: 19, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 13},
-		{StrOff: 10513, Target: 422, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12356, Target: 1153, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11481, Target: 441, Traits: 63, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 8485, Target: 439, Traits: 63, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 9726, Target: 423, Traits: 63, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 6583, Target: 444, Traits: 63, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 10993, Target: 607, Traits: 63, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 5464, Target: 233, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9713, Target: 823, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 8229, Target: 977, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 8229, Target: 978, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 788, Target: 979, Traits: 63, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4035, Target: 981, Traits: 63, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 7252, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10883, Target: 979, Traits: 63, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 5380, Target: 984, Traits: 63, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 160, Target: 985, Traits: 63, StrLen: 38, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10903, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11754, Target: 242, Traits: 65, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7216, Target: 299, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 10094, Target: 243, Traits: 65, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 346, Target: 990, Traits: 63, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 4833, Target: 985, Traits: 63, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 3595, Target: 992, Traits: 63, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10546, Target: 984, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6526, Target: 990, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 1760, Target: 995, Traits: 75, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11373, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10326, Target: 997, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 1075, Target: 998, Traits: 63, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12040, Target: 831, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6047, Target: 1647, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
-		{StrOff: 9974, Target: 1001, Traits: 63, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10436, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11265, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7090, Target: 1004, Traits: 63, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10722, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9817, Target: 1644, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7342, Target: 1009, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9648, Target: 998, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4058, Target: 1009, Traits: 63, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 8786, Target: 1001, Traits: 63, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10166, Target: 1001, Traits: 63, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7737, Target: 1012, Traits: 63, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 12153, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4723, Target: 1014, Traits: 63, StrLen: 22, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11238, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10381, Target: 1012, Traits: 63, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 8341, Target: 831, Traits: 63, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10943, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2881, Target: 831, Traits: 63, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2881, Target: 1149, Traits: 63, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 8657, Target: 1021, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 10833, Target: 1022, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 10833, Target: 1023, Traits: 63, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1022, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2436, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
-		{StrOff: 12446, Target: 1022, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12351, Target: 1028, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11714, Target: 1028, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 2920, Target: 1029, Traits: 63, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 14},
-		{StrOff: 10010, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12237, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10491, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12341, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3678, Target: 703, Traits: 63, StrLen: 9, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11874, Target: 1076, Traits: 63, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 11818, Target: 624, Traits: 63, StrLen: 8, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 10214, Target: 1062, Traits: 63, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 15},
-		{StrOff: 11283, Target: 225, Traits: 70, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 225, Traits: 70, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 12061, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 8831, Target: 1648, Traits: 63, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 11786, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 9752, Target: 1644, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10214, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9168, Target: 1647, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
-		{StrOff: 10843, Target: 1047, Traits: 63, StrLen: 10, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10106, Target: 225, Traits: 70, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 9674, Target: 225, Traits: 70, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11818, Target: 630, Traits: 63, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 10214, Target: 1074, Traits: 63, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11874, Target: 1081, Traits: 63, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 9752, Target: 828, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11722, Target: 1054, Traits: 63, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1029, Traits: 63, StrLen: 6, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 14},
-		{StrOff: 9531, Target: 1056, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 10753, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11666, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9544, Target: 1059, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 12425, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12361, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9070, Target: 1062, Traits: 63, StrLen: 10, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 0, Hash: 15},
-		{StrOff: 9028, Target: 1646, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12117, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9505, Target: 1646, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6683, Target: 1646, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 3107, Target: 1646, Traits: 63, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11112, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9408, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11202, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11594, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11970, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11991, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9070, Target: 1074, Traits: 63, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1062, Traits: 63, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 15},
-		{StrOff: 9986, Target: 1076, Traits: 63, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 9440, Target: 1646, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10773, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 0, Target: 1646, Traits: 63, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8666, Target: 1646, Traits: 63, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9986, Target: 1081, Traits: 63, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1076, Traits: 63, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 6450, Target: 1083, Traits: 76, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11373, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11211, Target: 1085, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 7754, Target: 1086, Traits: 63, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11043, Target: 1085, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10667, Target: 1085, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11013, Target: 693, Traits: 63, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 8123, Target: 1090, Traits: 67, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 7126, Target: 1091, Traits: 63, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 11184, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11650, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10260, Target: 1646, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9084, Target: 1095, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 11220, Target: 1096, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 4081, Target: 1097, Traits: 63, StrLen: 7, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11535, Target: 828, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10010, Target: 93, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12421, Target: 1125, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11274, Target: 1107, Traits: 63, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 12165, Target: 1106, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 10214, Target: 1124, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11544, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 9557, Target: 1106, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 0},
-		{StrOff: 8245, Target: 1107, Traits: 63, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 11858, Target: 832, Traits: 63, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8261, Target: 1109, Traits: 63, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 1673, Target: 1646, Traits: 63, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6964, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8261, Target: 1112, Traits: 63, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1109, Traits: 63, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 6469, Target: 1114, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12171, Target: 1112, Traits: 63, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 9322, Target: 599, Traits: 63, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6469, Target: 1117, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1114, Traits: 63, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10337, Target: 1119, Traits: 63, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1097, Traits: 63, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4081, Target: 1121, Traits: 63, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 4081, Target: 1122, Traits: 63, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1121, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9570, Target: 1124, Traits: 63, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 10348, Target: 1125, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 10359, Target: 1126, Traits: 63, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12311, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 6107, Target: 1651, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
-		{StrOff: 8277, Target: 1129, Traits: 63, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1131, Traits: 63, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 8277, Target: 1131, Traits: 63, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
-		{StrOff: 7068, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11073, Target: 1648, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 9583, Target: 1134, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12249, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11898, Target: 1137, Traits: 63, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 11730, Target: 1137, Traits: 63, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 12428, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12431, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12434, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 2295, Target: 1141, Traits: 77, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11373, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11328, Target: 1147, Traits: 63, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 2295, Target: 1144, Traits: 63, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12409, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11373, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2295, Target: 1147, Traits: 63, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1144, Traits: 63, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8293, Target: 1149, Traits: 63, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 11930, Target: 1646, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11928, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 5847, Target: 1646, Traits: 63, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12271, Target: 1153, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 6878, Target: 1154, Traits: 63, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11093, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10711, Target: 1161, Traits: 63, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 11553, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9596, Target: 1158, Traits: 67, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 9998, Target: 1159, Traits: 63, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1154, Traits: 63, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10370, Target: 1161, Traits: 63, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
-		{StrOff: 12369, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11914, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12105, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11175, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 2323, Target: 1166, Traits: 63, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 12201, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8309, Target: 1168, Traits: 63, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11292, Target: 266, Traits: 63, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 4939, Target: 1170, Traits: 63, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11436, Target: 966, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9661, Target: 929, Traits: 63, StrLen: 13, Count: 21, Type: uint8(smithy.ShapeTypeUnion), Flags: 1, Hash: 11},
-		{StrOff: 10082, Target: 201, Traits: 63, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 4173, Target: 1175, Traits: 63, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 9622, Target: 192, Traits: 63, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9804, Target: 323, Traits: 63, StrLen: 7, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4960, Target: 1178, Traits: 63, StrLen: 21, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 97, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12195, Target: 443, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11364, Target: 438, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10447, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12417, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 10590, Target: 100, Traits: 63, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 4217, Target: 1186, Traits: 63, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 9609, Target: 84, Traits: 63, StrLen: 10, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12417, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 4239, Target: 1189, Traits: 63, StrLen: 22, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11738, Target: 828, Traits: 78, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12409, Target: 156, Traits: 78, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7805, Target: 148, Traits: 63, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 11786, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 10447, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3736, Target: 1196, Traits: 63, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12401, Target: 141, Traits: 63, StrLen: 4, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6694, Target: 1198, Traits: 63, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11256, Target: 172, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11786, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 7805, Target: 136, Traits: 63, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 10447, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6127, Target: 1204, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10058, Target: 129, Traits: 63, StrLen: 5, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 3379, Target: 1206, Traits: 63, StrLen: 24, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3678, Target: 697, Traits: 63, StrLen: 9, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 11874, Target: 1076, Traits: 63, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 12341, Target: 224, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 223, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11818, Target: 624, Traits: 63, StrLen: 8, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 10447, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2907, Target: 1214, Traits: 63, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11053, Target: 1029, Traits: 63, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 14},
-		{StrOff: 7465, Target: 1216, Traits: 63, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12249, Target: 828, Traits: 79, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11898, Target: 1137, Traits: 80, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 6712, Target: 1220, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10491, Target: 828, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 1875, Target: 1223, Traits: 63, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 635, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11382, Target: 632, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 12417, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 1557, Target: 1227, Traits: 63, StrLen: 29, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 16},
-		{StrOff: 12405, Target: 635, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12421, Target: 655, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 7907, Target: 827, Traits: 63, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10513, Target: 422, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12356, Target: 1153, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4150, Target: 826, Traits: 63, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10214, Target: 636, Traits: 63, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 5464, Target: 1645, Traits: 66, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 9713, Target: 823, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 9154, Target: 322, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12417, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 5587, Target: 1239, Traits: 63, StrLen: 20, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12421, Target: 1125, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11274, Target: 1107, Traits: 63, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 12165, Target: 1106, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 10214, Target: 1124, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10447, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4981, Target: 1246, Traits: 63, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 6602, Target: 1097, Traits: 63, StrLen: 7, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 5023, Target: 1248, Traits: 63, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4261, Target: 1250, Traits: 63, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 4283, Target: 1251, Traits: 63, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11738, Target: 828, Traits: 78, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12409, Target: 156, Traits: 78, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3759, Target: 1255, Traits: 63, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 6748, Target: 1256, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11738, Target: 828, Traits: 78, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6146, Target: 1259, Traits: 63, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 1903, Target: 1260, Traits: 63, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 635, Traits: 78, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1586, Target: 1262, Traits: 63, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 635, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10214, Target: 636, Traits: 63, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 5607, Target: 1265, Traits: 63, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11535, Target: 828, Traits: 78, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5044, Target: 1268, Traits: 63, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 4305, Target: 1269, Traits: 63, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11436, Target: 966, Traits: 78, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3782, Target: 1271, Traits: 63, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 1137, Target: 1272, Traits: 63, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 635, Traits: 78, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 982, Target: 1274, Traits: 63, StrLen: 31, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 17},
-		{StrOff: 12405, Target: 635, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12421, Target: 655, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 7907, Target: 827, Traits: 63, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10513, Target: 422, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12356, Target: 1153, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4150, Target: 826, Traits: 63, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10214, Target: 636, Traits: 63, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 5464, Target: 1645, Traits: 66, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 9713, Target: 823, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 9154, Target: 322, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12417, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 3805, Target: 1286, Traits: 63, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11746, Target: 207, Traits: 81, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 3403, Target: 1289, Traits: 63, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9622, Target: 204, Traits: 78, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2932, Target: 1292, Traits: 63, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 4349, Target: 1293, Traits: 63, StrLen: 22, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11746, Target: 207, Traits: 63, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 7270, Target: 831, Traits: 63, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9182, Target: 1644, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11346, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10524, Target: 412, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8741, Target: 413, Traits: 65, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11826, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3851, Target: 1302, Traits: 63, StrLen: 23, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9210, Target: 576, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12443, Target: 392, Traits: 63, StrLen: 3, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7856, Target: 396, Traits: 63, StrLen: 3, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8741, Target: 405, Traits: 63, StrLen: 3, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 5627, Target: 1308, Traits: 63, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 5086, Target: 1309, Traits: 63, StrLen: 21, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 950, Target: 1126, Traits: 63, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 1818, Target: 1126, Traits: 63, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 821, Target: 1126, Traits: 63, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 2594, Target: 1126, Traits: 63, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 3257, Target: 1126, Traits: 63, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6107, Target: 265, Traits: 70, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 7360, Target: 265, Traits: 70, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 6784, Target: 1317, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10154, Target: 414, Traits: 82, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 6184, Target: 1320, Traits: 63, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 9609, Target: 84, Traits: 63, StrLen: 10, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12417, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 4393, Target: 1323, Traits: 63, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11738, Target: 828, Traits: 78, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10058, Target: 1649, Traits: 83, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 3874, Target: 1327, Traits: 63, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 7805, Target: 185, Traits: 63, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12061, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 6203, Target: 1330, Traits: 63, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11738, Target: 828, Traits: 78, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12409, Target: 156, Traits: 78, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10058, Target: 1649, Traits: 83, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 5647, Target: 1335, Traits: 63, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12401, Target: 141, Traits: 63, StrLen: 4, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8591, Target: 1337, Traits: 63, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11738, Target: 828, Traits: 78, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10058, Target: 1649, Traits: 83, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 8085, Target: 1341, Traits: 63, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10058, Target: 129, Traits: 63, StrLen: 5, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 6222, Target: 1343, Traits: 63, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9622, Target: 204, Traits: 78, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5667, Target: 1346, Traits: 63, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 9622, Target: 192, Traits: 63, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 5107, Target: 1348, Traits: 63, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12237, Target: 828, Traits: 78, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4415, Target: 1351, Traits: 63, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11053, Target: 1029, Traits: 63, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 14},
-		{StrOff: 6241, Target: 1353, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5687, Target: 1355, Traits: 63, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 9210, Target: 576, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12443, Target: 392, Traits: 63, StrLen: 3, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7856, Target: 396, Traits: 63, StrLen: 3, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 8741, Target: 405, Traits: 63, StrLen: 3, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 3451, Target: 1360, Traits: 63, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8437, Target: 828, Traits: 78, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5506, Target: 1650, Traits: 84, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
-		{StrOff: 2982, Target: 1364, Traits: 63, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 5506, Target: 661, Traits: 63, StrLen: 14, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 7},
-		{StrOff: 8606, Target: 1366, Traits: 63, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11436, Target: 966, Traits: 78, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8101, Target: 1368, Traits: 63, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 9280, Target: 762, Traits: 63, StrLen: 7, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 8},
-		{StrOff: 12417, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 7516, Target: 1371, Traits: 63, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11535, Target: 828, Traits: 78, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6802, Target: 1374, Traits: 63, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 6602, Target: 1097, Traits: 63, StrLen: 7, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 5767, Target: 1376, Traits: 63, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10963, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 86, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10154, Target: 414, Traits: 82, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 5149, Target: 1380, Traits: 63, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10392, Target: 95, Traits: 63, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 5170, Target: 1383, Traits: 63, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11738, Target: 828, Traits: 78, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10058, Target: 1649, Traits: 83, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 86, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10963, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 4437, Target: 1389, Traits: 63, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12306, Target: 163, Traits: 63, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7567, Target: 1392, Traits: 63, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11256, Target: 172, Traits: 87, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10226, Target: 1645, Traits: 88, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 9778, Target: 1645, Traits: 89, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 86, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10963, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 6838, Target: 1399, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12306, Target: 168, Traits: 63, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5191, Target: 1402, Traits: 63, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11391, Target: 572, Traits: 86, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10963, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 4459, Target: 1405, Traits: 63, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12306, Target: 173, Traits: 63, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3475, Target: 1408, Traits: 63, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11738, Target: 828, Traits: 78, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10963, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 86, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3032, Target: 1413, Traits: 63, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12306, Target: 182, Traits: 63, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5212, Target: 1416, Traits: 63, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10963, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 86, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7234, Target: 1644, Traits: 90, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4481, Target: 1421, Traits: 63, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10070, Target: 205, Traits: 63, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 3920, Target: 1424, Traits: 63, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7234, Target: 1047, Traits: 63, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12311, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11454, Target: 1056, Traits: 63, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 12321, Target: 1059, Traits: 63, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 3499, Target: 1431, Traits: 63, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12336, Target: 1054, Traits: 63, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11391, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8149, Target: 1434, Traits: 63, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12249, Target: 828, Traits: 79, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10963, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11391, Target: 1644, Traits: 86, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7584, Target: 1439, Traits: 63, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10923, Target: 240, Traits: 63, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11391, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5233, Target: 1442, Traits: 63, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12237, Target: 828, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12311, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4503, Target: 1447, Traits: 63, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10923, Target: 313, Traits: 63, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11391, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8165, Target: 1450, Traits: 63, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10214, Target: 379, Traits: 63, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 11770, Target: 383, Traits: 63, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 12311, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7601, Target: 1456, Traits: 63, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12296, Target: 372, Traits: 63, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11391, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3057, Target: 1459, Traits: 63, StrLen: 25, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10491, Target: 828, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12311, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11003, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12321, Target: 577, Traits: 63, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 2647, Target: 1466, Traits: 63, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12033, Target: 435, Traits: 63, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11391, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2673, Target: 1469, Traits: 63, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10491, Target: 828, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2351, Target: 1472, Traits: 63, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10491, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11778, Target: 604, Traits: 63, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11283, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 2378, Target: 1477, Traits: 63, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 1931, Target: 1478, Traits: 63, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 7288, Target: 653, Traits: 63, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 2699, Target: 1480, Traits: 63, StrLen: 26, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12237, Target: 828, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12189, Target: 828, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10214, Target: 686, Traits: 63, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 11818, Target: 682, Traits: 63, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 12311, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2405, Target: 1488, Traits: 63, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 8801, Target: 680, Traits: 63, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11391, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7618, Target: 1491, Traits: 63, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10963, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 86, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7234, Target: 909, Traits: 91, StrLen: 17, Count: 19, Type: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 10},
-		{StrOff: 6856, Target: 1495, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11866, Target: 774, Traits: 63, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 2725, Target: 1498, Traits: 63, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10634, Target: 1644, Traits: 78, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2432, Target: 1500, Traits: 63, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12417, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 6317, Target: 1502, Traits: 63, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10214, Target: 1124, Traits: 92, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 86, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10963, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 5787, Target: 1507, Traits: 63, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12306, Target: 1119, Traits: 63, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7635, Target: 1510, Traits: 63, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9622, Target: 204, Traits: 78, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6874, Target: 1513, Traits: 63, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11906, Target: 1159, Traits: 63, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 5907, Target: 1515, Traits: 63, StrLen: 20, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 9280, Target: 609, Traits: 78, StrLen: 7, Count: 14, Type: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 5},
-		{StrOff: 9280, Target: 951, Traits: 63, StrLen: 14, Count: 14, Type: uint8(smithy.ShapeTypeUnion), Flags: 1, Hash: 12},
-		{StrOff: 11364, Target: 438, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5485, Target: 635, Traits: 63, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1527, Target: 635, Traits: 63, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 918, Target: 635, Traits: 63, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12405, Target: 978, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12417, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 5359, Target: 1524, Traits: 63, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11436, Target: 966, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9098, Target: 82, Traits: 63, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 11364, Target: 438, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12417, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 7072, Target: 1529, Traits: 63, StrLen: 18, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10491, Target: 239, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7805, Target: 532, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12005, Target: 867, Traits: 63, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12249, Target: 828, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11738, Target: 166, Traits: 63, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 11382, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 556, Target: 1537, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12171, Target: 872, Traits: 93, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeUnion), Flags: 1, Hash: 9},
-		{StrOff: 7108, Target: 1539, Traits: 63, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10634, Target: 1644, Traits: 78, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12417, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 6431, Target: 1542, Traits: 63, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 6007, Target: 1543, Traits: 63, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10634, Target: 1644, Traits: 78, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12054, Target: 1023, Traits: 94, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
-		{StrOff: 5401, Target: 1546, Traits: 63, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 5422, Target: 1547, Traits: 63, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12405, Target: 97, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10469, Target: 274, Traits: 65, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12195, Target: 443, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10590, Target: 100, Traits: 63, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 4745, Target: 1553, Traits: 63, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 9609, Target: 84, Traits: 63, StrLen: 10, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 2540, Target: 1555, Traits: 63, StrLen: 27, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10873, Target: 116, Traits: 78, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12165, Target: 110, Traits: 63, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 10142, Target: 117, Traits: 63, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 12207, Target: 122, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11083, Target: 1649, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 11445, Target: 1647, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
-		{StrOff: 2211, Target: 1563, Traits: 63, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10873, Target: 116, Traits: 63, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10214, Target: 123, Traits: 63, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 11319, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 4767, Target: 1567, Traits: 63, StrLen: 22, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11738, Target: 828, Traits: 78, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12409, Target: 156, Traits: 78, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7805, Target: 148, Traits: 63, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 11786, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 10447, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4104, Target: 1574, Traits: 63, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12401, Target: 141, Traits: 63, StrLen: 4, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 7162, Target: 1576, Traits: 63, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11738, Target: 828, Traits: 78, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11786, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
-		{StrOff: 7805, Target: 136, Traits: 63, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
-		{StrOff: 10447, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 6488, Target: 1582, Traits: 63, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10058, Target: 129, Traits: 63, StrLen: 5, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4789, Target: 1584, Traits: 63, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9622, Target: 204, Traits: 78, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 9661, Target: 929, Traits: 63, StrLen: 13, Count: 21, Type: uint8(smithy.ShapeTypeUnion), Flags: 1, Hash: 11},
-		{StrOff: 10082, Target: 201, Traits: 63, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 4127, Target: 1589, Traits: 63, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 9622, Target: 192, Traits: 63, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 9804, Target: 323, Traits: 63, StrLen: 7, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 3619, Target: 1592, Traits: 63, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12237, Target: 828, Traits: 78, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11053, Target: 1062, Traits: 63, StrLen: 10, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 15},
-		{StrOff: 10447, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3232, Target: 1597, Traits: 63, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 11053, Target: 1029, Traits: 63, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 14},
-		{StrOff: 7771, Target: 1599, Traits: 63, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12189, Target: 1644, Traits: 78, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7198, Target: 377, Traits: 63, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 10447, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 7180, Target: 1604, Traits: 63, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10502, Target: 355, Traits: 63, StrLen: 4, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 3},
-		{StrOff: 1106, Target: 1606, Traits: 63, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8741, Target: 413, Traits: 65, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 886, Target: 1609, Traits: 63, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 63, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8741, Target: 405, Traits: 63, StrLen: 3, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 121, Target: 1612, Traits: 63, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 12405, Target: 635, Traits: 78, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5464, Target: 233, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 42, Target: 1615, Traits: 63, StrLen: 40, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 18},
-		{StrOff: 12405, Target: 635, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12421, Target: 655, Traits: 63, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 7907, Target: 827, Traits: 63, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10513, Target: 422, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 12356, Target: 1153, Traits: 63, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 4150, Target: 826, Traits: 63, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10214, Target: 636, Traits: 63, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 5464, Target: 1645, Traits: 66, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
-		{StrOff: 9713, Target: 823, Traits: 63, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 9154, Target: 322, Traits: 63, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2567, Target: 1626, Traits: 63, StrLen: 27, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 8437, Target: 828, Traits: 78, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10214, Target: 686, Traits: 63, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 7788, Target: 1644, Traits: 63, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10447, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 2239, Target: 1632, Traits: 63, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 5506, Target: 661, Traits: 63, StrLen: 14, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 7},
-		{StrOff: 6027, Target: 1634, Traits: 63, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 94, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 11535, Target: 828, Traits: 78, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10214, Target: 1124, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 10447, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5443, Target: 1639, Traits: 63, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 6602, Target: 1097, Traits: 63, StrLen: 7, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 2267, Target: 1641, Traits: 63, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 10010, Target: 93, Traits: 78, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1789, Target: 1643, Traits: 63, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 7425, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
-		{StrOff: 8028, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
-		{StrOff: 12389, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
-		{StrOff: 11921, Target: 1647, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
-		{StrOff: 9866, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 2},
-		{StrOff: 11935, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
-		{StrOff: 12381, Target: 1650, Traits: 63, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 2},
-		{StrOff: 12087, Target: 1651, Traits: 63, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 2},
-	},
+	Len:        1652,
 	Traits: []smithy.TraitSet{
 		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 			URI:  "/v1/agentspaces/{agentSpaceId}/associations",
@@ -2066,3821 +413,3821 @@ var set = smithy.SchemaSet{
 	},
 }
 
-var handles = [1652]smithy.Schema{
-	smithy.NewStaticSchema(&set, 0, 0),
-	smithy.NewStaticSchema(&set, 1, 0),
-	smithy.NewStaticSchema(&set, 2, 0),
-	smithy.NewStaticSchema(&set, 3, 0),
-	smithy.NewStaticSchema(&set, 4, 0),
-	smithy.NewStaticSchema(&set, 5, 0),
-	smithy.NewStaticSchema(&set, 6, 0),
-	smithy.NewStaticSchema(&set, 7, 0),
-	smithy.NewStaticSchema(&set, 8, 0),
-	smithy.NewStaticSchema(&set, 9, 0),
-	smithy.NewStaticSchema(&set, 10, 0),
-	smithy.NewStaticSchema(&set, 11, 0),
-	smithy.NewStaticSchema(&set, 12, 0),
-	smithy.NewStaticSchema(&set, 13, 0),
-	smithy.NewStaticSchema(&set, 14, 0),
-	smithy.NewStaticSchema(&set, 15, 0),
-	smithy.NewStaticSchema(&set, 16, 0),
-	smithy.NewStaticSchema(&set, 17, 0),
-	smithy.NewStaticSchema(&set, 18, 0),
-	smithy.NewStaticSchema(&set, 19, 0),
-	smithy.NewStaticSchema(&set, 20, 0),
-	smithy.NewStaticSchema(&set, 21, 0),
-	smithy.NewStaticSchema(&set, 22, 0),
-	smithy.NewStaticSchema(&set, 23, 0),
-	smithy.NewStaticSchema(&set, 24, 0),
-	smithy.NewStaticSchema(&set, 25, 0),
-	smithy.NewStaticSchema(&set, 26, 0),
-	smithy.NewStaticSchema(&set, 27, 0),
-	smithy.NewStaticSchema(&set, 28, 0),
-	smithy.NewStaticSchema(&set, 29, 0),
-	smithy.NewStaticSchema(&set, 30, 0),
-	smithy.NewStaticSchema(&set, 31, 0),
-	smithy.NewStaticSchema(&set, 32, 0),
-	smithy.NewStaticSchema(&set, 33, 0),
-	smithy.NewStaticSchema(&set, 34, 0),
-	smithy.NewStaticSchema(&set, 35, 0),
-	smithy.NewStaticSchema(&set, 36, 0),
-	smithy.NewStaticSchema(&set, 37, 0),
-	smithy.NewStaticSchema(&set, 38, 0),
-	smithy.NewStaticSchema(&set, 39, 0),
-	smithy.NewStaticSchema(&set, 40, 0),
-	smithy.NewStaticSchema(&set, 41, 0),
-	smithy.NewStaticSchema(&set, 42, 0),
-	smithy.NewStaticSchema(&set, 43, 0),
-	smithy.NewStaticSchema(&set, 44, 0),
-	smithy.NewStaticSchema(&set, 45, 0),
-	smithy.NewStaticSchema(&set, 46, 0),
-	smithy.NewStaticSchema(&set, 47, 0),
-	smithy.NewStaticSchema(&set, 48, 0),
-	smithy.NewStaticSchema(&set, 49, 0),
-	smithy.NewStaticSchema(&set, 50, 0),
-	smithy.NewStaticSchema(&set, 51, 0),
-	smithy.NewStaticSchema(&set, 52, 0),
-	smithy.NewStaticSchema(&set, 53, 0),
-	smithy.NewStaticSchema(&set, 54, 0),
-	smithy.NewStaticSchema(&set, 55, 0),
-	smithy.NewStaticSchema(&set, 56, 0),
-	smithy.NewStaticSchema(&set, 57, 0),
-	smithy.NewStaticSchema(&set, 58, 0),
-	smithy.NewStaticSchema(&set, 59, 0),
-	smithy.NewStaticSchema(&set, 60, 0),
-	smithy.NewStaticSchema(&set, 61, 0),
-	smithy.NewStaticSchema(&set, 62, 0),
-	smithy.NewStaticSchema(&set, 63, 0),
-	smithy.NewStaticSchema(&set, 64, 0),
-	smithy.NewStaticSchema(&set, 65, 0),
-	smithy.NewStaticSchema(&set, 66, 0),
-	smithy.NewStaticSchema(&set, 67, 0),
-	smithy.NewStaticSchema(&set, 68, 0),
-	smithy.NewStaticSchema(&set, 69, 0),
-	smithy.NewStaticSchema(&set, 70, 0),
-	smithy.NewStaticSchema(&set, 71, 0),
-	smithy.NewStaticSchema(&set, 72, 0),
-	smithy.NewStaticSchema(&set, 73, 0),
-	smithy.NewStaticSchema(&set, 74, 0),
-	smithy.NewStaticSchema(&set, 75, 0),
-	smithy.NewStaticSchema(&set, 76, 0),
-	smithy.NewStaticSchema(&set, 77, 0),
-	smithy.NewStaticSchema(&set, 78, 0),
-	smithy.NewStaticSchema(&set, 79, 0),
-	smithy.NewStaticSchema(&set, 80, 0),
-	smithy.NewStaticSchema(&set, 81, 0),
-	smithy.NewStaticSchema(&set, 82, 0),
-	smithy.NewStaticSchema(&set, 83, 0),
-	smithy.NewStaticSchema(&set, 84, 0),
-	smithy.NewStaticSchema(&set, 85, 0),
-	smithy.NewStaticSchema(&set, 86, 0),
-	smithy.NewStaticSchema(&set, 87, 0),
-	smithy.NewStaticSchema(&set, 88, 0),
-	smithy.NewStaticSchema(&set, 89, 0),
-	smithy.NewStaticSchema(&set, 90, 0),
-	smithy.NewStaticSchema(&set, 91, 0),
-	smithy.NewStaticSchema(&set, 92, 2147483748),
-	smithy.NewStaticSchema(&set, 93, 0),
-	smithy.NewStaticSchema(&set, 94, 0),
-	smithy.NewStaticSchema(&set, 95, 1073741919),
-	smithy.NewStaticSchema(&set, 96, 0),
-	smithy.NewStaticSchema(&set, 97, 0),
-	smithy.NewStaticSchema(&set, 98, 0),
-	smithy.NewStaticSchema(&set, 99, 0),
-	smithy.NewStaticSchema(&set, 100, 2147483748),
-	smithy.NewStaticSchema(&set, 101, 0),
-	smithy.NewStaticSchema(&set, 102, 0),
-	smithy.NewStaticSchema(&set, 103, 0),
-	smithy.NewStaticSchema(&set, 104, 0),
-	smithy.NewStaticSchema(&set, 105, 0),
-	smithy.NewStaticSchema(&set, 106, 0),
-	smithy.NewStaticSchema(&set, 107, 0),
-	smithy.NewStaticSchema(&set, 108, 0),
-	smithy.NewStaticSchema(&set, 109, 0),
-	smithy.NewStaticSchema(&set, 110, 0),
-	smithy.NewStaticSchema(&set, 111, 0),
-	smithy.NewStaticSchema(&set, 112, 0),
-	smithy.NewStaticSchema(&set, 113, 2147483761),
-	smithy.NewStaticSchema(&set, 114, 0),
-	smithy.NewStaticSchema(&set, 115, 0),
-	smithy.NewStaticSchema(&set, 116, 0),
-	smithy.NewStaticSchema(&set, 117, 0),
-	smithy.NewStaticSchema(&set, 118, 0),
-	smithy.NewStaticSchema(&set, 119, 2147483761),
-	smithy.NewStaticSchema(&set, 120, 0),
-	smithy.NewStaticSchema(&set, 121, 0),
-	smithy.NewStaticSchema(&set, 122, 0),
-	smithy.NewStaticSchema(&set, 123, 0),
-	smithy.NewStaticSchema(&set, 124, 0),
-	smithy.NewStaticSchema(&set, 125, 0),
-	smithy.NewStaticSchema(&set, 126, 0),
-	smithy.NewStaticSchema(&set, 127, 0),
-	smithy.NewStaticSchema(&set, 128, 0),
-	smithy.NewStaticSchema(&set, 129, 0),
-	smithy.NewStaticSchema(&set, 130, 0),
-	smithy.NewStaticSchema(&set, 131, 0),
-	smithy.NewStaticSchema(&set, 132, 0),
-	smithy.NewStaticSchema(&set, 133, 0),
-	smithy.NewStaticSchema(&set, 134, 0),
-	smithy.NewStaticSchema(&set, 135, 0),
-	smithy.NewStaticSchema(&set, 136, 0),
-	smithy.NewStaticSchema(&set, 137, 0),
-	smithy.NewStaticSchema(&set, 138, 0),
-	smithy.NewStaticSchema(&set, 139, 0),
-	smithy.NewStaticSchema(&set, 140, 0),
-	smithy.NewStaticSchema(&set, 141, 0),
-	smithy.NewStaticSchema(&set, 142, 0),
-	smithy.NewStaticSchema(&set, 143, 0),
-	smithy.NewStaticSchema(&set, 144, 0),
-	smithy.NewStaticSchema(&set, 145, 0),
-	smithy.NewStaticSchema(&set, 146, 0),
-	smithy.NewStaticSchema(&set, 147, 0),
-	smithy.NewStaticSchema(&set, 148, 0),
-	smithy.NewStaticSchema(&set, 149, 0),
-	smithy.NewStaticSchema(&set, 150, 0),
-	smithy.NewStaticSchema(&set, 151, 0),
-	smithy.NewStaticSchema(&set, 152, 0),
-	smithy.NewStaticSchema(&set, 153, 0),
-	smithy.NewStaticSchema(&set, 154, 0),
-	smithy.NewStaticSchema(&set, 155, 0),
-	smithy.NewStaticSchema(&set, 156, 0),
-	smithy.NewStaticSchema(&set, 157, 0),
-	smithy.NewStaticSchema(&set, 158, 0),
-	smithy.NewStaticSchema(&set, 159, 0),
-	smithy.NewStaticSchema(&set, 160, 0),
-	smithy.NewStaticSchema(&set, 161, 0),
-	smithy.NewStaticSchema(&set, 162, 0),
-	smithy.NewStaticSchema(&set, 163, 1073741987),
-	smithy.NewStaticSchema(&set, 164, 0),
-	smithy.NewStaticSchema(&set, 165, 0),
-	smithy.NewStaticSchema(&set, 166, 1073741990),
-	smithy.NewStaticSchema(&set, 167, 0),
-	smithy.NewStaticSchema(&set, 168, 1073741992),
-	smithy.NewStaticSchema(&set, 169, 0),
-	smithy.NewStaticSchema(&set, 170, 0),
-	smithy.NewStaticSchema(&set, 171, 0),
-	smithy.NewStaticSchema(&set, 172, 0),
-	smithy.NewStaticSchema(&set, 173, 1073741997),
-	smithy.NewStaticSchema(&set, 174, 0),
-	smithy.NewStaticSchema(&set, 175, 0),
-	smithy.NewStaticSchema(&set, 176, 0),
-	smithy.NewStaticSchema(&set, 177, 0),
-	smithy.NewStaticSchema(&set, 178, 0),
-	smithy.NewStaticSchema(&set, 179, 0),
-	smithy.NewStaticSchema(&set, 180, 0),
-	smithy.NewStaticSchema(&set, 181, 0),
-	smithy.NewStaticSchema(&set, 182, 1073742006),
-	smithy.NewStaticSchema(&set, 183, 0),
-	smithy.NewStaticSchema(&set, 184, 0),
-	smithy.NewStaticSchema(&set, 185, 0),
-	smithy.NewStaticSchema(&set, 186, 0),
-	smithy.NewStaticSchema(&set, 187, 1073742011),
-	smithy.NewStaticSchema(&set, 188, 0),
-	smithy.NewStaticSchema(&set, 189, 0),
-	smithy.NewStaticSchema(&set, 190, 0),
-	smithy.NewStaticSchema(&set, 191, 0),
-	smithy.NewStaticSchema(&set, 192, 0),
-	smithy.NewStaticSchema(&set, 193, 0),
-	smithy.NewStaticSchema(&set, 194, 0),
-	smithy.NewStaticSchema(&set, 195, 0),
-	smithy.NewStaticSchema(&set, 196, 0),
-	smithy.NewStaticSchema(&set, 197, 0),
-	smithy.NewStaticSchema(&set, 198, 0),
-	smithy.NewStaticSchema(&set, 199, 0),
-	smithy.NewStaticSchema(&set, 200, 2147483849),
-	smithy.NewStaticSchema(&set, 201, 2147483849),
-	smithy.NewStaticSchema(&set, 202, 0),
-	smithy.NewStaticSchema(&set, 203, 0),
-	smithy.NewStaticSchema(&set, 204, 0),
-	smithy.NewStaticSchema(&set, 205, 1073742029),
-	smithy.NewStaticSchema(&set, 206, 0),
-	smithy.NewStaticSchema(&set, 207, 0),
-	smithy.NewStaticSchema(&set, 208, 0),
-	smithy.NewStaticSchema(&set, 209, 0),
-	smithy.NewStaticSchema(&set, 210, 0),
-	smithy.NewStaticSchema(&set, 211, 0),
-	smithy.NewStaticSchema(&set, 212, 0),
-	smithy.NewStaticSchema(&set, 213, 0),
-	smithy.NewStaticSchema(&set, 214, 0),
-	smithy.NewStaticSchema(&set, 215, 0),
-	smithy.NewStaticSchema(&set, 216, 0),
-	smithy.NewStaticSchema(&set, 217, 0),
-	smithy.NewStaticSchema(&set, 218, 0),
-	smithy.NewStaticSchema(&set, 219, 0),
-	smithy.NewStaticSchema(&set, 220, 0),
-	smithy.NewStaticSchema(&set, 221, 0),
-	smithy.NewStaticSchema(&set, 222, 0),
-	smithy.NewStaticSchema(&set, 223, 0),
-	smithy.NewStaticSchema(&set, 224, 0),
-	smithy.NewStaticSchema(&set, 225, 0),
-	smithy.NewStaticSchema(&set, 226, 0),
-	smithy.NewStaticSchema(&set, 227, 0),
-	smithy.NewStaticSchema(&set, 228, 0),
-	smithy.NewStaticSchema(&set, 229, 1073742941),
-	smithy.NewStaticSchema(&set, 230, 0),
-	smithy.NewStaticSchema(&set, 231, 0),
-	smithy.NewStaticSchema(&set, 232, 0),
-	smithy.NewStaticSchema(&set, 233, 0),
-	smithy.NewStaticSchema(&set, 234, 0),
-	smithy.NewStaticSchema(&set, 235, 0),
-	smithy.NewStaticSchema(&set, 236, 0),
-	smithy.NewStaticSchema(&set, 237, 0),
-	smithy.NewStaticSchema(&set, 238, 0),
-	smithy.NewStaticSchema(&set, 239, 0),
-	smithy.NewStaticSchema(&set, 240, 1073742064),
-	smithy.NewStaticSchema(&set, 241, 0),
-	smithy.NewStaticSchema(&set, 242, 0),
-	smithy.NewStaticSchema(&set, 243, 0),
-	smithy.NewStaticSchema(&set, 244, 0),
-	smithy.NewStaticSchema(&set, 245, 0),
-	smithy.NewStaticSchema(&set, 246, 0),
-	smithy.NewStaticSchema(&set, 247, 0),
-	smithy.NewStaticSchema(&set, 248, 0),
-	smithy.NewStaticSchema(&set, 249, 0),
-	smithy.NewStaticSchema(&set, 250, 0),
-	smithy.NewStaticSchema(&set, 251, 1073742075),
-	smithy.NewStaticSchema(&set, 252, 0),
-	smithy.NewStaticSchema(&set, 253, 2147483901),
-	smithy.NewStaticSchema(&set, 254, 0),
-	smithy.NewStaticSchema(&set, 255, 0),
-	smithy.NewStaticSchema(&set, 256, 0),
-	smithy.NewStaticSchema(&set, 257, 0),
-	smithy.NewStaticSchema(&set, 258, 0),
-	smithy.NewStaticSchema(&set, 259, 0),
-	smithy.NewStaticSchema(&set, 260, 0),
-	smithy.NewStaticSchema(&set, 261, 0),
-	smithy.NewStaticSchema(&set, 262, 0),
-	smithy.NewStaticSchema(&set, 263, 0),
-	smithy.NewStaticSchema(&set, 264, 0),
-	smithy.NewStaticSchema(&set, 265, 0),
-	smithy.NewStaticSchema(&set, 266, 0),
-	smithy.NewStaticSchema(&set, 267, 0),
-	smithy.NewStaticSchema(&set, 268, 0),
-	smithy.NewStaticSchema(&set, 269, 0),
-	smithy.NewStaticSchema(&set, 270, 0),
-	smithy.NewStaticSchema(&set, 271, 0),
-	smithy.NewStaticSchema(&set, 272, 0),
-	smithy.NewStaticSchema(&set, 273, 0),
-	smithy.NewStaticSchema(&set, 274, 0),
-	smithy.NewStaticSchema(&set, 275, 0),
-	smithy.NewStaticSchema(&set, 276, 1073742100),
-	smithy.NewStaticSchema(&set, 277, 0),
-	smithy.NewStaticSchema(&set, 278, 0),
-	smithy.NewStaticSchema(&set, 279, 0),
-	smithy.NewStaticSchema(&set, 280, 1073742110),
-	smithy.NewStaticSchema(&set, 281, 0),
-	smithy.NewStaticSchema(&set, 282, 0),
-	smithy.NewStaticSchema(&set, 283, 0),
-	smithy.NewStaticSchema(&set, 284, 2147483947),
-	smithy.NewStaticSchema(&set, 285, 0),
-	smithy.NewStaticSchema(&set, 286, 1073742110),
-	smithy.NewStaticSchema(&set, 287, 0),
-	smithy.NewStaticSchema(&set, 288, 0),
-	smithy.NewStaticSchema(&set, 289, 0),
-	smithy.NewStaticSchema(&set, 290, 0),
-	smithy.NewStaticSchema(&set, 291, 0),
-	smithy.NewStaticSchema(&set, 292, 0),
-	smithy.NewStaticSchema(&set, 293, 0),
-	smithy.NewStaticSchema(&set, 294, 0),
-	smithy.NewStaticSchema(&set, 295, 0),
-	smithy.NewStaticSchema(&set, 296, 0),
-	smithy.NewStaticSchema(&set, 297, 0),
-	smithy.NewStaticSchema(&set, 298, 0),
-	smithy.NewStaticSchema(&set, 299, 2147483947),
-	smithy.NewStaticSchema(&set, 300, 0),
-	smithy.NewStaticSchema(&set, 301, 0),
-	smithy.NewStaticSchema(&set, 302, 0),
-	smithy.NewStaticSchema(&set, 303, 0),
-	smithy.NewStaticSchema(&set, 304, 0),
-	smithy.NewStaticSchema(&set, 305, 0),
-	smithy.NewStaticSchema(&set, 306, 0),
-	smithy.NewStaticSchema(&set, 307, 0),
-	smithy.NewStaticSchema(&set, 308, 0),
-	smithy.NewStaticSchema(&set, 309, 0),
-	smithy.NewStaticSchema(&set, 310, 0),
-	smithy.NewStaticSchema(&set, 311, 0),
-	smithy.NewStaticSchema(&set, 312, 0),
-	smithy.NewStaticSchema(&set, 313, 1073742137),
-	smithy.NewStaticSchema(&set, 314, 0),
-	smithy.NewStaticSchema(&set, 315, 0),
-	smithy.NewStaticSchema(&set, 316, 0),
-	smithy.NewStaticSchema(&set, 317, 0),
-	smithy.NewStaticSchema(&set, 318, 0),
-	smithy.NewStaticSchema(&set, 319, 0),
-	smithy.NewStaticSchema(&set, 320, 0),
-	smithy.NewStaticSchema(&set, 321, 0),
-	smithy.NewStaticSchema(&set, 322, 0),
-	smithy.NewStaticSchema(&set, 323, 0),
-	smithy.NewStaticSchema(&set, 324, 0),
-	smithy.NewStaticSchema(&set, 325, 0),
-	smithy.NewStaticSchema(&set, 326, 0),
-	smithy.NewStaticSchema(&set, 327, 0),
-	smithy.NewStaticSchema(&set, 328, 0),
-	smithy.NewStaticSchema(&set, 329, 0),
-	smithy.NewStaticSchema(&set, 330, 0),
-	smithy.NewStaticSchema(&set, 331, 0),
-	smithy.NewStaticSchema(&set, 332, 0),
-	smithy.NewStaticSchema(&set, 333, 0),
-	smithy.NewStaticSchema(&set, 334, 0),
-	smithy.NewStaticSchema(&set, 335, 0),
-	smithy.NewStaticSchema(&set, 336, 0),
-	smithy.NewStaticSchema(&set, 337, 0),
-	smithy.NewStaticSchema(&set, 338, 0),
-	smithy.NewStaticSchema(&set, 339, 0),
-	smithy.NewStaticSchema(&set, 340, 0),
-	smithy.NewStaticSchema(&set, 341, 0),
-	smithy.NewStaticSchema(&set, 342, 0),
-	smithy.NewStaticSchema(&set, 343, 0),
-	smithy.NewStaticSchema(&set, 344, 0),
-	smithy.NewStaticSchema(&set, 345, 0),
-	smithy.NewStaticSchema(&set, 346, 0),
-	smithy.NewStaticSchema(&set, 347, 0),
-	smithy.NewStaticSchema(&set, 348, 0),
-	smithy.NewStaticSchema(&set, 349, 0),
-	smithy.NewStaticSchema(&set, 350, 0),
-	smithy.NewStaticSchema(&set, 351, 0),
-	smithy.NewStaticSchema(&set, 352, 0),
-	smithy.NewStaticSchema(&set, 353, 0),
-	smithy.NewStaticSchema(&set, 354, 0),
-	smithy.NewStaticSchema(&set, 355, 0),
-	smithy.NewStaticSchema(&set, 356, 0),
-	smithy.NewStaticSchema(&set, 357, 0),
-	smithy.NewStaticSchema(&set, 358, 0),
-	smithy.NewStaticSchema(&set, 359, 0),
-	smithy.NewStaticSchema(&set, 360, 0),
-	smithy.NewStaticSchema(&set, 361, 0),
-	smithy.NewStaticSchema(&set, 362, 0),
-	smithy.NewStaticSchema(&set, 363, 0),
-	smithy.NewStaticSchema(&set, 364, 0),
-	smithy.NewStaticSchema(&set, 365, 0),
-	smithy.NewStaticSchema(&set, 366, 0),
-	smithy.NewStaticSchema(&set, 367, 0),
-	smithy.NewStaticSchema(&set, 368, 0),
-	smithy.NewStaticSchema(&set, 369, 0),
-	smithy.NewStaticSchema(&set, 370, 0),
-	smithy.NewStaticSchema(&set, 371, 0),
-	smithy.NewStaticSchema(&set, 372, 1073742196),
-	smithy.NewStaticSchema(&set, 373, 0),
-	smithy.NewStaticSchema(&set, 374, 0),
-	smithy.NewStaticSchema(&set, 375, 0),
-	smithy.NewStaticSchema(&set, 376, 0),
-	smithy.NewStaticSchema(&set, 377, 0),
-	smithy.NewStaticSchema(&set, 378, 0),
-	smithy.NewStaticSchema(&set, 379, 0),
-	smithy.NewStaticSchema(&set, 380, 0),
-	smithy.NewStaticSchema(&set, 381, 0),
-	smithy.NewStaticSchema(&set, 382, 0),
-	smithy.NewStaticSchema(&set, 383, 0),
-	smithy.NewStaticSchema(&set, 384, 0),
-	smithy.NewStaticSchema(&set, 385, 0),
-	smithy.NewStaticSchema(&set, 386, 0),
-	smithy.NewStaticSchema(&set, 387, 0),
-	smithy.NewStaticSchema(&set, 388, 0),
-	smithy.NewStaticSchema(&set, 389, 0),
-	smithy.NewStaticSchema(&set, 390, 0),
-	smithy.NewStaticSchema(&set, 391, 0),
-	smithy.NewStaticSchema(&set, 392, 0),
-	smithy.NewStaticSchema(&set, 393, 0),
-	smithy.NewStaticSchema(&set, 394, 0),
-	smithy.NewStaticSchema(&set, 395, 0),
-	smithy.NewStaticSchema(&set, 396, 0),
-	smithy.NewStaticSchema(&set, 397, 0),
-	smithy.NewStaticSchema(&set, 398, 0),
-	smithy.NewStaticSchema(&set, 399, 0),
-	smithy.NewStaticSchema(&set, 400, 0),
-	smithy.NewStaticSchema(&set, 401, 0),
-	smithy.NewStaticSchema(&set, 402, 0),
-	smithy.NewStaticSchema(&set, 403, 0),
-	smithy.NewStaticSchema(&set, 404, 0),
-	smithy.NewStaticSchema(&set, 405, 0),
-	smithy.NewStaticSchema(&set, 406, 0),
-	smithy.NewStaticSchema(&set, 407, 0),
-	smithy.NewStaticSchema(&set, 408, 0),
-	smithy.NewStaticSchema(&set, 409, 0),
-	smithy.NewStaticSchema(&set, 410, 0),
-	smithy.NewStaticSchema(&set, 411, 0),
-	smithy.NewStaticSchema(&set, 412, 0),
-	smithy.NewStaticSchema(&set, 413, 0),
-	smithy.NewStaticSchema(&set, 414, 0),
-	smithy.NewStaticSchema(&set, 415, 0),
-	smithy.NewStaticSchema(&set, 416, 0),
-	smithy.NewStaticSchema(&set, 417, 0),
-	smithy.NewStaticSchema(&set, 418, 0),
-	smithy.NewStaticSchema(&set, 419, 0),
-	smithy.NewStaticSchema(&set, 420, 0),
-	smithy.NewStaticSchema(&set, 421, 0),
-	smithy.NewStaticSchema(&set, 422, 0),
-	smithy.NewStaticSchema(&set, 423, 0),
-	smithy.NewStaticSchema(&set, 424, 0),
-	smithy.NewStaticSchema(&set, 425, 0),
-	smithy.NewStaticSchema(&set, 426, 0),
-	smithy.NewStaticSchema(&set, 427, 0),
-	smithy.NewStaticSchema(&set, 428, 0),
-	smithy.NewStaticSchema(&set, 429, 0),
-	smithy.NewStaticSchema(&set, 430, 0),
-	smithy.NewStaticSchema(&set, 431, 0),
-	smithy.NewStaticSchema(&set, 432, 0),
-	smithy.NewStaticSchema(&set, 433, 0),
-	smithy.NewStaticSchema(&set, 434, 0),
-	smithy.NewStaticSchema(&set, 435, 1073742259),
-	smithy.NewStaticSchema(&set, 436, 0),
-	smithy.NewStaticSchema(&set, 437, 0),
-	smithy.NewStaticSchema(&set, 438, 0),
-	smithy.NewStaticSchema(&set, 439, 1073742263),
-	smithy.NewStaticSchema(&set, 440, 0),
-	smithy.NewStaticSchema(&set, 441, 1073742265),
-	smithy.NewStaticSchema(&set, 442, 0),
-	smithy.NewStaticSchema(&set, 443, 0),
-	smithy.NewStaticSchema(&set, 444, 0),
-	smithy.NewStaticSchema(&set, 445, 0),
-	smithy.NewStaticSchema(&set, 446, 0),
-	smithy.NewStaticSchema(&set, 447, 0),
-	smithy.NewStaticSchema(&set, 448, 0),
-	smithy.NewStaticSchema(&set, 449, 0),
-	smithy.NewStaticSchema(&set, 450, 0),
-	smithy.NewStaticSchema(&set, 451, 0),
-	smithy.NewStaticSchema(&set, 452, 0),
-	smithy.NewStaticSchema(&set, 453, 0),
-	smithy.NewStaticSchema(&set, 454, 0),
-	smithy.NewStaticSchema(&set, 455, 0),
-	smithy.NewStaticSchema(&set, 456, 0),
-	smithy.NewStaticSchema(&set, 457, 0),
-	smithy.NewStaticSchema(&set, 458, 0),
-	smithy.NewStaticSchema(&set, 459, 0),
-	smithy.NewStaticSchema(&set, 460, 0),
-	smithy.NewStaticSchema(&set, 461, 0),
-	smithy.NewStaticSchema(&set, 462, 0),
-	smithy.NewStaticSchema(&set, 463, 0),
-	smithy.NewStaticSchema(&set, 464, 0),
-	smithy.NewStaticSchema(&set, 465, 0),
-	smithy.NewStaticSchema(&set, 466, 0),
-	smithy.NewStaticSchema(&set, 467, 0),
-	smithy.NewStaticSchema(&set, 468, 0),
-	smithy.NewStaticSchema(&set, 469, 1073742351),
-	smithy.NewStaticSchema(&set, 470, 1073742349),
-	smithy.NewStaticSchema(&set, 471, 0),
-	smithy.NewStaticSchema(&set, 472, 2147483901),
-	smithy.NewStaticSchema(&set, 473, 0),
-	smithy.NewStaticSchema(&set, 474, 1073742349),
-	smithy.NewStaticSchema(&set, 475, 0),
-	smithy.NewStaticSchema(&set, 476, 0),
-	smithy.NewStaticSchema(&set, 477, 0),
-	smithy.NewStaticSchema(&set, 478, 0),
-	smithy.NewStaticSchema(&set, 479, 0),
-	smithy.NewStaticSchema(&set, 480, 0),
-	smithy.NewStaticSchema(&set, 481, 0),
-	smithy.NewStaticSchema(&set, 482, 0),
-	smithy.NewStaticSchema(&set, 483, 0),
-	smithy.NewStaticSchema(&set, 484, 1073742351),
-	smithy.NewStaticSchema(&set, 485, 1073742349),
-	smithy.NewStaticSchema(&set, 486, 0),
-	smithy.NewStaticSchema(&set, 487, 0),
-	smithy.NewStaticSchema(&set, 488, 0),
-	smithy.NewStaticSchema(&set, 489, 0),
-	smithy.NewStaticSchema(&set, 490, 0),
-	smithy.NewStaticSchema(&set, 491, 0),
-	smithy.NewStaticSchema(&set, 492, 0),
-	smithy.NewStaticSchema(&set, 493, 2147483947),
-	smithy.NewStaticSchema(&set, 494, 0),
-	smithy.NewStaticSchema(&set, 495, 0),
-	smithy.NewStaticSchema(&set, 496, 0),
-	smithy.NewStaticSchema(&set, 497, 0),
-	smithy.NewStaticSchema(&set, 498, 0),
-	smithy.NewStaticSchema(&set, 499, 1073742666),
-	smithy.NewStaticSchema(&set, 500, 0),
-	smithy.NewStaticSchema(&set, 501, 0),
-	smithy.NewStaticSchema(&set, 502, 0),
-	smithy.NewStaticSchema(&set, 503, 2147483947),
-	smithy.NewStaticSchema(&set, 504, 0),
-	smithy.NewStaticSchema(&set, 505, 0),
-	smithy.NewStaticSchema(&set, 506, 1073742666),
-	smithy.NewStaticSchema(&set, 507, 0),
-	smithy.NewStaticSchema(&set, 508, 0),
-	smithy.NewStaticSchema(&set, 509, 0),
-	smithy.NewStaticSchema(&set, 510, 0),
-	smithy.NewStaticSchema(&set, 511, 0),
-	smithy.NewStaticSchema(&set, 512, 2147483901),
-	smithy.NewStaticSchema(&set, 513, 0),
-	smithy.NewStaticSchema(&set, 514, 1073742351),
-	smithy.NewStaticSchema(&set, 515, 1073742349),
-	smithy.NewStaticSchema(&set, 516, 0),
-	smithy.NewStaticSchema(&set, 517, 0),
-	smithy.NewStaticSchema(&set, 518, 0),
-	smithy.NewStaticSchema(&set, 519, 0),
-	smithy.NewStaticSchema(&set, 520, 0),
-	smithy.NewStaticSchema(&set, 521, 0),
-	smithy.NewStaticSchema(&set, 522, 0),
-	smithy.NewStaticSchema(&set, 523, 0),
-	smithy.NewStaticSchema(&set, 524, 0),
-	smithy.NewStaticSchema(&set, 525, 1073742349),
-	smithy.NewStaticSchema(&set, 526, 0),
-	smithy.NewStaticSchema(&set, 527, 1073742351),
-	smithy.NewStaticSchema(&set, 528, 0),
-	smithy.NewStaticSchema(&set, 529, 0),
-	smithy.NewStaticSchema(&set, 530, 1073742953),
-	smithy.NewStaticSchema(&set, 531, 1073742011),
-	smithy.NewStaticSchema(&set, 532, 0),
-	smithy.NewStaticSchema(&set, 533, 0),
-	smithy.NewStaticSchema(&set, 534, 0),
-	smithy.NewStaticSchema(&set, 535, 0),
-	smithy.NewStaticSchema(&set, 536, 0),
-	smithy.NewStaticSchema(&set, 537, 0),
-	smithy.NewStaticSchema(&set, 538, 0),
-	smithy.NewStaticSchema(&set, 539, 0),
-	smithy.NewStaticSchema(&set, 540, 0),
-	smithy.NewStaticSchema(&set, 541, 0),
-	smithy.NewStaticSchema(&set, 542, 0),
-	smithy.NewStaticSchema(&set, 543, 0),
-	smithy.NewStaticSchema(&set, 544, 0),
-	smithy.NewStaticSchema(&set, 545, 0),
-	smithy.NewStaticSchema(&set, 546, 0),
-	smithy.NewStaticSchema(&set, 547, 0),
-	smithy.NewStaticSchema(&set, 548, 0),
-	smithy.NewStaticSchema(&set, 549, 0),
-	smithy.NewStaticSchema(&set, 550, 1073742374),
-	smithy.NewStaticSchema(&set, 551, 0),
-	smithy.NewStaticSchema(&set, 552, 0),
-	smithy.NewStaticSchema(&set, 553, 0),
-	smithy.NewStaticSchema(&set, 554, 0),
-	smithy.NewStaticSchema(&set, 555, 0),
-	smithy.NewStaticSchema(&set, 556, 0),
-	smithy.NewStaticSchema(&set, 557, 1073742384),
-	smithy.NewStaticSchema(&set, 558, 1073742386),
-	smithy.NewStaticSchema(&set, 559, 1073742374),
-	smithy.NewStaticSchema(&set, 560, 1073742384),
-	smithy.NewStaticSchema(&set, 561, 0),
-	smithy.NewStaticSchema(&set, 562, 1073742386),
-	smithy.NewStaticSchema(&set, 563, 0),
-	smithy.NewStaticSchema(&set, 564, 0),
-	smithy.NewStaticSchema(&set, 565, 0),
-	smithy.NewStaticSchema(&set, 566, 0),
-	smithy.NewStaticSchema(&set, 567, 0),
-	smithy.NewStaticSchema(&set, 568, 0),
-	smithy.NewStaticSchema(&set, 569, 0),
-	smithy.NewStaticSchema(&set, 570, 0),
-	smithy.NewStaticSchema(&set, 571, 0),
-	smithy.NewStaticSchema(&set, 572, 0),
-	smithy.NewStaticSchema(&set, 573, 0),
-	smithy.NewStaticSchema(&set, 574, 0),
-	smithy.NewStaticSchema(&set, 575, 0),
-	smithy.NewStaticSchema(&set, 576, 0),
-	smithy.NewStaticSchema(&set, 577, 0),
-	smithy.NewStaticSchema(&set, 578, 0),
-	smithy.NewStaticSchema(&set, 579, 0),
-	smithy.NewStaticSchema(&set, 580, 0),
-	smithy.NewStaticSchema(&set, 581, 0),
-	smithy.NewStaticSchema(&set, 582, 0),
-	smithy.NewStaticSchema(&set, 583, 1073742421),
-	smithy.NewStaticSchema(&set, 584, 0),
-	smithy.NewStaticSchema(&set, 585, 0),
-	smithy.NewStaticSchema(&set, 586, 1073742417),
-	smithy.NewStaticSchema(&set, 587, 0),
-	smithy.NewStaticSchema(&set, 588, 0),
-	smithy.NewStaticSchema(&set, 589, 0),
-	smithy.NewStaticSchema(&set, 590, 0),
-	smithy.NewStaticSchema(&set, 591, 2147483947),
-	smithy.NewStaticSchema(&set, 592, 0),
-	smithy.NewStaticSchema(&set, 593, 1073742417),
-	smithy.NewStaticSchema(&set, 594, 0),
-	smithy.NewStaticSchema(&set, 595, 1073742419),
-	smithy.NewStaticSchema(&set, 596, 0),
-	smithy.NewStaticSchema(&set, 597, 1073742421),
-	smithy.NewStaticSchema(&set, 598, 0),
-	smithy.NewStaticSchema(&set, 599, 0),
-	smithy.NewStaticSchema(&set, 600, 1073742946),
-	smithy.NewStaticSchema(&set, 601, 0),
-	smithy.NewStaticSchema(&set, 602, 0),
-	smithy.NewStaticSchema(&set, 603, 0),
-	smithy.NewStaticSchema(&set, 604, 1073742428),
-	smithy.NewStaticSchema(&set, 605, 0),
-	smithy.NewStaticSchema(&set, 606, 0),
-	smithy.NewStaticSchema(&set, 607, 1073742431),
-	smithy.NewStaticSchema(&set, 608, 0),
-	smithy.NewStaticSchema(&set, 609, 0),
-	smithy.NewStaticSchema(&set, 610, 0),
-	smithy.NewStaticSchema(&set, 611, 0),
-	smithy.NewStaticSchema(&set, 612, 0),
-	smithy.NewStaticSchema(&set, 613, 0),
-	smithy.NewStaticSchema(&set, 614, 0),
-	smithy.NewStaticSchema(&set, 615, 0),
-	smithy.NewStaticSchema(&set, 616, 0),
-	smithy.NewStaticSchema(&set, 617, 0),
-	smithy.NewStaticSchema(&set, 618, 0),
-	smithy.NewStaticSchema(&set, 619, 0),
-	smithy.NewStaticSchema(&set, 620, 0),
-	smithy.NewStaticSchema(&set, 621, 0),
-	smithy.NewStaticSchema(&set, 622, 0),
-	smithy.NewStaticSchema(&set, 623, 0),
-	smithy.NewStaticSchema(&set, 624, 0),
-	smithy.NewStaticSchema(&set, 625, 0),
-	smithy.NewStaticSchema(&set, 626, 0),
-	smithy.NewStaticSchema(&set, 627, 0),
-	smithy.NewStaticSchema(&set, 628, 0),
-	smithy.NewStaticSchema(&set, 629, 0),
-	smithy.NewStaticSchema(&set, 630, 1073742454),
-	smithy.NewStaticSchema(&set, 631, 0),
-	smithy.NewStaticSchema(&set, 632, 0),
-	smithy.NewStaticSchema(&set, 633, 0),
-	smithy.NewStaticSchema(&set, 634, 0),
-	smithy.NewStaticSchema(&set, 635, 0),
-	smithy.NewStaticSchema(&set, 636, 0),
-	smithy.NewStaticSchema(&set, 637, 0),
-	smithy.NewStaticSchema(&set, 638, 0),
-	smithy.NewStaticSchema(&set, 639, 0),
-	smithy.NewStaticSchema(&set, 640, 0),
-	smithy.NewStaticSchema(&set, 641, 0),
-	smithy.NewStaticSchema(&set, 642, 0),
-	smithy.NewStaticSchema(&set, 643, 0),
-	smithy.NewStaticSchema(&set, 644, 0),
-	smithy.NewStaticSchema(&set, 645, 0),
-	smithy.NewStaticSchema(&set, 646, 0),
-	smithy.NewStaticSchema(&set, 647, 0),
-	smithy.NewStaticSchema(&set, 648, 0),
-	smithy.NewStaticSchema(&set, 649, 0),
-	smithy.NewStaticSchema(&set, 650, 0),
-	smithy.NewStaticSchema(&set, 651, 0),
-	smithy.NewStaticSchema(&set, 652, 0),
-	smithy.NewStaticSchema(&set, 653, 1073742477),
-	smithy.NewStaticSchema(&set, 654, 0),
-	smithy.NewStaticSchema(&set, 655, 0),
-	smithy.NewStaticSchema(&set, 656, 0),
-	smithy.NewStaticSchema(&set, 657, 0),
-	smithy.NewStaticSchema(&set, 658, 0),
-	smithy.NewStaticSchema(&set, 659, 0),
-	smithy.NewStaticSchema(&set, 660, 0),
-	smithy.NewStaticSchema(&set, 661, 0),
-	smithy.NewStaticSchema(&set, 662, 0),
-	smithy.NewStaticSchema(&set, 663, 0),
-	smithy.NewStaticSchema(&set, 664, 0),
-	smithy.NewStaticSchema(&set, 665, 0),
-	smithy.NewStaticSchema(&set, 666, 0),
-	smithy.NewStaticSchema(&set, 667, 0),
-	smithy.NewStaticSchema(&set, 668, 0),
-	smithy.NewStaticSchema(&set, 669, 0),
-	smithy.NewStaticSchema(&set, 670, 0),
-	smithy.NewStaticSchema(&set, 671, 0),
-	smithy.NewStaticSchema(&set, 672, 0),
-	smithy.NewStaticSchema(&set, 673, 0),
-	smithy.NewStaticSchema(&set, 674, 0),
-	smithy.NewStaticSchema(&set, 675, 0),
-	smithy.NewStaticSchema(&set, 676, 0),
-	smithy.NewStaticSchema(&set, 677, 0),
-	smithy.NewStaticSchema(&set, 678, 0),
-	smithy.NewStaticSchema(&set, 679, 0),
-	smithy.NewStaticSchema(&set, 680, 1073742504),
-	smithy.NewStaticSchema(&set, 681, 0),
-	smithy.NewStaticSchema(&set, 682, 0),
-	smithy.NewStaticSchema(&set, 683, 0),
-	smithy.NewStaticSchema(&set, 684, 0),
-	smithy.NewStaticSchema(&set, 685, 0),
-	smithy.NewStaticSchema(&set, 686, 0),
-	smithy.NewStaticSchema(&set, 687, 0),
-	smithy.NewStaticSchema(&set, 688, 0),
-	smithy.NewStaticSchema(&set, 689, 0),
-	smithy.NewStaticSchema(&set, 690, 0),
-	smithy.NewStaticSchema(&set, 691, 0),
-	smithy.NewStaticSchema(&set, 692, 0),
-	smithy.NewStaticSchema(&set, 693, 0),
-	smithy.NewStaticSchema(&set, 694, 0),
-	smithy.NewStaticSchema(&set, 695, 0),
-	smithy.NewStaticSchema(&set, 696, 0),
-	smithy.NewStaticSchema(&set, 697, 0),
-	smithy.NewStaticSchema(&set, 698, 0),
-	smithy.NewStaticSchema(&set, 699, 0),
-	smithy.NewStaticSchema(&set, 700, 0),
-	smithy.NewStaticSchema(&set, 701, 0),
-	smithy.NewStaticSchema(&set, 702, 0),
-	smithy.NewStaticSchema(&set, 703, 0),
-	smithy.NewStaticSchema(&set, 704, 0),
-	smithy.NewStaticSchema(&set, 705, 0),
-	smithy.NewStaticSchema(&set, 706, 0),
-	smithy.NewStaticSchema(&set, 707, 0),
-	smithy.NewStaticSchema(&set, 708, 0),
-	smithy.NewStaticSchema(&set, 709, 0),
-	smithy.NewStaticSchema(&set, 710, 0),
-	smithy.NewStaticSchema(&set, 711, 0),
-	smithy.NewStaticSchema(&set, 712, 0),
-	smithy.NewStaticSchema(&set, 713, 0),
-	smithy.NewStaticSchema(&set, 714, 0),
-	smithy.NewStaticSchema(&set, 715, 1073742990),
-	smithy.NewStaticSchema(&set, 716, 0),
-	smithy.NewStaticSchema(&set, 717, 0),
-	smithy.NewStaticSchema(&set, 718, 0),
-	smithy.NewStaticSchema(&set, 719, 0),
-	smithy.NewStaticSchema(&set, 720, 0),
-	smithy.NewStaticSchema(&set, 721, 0),
-	smithy.NewStaticSchema(&set, 722, 0),
-	smithy.NewStaticSchema(&set, 723, 0),
-	smithy.NewStaticSchema(&set, 724, 0),
-	smithy.NewStaticSchema(&set, 725, 0),
-	smithy.NewStaticSchema(&set, 726, 0),
-	smithy.NewStaticSchema(&set, 727, 0),
-	smithy.NewStaticSchema(&set, 728, 0),
-	smithy.NewStaticSchema(&set, 729, 0),
-	smithy.NewStaticSchema(&set, 730, 0),
-	smithy.NewStaticSchema(&set, 731, 0),
-	smithy.NewStaticSchema(&set, 732, 0),
-	smithy.NewStaticSchema(&set, 733, 1073742075),
-	smithy.NewStaticSchema(&set, 734, 0),
-	smithy.NewStaticSchema(&set, 735, 0),
-	smithy.NewStaticSchema(&set, 736, 0),
-	smithy.NewStaticSchema(&set, 737, 0),
-	smithy.NewStaticSchema(&set, 738, 0),
-	smithy.NewStaticSchema(&set, 739, 0),
-	smithy.NewStaticSchema(&set, 740, 0),
-	smithy.NewStaticSchema(&set, 741, 0),
-	smithy.NewStaticSchema(&set, 742, 2147483901),
-	smithy.NewStaticSchema(&set, 743, 0),
-	smithy.NewStaticSchema(&set, 744, 0),
-	smithy.NewStaticSchema(&set, 745, 0),
-	smithy.NewStaticSchema(&set, 746, 0),
-	smithy.NewStaticSchema(&set, 747, 0),
-	smithy.NewStaticSchema(&set, 748, 1073742419),
-	smithy.NewStaticSchema(&set, 749, 0),
-	smithy.NewStaticSchema(&set, 750, 0),
-	smithy.NewStaticSchema(&set, 751, 0),
-	smithy.NewStaticSchema(&set, 752, 0),
-	smithy.NewStaticSchema(&set, 753, 0),
-	smithy.NewStaticSchema(&set, 754, 0),
-	smithy.NewStaticSchema(&set, 755, 0),
-	smithy.NewStaticSchema(&set, 756, 0),
-	smithy.NewStaticSchema(&set, 757, 0),
-	smithy.NewStaticSchema(&set, 758, 0),
-	smithy.NewStaticSchema(&set, 759, 0),
-	smithy.NewStaticSchema(&set, 760, 0),
-	smithy.NewStaticSchema(&set, 761, 0),
-	smithy.NewStaticSchema(&set, 762, 0),
-	smithy.NewStaticSchema(&set, 763, 0),
-	smithy.NewStaticSchema(&set, 764, 0),
-	smithy.NewStaticSchema(&set, 765, 0),
-	smithy.NewStaticSchema(&set, 766, 1073742100),
-	smithy.NewStaticSchema(&set, 767, 0),
-	smithy.NewStaticSchema(&set, 768, 0),
-	smithy.NewStaticSchema(&set, 769, 0),
-	smithy.NewStaticSchema(&set, 770, 0),
-	smithy.NewStaticSchema(&set, 771, 0),
-	smithy.NewStaticSchema(&set, 772, 0),
-	smithy.NewStaticSchema(&set, 773, 0),
-	smithy.NewStaticSchema(&set, 774, 1073742598),
-	smithy.NewStaticSchema(&set, 775, 0),
-	smithy.NewStaticSchema(&set, 776, 0),
-	smithy.NewStaticSchema(&set, 777, 0),
-	smithy.NewStaticSchema(&set, 778, 0),
-	smithy.NewStaticSchema(&set, 779, 0),
-	smithy.NewStaticSchema(&set, 780, 0),
-	smithy.NewStaticSchema(&set, 781, 0),
-	smithy.NewStaticSchema(&set, 782, 0),
-	smithy.NewStaticSchema(&set, 783, 0),
-	smithy.NewStaticSchema(&set, 784, 0),
-	smithy.NewStaticSchema(&set, 785, 0),
-	smithy.NewStaticSchema(&set, 786, 0),
-	smithy.NewStaticSchema(&set, 787, 0),
-	smithy.NewStaticSchema(&set, 788, 0),
-	smithy.NewStaticSchema(&set, 789, 0),
-	smithy.NewStaticSchema(&set, 790, 0),
-	smithy.NewStaticSchema(&set, 791, 0),
-	smithy.NewStaticSchema(&set, 792, 0),
-	smithy.NewStaticSchema(&set, 793, 0),
-	smithy.NewStaticSchema(&set, 794, 0),
-	smithy.NewStaticSchema(&set, 795, 0),
-	smithy.NewStaticSchema(&set, 796, 0),
-	smithy.NewStaticSchema(&set, 797, 0),
-	smithy.NewStaticSchema(&set, 798, 0),
-	smithy.NewStaticSchema(&set, 799, 0),
-	smithy.NewStaticSchema(&set, 800, 0),
-	smithy.NewStaticSchema(&set, 801, 0),
-	smithy.NewStaticSchema(&set, 802, 0),
-	smithy.NewStaticSchema(&set, 803, 0),
-	smithy.NewStaticSchema(&set, 804, 2147483947),
-	smithy.NewStaticSchema(&set, 805, 0),
-	smithy.NewStaticSchema(&set, 806, 0),
-	smithy.NewStaticSchema(&set, 807, 1073742666),
-	smithy.NewStaticSchema(&set, 808, 0),
-	smithy.NewStaticSchema(&set, 809, 0),
-	smithy.NewStaticSchema(&set, 810, 0),
-	smithy.NewStaticSchema(&set, 811, 0),
-	smithy.NewStaticSchema(&set, 812, 0),
-	smithy.NewStaticSchema(&set, 813, 0),
-	smithy.NewStaticSchema(&set, 814, 0),
-	smithy.NewStaticSchema(&set, 815, 0),
-	smithy.NewStaticSchema(&set, 816, 0),
-	smithy.NewStaticSchema(&set, 817, 0),
-	smithy.NewStaticSchema(&set, 818, 0),
-	smithy.NewStaticSchema(&set, 819, 0),
-	smithy.NewStaticSchema(&set, 820, 0),
-	smithy.NewStaticSchema(&set, 821, 0),
-	smithy.NewStaticSchema(&set, 822, 0),
-	smithy.NewStaticSchema(&set, 823, 0),
-	smithy.NewStaticSchema(&set, 824, 0),
-	smithy.NewStaticSchema(&set, 825, 0),
-	smithy.NewStaticSchema(&set, 826, 0),
-	smithy.NewStaticSchema(&set, 827, 0),
-	smithy.NewStaticSchema(&set, 828, 0),
-	smithy.NewStaticSchema(&set, 829, 0),
-	smithy.NewStaticSchema(&set, 830, 0),
-	smithy.NewStaticSchema(&set, 831, 0),
-	smithy.NewStaticSchema(&set, 832, 0),
-	smithy.NewStaticSchema(&set, 833, 0),
-	smithy.NewStaticSchema(&set, 834, 0),
-	smithy.NewStaticSchema(&set, 835, 0),
-	smithy.NewStaticSchema(&set, 836, 0),
-	smithy.NewStaticSchema(&set, 837, 0),
-	smithy.NewStaticSchema(&set, 838, 0),
-	smithy.NewStaticSchema(&set, 839, 0),
-	smithy.NewStaticSchema(&set, 840, 0),
-	smithy.NewStaticSchema(&set, 841, 0),
-	smithy.NewStaticSchema(&set, 842, 1073742666),
-	smithy.NewStaticSchema(&set, 843, 0),
-	smithy.NewStaticSchema(&set, 844, 0),
-	smithy.NewStaticSchema(&set, 845, 0),
-	smithy.NewStaticSchema(&set, 846, 0),
-	smithy.NewStaticSchema(&set, 847, 0),
-	smithy.NewStaticSchema(&set, 848, 0),
-	smithy.NewStaticSchema(&set, 849, 0),
-	smithy.NewStaticSchema(&set, 850, 0),
-	smithy.NewStaticSchema(&set, 851, 0),
-	smithy.NewStaticSchema(&set, 852, 0),
-	smithy.NewStaticSchema(&set, 853, 0),
-	smithy.NewStaticSchema(&set, 854, 0),
-	smithy.NewStaticSchema(&set, 855, 0),
-	smithy.NewStaticSchema(&set, 856, 0),
-	smithy.NewStaticSchema(&set, 857, 0),
-	smithy.NewStaticSchema(&set, 858, 0),
-	smithy.NewStaticSchema(&set, 859, 0),
-	smithy.NewStaticSchema(&set, 860, 0),
-	smithy.NewStaticSchema(&set, 861, 0),
-	smithy.NewStaticSchema(&set, 862, 0),
-	smithy.NewStaticSchema(&set, 863, 0),
-	smithy.NewStaticSchema(&set, 864, 0),
-	smithy.NewStaticSchema(&set, 865, 0),
-	smithy.NewStaticSchema(&set, 866, 0),
-	smithy.NewStaticSchema(&set, 867, 0),
-	smithy.NewStaticSchema(&set, 868, 0),
-	smithy.NewStaticSchema(&set, 869, 0),
-	smithy.NewStaticSchema(&set, 870, 0),
-	smithy.NewStaticSchema(&set, 871, 0),
-	smithy.NewStaticSchema(&set, 872, 0),
-	smithy.NewStaticSchema(&set, 873, 0),
-	smithy.NewStaticSchema(&set, 874, 0),
-	smithy.NewStaticSchema(&set, 875, 0),
-	smithy.NewStaticSchema(&set, 876, 0),
-	smithy.NewStaticSchema(&set, 877, 0),
-	smithy.NewStaticSchema(&set, 878, 0),
-	smithy.NewStaticSchema(&set, 879, 0),
-	smithy.NewStaticSchema(&set, 880, 0),
-	smithy.NewStaticSchema(&set, 881, 0),
-	smithy.NewStaticSchema(&set, 882, 0),
-	smithy.NewStaticSchema(&set, 883, 0),
-	smithy.NewStaticSchema(&set, 884, 0),
-	smithy.NewStaticSchema(&set, 885, 0),
-	smithy.NewStaticSchema(&set, 886, 0),
-	smithy.NewStaticSchema(&set, 887, 0),
-	smithy.NewStaticSchema(&set, 888, 0),
-	smithy.NewStaticSchema(&set, 889, 0),
-	smithy.NewStaticSchema(&set, 890, 0),
-	smithy.NewStaticSchema(&set, 891, 0),
-	smithy.NewStaticSchema(&set, 892, 0),
-	smithy.NewStaticSchema(&set, 893, 0),
-	smithy.NewStaticSchema(&set, 894, 0),
-	smithy.NewStaticSchema(&set, 895, 0),
-	smithy.NewStaticSchema(&set, 896, 0),
-	smithy.NewStaticSchema(&set, 897, 0),
-	smithy.NewStaticSchema(&set, 898, 0),
-	smithy.NewStaticSchema(&set, 899, 0),
-	smithy.NewStaticSchema(&set, 900, 0),
-	smithy.NewStaticSchema(&set, 901, 0),
-	smithy.NewStaticSchema(&set, 902, 0),
-	smithy.NewStaticSchema(&set, 903, 0),
-	smithy.NewStaticSchema(&set, 904, 0),
-	smithy.NewStaticSchema(&set, 905, 0),
-	smithy.NewStaticSchema(&set, 906, 0),
-	smithy.NewStaticSchema(&set, 907, 0),
-	smithy.NewStaticSchema(&set, 908, 0),
-	smithy.NewStaticSchema(&set, 909, 0),
-	smithy.NewStaticSchema(&set, 910, 0),
-	smithy.NewStaticSchema(&set, 911, 0),
-	smithy.NewStaticSchema(&set, 912, 0),
-	smithy.NewStaticSchema(&set, 913, 0),
-	smithy.NewStaticSchema(&set, 914, 0),
-	smithy.NewStaticSchema(&set, 915, 0),
-	smithy.NewStaticSchema(&set, 916, 0),
-	smithy.NewStaticSchema(&set, 917, 0),
-	smithy.NewStaticSchema(&set, 918, 0),
-	smithy.NewStaticSchema(&set, 919, 0),
-	smithy.NewStaticSchema(&set, 920, 0),
-	smithy.NewStaticSchema(&set, 921, 0),
-	smithy.NewStaticSchema(&set, 922, 0),
-	smithy.NewStaticSchema(&set, 923, 0),
-	smithy.NewStaticSchema(&set, 924, 0),
-	smithy.NewStaticSchema(&set, 925, 0),
-	smithy.NewStaticSchema(&set, 926, 0),
-	smithy.NewStaticSchema(&set, 927, 0),
-	smithy.NewStaticSchema(&set, 928, 0),
-	smithy.NewStaticSchema(&set, 929, 0),
-	smithy.NewStaticSchema(&set, 930, 0),
-	smithy.NewStaticSchema(&set, 931, 0),
-	smithy.NewStaticSchema(&set, 932, 0),
-	smithy.NewStaticSchema(&set, 933, 0),
-	smithy.NewStaticSchema(&set, 934, 0),
-	smithy.NewStaticSchema(&set, 935, 0),
-	smithy.NewStaticSchema(&set, 936, 0),
-	smithy.NewStaticSchema(&set, 937, 0),
-	smithy.NewStaticSchema(&set, 938, 0),
-	smithy.NewStaticSchema(&set, 939, 0),
-	smithy.NewStaticSchema(&set, 940, 0),
-	smithy.NewStaticSchema(&set, 941, 0),
-	smithy.NewStaticSchema(&set, 942, 0),
-	smithy.NewStaticSchema(&set, 943, 0),
-	smithy.NewStaticSchema(&set, 944, 0),
-	smithy.NewStaticSchema(&set, 945, 0),
-	smithy.NewStaticSchema(&set, 946, 0),
-	smithy.NewStaticSchema(&set, 947, 0),
-	smithy.NewStaticSchema(&set, 948, 0),
-	smithy.NewStaticSchema(&set, 949, 0),
-	smithy.NewStaticSchema(&set, 950, 0),
-	smithy.NewStaticSchema(&set, 951, 0),
-	smithy.NewStaticSchema(&set, 952, 0),
-	smithy.NewStaticSchema(&set, 953, 0),
-	smithy.NewStaticSchema(&set, 954, 0),
-	smithy.NewStaticSchema(&set, 955, 0),
-	smithy.NewStaticSchema(&set, 956, 0),
-	smithy.NewStaticSchema(&set, 957, 0),
-	smithy.NewStaticSchema(&set, 958, 0),
-	smithy.NewStaticSchema(&set, 959, 0),
-	smithy.NewStaticSchema(&set, 960, 0),
-	smithy.NewStaticSchema(&set, 961, 0),
-	smithy.NewStaticSchema(&set, 962, 0),
-	smithy.NewStaticSchema(&set, 963, 0),
-	smithy.NewStaticSchema(&set, 964, 0),
-	smithy.NewStaticSchema(&set, 965, 0),
-	smithy.NewStaticSchema(&set, 966, 0),
-	smithy.NewStaticSchema(&set, 967, 0),
-	smithy.NewStaticSchema(&set, 968, 0),
-	smithy.NewStaticSchema(&set, 969, 0),
-	smithy.NewStaticSchema(&set, 970, 1073742265),
-	smithy.NewStaticSchema(&set, 971, 1073742263),
-	smithy.NewStaticSchema(&set, 972, 0),
-	smithy.NewStaticSchema(&set, 973, 0),
-	smithy.NewStaticSchema(&set, 974, 1073742431),
-	smithy.NewStaticSchema(&set, 975, 0),
-	smithy.NewStaticSchema(&set, 976, 0),
-	smithy.NewStaticSchema(&set, 977, 0),
-	smithy.NewStaticSchema(&set, 978, 0),
-	smithy.NewStaticSchema(&set, 979, 1073742803),
-	smithy.NewStaticSchema(&set, 980, 0),
-	smithy.NewStaticSchema(&set, 981, 0),
-	smithy.NewStaticSchema(&set, 982, 0),
-	smithy.NewStaticSchema(&set, 983, 1073742803),
-	smithy.NewStaticSchema(&set, 984, 0),
-	smithy.NewStaticSchema(&set, 985, 0),
-	smithy.NewStaticSchema(&set, 986, 0),
-	smithy.NewStaticSchema(&set, 987, 0),
-	smithy.NewStaticSchema(&set, 988, 2147483947),
-	smithy.NewStaticSchema(&set, 989, 0),
-	smithy.NewStaticSchema(&set, 990, 0),
-	smithy.NewStaticSchema(&set, 991, 0),
-	smithy.NewStaticSchema(&set, 992, 0),
-	smithy.NewStaticSchema(&set, 993, 0),
-	smithy.NewStaticSchema(&set, 994, 0),
-	smithy.NewStaticSchema(&set, 995, 0),
-	smithy.NewStaticSchema(&set, 996, 0),
-	smithy.NewStaticSchema(&set, 997, 0),
-	smithy.NewStaticSchema(&set, 998, 0),
-	smithy.NewStaticSchema(&set, 999, 0),
-	smithy.NewStaticSchema(&set, 1000, 0),
-	smithy.NewStaticSchema(&set, 1001, 0),
-	smithy.NewStaticSchema(&set, 1002, 0),
-	smithy.NewStaticSchema(&set, 1003, 0),
-	smithy.NewStaticSchema(&set, 1004, 0),
-	smithy.NewStaticSchema(&set, 1005, 0),
-	smithy.NewStaticSchema(&set, 1006, 0),
-	smithy.NewStaticSchema(&set, 1007, 0),
-	smithy.NewStaticSchema(&set, 1008, 0),
-	smithy.NewStaticSchema(&set, 1009, 0),
-	smithy.NewStaticSchema(&set, 1010, 0),
-	smithy.NewStaticSchema(&set, 1011, 0),
-	smithy.NewStaticSchema(&set, 1012, 0),
-	smithy.NewStaticSchema(&set, 1013, 0),
-	smithy.NewStaticSchema(&set, 1014, 0),
-	smithy.NewStaticSchema(&set, 1015, 0),
-	smithy.NewStaticSchema(&set, 1016, 0),
-	smithy.NewStaticSchema(&set, 1017, 0),
-	smithy.NewStaticSchema(&set, 1018, 0),
-	smithy.NewStaticSchema(&set, 1019, 0),
-	smithy.NewStaticSchema(&set, 1020, 0),
-	smithy.NewStaticSchema(&set, 1021, 0),
-	smithy.NewStaticSchema(&set, 1022, 0),
-	smithy.NewStaticSchema(&set, 1023, 1073742847),
-	smithy.NewStaticSchema(&set, 1024, 0),
-	smithy.NewStaticSchema(&set, 1025, 2147484673),
-	smithy.NewStaticSchema(&set, 1026, 0),
-	smithy.NewStaticSchema(&set, 1027, 0),
-	smithy.NewStaticSchema(&set, 1028, 0),
-	smithy.NewStaticSchema(&set, 1029, 0),
-	smithy.NewStaticSchema(&set, 1030, 0),
-	smithy.NewStaticSchema(&set, 1031, 0),
-	smithy.NewStaticSchema(&set, 1032, 0),
-	smithy.NewStaticSchema(&set, 1033, 0),
-	smithy.NewStaticSchema(&set, 1034, 0),
-	smithy.NewStaticSchema(&set, 1035, 0),
-	smithy.NewStaticSchema(&set, 1036, 0),
-	smithy.NewStaticSchema(&set, 1037, 0),
-	smithy.NewStaticSchema(&set, 1038, 0),
-	smithy.NewStaticSchema(&set, 1039, 0),
-	smithy.NewStaticSchema(&set, 1040, 0),
-	smithy.NewStaticSchema(&set, 1041, 0),
-	smithy.NewStaticSchema(&set, 1042, 0),
-	smithy.NewStaticSchema(&set, 1043, 0),
-	smithy.NewStaticSchema(&set, 1044, 0),
-	smithy.NewStaticSchema(&set, 1045, 0),
-	smithy.NewStaticSchema(&set, 1046, 0),
-	smithy.NewStaticSchema(&set, 1047, 0),
-	smithy.NewStaticSchema(&set, 1048, 0),
-	smithy.NewStaticSchema(&set, 1049, 0),
-	smithy.NewStaticSchema(&set, 1050, 1073742454),
-	smithy.NewStaticSchema(&set, 1051, 1073742898),
-	smithy.NewStaticSchema(&set, 1052, 1073742905),
-	smithy.NewStaticSchema(&set, 1053, 0),
-	smithy.NewStaticSchema(&set, 1054, 1073742878),
-	smithy.NewStaticSchema(&set, 1055, 0),
-	smithy.NewStaticSchema(&set, 1056, 0),
-	smithy.NewStaticSchema(&set, 1057, 0),
-	smithy.NewStaticSchema(&set, 1058, 0),
-	smithy.NewStaticSchema(&set, 1059, 0),
-	smithy.NewStaticSchema(&set, 1060, 0),
-	smithy.NewStaticSchema(&set, 1061, 0),
-	smithy.NewStaticSchema(&set, 1062, 0),
-	smithy.NewStaticSchema(&set, 1063, 0),
-	smithy.NewStaticSchema(&set, 1064, 0),
-	smithy.NewStaticSchema(&set, 1065, 0),
-	smithy.NewStaticSchema(&set, 1066, 0),
-	smithy.NewStaticSchema(&set, 1067, 0),
-	smithy.NewStaticSchema(&set, 1068, 0),
-	smithy.NewStaticSchema(&set, 1069, 0),
-	smithy.NewStaticSchema(&set, 1070, 0),
-	smithy.NewStaticSchema(&set, 1071, 0),
-	smithy.NewStaticSchema(&set, 1072, 0),
-	smithy.NewStaticSchema(&set, 1073, 0),
-	smithy.NewStaticSchema(&set, 1074, 1073742898),
-	smithy.NewStaticSchema(&set, 1075, 0),
-	smithy.NewStaticSchema(&set, 1076, 0),
-	smithy.NewStaticSchema(&set, 1077, 0),
-	smithy.NewStaticSchema(&set, 1078, 0),
-	smithy.NewStaticSchema(&set, 1079, 0),
-	smithy.NewStaticSchema(&set, 1080, 0),
-	smithy.NewStaticSchema(&set, 1081, 1073742905),
-	smithy.NewStaticSchema(&set, 1082, 0),
-	smithy.NewStaticSchema(&set, 1083, 0),
-	smithy.NewStaticSchema(&set, 1084, 0),
-	smithy.NewStaticSchema(&set, 1085, 0),
-	smithy.NewStaticSchema(&set, 1086, 0),
-	smithy.NewStaticSchema(&set, 1087, 0),
-	smithy.NewStaticSchema(&set, 1088, 0),
-	smithy.NewStaticSchema(&set, 1089, 0),
-	smithy.NewStaticSchema(&set, 1090, 0),
-	smithy.NewStaticSchema(&set, 1091, 0),
-	smithy.NewStaticSchema(&set, 1092, 0),
-	smithy.NewStaticSchema(&set, 1093, 0),
-	smithy.NewStaticSchema(&set, 1094, 0),
-	smithy.NewStaticSchema(&set, 1095, 0),
-	smithy.NewStaticSchema(&set, 1096, 0),
-	smithy.NewStaticSchema(&set, 1097, 0),
-	smithy.NewStaticSchema(&set, 1098, 0),
-	smithy.NewStaticSchema(&set, 1099, 0),
-	smithy.NewStaticSchema(&set, 1100, 0),
-	smithy.NewStaticSchema(&set, 1101, 0),
-	smithy.NewStaticSchema(&set, 1102, 0),
-	smithy.NewStaticSchema(&set, 1103, 0),
-	smithy.NewStaticSchema(&set, 1104, 0),
-	smithy.NewStaticSchema(&set, 1105, 0),
-	smithy.NewStaticSchema(&set, 1106, 0),
-	smithy.NewStaticSchema(&set, 1107, 0),
-	smithy.NewStaticSchema(&set, 1108, 0),
-	smithy.NewStaticSchema(&set, 1109, 0),
-	smithy.NewStaticSchema(&set, 1110, 0),
-	smithy.NewStaticSchema(&set, 1111, 0),
-	smithy.NewStaticSchema(&set, 1112, 1073742936),
-	smithy.NewStaticSchema(&set, 1113, 0),
-	smithy.NewStaticSchema(&set, 1114, 0),
-	smithy.NewStaticSchema(&set, 1115, 1073742936),
-	smithy.NewStaticSchema(&set, 1116, 0),
-	smithy.NewStaticSchema(&set, 1117, 1073742941),
-	smithy.NewStaticSchema(&set, 1118, 0),
-	smithy.NewStaticSchema(&set, 1119, 1073742943),
-	smithy.NewStaticSchema(&set, 1120, 0),
-	smithy.NewStaticSchema(&set, 1121, 0),
-	smithy.NewStaticSchema(&set, 1122, 1073742946),
-	smithy.NewStaticSchema(&set, 1123, 0),
-	smithy.NewStaticSchema(&set, 1124, 0),
-	smithy.NewStaticSchema(&set, 1125, 0),
-	smithy.NewStaticSchema(&set, 1126, 0),
-	smithy.NewStaticSchema(&set, 1127, 0),
-	smithy.NewStaticSchema(&set, 1128, 0),
-	smithy.NewStaticSchema(&set, 1129, 1073742953),
-	smithy.NewStaticSchema(&set, 1130, 0),
-	smithy.NewStaticSchema(&set, 1131, 0),
-	smithy.NewStaticSchema(&set, 1132, 0),
-	smithy.NewStaticSchema(&set, 1133, 0),
-	smithy.NewStaticSchema(&set, 1134, 0),
-	smithy.NewStaticSchema(&set, 1135, 0),
-	smithy.NewStaticSchema(&set, 1136, 0),
-	smithy.NewStaticSchema(&set, 1137, 0),
-	smithy.NewStaticSchema(&set, 1138, 0),
-	smithy.NewStaticSchema(&set, 1139, 0),
-	smithy.NewStaticSchema(&set, 1140, 0),
-	smithy.NewStaticSchema(&set, 1141, 0),
-	smithy.NewStaticSchema(&set, 1142, 0),
-	smithy.NewStaticSchema(&set, 1143, 1073742971),
-	smithy.NewStaticSchema(&set, 1144, 0),
-	smithy.NewStaticSchema(&set, 1145, 0),
-	smithy.NewStaticSchema(&set, 1146, 0),
-	smithy.NewStaticSchema(&set, 1147, 1073742971),
-	smithy.NewStaticSchema(&set, 1148, 0),
-	smithy.NewStaticSchema(&set, 1149, 0),
-	smithy.NewStaticSchema(&set, 1150, 0),
-	smithy.NewStaticSchema(&set, 1151, 0),
-	smithy.NewStaticSchema(&set, 1152, 0),
-	smithy.NewStaticSchema(&set, 1153, 0),
-	smithy.NewStaticSchema(&set, 1154, 0),
-	smithy.NewStaticSchema(&set, 1155, 0),
-	smithy.NewStaticSchema(&set, 1156, 0),
-	smithy.NewStaticSchema(&set, 1157, 0),
-	smithy.NewStaticSchema(&set, 1158, 0),
-	smithy.NewStaticSchema(&set, 1159, 1073742983),
-	smithy.NewStaticSchema(&set, 1160, 0),
-	smithy.NewStaticSchema(&set, 1161, 0),
-	smithy.NewStaticSchema(&set, 1162, 0),
-	smithy.NewStaticSchema(&set, 1163, 0),
-	smithy.NewStaticSchema(&set, 1164, 0),
-	smithy.NewStaticSchema(&set, 1165, 0),
-	smithy.NewStaticSchema(&set, 1166, 1073742990),
-	smithy.NewStaticSchema(&set, 1167, 0),
-	smithy.NewStaticSchema(&set, 1168, 0),
-	smithy.NewStaticSchema(&set, 1169, 0),
-	smithy.NewStaticSchema(&set, 1170, 0),
-	smithy.NewStaticSchema(&set, 1171, 0),
-	smithy.NewStaticSchema(&set, 1172, 0),
-	smithy.NewStaticSchema(&set, 1173, 0),
-	smithy.NewStaticSchema(&set, 1174, 2147483849),
-	smithy.NewStaticSchema(&set, 1175, 0),
-	smithy.NewStaticSchema(&set, 1176, 0),
-	smithy.NewStaticSchema(&set, 1177, 0),
-	smithy.NewStaticSchema(&set, 1178, 0),
-	smithy.NewStaticSchema(&set, 1179, 0),
-	smithy.NewStaticSchema(&set, 1180, 0),
-	smithy.NewStaticSchema(&set, 1181, 0),
-	smithy.NewStaticSchema(&set, 1182, 0),
-	smithy.NewStaticSchema(&set, 1183, 0),
-	smithy.NewStaticSchema(&set, 1184, 2147484673),
-	smithy.NewStaticSchema(&set, 1185, 2147483748),
-	smithy.NewStaticSchema(&set, 1186, 0),
-	smithy.NewStaticSchema(&set, 1187, 0),
-	smithy.NewStaticSchema(&set, 1188, 2147484673),
-	smithy.NewStaticSchema(&set, 1189, 0),
-	smithy.NewStaticSchema(&set, 1190, 0),
-	smithy.NewStaticSchema(&set, 1191, 0),
-	smithy.NewStaticSchema(&set, 1192, 0),
-	smithy.NewStaticSchema(&set, 1193, 0),
-	smithy.NewStaticSchema(&set, 1194, 0),
-	smithy.NewStaticSchema(&set, 1195, 0),
-	smithy.NewStaticSchema(&set, 1196, 0),
-	smithy.NewStaticSchema(&set, 1197, 0),
-	smithy.NewStaticSchema(&set, 1198, 0),
-	smithy.NewStaticSchema(&set, 1199, 0),
-	smithy.NewStaticSchema(&set, 1200, 0),
-	smithy.NewStaticSchema(&set, 1201, 0),
-	smithy.NewStaticSchema(&set, 1202, 0),
-	smithy.NewStaticSchema(&set, 1203, 0),
-	smithy.NewStaticSchema(&set, 1204, 0),
-	smithy.NewStaticSchema(&set, 1205, 0),
-	smithy.NewStaticSchema(&set, 1206, 0),
-	smithy.NewStaticSchema(&set, 1207, 0),
-	smithy.NewStaticSchema(&set, 1208, 0),
-	smithy.NewStaticSchema(&set, 1209, 0),
-	smithy.NewStaticSchema(&set, 1210, 0),
-	smithy.NewStaticSchema(&set, 1211, 0),
-	smithy.NewStaticSchema(&set, 1212, 0),
-	smithy.NewStaticSchema(&set, 1213, 0),
-	smithy.NewStaticSchema(&set, 1214, 0),
-	smithy.NewStaticSchema(&set, 1215, 0),
-	smithy.NewStaticSchema(&set, 1216, 0),
-	smithy.NewStaticSchema(&set, 1217, 0),
-	smithy.NewStaticSchema(&set, 1218, 0),
-	smithy.NewStaticSchema(&set, 1219, 0),
-	smithy.NewStaticSchema(&set, 1220, 0),
-	smithy.NewStaticSchema(&set, 1221, 0),
-	smithy.NewStaticSchema(&set, 1222, 0),
-	smithy.NewStaticSchema(&set, 1223, 0),
-	smithy.NewStaticSchema(&set, 1224, 0),
-	smithy.NewStaticSchema(&set, 1225, 0),
-	smithy.NewStaticSchema(&set, 1226, 2147484673),
-	smithy.NewStaticSchema(&set, 1227, 0),
-	smithy.NewStaticSchema(&set, 1228, 0),
-	smithy.NewStaticSchema(&set, 1229, 0),
-	smithy.NewStaticSchema(&set, 1230, 0),
-	smithy.NewStaticSchema(&set, 1231, 0),
-	smithy.NewStaticSchema(&set, 1232, 0),
-	smithy.NewStaticSchema(&set, 1233, 0),
-	smithy.NewStaticSchema(&set, 1234, 0),
-	smithy.NewStaticSchema(&set, 1235, 0),
-	smithy.NewStaticSchema(&set, 1236, 0),
-	smithy.NewStaticSchema(&set, 1237, 0),
-	smithy.NewStaticSchema(&set, 1238, 2147484673),
-	smithy.NewStaticSchema(&set, 1239, 0),
-	smithy.NewStaticSchema(&set, 1240, 0),
-	smithy.NewStaticSchema(&set, 1241, 0),
-	smithy.NewStaticSchema(&set, 1242, 0),
-	smithy.NewStaticSchema(&set, 1243, 0),
-	smithy.NewStaticSchema(&set, 1244, 0),
-	smithy.NewStaticSchema(&set, 1245, 0),
-	smithy.NewStaticSchema(&set, 1246, 0),
-	smithy.NewStaticSchema(&set, 1247, 0),
-	smithy.NewStaticSchema(&set, 1248, 0),
-	smithy.NewStaticSchema(&set, 1249, 0),
-	smithy.NewStaticSchema(&set, 1250, 0),
-	smithy.NewStaticSchema(&set, 1251, 0),
-	smithy.NewStaticSchema(&set, 1252, 0),
-	smithy.NewStaticSchema(&set, 1253, 0),
-	smithy.NewStaticSchema(&set, 1254, 0),
-	smithy.NewStaticSchema(&set, 1255, 0),
-	smithy.NewStaticSchema(&set, 1256, 0),
-	smithy.NewStaticSchema(&set, 1257, 0),
-	smithy.NewStaticSchema(&set, 1258, 0),
-	smithy.NewStaticSchema(&set, 1259, 0),
-	smithy.NewStaticSchema(&set, 1260, 0),
-	smithy.NewStaticSchema(&set, 1261, 0),
-	smithy.NewStaticSchema(&set, 1262, 0),
-	smithy.NewStaticSchema(&set, 1263, 0),
-	smithy.NewStaticSchema(&set, 1264, 0),
-	smithy.NewStaticSchema(&set, 1265, 0),
-	smithy.NewStaticSchema(&set, 1266, 0),
-	smithy.NewStaticSchema(&set, 1267, 0),
-	smithy.NewStaticSchema(&set, 1268, 0),
-	smithy.NewStaticSchema(&set, 1269, 0),
-	smithy.NewStaticSchema(&set, 1270, 0),
-	smithy.NewStaticSchema(&set, 1271, 0),
-	smithy.NewStaticSchema(&set, 1272, 0),
-	smithy.NewStaticSchema(&set, 1273, 0),
-	smithy.NewStaticSchema(&set, 1274, 0),
-	smithy.NewStaticSchema(&set, 1275, 0),
-	smithy.NewStaticSchema(&set, 1276, 0),
-	smithy.NewStaticSchema(&set, 1277, 0),
-	smithy.NewStaticSchema(&set, 1278, 0),
-	smithy.NewStaticSchema(&set, 1279, 0),
-	smithy.NewStaticSchema(&set, 1280, 0),
-	smithy.NewStaticSchema(&set, 1281, 0),
-	smithy.NewStaticSchema(&set, 1282, 0),
-	smithy.NewStaticSchema(&set, 1283, 0),
-	smithy.NewStaticSchema(&set, 1284, 0),
-	smithy.NewStaticSchema(&set, 1285, 2147484673),
-	smithy.NewStaticSchema(&set, 1286, 0),
-	smithy.NewStaticSchema(&set, 1287, 0),
-	smithy.NewStaticSchema(&set, 1288, 0),
-	smithy.NewStaticSchema(&set, 1289, 0),
-	smithy.NewStaticSchema(&set, 1290, 0),
-	smithy.NewStaticSchema(&set, 1291, 0),
-	smithy.NewStaticSchema(&set, 1292, 0),
-	smithy.NewStaticSchema(&set, 1293, 0),
-	smithy.NewStaticSchema(&set, 1294, 0),
-	smithy.NewStaticSchema(&set, 1295, 0),
-	smithy.NewStaticSchema(&set, 1296, 0),
-	smithy.NewStaticSchema(&set, 1297, 0),
-	smithy.NewStaticSchema(&set, 1298, 0),
-	smithy.NewStaticSchema(&set, 1299, 0),
-	smithy.NewStaticSchema(&set, 1300, 0),
-	smithy.NewStaticSchema(&set, 1301, 0),
-	smithy.NewStaticSchema(&set, 1302, 0),
-	smithy.NewStaticSchema(&set, 1303, 0),
-	smithy.NewStaticSchema(&set, 1304, 0),
-	smithy.NewStaticSchema(&set, 1305, 0),
-	smithy.NewStaticSchema(&set, 1306, 0),
-	smithy.NewStaticSchema(&set, 1307, 0),
-	smithy.NewStaticSchema(&set, 1308, 0),
-	smithy.NewStaticSchema(&set, 1309, 0),
-	smithy.NewStaticSchema(&set, 1310, 0),
-	smithy.NewStaticSchema(&set, 1311, 0),
-	smithy.NewStaticSchema(&set, 1312, 0),
-	smithy.NewStaticSchema(&set, 1313, 0),
-	smithy.NewStaticSchema(&set, 1314, 0),
-	smithy.NewStaticSchema(&set, 1315, 0),
-	smithy.NewStaticSchema(&set, 1316, 0),
-	smithy.NewStaticSchema(&set, 1317, 0),
-	smithy.NewStaticSchema(&set, 1318, 0),
-	smithy.NewStaticSchema(&set, 1319, 0),
-	smithy.NewStaticSchema(&set, 1320, 0),
-	smithy.NewStaticSchema(&set, 1321, 0),
-	smithy.NewStaticSchema(&set, 1322, 2147484673),
-	smithy.NewStaticSchema(&set, 1323, 0),
-	smithy.NewStaticSchema(&set, 1324, 0),
-	smithy.NewStaticSchema(&set, 1325, 0),
-	smithy.NewStaticSchema(&set, 1326, 0),
-	smithy.NewStaticSchema(&set, 1327, 0),
-	smithy.NewStaticSchema(&set, 1328, 0),
-	smithy.NewStaticSchema(&set, 1329, 0),
-	smithy.NewStaticSchema(&set, 1330, 0),
-	smithy.NewStaticSchema(&set, 1331, 0),
-	smithy.NewStaticSchema(&set, 1332, 0),
-	smithy.NewStaticSchema(&set, 1333, 0),
-	smithy.NewStaticSchema(&set, 1334, 0),
-	smithy.NewStaticSchema(&set, 1335, 0),
-	smithy.NewStaticSchema(&set, 1336, 0),
-	smithy.NewStaticSchema(&set, 1337, 0),
-	smithy.NewStaticSchema(&set, 1338, 0),
-	smithy.NewStaticSchema(&set, 1339, 0),
-	smithy.NewStaticSchema(&set, 1340, 0),
-	smithy.NewStaticSchema(&set, 1341, 0),
-	smithy.NewStaticSchema(&set, 1342, 0),
-	smithy.NewStaticSchema(&set, 1343, 0),
-	smithy.NewStaticSchema(&set, 1344, 0),
-	smithy.NewStaticSchema(&set, 1345, 0),
-	smithy.NewStaticSchema(&set, 1346, 0),
-	smithy.NewStaticSchema(&set, 1347, 0),
-	smithy.NewStaticSchema(&set, 1348, 0),
-	smithy.NewStaticSchema(&set, 1349, 0),
-	smithy.NewStaticSchema(&set, 1350, 0),
-	smithy.NewStaticSchema(&set, 1351, 0),
-	smithy.NewStaticSchema(&set, 1352, 0),
-	smithy.NewStaticSchema(&set, 1353, 0),
-	smithy.NewStaticSchema(&set, 1354, 0),
-	smithy.NewStaticSchema(&set, 1355, 0),
-	smithy.NewStaticSchema(&set, 1356, 0),
-	smithy.NewStaticSchema(&set, 1357, 0),
-	smithy.NewStaticSchema(&set, 1358, 0),
-	smithy.NewStaticSchema(&set, 1359, 0),
-	smithy.NewStaticSchema(&set, 1360, 0),
-	smithy.NewStaticSchema(&set, 1361, 0),
-	smithy.NewStaticSchema(&set, 1362, 0),
-	smithy.NewStaticSchema(&set, 1363, 0),
-	smithy.NewStaticSchema(&set, 1364, 0),
-	smithy.NewStaticSchema(&set, 1365, 0),
-	smithy.NewStaticSchema(&set, 1366, 0),
-	smithy.NewStaticSchema(&set, 1367, 0),
-	smithy.NewStaticSchema(&set, 1368, 0),
-	smithy.NewStaticSchema(&set, 1369, 0),
-	smithy.NewStaticSchema(&set, 1370, 2147484673),
-	smithy.NewStaticSchema(&set, 1371, 0),
-	smithy.NewStaticSchema(&set, 1372, 0),
-	smithy.NewStaticSchema(&set, 1373, 0),
-	smithy.NewStaticSchema(&set, 1374, 0),
-	smithy.NewStaticSchema(&set, 1375, 0),
-	smithy.NewStaticSchema(&set, 1376, 0),
-	smithy.NewStaticSchema(&set, 1377, 0),
-	smithy.NewStaticSchema(&set, 1378, 0),
-	smithy.NewStaticSchema(&set, 1379, 0),
-	smithy.NewStaticSchema(&set, 1380, 0),
-	smithy.NewStaticSchema(&set, 1381, 0),
-	smithy.NewStaticSchema(&set, 1382, 1073741919),
-	smithy.NewStaticSchema(&set, 1383, 0),
-	smithy.NewStaticSchema(&set, 1384, 0),
-	smithy.NewStaticSchema(&set, 1385, 0),
-	smithy.NewStaticSchema(&set, 1386, 0),
-	smithy.NewStaticSchema(&set, 1387, 0),
-	smithy.NewStaticSchema(&set, 1388, 0),
-	smithy.NewStaticSchema(&set, 1389, 0),
-	smithy.NewStaticSchema(&set, 1390, 1073741987),
-	smithy.NewStaticSchema(&set, 1391, 0),
-	smithy.NewStaticSchema(&set, 1392, 0),
-	smithy.NewStaticSchema(&set, 1393, 0),
-	smithy.NewStaticSchema(&set, 1394, 0),
-	smithy.NewStaticSchema(&set, 1395, 0),
-	smithy.NewStaticSchema(&set, 1396, 0),
-	smithy.NewStaticSchema(&set, 1397, 0),
-	smithy.NewStaticSchema(&set, 1398, 0),
-	smithy.NewStaticSchema(&set, 1399, 0),
-	smithy.NewStaticSchema(&set, 1400, 1073741992),
-	smithy.NewStaticSchema(&set, 1401, 0),
-	smithy.NewStaticSchema(&set, 1402, 0),
-	smithy.NewStaticSchema(&set, 1403, 0),
-	smithy.NewStaticSchema(&set, 1404, 0),
-	smithy.NewStaticSchema(&set, 1405, 0),
-	smithy.NewStaticSchema(&set, 1406, 1073741997),
-	smithy.NewStaticSchema(&set, 1407, 0),
-	smithy.NewStaticSchema(&set, 1408, 0),
-	smithy.NewStaticSchema(&set, 1409, 0),
-	smithy.NewStaticSchema(&set, 1410, 0),
-	smithy.NewStaticSchema(&set, 1411, 0),
-	smithy.NewStaticSchema(&set, 1412, 0),
-	smithy.NewStaticSchema(&set, 1413, 0),
-	smithy.NewStaticSchema(&set, 1414, 1073742006),
-	smithy.NewStaticSchema(&set, 1415, 0),
-	smithy.NewStaticSchema(&set, 1416, 0),
-	smithy.NewStaticSchema(&set, 1417, 0),
-	smithy.NewStaticSchema(&set, 1418, 0),
-	smithy.NewStaticSchema(&set, 1419, 0),
-	smithy.NewStaticSchema(&set, 1420, 0),
-	smithy.NewStaticSchema(&set, 1421, 0),
-	smithy.NewStaticSchema(&set, 1422, 0),
-	smithy.NewStaticSchema(&set, 1423, 1073742029),
-	smithy.NewStaticSchema(&set, 1424, 0),
-	smithy.NewStaticSchema(&set, 1425, 0),
-	smithy.NewStaticSchema(&set, 1426, 0),
-	smithy.NewStaticSchema(&set, 1427, 0),
-	smithy.NewStaticSchema(&set, 1428, 0),
-	smithy.NewStaticSchema(&set, 1429, 0),
-	smithy.NewStaticSchema(&set, 1430, 0),
-	smithy.NewStaticSchema(&set, 1431, 0),
-	smithy.NewStaticSchema(&set, 1432, 1073742878),
-	smithy.NewStaticSchema(&set, 1433, 0),
-	smithy.NewStaticSchema(&set, 1434, 0),
-	smithy.NewStaticSchema(&set, 1435, 0),
-	smithy.NewStaticSchema(&set, 1436, 0),
-	smithy.NewStaticSchema(&set, 1437, 0),
-	smithy.NewStaticSchema(&set, 1438, 0),
-	smithy.NewStaticSchema(&set, 1439, 0),
-	smithy.NewStaticSchema(&set, 1440, 1073742064),
-	smithy.NewStaticSchema(&set, 1441, 0),
-	smithy.NewStaticSchema(&set, 1442, 0),
-	smithy.NewStaticSchema(&set, 1443, 0),
-	smithy.NewStaticSchema(&set, 1444, 0),
-	smithy.NewStaticSchema(&set, 1445, 0),
-	smithy.NewStaticSchema(&set, 1446, 0),
-	smithy.NewStaticSchema(&set, 1447, 0),
-	smithy.NewStaticSchema(&set, 1448, 1073742137),
-	smithy.NewStaticSchema(&set, 1449, 0),
-	smithy.NewStaticSchema(&set, 1450, 0),
-	smithy.NewStaticSchema(&set, 1451, 0),
-	smithy.NewStaticSchema(&set, 1452, 0),
-	smithy.NewStaticSchema(&set, 1453, 0),
-	smithy.NewStaticSchema(&set, 1454, 0),
-	smithy.NewStaticSchema(&set, 1455, 0),
-	smithy.NewStaticSchema(&set, 1456, 0),
-	smithy.NewStaticSchema(&set, 1457, 1073742196),
-	smithy.NewStaticSchema(&set, 1458, 0),
-	smithy.NewStaticSchema(&set, 1459, 0),
-	smithy.NewStaticSchema(&set, 1460, 0),
-	smithy.NewStaticSchema(&set, 1461, 0),
-	smithy.NewStaticSchema(&set, 1462, 0),
-	smithy.NewStaticSchema(&set, 1463, 0),
-	smithy.NewStaticSchema(&set, 1464, 0),
-	smithy.NewStaticSchema(&set, 1465, 0),
-	smithy.NewStaticSchema(&set, 1466, 0),
-	smithy.NewStaticSchema(&set, 1467, 1073742259),
-	smithy.NewStaticSchema(&set, 1468, 0),
-	smithy.NewStaticSchema(&set, 1469, 0),
-	smithy.NewStaticSchema(&set, 1470, 0),
-	smithy.NewStaticSchema(&set, 1471, 0),
-	smithy.NewStaticSchema(&set, 1472, 0),
-	smithy.NewStaticSchema(&set, 1473, 0),
-	smithy.NewStaticSchema(&set, 1474, 0),
-	smithy.NewStaticSchema(&set, 1475, 1073742428),
-	smithy.NewStaticSchema(&set, 1476, 0),
-	smithy.NewStaticSchema(&set, 1477, 0),
-	smithy.NewStaticSchema(&set, 1478, 0),
-	smithy.NewStaticSchema(&set, 1479, 1073742477),
-	smithy.NewStaticSchema(&set, 1480, 0),
-	smithy.NewStaticSchema(&set, 1481, 0),
-	smithy.NewStaticSchema(&set, 1482, 0),
-	smithy.NewStaticSchema(&set, 1483, 0),
-	smithy.NewStaticSchema(&set, 1484, 0),
-	smithy.NewStaticSchema(&set, 1485, 0),
-	smithy.NewStaticSchema(&set, 1486, 0),
-	smithy.NewStaticSchema(&set, 1487, 0),
-	smithy.NewStaticSchema(&set, 1488, 0),
-	smithy.NewStaticSchema(&set, 1489, 1073742504),
-	smithy.NewStaticSchema(&set, 1490, 0),
-	smithy.NewStaticSchema(&set, 1491, 0),
-	smithy.NewStaticSchema(&set, 1492, 0),
-	smithy.NewStaticSchema(&set, 1493, 0),
-	smithy.NewStaticSchema(&set, 1494, 0),
-	smithy.NewStaticSchema(&set, 1495, 0),
-	smithy.NewStaticSchema(&set, 1496, 0),
-	smithy.NewStaticSchema(&set, 1497, 1073742598),
-	smithy.NewStaticSchema(&set, 1498, 0),
-	smithy.NewStaticSchema(&set, 1499, 0),
-	smithy.NewStaticSchema(&set, 1500, 0),
-	smithy.NewStaticSchema(&set, 1501, 2147484673),
-	smithy.NewStaticSchema(&set, 1502, 0),
-	smithy.NewStaticSchema(&set, 1503, 0),
-	smithy.NewStaticSchema(&set, 1504, 0),
-	smithy.NewStaticSchema(&set, 1505, 0),
-	smithy.NewStaticSchema(&set, 1506, 0),
-	smithy.NewStaticSchema(&set, 1507, 0),
-	smithy.NewStaticSchema(&set, 1508, 1073742943),
-	smithy.NewStaticSchema(&set, 1509, 0),
-	smithy.NewStaticSchema(&set, 1510, 0),
-	smithy.NewStaticSchema(&set, 1511, 0),
-	smithy.NewStaticSchema(&set, 1512, 0),
-	smithy.NewStaticSchema(&set, 1513, 0),
-	smithy.NewStaticSchema(&set, 1514, 1073742983),
-	smithy.NewStaticSchema(&set, 1515, 0),
-	smithy.NewStaticSchema(&set, 1516, 0),
-	smithy.NewStaticSchema(&set, 1517, 0),
-	smithy.NewStaticSchema(&set, 1518, 0),
-	smithy.NewStaticSchema(&set, 1519, 0),
-	smithy.NewStaticSchema(&set, 1520, 0),
-	smithy.NewStaticSchema(&set, 1521, 0),
-	smithy.NewStaticSchema(&set, 1522, 0),
-	smithy.NewStaticSchema(&set, 1523, 2147484673),
-	smithy.NewStaticSchema(&set, 1524, 0),
-	smithy.NewStaticSchema(&set, 1525, 0),
-	smithy.NewStaticSchema(&set, 1526, 0),
-	smithy.NewStaticSchema(&set, 1527, 0),
-	smithy.NewStaticSchema(&set, 1528, 2147484673),
-	smithy.NewStaticSchema(&set, 1529, 0),
-	smithy.NewStaticSchema(&set, 1530, 0),
-	smithy.NewStaticSchema(&set, 1531, 0),
-	smithy.NewStaticSchema(&set, 1532, 0),
-	smithy.NewStaticSchema(&set, 1533, 0),
-	smithy.NewStaticSchema(&set, 1534, 0),
-	smithy.NewStaticSchema(&set, 1535, 1073741990),
-	smithy.NewStaticSchema(&set, 1536, 0),
-	smithy.NewStaticSchema(&set, 1537, 0),
-	smithy.NewStaticSchema(&set, 1538, 0),
-	smithy.NewStaticSchema(&set, 1539, 0),
-	smithy.NewStaticSchema(&set, 1540, 0),
-	smithy.NewStaticSchema(&set, 1541, 2147484673),
-	smithy.NewStaticSchema(&set, 1542, 0),
-	smithy.NewStaticSchema(&set, 1543, 0),
-	smithy.NewStaticSchema(&set, 1544, 0),
-	smithy.NewStaticSchema(&set, 1545, 1073742847),
-	smithy.NewStaticSchema(&set, 1546, 0),
-	smithy.NewStaticSchema(&set, 1547, 0),
-	smithy.NewStaticSchema(&set, 1548, 0),
-	smithy.NewStaticSchema(&set, 1549, 0),
-	smithy.NewStaticSchema(&set, 1550, 0),
-	smithy.NewStaticSchema(&set, 1551, 0),
-	smithy.NewStaticSchema(&set, 1552, 2147483748),
-	smithy.NewStaticSchema(&set, 1553, 0),
-	smithy.NewStaticSchema(&set, 1554, 0),
-	smithy.NewStaticSchema(&set, 1555, 0),
-	smithy.NewStaticSchema(&set, 1556, 0),
-	smithy.NewStaticSchema(&set, 1557, 0),
-	smithy.NewStaticSchema(&set, 1558, 0),
-	smithy.NewStaticSchema(&set, 1559, 0),
-	smithy.NewStaticSchema(&set, 1560, 0),
-	smithy.NewStaticSchema(&set, 1561, 0),
-	smithy.NewStaticSchema(&set, 1562, 0),
-	smithy.NewStaticSchema(&set, 1563, 0),
-	smithy.NewStaticSchema(&set, 1564, 0),
-	smithy.NewStaticSchema(&set, 1565, 0),
-	smithy.NewStaticSchema(&set, 1566, 0),
-	smithy.NewStaticSchema(&set, 1567, 0),
-	smithy.NewStaticSchema(&set, 1568, 0),
-	smithy.NewStaticSchema(&set, 1569, 0),
-	smithy.NewStaticSchema(&set, 1570, 0),
-	smithy.NewStaticSchema(&set, 1571, 0),
-	smithy.NewStaticSchema(&set, 1572, 0),
-	smithy.NewStaticSchema(&set, 1573, 0),
-	smithy.NewStaticSchema(&set, 1574, 0),
-	smithy.NewStaticSchema(&set, 1575, 0),
-	smithy.NewStaticSchema(&set, 1576, 0),
-	smithy.NewStaticSchema(&set, 1577, 0),
-	smithy.NewStaticSchema(&set, 1578, 0),
-	smithy.NewStaticSchema(&set, 1579, 0),
-	smithy.NewStaticSchema(&set, 1580, 0),
-	smithy.NewStaticSchema(&set, 1581, 0),
-	smithy.NewStaticSchema(&set, 1582, 0),
-	smithy.NewStaticSchema(&set, 1583, 0),
-	smithy.NewStaticSchema(&set, 1584, 0),
-	smithy.NewStaticSchema(&set, 1585, 0),
-	smithy.NewStaticSchema(&set, 1586, 0),
-	smithy.NewStaticSchema(&set, 1587, 0),
-	smithy.NewStaticSchema(&set, 1588, 2147483849),
-	smithy.NewStaticSchema(&set, 1589, 0),
-	smithy.NewStaticSchema(&set, 1590, 0),
-	smithy.NewStaticSchema(&set, 1591, 0),
-	smithy.NewStaticSchema(&set, 1592, 0),
-	smithy.NewStaticSchema(&set, 1593, 0),
-	smithy.NewStaticSchema(&set, 1594, 0),
-	smithy.NewStaticSchema(&set, 1595, 0),
-	smithy.NewStaticSchema(&set, 1596, 0),
-	smithy.NewStaticSchema(&set, 1597, 0),
-	smithy.NewStaticSchema(&set, 1598, 0),
-	smithy.NewStaticSchema(&set, 1599, 0),
-	smithy.NewStaticSchema(&set, 1600, 0),
-	smithy.NewStaticSchema(&set, 1601, 0),
-	smithy.NewStaticSchema(&set, 1602, 0),
-	smithy.NewStaticSchema(&set, 1603, 0),
-	smithy.NewStaticSchema(&set, 1604, 0),
-	smithy.NewStaticSchema(&set, 1605, 0),
-	smithy.NewStaticSchema(&set, 1606, 0),
-	smithy.NewStaticSchema(&set, 1607, 0),
-	smithy.NewStaticSchema(&set, 1608, 0),
-	smithy.NewStaticSchema(&set, 1609, 0),
-	smithy.NewStaticSchema(&set, 1610, 0),
-	smithy.NewStaticSchema(&set, 1611, 0),
-	smithy.NewStaticSchema(&set, 1612, 0),
-	smithy.NewStaticSchema(&set, 1613, 0),
-	smithy.NewStaticSchema(&set, 1614, 0),
-	smithy.NewStaticSchema(&set, 1615, 0),
-	smithy.NewStaticSchema(&set, 1616, 0),
-	smithy.NewStaticSchema(&set, 1617, 0),
-	smithy.NewStaticSchema(&set, 1618, 0),
-	smithy.NewStaticSchema(&set, 1619, 0),
-	smithy.NewStaticSchema(&set, 1620, 0),
-	smithy.NewStaticSchema(&set, 1621, 0),
-	smithy.NewStaticSchema(&set, 1622, 0),
-	smithy.NewStaticSchema(&set, 1623, 0),
-	smithy.NewStaticSchema(&set, 1624, 0),
-	smithy.NewStaticSchema(&set, 1625, 0),
-	smithy.NewStaticSchema(&set, 1626, 0),
-	smithy.NewStaticSchema(&set, 1627, 0),
-	smithy.NewStaticSchema(&set, 1628, 0),
-	smithy.NewStaticSchema(&set, 1629, 0),
-	smithy.NewStaticSchema(&set, 1630, 0),
-	smithy.NewStaticSchema(&set, 1631, 0),
-	smithy.NewStaticSchema(&set, 1632, 0),
-	smithy.NewStaticSchema(&set, 1633, 0),
-	smithy.NewStaticSchema(&set, 1634, 0),
-	smithy.NewStaticSchema(&set, 1635, 0),
-	smithy.NewStaticSchema(&set, 1636, 0),
-	smithy.NewStaticSchema(&set, 1637, 0),
-	smithy.NewStaticSchema(&set, 1638, 0),
-	smithy.NewStaticSchema(&set, 1639, 0),
-	smithy.NewStaticSchema(&set, 1640, 0),
-	smithy.NewStaticSchema(&set, 1641, 0),
-	smithy.NewStaticSchema(&set, 1642, 0),
-	smithy.NewStaticSchema(&set, 1643, 0),
-	smithy.NewStaticSchema(&set, 1644, 0),
-	smithy.NewStaticSchema(&set, 1645, 0),
-	smithy.NewStaticSchema(&set, 1646, 0),
-	smithy.NewStaticSchema(&set, 1647, 0),
-	smithy.NewStaticSchema(&set, 1648, 0),
-	smithy.NewStaticSchema(&set, 1649, 0),
-	smithy.NewStaticSchema(&set, 1650, 0),
-	smithy.NewStaticSchema(&set, 1651, 0),
+var all = [1652]smithy.Schema{
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4173, Ord: 0, Target: 0, Traits: 0, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4217, Ord: 1, Target: 1, Traits: 1, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3736, Ord: 2, Target: 2, Traits: 2, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3736, Ord: 3, Target: 3, Traits: 3, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2907, Ord: 4, Target: 4, Traits: 4, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6712, Ord: 5, Target: 5, Traits: 5, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1557, Ord: 6, Target: 6, Traits: 6, StrLen: 23, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4981, Ord: 7, Target: 7, Traits: 7, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4261, Ord: 8, Target: 8, Traits: 8, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3759, Ord: 9, Target: 9, Traits: 9, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3759, Ord: 10, Target: 10, Traits: 10, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1586, Ord: 11, Target: 11, Traits: 11, StrLen: 23, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5044, Ord: 12, Target: 12, Traits: 12, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3782, Ord: 13, Target: 13, Traits: 13, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 982, Ord: 14, Target: 14, Traits: 14, StrLen: 25, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3805, Ord: 15, Target: 15, Traits: 15, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2932, Ord: 16, Target: 16, Traits: 16, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3851, Ord: 17, Target: 17, Traits: 17, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5086, Ord: 18, Target: 18, Traits: 18, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6184, Ord: 19, Target: 19, Traits: 19, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3874, Ord: 20, Target: 20, Traits: 20, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3874, Ord: 21, Target: 21, Traits: 21, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5647, Ord: 22, Target: 22, Traits: 22, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5667, Ord: 23, Target: 23, Traits: 23, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4415, Ord: 24, Target: 24, Traits: 24, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5687, Ord: 25, Target: 25, Traits: 25, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2982, Ord: 26, Target: 26, Traits: 26, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8101, Ord: 27, Target: 27, Traits: 27, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6802, Ord: 28, Target: 28, Traits: 28, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5149, Ord: 29, Target: 29, Traits: 29, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4437, Ord: 30, Target: 30, Traits: 30, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6838, Ord: 31, Target: 31, Traits: 31, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4459, Ord: 32, Target: 32, Traits: 32, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3032, Ord: 33, Target: 33, Traits: 33, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4481, Ord: 34, Target: 34, Traits: 34, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3499, Ord: 35, Target: 35, Traits: 35, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7584, Ord: 36, Target: 36, Traits: 36, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4503, Ord: 37, Target: 37, Traits: 37, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7601, Ord: 38, Target: 38, Traits: 38, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2647, Ord: 39, Target: 39, Traits: 39, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2351, Ord: 40, Target: 40, Traits: 40, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1931, Ord: 41, Target: 41, Traits: 41, StrLen: 22, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2405, Ord: 42, Target: 42, Traits: 42, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6856, Ord: 43, Target: 43, Traits: 43, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2432, Ord: 44, Target: 44, Traits: 44, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5787, Ord: 45, Target: 45, Traits: 45, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6874, Ord: 46, Target: 46, Traits: 46, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 421, Ord: 47, Target: 47, Traits: 47, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 556, Ord: 48, Target: 48, Traits: 48, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6431, Ord: 49, Target: 49, Traits: 49, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5401, Ord: 50, Target: 50, Traits: 50, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4745, Ord: 51, Target: 51, Traits: 51, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2211, Ord: 52, Target: 52, Traits: 52, StrLen: 20, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4104, Ord: 53, Target: 53, Traits: 53, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4104, Ord: 54, Target: 54, Traits: 54, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4127, Ord: 55, Target: 55, Traits: 55, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3232, Ord: 56, Target: 56, Traits: 56, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7180, Ord: 57, Target: 57, Traits: 57, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 886, Ord: 58, Target: 58, Traits: 58, StrLen: 26, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 42, Ord: 59, Target: 59, Traits: 59, StrLen: 34, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2239, Ord: 60, Target: 60, Traits: 60, StrLen: 20, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5443, Ord: 61, Target: 61, Traits: 61, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1789, Ord: 62, Target: 62, Traits: 62, StrLen: 23, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10271, Ord: 63, Target: 63, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeService), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4855, Ord: 64, Target: 64, Traits: 64, StrLen: 21, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11373, Ord: 65, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3307, Ord: 66, Target: 66, Traits: 63, StrLen: 24, Count: 15, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0, Hash: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12177, Ord: 67, Target: 716, Traits: 63, StrLen: 6, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12326, Ord: 68, Target: 776, Traits: 63, StrLen: 5, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8389, Ord: 69, Target: 727, Traits: 63, StrLen: 16, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7873, Ord: 70, Target: 727, Traits: 63, StrLen: 9, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11033, Ord: 71, Target: 772, Traits: 63, StrLen: 10, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12183, Ord: 72, Target: 720, Traits: 63, StrLen: 6, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8771, Ord: 73, Target: 727, Traits: 63, StrLen: 15, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7873, Ord: 74, Target: 743, Traits: 63, StrLen: 17, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10414, Ord: 75, Target: 709, Traits: 63, StrLen: 11, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9635, Ord: 76, Target: 711, Traits: 63, StrLen: 13, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8405, Ord: 77, Target: 724, Traits: 63, StrLen: 16, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11409, Ord: 78, Target: 747, Traits: 63, StrLen: 9, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9196, Ord: 79, Target: 734, Traits: 63, StrLen: 14, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8453, Ord: 80, Target: 749, Traits: 63, StrLen: 11, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8453, Ord: 81, Target: 755, Traits: 63, StrLen: 16, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 590, Ord: 82, Target: 82, Traits: 63, StrLen: 33, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12316, Ord: 83, Target: 573, Traits: 63, StrLen: 5, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3667, Ord: 84, Target: 84, Traits: 63, StrLen: 10, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 85, Target: 97, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 86, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12195, Ord: 87, Target: 443, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 88, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 89, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11364, Ord: 90, Target: 438, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 91, Target: 93, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10590, Ord: 92, Target: 100, Traits: 63, StrLen: 11, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5527, Ord: 93, Target: 93, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5527, Ord: 94, Target: 94, Traits: 63, StrLen: 20, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8860, Ord: 95, Target: 95, Traits: 63, StrLen: 14, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 96, Target: 84, Traits: 63, StrLen: 6, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8874, Ord: 97, Target: 97, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3667, Ord: 98, Target: 98, Traits: 63, StrLen: 23, Count: 1, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3427, Ord: 99, Target: 1646, Traits: 63, StrLen: 24, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4876, Ord: 100, Target: 100, Traits: 63, StrLen: 21, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 4}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12446, Ord: 101, Target: 98, Traits: 63, StrLen: 3, Count: 1, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12351, Ord: 102, Target: 1647, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeBoolean), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10238, Ord: 103, Target: 103, Traits: 67, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2217, Ord: 104, Target: 104, Traits: 63, StrLen: 14, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11526, Ord: 105, Target: 1096, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10557, Ord: 106, Target: 419, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10873, Ord: 107, Target: 116, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10893, Ord: 108, Target: 226, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12165, Ord: 109, Target: 110, Traits: 63, StrLen: 6, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6640, Ord: 110, Target: 110, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11578, Ord: 111, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11690, Ord: 112, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5547, Ord: 113, Target: 113, Traits: 63, StrLen: 20, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 4}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12446, Ord: 114, Target: 120, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12351, Ord: 115, Target: 121, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10733, Ord: 116, Target: 116, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8501, Ord: 117, Target: 117, Traits: 63, StrLen: 15, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7324, Ord: 118, Target: 1095, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10046, Ord: 119, Target: 113, Traits: 63, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8888, Ord: 120, Target: 120, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7957, Ord: 121, Target: 121, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8902, Ord: 122, Target: 122, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8916, Ord: 123, Target: 123, Traits: 63, StrLen: 14, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3107, Ord: 124, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11578, Ord: 125, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11690, Ord: 126, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11956, Ord: 127, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11682, Ord: 128, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3036, Ord: 129, Target: 129, Traits: 63, StrLen: 5, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11738, Ord: 130, Target: 828, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11256, Ord: 131, Target: 172, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11786, Ord: 132, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12061, Ord: 133, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 134, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 135, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3877, Ord: 136, Target: 136, Traits: 63, StrLen: 12, Count: 3, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12401, Ord: 137, Target: 152, Traits: 63, StrLen: 4, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12068, Ord: 138, Target: 185, Traits: 63, StrLen: 3, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11472, Ord: 139, Target: 170, Traits: 63, StrLen: 9, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8516, Ord: 140, Target: 140, Traits: 63, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3742, Ord: 141, Target: 141, Traits: 63, StrLen: 9, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12409, Ord: 142, Target: 156, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7805, Ord: 143, Target: 148, Traits: 63, StrLen: 7, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11786, Ord: 144, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12061, Ord: 145, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 146, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 147, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9336, Ord: 148, Target: 148, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12276, Ord: 149, Target: 151, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeBlob), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7068, Ord: 150, Target: 165, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8930, Ord: 151, Target: 151, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeBlob), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7973, Ord: 152, Target: 152, Traits: 63, StrLen: 16, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12409, Ord: 153, Target: 156, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12393, Ord: 154, Target: 148, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11786, Ord: 155, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9349, Ord: 156, Target: 156, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5567, Ord: 157, Target: 157, Traits: 63, StrLen: 16, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12409, Ord: 158, Target: 156, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11786, Ord: 159, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12061, Ord: 160, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 161, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 162, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5567, Ord: 163, Target: 163, Traits: 63, StrLen: 20, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 164, Target: 157, Traits: 63, StrLen: 6, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9362, Ord: 165, Target: 165, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10249, Ord: 166, Target: 166, Traits: 63, StrLen: 11, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 167, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11103, Ord: 168, Target: 168, Traits: 63, StrLen: 9, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 169, Target: 129, Traits: 63, StrLen: 6, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4897, Ord: 170, Target: 170, Traits: 63, StrLen: 21, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12449, Ord: 171, Target: 140, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4463, Ord: 172, Target: 172, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9375, Ord: 173, Target: 173, Traits: 63, StrLen: 13, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 174, Target: 175, Traits: 63, StrLen: 6, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7989, Ord: 175, Target: 175, Traits: 63, StrLen: 16, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11256, Ord: 176, Target: 172, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 177, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3331, Ord: 178, Target: 178, Traits: 63, StrLen: 20, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12061, Ord: 179, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 180, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 181, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3331, Ord: 182, Target: 182, Traits: 63, StrLen: 24, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 183, Target: 178, Traits: 63, StrLen: 6, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9388, Ord: 184, Target: 184, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeBlob), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8531, Ord: 185, Target: 185, Traits: 63, StrLen: 15, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12068, Ord: 186, Target: 184, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeBlob), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4918, Ord: 187, Target: 187, Traits: 63, StrLen: 16, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 188, Target: 189, Traits: 63, StrLen: 6, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4918, Ord: 189, Target: 189, Traits: 63, StrLen: 21, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7068, Ord: 190, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11526, Ord: 191, Target: 1648, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1514, Ord: 192, Target: 192, Traits: 63, StrLen: 11, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 193, Target: 93, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 194, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 195, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 196, Target: 1149, Traits: 63, StrLen: 6, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9622, Ord: 197, Target: 204, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11436, Ord: 198, Target: 966, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9661, Ord: 199, Target: 929, Traits: 63, StrLen: 13, Count: 21, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1, Hash: 11}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10082, Ord: 200, Target: 201, Traits: 63, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3690, Ord: 201, Target: 201, Traits: 63, StrLen: 23, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 4}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12446, Ord: 202, Target: 230, Traits: 63, StrLen: 3, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12351, Ord: 203, Target: 227, Traits: 63, StrLen: 5, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1514, Ord: 204, Target: 204, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8005, Ord: 205, Target: 205, Traits: 63, StrLen: 16, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 206, Target: 192, Traits: 63, StrLen: 6, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11586, Ord: 207, Target: 207, Traits: 63, StrLen: 8, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12428, Ord: 208, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12431, Ord: 209, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12434, Ord: 210, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7941, Ord: 211, Target: 211, Traits: 63, StrLen: 16, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8341, Ord: 212, Target: 831, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11238, Ord: 213, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10381, Ord: 214, Target: 533, Traits: 63, StrLen: 11, Count: 1, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2881, Ord: 215, Target: 831, Traits: 63, StrLen: 20, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2881, Ord: 216, Target: 1149, Traits: 63, StrLen: 26, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6658, Ord: 217, Target: 217, Traits: 63, StrLen: 18, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9308, Ord: 218, Target: 1644, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3355, Ord: 219, Target: 219, Traits: 63, StrLen: 24, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8421, Ord: 220, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11418, Ord: 221, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10601, Ord: 222, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4195, Ord: 223, Target: 223, Traits: 63, StrLen: 22, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8037, Ord: 224, Target: 224, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8021, Ord: 225, Target: 225, Traits: 66, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10743, Ord: 226, Target: 226, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3713, Ord: 227, Target: 227, Traits: 63, StrLen: 23, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6047, Ord: 228, Target: 1647, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeBoolean), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6602, Ord: 229, Target: 1117, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8958, Ord: 230, Target: 230, Traits: 63, StrLen: 14, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 0, Ord: 231, Target: 1646, Traits: 63, StrLen: 24, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 0, Ord: 232, Target: 1646, Traits: 63, StrLen: 42, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7414, Ord: 233, Target: 233, Traits: 63, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7431, Ord: 234, Target: 234, Traits: 63, StrLen: 13, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10491, Ord: 235, Target: 828, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 236, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 237, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12047, Ord: 238, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8546, Ord: 239, Target: 239, Traits: 63, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7431, Ord: 240, Target: 240, Traits: 63, StrLen: 17, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 241, Target: 234, Traits: 63, StrLen: 6, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10307, Ord: 242, Target: 242, Traits: 67, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8639, Ord: 243, Target: 243, Traits: 67, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7448, Ord: 244, Target: 244, Traits: 68, StrLen: 17, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11373, Ord: 245, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1847, Ord: 246, Target: 246, Traits: 69, StrLen: 28, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11373, Ord: 247, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9854, Ord: 248, Target: 248, Traits: 63, StrLen: 12, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10933, Ord: 249, Target: 835, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7482, Ord: 250, Target: 250, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7482, Ord: 251, Target: 251, Traits: 63, StrLen: 17, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 252, Target: 250, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2024, Ord: 253, Target: 253, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 4}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12446, Ord: 254, Target: 250, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12351, Ord: 255, Target: 256, Traits: 65, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7499, Ord: 256, Target: 256, Traits: 67, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8561, Ord: 257, Target: 257, Traits: 63, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2621, Ord: 258, Target: 258, Traits: 63, StrLen: 26, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4811, Ord: 259, Target: 456, Traits: 63, StrLen: 22, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5002, Ord: 260, Target: 260, Traits: 63, StrLen: 21, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 261, Target: 486, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11762, Ord: 262, Target: 480, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 263, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6526, Ord: 264, Target: 258, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11618, Ord: 265, Target: 265, Traits: 66, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11130, Ord: 266, Target: 266, Traits: 63, StrLen: 9, Count: 7, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12135, Ord: 267, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11984, Ord: 268, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11229, Ord: 269, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11706, Ord: 270, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12093, Ord: 271, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11698, Ord: 272, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12159, Ord: 273, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4206, Ord: 274, Target: 274, Traits: 67, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10282, Ord: 275, Target: 275, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9866, Ord: 276, Target: 276, Traits: 63, StrLen: 12, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 277, Target: 1648, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4327, Ord: 278, Target: 278, Traits: 63, StrLen: 22, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12291, Ord: 279, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11427, Ord: 280, Target: 286, Traits: 63, StrLen: 9, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 198, Ord: 281, Target: 281, Traits: 63, StrLen: 37, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10903, Ord: 282, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11754, Ord: 283, Target: 242, Traits: 65, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7216, Ord: 284, Target: 299, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10094, Ord: 285, Target: 243, Traits: 65, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5065, Ord: 286, Target: 286, Traits: 63, StrLen: 21, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 287, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 382, Ord: 288, Target: 288, Traits: 67, StrLen: 35, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4833, Ord: 289, Target: 281, Traits: 63, StrLen: 22, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3828, Ord: 290, Target: 290, Traits: 63, StrLen: 23, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10853, Ord: 291, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6526, Ord: 292, Target: 288, Traits: 65, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9890, Ord: 293, Target: 293, Traits: 67, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2957, Ord: 294, Target: 294, Traits: 63, StrLen: 25, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6165, Ord: 295, Target: 295, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12421, Ord: 296, Target: 297, Traits: 63, StrLen: 4, Count: 1, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8069, Ord: 297, Target: 297, Traits: 63, StrLen: 16, Count: 1, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11998, Ord: 298, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6766, Ord: 299, Target: 299, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 4}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12446, Ord: 300, Target: 1644, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12351, Ord: 301, Target: 302, Traits: 65, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4371, Ord: 302, Target: 302, Traits: 67, StrLen: 22, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4507, Ord: 303, Target: 303, Traits: 63, StrLen: 9, Count: 9, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 304, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10491, Ord: 305, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7890, Ord: 306, Target: 1644, Traits: 63, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10022, Ord: 307, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 308, Target: 437, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 309, Target: 437, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8726, Ord: 310, Target: 315, Traits: 63, StrLen: 15, Count: 6, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11247, Ord: 311, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6370, Ord: 312, Target: 1644, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7435, Ord: 313, Target: 313, Traits: 63, StrLen: 13, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 314, Target: 303, Traits: 63, StrLen: 6, Count: 9, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8576, Ord: 315, Target: 315, Traits: 63, StrLen: 15, Count: 6, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9408, Ord: 316, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11963, Ord: 317, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11977, Ord: 318, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11594, Ord: 319, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11202, Ord: 320, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11991, Ord: 321, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8972, Ord: 322, Target: 322, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8986, Ord: 323, Target: 323, Traits: 63, StrLen: 14, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11093, Ord: 324, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11553, Ord: 325, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10711, Ord: 326, Target: 1161, Traits: 63, StrLen: 11, Count: 4, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9804, Ord: 327, Target: 1158, Traits: 65, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10034, Ord: 328, Target: 103, Traits: 65, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6260, Ord: 329, Target: 329, Traits: 63, StrLen: 19, Count: 7, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11850, Ord: 330, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12219, Ord: 331, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11400, Ord: 332, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11400, Ord: 333, Target: 337, Traits: 63, StrLen: 9, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7252, Ord: 334, Target: 1644, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9252, Ord: 335, Target: 831, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1497, Ord: 336, Target: 204, Traits: 63, StrLen: 30, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6298, Ord: 337, Target: 337, Traits: 63, StrLen: 19, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9926, Ord: 338, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12385, Ord: 339, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6279, Ord: 340, Target: 340, Traits: 63, StrLen: 19, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11418, Ord: 341, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10612, Ord: 342, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7252, Ord: 343, Target: 1644, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9252, Ord: 344, Target: 831, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1497, Ord: 345, Target: 204, Traits: 63, StrLen: 30, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9427, Ord: 346, Target: 346, Traits: 63, StrLen: 13, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1527, Ord: 347, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11517, Ord: 348, Target: 351, Traits: 63, StrLen: 9, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11063, Ord: 349, Target: 354, Traits: 65, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12012, Ord: 350, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8621, Ord: 351, Target: 351, Traits: 63, StrLen: 15, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11658, Ord: 352, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12261, Ord: 353, Target: 1646, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8117, Ord: 354, Target: 354, Traits: 67, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7186, Ord: 355, Target: 355, Traits: 63, StrLen: 4, Count: 13, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9609, Ord: 356, Target: 1644, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12189, Ord: 357, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12341, Ord: 358, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7805, Ord: 359, Target: 369, Traits: 63, StrLen: 7, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 360, Target: 379, Traits: 63, StrLen: 6, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11770, Ord: 361, Target: 383, Traits: 63, StrLen: 8, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 362, Target: 225, Traits: 70, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 363, Target: 225, Traits: 70, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8756, Ord: 364, Target: 225, Traits: 70, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10953, Ord: 365, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6067, Ord: 366, Target: 1644, Traits: 63, StrLen: 20, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12061, Ord: 367, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7198, Ord: 368, Target: 374, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10293, Ord: 369, Target: 369, Traits: 63, StrLen: 11, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 370, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10983, Ord: 371, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11626, Ord: 372, Target: 372, Traits: 63, StrLen: 8, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 373, Target: 355, Traits: 63, StrLen: 6, Count: 13, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7533, Ord: 374, Target: 374, Traits: 63, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12331, Ord: 375, Target: 836, Traits: 63, StrLen: 5, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10933, Ord: 376, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7533, Ord: 377, Target: 377, Traits: 63, StrLen: 17, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12331, Ord: 378, Target: 836, Traits: 63, StrLen: 5, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10783, Ord: 379, Target: 379, Traits: 63, StrLen: 10, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12075, Ord: 380, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12141, Ord: 381, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11112, Ord: 382, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11634, Ord: 383, Target: 383, Traits: 63, StrLen: 8, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8053, Ord: 384, Target: 1646, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9492, Ord: 385, Target: 1646, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5128, Ord: 386, Target: 386, Traits: 63, StrLen: 21, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 387, Target: 486, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11762, Ord: 388, Target: 480, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 389, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6526, Ord: 390, Target: 449, Traits: 63, StrLen: 19, Count: 6, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6369, Ord: 391, Target: 391, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5707, Ord: 392, Target: 392, Traits: 63, StrLen: 20, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7270, Ord: 393, Target: 1644, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 394, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 395, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5727, Ord: 396, Target: 396, Traits: 63, StrLen: 20, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7270, Ord: 397, Target: 1644, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9182, Ord: 398, Target: 1644, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7856, Ord: 399, Target: 1644, Traits: 63, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 400, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 401, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1167, Ord: 402, Target: 402, Traits: 71, StrLen: 30, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11373, Ord: 403, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6621, Ord: 404, Target: 1644, Traits: 63, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5747, Ord: 405, Target: 405, Traits: 63, StrLen: 20, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11346, Ord: 406, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11754, Ord: 407, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7270, Ord: 408, Target: 1644, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11826, Ord: 409, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 410, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 411, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10304, Ord: 412, Target: 412, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8636, Ord: 413, Target: 413, Traits: 67, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9902, Ord: 414, Target: 414, Traits: 63, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9479, Ord: 415, Target: 1646, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11570, Ord: 416, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3897, Ord: 417, Target: 417, Traits: 72, StrLen: 23, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11373, Ord: 418, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10315, Ord: 419, Target: 419, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3007, Ord: 420, Target: 420, Traits: 71, StrLen: 25, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11373, Ord: 421, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6820, Ord: 422, Target: 422, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9453, Ord: 423, Target: 423, Traits: 63, StrLen: 13, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12373, Ord: 424, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12377, Ord: 425, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10763, Ord: 426, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2651, Ord: 427, Target: 427, Traits: 63, StrLen: 13, Count: 7, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 428, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10491, Ord: 429, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11842, Ord: 430, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7805, Ord: 431, Target: 1648, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 432, Target: 437, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11003, Ord: 433, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9791, Ord: 434, Target: 1134, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7550, Ord: 435, Target: 435, Traits: 63, StrLen: 17, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 436, Target: 427, Traits: 63, StrLen: 6, Count: 7, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8133, Ord: 437, Target: 437, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11139, Ord: 438, Target: 438, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4525, Ord: 439, Target: 439, Traits: 63, StrLen: 22, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 440, Target: 844, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8651, Ord: 441, Target: 441, Traits: 63, StrLen: 15, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 442, Target: 1021, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12123, Ord: 443, Target: 443, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4569, Ord: 444, Target: 444, Traits: 63, StrLen: 22, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5254, Ord: 445, Target: 445, Traits: 63, StrLen: 21, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10863, Ord: 446, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10403, Ord: 447, Target: 103, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10034, Ord: 448, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1959, Ord: 449, Target: 449, Traits: 63, StrLen: 28, Count: 6, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4833, Ord: 450, Target: 500, Traits: 63, StrLen: 22, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11794, Ord: 451, Target: 490, Traits: 63, StrLen: 8, Count: 9, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 4}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10034, Ord: 452, Target: 445, Traits: 63, StrLen: 6, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10425, Ord: 453, Target: 464, Traits: 63, StrLen: 11, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9687, Ord: 454, Target: 471, Traits: 63, StrLen: 13, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4811, Ord: 455, Target: 456, Traits: 63, StrLen: 22, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 235, Ord: 456, Target: 456, Traits: 63, StrLen: 37, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8469, Ord: 457, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1987, Ord: 458, Target: 458, Traits: 63, StrLen: 28, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3523, Ord: 459, Target: 1646, Traits: 63, StrLen: 24, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11157, Ord: 460, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11914, Ord: 461, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9842, Ord: 462, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8944, Ord: 463, Target: 1646, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2751, Ord: 464, Target: 464, Traits: 63, StrLen: 26, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11508, Ord: 465, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11063, Ord: 466, Target: 1090, Traits: 65, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6545, Ord: 467, Target: 1644, Traits: 63, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4547, Ord: 468, Target: 468, Traits: 63, StrLen: 22, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12346, Ord: 469, Target: 527, Traits: 63, StrLen: 5, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10678, Ord: 470, Target: 525, Traits: 63, StrLen: 11, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2015, Ord: 471, Target: 471, Traits: 63, StrLen: 28, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12019, Ord: 472, Target: 253, Traits: 63, StrLen: 7, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1615, Ord: 473, Target: 473, Traits: 63, StrLen: 29, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6047, Ord: 474, Target: 525, Traits: 63, StrLen: 20, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2839, Ord: 475, Target: 475, Traits: 63, StrLen: 16, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 476, Target: 486, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11762, Ord: 477, Target: 480, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 478, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6526, Ord: 479, Target: 449, Traits: 63, StrLen: 19, Count: 6, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7652, Ord: 480, Target: 480, Traits: 63, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1644, Ord: 481, Target: 481, Traits: 63, StrLen: 29, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11762, Ord: 482, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9224, Ord: 483, Target: 1644, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12346, Ord: 484, Target: 527, Traits: 63, StrLen: 5, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6047, Ord: 485, Target: 525, Traits: 63, StrLen: 20, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9466, Ord: 486, Target: 486, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1197, Ord: 487, Target: 487, Traits: 63, StrLen: 30, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11238, Ord: 488, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11762, Ord: 489, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3943, Ord: 490, Target: 490, Traits: 63, StrLen: 23, Count: 9, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 4}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10903, Ord: 491, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11754, Ord: 492, Target: 242, Traits: 65, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7216, Ord: 493, Target: 299, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8469, Ord: 494, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8357, Ord: 495, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 918, Ord: 496, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10094, Ord: 497, Target: 243, Traits: 65, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6087, Ord: 498, Target: 1647, Traits: 63, StrLen: 20, Count: 0, Shape: uint8(smithy.ShapeTypeBoolean), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12225, Ord: 499, Target: 842, Traits: 63, StrLen: 6, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 272, Ord: 500, Target: 500, Traits: 63, StrLen: 37, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10903, Ord: 501, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11754, Ord: 502, Target: 242, Traits: 65, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7216, Ord: 503, Target: 299, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10094, Ord: 504, Target: 243, Traits: 65, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 918, Ord: 505, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12225, Ord: 506, Target: 842, Traits: 63, StrLen: 6, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 623, Ord: 507, Target: 507, Traits: 63, StrLen: 33, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12213, Ord: 508, Target: 997, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9280, Ord: 509, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12040, Ord: 510, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10973, Ord: 511, Target: 831, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9687, Ord: 512, Target: 253, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2459, Ord: 513, Target: 513, Traits: 63, StrLen: 27, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12346, Ord: 514, Target: 527, Traits: 63, StrLen: 5, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10678, Ord: 515, Target: 525, Traits: 63, StrLen: 11, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2043, Ord: 516, Target: 516, Traits: 63, StrLen: 28, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 517, Target: 486, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11762, Ord: 518, Target: 480, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 519, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6526, Ord: 520, Target: 507, Traits: 63, StrLen: 19, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2071, Ord: 521, Target: 521, Traits: 63, StrLen: 28, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6892, Ord: 522, Target: 522, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 523, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7324, Ord: 524, Target: 1091, Traits: 63, StrLen: 18, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6892, Ord: 525, Target: 525, Traits: 63, StrLen: 18, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 526, Target: 522, Traits: 63, StrLen: 6, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9914, Ord: 527, Target: 527, Traits: 63, StrLen: 12, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 528, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 560, Ord: 529, Target: 529, Traits: 63, StrLen: 7, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10700, Ord: 530, Target: 1129, Traits: 63, StrLen: 11, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8325, Ord: 531, Target: 187, Traits: 63, StrLen: 16, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 693, Ord: 532, Target: 532, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6946, Ord: 533, Target: 533, Traits: 63, StrLen: 18, Count: 1, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11949, Ord: 534, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7686, Ord: 535, Target: 535, Traits: 63, StrLen: 17, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10913, Ord: 536, Target: 1649, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8197, Ord: 537, Target: 537, Traits: 63, StrLen: 14, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10436, Ord: 538, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11265, Ord: 539, Target: 540, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8197, Ord: 540, Target: 540, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5807, Ord: 541, Target: 541, Traits: 63, StrLen: 20, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12243, Ord: 542, Target: 391, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11882, Ord: 543, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7342, Ord: 544, Target: 545, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3082, Ord: 545, Target: 545, Traits: 63, StrLen: 25, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8786, Ord: 546, Target: 537, Traits: 63, StrLen: 15, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10166, Ord: 547, Target: 537, Traits: 63, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2777, Ord: 548, Target: 548, Traits: 63, StrLen: 26, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9765, Ord: 549, Target: 658, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4591, Ord: 550, Target: 550, Traits: 63, StrLen: 22, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 551, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5827, Ord: 552, Target: 552, Traits: 67, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5827, Ord: 553, Target: 553, Traits: 63, StrLen: 20, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10034, Ord: 554, Target: 552, Traits: 65, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11238, Ord: 555, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12213, Ord: 556, Target: 564, Traits: 63, StrLen: 6, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9126, Ord: 557, Target: 560, Traits: 63, StrLen: 14, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10480, Ord: 558, Target: 562, Traits: 63, StrLen: 11, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9112, Ord: 559, Target: 550, Traits: 63, StrLen: 14, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4613, Ord: 560, Target: 560, Traits: 63, StrLen: 22, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 561, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6355, Ord: 562, Target: 562, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 563, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9000, Ord: 564, Target: 564, Traits: 63, StrLen: 14, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3116, Ord: 565, Target: 1646, Traits: 63, StrLen: 2, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12452, Ord: 566, Target: 1646, Traits: 63, StrLen: 2, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12454, Ord: 567, Target: 1646, Traits: 63, StrLen: 2, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 522, Ord: 568, Target: 568, Traits: 63, StrLen: 34, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10034, Ord: 569, Target: 553, Traits: 63, StrLen: 6, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4635, Ord: 570, Target: 570, Traits: 63, StrLen: 22, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6526, Ord: 571, Target: 568, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11148, Ord: 572, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2803, Ord: 573, Target: 573, Traits: 63, StrLen: 26, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8357, Ord: 574, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10793, Ord: 575, Target: 575, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9014, Ord: 576, Target: 576, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11166, Ord: 577, Target: 577, Traits: 63, StrLen: 9, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12425, Ord: 578, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12361, Ord: 579, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2099, Ord: 580, Target: 580, Traits: 63, StrLen: 28, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4833, Ord: 581, Target: 588, Traits: 63, StrLen: 22, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4657, Ord: 582, Target: 582, Traits: 63, StrLen: 22, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11866, Ord: 583, Target: 597, Traits: 63, StrLen: 8, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9700, Ord: 584, Target: 293, Traits: 65, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2865, Ord: 585, Target: 585, Traits: 63, StrLen: 16, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12225, Ord: 586, Target: 593, Traits: 63, StrLen: 6, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6526, Ord: 587, Target: 580, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 309, Ord: 588, Target: 588, Traits: 63, StrLen: 37, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10903, Ord: 589, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11754, Ord: 590, Target: 242, Traits: 65, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7216, Ord: 591, Target: 299, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10094, Ord: 592, Target: 243, Traits: 65, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6374, Ord: 593, Target: 593, Traits: 63, StrLen: 15, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 594, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6374, Ord: 595, Target: 595, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 596, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5275, Ord: 597, Target: 597, Traits: 63, StrLen: 21, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 598, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9518, Ord: 599, Target: 599, Traits: 63, StrLen: 13, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11810, Ord: 600, Target: 1122, Traits: 63, StrLen: 8, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2355, Ord: 601, Target: 601, Traits: 63, StrLen: 14, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11373, Ord: 602, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11373, Ord: 603, Target: 529, Traits: 63, StrLen: 7, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2355, Ord: 604, Target: 604, Traits: 63, StrLen: 15, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 605, Target: 601, Traits: 63, StrLen: 6, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10803, Ord: 606, Target: 606, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10803, Ord: 607, Target: 607, Traits: 63, StrLen: 10, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 608, Target: 606, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 417, Ord: 609, Target: 609, Traits: 63, StrLen: 35, Count: 14, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0, Hash: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11121, Ord: 610, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10823, Ord: 611, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11175, Ord: 612, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12105, Ord: 613, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9878, Ord: 614, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6336, Ord: 615, Target: 1646, Traits: 63, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6928, Ord: 616, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6910, Ord: 617, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6336, Ord: 618, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7669, Ord: 619, Target: 1646, Traits: 63, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8846, Ord: 620, Target: 1646, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8181, Ord: 621, Target: 1646, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6982, Ord: 622, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6982, Ord: 623, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4693, Ord: 624, Target: 624, Traits: 63, StrLen: 8, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11602, Ord: 625, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12365, Ord: 626, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12129, Ord: 627, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12437, Ord: 628, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11942, Ord: 629, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9938, Ord: 630, Target: 630, Traits: 63, StrLen: 12, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 631, Target: 624, Traits: 63, StrLen: 6, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5296, Ord: 632, Target: 632, Traits: 63, StrLen: 21, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9294, Ord: 633, Target: 967, Traits: 63, StrLen: 14, Count: 9, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 13}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10645, Ord: 634, Target: 845, Traits: 63, StrLen: 11, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 929, Ord: 635, Target: 635, Traits: 63, StrLen: 21, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3966, Ord: 636, Target: 636, Traits: 63, StrLen: 23, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12075, Ord: 637, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6676, Ord: 638, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9401, Ord: 639, Target: 1646, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6730, Ord: 640, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9414, Ord: 641, Target: 1646, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2127, Ord: 642, Target: 642, Traits: 63, StrLen: 24, Count: 10, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 6}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 643, Target: 635, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12421, Ord: 644, Target: 655, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7907, Ord: 645, Target: 827, Traits: 63, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10513, Ord: 646, Target: 422, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12356, Ord: 647, Target: 1153, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4150, Ord: 648, Target: 826, Traits: 63, StrLen: 23, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 649, Target: 636, Traits: 63, StrLen: 6, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5464, Ord: 650, Target: 1645, Traits: 66, StrLen: 21, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9713, Ord: 651, Target: 823, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9154, Ord: 652, Target: 322, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2127, Ord: 653, Target: 653, Traits: 63, StrLen: 28, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 654, Target: 642, Traits: 63, StrLen: 6, Count: 10, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 6}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5317, Ord: 655, Target: 655, Traits: 63, StrLen: 21, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9950, Ord: 656, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8711, Ord: 657, Target: 1646, Traits: 63, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5867, Ord: 658, Target: 658, Traits: 63, StrLen: 20, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5485, Ord: 659, Target: 635, Traits: 63, StrLen: 21, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9252, Ord: 660, Target: 831, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2245, Ord: 661, Target: 661, Traits: 63, StrLen: 14, Count: 15, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 7}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9609, Ord: 662, Target: 1644, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8437, Ord: 663, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12237, Ord: 664, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12189, Ord: 665, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12341, Ord: 666, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7805, Ord: 667, Target: 677, Traits: 63, StrLen: 7, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 668, Target: 686, Traits: 63, StrLen: 6, Count: 6, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11818, Ord: 669, Target: 682, Traits: 63, StrLen: 8, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10502, Ord: 670, Target: 1650, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeLong), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7788, Ord: 671, Target: 1644, Traits: 63, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10190, Ord: 672, Target: 1649, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11834, Ord: 673, Target: 225, Traits: 70, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 674, Target: 225, Traits: 70, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 675, Target: 225, Traits: 70, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12061, Ord: 676, Target: 1650, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeLong), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5338, Ord: 677, Target: 677, Traits: 63, StrLen: 21, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12047, Ord: 678, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12413, Ord: 679, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7000, Ord: 680, Target: 680, Traits: 63, StrLen: 18, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 681, Target: 661, Traits: 63, StrLen: 6, Count: 15, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 7}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4679, Ord: 682, Target: 682, Traits: 63, StrLen: 22, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12365, Ord: 683, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12129, Ord: 684, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12437, Ord: 685, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5887, Ord: 686, Target: 686, Traits: 63, StrLen: 20, Count: 6, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11674, Ord: 687, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11562, Ord: 688, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11690, Ord: 689, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12081, Ord: 690, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11112, Ord: 691, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7144, Ord: 692, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7693, Ord: 693, Target: 693, Traits: 63, StrLen: 10, Count: 3, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12281, Ord: 694, Target: 257, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12255, Ord: 695, Target: 1168, Traits: 63, StrLen: 6, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 821, Ord: 696, Target: 535, Traits: 63, StrLen: 7, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9042, Ord: 697, Target: 697, Traits: 63, StrLen: 14, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12231, Ord: 698, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12341, Ord: 699, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10623, Ord: 700, Target: 828, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10202, Ord: 701, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9622, Ord: 702, Target: 828, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8681, Ord: 703, Target: 703, Traits: 63, StrLen: 15, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12231, Ord: 704, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12341, Ord: 705, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10623, Ord: 706, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10202, Ord: 707, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9622, Ord: 708, Target: 1644, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 452, Ord: 709, Target: 709, Traits: 63, StrLen: 35, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8421, Ord: 710, Target: 1644, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1227, Ord: 711, Target: 711, Traits: 63, StrLen: 30, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11890, Ord: 712, Target: 391, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11754, Ord: 713, Target: 391, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7396, Ord: 714, Target: 831, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3282, Ord: 715, Target: 1166, Traits: 63, StrLen: 25, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1287, Ord: 716, Target: 716, Traits: 63, StrLen: 30, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11400, Ord: 717, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11400, Ord: 718, Target: 337, Traits: 63, StrLen: 9, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1527, Ord: 719, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1257, Ord: 720, Target: 720, Traits: 63, StrLen: 30, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1527, Ord: 721, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11517, Ord: 722, Target: 351, Traits: 63, StrLen: 9, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12012, Ord: 723, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1317, Ord: 724, Target: 724, Traits: 63, StrLen: 30, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11762, Ord: 725, Target: 480, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6564, Ord: 726, Target: 458, Traits: 63, StrLen: 19, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2829, Ord: 727, Target: 727, Traits: 63, StrLen: 26, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 728, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11762, Ord: 729, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6564, Ord: 730, Target: 458, Traits: 63, StrLen: 19, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 731, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10034, Ord: 732, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7839, Ord: 733, Target: 251, Traits: 63, StrLen: 17, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1013, Ord: 734, Target: 734, Traits: 63, StrLen: 31, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 735, Target: 486, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11762, Ord: 736, Target: 480, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 737, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12213, Ord: 738, Target: 997, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9280, Ord: 739, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12040, Ord: 740, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10973, Ord: 741, Target: 831, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9687, Ord: 742, Target: 253, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3132, Ord: 743, Target: 743, Traits: 63, StrLen: 25, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11238, Ord: 744, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12213, Ord: 745, Target: 564, Traits: 63, StrLen: 6, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 746, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2855, Ord: 747, Target: 747, Traits: 63, StrLen: 26, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12225, Ord: 748, Target: 595, Traits: 63, StrLen: 6, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2155, Ord: 749, Target: 749, Traits: 63, StrLen: 28, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 750, Target: 800, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11762, Ord: 751, Target: 799, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 752, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6564, Ord: 753, Target: 790, Traits: 63, StrLen: 19, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10034, Ord: 754, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 656, Ord: 755, Target: 755, Traits: 63, StrLen: 33, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 756, Target: 800, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11762, Ord: 757, Target: 799, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 758, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12213, Ord: 759, Target: 997, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9280, Ord: 760, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12040, Ord: 761, Target: 831, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2486, Ord: 762, Target: 762, Traits: 63, StrLen: 17, Count: 9, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 8}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11436, Ord: 763, Target: 966, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10656, Ord: 764, Target: 909, Traits: 63, StrLen: 11, Count: 19, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 10}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 765, Target: 977, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6507, Ord: 766, Target: 276, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3643, Ord: 767, Target: 66, Traits: 63, StrLen: 24, Count: 15, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1, Hash: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11364, Ord: 768, Target: 438, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5485, Ord: 769, Target: 635, Traits: 63, StrLen: 21, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 770, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 771, Target: 1645, Traits: 66, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2486, Ord: 772, Target: 772, Traits: 63, StrLen: 27, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10546, Ord: 773, Target: 984, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4701, Ord: 774, Target: 774, Traits: 63, StrLen: 22, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 775, Target: 762, Traits: 63, StrLen: 6, Count: 9, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 8}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1702, Ord: 776, Target: 776, Traits: 63, StrLen: 29, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12243, Ord: 777, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11882, Ord: 778, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1347, Ord: 779, Target: 779, Traits: 63, StrLen: 30, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 780, Target: 275, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9739, Ord: 781, Target: 548, Traits: 63, StrLen: 13, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3989, Ord: 782, Target: 782, Traits: 63, StrLen: 23, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10863, Ord: 783, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10403, Ord: 784, Target: 103, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10034, Ord: 785, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1377, Ord: 786, Target: 786, Traits: 63, StrLen: 30, Count: 3, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10034, Ord: 787, Target: 782, Traits: 63, StrLen: 6, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4833, Ord: 788, Target: 801, Traits: 63, StrLen: 22, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10425, Ord: 789, Target: 794, Traits: 63, StrLen: 11, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1407, Ord: 790, Target: 790, Traits: 63, StrLen: 30, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3523, Ord: 791, Target: 1646, Traits: 63, StrLen: 24, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11914, Ord: 792, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9842, Ord: 793, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2183, Ord: 794, Target: 794, Traits: 63, StrLen: 28, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11508, Ord: 795, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11063, Ord: 796, Target: 1090, Traits: 65, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6545, Ord: 797, Target: 1644, Traits: 63, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3547, Ord: 798, Target: 798, Traits: 63, StrLen: 24, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6393, Ord: 799, Target: 799, Traits: 63, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8696, Ord: 800, Target: 800, Traits: 63, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 82, Ord: 801, Target: 801, Traits: 63, StrLen: 39, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10903, Ord: 802, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11754, Ord: 803, Target: 242, Traits: 65, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7216, Ord: 804, Target: 299, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10094, Ord: 805, Target: 243, Traits: 65, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 918, Ord: 806, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12225, Ord: 807, Target: 842, Traits: 63, StrLen: 6, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3157, Ord: 808, Target: 808, Traits: 63, StrLen: 25, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 809, Target: 800, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11762, Ord: 810, Target: 799, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 811, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6526, Ord: 812, Target: 786, Traits: 63, StrLen: 19, Count: 3, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 487, Ord: 813, Target: 813, Traits: 63, StrLen: 35, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12213, Ord: 814, Target: 997, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9280, Ord: 815, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12040, Ord: 816, Target: 831, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1731, Ord: 817, Target: 817, Traits: 63, StrLen: 29, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1437, Ord: 818, Target: 818, Traits: 63, StrLen: 30, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 819, Target: 800, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11762, Ord: 820, Target: 799, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 821, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6526, Ord: 822, Target: 813, Traits: 63, StrLen: 19, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2513, Ord: 823, Target: 823, Traits: 63, StrLen: 27, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12147, Ord: 824, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12111, Ord: 825, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3571, Ord: 826, Target: 826, Traits: 63, StrLen: 24, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7018, Ord: 827, Target: 827, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10813, Ord: 828, Target: 828, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3182, Ord: 829, Target: 829, Traits: 73, StrLen: 25, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11373, Ord: 830, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2894, Ord: 831, Target: 831, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7703, Ord: 832, Target: 832, Traits: 63, StrLen: 17, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10933, Ord: 833, Target: 835, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12413, Ord: 834, Target: 839, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7036, Ord: 835, Target: 835, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9056, Ord: 836, Target: 836, Traits: 63, StrLen: 14, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3444, Ord: 837, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11610, Ord: 838, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9962, Ord: 839, Target: 839, Traits: 63, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12397, Ord: 840, Target: 248, Traits: 63, StrLen: 4, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11499, Ord: 841, Target: 1086, Traits: 63, StrLen: 9, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6383, Ord: 842, Target: 842, Traits: 63, StrLen: 6, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 843, Target: 575, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4531, Ord: 844, Target: 844, Traits: 63, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8213, Ord: 845, Target: 845, Traits: 63, StrLen: 16, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4150, Ord: 846, Target: 826, Traits: 63, StrLen: 23, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5464, Ord: 847, Target: 233, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 689, Ord: 848, Target: 848, Traits: 63, StrLen: 28, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11490, Ord: 849, Target: 903, Traits: 63, StrLen: 9, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11355, Ord: 850, Target: 883, Traits: 63, StrLen: 9, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 689, Ord: 851, Target: 851, Traits: 63, StrLen: 33, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12301, Ord: 852, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12286, Ord: 853, Target: 848, Traits: 63, StrLen: 5, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9266, Ord: 854, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 722, Ord: 855, Target: 855, Traits: 63, StrLen: 33, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12301, Ord: 856, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12421, Ord: 857, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1081, Ord: 858, Target: 1644, Traits: 63, StrLen: 2, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11802, Ord: 859, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9266, Ord: 860, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 854, Ord: 861, Target: 861, Traits: 63, StrLen: 32, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12301, Ord: 862, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12421, Ord: 863, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7068, Ord: 864, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6067, Ord: 865, Target: 1647, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeBoolean), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9266, Ord: 866, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7054, Ord: 867, Target: 867, Traits: 63, StrLen: 18, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10458, Ord: 868, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10568, Ord: 869, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7378, Ord: 870, Target: 1644, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9140, Ord: 871, Target: 104, Traits: 63, StrLen: 14, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7720, Ord: 872, Target: 872, Traits: 74, StrLen: 17, Count: 9, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0, Hash: 9}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8816, Ord: 873, Target: 889, Traits: 63, StrLen: 15, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7306, Ord: 874, Target: 897, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7924, Ord: 875, Target: 885, Traits: 63, StrLen: 17, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9238, Ord: 876, Target: 892, Traits: 63, StrLen: 14, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12047, Ord: 877, Target: 900, Traits: 63, StrLen: 7, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11337, Ord: 878, Target: 882, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7822, Ord: 879, Target: 855, Traits: 63, StrLen: 17, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7805, Ord: 880, Target: 851, Traits: 63, StrLen: 17, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8373, Ord: 881, Target: 861, Traits: 63, StrLen: 16, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3207, Ord: 882, Target: 882, Traits: 63, StrLen: 25, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5927, Ord: 883, Target: 883, Traits: 63, StrLen: 20, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10579, Ord: 884, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 755, Ord: 885, Target: 885, Traits: 63, StrLen: 33, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11023, Ord: 886, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6107, Ord: 887, Target: 905, Traits: 63, StrLen: 5, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9266, Ord: 888, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1044, Ord: 889, Target: 889, Traits: 63, StrLen: 31, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11023, Ord: 890, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9266, Ord: 891, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1467, Ord: 892, Target: 892, Traits: 63, StrLen: 30, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11023, Ord: 893, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11310, Ord: 894, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10118, Ord: 895, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9266, Ord: 896, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 556, Ord: 897, Target: 897, Traits: 63, StrLen: 34, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11023, Ord: 898, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9266, Ord: 899, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4012, Ord: 900, Target: 900, Traits: 63, StrLen: 23, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7805, Ord: 901, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9266, Ord: 902, Target: 1649, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5947, Ord: 903, Target: 903, Traits: 63, StrLen: 20, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7068, Ord: 904, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5967, Ord: 905, Target: 905, Traits: 63, StrLen: 20, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10535, Ord: 906, Target: 1649, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10178, Ord: 907, Target: 1649, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10689, Ord: 908, Target: 1649, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 160, Ord: 909, Target: 909, Traits: 63, StrLen: 7, Count: 19, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0, Hash: 10}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12099, Ord: 910, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12266, Ord: 911, Target: 1646, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8846, Ord: 912, Target: 1646, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9830, Ord: 913, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11642, Ord: 914, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11121, Ord: 915, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10823, Ord: 916, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11175, Ord: 917, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12105, Ord: 918, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9878, Ord: 919, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6336, Ord: 920, Target: 1646, Traits: 63, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6928, Ord: 921, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6910, Ord: 922, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6336, Ord: 923, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7669, Ord: 924, Target: 1646, Traits: 63, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8846, Ord: 925, Target: 1646, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8181, Ord: 926, Target: 1646, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6982, Ord: 927, Target: 1646, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6982, Ord: 928, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5987, Ord: 929, Target: 929, Traits: 63, StrLen: 20, Count: 21, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0, Hash: 11}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11463, Ord: 930, Target: 1014, Traits: 63, StrLen: 9, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12440, Ord: 931, Target: 211, Traits: 63, StrLen: 3, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12177, Ord: 932, Target: 329, Traits: 63, StrLen: 6, Count: 7, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12326, Ord: 933, Target: 1004, Traits: 63, StrLen: 5, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11301, Ord: 934, Target: 278, Traits: 63, StrLen: 9, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11033, Ord: 935, Target: 981, Traits: 63, StrLen: 10, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7873, Ord: 936, Target: 487, Traits: 63, StrLen: 17, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8389, Ord: 937, Target: 473, Traits: 63, StrLen: 16, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7873, Ord: 938, Target: 468, Traits: 63, StrLen: 9, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12183, Ord: 939, Target: 340, Traits: 63, StrLen: 6, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8771, Ord: 940, Target: 521, Traits: 63, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10130, Ord: 941, Target: 294, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9635, Ord: 942, Target: 217, Traits: 63, StrLen: 5, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10414, Ord: 943, Target: 219, Traits: 63, StrLen: 11, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8405, Ord: 944, Target: 481, Traits: 63, StrLen: 16, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11409, Ord: 945, Target: 582, Traits: 63, StrLen: 9, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9196, Ord: 946, Target: 513, Traits: 63, StrLen: 14, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8453, Ord: 947, Target: 798, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8453, Ord: 948, Target: 817, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12026, Ord: 949, Target: 541, Traits: 63, StrLen: 7, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1497, Ord: 950, Target: 779, Traits: 63, StrLen: 17, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 473, Ord: 951, Target: 951, Traits: 63, StrLen: 14, Count: 14, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0, Hash: 12}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11301, Ord: 952, Target: 290, Traits: 63, StrLen: 9, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11033, Ord: 953, Target: 992, Traits: 63, StrLen: 10, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8389, Ord: 954, Target: 260, Traits: 63, StrLen: 16, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7873, Ord: 955, Target: 475, Traits: 63, StrLen: 9, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12183, Ord: 956, Target: 346, Traits: 63, StrLen: 6, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8771, Ord: 957, Target: 475, Traits: 63, StrLen: 15, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7873, Ord: 958, Target: 570, Traits: 63, StrLen: 17, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10130, Ord: 959, Target: 295, Traits: 63, StrLen: 12, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8405, Ord: 960, Target: 386, Traits: 63, StrLen: 16, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11409, Ord: 961, Target: 585, Traits: 63, StrLen: 9, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9635, Ord: 962, Target: 711, Traits: 63, StrLen: 13, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9196, Ord: 963, Target: 516, Traits: 63, StrLen: 14, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8453, Ord: 964, Target: 808, Traits: 63, StrLen: 11, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8453, Ord: 965, Target: 818, Traits: 63, StrLen: 16, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11193, Ord: 966, Target: 966, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6412, Ord: 967, Target: 967, Traits: 63, StrLen: 19, Count: 9, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 13}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10513, Ord: 968, Target: 422, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12356, Ord: 969, Target: 1153, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11481, Ord: 970, Target: 441, Traits: 63, StrLen: 9, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8485, Ord: 971, Target: 439, Traits: 63, StrLen: 16, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9726, Ord: 972, Target: 423, Traits: 63, StrLen: 13, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6583, Ord: 973, Target: 444, Traits: 63, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10993, Ord: 974, Target: 607, Traits: 63, StrLen: 10, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5464, Ord: 975, Target: 233, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9713, Ord: 976, Target: 823, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8229, Ord: 977, Target: 977, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8229, Ord: 978, Target: 978, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 788, Ord: 979, Target: 979, Traits: 63, StrLen: 33, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 980, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4035, Ord: 981, Target: 981, Traits: 63, StrLen: 23, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7252, Ord: 982, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10883, Ord: 983, Target: 979, Traits: 63, StrLen: 10, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5380, Ord: 984, Target: 984, Traits: 63, StrLen: 21, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 160, Ord: 985, Target: 985, Traits: 63, StrLen: 38, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10903, Ord: 986, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11754, Ord: 987, Target: 242, Traits: 65, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7216, Ord: 988, Target: 299, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10094, Ord: 989, Target: 243, Traits: 65, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 346, Ord: 990, Target: 990, Traits: 63, StrLen: 36, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4833, Ord: 991, Target: 985, Traits: 63, StrLen: 22, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3595, Ord: 992, Target: 992, Traits: 63, StrLen: 24, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10546, Ord: 993, Target: 984, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6526, Ord: 994, Target: 990, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1760, Ord: 995, Target: 995, Traits: 75, StrLen: 29, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11373, Ord: 996, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10326, Ord: 997, Target: 997, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1075, Ord: 998, Target: 998, Traits: 63, StrLen: 31, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12040, Ord: 999, Target: 831, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6047, Ord: 1000, Target: 1647, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeBoolean), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9974, Ord: 1001, Target: 1001, Traits: 63, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10436, Ord: 1002, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11265, Ord: 1003, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7090, Ord: 1004, Target: 1004, Traits: 63, StrLen: 18, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10722, Ord: 1005, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9817, Ord: 1006, Target: 1644, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7342, Ord: 1007, Target: 1009, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9648, Ord: 1008, Target: 998, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4058, Ord: 1009, Target: 1009, Traits: 63, StrLen: 23, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8786, Ord: 1010, Target: 1001, Traits: 63, StrLen: 15, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10166, Ord: 1011, Target: 1001, Traits: 63, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7737, Ord: 1012, Target: 1012, Traits: 63, StrLen: 17, Count: 1, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12153, Ord: 1013, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4723, Ord: 1014, Target: 1014, Traits: 63, StrLen: 22, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11238, Ord: 1015, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10381, Ord: 1016, Target: 1012, Traits: 63, StrLen: 11, Count: 1, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8341, Ord: 1017, Target: 831, Traits: 63, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10943, Ord: 1018, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2881, Ord: 1019, Target: 831, Traits: 63, StrLen: 20, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2881, Ord: 1020, Target: 1149, Traits: 63, StrLen: 26, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8657, Ord: 1021, Target: 1021, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10833, Ord: 1022, Target: 1022, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10833, Ord: 1023, Target: 1023, Traits: 63, StrLen: 10, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 1024, Target: 1022, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2436, Ord: 1025, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 4}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12446, Ord: 1026, Target: 1022, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12351, Ord: 1027, Target: 1028, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11714, Ord: 1028, Target: 1028, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2920, Ord: 1029, Target: 1029, Traits: 63, StrLen: 4, Count: 17, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 14}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1030, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12237, Ord: 1031, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10491, Ord: 1032, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12341, Ord: 1033, Target: 1644, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 1034, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3678, Ord: 1035, Target: 703, Traits: 63, StrLen: 9, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11874, Ord: 1036, Target: 1076, Traits: 63, StrLen: 8, Count: 4, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11818, Ord: 1037, Target: 624, Traits: 63, StrLen: 8, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1038, Target: 1062, Traits: 63, StrLen: 6, Count: 11, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 15}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 1039, Target: 225, Traits: 70, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 1040, Target: 225, Traits: 70, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12061, Ord: 1041, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8831, Ord: 1042, Target: 1648, Traits: 63, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11786, Ord: 1043, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9752, Ord: 1044, Target: 1644, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1045, Target: 1644, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9168, Ord: 1046, Target: 1647, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeBoolean), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10843, Ord: 1047, Target: 1047, Traits: 63, StrLen: 10, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10106, Ord: 1048, Target: 225, Traits: 70, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9674, Ord: 1049, Target: 225, Traits: 70, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11818, Ord: 1050, Target: 630, Traits: 63, StrLen: 8, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1051, Target: 1074, Traits: 63, StrLen: 6, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11874, Ord: 1052, Target: 1081, Traits: 63, StrLen: 8, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9752, Ord: 1053, Target: 828, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11722, Ord: 1054, Target: 1054, Traits: 63, StrLen: 8, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 1055, Target: 1029, Traits: 63, StrLen: 6, Count: 17, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 14}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9531, Ord: 1056, Target: 1056, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10753, Ord: 1057, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11666, Ord: 1058, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9544, Ord: 1059, Target: 1059, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12425, Ord: 1060, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12361, Ord: 1061, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9070, Ord: 1062, Target: 1062, Traits: 63, StrLen: 10, Count: 11, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0, Hash: 15}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9028, Ord: 1063, Target: 1646, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12117, Ord: 1064, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9505, Ord: 1065, Target: 1646, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6683, Ord: 1066, Target: 1646, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3107, Ord: 1067, Target: 1646, Traits: 63, StrLen: 25, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11112, Ord: 1068, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9408, Ord: 1069, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11202, Ord: 1070, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11594, Ord: 1071, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11970, Ord: 1072, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11991, Ord: 1073, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9070, Ord: 1074, Target: 1074, Traits: 63, StrLen: 14, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 1075, Target: 1062, Traits: 63, StrLen: 6, Count: 11, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 15}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9986, Ord: 1076, Target: 1076, Traits: 63, StrLen: 8, Count: 4, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9440, Ord: 1077, Target: 1646, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10773, Ord: 1078, Target: 1646, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 0, Ord: 1079, Target: 1646, Traits: 63, StrLen: 24, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8666, Ord: 1080, Target: 1646, Traits: 63, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9986, Ord: 1081, Target: 1081, Traits: 63, StrLen: 12, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 1082, Target: 1076, Traits: 63, StrLen: 6, Count: 4, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6450, Ord: 1083, Target: 1083, Traits: 76, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11373, Ord: 1084, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11211, Ord: 1085, Target: 1085, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7754, Ord: 1086, Target: 1086, Traits: 63, StrLen: 17, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11043, Ord: 1087, Target: 1085, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10667, Ord: 1088, Target: 1085, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11013, Ord: 1089, Target: 693, Traits: 63, StrLen: 10, Count: 3, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8123, Ord: 1090, Target: 1090, Traits: 67, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7126, Ord: 1091, Target: 1091, Traits: 63, StrLen: 18, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11184, Ord: 1092, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11650, Ord: 1093, Target: 1646, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10260, Ord: 1094, Target: 1646, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9084, Ord: 1095, Target: 1095, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11220, Ord: 1096, Target: 1096, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4081, Ord: 1097, Target: 1097, Traits: 63, StrLen: 7, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11535, Ord: 1098, Target: 828, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1099, Target: 93, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12421, Ord: 1100, Target: 1125, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11274, Ord: 1101, Target: 1107, Traits: 63, StrLen: 9, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12165, Ord: 1102, Target: 1106, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1103, Target: 1124, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 1104, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11544, Ord: 1105, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9557, Ord: 1106, Target: 1106, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8245, Ord: 1107, Target: 1107, Traits: 63, StrLen: 16, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11858, Ord: 1108, Target: 832, Traits: 63, StrLen: 8, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8261, Ord: 1109, Target: 1109, Traits: 63, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1673, Ord: 1110, Target: 1646, Traits: 63, StrLen: 29, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6964, Ord: 1111, Target: 1646, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8261, Ord: 1112, Target: 1112, Traits: 63, StrLen: 16, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 1113, Target: 1109, Traits: 63, StrLen: 6, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6469, Ord: 1114, Target: 1114, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12171, Ord: 1115, Target: 1112, Traits: 63, StrLen: 6, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9322, Ord: 1116, Target: 599, Traits: 63, StrLen: 14, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6469, Ord: 1117, Target: 1117, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 1118, Target: 1114, Traits: 63, StrLen: 6, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10337, Ord: 1119, Target: 1119, Traits: 63, StrLen: 11, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 1120, Target: 1097, Traits: 63, StrLen: 6, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4081, Ord: 1121, Target: 1121, Traits: 63, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4081, Ord: 1122, Target: 1122, Traits: 63, StrLen: 23, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 1123, Target: 1121, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9570, Ord: 1124, Target: 1124, Traits: 63, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10348, Ord: 1125, Target: 1125, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10359, Ord: 1126, Target: 1126, Traits: 63, StrLen: 11, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12311, Ord: 1127, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6107, Ord: 1128, Target: 1651, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeDouble), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8277, Ord: 1129, Target: 1129, Traits: 63, StrLen: 11, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 1130, Target: 1131, Traits: 63, StrLen: 6, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8277, Ord: 1131, Target: 1131, Traits: 63, StrLen: 16, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7068, Ord: 1132, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11073, Ord: 1133, Target: 1648, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9583, Ord: 1134, Target: 1134, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12249, Ord: 1135, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11898, Ord: 1136, Target: 1137, Traits: 63, StrLen: 8, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11730, Ord: 1137, Target: 1137, Traits: 63, StrLen: 8, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12428, Ord: 1138, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12431, Ord: 1139, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12434, Ord: 1140, Target: 1646, Traits: 63, StrLen: 3, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2295, Ord: 1141, Target: 1141, Traits: 77, StrLen: 19, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11373, Ord: 1142, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11328, Ord: 1143, Target: 1147, Traits: 63, StrLen: 9, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2295, Ord: 1144, Target: 1144, Traits: 63, StrLen: 24, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12409, Ord: 1145, Target: 1644, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11373, Ord: 1146, Target: 1644, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2295, Ord: 1147, Target: 1147, Traits: 63, StrLen: 28, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 1148, Target: 1144, Traits: 63, StrLen: 6, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8293, Ord: 1149, Target: 1149, Traits: 63, StrLen: 16, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11930, Ord: 1150, Target: 1646, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11928, Ord: 1151, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5847, Ord: 1152, Target: 1646, Traits: 63, StrLen: 20, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12271, Ord: 1153, Target: 1153, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6878, Ord: 1154, Target: 1154, Traits: 63, StrLen: 7, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11093, Ord: 1155, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10711, Ord: 1156, Target: 1161, Traits: 63, StrLen: 11, Count: 4, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11553, Ord: 1157, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9596, Ord: 1158, Target: 1158, Traits: 67, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9998, Ord: 1159, Target: 1159, Traits: 63, StrLen: 12, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 1160, Target: 1154, Traits: 63, StrLen: 6, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10370, Ord: 1161, Target: 1161, Traits: 63, StrLen: 11, Count: 4, Shape: uint8(smithy.ShapeTypeEnum), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12369, Ord: 1162, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11914, Ord: 1163, Target: 1646, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12105, Ord: 1164, Target: 1646, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11175, Ord: 1165, Target: 1646, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2323, Ord: 1166, Target: 1166, Traits: 63, StrLen: 28, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 2}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12201, Ord: 1167, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8309, Ord: 1168, Target: 1168, Traits: 63, StrLen: 16, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11292, Ord: 1169, Target: 266, Traits: 63, StrLen: 9, Count: 7, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4939, Ord: 1170, Target: 1170, Traits: 63, StrLen: 21, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1171, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11436, Ord: 1172, Target: 966, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9661, Ord: 1173, Target: 929, Traits: 63, StrLen: 13, Count: 21, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1, Hash: 11}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10082, Ord: 1174, Target: 201, Traits: 63, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4173, Ord: 1175, Target: 1175, Traits: 63, StrLen: 22, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9622, Ord: 1176, Target: 192, Traits: 63, StrLen: 11, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9804, Ord: 1177, Target: 323, Traits: 63, StrLen: 7, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4960, Ord: 1178, Target: 1178, Traits: 63, StrLen: 21, Count: 7, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 1179, Target: 97, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 1180, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12195, Ord: 1181, Target: 443, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11364, Ord: 1182, Target: 438, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10447, Ord: 1183, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12417, Ord: 1184, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10590, Ord: 1185, Target: 100, Traits: 63, StrLen: 11, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4217, Ord: 1186, Target: 1186, Traits: 63, StrLen: 22, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9609, Ord: 1187, Target: 84, Traits: 63, StrLen: 10, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12417, Ord: 1188, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4239, Ord: 1189, Target: 1189, Traits: 63, StrLen: 22, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1190, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11738, Ord: 1191, Target: 828, Traits: 78, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12409, Ord: 1192, Target: 156, Traits: 78, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7805, Ord: 1193, Target: 148, Traits: 63, StrLen: 7, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11786, Ord: 1194, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10447, Ord: 1195, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3736, Ord: 1196, Target: 1196, Traits: 63, StrLen: 23, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12401, Ord: 1197, Target: 141, Traits: 63, StrLen: 4, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6694, Ord: 1198, Target: 1198, Traits: 63, StrLen: 18, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1199, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11256, Ord: 1200, Target: 172, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11786, Ord: 1201, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7805, Ord: 1202, Target: 136, Traits: 63, StrLen: 7, Count: 3, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10447, Ord: 1203, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6127, Ord: 1204, Target: 1204, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10058, Ord: 1205, Target: 129, Traits: 63, StrLen: 5, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3379, Ord: 1206, Target: 1206, Traits: 63, StrLen: 24, Count: 7, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1207, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3678, Ord: 1208, Target: 697, Traits: 63, StrLen: 9, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11874, Ord: 1209, Target: 1076, Traits: 63, StrLen: 8, Count: 4, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12341, Ord: 1210, Target: 224, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 1211, Target: 223, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11818, Ord: 1212, Target: 624, Traits: 63, StrLen: 8, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10447, Ord: 1213, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2907, Ord: 1214, Target: 1214, Traits: 63, StrLen: 25, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11053, Ord: 1215, Target: 1029, Traits: 63, StrLen: 4, Count: 17, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 14}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7465, Ord: 1216, Target: 1216, Traits: 63, StrLen: 17, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1217, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12249, Ord: 1218, Target: 828, Traits: 79, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11898, Ord: 1219, Target: 1137, Traits: 80, StrLen: 8, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6712, Ord: 1220, Target: 1220, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10491, Ord: 1221, Target: 828, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 1222, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1875, Ord: 1223, Target: 1223, Traits: 63, StrLen: 28, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 1224, Target: 635, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11382, Ord: 1225, Target: 632, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12417, Ord: 1226, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1557, Ord: 1227, Target: 1227, Traits: 63, StrLen: 29, Count: 11, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 16}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 1228, Target: 635, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12421, Ord: 1229, Target: 655, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7907, Ord: 1230, Target: 827, Traits: 63, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10513, Ord: 1231, Target: 422, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12356, Ord: 1232, Target: 1153, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4150, Ord: 1233, Target: 826, Traits: 63, StrLen: 23, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1234, Target: 636, Traits: 63, StrLen: 6, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5464, Ord: 1235, Target: 1645, Traits: 66, StrLen: 21, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9713, Ord: 1236, Target: 823, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9154, Ord: 1237, Target: 322, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12417, Ord: 1238, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5587, Ord: 1239, Target: 1239, Traits: 63, StrLen: 20, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1240, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12421, Ord: 1241, Target: 1125, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11274, Ord: 1242, Target: 1107, Traits: 63, StrLen: 9, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12165, Ord: 1243, Target: 1106, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1244, Target: 1124, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10447, Ord: 1245, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4981, Ord: 1246, Target: 1246, Traits: 63, StrLen: 21, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6602, Ord: 1247, Target: 1097, Traits: 63, StrLen: 7, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5023, Ord: 1248, Target: 1248, Traits: 63, StrLen: 21, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1249, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4261, Ord: 1250, Target: 1250, Traits: 63, StrLen: 22, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4283, Ord: 1251, Target: 1251, Traits: 63, StrLen: 22, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1252, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11738, Ord: 1253, Target: 828, Traits: 78, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12409, Ord: 1254, Target: 156, Traits: 78, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3759, Ord: 1255, Target: 1255, Traits: 63, StrLen: 23, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6748, Ord: 1256, Target: 1256, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1257, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11738, Ord: 1258, Target: 828, Traits: 78, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6146, Ord: 1259, Target: 1259, Traits: 63, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1903, Ord: 1260, Target: 1260, Traits: 63, StrLen: 28, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 1261, Target: 635, Traits: 78, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1586, Ord: 1262, Target: 1262, Traits: 63, StrLen: 29, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 1263, Target: 635, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1264, Target: 636, Traits: 63, StrLen: 6, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5607, Ord: 1265, Target: 1265, Traits: 63, StrLen: 20, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1266, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11535, Ord: 1267, Target: 828, Traits: 78, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5044, Ord: 1268, Target: 1268, Traits: 63, StrLen: 21, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4305, Ord: 1269, Target: 1269, Traits: 63, StrLen: 22, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11436, Ord: 1270, Target: 966, Traits: 78, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3782, Ord: 1271, Target: 1271, Traits: 63, StrLen: 23, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1137, Ord: 1272, Target: 1272, Traits: 63, StrLen: 30, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 1273, Target: 635, Traits: 78, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 982, Ord: 1274, Target: 1274, Traits: 63, StrLen: 31, Count: 11, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 17}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 1275, Target: 635, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12421, Ord: 1276, Target: 655, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7907, Ord: 1277, Target: 827, Traits: 63, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10513, Ord: 1278, Target: 422, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12356, Ord: 1279, Target: 1153, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4150, Ord: 1280, Target: 826, Traits: 63, StrLen: 23, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1281, Target: 636, Traits: 63, StrLen: 6, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5464, Ord: 1282, Target: 1645, Traits: 66, StrLen: 21, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9713, Ord: 1283, Target: 823, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9154, Ord: 1284, Target: 322, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12417, Ord: 1285, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3805, Ord: 1286, Target: 1286, Traits: 63, StrLen: 23, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1287, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11746, Ord: 1288, Target: 207, Traits: 81, StrLen: 8, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3403, Ord: 1289, Target: 1289, Traits: 63, StrLen: 24, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1290, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9622, Ord: 1291, Target: 204, Traits: 78, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2932, Ord: 1292, Target: 1292, Traits: 63, StrLen: 25, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4349, Ord: 1293, Target: 1293, Traits: 63, StrLen: 22, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1294, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11746, Ord: 1295, Target: 207, Traits: 63, StrLen: 8, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7270, Ord: 1296, Target: 831, Traits: 63, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9182, Ord: 1297, Target: 1644, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11346, Ord: 1298, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10524, Ord: 1299, Target: 412, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8741, Ord: 1300, Target: 413, Traits: 65, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11826, Ord: 1301, Target: 1644, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3851, Ord: 1302, Target: 1302, Traits: 63, StrLen: 23, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1303, Target: 93, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9210, Ord: 1304, Target: 576, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12443, Ord: 1305, Target: 392, Traits: 63, StrLen: 3, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7856, Ord: 1306, Target: 396, Traits: 63, StrLen: 3, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8741, Ord: 1307, Target: 405, Traits: 63, StrLen: 3, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5627, Ord: 1308, Target: 1308, Traits: 63, StrLen: 20, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5086, Ord: 1309, Target: 1309, Traits: 63, StrLen: 21, Count: 7, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 950, Ord: 1310, Target: 1126, Traits: 63, StrLen: 32, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1818, Ord: 1311, Target: 1126, Traits: 63, StrLen: 29, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 821, Ord: 1312, Target: 1126, Traits: 63, StrLen: 33, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2594, Ord: 1313, Target: 1126, Traits: 63, StrLen: 27, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3257, Ord: 1314, Target: 1126, Traits: 63, StrLen: 25, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6107, Ord: 1315, Target: 265, Traits: 70, StrLen: 20, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7360, Ord: 1316, Target: 265, Traits: 70, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6784, Ord: 1317, Target: 1317, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1318, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10154, Ord: 1319, Target: 414, Traits: 82, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6184, Ord: 1320, Target: 1320, Traits: 63, StrLen: 19, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9609, Ord: 1321, Target: 84, Traits: 63, StrLen: 10, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12417, Ord: 1322, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4393, Ord: 1323, Target: 1323, Traits: 63, StrLen: 22, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1324, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11738, Ord: 1325, Target: 828, Traits: 78, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10058, Ord: 1326, Target: 1649, Traits: 83, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3874, Ord: 1327, Target: 1327, Traits: 63, StrLen: 23, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7805, Ord: 1328, Target: 185, Traits: 63, StrLen: 7, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12061, Ord: 1329, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6203, Ord: 1330, Target: 1330, Traits: 63, StrLen: 19, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1331, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11738, Ord: 1332, Target: 828, Traits: 78, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12409, Ord: 1333, Target: 156, Traits: 78, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10058, Ord: 1334, Target: 1649, Traits: 83, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5647, Ord: 1335, Target: 1335, Traits: 63, StrLen: 20, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12401, Ord: 1336, Target: 141, Traits: 63, StrLen: 4, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8591, Ord: 1337, Target: 1337, Traits: 63, StrLen: 15, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1338, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11738, Ord: 1339, Target: 828, Traits: 78, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10058, Ord: 1340, Target: 1649, Traits: 83, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8085, Ord: 1341, Target: 1341, Traits: 63, StrLen: 16, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10058, Ord: 1342, Target: 129, Traits: 63, StrLen: 5, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6222, Ord: 1343, Target: 1343, Traits: 63, StrLen: 19, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1344, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9622, Ord: 1345, Target: 204, Traits: 78, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5667, Ord: 1346, Target: 1346, Traits: 63, StrLen: 20, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9622, Ord: 1347, Target: 192, Traits: 63, StrLen: 11, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5107, Ord: 1348, Target: 1348, Traits: 63, StrLen: 21, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1349, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12237, Ord: 1350, Target: 828, Traits: 78, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4415, Ord: 1351, Target: 1351, Traits: 63, StrLen: 22, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11053, Ord: 1352, Target: 1029, Traits: 63, StrLen: 4, Count: 17, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 14}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6241, Ord: 1353, Target: 1353, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1354, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5687, Ord: 1355, Target: 1355, Traits: 63, StrLen: 20, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9210, Ord: 1356, Target: 576, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12443, Ord: 1357, Target: 392, Traits: 63, StrLen: 3, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7856, Ord: 1358, Target: 396, Traits: 63, StrLen: 3, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8741, Ord: 1359, Target: 405, Traits: 63, StrLen: 3, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3451, Ord: 1360, Target: 1360, Traits: 63, StrLen: 24, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1361, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8437, Ord: 1362, Target: 828, Traits: 78, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5506, Ord: 1363, Target: 1650, Traits: 84, StrLen: 21, Count: 0, Shape: uint8(smithy.ShapeTypeLong), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2982, Ord: 1364, Target: 1364, Traits: 63, StrLen: 25, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5506, Ord: 1365, Target: 661, Traits: 63, StrLen: 14, Count: 15, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 7}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8606, Ord: 1366, Target: 1366, Traits: 63, StrLen: 15, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11436, Ord: 1367, Target: 966, Traits: 78, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8101, Ord: 1368, Target: 1368, Traits: 63, StrLen: 16, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9280, Ord: 1369, Target: 762, Traits: 63, StrLen: 7, Count: 9, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 8}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12417, Ord: 1370, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7516, Ord: 1371, Target: 1371, Traits: 63, StrLen: 17, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1372, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11535, Ord: 1373, Target: 828, Traits: 78, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6802, Ord: 1374, Target: 1374, Traits: 63, StrLen: 18, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6602, Ord: 1375, Target: 1097, Traits: 63, StrLen: 7, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5767, Ord: 1376, Target: 1376, Traits: 63, StrLen: 20, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10963, Ord: 1377, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1378, Target: 572, Traits: 86, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10154, Ord: 1379, Target: 414, Traits: 82, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5149, Ord: 1380, Target: 1380, Traits: 63, StrLen: 21, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1381, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10392, Ord: 1382, Target: 95, Traits: 63, StrLen: 11, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5170, Ord: 1383, Target: 1383, Traits: 63, StrLen: 21, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1384, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11738, Ord: 1385, Target: 828, Traits: 78, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10058, Ord: 1386, Target: 1649, Traits: 83, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1387, Target: 572, Traits: 86, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10963, Ord: 1388, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4437, Ord: 1389, Target: 1389, Traits: 63, StrLen: 22, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12306, Ord: 1390, Target: 163, Traits: 63, StrLen: 5, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1391, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7567, Ord: 1392, Target: 1392, Traits: 63, StrLen: 17, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1393, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11256, Ord: 1394, Target: 172, Traits: 87, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10226, Ord: 1395, Target: 1645, Traits: 88, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9778, Ord: 1396, Target: 1645, Traits: 89, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1397, Target: 572, Traits: 86, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10963, Ord: 1398, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6838, Ord: 1399, Target: 1399, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12306, Ord: 1400, Target: 168, Traits: 63, StrLen: 5, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1401, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5191, Ord: 1402, Target: 1402, Traits: 63, StrLen: 21, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1403, Target: 572, Traits: 86, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10963, Ord: 1404, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4459, Ord: 1405, Target: 1405, Traits: 63, StrLen: 22, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12306, Ord: 1406, Target: 173, Traits: 63, StrLen: 5, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1407, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3475, Ord: 1408, Target: 1408, Traits: 63, StrLen: 24, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1409, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11738, Ord: 1410, Target: 828, Traits: 78, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10963, Ord: 1411, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1412, Target: 572, Traits: 86, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3032, Ord: 1413, Target: 1413, Traits: 63, StrLen: 25, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12306, Ord: 1414, Target: 182, Traits: 63, StrLen: 5, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1415, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5212, Ord: 1416, Target: 1416, Traits: 63, StrLen: 21, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1417, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10963, Ord: 1418, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1419, Target: 572, Traits: 86, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7234, Ord: 1420, Target: 1644, Traits: 90, StrLen: 18, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4481, Ord: 1421, Target: 1421, Traits: 63, StrLen: 22, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1422, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10070, Ord: 1423, Target: 205, Traits: 63, StrLen: 12, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3920, Ord: 1424, Target: 1424, Traits: 63, StrLen: 23, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1425, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7234, Ord: 1426, Target: 1047, Traits: 63, StrLen: 6, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12311, Ord: 1427, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1428, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11454, Ord: 1429, Target: 1056, Traits: 63, StrLen: 9, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12321, Ord: 1430, Target: 1059, Traits: 63, StrLen: 5, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3499, Ord: 1431, Target: 1431, Traits: 63, StrLen: 24, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12336, Ord: 1432, Target: 1054, Traits: 63, StrLen: 5, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1433, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8149, Ord: 1434, Target: 1434, Traits: 63, StrLen: 16, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1435, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12249, Ord: 1436, Target: 828, Traits: 79, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10963, Ord: 1437, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1438, Target: 1644, Traits: 86, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7584, Ord: 1439, Target: 1439, Traits: 63, StrLen: 17, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10923, Ord: 1440, Target: 240, Traits: 63, StrLen: 10, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1441, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5233, Ord: 1442, Target: 1442, Traits: 63, StrLen: 21, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1443, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12237, Ord: 1444, Target: 828, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12311, Ord: 1445, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1446, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4503, Ord: 1447, Target: 1447, Traits: 63, StrLen: 22, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10923, Ord: 1448, Target: 313, Traits: 63, StrLen: 10, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1449, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8165, Ord: 1450, Target: 1450, Traits: 63, StrLen: 16, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1451, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1452, Target: 379, Traits: 63, StrLen: 6, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11770, Ord: 1453, Target: 383, Traits: 63, StrLen: 8, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12311, Ord: 1454, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1455, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7601, Ord: 1456, Target: 1456, Traits: 63, StrLen: 17, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12296, Ord: 1457, Target: 372, Traits: 63, StrLen: 5, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1458, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3057, Ord: 1459, Target: 1459, Traits: 63, StrLen: 25, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1460, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10491, Ord: 1461, Target: 828, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12311, Ord: 1462, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1463, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11003, Ord: 1464, Target: 1644, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12321, Ord: 1465, Target: 577, Traits: 63, StrLen: 5, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2647, Ord: 1466, Target: 1466, Traits: 63, StrLen: 26, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12033, Ord: 1467, Target: 435, Traits: 63, StrLen: 7, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1468, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2673, Ord: 1469, Target: 1469, Traits: 63, StrLen: 26, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1470, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10491, Ord: 1471, Target: 828, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2351, Ord: 1472, Target: 1472, Traits: 63, StrLen: 27, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1473, Target: 93, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10491, Ord: 1474, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11778, Ord: 1475, Target: 604, Traits: 63, StrLen: 8, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11283, Ord: 1476, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2378, Ord: 1477, Target: 1477, Traits: 63, StrLen: 27, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1931, Ord: 1478, Target: 1478, Traits: 63, StrLen: 28, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7288, Ord: 1479, Target: 653, Traits: 63, StrLen: 18, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2699, Ord: 1480, Target: 1480, Traits: 63, StrLen: 26, Count: 7, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1481, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12237, Ord: 1482, Target: 828, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12189, Ord: 1483, Target: 828, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1484, Target: 686, Traits: 63, StrLen: 6, Count: 6, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11818, Ord: 1485, Target: 682, Traits: 63, StrLen: 8, Count: 3, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12311, Ord: 1486, Target: 1649, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1487, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2405, Ord: 1488, Target: 1488, Traits: 63, StrLen: 27, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8801, Ord: 1489, Target: 680, Traits: 63, StrLen: 15, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1490, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7618, Ord: 1491, Target: 1491, Traits: 63, StrLen: 17, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10963, Ord: 1492, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1493, Target: 572, Traits: 86, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7234, Ord: 1494, Target: 909, Traits: 91, StrLen: 17, Count: 19, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 10}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6856, Ord: 1495, Target: 1495, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1496, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11866, Ord: 1497, Target: 774, Traits: 63, StrLen: 8, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2725, Ord: 1498, Target: 1498, Traits: 63, StrLen: 26, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10634, Ord: 1499, Target: 1644, Traits: 78, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2432, Ord: 1500, Target: 1500, Traits: 63, StrLen: 27, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12417, Ord: 1501, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6317, Ord: 1502, Target: 1502, Traits: 63, StrLen: 19, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1503, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1504, Target: 1124, Traits: 92, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1505, Target: 572, Traits: 86, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10963, Ord: 1506, Target: 1649, Traits: 85, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5787, Ord: 1507, Target: 1507, Traits: 63, StrLen: 20, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12306, Ord: 1508, Target: 1119, Traits: 63, StrLen: 5, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11391, Ord: 1509, Target: 572, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7635, Ord: 1510, Target: 1510, Traits: 63, StrLen: 17, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1511, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9622, Ord: 1512, Target: 204, Traits: 78, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6874, Ord: 1513, Target: 1513, Traits: 63, StrLen: 18, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11906, Ord: 1514, Target: 1159, Traits: 63, StrLen: 8, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5907, Ord: 1515, Target: 1515, Traits: 63, StrLen: 20, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9280, Ord: 1516, Target: 609, Traits: 78, StrLen: 7, Count: 14, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9280, Ord: 1517, Target: 951, Traits: 63, StrLen: 14, Count: 14, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1, Hash: 12}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11364, Ord: 1518, Target: 438, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5485, Ord: 1519, Target: 635, Traits: 63, StrLen: 21, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1527, Ord: 1520, Target: 635, Traits: 63, StrLen: 30, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 918, Ord: 1521, Target: 635, Traits: 63, StrLen: 32, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 1522, Target: 978, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12417, Ord: 1523, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5359, Ord: 1524, Target: 1524, Traits: 63, StrLen: 21, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11436, Ord: 1525, Target: 966, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9098, Ord: 1526, Target: 82, Traits: 63, StrLen: 14, Count: 1, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11364, Ord: 1527, Target: 438, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12417, Ord: 1528, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7072, Ord: 1529, Target: 1529, Traits: 63, StrLen: 18, Count: 7, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1530, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10491, Ord: 1531, Target: 239, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7805, Ord: 1532, Target: 532, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12005, Ord: 1533, Target: 867, Traits: 63, StrLen: 7, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12249, Ord: 1534, Target: 828, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11738, Ord: 1535, Target: 166, Traits: 63, StrLen: 8, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11382, Ord: 1536, Target: 1644, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 556, Ord: 1537, Target: 1537, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12171, Ord: 1538, Target: 872, Traits: 93, StrLen: 6, Count: 9, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1, Hash: 9}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7108, Ord: 1539, Target: 1539, Traits: 63, StrLen: 18, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10634, Ord: 1540, Target: 1644, Traits: 78, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12417, Ord: 1541, Target: 1025, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6431, Ord: 1542, Target: 1542, Traits: 63, StrLen: 19, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6007, Ord: 1543, Target: 1543, Traits: 63, StrLen: 20, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10634, Ord: 1544, Target: 1644, Traits: 78, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12054, Ord: 1545, Target: 1023, Traits: 94, StrLen: 7, Count: 1, Shape: uint8(smithy.ShapeTypeList), Flags: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5401, Ord: 1546, Target: 1546, Traits: 63, StrLen: 21, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5422, Ord: 1547, Target: 1547, Traits: 63, StrLen: 21, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1548, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 1549, Target: 97, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10469, Ord: 1550, Target: 274, Traits: 65, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12195, Ord: 1551, Target: 443, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10590, Ord: 1552, Target: 100, Traits: 63, StrLen: 11, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4745, Ord: 1553, Target: 1553, Traits: 63, StrLen: 22, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9609, Ord: 1554, Target: 84, Traits: 63, StrLen: 10, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2540, Ord: 1555, Target: 1555, Traits: 63, StrLen: 27, Count: 7, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1556, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10873, Ord: 1557, Target: 116, Traits: 78, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12165, Ord: 1558, Target: 110, Traits: 63, StrLen: 6, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10142, Ord: 1559, Target: 117, Traits: 63, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12207, Ord: 1560, Target: 122, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11083, Ord: 1561, Target: 1649, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11445, Ord: 1562, Target: 1647, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeBoolean), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2211, Ord: 1563, Target: 1563, Traits: 63, StrLen: 28, Count: 3, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10873, Ord: 1564, Target: 116, Traits: 63, StrLen: 10, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1565, Target: 123, Traits: 63, StrLen: 6, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11319, Ord: 1566, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4767, Ord: 1567, Target: 1567, Traits: 63, StrLen: 22, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1568, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11738, Ord: 1569, Target: 828, Traits: 78, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12409, Ord: 1570, Target: 156, Traits: 78, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7805, Ord: 1571, Target: 148, Traits: 63, StrLen: 7, Count: 2, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11786, Ord: 1572, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10447, Ord: 1573, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4104, Ord: 1574, Target: 1574, Traits: 63, StrLen: 23, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12401, Ord: 1575, Target: 141, Traits: 63, StrLen: 4, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7162, Ord: 1576, Target: 1576, Traits: 63, StrLen: 18, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1577, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11738, Ord: 1578, Target: 828, Traits: 78, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11786, Ord: 1579, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7805, Ord: 1580, Target: 136, Traits: 63, StrLen: 7, Count: 3, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10447, Ord: 1581, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6488, Ord: 1582, Target: 1582, Traits: 63, StrLen: 19, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10058, Ord: 1583, Target: 129, Traits: 63, StrLen: 5, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4789, Ord: 1584, Target: 1584, Traits: 63, StrLen: 22, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1585, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9622, Ord: 1586, Target: 204, Traits: 78, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9661, Ord: 1587, Target: 929, Traits: 63, StrLen: 13, Count: 21, Shape: uint8(smithy.ShapeTypeUnion), Flags: 1, Hash: 11}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10082, Ord: 1588, Target: 201, Traits: 63, StrLen: 12, Count: 2, Shape: uint8(smithy.ShapeTypeMap), Flags: 5}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4127, Ord: 1589, Target: 1589, Traits: 63, StrLen: 23, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9622, Ord: 1590, Target: 192, Traits: 63, StrLen: 11, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9804, Ord: 1591, Target: 323, Traits: 63, StrLen: 7, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3619, Ord: 1592, Target: 1592, Traits: 63, StrLen: 24, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1593, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12237, Ord: 1594, Target: 828, Traits: 78, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11053, Ord: 1595, Target: 1062, Traits: 63, StrLen: 10, Count: 11, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 15}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10447, Ord: 1596, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 3232, Ord: 1597, Target: 1597, Traits: 63, StrLen: 25, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11053, Ord: 1598, Target: 1029, Traits: 63, StrLen: 4, Count: 17, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 14}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7771, Ord: 1599, Target: 1599, Traits: 63, StrLen: 17, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1600, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12189, Ord: 1601, Target: 1644, Traits: 78, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7198, Ord: 1602, Target: 377, Traits: 63, StrLen: 18, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10447, Ord: 1603, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7180, Ord: 1604, Target: 1604, Traits: 63, StrLen: 18, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10502, Ord: 1605, Target: 355, Traits: 63, StrLen: 4, Count: 13, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 3}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1106, Ord: 1606, Target: 1606, Traits: 63, StrLen: 31, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1607, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8741, Ord: 1608, Target: 413, Traits: 65, StrLen: 15, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 886, Ord: 1609, Target: 1609, Traits: 63, StrLen: 32, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1610, Target: 93, Traits: 63, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8741, Ord: 1611, Target: 405, Traits: 63, StrLen: 3, Count: 6, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 121, Ord: 1612, Target: 1612, Traits: 63, StrLen: 39, Count: 2, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 1613, Target: 635, Traits: 78, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5464, Ord: 1614, Target: 233, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 42, Ord: 1615, Target: 1615, Traits: 63, StrLen: 40, Count: 10, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 18}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12405, Ord: 1616, Target: 635, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12421, Ord: 1617, Target: 655, Traits: 63, StrLen: 4, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7907, Ord: 1618, Target: 827, Traits: 63, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10513, Ord: 1619, Target: 422, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12356, Ord: 1620, Target: 1153, Traits: 63, StrLen: 5, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 4150, Ord: 1621, Target: 826, Traits: 63, StrLen: 23, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1622, Target: 636, Traits: 63, StrLen: 6, Count: 5, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5464, Ord: 1623, Target: 1645, Traits: 66, StrLen: 21, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9713, Ord: 1624, Target: 823, Traits: 63, StrLen: 13, Count: 2, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9154, Ord: 1625, Target: 322, Traits: 63, StrLen: 14, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2567, Ord: 1626, Target: 1626, Traits: 63, StrLen: 27, Count: 5, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1627, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8437, Ord: 1628, Target: 828, Traits: 78, StrLen: 16, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1629, Target: 686, Traits: 63, StrLen: 6, Count: 6, Shape: uint8(smithy.ShapeTypeEnum), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7788, Ord: 1630, Target: 1644, Traits: 63, StrLen: 17, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10447, Ord: 1631, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2239, Ord: 1632, Target: 1632, Traits: 63, StrLen: 28, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5506, Ord: 1633, Target: 661, Traits: 63, StrLen: 14, Count: 15, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 7}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6027, Ord: 1634, Target: 1634, Traits: 63, StrLen: 20, Count: 4, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1635, Target: 94, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11535, Ord: 1636, Target: 828, Traits: 78, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10214, Ord: 1637, Target: 1124, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10447, Ord: 1638, Target: 1644, Traits: 63, StrLen: 11, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 5443, Ord: 1639, Target: 1639, Traits: 63, StrLen: 21, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 6602, Ord: 1640, Target: 1097, Traits: 63, StrLen: 7, Count: 8, Shape: uint8(smithy.ShapeTypeStructure), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 2267, Ord: 1641, Target: 1641, Traits: 63, StrLen: 28, Count: 1, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 10010, Ord: 1642, Target: 93, Traits: 78, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 1}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 1789, Ord: 1643, Target: 1643, Traits: 63, StrLen: 29, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 7425, Ord: 1644, Target: 1644, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeString), Flags: 8}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 8028, Ord: 1645, Target: 1645, Traits: 63, StrLen: 9, Count: 0, Shape: uint8(smithy.ShapeTypeTimestamp), Flags: 8}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12389, Ord: 1646, Target: 1646, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 8}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11921, Ord: 1647, Target: 1647, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeBoolean), Flags: 8}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 9866, Ord: 1648, Target: 1648, Traits: 63, StrLen: 8, Count: 0, Shape: uint8(smithy.ShapeTypeDocument), Flags: 8}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 11935, Ord: 1649, Target: 1649, Traits: 63, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeInteger), Flags: 8}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12381, Ord: 1650, Target: 1650, Traits: 63, StrLen: 4, Count: 0, Shape: uint8(smithy.ShapeTypeLong), Flags: 8}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 12087, Ord: 1651, Target: 1651, Traits: 63, StrLen: 6, Count: 0, Shape: uint8(smithy.ShapeTypeDouble), Flags: 8}),
 }
 
-var AssociateService = &handles[0]
+var AssociateService = &all[0]
 
-var CreateAgentSpace = &handles[1]
+var CreateAgentSpace = &all[1]
 
-var CreateAsset = &handles[2]
+var CreateAsset = &all[2]
 
-var CreateAssetFile = &handles[3]
+var CreateAssetFile = &all[3]
 
-var CreateBacklogTask = &handles[4]
+var CreateBacklogTask = &all[4]
 
-var CreateChat = &handles[5]
+var CreateChat = &all[5]
 
-var CreatePrivateConnection = &handles[6]
+var CreatePrivateConnection = &all[6]
 
-var CreateTrigger = &handles[7]
+var CreateTrigger = &all[7]
 
-var DeleteAgentSpace = &handles[8]
+var DeleteAgentSpace = &all[8]
 
-var DeleteAsset = &handles[9]
+var DeleteAsset = &all[9]
 
-var DeleteAssetFile = &handles[10]
+var DeleteAssetFile = &all[10]
 
-var DeletePrivateConnection = &handles[11]
+var DeletePrivateConnection = &all[11]
 
-var DeleteTrigger = &handles[12]
+var DeleteTrigger = &all[12]
 
-var DeregisterService = &handles[13]
+var DeregisterService = &all[13]
 
-var DescribePrivateConnection = &handles[14]
+var DescribePrivateConnection = &all[14]
 
-var DisableOperatorApp = &handles[15]
+var DisableOperatorApp = &all[15]
 
-var DisassociateService = &handles[16]
+var DisassociateService = &all[16]
 
-var EnableOperatorApp = &handles[17]
+var EnableOperatorApp = &all[17]
 
-var GetAccountUsage = &handles[18]
+var GetAccountUsage = &all[18]
 
-var GetAgentSpace = &handles[19]
+var GetAgentSpace = &all[19]
 
-var GetAsset = &handles[20]
+var GetAsset = &all[20]
 
-var GetAssetContent = &handles[21]
+var GetAssetContent = &all[21]
 
-var GetAssetFile = &handles[22]
+var GetAssetFile = &all[22]
 
-var GetAssociation = &handles[23]
+var GetAssociation = &all[23]
 
-var GetBacklogTask = &handles[24]
+var GetBacklogTask = &all[24]
 
-var GetOperatorApp = &handles[25]
+var GetOperatorApp = &all[25]
 
-var GetRecommendation = &handles[26]
+var GetRecommendation = &all[26]
 
-var GetService = &handles[27]
+var GetService = &all[27]
 
-var GetTrigger = &handles[28]
+var GetTrigger = &all[28]
 
-var ListAgentSpaces = &handles[29]
+var ListAgentSpaces = &all[29]
 
-var ListAssetFiles = &handles[30]
+var ListAssetFiles = &all[30]
 
-var ListAssets = &handles[31]
+var ListAssets = &all[31]
 
-var ListAssetTypes = &handles[32]
+var ListAssetTypes = &all[32]
 
-var ListAssetVersions = &handles[33]
+var ListAssetVersions = &all[33]
 
-var ListAssociations = &handles[34]
+var ListAssociations = &all[34]
 
-var ListBacklogTasks = &handles[35]
+var ListBacklogTasks = &all[35]
 
-var ListChats = &handles[36]
+var ListChats = &all[36]
 
-var ListExecutions = &handles[37]
+var ListExecutions = &all[37]
 
-var ListGoals = &handles[38]
+var ListGoals = &all[38]
 
-var ListJournalRecords = &handles[39]
+var ListJournalRecords = &all[39]
 
-var ListPendingMessages = &handles[40]
+var ListPendingMessages = &all[40]
 
-var ListPrivateConnections = &handles[41]
+var ListPrivateConnections = &all[41]
 
-var ListRecommendations = &handles[42]
+var ListRecommendations = &all[42]
 
-var ListServices = &handles[43]
+var ListServices = &all[43]
 
-var ListTagsForResource = &handles[44]
+var ListTagsForResource = &all[44]
 
-var ListTriggers = &handles[45]
+var ListTriggers = &all[45]
 
-var ListWebhooks = &handles[46]
+var ListWebhooks = &all[46]
 
-var RegisterService = &handles[47]
+var RegisterService = &all[47]
 
-var SendMessage = &handles[48]
+var SendMessage = &all[48]
 
-var TagResource = &handles[49]
+var TagResource = &all[49]
 
-var UntagResource = &handles[50]
+var UntagResource = &all[50]
 
-var UpdateAgentSpace = &handles[51]
+var UpdateAgentSpace = &all[51]
 
-var UpdateApprovalAction = &handles[52]
+var UpdateApprovalAction = &all[52]
 
-var UpdateAsset = &handles[53]
+var UpdateAsset = &all[53]
 
-var UpdateAssetFile = &handles[54]
+var UpdateAssetFile = &all[54]
 
-var UpdateAssociation = &handles[55]
+var UpdateAssociation = &all[55]
 
-var UpdateBacklogTask = &handles[56]
+var UpdateBacklogTask = &all[56]
 
-var UpdateGoal = &handles[57]
+var UpdateGoal = &all[57]
 
-var UpdateOperatorAppIdpConfig = &handles[58]
+var UpdateOperatorAppIdpConfig = &all[58]
 
-var UpdatePrivateConnectionCertificate = &handles[59]
+var UpdatePrivateConnectionCertificate = &all[59]
 
-var UpdateRecommendation = &handles[60]
+var UpdateRecommendation = &all[60]
 
-var UpdateTrigger = &handles[61]
+var UpdateTrigger = &all[61]
 
-var ValidateAwsAssociations = &handles[62]
+var ValidateAwsAssociations = &all[62]
 
-var _DevOpsAgent = &handles[63]
+var _DevOpsAgent = &all[63]
 
-var AccessDeniedException = &handles[64]
-var AccessDeniedException_message = &handles[65]
+var AccessDeniedException = &all[64]
+var AccessDeniedException_message = &all[65]
 
-var AdditionalServiceDetails = &handles[66]
-var AdditionalServiceDetails_github = &handles[67]
-var AdditionalServiceDetails_slack = &handles[68]
-var AdditionalServiceDetails_mcpserverdatadog = &handles[69]
-var AdditionalServiceDetails_mcpserver = &handles[70]
-var AdditionalServiceDetails_servicenow = &handles[71]
-var AdditionalServiceDetails_gitlab = &handles[72]
-var AdditionalServiceDetails_mcpserversplunk = &handles[73]
-var AdditionalServiceDetails_mcpservernewrelic = &handles[74]
-var AdditionalServiceDetails_azuredevops = &handles[75]
-var AdditionalServiceDetails_azureidentity = &handles[76]
-var AdditionalServiceDetails_mcpservergrafana = &handles[77]
-var AdditionalServiceDetails_pagerduty = &handles[78]
-var AdditionalServiceDetails_mcpserversigv4 = &handles[79]
-var AdditionalServiceDetails_remoteagent = &handles[80]
-var AdditionalServiceDetails_remoteagentsigv4 = &handles[81]
+var AdditionalServiceDetails = &all[66]
+var AdditionalServiceDetails_github = &all[67]
+var AdditionalServiceDetails_slack = &all[68]
+var AdditionalServiceDetails_mcpserverdatadog = &all[69]
+var AdditionalServiceDetails_mcpserver = &all[70]
+var AdditionalServiceDetails_servicenow = &all[71]
+var AdditionalServiceDetails_gitlab = &all[72]
+var AdditionalServiceDetails_mcpserversplunk = &all[73]
+var AdditionalServiceDetails_mcpservernewrelic = &all[74]
+var AdditionalServiceDetails_azuredevops = &all[75]
+var AdditionalServiceDetails_azureidentity = &all[76]
+var AdditionalServiceDetails_mcpservergrafana = &all[77]
+var AdditionalServiceDetails_pagerduty = &all[78]
+var AdditionalServiceDetails_mcpserversigv4 = &all[79]
+var AdditionalServiceDetails_remoteagent = &all[80]
+var AdditionalServiceDetails_remoteagentsigv4 = &all[81]
 
-var AdditionalServiceRegistrationStep = &handles[82]
-var AdditionalServiceRegistrationStep_oauth = &handles[83]
+var AdditionalServiceRegistrationStep = &all[82]
+var AdditionalServiceRegistrationStep_oauth = &all[83]
 
-var AgentSpace = &handles[84]
-var AgentSpace_name = &handles[85]
-var AgentSpace_description = &handles[86]
-var AgentSpace_locale = &handles[87]
-var AgentSpace_createdAt = &handles[88]
-var AgentSpace_updatedAt = &handles[89]
-var AgentSpace_kmsKeyArn = &handles[90]
-var AgentSpace_agentSpaceId = &handles[91]
-var AgentSpace_preferences = &handles[92]
+var AgentSpace = &all[84]
+var AgentSpace_name = &all[85]
+var AgentSpace_description = &all[86]
+var AgentSpace_locale = &all[87]
+var AgentSpace_createdAt = &all[88]
+var AgentSpace_updatedAt = &all[89]
+var AgentSpace_kmsKeyArn = &all[90]
+var AgentSpace_agentSpaceId = &all[91]
+var AgentSpace_preferences = &all[92]
 
-var _AgentSpaceId = &handles[93]
+var _AgentSpaceId = &all[93]
 
-var _AgentSpaceIdentifier = &handles[94]
+var _AgentSpaceIdentifier = &all[94]
 
-var _AgentSpaceList = &handles[95]
-var _AgentSpaceList_member = &handles[96]
+var _AgentSpaceList = &all[95]
+var _AgentSpaceList_member = &all[96]
 
-var _AgentSpaceName = &handles[97]
+var _AgentSpaceName = &all[97]
 
-var AgentSpacePreferenceKey = &handles[98]
-var AgentSpacePreferenceKey_ELEVATED_ACTIONS_ENABLED = &handles[99]
+var AgentSpacePreferenceKey = &all[98]
+var AgentSpacePreferenceKey_ELEVATED_ACTIONS_ENABLED = &all[99]
 
-var _AgentSpacePreferences = &handles[100]
-var _AgentSpacePreferences_key = &handles[101]
-var _AgentSpacePreferences_value = &handles[102]
+var _AgentSpacePreferences = &all[100]
+var _AgentSpacePreferences_key = &all[101]
+var _AgentSpacePreferences_value = &all[102]
 
-var _ApiKeyValue = &handles[103]
+var _ApiKeyValue = &all[103]
 
-var ApprovalAction = &handles[104]
-var ApprovalAction_toolUseId = &handles[105]
-var ApprovalAction_interruptId = &handles[106]
-var ApprovalAction_approvalId = &handles[107]
-var ApprovalAction_buttonText = &handles[108]
-var ApprovalAction_action = &handles[109]
+var ApprovalAction = &all[104]
+var ApprovalAction_toolUseId = &all[105]
+var ApprovalAction_interruptId = &all[106]
+var ApprovalAction_approvalId = &all[107]
+var ApprovalAction_buttonText = &all[108]
+var ApprovalAction_action = &all[109]
 
-var ApprovalActionType = &handles[110]
-var ApprovalActionType_APPROVED = &handles[111]
-var ApprovalActionType_REJECTED = &handles[112]
+var ApprovalActionType = &all[110]
+var ApprovalActionType_APPROVED = &all[111]
+var ApprovalActionType_REJECTED = &all[112]
 
-var _ApprovalArgumentPins = &handles[113]
-var _ApprovalArgumentPins_key = &handles[114]
-var _ApprovalArgumentPins_value = &handles[115]
+var _ApprovalArgumentPins = &all[113]
+var _ApprovalArgumentPins_key = &all[114]
+var _ApprovalArgumentPins_value = &all[115]
 
-var _ApprovalId = &handles[116]
+var _ApprovalId = &all[116]
 
-var ApprovalPattern = &handles[117]
-var ApprovalPattern_tool = &handles[118]
-var ApprovalPattern_argumentPins = &handles[119]
+var ApprovalPattern = &all[117]
+var ApprovalPattern_tool = &all[118]
+var ApprovalPattern_argumentPins = &all[119]
 
-var _ApprovalPinKey = &handles[120]
+var _ApprovalPinKey = &all[120]
 
-var _ApprovalPinValue = &handles[121]
+var _ApprovalPinValue = &all[121]
 
-var _ApprovalReason = &handles[122]
+var _ApprovalReason = &all[122]
 
-var ApprovalStatus = &handles[123]
-var ApprovalStatus_PENDING = &handles[124]
-var ApprovalStatus_APPROVED = &handles[125]
-var ApprovalStatus_REJECTED = &handles[126]
-var ApprovalStatus_REVOKED = &handles[127]
-var ApprovalStatus_REDEEMED = &handles[128]
+var ApprovalStatus = &all[123]
+var ApprovalStatus_PENDING = &all[124]
+var ApprovalStatus_APPROVED = &all[125]
+var ApprovalStatus_REJECTED = &all[126]
+var ApprovalStatus_REVOKED = &all[127]
+var ApprovalStatus_REDEEMED = &all[128]
 
-var Asset = &handles[129]
-var Asset_assetId = &handles[130]
-var Asset_assetType = &handles[131]
-var Asset_metadata = &handles[132]
-var Asset_version = &handles[133]
-var Asset_createdAt = &handles[134]
-var Asset_updatedAt = &handles[135]
+var Asset = &all[129]
+var Asset_assetId = &all[130]
+var Asset_assetType = &all[131]
+var Asset_metadata = &all[132]
+var Asset_version = &all[133]
+var Asset_createdAt = &all[134]
+var Asset_updatedAt = &all[135]
 
-var AssetContent = &handles[136]
-var AssetContent_file = &handles[137]
-var AssetContent_zip = &handles[138]
-var AssetContent_sourceUrl = &handles[139]
+var AssetContent = &all[136]
+var AssetContent_file = &all[137]
+var AssetContent_zip = &all[138]
+var AssetContent_sourceUrl = &all[139]
 
-var _AssetContentUrl = &handles[140]
+var _AssetContentUrl = &all[140]
 
-var AssetFile = &handles[141]
-var AssetFile_path = &handles[142]
-var AssetFile_content = &handles[143]
-var AssetFile_metadata = &handles[144]
-var AssetFile_version = &handles[145]
-var AssetFile_createdAt = &handles[146]
-var AssetFile_updatedAt = &handles[147]
+var AssetFile = &all[141]
+var AssetFile_path = &all[142]
+var AssetFile_content = &all[143]
+var AssetFile_metadata = &all[144]
+var AssetFile_version = &all[145]
+var AssetFile_createdAt = &all[146]
+var AssetFile_updatedAt = &all[147]
 
-var AssetFileBody = &handles[148]
-var AssetFileBody_bytes = &handles[149]
-var AssetFileBody_text = &handles[150]
+var AssetFileBody = &all[148]
+var AssetFileBody_bytes = &all[149]
+var AssetFileBody_text = &all[150]
 
-var _AssetFileBytes = &handles[151]
+var _AssetFileBytes = &all[151]
 
-var AssetFileContent = &handles[152]
-var AssetFileContent_path = &handles[153]
-var AssetFileContent_body = &handles[154]
-var AssetFileContent_metadata = &handles[155]
+var AssetFileContent = &all[152]
+var AssetFileContent_path = &all[153]
+var AssetFileContent_body = &all[154]
+var AssetFileContent_metadata = &all[155]
 
-var _AssetFilePath = &handles[156]
+var _AssetFilePath = &all[156]
 
-var AssetFileSummary = &handles[157]
-var AssetFileSummary_path = &handles[158]
-var AssetFileSummary_metadata = &handles[159]
-var AssetFileSummary_version = &handles[160]
-var AssetFileSummary_createdAt = &handles[161]
-var AssetFileSummary_updatedAt = &handles[162]
+var AssetFileSummary = &all[157]
+var AssetFileSummary_path = &all[158]
+var AssetFileSummary_metadata = &all[159]
+var AssetFileSummary_version = &all[160]
+var AssetFileSummary_createdAt = &all[161]
+var AssetFileSummary_updatedAt = &all[162]
 
-var _AssetFileSummaryList = &handles[163]
-var _AssetFileSummaryList_member = &handles[164]
+var _AssetFileSummaryList = &all[163]
+var _AssetFileSummaryList_member = &all[164]
 
-var _AssetFileText = &handles[165]
+var _AssetFileText = &all[165]
 
-var _AssetIdList = &handles[166]
-var _AssetIdList_member = &handles[167]
+var _AssetIdList = &all[166]
+var _AssetIdList_member = &all[167]
 
-var _AssetList = &handles[168]
-var _AssetList_member = &handles[169]
+var _AssetList = &all[168]
+var _AssetList_member = &all[169]
 
-var AssetSourceUrlContent = &handles[170]
-var AssetSourceUrlContent_url = &handles[171]
+var AssetSourceUrlContent = &all[170]
+var AssetSourceUrlContent_url = &all[171]
 
-var _AssetType = &handles[172]
+var _AssetType = &all[172]
 
-var _AssetTypeList = &handles[173]
-var _AssetTypeList_member = &handles[174]
+var _AssetTypeList = &all[173]
+var _AssetTypeList_member = &all[174]
 
-var AssetTypeSummary = &handles[175]
-var AssetTypeSummary_assetType = &handles[176]
-var AssetTypeSummary_description = &handles[177]
+var AssetTypeSummary = &all[175]
+var AssetTypeSummary_assetType = &all[176]
+var AssetTypeSummary_description = &all[177]
 
-var AssetVersionMetadata = &handles[178]
-var AssetVersionMetadata_version = &handles[179]
-var AssetVersionMetadata_createdAt = &handles[180]
-var AssetVersionMetadata_updatedAt = &handles[181]
+var AssetVersionMetadata = &all[178]
+var AssetVersionMetadata_version = &all[179]
+var AssetVersionMetadata_createdAt = &all[180]
+var AssetVersionMetadata_updatedAt = &all[181]
 
-var _AssetVersionMetadataList = &handles[182]
-var _AssetVersionMetadataList_member = &handles[183]
+var _AssetVersionMetadataList = &all[182]
+var _AssetVersionMetadataList_member = &all[183]
 
-var _AssetZipBytes = &handles[184]
+var _AssetZipBytes = &all[184]
 
-var AssetZipContent = &handles[185]
-var AssetZipContent_zipFile = &handles[186]
+var AssetZipContent = &all[185]
+var AssetZipContent_zipFile = &all[186]
 
-var _AssistantMessage = &handles[187]
-var _AssistantMessage_member = &handles[188]
+var _AssistantMessage = &all[187]
+var _AssistantMessage_member = &all[188]
 
-var AssistantMessageBlock = &handles[189]
-var AssistantMessageBlock_text = &handles[190]
-var AssistantMessageBlock_toolUse = &handles[191]
+var AssistantMessageBlock = &all[189]
+var AssistantMessageBlock_text = &all[190]
+var AssistantMessageBlock_toolUse = &all[191]
 
-var Association = &handles[192]
-var Association_agentSpaceId = &handles[193]
-var Association_createdAt = &handles[194]
-var Association_updatedAt = &handles[195]
-var Association_status = &handles[196]
-var Association_associationId = &handles[197]
-var Association_serviceId = &handles[198]
-var Association_configuration = &handles[199]
-var Association_capabilities = &handles[200]
+var Association = &all[192]
+var Association_agentSpaceId = &all[193]
+var Association_createdAt = &all[194]
+var Association_updatedAt = &all[195]
+var Association_status = &all[196]
+var Association_associationId = &all[197]
+var Association_serviceId = &all[198]
+var Association_configuration = &all[199]
+var Association_capabilities = &all[200]
 
-var _AssociationCapabilities = &handles[201]
-var _AssociationCapabilities_key = &handles[202]
-var _AssociationCapabilities_value = &handles[203]
+var _AssociationCapabilities = &all[201]
+var _AssociationCapabilities_key = &all[202]
+var _AssociationCapabilities_value = &all[203]
 
-var _AssociationId = &handles[204]
+var _AssociationId = &all[204]
 
-var _AssociationsList = &handles[205]
-var _AssociationsList_member = &handles[206]
+var _AssociationsList = &all[205]
+var _AssociationsList_member = &all[206]
 
-var AuthFlow = &handles[207]
-var AuthFlow_IAM = &handles[208]
-var AuthFlow_IDC = &handles[209]
-var AuthFlow_IDP = &handles[210]
+var AuthFlow = &all[207]
+var AuthFlow_IAM = &all[208]
+var AuthFlow_IDC = &all[209]
+var AuthFlow_IDP = &all[210]
 
-var AWSConfiguration = &handles[211]
-var AWSConfiguration_assumableRoleArn = &handles[212]
-var AWSConfiguration_accountId = &handles[213]
-var AWSConfiguration_accountType = &handles[214]
-var AWSConfiguration_agentElevatedRoleArn = &handles[215]
-var AWSConfiguration_agentElevatedRoleArnStatus = &handles[216]
+var AWSConfiguration = &all[211]
+var AWSConfiguration_assumableRoleArn = &all[212]
+var AWSConfiguration_accountId = &all[213]
+var AWSConfiguration_accountType = &all[214]
+var AWSConfiguration_agentElevatedRoleArn = &all[215]
+var AWSConfiguration_agentElevatedRoleArnStatus = &all[216]
 
-var AzureConfiguration = &handles[217]
-var AzureConfiguration_subscriptionId = &handles[218]
+var AzureConfiguration = &all[217]
+var AzureConfiguration_subscriptionId = &all[218]
 
-var AzureDevOpsConfiguration = &handles[219]
-var AzureDevOpsConfiguration_organizationName = &handles[220]
-var AzureDevOpsConfiguration_projectId = &handles[221]
-var AzureDevOpsConfiguration_projectName = &handles[222]
+var AzureDevOpsConfiguration = &all[219]
+var AzureDevOpsConfiguration_organizationName = &all[220]
+var AzureDevOpsConfiguration_projectId = &all[221]
+var AzureDevOpsConfiguration_projectName = &all[222]
 
-var _BacklogTaskDescription = &handles[223]
+var _BacklogTaskDescription = &all[223]
 
-var _BacklogTaskTitle = &handles[224]
+var _BacklogTaskTitle = &all[224]
 
-var _BackLogTimestamp = &handles[225]
+var _BackLogTimestamp = &all[225]
 
-var _ButtonText = &handles[226]
+var _ButtonText = &all[226]
 
-var CapabilityConfiguration = &handles[227]
-var CapabilityConfiguration_enabled = &handles[228]
-var CapabilityConfiguration_triggerFilterGroups = &handles[229]
+var CapabilityConfiguration = &all[227]
+var CapabilityConfiguration_enabled = &all[228]
+var CapabilityConfiguration_triggerFilterGroups = &all[229]
 
-var CapabilityType = &handles[230]
-var CapabilityType_RELEASE_READINESS_REVIEW = &handles[231]
-var CapabilityType_RELEASE_READINESS_REVIEW_AUTOMATED_TESTING = &handles[232]
+var CapabilityType = &all[230]
+var CapabilityType_RELEASE_READINESS_REVIEW = &all[231]
+var CapabilityType_RELEASE_READINESS_REVIEW_AUTOMATED_TESTING = &all[232]
 
-var _CertificateString = &handles[233]
+var _CertificateString = &all[233]
 
-var ChatExecution = &handles[234]
-var ChatExecution_executionId = &handles[235]
-var ChatExecution_createdAt = &handles[236]
-var ChatExecution_updatedAt = &handles[237]
-var ChatExecution_summary = &handles[238]
+var ChatExecution = &all[234]
+var ChatExecution_executionId = &all[235]
+var ChatExecution_createdAt = &all[236]
+var ChatExecution_updatedAt = &all[237]
+var ChatExecution_summary = &all[238]
 
-var _ChatExecutionId = &handles[239]
+var _ChatExecutionId = &all[239]
 
-var _ChatExecutionList = &handles[240]
-var _ChatExecutionList_member = &handles[241]
+var _ChatExecutionList = &all[240]
+var _ChatExecutionList_member = &all[241]
 
-var _ClientId = &handles[242]
+var _ClientId = &all[242]
 
-var _ClientSecret = &handles[243]
+var _ClientSecret = &all[243]
 
-var ConflictException = &handles[244]
-var ConflictException_message = &handles[245]
+var ConflictException = &all[244]
+var ConflictException_message = &all[245]
 
-var ContentSizeExceededException = &handles[246]
-var ContentSizeExceededException_message = &handles[247]
+var ContentSizeExceededException = &all[246]
+var ContentSizeExceededException_message = &all[247]
 
-var CronSchedule = &handles[248]
-var CronSchedule_expression = &handles[249]
+var CronSchedule = &all[248]
+var CronSchedule_expression = &all[249]
 
-var _CustomHeaderName = &handles[250]
+var _CustomHeaderName = &all[250]
 
-var _CustomHeaderNames = &handles[251]
-var _CustomHeaderNames_member = &handles[252]
+var _CustomHeaderNames = &all[251]
+var _CustomHeaderNames_member = &all[252]
 
-var _CustomHeaders = &handles[253]
-var _CustomHeaders_key = &handles[254]
-var _CustomHeaders_value = &handles[255]
+var _CustomHeaders = &all[253]
+var _CustomHeaders_key = &all[254]
+var _CustomHeaders_value = &all[255]
 
-var _CustomHeaderValue = &handles[256]
+var _CustomHeaderValue = &all[256]
 
-var DailyRecurrence = &handles[257]
+var DailyRecurrence = &all[257]
 
-var DatadogAuthorizationConfig = &handles[258]
-var DatadogAuthorizationConfig_authorizationDiscovery = &handles[259]
+var DatadogAuthorizationConfig = &all[258]
+var DatadogAuthorizationConfig_authorizationDiscovery = &all[259]
 
-var DatadogServiceDetails = &handles[260]
-var DatadogServiceDetails_name = &handles[261]
-var DatadogServiceDetails_endpoint = &handles[262]
-var DatadogServiceDetails_description = &handles[263]
-var DatadogServiceDetails_authorizationConfig = &handles[264]
+var DatadogServiceDetails = &all[260]
+var DatadogServiceDetails_name = &all[261]
+var DatadogServiceDetails_endpoint = &all[262]
+var DatadogServiceDetails_description = &all[263]
+var DatadogServiceDetails_authorizationConfig = &all[264]
 
-var _DateTime = &handles[265]
+var _DateTime = &all[265]
 
-var DayOfWeek = &handles[266]
-var DayOfWeek_MONDAY = &handles[267]
-var DayOfWeek_TUESDAY = &handles[268]
-var DayOfWeek_WEDNESDAY = &handles[269]
-var DayOfWeek_THURSDAY = &handles[270]
-var DayOfWeek_FRIDAY = &handles[271]
-var DayOfWeek_SATURDAY = &handles[272]
-var DayOfWeek_SUNDAY = &handles[273]
+var DayOfWeek = &all[266]
+var DayOfWeek_MONDAY = &all[267]
+var DayOfWeek_TUESDAY = &all[268]
+var DayOfWeek_WEDNESDAY = &all[269]
+var DayOfWeek_THURSDAY = &all[270]
+var DayOfWeek_FRIDAY = &all[271]
+var DayOfWeek_SATURDAY = &all[272]
+var DayOfWeek_SUNDAY = &all[273]
 
-var _Description = &handles[274]
+var _Description = &all[274]
 
-var _DisplayName = &handles[275]
+var _DisplayName = &all[275]
 
-var _DocumentList = &handles[276]
-var _DocumentList_member = &handles[277]
+var _DocumentList = &all[276]
+var _DocumentList_member = &all[277]
 
-var DynatraceConfiguration = &handles[278]
-var DynatraceConfiguration_envId = &handles[279]
-var DynatraceConfiguration_resources = &handles[280]
+var DynatraceConfiguration = &all[278]
+var DynatraceConfiguration_envId = &all[279]
+var DynatraceConfiguration_resources = &all[280]
 
-var DynatraceOAuthClientCredentialsConfig = &handles[281]
-var DynatraceOAuthClientCredentialsConfig_clientName = &handles[282]
-var DynatraceOAuthClientCredentialsConfig_clientId = &handles[283]
-var DynatraceOAuthClientCredentialsConfig_exchangeParameters = &handles[284]
-var DynatraceOAuthClientCredentialsConfig_clientSecret = &handles[285]
+var DynatraceOAuthClientCredentialsConfig = &all[281]
+var DynatraceOAuthClientCredentialsConfig_clientName = &all[282]
+var DynatraceOAuthClientCredentialsConfig_clientId = &all[283]
+var DynatraceOAuthClientCredentialsConfig_exchangeParameters = &all[284]
+var DynatraceOAuthClientCredentialsConfig_clientSecret = &all[285]
 
-var _DynatraceResourceList = &handles[286]
-var _DynatraceResourceList_member = &handles[287]
+var _DynatraceResourceList = &all[286]
+var _DynatraceResourceList_member = &all[287]
 
-var DynatraceServiceAuthorizationConfig = &handles[288]
-var DynatraceServiceAuthorizationConfig_oAuthClientCredentials = &handles[289]
+var DynatraceServiceAuthorizationConfig = &all[288]
+var DynatraceServiceAuthorizationConfig_oAuthClientCredentials = &all[289]
 
-var DynatraceServiceDetails = &handles[290]
-var DynatraceServiceDetails_accountUrn = &handles[291]
-var DynatraceServiceDetails_authorizationConfig = &handles[292]
+var DynatraceServiceDetails = &all[290]
+var DynatraceServiceDetails_accountUrn = &all[291]
+var DynatraceServiceDetails_authorizationConfig = &all[292]
 
-var _EmailAddress = &handles[293]
+var _EmailAddress = &all[293]
 
-var EventChannelConfiguration = &handles[294]
+var EventChannelConfiguration = &all[294]
 
-var EventChannelDetails = &handles[295]
-var EventChannelDetails_type = &handles[296]
+var EventChannelDetails = &all[295]
+var EventChannelDetails_type = &all[296]
 
-var EventChannelType = &handles[297]
-var EventChannelType_WEBHOOK = &handles[298]
+var EventChannelType = &all[297]
+var EventChannelType_WEBHOOK = &all[298]
 
-var _ExchangeParameters = &handles[299]
-var _ExchangeParameters_key = &handles[300]
-var _ExchangeParameters_value = &handles[301]
+var _ExchangeParameters = &all[299]
+var _ExchangeParameters_key = &all[300]
+var _ExchangeParameters_value = &all[301]
 
-var _ExchangeParameterValue = &handles[302]
+var _ExchangeParameterValue = &all[302]
 
-var Execution = &handles[303]
-var Execution_agentSpaceId = &handles[304]
-var Execution_executionId = &handles[305]
-var Execution_parentExecutionId = &handles[306]
-var Execution_agentSubTask = &handles[307]
-var Execution_createdAt = &handles[308]
-var Execution_updatedAt = &handles[309]
-var Execution_executionStatus = &handles[310]
-var Execution_agentType = &handles[311]
-var Execution_uid = &handles[312]
+var Execution = &all[303]
+var Execution_agentSpaceId = &all[304]
+var Execution_executionId = &all[305]
+var Execution_parentExecutionId = &all[306]
+var Execution_agentSubTask = &all[307]
+var Execution_createdAt = &all[308]
+var Execution_updatedAt = &all[309]
+var Execution_executionStatus = &all[310]
+var Execution_agentType = &all[311]
+var Execution_uid = &all[312]
 
-var _ExecutionList = &handles[313]
-var _ExecutionList_member = &handles[314]
+var _ExecutionList = &all[313]
+var _ExecutionList_member = &all[314]
 
-var ExecutionStatus = &handles[315]
-var ExecutionStatus_FAILED = &handles[316]
-var ExecutionStatus_RUNNING = &handles[317]
-var ExecutionStatus_STOPPED = &handles[318]
-var ExecutionStatus_CANCELED = &handles[319]
-var ExecutionStatus_TIMED_OUT = &handles[320]
-var ExecutionStatus_WAITING = &handles[321]
+var ExecutionStatus = &all[315]
+var ExecutionStatus_FAILED = &all[316]
+var ExecutionStatus_RUNNING = &all[317]
+var ExecutionStatus_STOPPED = &all[318]
+var ExecutionStatus_CANCELED = &all[319]
+var ExecutionStatus_TIMED_OUT = &all[320]
+var ExecutionStatus_WAITING = &all[321]
 
-var _FailureMessage = &handles[322]
+var _FailureMessage = &all[322]
 
-var GenericWebhook = &handles[323]
-var GenericWebhook_webhookUrl = &handles[324]
-var GenericWebhook_webhookId = &handles[325]
-var GenericWebhook_webhookType = &handles[326]
-var GenericWebhook_webhookSecret = &handles[327]
-var GenericWebhook_apiKey = &handles[328]
+var GenericWebhook = &all[323]
+var GenericWebhook_webhookUrl = &all[324]
+var GenericWebhook_webhookId = &all[325]
+var GenericWebhook_webhookType = &all[326]
+var GenericWebhook_webhookSecret = &all[327]
+var GenericWebhook_apiKey = &all[328]
 
-var GitHubConfiguration = &handles[329]
-var GitHubConfiguration_repoName = &handles[330]
-var GitHubConfiguration_repoId = &handles[331]
-var GitHubConfiguration_owner = &handles[332]
-var GitHubConfiguration_ownerType = &handles[333]
-var GitHubConfiguration_instanceIdentifier = &handles[334]
-var GitHubConfiguration_runtimeRoleArn = &handles[335]
-var GitHubConfiguration_releaseManagementAssociationId = &handles[336]
+var GitHubConfiguration = &all[329]
+var GitHubConfiguration_repoName = &all[330]
+var GitHubConfiguration_repoId = &all[331]
+var GitHubConfiguration_owner = &all[332]
+var GitHubConfiguration_ownerType = &all[333]
+var GitHubConfiguration_instanceIdentifier = &all[334]
+var GitHubConfiguration_runtimeRoleArn = &all[335]
+var GitHubConfiguration_releaseManagementAssociationId = &all[336]
 
-var GithubRepoOwnerType = &handles[337]
-var GithubRepoOwnerType_ORGANIZATION = &handles[338]
-var GithubRepoOwnerType_USER = &handles[339]
+var GithubRepoOwnerType = &all[337]
+var GithubRepoOwnerType_ORGANIZATION = &all[338]
+var GithubRepoOwnerType_USER = &all[339]
 
-var GitLabConfiguration = &handles[340]
-var GitLabConfiguration_projectId = &handles[341]
-var GitLabConfiguration_projectPath = &handles[342]
-var GitLabConfiguration_instanceIdentifier = &handles[343]
-var GitLabConfiguration_runtimeRoleArn = &handles[344]
-var GitLabConfiguration_releaseManagementAssociationId = &handles[345]
+var GitLabConfiguration = &all[340]
+var GitLabConfiguration_projectId = &all[341]
+var GitLabConfiguration_projectPath = &all[342]
+var GitLabConfiguration_instanceIdentifier = &all[343]
+var GitLabConfiguration_runtimeRoleArn = &all[344]
+var GitLabConfiguration_releaseManagementAssociationId = &all[345]
 
-var GitLabDetails = &handles[346]
-var GitLabDetails_targetUrl = &handles[347]
-var GitLabDetails_tokenType = &handles[348]
-var GitLabDetails_tokenValue = &handles[349]
-var GitLabDetails_groupId = &handles[350]
+var GitLabDetails = &all[346]
+var GitLabDetails_targetUrl = &all[347]
+var GitLabDetails_tokenType = &all[348]
+var GitLabDetails_tokenValue = &all[349]
+var GitLabDetails_groupId = &all[350]
 
-var GitLabTokenType = &handles[351]
-var GitLabTokenType_PERSONAL = &handles[352]
-var GitLabTokenType_GROUP = &handles[353]
+var GitLabTokenType = &all[351]
+var GitLabTokenType_PERSONAL = &all[352]
+var GitLabTokenType_GROUP = &all[353]
 
-var _GitLabTokenValue = &handles[354]
+var _GitLabTokenValue = &all[354]
 
-var Goal = &handles[355]
-var Goal_agentSpaceArn = &handles[356]
-var Goal_goalId = &handles[357]
-var Goal_title = &handles[358]
-var Goal_content = &handles[359]
-var Goal_status = &handles[360]
-var Goal_goalType = &handles[361]
-var Goal_createdAt = &handles[362]
-var Goal_updatedAt = &handles[363]
-var Goal_lastEvaluatedAt = &handles[364]
-var Goal_lastTaskId = &handles[365]
-var Goal_lastSuccessfulTaskId = &handles[366]
-var Goal_version = &handles[367]
-var Goal_evaluationSchedule = &handles[368]
+var Goal = &all[355]
+var Goal_agentSpaceArn = &all[356]
+var Goal_goalId = &all[357]
+var Goal_title = &all[358]
+var Goal_content = &all[359]
+var Goal_status = &all[360]
+var Goal_goalType = &all[361]
+var Goal_createdAt = &all[362]
+var Goal_updatedAt = &all[363]
+var Goal_lastEvaluatedAt = &all[364]
+var Goal_lastTaskId = &all[365]
+var Goal_lastSuccessfulTaskId = &all[366]
+var Goal_version = &all[367]
+var Goal_evaluationSchedule = &all[368]
 
-var GoalContent = &handles[369]
-var GoalContent_description = &handles[370]
-var GoalContent_objectives = &handles[371]
+var GoalContent = &all[369]
+var GoalContent_description = &all[370]
+var GoalContent_objectives = &all[371]
 
-var _GoalList = &handles[372]
-var _GoalList_member = &handles[373]
+var _GoalList = &all[372]
+var _GoalList_member = &all[373]
 
-var GoalSchedule = &handles[374]
-var GoalSchedule_state = &handles[375]
-var GoalSchedule_expression = &handles[376]
+var GoalSchedule = &all[374]
+var GoalSchedule_state = &all[375]
+var GoalSchedule_expression = &all[376]
 
-var GoalScheduleInput = &handles[377]
-var GoalScheduleInput_state = &handles[378]
+var GoalScheduleInput = &all[377]
+var GoalScheduleInput_state = &all[378]
 
-var GoalStatus = &handles[379]
-var GoalStatus_ACTIVE = &handles[380]
-var GoalStatus_PAUSED = &handles[381]
-var GoalStatus_COMPLETE = &handles[382]
+var GoalStatus = &all[379]
+var GoalStatus_ACTIVE = &all[380]
+var GoalStatus_PAUSED = &all[381]
+var GoalStatus_COMPLETE = &all[382]
 
-var GoalType = &handles[383]
-var GoalType_CUSTOMER_DEFINED = &handles[384]
-var GoalType_ONCALL_REPORT = &handles[385]
+var GoalType = &all[383]
+var GoalType_CUSTOMER_DEFINED = &all[384]
+var GoalType_ONCALL_REPORT = &all[385]
 
-var GrafanaServiceDetails = &handles[386]
-var GrafanaServiceDetails_name = &handles[387]
-var GrafanaServiceDetails_endpoint = &handles[388]
-var GrafanaServiceDetails_description = &handles[389]
-var GrafanaServiceDetails_authorizationConfig = &handles[390]
+var GrafanaServiceDetails = &all[386]
+var GrafanaServiceDetails_name = &all[387]
+var GrafanaServiceDetails_endpoint = &all[388]
+var GrafanaServiceDetails_description = &all[389]
+var GrafanaServiceDetails_authorizationConfig = &all[390]
 
-var _Guid = &handles[391]
+var _Guid = &all[391]
 
-var IamAuthConfiguration = &handles[392]
-var IamAuthConfiguration_operatorAppRoleArn = &handles[393]
-var IamAuthConfiguration_createdAt = &handles[394]
-var IamAuthConfiguration_updatedAt = &handles[395]
+var IamAuthConfiguration = &all[392]
+var IamAuthConfiguration_operatorAppRoleArn = &all[393]
+var IamAuthConfiguration_createdAt = &all[394]
+var IamAuthConfiguration_updatedAt = &all[395]
 
-var IdcAuthConfiguration = &handles[396]
-var IdcAuthConfiguration_operatorAppRoleArn = &handles[397]
-var IdcAuthConfiguration_idcInstanceArn = &handles[398]
-var IdcAuthConfiguration_idcApplicationArn = &handles[399]
-var IdcAuthConfiguration_createdAt = &handles[400]
-var IdcAuthConfiguration_updatedAt = &handles[401]
+var IdcAuthConfiguration = &all[396]
+var IdcAuthConfiguration_operatorAppRoleArn = &all[397]
+var IdcAuthConfiguration_idcInstanceArn = &all[398]
+var IdcAuthConfiguration_idcApplicationArn = &all[399]
+var IdcAuthConfiguration_createdAt = &all[400]
+var IdcAuthConfiguration_updatedAt = &all[401]
 
-var IdentityCenterServiceException = &handles[402]
-var IdentityCenterServiceException_message = &handles[403]
-var IdentityCenterServiceException_underlyingErrorCode = &handles[404]
+var IdentityCenterServiceException = &all[402]
+var IdentityCenterServiceException_message = &all[403]
+var IdentityCenterServiceException_underlyingErrorCode = &all[404]
 
-var IdpAuthConfiguration = &handles[405]
-var IdpAuthConfiguration_issuerUrl = &handles[406]
-var IdpAuthConfiguration_clientId = &handles[407]
-var IdpAuthConfiguration_operatorAppRoleArn = &handles[408]
-var IdpAuthConfiguration_provider = &handles[409]
-var IdpAuthConfiguration_createdAt = &handles[410]
-var IdpAuthConfiguration_updatedAt = &handles[411]
+var IdpAuthConfiguration = &all[405]
+var IdpAuthConfiguration_issuerUrl = &all[406]
+var IdpAuthConfiguration_clientId = &all[407]
+var IdpAuthConfiguration_operatorAppRoleArn = &all[408]
+var IdpAuthConfiguration_provider = &all[409]
+var IdpAuthConfiguration_createdAt = &all[410]
+var IdpAuthConfiguration_updatedAt = &all[411]
 
-var _IdpClientId = &handles[412]
+var _IdpClientId = &all[412]
 
-var _IdpClientSecret = &handles[413]
+var _IdpClientSecret = &all[413]
 
-var IncludedData = &handles[414]
-var IncludedData_METADATA_ONLY = &handles[415]
-var IncludedData_ALL_DATA = &handles[416]
+var IncludedData = &all[414]
+var IncludedData_METADATA_ONLY = &all[415]
+var IncludedData_ALL_DATA = &all[416]
 
-var InternalServerException = &handles[417]
-var InternalServerException_message = &handles[418]
+var InternalServerException = &all[417]
+var InternalServerException_message = &all[418]
 
-var _InterruptId = &handles[419]
+var _InterruptId = &all[419]
 
-var InvalidParameterException = &handles[420]
-var InvalidParameterException_message = &handles[421]
+var InvalidParameterException = &all[420]
+var InvalidParameterException_message = &all[421]
 
-var _IpAddressOrDnsName = &handles[422]
+var _IpAddressOrDnsName = &all[422]
 
-var IpAddressType = &handles[423]
-var IpAddressType_IPV4 = &handles[424]
-var IpAddressType_IPV6 = &handles[425]
-var IpAddressType_DUAL_STACK = &handles[426]
+var IpAddressType = &all[423]
+var IpAddressType_IPV4 = &all[424]
+var IpAddressType_IPV6 = &all[425]
+var IpAddressType_DUAL_STACK = &all[426]
 
-var JournalRecord = &handles[427]
-var JournalRecord_agentSpaceId = &handles[428]
-var JournalRecord_executionId = &handles[429]
-var JournalRecord_recordId = &handles[430]
-var JournalRecord_content = &handles[431]
-var JournalRecord_createdAt = &handles[432]
-var JournalRecord_recordType = &handles[433]
-var JournalRecord_userReference = &handles[434]
+var JournalRecord = &all[427]
+var JournalRecord_agentSpaceId = &all[428]
+var JournalRecord_executionId = &all[429]
+var JournalRecord_recordId = &all[430]
+var JournalRecord_content = &all[431]
+var JournalRecord_createdAt = &all[432]
+var JournalRecord_recordType = &all[433]
+var JournalRecord_userReference = &all[434]
 
-var _JournalRecordList = &handles[435]
-var _JournalRecordList_member = &handles[436]
+var _JournalRecordList = &all[435]
+var _JournalRecordList_member = &all[436]
 
-var _JournalTimestamp = &handles[437]
+var _JournalTimestamp = &all[437]
 
-var _KmsKeyArn = &handles[438]
+var _KmsKeyArn = &all[438]
 
-var _ListOfSecurityGroupIds = &handles[439]
-var _ListOfSecurityGroupIds_member = &handles[440]
+var _ListOfSecurityGroupIds = &all[439]
+var _ListOfSecurityGroupIds_member = &all[440]
 
-var _ListOfSubnetIds = &handles[441]
-var _ListOfSubnetIds_member = &handles[442]
+var _ListOfSubnetIds = &all[441]
+var _ListOfSubnetIds_member = &all[442]
 
-var _Locale = &handles[443]
+var _Locale = &all[443]
 
-var _MaxIpv4AddressesPerEni = &handles[444]
+var _MaxIpv4AddressesPerEni = &all[444]
 
-var MCPServerAPIKeyConfig = &handles[445]
-var MCPServerAPIKeyConfig_apiKeyName = &handles[446]
-var MCPServerAPIKeyConfig_apiKeyValue = &handles[447]
-var MCPServerAPIKeyConfig_apiKeyHeader = &handles[448]
+var MCPServerAPIKeyConfig = &all[445]
+var MCPServerAPIKeyConfig_apiKeyName = &all[446]
+var MCPServerAPIKeyConfig_apiKeyValue = &all[447]
+var MCPServerAPIKeyConfig_apiKeyHeader = &all[448]
 
-var MCPServerAuthorizationConfig = &handles[449]
-var MCPServerAuthorizationConfig_oAuthClientCredentials = &handles[450]
-var MCPServerAuthorizationConfig_oAuth3LO = &handles[451]
-var MCPServerAuthorizationConfig_apiKey = &handles[452]
-var MCPServerAuthorizationConfig_bearerToken = &handles[453]
-var MCPServerAuthorizationConfig_customHeaders = &handles[454]
-var MCPServerAuthorizationConfig_authorizationDiscovery = &handles[455]
+var MCPServerAuthorizationConfig = &all[449]
+var MCPServerAuthorizationConfig_oAuthClientCredentials = &all[450]
+var MCPServerAuthorizationConfig_oAuth3LO = &all[451]
+var MCPServerAuthorizationConfig_apiKey = &all[452]
+var MCPServerAuthorizationConfig_bearerToken = &all[453]
+var MCPServerAuthorizationConfig_customHeaders = &all[454]
+var MCPServerAuthorizationConfig_authorizationDiscovery = &all[455]
 
-var MCPServerAuthorizationDiscoveryConfig = &handles[456]
-var MCPServerAuthorizationDiscoveryConfig_returnToEndpoint = &handles[457]
+var MCPServerAuthorizationDiscoveryConfig = &all[456]
+var MCPServerAuthorizationDiscoveryConfig_returnToEndpoint = &all[457]
 
-var MCPServerAuthorizationMethod = &handles[458]
-var MCPServerAuthorizationMethod_OAUTH_CLIENT_CREDENTIALS = &handles[459]
-var MCPServerAuthorizationMethod_OAUTH_3LO = &handles[460]
-var MCPServerAuthorizationMethod_API_KEY = &handles[461]
-var MCPServerAuthorizationMethod_BEARER_TOKEN = &handles[462]
-var MCPServerAuthorizationMethod_CUSTOM_HEADERS = &handles[463]
+var MCPServerAuthorizationMethod = &all[458]
+var MCPServerAuthorizationMethod_OAUTH_CLIENT_CREDENTIALS = &all[459]
+var MCPServerAuthorizationMethod_OAUTH_3LO = &all[460]
+var MCPServerAuthorizationMethod_API_KEY = &all[461]
+var MCPServerAuthorizationMethod_BEARER_TOKEN = &all[462]
+var MCPServerAuthorizationMethod_CUSTOM_HEADERS = &all[463]
 
-var MCPServerBearerTokenConfig = &handles[464]
-var MCPServerBearerTokenConfig_tokenName = &handles[465]
-var MCPServerBearerTokenConfig_tokenValue = &handles[466]
-var MCPServerBearerTokenConfig_authorizationHeader = &handles[467]
+var MCPServerBearerTokenConfig = &all[464]
+var MCPServerBearerTokenConfig_tokenName = &all[465]
+var MCPServerBearerTokenConfig_tokenValue = &all[466]
+var MCPServerBearerTokenConfig_authorizationHeader = &all[467]
 
-var MCPServerConfiguration = &handles[468]
-var MCPServerConfiguration_tools = &handles[469]
-var MCPServerConfiguration_toolDetails = &handles[470]
+var MCPServerConfiguration = &all[468]
+var MCPServerConfiguration_tools = &all[469]
+var MCPServerConfiguration_toolDetails = &all[470]
 
-var MCPServerCustomHeadersConfig = &handles[471]
-var MCPServerCustomHeadersConfig_headers = &handles[472]
+var MCPServerCustomHeadersConfig = &all[471]
+var MCPServerCustomHeadersConfig_headers = &all[472]
 
-var MCPServerDatadogConfiguration = &handles[473]
-var MCPServerDatadogConfiguration_enabledElevatedTools = &handles[474]
+var MCPServerDatadogConfiguration = &all[473]
+var MCPServerDatadogConfiguration_enabledElevatedTools = &all[474]
 
-var MCPServerDetails = &handles[475]
-var MCPServerDetails_name = &handles[476]
-var MCPServerDetails_endpoint = &handles[477]
-var MCPServerDetails_description = &handles[478]
-var MCPServerDetails_authorizationConfig = &handles[479]
+var MCPServerDetails = &all[475]
+var MCPServerDetails_name = &all[476]
+var MCPServerDetails_endpoint = &all[477]
+var MCPServerDetails_description = &all[478]
+var MCPServerDetails_authorizationConfig = &all[479]
 
-var _MCPServerEndpoint = &handles[480]
+var _MCPServerEndpoint = &all[480]
 
-var MCPServerGrafanaConfiguration = &handles[481]
-var MCPServerGrafanaConfiguration_endpoint = &handles[482]
-var MCPServerGrafanaConfiguration_organizationId = &handles[483]
-var MCPServerGrafanaConfiguration_tools = &handles[484]
-var MCPServerGrafanaConfiguration_enabledElevatedTools = &handles[485]
+var MCPServerGrafanaConfiguration = &all[481]
+var MCPServerGrafanaConfiguration_endpoint = &all[482]
+var MCPServerGrafanaConfiguration_organizationId = &all[483]
+var MCPServerGrafanaConfiguration_tools = &all[484]
+var MCPServerGrafanaConfiguration_enabledElevatedTools = &all[485]
 
-var _MCPServerName = &handles[486]
+var _MCPServerName = &all[486]
 
-var MCPServerNewRelicConfiguration = &handles[487]
-var MCPServerNewRelicConfiguration_accountId = &handles[488]
-var MCPServerNewRelicConfiguration_endpoint = &handles[489]
+var MCPServerNewRelicConfiguration = &all[487]
+var MCPServerNewRelicConfiguration_accountId = &all[488]
+var MCPServerNewRelicConfiguration_endpoint = &all[489]
 
-var MCPServerOAuth3LOConfig = &handles[490]
-var MCPServerOAuth3LOConfig_clientName = &handles[491]
-var MCPServerOAuth3LOConfig_clientId = &handles[492]
-var MCPServerOAuth3LOConfig_exchangeParameters = &handles[493]
-var MCPServerOAuth3LOConfig_returnToEndpoint = &handles[494]
-var MCPServerOAuth3LOConfig_authorizationUrl = &handles[495]
-var MCPServerOAuth3LOConfig_exchangeUrl = &handles[496]
-var MCPServerOAuth3LOConfig_clientSecret = &handles[497]
-var MCPServerOAuth3LOConfig_supportCodeChallenge = &handles[498]
-var MCPServerOAuth3LOConfig_scopes = &handles[499]
+var MCPServerOAuth3LOConfig = &all[490]
+var MCPServerOAuth3LOConfig_clientName = &all[491]
+var MCPServerOAuth3LOConfig_clientId = &all[492]
+var MCPServerOAuth3LOConfig_exchangeParameters = &all[493]
+var MCPServerOAuth3LOConfig_returnToEndpoint = &all[494]
+var MCPServerOAuth3LOConfig_authorizationUrl = &all[495]
+var MCPServerOAuth3LOConfig_exchangeUrl = &all[496]
+var MCPServerOAuth3LOConfig_clientSecret = &all[497]
+var MCPServerOAuth3LOConfig_supportCodeChallenge = &all[498]
+var MCPServerOAuth3LOConfig_scopes = &all[499]
 
-var MCPServerOAuthClientCredentialsConfig = &handles[500]
-var MCPServerOAuthClientCredentialsConfig_clientName = &handles[501]
-var MCPServerOAuthClientCredentialsConfig_clientId = &handles[502]
-var MCPServerOAuthClientCredentialsConfig_exchangeParameters = &handles[503]
-var MCPServerOAuthClientCredentialsConfig_clientSecret = &handles[504]
-var MCPServerOAuthClientCredentialsConfig_exchangeUrl = &handles[505]
-var MCPServerOAuthClientCredentialsConfig_scopes = &handles[506]
+var MCPServerOAuthClientCredentialsConfig = &all[500]
+var MCPServerOAuthClientCredentialsConfig_clientName = &all[501]
+var MCPServerOAuthClientCredentialsConfig_clientId = &all[502]
+var MCPServerOAuthClientCredentialsConfig_exchangeParameters = &all[503]
+var MCPServerOAuthClientCredentialsConfig_clientSecret = &all[504]
+var MCPServerOAuthClientCredentialsConfig_exchangeUrl = &all[505]
+var MCPServerOAuthClientCredentialsConfig_scopes = &all[506]
 
-var MCPServerSigV4AuthorizationConfig = &handles[507]
-var MCPServerSigV4AuthorizationConfig_region = &handles[508]
-var MCPServerSigV4AuthorizationConfig_service = &handles[509]
-var MCPServerSigV4AuthorizationConfig_roleArn = &handles[510]
-var MCPServerSigV4AuthorizationConfig_mcpRoleArn = &handles[511]
-var MCPServerSigV4AuthorizationConfig_customHeaders = &handles[512]
+var MCPServerSigV4AuthorizationConfig = &all[507]
+var MCPServerSigV4AuthorizationConfig_region = &all[508]
+var MCPServerSigV4AuthorizationConfig_service = &all[509]
+var MCPServerSigV4AuthorizationConfig_roleArn = &all[510]
+var MCPServerSigV4AuthorizationConfig_mcpRoleArn = &all[511]
+var MCPServerSigV4AuthorizationConfig_customHeaders = &all[512]
 
-var MCPServerSigV4Configuration = &handles[513]
-var MCPServerSigV4Configuration_tools = &handles[514]
-var MCPServerSigV4Configuration_toolDetails = &handles[515]
+var MCPServerSigV4Configuration = &all[513]
+var MCPServerSigV4Configuration_tools = &all[514]
+var MCPServerSigV4Configuration_toolDetails = &all[515]
 
-var MCPServerSigV4ServiceDetails = &handles[516]
-var MCPServerSigV4ServiceDetails_name = &handles[517]
-var MCPServerSigV4ServiceDetails_endpoint = &handles[518]
-var MCPServerSigV4ServiceDetails_description = &handles[519]
-var MCPServerSigV4ServiceDetails_authorizationConfig = &handles[520]
+var MCPServerSigV4ServiceDetails = &all[516]
+var MCPServerSigV4ServiceDetails_name = &all[517]
+var MCPServerSigV4ServiceDetails_endpoint = &all[518]
+var MCPServerSigV4ServiceDetails_description = &all[519]
+var MCPServerSigV4ServiceDetails_authorizationConfig = &all[520]
 
-var MCPServerSplunkConfiguration = &handles[521]
+var MCPServerSplunkConfiguration = &all[521]
 
-var MCPToolDetail = &handles[522]
-var MCPToolDetail_name = &handles[523]
-var MCPToolDetail_toolClassification = &handles[524]
+var MCPToolDetail = &all[522]
+var MCPToolDetail_name = &all[523]
+var MCPToolDetail_toolClassification = &all[524]
 
-var _MCPToolDetailsList = &handles[525]
-var _MCPToolDetailsList_member = &handles[526]
+var _MCPToolDetailsList = &all[525]
+var _MCPToolDetailsList_member = &all[526]
 
-var _MCPToolsList = &handles[527]
-var _MCPToolsList_member = &handles[528]
+var _MCPToolsList = &all[527]
+var _MCPToolsList_member = &all[528]
 
-var Message = &handles[529]
-var Message_userMessage = &handles[530]
-var Message_assistantMessage = &handles[531]
+var Message = &all[529]
+var Message_userMessage = &all[530]
+var Message_assistantMessage = &all[531]
 
-var _MessageContent = &handles[532]
+var _MessageContent = &all[532]
 
-var MonitorAccountType = &handles[533]
-var MonitorAccountType_MONITOR = &handles[534]
+var MonitorAccountType = &all[533]
+var MonitorAccountType_MONITOR = &all[534]
 
-var MonthlyRecurrence = &handles[535]
-var MonthlyRecurrence_dayOfMonth = &handles[536]
+var MonthlyRecurrence = &all[535]
+var MonthlyRecurrence_dayOfMonth = &all[536]
 
-var MSTeamsChannel = &handles[537]
-var MSTeamsChannel_channelName = &handles[538]
-var MSTeamsChannel_channelId = &handles[539]
+var MSTeamsChannel = &all[537]
+var MSTeamsChannel_channelName = &all[538]
+var MSTeamsChannel_channelId = &all[539]
 
-var _MSTeamsChannelId = &handles[540]
+var _MSTeamsChannelId = &all[540]
 
-var MSTeamsConfiguration = &handles[541]
-var MSTeamsConfiguration_teamId = &handles[542]
-var MSTeamsConfiguration_teamName = &handles[543]
-var MSTeamsConfiguration_transmissionTarget = &handles[544]
+var MSTeamsConfiguration = &all[541]
+var MSTeamsConfiguration_teamId = &all[542]
+var MSTeamsConfiguration_teamName = &all[543]
+var MSTeamsConfiguration_transmissionTarget = &all[544]
 
-var MSTeamsTransmissionTarget = &handles[545]
-var MSTeamsTransmissionTarget_opsOncallTarget = &handles[546]
-var MSTeamsTransmissionTarget_opsSRETarget = &handles[547]
+var MSTeamsTransmissionTarget = &all[545]
+var MSTeamsTransmissionTarget_opsOncallTarget = &all[546]
+var MSTeamsTransmissionTarget_opsSRETarget = &all[547]
 
-var NetworkAccessConfiguration = &handles[548]
-var NetworkAccessConfiguration_privateAccess = &handles[549]
+var NetworkAccessConfiguration = &all[548]
+var NetworkAccessConfiguration_privateAccess = &all[549]
 
-var _NewRelicAlertPolicyIds = &handles[550]
-var _NewRelicAlertPolicyIds_member = &handles[551]
+var _NewRelicAlertPolicyIds = &all[550]
+var _NewRelicAlertPolicyIds_member = &all[551]
 
-var _NewRelicApiKey = &handles[552]
+var _NewRelicApiKey = &all[552]
 
-var NewRelicApiKeyConfig = &handles[553]
-var NewRelicApiKeyConfig_apiKey = &handles[554]
-var NewRelicApiKeyConfig_accountId = &handles[555]
-var NewRelicApiKeyConfig_region = &handles[556]
-var NewRelicApiKeyConfig_applicationIds = &handles[557]
-var NewRelicApiKeyConfig_entityGuids = &handles[558]
-var NewRelicApiKeyConfig_alertPolicyIds = &handles[559]
+var NewRelicApiKeyConfig = &all[553]
+var NewRelicApiKeyConfig_apiKey = &all[554]
+var NewRelicApiKeyConfig_accountId = &all[555]
+var NewRelicApiKeyConfig_region = &all[556]
+var NewRelicApiKeyConfig_applicationIds = &all[557]
+var NewRelicApiKeyConfig_entityGuids = &all[558]
+var NewRelicApiKeyConfig_alertPolicyIds = &all[559]
 
-var _NewRelicApplicationIds = &handles[560]
-var _NewRelicApplicationIds_member = &handles[561]
+var _NewRelicApplicationIds = &all[560]
+var _NewRelicApplicationIds_member = &all[561]
 
-var _NewRelicEntityGuids = &handles[562]
-var _NewRelicEntityGuids_member = &handles[563]
+var _NewRelicEntityGuids = &all[562]
+var _NewRelicEntityGuids_member = &all[563]
 
-var NewRelicRegion = &handles[564]
-var NewRelicRegion_US = &handles[565]
-var NewRelicRegion_EU = &handles[566]
-var NewRelicRegion_JP = &handles[567]
+var NewRelicRegion = &all[564]
+var NewRelicRegion_US = &all[565]
+var NewRelicRegion_EU = &all[566]
+var NewRelicRegion_JP = &all[567]
 
-var NewRelicServiceAuthorizationConfig = &handles[568]
-var NewRelicServiceAuthorizationConfig_apiKey = &handles[569]
+var NewRelicServiceAuthorizationConfig = &all[568]
+var NewRelicServiceAuthorizationConfig_apiKey = &all[569]
 
-var NewRelicServiceDetails = &handles[570]
-var NewRelicServiceDetails_authorizationConfig = &handles[571]
+var NewRelicServiceDetails = &all[570]
+var NewRelicServiceDetails_authorizationConfig = &all[571]
 
-var _NextToken = &handles[572]
+var _NextToken = &all[572]
 
-var OAuthAdditionalStepDetails = &handles[573]
-var OAuthAdditionalStepDetails_authorizationUrl = &handles[574]
+var OAuthAdditionalStepDetails = &all[573]
+var OAuthAdditionalStepDetails_authorizationUrl = &all[574]
 
-var _OAuthScope = &handles[575]
+var _OAuthScope = &all[575]
 
-var _OperatorAppUrl = &handles[576]
+var _OperatorAppUrl = &all[576]
 
-var OrderType = &handles[577]
-var OrderType_ASC = &handles[578]
-var OrderType_DESC = &handles[579]
+var OrderType = &all[577]
+var OrderType_ASC = &all[578]
+var OrderType_DESC = &all[579]
 
-var PagerDutyAuthorizationConfig = &handles[580]
-var PagerDutyAuthorizationConfig_oAuthClientCredentials = &handles[581]
+var PagerDutyAuthorizationConfig = &all[580]
+var PagerDutyAuthorizationConfig_oAuthClientCredentials = &all[581]
 
-var PagerDutyConfiguration = &handles[582]
-var PagerDutyConfiguration_services = &handles[583]
-var PagerDutyConfiguration_customerEmail = &handles[584]
+var PagerDutyConfiguration = &all[582]
+var PagerDutyConfiguration_services = &all[583]
+var PagerDutyConfiguration_customerEmail = &all[584]
 
-var PagerDutyDetails = &handles[585]
-var PagerDutyDetails_scopes = &handles[586]
-var PagerDutyDetails_authorizationConfig = &handles[587]
+var PagerDutyDetails = &all[585]
+var PagerDutyDetails_scopes = &all[586]
+var PagerDutyDetails_authorizationConfig = &all[587]
 
-var PagerDutyOAuthClientCredentialsConfig = &handles[588]
-var PagerDutyOAuthClientCredentialsConfig_clientName = &handles[589]
-var PagerDutyOAuthClientCredentialsConfig_clientId = &handles[590]
-var PagerDutyOAuthClientCredentialsConfig_exchangeParameters = &handles[591]
-var PagerDutyOAuthClientCredentialsConfig_clientSecret = &handles[592]
+var PagerDutyOAuthClientCredentialsConfig = &all[588]
+var PagerDutyOAuthClientCredentialsConfig_clientName = &all[589]
+var PagerDutyOAuthClientCredentialsConfig_clientId = &all[590]
+var PagerDutyOAuthClientCredentialsConfig_exchangeParameters = &all[591]
+var PagerDutyOAuthClientCredentialsConfig_clientSecret = &all[592]
 
-var _PagerDutyScopes = &handles[593]
-var _PagerDutyScopes_member = &handles[594]
+var _PagerDutyScopes = &all[593]
+var _PagerDutyScopes_member = &all[594]
 
-var _PagerDutyScopesList = &handles[595]
-var _PagerDutyScopesList_member = &handles[596]
+var _PagerDutyScopesList = &all[595]
+var _PagerDutyScopesList_member = &all[596]
 
-var _PagerDutyServicesList = &handles[597]
-var _PagerDutyServicesList_member = &handles[598]
+var _PagerDutyServicesList = &all[597]
+var _PagerDutyServicesList_member = &all[598]
 
-var PatternFilter = &handles[599]
-var PatternFilter_patterns = &handles[600]
+var PatternFilter = &all[599]
+var PatternFilter_patterns = &all[600]
 
-var PendingMessage = &handles[601]
-var PendingMessage_messageId = &handles[602]
-var PendingMessage_message = &handles[603]
+var PendingMessage = &all[601]
+var PendingMessage_messageId = &all[602]
+var PendingMessage_message = &all[603]
 
-var _PendingMessages = &handles[604]
-var _PendingMessages_member = &handles[605]
+var _PendingMessages = &all[604]
+var _PendingMessages_member = &all[605]
 
-var _PortRange = &handles[606]
-
-var _PortRanges = &handles[607]
-var _PortRanges_member = &handles[608]
-
-var PostRegisterServiceSupportedService = &handles[609]
-var PostRegisterServiceSupportedService_DYNATRACE = &handles[610]
-var PostRegisterServiceSupportedService_SERVICENOW = &handles[611]
-var PostRegisterServiceSupportedService_PAGERDUTY = &handles[612]
-var PostRegisterServiceSupportedService_GITLAB = &handles[613]
-var PostRegisterServiceSupportedService_EVENTCHANNEL = &handles[614]
-var PostRegisterServiceSupportedService_MCP_SERVER_NEWRELIC = &handles[615]
-var PostRegisterServiceSupportedService_MCP_SERVER_GRAFANA = &handles[616]
-var PostRegisterServiceSupportedService_MCP_SERVER_DATADOG = &handles[617]
-var PostRegisterServiceSupportedService_MCP_SERVER = &handles[618]
-var PostRegisterServiceSupportedService_MCP_SERVER_SPLUNK = &handles[619]
-var PostRegisterServiceSupportedService_AZURE_IDENTITY = &handles[620]
-var PostRegisterServiceSupportedService_MCP_SERVER_SIGV4 = &handles[621]
-var PostRegisterServiceSupportedService_REMOTE_AGENT = &handles[622]
-var PostRegisterServiceSupportedService_REMOTE_AGENT_SIGV4 = &handles[623]
-
-var Priority = &handles[624]
-var Priority_CRITICAL = &handles[625]
-var Priority_HIGH = &handles[626]
-var Priority_MEDIUM = &handles[627]
-var Priority_LOW = &handles[628]
-var Priority_MINIMAL = &handles[629]
-
-var _PriorityList = &handles[630]
-var _PriorityList_member = &handles[631]
-
-var PrivateConnectionMode = &handles[632]
-var PrivateConnectionMode_serviceManaged = &handles[633]
-var PrivateConnectionMode_selfManaged = &handles[634]
-
-var _PrivateConnectionName = &handles[635]
-
-var PrivateConnectionStatus = &handles[636]
-var PrivateConnectionStatus_ACTIVE = &handles[637]
-var PrivateConnectionStatus_CREATE_IN_PROGRESS = &handles[638]
-var PrivateConnectionStatus_CREATE_FAILED = &handles[639]
-var PrivateConnectionStatus_DELETE_IN_PROGRESS = &handles[640]
-var PrivateConnectionStatus_DELETE_FAILED = &handles[641]
-
-var PrivateConnectionSummary = &handles[642]
-var PrivateConnectionSummary_name = &handles[643]
-var PrivateConnectionSummary_type = &handles[644]
-var PrivateConnectionSummary_resourceGatewayId = &handles[645]
-var PrivateConnectionSummary_hostAddress = &handles[646]
-var PrivateConnectionSummary_vpcId = &handles[647]
-var PrivateConnectionSummary_resourceConfigurationId = &handles[648]
-var PrivateConnectionSummary_status = &handles[649]
-var PrivateConnectionSummary_certificateExpiryTime = &handles[650]
-var PrivateConnectionSummary_dnsResolution = &handles[651]
-var PrivateConnectionSummary_failureMessage = &handles[652]
-
-var _PrivateConnectionSummaryList = &handles[653]
-var _PrivateConnectionSummaryList_member = &handles[654]
-
-var PrivateConnectionType = &handles[655]
-var PrivateConnectionType_SELF_MANAGED = &handles[656]
-var PrivateConnectionType_SERVICE_MANAGED = &handles[657]
-
-var PrivateNetworkAccess = &handles[658]
-var PrivateNetworkAccess_privateConnectionName = &handles[659]
-var PrivateNetworkAccess_runtimeRoleArn = &handles[660]
-
-var Recommendation = &handles[661]
-var Recommendation_agentSpaceArn = &handles[662]
-var Recommendation_recommendationId = &handles[663]
-var Recommendation_taskId = &handles[664]
-var Recommendation_goalId = &handles[665]
-var Recommendation_title = &handles[666]
-var Recommendation_content = &handles[667]
-var Recommendation_status = &handles[668]
-var Recommendation_priority = &handles[669]
-var Recommendation_goalVersion = &handles[670]
-var Recommendation_additionalContext = &handles[671]
-var Recommendation_rankPosition = &handles[672]
-var Recommendation_rankedAt = &handles[673]
-var Recommendation_createdAt = &handles[674]
-var Recommendation_updatedAt = &handles[675]
-var Recommendation_version = &handles[676]
-
-var RecommendationContent = &handles[677]
-var RecommendationContent_summary = &handles[678]
-var RecommendationContent_spec = &handles[679]
-
-var _RecommendationList = &handles[680]
-var _RecommendationList_member = &handles[681]
-
-var RecommendationPriority = &handles[682]
-var RecommendationPriority_HIGH = &handles[683]
-var RecommendationPriority_MEDIUM = &handles[684]
-var RecommendationPriority_LOW = &handles[685]
-
-var RecommendationStatus = &handles[686]
-var RecommendationStatus_PROPOSED = &handles[687]
-var RecommendationStatus_ACCEPTED = &handles[688]
-var RecommendationStatus_REJECTED = &handles[689]
-var RecommendationStatus_CLOSED = &handles[690]
-var RecommendationStatus_COMPLETED = &handles[691]
-var RecommendationStatus_UPDATE_IN_PROGRESS = &handles[692]
-
-var Recurrence = &handles[693]
-var Recurrence_daily = &handles[694]
-var Recurrence_weekly = &handles[695]
-var Recurrence_monthly = &handles[696]
-
-var ReferenceInput = &handles[697]
-var ReferenceInput_system = &handles[698]
-var ReferenceInput_title = &handles[699]
-var ReferenceInput_referenceId = &handles[700]
-var ReferenceInput_referenceUrl = &handles[701]
-var ReferenceInput_associationId = &handles[702]
-
-var ReferenceOutput = &handles[703]
-var ReferenceOutput_system = &handles[704]
-var ReferenceOutput_title = &handles[705]
-var ReferenceOutput_referenceId = &handles[706]
-var ReferenceOutput_referenceUrl = &handles[707]
-var ReferenceOutput_associationId = &handles[708]
-
-var RegisteredAzureDevOpsServiceDetails = &handles[709]
-var RegisteredAzureDevOpsServiceDetails_organizationName = &handles[710]
-
-var RegisteredAzureIdentityDetails = &handles[711]
-var RegisteredAzureIdentityDetails_tenantId = &handles[712]
-var RegisteredAzureIdentityDetails_clientId = &handles[713]
-var RegisteredAzureIdentityDetails_webIdentityRoleArn = &handles[714]
-var RegisteredAzureIdentityDetails_webIdentityTokenAudiences = &handles[715]
-
-var RegisteredGithubServiceDetails = &handles[716]
-var RegisteredGithubServiceDetails_owner = &handles[717]
-var RegisteredGithubServiceDetails_ownerType = &handles[718]
-var RegisteredGithubServiceDetails_targetUrl = &handles[719]
-
-var RegisteredGitLabServiceDetails = &handles[720]
-var RegisteredGitLabServiceDetails_targetUrl = &handles[721]
-var RegisteredGitLabServiceDetails_tokenType = &handles[722]
-var RegisteredGitLabServiceDetails_groupId = &handles[723]
-
-var RegisteredGrafanaServerDetails = &handles[724]
-var RegisteredGrafanaServerDetails_endpoint = &handles[725]
-var RegisteredGrafanaServerDetails_authorizationMethod = &handles[726]
-
-var RegisteredMCPServerDetails = &handles[727]
-var RegisteredMCPServerDetails_name = &handles[728]
-var RegisteredMCPServerDetails_endpoint = &handles[729]
-var RegisteredMCPServerDetails_authorizationMethod = &handles[730]
-var RegisteredMCPServerDetails_description = &handles[731]
-var RegisteredMCPServerDetails_apiKeyHeader = &handles[732]
-var RegisteredMCPServerDetails_customHeaderNames = &handles[733]
-
-var RegisteredMCPServerSigV4Details = &handles[734]
-var RegisteredMCPServerSigV4Details_name = &handles[735]
-var RegisteredMCPServerSigV4Details_endpoint = &handles[736]
-var RegisteredMCPServerSigV4Details_description = &handles[737]
-var RegisteredMCPServerSigV4Details_region = &handles[738]
-var RegisteredMCPServerSigV4Details_service = &handles[739]
-var RegisteredMCPServerSigV4Details_roleArn = &handles[740]
-var RegisteredMCPServerSigV4Details_mcpRoleArn = &handles[741]
-var RegisteredMCPServerSigV4Details_customHeaders = &handles[742]
-
-var RegisteredNewRelicDetails = &handles[743]
-var RegisteredNewRelicDetails_accountId = &handles[744]
-var RegisteredNewRelicDetails_region = &handles[745]
-var RegisteredNewRelicDetails_description = &handles[746]
-
-var RegisteredPagerDutyDetails = &handles[747]
-var RegisteredPagerDutyDetails_scopes = &handles[748]
-
-var RegisteredRemoteAgentDetails = &handles[749]
-var RegisteredRemoteAgentDetails_name = &handles[750]
-var RegisteredRemoteAgentDetails_endpoint = &handles[751]
-var RegisteredRemoteAgentDetails_description = &handles[752]
-var RegisteredRemoteAgentDetails_authorizationMethod = &handles[753]
-var RegisteredRemoteAgentDetails_apiKeyHeader = &handles[754]
-
-var RegisteredRemoteAgentSigV4Details = &handles[755]
-var RegisteredRemoteAgentSigV4Details_name = &handles[756]
-var RegisteredRemoteAgentSigV4Details_endpoint = &handles[757]
-var RegisteredRemoteAgentSigV4Details_description = &handles[758]
-var RegisteredRemoteAgentSigV4Details_region = &handles[759]
-var RegisteredRemoteAgentSigV4Details_service = &handles[760]
-var RegisteredRemoteAgentSigV4Details_roleArn = &handles[761]
-
-var RegisteredService = &handles[762]
-var RegisteredService_serviceId = &handles[763]
-var RegisteredService_serviceType = &handles[764]
-var RegisteredService_name = &handles[765]
-var RegisteredService_accessibleResources = &handles[766]
-var RegisteredService_additionalServiceDetails = &handles[767]
-var RegisteredService_kmsKeyArn = &handles[768]
-var RegisteredService_privateConnectionName = &handles[769]
-var RegisteredService_createdAt = &handles[770]
-var RegisteredService_updatedAt = &handles[771]
-
-var RegisteredServiceNowDetails = &handles[772]
-var RegisteredServiceNowDetails_instanceUrl = &handles[773]
-
-var _RegisteredServicesList = &handles[774]
-var _RegisteredServicesList_member = &handles[775]
-
-var RegisteredSlackServiceDetails = &handles[776]
-var RegisteredSlackServiceDetails_teamId = &handles[777]
-var RegisteredSlackServiceDetails_teamName = &handles[778]
-
-var ReleaseManagementConfiguration = &handles[779]
-var ReleaseManagementConfiguration_name = &handles[780]
-var ReleaseManagementConfiguration_networkAccess = &handles[781]
-
-var RemoteAgentAPIKeyConfig = &handles[782]
-var RemoteAgentAPIKeyConfig_apiKeyName = &handles[783]
-var RemoteAgentAPIKeyConfig_apiKeyValue = &handles[784]
-var RemoteAgentAPIKeyConfig_apiKeyHeader = &handles[785]
-
-var RemoteAgentAuthorizationConfig = &handles[786]
-var RemoteAgentAuthorizationConfig_apiKey = &handles[787]
-var RemoteAgentAuthorizationConfig_oAuthClientCredentials = &handles[788]
-var RemoteAgentAuthorizationConfig_bearerToken = &handles[789]
-
-var RemoteAgentAuthorizationMethod = &handles[790]
-var RemoteAgentAuthorizationMethod_OAUTH_CLIENT_CREDENTIALS = &handles[791]
-var RemoteAgentAuthorizationMethod_API_KEY = &handles[792]
-var RemoteAgentAuthorizationMethod_BEARER_TOKEN = &handles[793]
-
-var RemoteAgentBearerTokenConfig = &handles[794]
-var RemoteAgentBearerTokenConfig_tokenName = &handles[795]
-var RemoteAgentBearerTokenConfig_tokenValue = &handles[796]
-var RemoteAgentBearerTokenConfig_authorizationHeader = &handles[797]
-
-var RemoteAgentConfiguration = &handles[798]
-
-var _RemoteAgentEndpoint = &handles[799]
-
-var _RemoteAgentName = &handles[800]
-
-var RemoteAgentOAuthClientCredentialsConfig = &handles[801]
-var RemoteAgentOAuthClientCredentialsConfig_clientName = &handles[802]
-var RemoteAgentOAuthClientCredentialsConfig_clientId = &handles[803]
-var RemoteAgentOAuthClientCredentialsConfig_exchangeParameters = &handles[804]
-var RemoteAgentOAuthClientCredentialsConfig_clientSecret = &handles[805]
-var RemoteAgentOAuthClientCredentialsConfig_exchangeUrl = &handles[806]
-var RemoteAgentOAuthClientCredentialsConfig_scopes = &handles[807]
-
-var RemoteAgentServiceDetails = &handles[808]
-var RemoteAgentServiceDetails_name = &handles[809]
-var RemoteAgentServiceDetails_endpoint = &handles[810]
-var RemoteAgentServiceDetails_description = &handles[811]
-var RemoteAgentServiceDetails_authorizationConfig = &handles[812]
-
-var RemoteAgentSigV4AuthorizationConfig = &handles[813]
-var RemoteAgentSigV4AuthorizationConfig_region = &handles[814]
-var RemoteAgentSigV4AuthorizationConfig_service = &handles[815]
-var RemoteAgentSigV4AuthorizationConfig_roleArn = &handles[816]
-
-var RemoteAgentSigV4Configuration = &handles[817]
-
-var RemoteAgentSigV4ServiceDetails = &handles[818]
-var RemoteAgentSigV4ServiceDetails_name = &handles[819]
-var RemoteAgentSigV4ServiceDetails_endpoint = &handles[820]
-var RemoteAgentSigV4ServiceDetails_description = &handles[821]
-var RemoteAgentSigV4ServiceDetails_authorizationConfig = &handles[822]
-
-var ResourceConfigDnsResolution = &handles[823]
-var ResourceConfigDnsResolution_PUBLIC = &handles[824]
-var ResourceConfigDnsResolution_IN_VPC = &handles[825]
-
-var _ResourceConfigurationArn = &handles[826]
-
-var _ResourceGatewayArn = &handles[827]
-
-var _ResourceId = &handles[828]
-
-var ResourceNotFoundException = &handles[829]
-var ResourceNotFoundException_message = &handles[830]
-
-var _RoleArn = &handles[831]
-
-var ScheduleCondition = &handles[832]
-var ScheduleCondition_expression = &handles[833]
-var ScheduleCondition_spec = &handles[834]
-
-var _ScheduleExpression = &handles[835]
-
-var SchedulerState = &handles[836]
-var SchedulerState_ENABLED = &handles[837]
-var SchedulerState_DISABLED = &handles[838]
-
-var ScheduleSpec = &handles[839]
-var ScheduleSpec_cron = &handles[840]
-var ScheduleSpec_timeRange = &handles[841]
-
-var _Scopes = &handles[842]
-var _Scopes_member = &handles[843]
-
-var _SecurityGroupId = &handles[844]
-
-var SelfManagedInput = &handles[845]
-var SelfManagedInput_resourceConfigurationId = &handles[846]
-var SelfManagedInput_certificate = &handles[847]
-
-var SendMessageContentBlockDelta = &handles[848]
-var SendMessageContentBlockDelta_textDelta = &handles[849]
-var SendMessageContentBlockDelta_jsonDelta = &handles[850]
-
-var SendMessageContentBlockDeltaEvent = &handles[851]
-var SendMessageContentBlockDeltaEvent_index = &handles[852]
-var SendMessageContentBlockDeltaEvent_delta = &handles[853]
-var SendMessageContentBlockDeltaEvent_sequenceNumber = &handles[854]
-
-var SendMessageContentBlockStartEvent = &handles[855]
-var SendMessageContentBlockStartEvent_index = &handles[856]
-var SendMessageContentBlockStartEvent_type = &handles[857]
-var SendMessageContentBlockStartEvent_id = &handles[858]
-var SendMessageContentBlockStartEvent_parentId = &handles[859]
-var SendMessageContentBlockStartEvent_sequenceNumber = &handles[860]
-
-var SendMessageContentBlockStopEvent = &handles[861]
-var SendMessageContentBlockStopEvent_index = &handles[862]
-var SendMessageContentBlockStopEvent_type = &handles[863]
-var SendMessageContentBlockStopEvent_text = &handles[864]
-var SendMessageContentBlockStopEvent_last = &handles[865]
-var SendMessageContentBlockStopEvent_sequenceNumber = &handles[866]
-
-var SendMessageContext = &handles[867]
-var SendMessageContext_currentPage = &handles[868]
-var SendMessageContext_lastMessage = &handles[869]
-var SendMessageContext_userActionResponse = &handles[870]
-var SendMessageContext_approvalAction = &handles[871]
-
-var SendMessageEvents = &handles[872]
-var SendMessageEvents_responseCreated = &handles[873]
-var SendMessageEvents_responseInProgress = &handles[874]
-var SendMessageEvents_responseCompleted = &handles[875]
-var SendMessageEvents_responseFailed = &handles[876]
-var SendMessageEvents_summary = &handles[877]
-var SendMessageEvents_heartbeat = &handles[878]
-var SendMessageEvents_contentBlockStart = &handles[879]
-var SendMessageEvents_contentBlockDelta = &handles[880]
-var SendMessageEvents_contentBlockStop = &handles[881]
-
-var SendMessageHeartbeatEvent = &handles[882]
-
-var SendMessageJsonDelta = &handles[883]
-var SendMessageJsonDelta_partialJson = &handles[884]
-
-var SendMessageResponseCompletedEvent = &handles[885]
-var SendMessageResponseCompletedEvent_responseId = &handles[886]
-var SendMessageResponseCompletedEvent_usage = &handles[887]
-var SendMessageResponseCompletedEvent_sequenceNumber = &handles[888]
-
-var SendMessageResponseCreatedEvent = &handles[889]
-var SendMessageResponseCreatedEvent_responseId = &handles[890]
-var SendMessageResponseCreatedEvent_sequenceNumber = &handles[891]
-
-var SendMessageResponseFailedEvent = &handles[892]
-var SendMessageResponseFailedEvent_responseId = &handles[893]
-var SendMessageResponseFailedEvent_errorCode = &handles[894]
-var SendMessageResponseFailedEvent_errorMessage = &handles[895]
-var SendMessageResponseFailedEvent_sequenceNumber = &handles[896]
-
-var SendMessageResponseInProgressEvent = &handles[897]
-var SendMessageResponseInProgressEvent_responseId = &handles[898]
-var SendMessageResponseInProgressEvent_sequenceNumber = &handles[899]
-
-var SendMessageSummaryEvent = &handles[900]
-var SendMessageSummaryEvent_content = &handles[901]
-var SendMessageSummaryEvent_sequenceNumber = &handles[902]
-
-var SendMessageTextDelta = &handles[903]
-var SendMessageTextDelta_text = &handles[904]
-
-var SendMessageUsageInfo = &handles[905]
-var SendMessageUsageInfo_inputTokens = &handles[906]
-var SendMessageUsageInfo_outputTokens = &handles[907]
-var SendMessageUsageInfo_totalTokens = &handles[908]
-
-var Service = &handles[909]
-var Service_GITHUB = &handles[910]
-var Service_SLACK = &handles[911]
-var Service_AZURE = &handles[912]
-var Service_AZURE_DEVOPS = &handles[913]
-var Service_MS_TEAMS = &handles[914]
-var Service_DYNATRACE = &handles[915]
-var Service_SERVICENOW = &handles[916]
-var Service_PAGERDUTY = &handles[917]
-var Service_GITLAB = &handles[918]
-var Service_EVENTCHANNEL = &handles[919]
-var Service_MCP_SERVER_NEWRELIC = &handles[920]
-var Service_MCP_SERVER_GRAFANA = &handles[921]
-var Service_MCP_SERVER_DATADOG = &handles[922]
-var Service_MCP_SERVER = &handles[923]
-var Service_MCP_SERVER_SPLUNK = &handles[924]
-var Service_AZURE_IDENTITY = &handles[925]
-var Service_MCP_SERVER_SIGV4 = &handles[926]
-var Service_REMOTE_AGENT = &handles[927]
-var Service_REMOTE_AGENT_SIGV4 = &handles[928]
-
-var ServiceConfiguration = &handles[929]
-var ServiceConfiguration_sourceAws = &handles[930]
-var ServiceConfiguration_aws = &handles[931]
-var ServiceConfiguration_github = &handles[932]
-var ServiceConfiguration_slack = &handles[933]
-var ServiceConfiguration_dynatrace = &handles[934]
-var ServiceConfiguration_servicenow = &handles[935]
-var ServiceConfiguration_mcpservernewrelic = &handles[936]
-var ServiceConfiguration_mcpserverdatadog = &handles[937]
-var ServiceConfiguration_mcpserver = &handles[938]
-var ServiceConfiguration_gitlab = &handles[939]
-var ServiceConfiguration_mcpserversplunk = &handles[940]
-var ServiceConfiguration_eventChannel = &handles[941]
-var ServiceConfiguration_azure = &handles[942]
-var ServiceConfiguration_azuredevops = &handles[943]
-var ServiceConfiguration_mcpservergrafana = &handles[944]
-var ServiceConfiguration_pagerduty = &handles[945]
-var ServiceConfiguration_mcpserversigv4 = &handles[946]
-var ServiceConfiguration_remoteagent = &handles[947]
-var ServiceConfiguration_remoteagentsigv4 = &handles[948]
-var ServiceConfiguration_msteams = &handles[949]
-var ServiceConfiguration_releaseManagement = &handles[950]
-
-var ServiceDetails = &handles[951]
-var ServiceDetails_dynatrace = &handles[952]
-var ServiceDetails_servicenow = &handles[953]
-var ServiceDetails_mcpserverdatadog = &handles[954]
-var ServiceDetails_mcpserver = &handles[955]
-var ServiceDetails_gitlab = &handles[956]
-var ServiceDetails_mcpserversplunk = &handles[957]
-var ServiceDetails_mcpservernewrelic = &handles[958]
-var ServiceDetails_eventChannel = &handles[959]
-var ServiceDetails_mcpservergrafana = &handles[960]
-var ServiceDetails_pagerduty = &handles[961]
-var ServiceDetails_azureidentity = &handles[962]
-var ServiceDetails_mcpserversigv4 = &handles[963]
-var ServiceDetails_remoteagent = &handles[964]
-var ServiceDetails_remoteagentsigv4 = &handles[965]
-
-var _ServiceId = &handles[966]
-
-var ServiceManagedInput = &handles[967]
-var ServiceManagedInput_hostAddress = &handles[968]
-var ServiceManagedInput_vpcId = &handles[969]
-var ServiceManagedInput_subnetIds = &handles[970]
-var ServiceManagedInput_securityGroupIds = &handles[971]
-var ServiceManagedInput_ipAddressType = &handles[972]
-var ServiceManagedInput_ipv4AddressesPerEni = &handles[973]
-var ServiceManagedInput_portRanges = &handles[974]
-var ServiceManagedInput_certificate = &handles[975]
-var ServiceManagedInput_dnsResolution = &handles[976]
-
-var _ServiceName = &handles[977]
-
-var _ServiceNameInput = &handles[978]
-
-var _ServiceNowAuthenticationScopeList = &handles[979]
-var _ServiceNowAuthenticationScopeList_member = &handles[980]
-
-var ServiceNowConfiguration = &handles[981]
-var ServiceNowConfiguration_instanceId = &handles[982]
-var ServiceNowConfiguration_authScopes = &handles[983]
-
-var _ServiceNowInstanceUrl = &handles[984]
-
-var ServiceNowOAuthClientCredentialsConfig = &handles[985]
-var ServiceNowOAuthClientCredentialsConfig_clientName = &handles[986]
-var ServiceNowOAuthClientCredentialsConfig_clientId = &handles[987]
-var ServiceNowOAuthClientCredentialsConfig_exchangeParameters = &handles[988]
-var ServiceNowOAuthClientCredentialsConfig_clientSecret = &handles[989]
-
-var ServiceNowServiceAuthorizationConfig = &handles[990]
-var ServiceNowServiceAuthorizationConfig_oAuthClientCredentials = &handles[991]
-
-var ServiceNowServiceDetails = &handles[992]
-var ServiceNowServiceDetails_instanceUrl = &handles[993]
-var ServiceNowServiceDetails_authorizationConfig = &handles[994]
-
-var ServiceQuotaExceededException = &handles[995]
-var ServiceQuotaExceededException_message = &handles[996]
-
-var _SigV4Region = &handles[997]
-
-var SlackBidirectionalConfiguration = &handles[998]
-var SlackBidirectionalConfiguration_roleArn = &handles[999]
-var SlackBidirectionalConfiguration_enabled = &handles[1000]
-
-var SlackChannel = &handles[1001]
-var SlackChannel_channelName = &handles[1002]
-var SlackChannel_channelId = &handles[1003]
-
-var SlackConfiguration = &handles[1004]
-var SlackConfiguration_workspaceId = &handles[1005]
-var SlackConfiguration_workspaceName = &handles[1006]
-var SlackConfiguration_transmissionTarget = &handles[1007]
-var SlackConfiguration_bidirectional = &handles[1008]
-
-var SlackTransmissionTarget = &handles[1009]
-var SlackTransmissionTarget_opsOncallTarget = &handles[1010]
-var SlackTransmissionTarget_opsSRETarget = &handles[1011]
-
-var SourceAccountType = &handles[1012]
-var SourceAccountType_SOURCE = &handles[1013]
-
-var SourceAwsConfiguration = &handles[1014]
-var SourceAwsConfiguration_accountId = &handles[1015]
-var SourceAwsConfiguration_accountType = &handles[1016]
-var SourceAwsConfiguration_assumableRoleArn = &handles[1017]
-var SourceAwsConfiguration_externalId = &handles[1018]
-var SourceAwsConfiguration_agentElevatedRoleArn = &handles[1019]
-var SourceAwsConfiguration_agentElevatedRoleArnStatus = &handles[1020]
-
-var _SubnetId = &handles[1021]
-
-var _TagKey = &handles[1022]
-
-var _TagKeyList = &handles[1023]
-var _TagKeyList_member = &handles[1024]
-
-var _Tags = &handles[1025]
-var _Tags_key = &handles[1026]
-var _Tags_value = &handles[1027]
-
-var _TagValue = &handles[1028]
-
-var Task = &handles[1029]
-var Task_agentSpaceId = &handles[1030]
-var Task_taskId = &handles[1031]
-var Task_executionId = &handles[1032]
-var Task_title = &handles[1033]
-var Task_description = &handles[1034]
-var Task_reference = &handles[1035]
-var Task_taskType = &handles[1036]
-var Task_priority = &handles[1037]
-var Task_status = &handles[1038]
-var Task_createdAt = &handles[1039]
-var Task_updatedAt = &handles[1040]
-var Task_version = &handles[1041]
-var Task_supportMetadata = &handles[1042]
-var Task_metadata = &handles[1043]
-var Task_primaryTaskId = &handles[1044]
-var Task_statusReason = &handles[1045]
-var Task_hasLinkedTasks = &handles[1046]
-
-var TaskFilter = &handles[1047]
-var TaskFilter_createdAfter = &handles[1048]
-var TaskFilter_createdBefore = &handles[1049]
-var TaskFilter_priority = &handles[1050]
-var TaskFilter_status = &handles[1051]
-var TaskFilter_taskType = &handles[1052]
-var TaskFilter_primaryTaskId = &handles[1053]
-
-var _TaskList = &handles[1054]
-var _TaskList_member = &handles[1055]
-
-var TaskSortField = &handles[1056]
-var TaskSortField_CREATED_AT = &handles[1057]
-var TaskSortField_PRIORITY = &handles[1058]
-
-var TaskSortOrder = &handles[1059]
-var TaskSortOrder_ASC = &handles[1060]
-var TaskSortOrder_DESC = &handles[1061]
-
-var TaskStatus = &handles[1062]
-var TaskStatus_PENDING_TRIAGE = &handles[1063]
-var TaskStatus_LINKED = &handles[1064]
-var TaskStatus_PENDING_START = &handles[1065]
-var TaskStatus_IN_PROGRESS = &handles[1066]
-var TaskStatus_PENDING_CUSTOMER_APPROVAL = &handles[1067]
-var TaskStatus_COMPLETED = &handles[1068]
-var TaskStatus_FAILED = &handles[1069]
-var TaskStatus_TIMED_OUT = &handles[1070]
-var TaskStatus_CANCELED = &handles[1071]
-var TaskStatus_SKIPPED = &handles[1072]
-var TaskStatus_WAITING = &handles[1073]
-
-var _TaskStatusList = &handles[1074]
-var _TaskStatusList_member = &handles[1075]
-
-var TaskType = &handles[1076]
-var TaskType_INVESTIGATION = &handles[1077]
-var TaskType_EVALUATION = &handles[1078]
-var TaskType_RELEASE_READINESS_REVIEW = &handles[1079]
-var TaskType_RELEASE_TESTING = &handles[1080]
-
-var _TaskTypeList = &handles[1081]
-var _TaskTypeList_member = &handles[1082]
-
-var ThrottlingException = &handles[1083]
-var ThrottlingException_message = &handles[1084]
-
-var _TimeOfDay = &handles[1085]
-
-var TimeRangeSchedule = &handles[1086]
-var TimeRangeSchedule_startAfter = &handles[1087]
-var TimeRangeSchedule_startBefore = &handles[1088]
-var TimeRangeSchedule_recurrence = &handles[1089]
-
-var _TokenValue = &handles[1090]
-
-var ToolClassification = &handles[1091]
-var ToolClassification_READ_ONLY = &handles[1092]
-var ToolClassification_MUTATIVE = &handles[1093]
-var ToolClassification_DESTRUCTIVE = &handles[1094]
-
-var _ToolIdentifier = &handles[1095]
-
-var _ToolUseId = &handles[1096]
-
-var Trigger = &handles[1097]
-var Trigger_triggerId = &handles[1098]
-var Trigger_agentSpaceId = &handles[1099]
-var Trigger_type = &handles[1100]
-var Trigger_condition = &handles[1101]
-var Trigger_action = &handles[1102]
-var Trigger_status = &handles[1103]
-var Trigger_createdAt = &handles[1104]
-var Trigger_updatedAt = &handles[1105]
-
-var _TriggerAction = &handles[1106]
-
-var TriggerCondition = &handles[1107]
-var TriggerCondition_schedule = &handles[1108]
-
-var TriggerEvent = &handles[1109]
-var TriggerEvent_PULL_REQUEST_READY_FOR_REVIEW = &handles[1110]
-var TriggerEvent_PULL_REQUEST_DRAFT = &handles[1111]
-
-var _TriggerEventList = &handles[1112]
-var _TriggerEventList_member = &handles[1113]
-
-var TriggerFilterGroup = &handles[1114]
-var TriggerFilterGroup_events = &handles[1115]
-var TriggerFilterGroup_targetBranches = &handles[1116]
-
-var _TriggerFilterGroups = &handles[1117]
-var _TriggerFilterGroups_member = &handles[1118]
-
-var _TriggerList = &handles[1119]
-var _TriggerList_member = &handles[1120]
-
-var _TriggerRegexPattern = &handles[1121]
-
-var _TriggerRegexPatternList = &handles[1122]
-var _TriggerRegexPatternList_member = &handles[1123]
-
-var _TriggerStatus = &handles[1124]
-
-var _TriggerType = &handles[1125]
-
-var UsageMetric = &handles[1126]
-var UsageMetric_limit = &handles[1127]
-var UsageMetric_usage = &handles[1128]
-
-var _UserMessage = &handles[1129]
-var _UserMessage_member = &handles[1130]
-
-var UserMessageBlock = &handles[1131]
-var UserMessageBlock_text = &handles[1132]
-var UserMessageBlock_toolResult = &handles[1133]
-
-var UserReference = &handles[1134]
-var UserReference_userId = &handles[1135]
-var UserReference_userType = &handles[1136]
-
-var UserType = &handles[1137]
-var UserType_IAM = &handles[1138]
-var UserType_IDC = &handles[1139]
-var UserType_IDP = &handles[1140]
-
-var ValidationException = &handles[1141]
-var ValidationException_message = &handles[1142]
-var ValidationException_fieldList = &handles[1143]
-
-var ValidationExceptionField = &handles[1144]
-var ValidationExceptionField_path = &handles[1145]
-var ValidationExceptionField_message = &handles[1146]
-
-var _ValidationExceptionFieldList = &handles[1147]
-var _ValidationExceptionFieldList_member = &handles[1148]
-
-var ValidationStatus = &handles[1149]
-var ValidationStatus_VALID = &handles[1150]
-var ValidationStatus_INVALID = &handles[1151]
-var ValidationStatus_PENDING_CONFIRMATION = &handles[1152]
-
-var _VpcId = &handles[1153]
-
-var Webhook = &handles[1154]
-var Webhook_webhookUrl = &handles[1155]
-var Webhook_webhookType = &handles[1156]
-var Webhook_webhookId = &handles[1157]
-
-var _WebhookSecret = &handles[1158]
-
-var _WebhooksList = &handles[1159]
-var _WebhooksList_member = &handles[1160]
-
-var WebhookType = &handles[1161]
-var WebhookType_HMAC = &handles[1162]
-var WebhookType_API_KEY = &handles[1163]
-var WebhookType_GITLAB = &handles[1164]
-var WebhookType_PAGERDUTY = &handles[1165]
-
-var _WebIdentityTokenAudienceList = &handles[1166]
-var _WebIdentityTokenAudienceList_member = &handles[1167]
-
-var WeeklyRecurrence = &handles[1168]
-var WeeklyRecurrence_dayOfWeek = &handles[1169]
-
-var AssociateServiceInput = &handles[1170]
-var AssociateServiceInput_agentSpaceId = &handles[1171]
-var AssociateServiceInput_serviceId = &handles[1172]
-var AssociateServiceInput_configuration = &handles[1173]
-var AssociateServiceInput_capabilities = &handles[1174]
-
-var AssociateServiceOutput = &handles[1175]
-var AssociateServiceOutput_association = &handles[1176]
-var AssociateServiceOutput_webhook = &handles[1177]
-
-var CreateAgentSpaceInput = &handles[1178]
-var CreateAgentSpaceInput_name = &handles[1179]
-var CreateAgentSpaceInput_description = &handles[1180]
-var CreateAgentSpaceInput_locale = &handles[1181]
-var CreateAgentSpaceInput_kmsKeyArn = &handles[1182]
-var CreateAgentSpaceInput_clientToken = &handles[1183]
-var CreateAgentSpaceInput_tags = &handles[1184]
-var CreateAgentSpaceInput_preferences = &handles[1185]
-
-var CreateAgentSpaceOutput = &handles[1186]
-var CreateAgentSpaceOutput_agentSpace = &handles[1187]
-var CreateAgentSpaceOutput_tags = &handles[1188]
-
-var CreateAssetFileRequest = &handles[1189]
-var CreateAssetFileRequest_agentSpaceId = &handles[1190]
-var CreateAssetFileRequest_assetId = &handles[1191]
-var CreateAssetFileRequest_path = &handles[1192]
-var CreateAssetFileRequest_content = &handles[1193]
-var CreateAssetFileRequest_metadata = &handles[1194]
-var CreateAssetFileRequest_clientToken = &handles[1195]
-
-var CreateAssetFileResponse = &handles[1196]
-var CreateAssetFileResponse_file = &handles[1197]
-
-var CreateAssetRequest = &handles[1198]
-var CreateAssetRequest_agentSpaceId = &handles[1199]
-var CreateAssetRequest_assetType = &handles[1200]
-var CreateAssetRequest_metadata = &handles[1201]
-var CreateAssetRequest_content = &handles[1202]
-var CreateAssetRequest_clientToken = &handles[1203]
-
-var CreateAssetResponse = &handles[1204]
-var CreateAssetResponse_asset = &handles[1205]
-
-var CreateBacklogTaskRequest = &handles[1206]
-var CreateBacklogTaskRequest_agentSpaceId = &handles[1207]
-var CreateBacklogTaskRequest_reference = &handles[1208]
-var CreateBacklogTaskRequest_taskType = &handles[1209]
-var CreateBacklogTaskRequest_title = &handles[1210]
-var CreateBacklogTaskRequest_description = &handles[1211]
-var CreateBacklogTaskRequest_priority = &handles[1212]
-var CreateBacklogTaskRequest_clientToken = &handles[1213]
-
-var CreateBacklogTaskResponse = &handles[1214]
-var CreateBacklogTaskResponse_task = &handles[1215]
-
-var CreateChatRequest = &handles[1216]
-var CreateChatRequest_agentSpaceId = &handles[1217]
-var CreateChatRequest_userId = &handles[1218]
-var CreateChatRequest_userType = &handles[1219]
-
-var CreateChatResponse = &handles[1220]
-var CreateChatResponse_executionId = &handles[1221]
-var CreateChatResponse_createdAt = &handles[1222]
-
-var CreatePrivateConnectionInput = &handles[1223]
-var CreatePrivateConnectionInput_name = &handles[1224]
-var CreatePrivateConnectionInput_mode = &handles[1225]
-var CreatePrivateConnectionInput_tags = &handles[1226]
-
-var CreatePrivateConnectionOutput = &handles[1227]
-var CreatePrivateConnectionOutput_name = &handles[1228]
-var CreatePrivateConnectionOutput_type = &handles[1229]
-var CreatePrivateConnectionOutput_resourceGatewayId = &handles[1230]
-var CreatePrivateConnectionOutput_hostAddress = &handles[1231]
-var CreatePrivateConnectionOutput_vpcId = &handles[1232]
-var CreatePrivateConnectionOutput_resourceConfigurationId = &handles[1233]
-var CreatePrivateConnectionOutput_status = &handles[1234]
-var CreatePrivateConnectionOutput_certificateExpiryTime = &handles[1235]
-var CreatePrivateConnectionOutput_dnsResolution = &handles[1236]
-var CreatePrivateConnectionOutput_failureMessage = &handles[1237]
-var CreatePrivateConnectionOutput_tags = &handles[1238]
-
-var CreateTriggerRequest = &handles[1239]
-var CreateTriggerRequest_agentSpaceId = &handles[1240]
-var CreateTriggerRequest_type = &handles[1241]
-var CreateTriggerRequest_condition = &handles[1242]
-var CreateTriggerRequest_action = &handles[1243]
-var CreateTriggerRequest_status = &handles[1244]
-var CreateTriggerRequest_clientToken = &handles[1245]
-
-var CreateTriggerResponse = &handles[1246]
-var CreateTriggerResponse_trigger = &handles[1247]
-
-var DeleteAgentSpaceInput = &handles[1248]
-var DeleteAgentSpaceInput_agentSpaceId = &handles[1249]
-
-var DeleteAgentSpaceOutput = &handles[1250]
-
-var DeleteAssetFileRequest = &handles[1251]
-var DeleteAssetFileRequest_agentSpaceId = &handles[1252]
-var DeleteAssetFileRequest_assetId = &handles[1253]
-var DeleteAssetFileRequest_path = &handles[1254]
-
-var DeleteAssetFileResponse = &handles[1255]
-
-var DeleteAssetRequest = &handles[1256]
-var DeleteAssetRequest_agentSpaceId = &handles[1257]
-var DeleteAssetRequest_assetId = &handles[1258]
-
-var DeleteAssetResponse = &handles[1259]
-
-var DeletePrivateConnectionInput = &handles[1260]
-var DeletePrivateConnectionInput_name = &handles[1261]
-
-var DeletePrivateConnectionOutput = &handles[1262]
-var DeletePrivateConnectionOutput_name = &handles[1263]
-var DeletePrivateConnectionOutput_status = &handles[1264]
-
-var DeleteTriggerRequest = &handles[1265]
-var DeleteTriggerRequest_agentSpaceId = &handles[1266]
-var DeleteTriggerRequest_triggerId = &handles[1267]
-
-var DeleteTriggerResponse = &handles[1268]
-
-var DeregisterServiceInput = &handles[1269]
-var DeregisterServiceInput_serviceId = &handles[1270]
-
-var DeregisterServiceOutput = &handles[1271]
-
-var DescribePrivateConnectionInput = &handles[1272]
-var DescribePrivateConnectionInput_name = &handles[1273]
-
-var DescribePrivateConnectionOutput = &handles[1274]
-var DescribePrivateConnectionOutput_name = &handles[1275]
-var DescribePrivateConnectionOutput_type = &handles[1276]
-var DescribePrivateConnectionOutput_resourceGatewayId = &handles[1277]
-var DescribePrivateConnectionOutput_hostAddress = &handles[1278]
-var DescribePrivateConnectionOutput_vpcId = &handles[1279]
-var DescribePrivateConnectionOutput_resourceConfigurationId = &handles[1280]
-var DescribePrivateConnectionOutput_status = &handles[1281]
-var DescribePrivateConnectionOutput_certificateExpiryTime = &handles[1282]
-var DescribePrivateConnectionOutput_dnsResolution = &handles[1283]
-var DescribePrivateConnectionOutput_failureMessage = &handles[1284]
-var DescribePrivateConnectionOutput_tags = &handles[1285]
-
-var DisableOperatorAppInput = &handles[1286]
-var DisableOperatorAppInput_agentSpaceId = &handles[1287]
-var DisableOperatorAppInput_authFlow = &handles[1288]
-
-var DisassociateServiceInput = &handles[1289]
-var DisassociateServiceInput_agentSpaceId = &handles[1290]
-var DisassociateServiceInput_associationId = &handles[1291]
-
-var DisassociateServiceOutput = &handles[1292]
-
-var EnableOperatorAppInput = &handles[1293]
-var EnableOperatorAppInput_agentSpaceId = &handles[1294]
-var EnableOperatorAppInput_authFlow = &handles[1295]
-var EnableOperatorAppInput_operatorAppRoleArn = &handles[1296]
-var EnableOperatorAppInput_idcInstanceArn = &handles[1297]
-var EnableOperatorAppInput_issuerUrl = &handles[1298]
-var EnableOperatorAppInput_idpClientId = &handles[1299]
-var EnableOperatorAppInput_idpClientSecret = &handles[1300]
-var EnableOperatorAppInput_provider = &handles[1301]
-
-var EnableOperatorAppOutput = &handles[1302]
-var EnableOperatorAppOutput_agentSpaceId = &handles[1303]
-var EnableOperatorAppOutput_operatorAppUrl = &handles[1304]
-var EnableOperatorAppOutput_iam = &handles[1305]
-var EnableOperatorAppOutput_idc = &handles[1306]
-var EnableOperatorAppOutput_idp = &handles[1307]
-
-var GetAccountUsageInput = &handles[1308]
-
-var GetAccountUsageOutput = &handles[1309]
-var GetAccountUsageOutput_monthlyAccountInvestigationHours = &handles[1310]
-var GetAccountUsageOutput_monthlyAccountEvaluationHours = &handles[1311]
-var GetAccountUsageOutput_monthlyAccountSystemLearningHours = &handles[1312]
-var GetAccountUsageOutput_monthlyAccountOnDemandHours = &handles[1313]
-var GetAccountUsageOutput_monthlyAccountGraderHours = &handles[1314]
-var GetAccountUsageOutput_usagePeriodStartTime = &handles[1315]
-var GetAccountUsageOutput_usagePeriodEndTime = &handles[1316]
-
-var GetAgentSpaceInput = &handles[1317]
-var GetAgentSpaceInput_agentSpaceId = &handles[1318]
-var GetAgentSpaceInput_includedData = &handles[1319]
-
-var GetAgentSpaceOutput = &handles[1320]
-var GetAgentSpaceOutput_agentSpace = &handles[1321]
-var GetAgentSpaceOutput_tags = &handles[1322]
-
-var GetAssetContentRequest = &handles[1323]
-var GetAssetContentRequest_agentSpaceId = &handles[1324]
-var GetAssetContentRequest_assetId = &handles[1325]
-var GetAssetContentRequest_assetVersion = &handles[1326]
-
-var GetAssetContentResponse = &handles[1327]
-var GetAssetContentResponse_content = &handles[1328]
-var GetAssetContentResponse_version = &handles[1329]
-
-var GetAssetFileRequest = &handles[1330]
-var GetAssetFileRequest_agentSpaceId = &handles[1331]
-var GetAssetFileRequest_assetId = &handles[1332]
-var GetAssetFileRequest_path = &handles[1333]
-var GetAssetFileRequest_assetVersion = &handles[1334]
-
-var GetAssetFileResponse = &handles[1335]
-var GetAssetFileResponse_file = &handles[1336]
-
-var GetAssetRequest = &handles[1337]
-var GetAssetRequest_agentSpaceId = &handles[1338]
-var GetAssetRequest_assetId = &handles[1339]
-var GetAssetRequest_assetVersion = &handles[1340]
-
-var GetAssetResponse = &handles[1341]
-var GetAssetResponse_asset = &handles[1342]
-
-var GetAssociationInput = &handles[1343]
-var GetAssociationInput_agentSpaceId = &handles[1344]
-var GetAssociationInput_associationId = &handles[1345]
-
-var GetAssociationOutput = &handles[1346]
-var GetAssociationOutput_association = &handles[1347]
-
-var GetBacklogTaskRequest = &handles[1348]
-var GetBacklogTaskRequest_agentSpaceId = &handles[1349]
-var GetBacklogTaskRequest_taskId = &handles[1350]
-
-var GetBacklogTaskResponse = &handles[1351]
-var GetBacklogTaskResponse_task = &handles[1352]
-
-var GetOperatorAppInput = &handles[1353]
-var GetOperatorAppInput_agentSpaceId = &handles[1354]
-
-var GetOperatorAppOutput = &handles[1355]
-var GetOperatorAppOutput_operatorAppUrl = &handles[1356]
-var GetOperatorAppOutput_iam = &handles[1357]
-var GetOperatorAppOutput_idc = &handles[1358]
-var GetOperatorAppOutput_idp = &handles[1359]
-
-var GetRecommendationRequest = &handles[1360]
-var GetRecommendationRequest_agentSpaceId = &handles[1361]
-var GetRecommendationRequest_recommendationId = &handles[1362]
-var GetRecommendationRequest_recommendationVersion = &handles[1363]
-
-var GetRecommendationResponse = &handles[1364]
-var GetRecommendationResponse_recommendation = &handles[1365]
-
-var GetServiceInput = &handles[1366]
-var GetServiceInput_serviceId = &handles[1367]
-
-var GetServiceOutput = &handles[1368]
-var GetServiceOutput_service = &handles[1369]
-var GetServiceOutput_tags = &handles[1370]
-
-var GetTriggerRequest = &handles[1371]
-var GetTriggerRequest_agentSpaceId = &handles[1372]
-var GetTriggerRequest_triggerId = &handles[1373]
-
-var GetTriggerResponse = &handles[1374]
-var GetTriggerResponse_trigger = &handles[1375]
-
-var ListAgentSpacesInput = &handles[1376]
-var ListAgentSpacesInput_maxResults = &handles[1377]
-var ListAgentSpacesInput_nextToken = &handles[1378]
-var ListAgentSpacesInput_includedData = &handles[1379]
-
-var ListAgentSpacesOutput = &handles[1380]
-var ListAgentSpacesOutput_nextToken = &handles[1381]
-var ListAgentSpacesOutput_agentSpaces = &handles[1382]
-
-var ListAssetFilesRequest = &handles[1383]
-var ListAssetFilesRequest_agentSpaceId = &handles[1384]
-var ListAssetFilesRequest_assetId = &handles[1385]
-var ListAssetFilesRequest_assetVersion = &handles[1386]
-var ListAssetFilesRequest_nextToken = &handles[1387]
-var ListAssetFilesRequest_maxResults = &handles[1388]
-
-var ListAssetFilesResponse = &handles[1389]
-var ListAssetFilesResponse_items = &handles[1390]
-var ListAssetFilesResponse_nextToken = &handles[1391]
-
-var ListAssetsRequest = &handles[1392]
-var ListAssetsRequest_agentSpaceId = &handles[1393]
-var ListAssetsRequest_assetType = &handles[1394]
-var ListAssetsRequest_updatedAfter = &handles[1395]
-var ListAssetsRequest_updatedBefore = &handles[1396]
-var ListAssetsRequest_nextToken = &handles[1397]
-var ListAssetsRequest_maxResults = &handles[1398]
-
-var ListAssetsResponse = &handles[1399]
-var ListAssetsResponse_items = &handles[1400]
-var ListAssetsResponse_nextToken = &handles[1401]
-
-var ListAssetTypesRequest = &handles[1402]
-var ListAssetTypesRequest_nextToken = &handles[1403]
-var ListAssetTypesRequest_maxResults = &handles[1404]
-
-var ListAssetTypesResponse = &handles[1405]
-var ListAssetTypesResponse_items = &handles[1406]
-var ListAssetTypesResponse_nextToken = &handles[1407]
-
-var ListAssetVersionsRequest = &handles[1408]
-var ListAssetVersionsRequest_agentSpaceId = &handles[1409]
-var ListAssetVersionsRequest_assetId = &handles[1410]
-var ListAssetVersionsRequest_maxResults = &handles[1411]
-var ListAssetVersionsRequest_nextToken = &handles[1412]
-
-var ListAssetVersionsResponse = &handles[1413]
-var ListAssetVersionsResponse_items = &handles[1414]
-var ListAssetVersionsResponse_nextToken = &handles[1415]
-
-var ListAssociationsInput = &handles[1416]
-var ListAssociationsInput_agentSpaceId = &handles[1417]
-var ListAssociationsInput_maxResults = &handles[1418]
-var ListAssociationsInput_nextToken = &handles[1419]
-var ListAssociationsInput_filterServiceTypes = &handles[1420]
-
-var ListAssociationsOutput = &handles[1421]
-var ListAssociationsOutput_nextToken = &handles[1422]
-var ListAssociationsOutput_associations = &handles[1423]
-
-var ListBacklogTasksRequest = &handles[1424]
-var ListBacklogTasksRequest_agentSpaceId = &handles[1425]
-var ListBacklogTasksRequest_filter = &handles[1426]
-var ListBacklogTasksRequest_limit = &handles[1427]
-var ListBacklogTasksRequest_nextToken = &handles[1428]
-var ListBacklogTasksRequest_sortField = &handles[1429]
-var ListBacklogTasksRequest_order = &handles[1430]
-
-var ListBacklogTasksResponse = &handles[1431]
-var ListBacklogTasksResponse_tasks = &handles[1432]
-var ListBacklogTasksResponse_nextToken = &handles[1433]
-
-var ListChatsRequest = &handles[1434]
-var ListChatsRequest_agentSpaceId = &handles[1435]
-var ListChatsRequest_userId = &handles[1436]
-var ListChatsRequest_maxResults = &handles[1437]
-var ListChatsRequest_nextToken = &handles[1438]
-
-var ListChatsResponse = &handles[1439]
-var ListChatsResponse_executions = &handles[1440]
-var ListChatsResponse_nextToken = &handles[1441]
-
-var ListExecutionsRequest = &handles[1442]
-var ListExecutionsRequest_agentSpaceId = &handles[1443]
-var ListExecutionsRequest_taskId = &handles[1444]
-var ListExecutionsRequest_limit = &handles[1445]
-var ListExecutionsRequest_nextToken = &handles[1446]
-
-var ListExecutionsResponse = &handles[1447]
-var ListExecutionsResponse_executions = &handles[1448]
-var ListExecutionsResponse_nextToken = &handles[1449]
-
-var ListGoalsRequest = &handles[1450]
-var ListGoalsRequest_agentSpaceId = &handles[1451]
-var ListGoalsRequest_status = &handles[1452]
-var ListGoalsRequest_goalType = &handles[1453]
-var ListGoalsRequest_limit = &handles[1454]
-var ListGoalsRequest_nextToken = &handles[1455]
-
-var ListGoalsResponse = &handles[1456]
-var ListGoalsResponse_goals = &handles[1457]
-var ListGoalsResponse_nextToken = &handles[1458]
-
-var ListJournalRecordsRequest = &handles[1459]
-var ListJournalRecordsRequest_agentSpaceId = &handles[1460]
-var ListJournalRecordsRequest_executionId = &handles[1461]
-var ListJournalRecordsRequest_limit = &handles[1462]
-var ListJournalRecordsRequest_nextToken = &handles[1463]
-var ListJournalRecordsRequest_recordType = &handles[1464]
-var ListJournalRecordsRequest_order = &handles[1465]
-
-var ListJournalRecordsResponse = &handles[1466]
-var ListJournalRecordsResponse_records = &handles[1467]
-var ListJournalRecordsResponse_nextToken = &handles[1468]
-
-var ListPendingMessagesRequest = &handles[1469]
-var ListPendingMessagesRequest_agentSpaceId = &handles[1470]
-var ListPendingMessagesRequest_executionId = &handles[1471]
-
-var ListPendingMessagesResponse = &handles[1472]
-var ListPendingMessagesResponse_agentSpaceId = &handles[1473]
-var ListPendingMessagesResponse_executionId = &handles[1474]
-var ListPendingMessagesResponse_messages = &handles[1475]
-var ListPendingMessagesResponse_createdAt = &handles[1476]
-
-var ListPrivateConnectionsInput = &handles[1477]
-
-var ListPrivateConnectionsOutput = &handles[1478]
-var ListPrivateConnectionsOutput_privateConnections = &handles[1479]
-
-var ListRecommendationsRequest = &handles[1480]
-var ListRecommendationsRequest_agentSpaceId = &handles[1481]
-var ListRecommendationsRequest_taskId = &handles[1482]
-var ListRecommendationsRequest_goalId = &handles[1483]
-var ListRecommendationsRequest_status = &handles[1484]
-var ListRecommendationsRequest_priority = &handles[1485]
-var ListRecommendationsRequest_limit = &handles[1486]
-var ListRecommendationsRequest_nextToken = &handles[1487]
-
-var ListRecommendationsResponse = &handles[1488]
-var ListRecommendationsResponse_recommendations = &handles[1489]
-var ListRecommendationsResponse_nextToken = &handles[1490]
-
-var ListServicesInput = &handles[1491]
-var ListServicesInput_maxResults = &handles[1492]
-var ListServicesInput_nextToken = &handles[1493]
-var ListServicesInput_filterServiceType = &handles[1494]
-
-var ListServicesOutput = &handles[1495]
-var ListServicesOutput_nextToken = &handles[1496]
-var ListServicesOutput_services = &handles[1497]
-
-var ListTagsForResourceRequest = &handles[1498]
-var ListTagsForResourceRequest_resourceArn = &handles[1499]
-
-var ListTagsForResourceResponse = &handles[1500]
-var ListTagsForResourceResponse_tags = &handles[1501]
-
-var ListTriggersRequest = &handles[1502]
-var ListTriggersRequest_agentSpaceId = &handles[1503]
-var ListTriggersRequest_status = &handles[1504]
-var ListTriggersRequest_nextToken = &handles[1505]
-var ListTriggersRequest_maxResults = &handles[1506]
-
-var ListTriggersResponse = &handles[1507]
-var ListTriggersResponse_items = &handles[1508]
-var ListTriggersResponse_nextToken = &handles[1509]
-
-var ListWebhooksInput = &handles[1510]
-var ListWebhooksInput_agentSpaceId = &handles[1511]
-var ListWebhooksInput_associationId = &handles[1512]
-
-var ListWebhooksOutput = &handles[1513]
-var ListWebhooksOutput_webhooks = &handles[1514]
-
-var RegisterServiceInput = &handles[1515]
-var RegisterServiceInput_service = &handles[1516]
-var RegisterServiceInput_serviceDetails = &handles[1517]
-var RegisterServiceInput_kmsKeyArn = &handles[1518]
-var RegisterServiceInput_privateConnectionName = &handles[1519]
-var RegisterServiceInput_targetUrlPrivateConnectionName = &handles[1520]
-var RegisterServiceInput_exchangeUrlPrivateConnectionName = &handles[1521]
-var RegisterServiceInput_name = &handles[1522]
-var RegisterServiceInput_tags = &handles[1523]
-
-var RegisterServiceOutput = &handles[1524]
-var RegisterServiceOutput_serviceId = &handles[1525]
-var RegisterServiceOutput_additionalStep = &handles[1526]
-var RegisterServiceOutput_kmsKeyArn = &handles[1527]
-var RegisterServiceOutput_tags = &handles[1528]
-
-var SendMessageRequest = &handles[1529]
-var SendMessageRequest_agentSpaceId = &handles[1530]
-var SendMessageRequest_executionId = &handles[1531]
-var SendMessageRequest_content = &handles[1532]
-var SendMessageRequest_context = &handles[1533]
-var SendMessageRequest_userId = &handles[1534]
-var SendMessageRequest_assetIds = &handles[1535]
-var SendMessageRequest_modelTier = &handles[1536]
-
-var SendMessageResponse = &handles[1537]
-var SendMessageResponse_events = &handles[1538]
-
-var TagResourceRequest = &handles[1539]
-var TagResourceRequest_resourceArn = &handles[1540]
-var TagResourceRequest_tags = &handles[1541]
-
-var TagResourceResponse = &handles[1542]
-
-var UntagResourceRequest = &handles[1543]
-var UntagResourceRequest_resourceArn = &handles[1544]
-var UntagResourceRequest_tagKeys = &handles[1545]
-
-var UntagResourceResponse = &handles[1546]
-
-var UpdateAgentSpaceInput = &handles[1547]
-var UpdateAgentSpaceInput_agentSpaceId = &handles[1548]
-var UpdateAgentSpaceInput_name = &handles[1549]
-var UpdateAgentSpaceInput_description = &handles[1550]
-var UpdateAgentSpaceInput_locale = &handles[1551]
-var UpdateAgentSpaceInput_preferences = &handles[1552]
-
-var UpdateAgentSpaceOutput = &handles[1553]
-var UpdateAgentSpaceOutput_agentSpace = &handles[1554]
-
-var UpdateApprovalActionRequest = &handles[1555]
-var UpdateApprovalActionRequest_agentSpaceId = &handles[1556]
-var UpdateApprovalActionRequest_approvalId = &handles[1557]
-var UpdateApprovalActionRequest_action = &handles[1558]
-var UpdateApprovalActionRequest_finalPattern = &handles[1559]
-var UpdateApprovalActionRequest_reason = &handles[1560]
-var UpdateApprovalActionRequest_ttlSeconds = &handles[1561]
-var UpdateApprovalActionRequest_singleUse = &handles[1562]
-
-var UpdateApprovalActionResponse = &handles[1563]
-var UpdateApprovalActionResponse_approvalId = &handles[1564]
-var UpdateApprovalActionResponse_status = &handles[1565]
-var UpdateApprovalActionResponse_expiresAt = &handles[1566]
-
-var UpdateAssetFileRequest = &handles[1567]
-var UpdateAssetFileRequest_agentSpaceId = &handles[1568]
-var UpdateAssetFileRequest_assetId = &handles[1569]
-var UpdateAssetFileRequest_path = &handles[1570]
-var UpdateAssetFileRequest_content = &handles[1571]
-var UpdateAssetFileRequest_metadata = &handles[1572]
-var UpdateAssetFileRequest_clientToken = &handles[1573]
-
-var UpdateAssetFileResponse = &handles[1574]
-var UpdateAssetFileResponse_file = &handles[1575]
-
-var UpdateAssetRequest = &handles[1576]
-var UpdateAssetRequest_agentSpaceId = &handles[1577]
-var UpdateAssetRequest_assetId = &handles[1578]
-var UpdateAssetRequest_metadata = &handles[1579]
-var UpdateAssetRequest_content = &handles[1580]
-var UpdateAssetRequest_clientToken = &handles[1581]
-
-var UpdateAssetResponse = &handles[1582]
-var UpdateAssetResponse_asset = &handles[1583]
-
-var UpdateAssociationInput = &handles[1584]
-var UpdateAssociationInput_agentSpaceId = &handles[1585]
-var UpdateAssociationInput_associationId = &handles[1586]
-var UpdateAssociationInput_configuration = &handles[1587]
-var UpdateAssociationInput_capabilities = &handles[1588]
-
-var UpdateAssociationOutput = &handles[1589]
-var UpdateAssociationOutput_association = &handles[1590]
-var UpdateAssociationOutput_webhook = &handles[1591]
-
-var UpdateBacklogTaskRequest = &handles[1592]
-var UpdateBacklogTaskRequest_agentSpaceId = &handles[1593]
-var UpdateBacklogTaskRequest_taskId = &handles[1594]
-var UpdateBacklogTaskRequest_taskStatus = &handles[1595]
-var UpdateBacklogTaskRequest_clientToken = &handles[1596]
-
-var UpdateBacklogTaskResponse = &handles[1597]
-var UpdateBacklogTaskResponse_task = &handles[1598]
-
-var UpdateGoalRequest = &handles[1599]
-var UpdateGoalRequest_agentSpaceId = &handles[1600]
-var UpdateGoalRequest_goalId = &handles[1601]
-var UpdateGoalRequest_evaluationSchedule = &handles[1602]
-var UpdateGoalRequest_clientToken = &handles[1603]
-
-var UpdateGoalResponse = &handles[1604]
-var UpdateGoalResponse_goal = &handles[1605]
-
-var UpdateOperatorAppIdpConfigInput = &handles[1606]
-var UpdateOperatorAppIdpConfigInput_agentSpaceId = &handles[1607]
-var UpdateOperatorAppIdpConfigInput_idpClientSecret = &handles[1608]
-
-var UpdateOperatorAppIdpConfigOutput = &handles[1609]
-var UpdateOperatorAppIdpConfigOutput_agentSpaceId = &handles[1610]
-var UpdateOperatorAppIdpConfigOutput_idp = &handles[1611]
-
-var UpdatePrivateConnectionCertificateInput = &handles[1612]
-var UpdatePrivateConnectionCertificateInput_name = &handles[1613]
-var UpdatePrivateConnectionCertificateInput_certificate = &handles[1614]
-
-var UpdatePrivateConnectionCertificateOutput = &handles[1615]
-var UpdatePrivateConnectionCertificateOutput_name = &handles[1616]
-var UpdatePrivateConnectionCertificateOutput_type = &handles[1617]
-var UpdatePrivateConnectionCertificateOutput_resourceGatewayId = &handles[1618]
-var UpdatePrivateConnectionCertificateOutput_hostAddress = &handles[1619]
-var UpdatePrivateConnectionCertificateOutput_vpcId = &handles[1620]
-var UpdatePrivateConnectionCertificateOutput_resourceConfigurationId = &handles[1621]
-var UpdatePrivateConnectionCertificateOutput_status = &handles[1622]
-var UpdatePrivateConnectionCertificateOutput_certificateExpiryTime = &handles[1623]
-var UpdatePrivateConnectionCertificateOutput_dnsResolution = &handles[1624]
-var UpdatePrivateConnectionCertificateOutput_failureMessage = &handles[1625]
-
-var UpdateRecommendationRequest = &handles[1626]
-var UpdateRecommendationRequest_agentSpaceId = &handles[1627]
-var UpdateRecommendationRequest_recommendationId = &handles[1628]
-var UpdateRecommendationRequest_status = &handles[1629]
-var UpdateRecommendationRequest_additionalContext = &handles[1630]
-var UpdateRecommendationRequest_clientToken = &handles[1631]
-
-var UpdateRecommendationResponse = &handles[1632]
-var UpdateRecommendationResponse_recommendation = &handles[1633]
-
-var UpdateTriggerRequest = &handles[1634]
-var UpdateTriggerRequest_agentSpaceId = &handles[1635]
-var UpdateTriggerRequest_triggerId = &handles[1636]
-var UpdateTriggerRequest_status = &handles[1637]
-var UpdateTriggerRequest_clientToken = &handles[1638]
-
-var UpdateTriggerResponse = &handles[1639]
-var UpdateTriggerResponse_trigger = &handles[1640]
-
-var ValidateAwsAssociationsInput = &handles[1641]
-var ValidateAwsAssociationsInput_agentSpaceId = &handles[1642]
-
-var ValidateAwsAssociationsOutput = &handles[1643]
-
-var DevOpsAgent = &smithy.ServiceSchema{Schema: &handles[63], Version: "2026-01-01"}
+var _PortRange = &all[606]
+
+var _PortRanges = &all[607]
+var _PortRanges_member = &all[608]
+
+var PostRegisterServiceSupportedService = &all[609]
+var PostRegisterServiceSupportedService_DYNATRACE = &all[610]
+var PostRegisterServiceSupportedService_SERVICENOW = &all[611]
+var PostRegisterServiceSupportedService_PAGERDUTY = &all[612]
+var PostRegisterServiceSupportedService_GITLAB = &all[613]
+var PostRegisterServiceSupportedService_EVENTCHANNEL = &all[614]
+var PostRegisterServiceSupportedService_MCP_SERVER_NEWRELIC = &all[615]
+var PostRegisterServiceSupportedService_MCP_SERVER_GRAFANA = &all[616]
+var PostRegisterServiceSupportedService_MCP_SERVER_DATADOG = &all[617]
+var PostRegisterServiceSupportedService_MCP_SERVER = &all[618]
+var PostRegisterServiceSupportedService_MCP_SERVER_SPLUNK = &all[619]
+var PostRegisterServiceSupportedService_AZURE_IDENTITY = &all[620]
+var PostRegisterServiceSupportedService_MCP_SERVER_SIGV4 = &all[621]
+var PostRegisterServiceSupportedService_REMOTE_AGENT = &all[622]
+var PostRegisterServiceSupportedService_REMOTE_AGENT_SIGV4 = &all[623]
+
+var Priority = &all[624]
+var Priority_CRITICAL = &all[625]
+var Priority_HIGH = &all[626]
+var Priority_MEDIUM = &all[627]
+var Priority_LOW = &all[628]
+var Priority_MINIMAL = &all[629]
+
+var _PriorityList = &all[630]
+var _PriorityList_member = &all[631]
+
+var PrivateConnectionMode = &all[632]
+var PrivateConnectionMode_serviceManaged = &all[633]
+var PrivateConnectionMode_selfManaged = &all[634]
+
+var _PrivateConnectionName = &all[635]
+
+var PrivateConnectionStatus = &all[636]
+var PrivateConnectionStatus_ACTIVE = &all[637]
+var PrivateConnectionStatus_CREATE_IN_PROGRESS = &all[638]
+var PrivateConnectionStatus_CREATE_FAILED = &all[639]
+var PrivateConnectionStatus_DELETE_IN_PROGRESS = &all[640]
+var PrivateConnectionStatus_DELETE_FAILED = &all[641]
+
+var PrivateConnectionSummary = &all[642]
+var PrivateConnectionSummary_name = &all[643]
+var PrivateConnectionSummary_type = &all[644]
+var PrivateConnectionSummary_resourceGatewayId = &all[645]
+var PrivateConnectionSummary_hostAddress = &all[646]
+var PrivateConnectionSummary_vpcId = &all[647]
+var PrivateConnectionSummary_resourceConfigurationId = &all[648]
+var PrivateConnectionSummary_status = &all[649]
+var PrivateConnectionSummary_certificateExpiryTime = &all[650]
+var PrivateConnectionSummary_dnsResolution = &all[651]
+var PrivateConnectionSummary_failureMessage = &all[652]
+
+var _PrivateConnectionSummaryList = &all[653]
+var _PrivateConnectionSummaryList_member = &all[654]
+
+var PrivateConnectionType = &all[655]
+var PrivateConnectionType_SELF_MANAGED = &all[656]
+var PrivateConnectionType_SERVICE_MANAGED = &all[657]
+
+var PrivateNetworkAccess = &all[658]
+var PrivateNetworkAccess_privateConnectionName = &all[659]
+var PrivateNetworkAccess_runtimeRoleArn = &all[660]
+
+var Recommendation = &all[661]
+var Recommendation_agentSpaceArn = &all[662]
+var Recommendation_recommendationId = &all[663]
+var Recommendation_taskId = &all[664]
+var Recommendation_goalId = &all[665]
+var Recommendation_title = &all[666]
+var Recommendation_content = &all[667]
+var Recommendation_status = &all[668]
+var Recommendation_priority = &all[669]
+var Recommendation_goalVersion = &all[670]
+var Recommendation_additionalContext = &all[671]
+var Recommendation_rankPosition = &all[672]
+var Recommendation_rankedAt = &all[673]
+var Recommendation_createdAt = &all[674]
+var Recommendation_updatedAt = &all[675]
+var Recommendation_version = &all[676]
+
+var RecommendationContent = &all[677]
+var RecommendationContent_summary = &all[678]
+var RecommendationContent_spec = &all[679]
+
+var _RecommendationList = &all[680]
+var _RecommendationList_member = &all[681]
+
+var RecommendationPriority = &all[682]
+var RecommendationPriority_HIGH = &all[683]
+var RecommendationPriority_MEDIUM = &all[684]
+var RecommendationPriority_LOW = &all[685]
+
+var RecommendationStatus = &all[686]
+var RecommendationStatus_PROPOSED = &all[687]
+var RecommendationStatus_ACCEPTED = &all[688]
+var RecommendationStatus_REJECTED = &all[689]
+var RecommendationStatus_CLOSED = &all[690]
+var RecommendationStatus_COMPLETED = &all[691]
+var RecommendationStatus_UPDATE_IN_PROGRESS = &all[692]
+
+var Recurrence = &all[693]
+var Recurrence_daily = &all[694]
+var Recurrence_weekly = &all[695]
+var Recurrence_monthly = &all[696]
+
+var ReferenceInput = &all[697]
+var ReferenceInput_system = &all[698]
+var ReferenceInput_title = &all[699]
+var ReferenceInput_referenceId = &all[700]
+var ReferenceInput_referenceUrl = &all[701]
+var ReferenceInput_associationId = &all[702]
+
+var ReferenceOutput = &all[703]
+var ReferenceOutput_system = &all[704]
+var ReferenceOutput_title = &all[705]
+var ReferenceOutput_referenceId = &all[706]
+var ReferenceOutput_referenceUrl = &all[707]
+var ReferenceOutput_associationId = &all[708]
+
+var RegisteredAzureDevOpsServiceDetails = &all[709]
+var RegisteredAzureDevOpsServiceDetails_organizationName = &all[710]
+
+var RegisteredAzureIdentityDetails = &all[711]
+var RegisteredAzureIdentityDetails_tenantId = &all[712]
+var RegisteredAzureIdentityDetails_clientId = &all[713]
+var RegisteredAzureIdentityDetails_webIdentityRoleArn = &all[714]
+var RegisteredAzureIdentityDetails_webIdentityTokenAudiences = &all[715]
+
+var RegisteredGithubServiceDetails = &all[716]
+var RegisteredGithubServiceDetails_owner = &all[717]
+var RegisteredGithubServiceDetails_ownerType = &all[718]
+var RegisteredGithubServiceDetails_targetUrl = &all[719]
+
+var RegisteredGitLabServiceDetails = &all[720]
+var RegisteredGitLabServiceDetails_targetUrl = &all[721]
+var RegisteredGitLabServiceDetails_tokenType = &all[722]
+var RegisteredGitLabServiceDetails_groupId = &all[723]
+
+var RegisteredGrafanaServerDetails = &all[724]
+var RegisteredGrafanaServerDetails_endpoint = &all[725]
+var RegisteredGrafanaServerDetails_authorizationMethod = &all[726]
+
+var RegisteredMCPServerDetails = &all[727]
+var RegisteredMCPServerDetails_name = &all[728]
+var RegisteredMCPServerDetails_endpoint = &all[729]
+var RegisteredMCPServerDetails_authorizationMethod = &all[730]
+var RegisteredMCPServerDetails_description = &all[731]
+var RegisteredMCPServerDetails_apiKeyHeader = &all[732]
+var RegisteredMCPServerDetails_customHeaderNames = &all[733]
+
+var RegisteredMCPServerSigV4Details = &all[734]
+var RegisteredMCPServerSigV4Details_name = &all[735]
+var RegisteredMCPServerSigV4Details_endpoint = &all[736]
+var RegisteredMCPServerSigV4Details_description = &all[737]
+var RegisteredMCPServerSigV4Details_region = &all[738]
+var RegisteredMCPServerSigV4Details_service = &all[739]
+var RegisteredMCPServerSigV4Details_roleArn = &all[740]
+var RegisteredMCPServerSigV4Details_mcpRoleArn = &all[741]
+var RegisteredMCPServerSigV4Details_customHeaders = &all[742]
+
+var RegisteredNewRelicDetails = &all[743]
+var RegisteredNewRelicDetails_accountId = &all[744]
+var RegisteredNewRelicDetails_region = &all[745]
+var RegisteredNewRelicDetails_description = &all[746]
+
+var RegisteredPagerDutyDetails = &all[747]
+var RegisteredPagerDutyDetails_scopes = &all[748]
+
+var RegisteredRemoteAgentDetails = &all[749]
+var RegisteredRemoteAgentDetails_name = &all[750]
+var RegisteredRemoteAgentDetails_endpoint = &all[751]
+var RegisteredRemoteAgentDetails_description = &all[752]
+var RegisteredRemoteAgentDetails_authorizationMethod = &all[753]
+var RegisteredRemoteAgentDetails_apiKeyHeader = &all[754]
+
+var RegisteredRemoteAgentSigV4Details = &all[755]
+var RegisteredRemoteAgentSigV4Details_name = &all[756]
+var RegisteredRemoteAgentSigV4Details_endpoint = &all[757]
+var RegisteredRemoteAgentSigV4Details_description = &all[758]
+var RegisteredRemoteAgentSigV4Details_region = &all[759]
+var RegisteredRemoteAgentSigV4Details_service = &all[760]
+var RegisteredRemoteAgentSigV4Details_roleArn = &all[761]
+
+var RegisteredService = &all[762]
+var RegisteredService_serviceId = &all[763]
+var RegisteredService_serviceType = &all[764]
+var RegisteredService_name = &all[765]
+var RegisteredService_accessibleResources = &all[766]
+var RegisteredService_additionalServiceDetails = &all[767]
+var RegisteredService_kmsKeyArn = &all[768]
+var RegisteredService_privateConnectionName = &all[769]
+var RegisteredService_createdAt = &all[770]
+var RegisteredService_updatedAt = &all[771]
+
+var RegisteredServiceNowDetails = &all[772]
+var RegisteredServiceNowDetails_instanceUrl = &all[773]
+
+var _RegisteredServicesList = &all[774]
+var _RegisteredServicesList_member = &all[775]
+
+var RegisteredSlackServiceDetails = &all[776]
+var RegisteredSlackServiceDetails_teamId = &all[777]
+var RegisteredSlackServiceDetails_teamName = &all[778]
+
+var ReleaseManagementConfiguration = &all[779]
+var ReleaseManagementConfiguration_name = &all[780]
+var ReleaseManagementConfiguration_networkAccess = &all[781]
+
+var RemoteAgentAPIKeyConfig = &all[782]
+var RemoteAgentAPIKeyConfig_apiKeyName = &all[783]
+var RemoteAgentAPIKeyConfig_apiKeyValue = &all[784]
+var RemoteAgentAPIKeyConfig_apiKeyHeader = &all[785]
+
+var RemoteAgentAuthorizationConfig = &all[786]
+var RemoteAgentAuthorizationConfig_apiKey = &all[787]
+var RemoteAgentAuthorizationConfig_oAuthClientCredentials = &all[788]
+var RemoteAgentAuthorizationConfig_bearerToken = &all[789]
+
+var RemoteAgentAuthorizationMethod = &all[790]
+var RemoteAgentAuthorizationMethod_OAUTH_CLIENT_CREDENTIALS = &all[791]
+var RemoteAgentAuthorizationMethod_API_KEY = &all[792]
+var RemoteAgentAuthorizationMethod_BEARER_TOKEN = &all[793]
+
+var RemoteAgentBearerTokenConfig = &all[794]
+var RemoteAgentBearerTokenConfig_tokenName = &all[795]
+var RemoteAgentBearerTokenConfig_tokenValue = &all[796]
+var RemoteAgentBearerTokenConfig_authorizationHeader = &all[797]
+
+var RemoteAgentConfiguration = &all[798]
+
+var _RemoteAgentEndpoint = &all[799]
+
+var _RemoteAgentName = &all[800]
+
+var RemoteAgentOAuthClientCredentialsConfig = &all[801]
+var RemoteAgentOAuthClientCredentialsConfig_clientName = &all[802]
+var RemoteAgentOAuthClientCredentialsConfig_clientId = &all[803]
+var RemoteAgentOAuthClientCredentialsConfig_exchangeParameters = &all[804]
+var RemoteAgentOAuthClientCredentialsConfig_clientSecret = &all[805]
+var RemoteAgentOAuthClientCredentialsConfig_exchangeUrl = &all[806]
+var RemoteAgentOAuthClientCredentialsConfig_scopes = &all[807]
+
+var RemoteAgentServiceDetails = &all[808]
+var RemoteAgentServiceDetails_name = &all[809]
+var RemoteAgentServiceDetails_endpoint = &all[810]
+var RemoteAgentServiceDetails_description = &all[811]
+var RemoteAgentServiceDetails_authorizationConfig = &all[812]
+
+var RemoteAgentSigV4AuthorizationConfig = &all[813]
+var RemoteAgentSigV4AuthorizationConfig_region = &all[814]
+var RemoteAgentSigV4AuthorizationConfig_service = &all[815]
+var RemoteAgentSigV4AuthorizationConfig_roleArn = &all[816]
+
+var RemoteAgentSigV4Configuration = &all[817]
+
+var RemoteAgentSigV4ServiceDetails = &all[818]
+var RemoteAgentSigV4ServiceDetails_name = &all[819]
+var RemoteAgentSigV4ServiceDetails_endpoint = &all[820]
+var RemoteAgentSigV4ServiceDetails_description = &all[821]
+var RemoteAgentSigV4ServiceDetails_authorizationConfig = &all[822]
+
+var ResourceConfigDnsResolution = &all[823]
+var ResourceConfigDnsResolution_PUBLIC = &all[824]
+var ResourceConfigDnsResolution_IN_VPC = &all[825]
+
+var _ResourceConfigurationArn = &all[826]
+
+var _ResourceGatewayArn = &all[827]
+
+var _ResourceId = &all[828]
+
+var ResourceNotFoundException = &all[829]
+var ResourceNotFoundException_message = &all[830]
+
+var _RoleArn = &all[831]
+
+var ScheduleCondition = &all[832]
+var ScheduleCondition_expression = &all[833]
+var ScheduleCondition_spec = &all[834]
+
+var _ScheduleExpression = &all[835]
+
+var SchedulerState = &all[836]
+var SchedulerState_ENABLED = &all[837]
+var SchedulerState_DISABLED = &all[838]
+
+var ScheduleSpec = &all[839]
+var ScheduleSpec_cron = &all[840]
+var ScheduleSpec_timeRange = &all[841]
+
+var _Scopes = &all[842]
+var _Scopes_member = &all[843]
+
+var _SecurityGroupId = &all[844]
+
+var SelfManagedInput = &all[845]
+var SelfManagedInput_resourceConfigurationId = &all[846]
+var SelfManagedInput_certificate = &all[847]
+
+var SendMessageContentBlockDelta = &all[848]
+var SendMessageContentBlockDelta_textDelta = &all[849]
+var SendMessageContentBlockDelta_jsonDelta = &all[850]
+
+var SendMessageContentBlockDeltaEvent = &all[851]
+var SendMessageContentBlockDeltaEvent_index = &all[852]
+var SendMessageContentBlockDeltaEvent_delta = &all[853]
+var SendMessageContentBlockDeltaEvent_sequenceNumber = &all[854]
+
+var SendMessageContentBlockStartEvent = &all[855]
+var SendMessageContentBlockStartEvent_index = &all[856]
+var SendMessageContentBlockStartEvent_type = &all[857]
+var SendMessageContentBlockStartEvent_id = &all[858]
+var SendMessageContentBlockStartEvent_parentId = &all[859]
+var SendMessageContentBlockStartEvent_sequenceNumber = &all[860]
+
+var SendMessageContentBlockStopEvent = &all[861]
+var SendMessageContentBlockStopEvent_index = &all[862]
+var SendMessageContentBlockStopEvent_type = &all[863]
+var SendMessageContentBlockStopEvent_text = &all[864]
+var SendMessageContentBlockStopEvent_last = &all[865]
+var SendMessageContentBlockStopEvent_sequenceNumber = &all[866]
+
+var SendMessageContext = &all[867]
+var SendMessageContext_currentPage = &all[868]
+var SendMessageContext_lastMessage = &all[869]
+var SendMessageContext_userActionResponse = &all[870]
+var SendMessageContext_approvalAction = &all[871]
+
+var SendMessageEvents = &all[872]
+var SendMessageEvents_responseCreated = &all[873]
+var SendMessageEvents_responseInProgress = &all[874]
+var SendMessageEvents_responseCompleted = &all[875]
+var SendMessageEvents_responseFailed = &all[876]
+var SendMessageEvents_summary = &all[877]
+var SendMessageEvents_heartbeat = &all[878]
+var SendMessageEvents_contentBlockStart = &all[879]
+var SendMessageEvents_contentBlockDelta = &all[880]
+var SendMessageEvents_contentBlockStop = &all[881]
+
+var SendMessageHeartbeatEvent = &all[882]
+
+var SendMessageJsonDelta = &all[883]
+var SendMessageJsonDelta_partialJson = &all[884]
+
+var SendMessageResponseCompletedEvent = &all[885]
+var SendMessageResponseCompletedEvent_responseId = &all[886]
+var SendMessageResponseCompletedEvent_usage = &all[887]
+var SendMessageResponseCompletedEvent_sequenceNumber = &all[888]
+
+var SendMessageResponseCreatedEvent = &all[889]
+var SendMessageResponseCreatedEvent_responseId = &all[890]
+var SendMessageResponseCreatedEvent_sequenceNumber = &all[891]
+
+var SendMessageResponseFailedEvent = &all[892]
+var SendMessageResponseFailedEvent_responseId = &all[893]
+var SendMessageResponseFailedEvent_errorCode = &all[894]
+var SendMessageResponseFailedEvent_errorMessage = &all[895]
+var SendMessageResponseFailedEvent_sequenceNumber = &all[896]
+
+var SendMessageResponseInProgressEvent = &all[897]
+var SendMessageResponseInProgressEvent_responseId = &all[898]
+var SendMessageResponseInProgressEvent_sequenceNumber = &all[899]
+
+var SendMessageSummaryEvent = &all[900]
+var SendMessageSummaryEvent_content = &all[901]
+var SendMessageSummaryEvent_sequenceNumber = &all[902]
+
+var SendMessageTextDelta = &all[903]
+var SendMessageTextDelta_text = &all[904]
+
+var SendMessageUsageInfo = &all[905]
+var SendMessageUsageInfo_inputTokens = &all[906]
+var SendMessageUsageInfo_outputTokens = &all[907]
+var SendMessageUsageInfo_totalTokens = &all[908]
+
+var Service = &all[909]
+var Service_GITHUB = &all[910]
+var Service_SLACK = &all[911]
+var Service_AZURE = &all[912]
+var Service_AZURE_DEVOPS = &all[913]
+var Service_MS_TEAMS = &all[914]
+var Service_DYNATRACE = &all[915]
+var Service_SERVICENOW = &all[916]
+var Service_PAGERDUTY = &all[917]
+var Service_GITLAB = &all[918]
+var Service_EVENTCHANNEL = &all[919]
+var Service_MCP_SERVER_NEWRELIC = &all[920]
+var Service_MCP_SERVER_GRAFANA = &all[921]
+var Service_MCP_SERVER_DATADOG = &all[922]
+var Service_MCP_SERVER = &all[923]
+var Service_MCP_SERVER_SPLUNK = &all[924]
+var Service_AZURE_IDENTITY = &all[925]
+var Service_MCP_SERVER_SIGV4 = &all[926]
+var Service_REMOTE_AGENT = &all[927]
+var Service_REMOTE_AGENT_SIGV4 = &all[928]
+
+var ServiceConfiguration = &all[929]
+var ServiceConfiguration_sourceAws = &all[930]
+var ServiceConfiguration_aws = &all[931]
+var ServiceConfiguration_github = &all[932]
+var ServiceConfiguration_slack = &all[933]
+var ServiceConfiguration_dynatrace = &all[934]
+var ServiceConfiguration_servicenow = &all[935]
+var ServiceConfiguration_mcpservernewrelic = &all[936]
+var ServiceConfiguration_mcpserverdatadog = &all[937]
+var ServiceConfiguration_mcpserver = &all[938]
+var ServiceConfiguration_gitlab = &all[939]
+var ServiceConfiguration_mcpserversplunk = &all[940]
+var ServiceConfiguration_eventChannel = &all[941]
+var ServiceConfiguration_azure = &all[942]
+var ServiceConfiguration_azuredevops = &all[943]
+var ServiceConfiguration_mcpservergrafana = &all[944]
+var ServiceConfiguration_pagerduty = &all[945]
+var ServiceConfiguration_mcpserversigv4 = &all[946]
+var ServiceConfiguration_remoteagent = &all[947]
+var ServiceConfiguration_remoteagentsigv4 = &all[948]
+var ServiceConfiguration_msteams = &all[949]
+var ServiceConfiguration_releaseManagement = &all[950]
+
+var ServiceDetails = &all[951]
+var ServiceDetails_dynatrace = &all[952]
+var ServiceDetails_servicenow = &all[953]
+var ServiceDetails_mcpserverdatadog = &all[954]
+var ServiceDetails_mcpserver = &all[955]
+var ServiceDetails_gitlab = &all[956]
+var ServiceDetails_mcpserversplunk = &all[957]
+var ServiceDetails_mcpservernewrelic = &all[958]
+var ServiceDetails_eventChannel = &all[959]
+var ServiceDetails_mcpservergrafana = &all[960]
+var ServiceDetails_pagerduty = &all[961]
+var ServiceDetails_azureidentity = &all[962]
+var ServiceDetails_mcpserversigv4 = &all[963]
+var ServiceDetails_remoteagent = &all[964]
+var ServiceDetails_remoteagentsigv4 = &all[965]
+
+var _ServiceId = &all[966]
+
+var ServiceManagedInput = &all[967]
+var ServiceManagedInput_hostAddress = &all[968]
+var ServiceManagedInput_vpcId = &all[969]
+var ServiceManagedInput_subnetIds = &all[970]
+var ServiceManagedInput_securityGroupIds = &all[971]
+var ServiceManagedInput_ipAddressType = &all[972]
+var ServiceManagedInput_ipv4AddressesPerEni = &all[973]
+var ServiceManagedInput_portRanges = &all[974]
+var ServiceManagedInput_certificate = &all[975]
+var ServiceManagedInput_dnsResolution = &all[976]
+
+var _ServiceName = &all[977]
+
+var _ServiceNameInput = &all[978]
+
+var _ServiceNowAuthenticationScopeList = &all[979]
+var _ServiceNowAuthenticationScopeList_member = &all[980]
+
+var ServiceNowConfiguration = &all[981]
+var ServiceNowConfiguration_instanceId = &all[982]
+var ServiceNowConfiguration_authScopes = &all[983]
+
+var _ServiceNowInstanceUrl = &all[984]
+
+var ServiceNowOAuthClientCredentialsConfig = &all[985]
+var ServiceNowOAuthClientCredentialsConfig_clientName = &all[986]
+var ServiceNowOAuthClientCredentialsConfig_clientId = &all[987]
+var ServiceNowOAuthClientCredentialsConfig_exchangeParameters = &all[988]
+var ServiceNowOAuthClientCredentialsConfig_clientSecret = &all[989]
+
+var ServiceNowServiceAuthorizationConfig = &all[990]
+var ServiceNowServiceAuthorizationConfig_oAuthClientCredentials = &all[991]
+
+var ServiceNowServiceDetails = &all[992]
+var ServiceNowServiceDetails_instanceUrl = &all[993]
+var ServiceNowServiceDetails_authorizationConfig = &all[994]
+
+var ServiceQuotaExceededException = &all[995]
+var ServiceQuotaExceededException_message = &all[996]
+
+var _SigV4Region = &all[997]
+
+var SlackBidirectionalConfiguration = &all[998]
+var SlackBidirectionalConfiguration_roleArn = &all[999]
+var SlackBidirectionalConfiguration_enabled = &all[1000]
+
+var SlackChannel = &all[1001]
+var SlackChannel_channelName = &all[1002]
+var SlackChannel_channelId = &all[1003]
+
+var SlackConfiguration = &all[1004]
+var SlackConfiguration_workspaceId = &all[1005]
+var SlackConfiguration_workspaceName = &all[1006]
+var SlackConfiguration_transmissionTarget = &all[1007]
+var SlackConfiguration_bidirectional = &all[1008]
+
+var SlackTransmissionTarget = &all[1009]
+var SlackTransmissionTarget_opsOncallTarget = &all[1010]
+var SlackTransmissionTarget_opsSRETarget = &all[1011]
+
+var SourceAccountType = &all[1012]
+var SourceAccountType_SOURCE = &all[1013]
+
+var SourceAwsConfiguration = &all[1014]
+var SourceAwsConfiguration_accountId = &all[1015]
+var SourceAwsConfiguration_accountType = &all[1016]
+var SourceAwsConfiguration_assumableRoleArn = &all[1017]
+var SourceAwsConfiguration_externalId = &all[1018]
+var SourceAwsConfiguration_agentElevatedRoleArn = &all[1019]
+var SourceAwsConfiguration_agentElevatedRoleArnStatus = &all[1020]
+
+var _SubnetId = &all[1021]
+
+var _TagKey = &all[1022]
+
+var _TagKeyList = &all[1023]
+var _TagKeyList_member = &all[1024]
+
+var _Tags = &all[1025]
+var _Tags_key = &all[1026]
+var _Tags_value = &all[1027]
+
+var _TagValue = &all[1028]
+
+var Task = &all[1029]
+var Task_agentSpaceId = &all[1030]
+var Task_taskId = &all[1031]
+var Task_executionId = &all[1032]
+var Task_title = &all[1033]
+var Task_description = &all[1034]
+var Task_reference = &all[1035]
+var Task_taskType = &all[1036]
+var Task_priority = &all[1037]
+var Task_status = &all[1038]
+var Task_createdAt = &all[1039]
+var Task_updatedAt = &all[1040]
+var Task_version = &all[1041]
+var Task_supportMetadata = &all[1042]
+var Task_metadata = &all[1043]
+var Task_primaryTaskId = &all[1044]
+var Task_statusReason = &all[1045]
+var Task_hasLinkedTasks = &all[1046]
+
+var TaskFilter = &all[1047]
+var TaskFilter_createdAfter = &all[1048]
+var TaskFilter_createdBefore = &all[1049]
+var TaskFilter_priority = &all[1050]
+var TaskFilter_status = &all[1051]
+var TaskFilter_taskType = &all[1052]
+var TaskFilter_primaryTaskId = &all[1053]
+
+var _TaskList = &all[1054]
+var _TaskList_member = &all[1055]
+
+var TaskSortField = &all[1056]
+var TaskSortField_CREATED_AT = &all[1057]
+var TaskSortField_PRIORITY = &all[1058]
+
+var TaskSortOrder = &all[1059]
+var TaskSortOrder_ASC = &all[1060]
+var TaskSortOrder_DESC = &all[1061]
+
+var TaskStatus = &all[1062]
+var TaskStatus_PENDING_TRIAGE = &all[1063]
+var TaskStatus_LINKED = &all[1064]
+var TaskStatus_PENDING_START = &all[1065]
+var TaskStatus_IN_PROGRESS = &all[1066]
+var TaskStatus_PENDING_CUSTOMER_APPROVAL = &all[1067]
+var TaskStatus_COMPLETED = &all[1068]
+var TaskStatus_FAILED = &all[1069]
+var TaskStatus_TIMED_OUT = &all[1070]
+var TaskStatus_CANCELED = &all[1071]
+var TaskStatus_SKIPPED = &all[1072]
+var TaskStatus_WAITING = &all[1073]
+
+var _TaskStatusList = &all[1074]
+var _TaskStatusList_member = &all[1075]
+
+var TaskType = &all[1076]
+var TaskType_INVESTIGATION = &all[1077]
+var TaskType_EVALUATION = &all[1078]
+var TaskType_RELEASE_READINESS_REVIEW = &all[1079]
+var TaskType_RELEASE_TESTING = &all[1080]
+
+var _TaskTypeList = &all[1081]
+var _TaskTypeList_member = &all[1082]
+
+var ThrottlingException = &all[1083]
+var ThrottlingException_message = &all[1084]
+
+var _TimeOfDay = &all[1085]
+
+var TimeRangeSchedule = &all[1086]
+var TimeRangeSchedule_startAfter = &all[1087]
+var TimeRangeSchedule_startBefore = &all[1088]
+var TimeRangeSchedule_recurrence = &all[1089]
+
+var _TokenValue = &all[1090]
+
+var ToolClassification = &all[1091]
+var ToolClassification_READ_ONLY = &all[1092]
+var ToolClassification_MUTATIVE = &all[1093]
+var ToolClassification_DESTRUCTIVE = &all[1094]
+
+var _ToolIdentifier = &all[1095]
+
+var _ToolUseId = &all[1096]
+
+var Trigger = &all[1097]
+var Trigger_triggerId = &all[1098]
+var Trigger_agentSpaceId = &all[1099]
+var Trigger_type = &all[1100]
+var Trigger_condition = &all[1101]
+var Trigger_action = &all[1102]
+var Trigger_status = &all[1103]
+var Trigger_createdAt = &all[1104]
+var Trigger_updatedAt = &all[1105]
+
+var _TriggerAction = &all[1106]
+
+var TriggerCondition = &all[1107]
+var TriggerCondition_schedule = &all[1108]
+
+var TriggerEvent = &all[1109]
+var TriggerEvent_PULL_REQUEST_READY_FOR_REVIEW = &all[1110]
+var TriggerEvent_PULL_REQUEST_DRAFT = &all[1111]
+
+var _TriggerEventList = &all[1112]
+var _TriggerEventList_member = &all[1113]
+
+var TriggerFilterGroup = &all[1114]
+var TriggerFilterGroup_events = &all[1115]
+var TriggerFilterGroup_targetBranches = &all[1116]
+
+var _TriggerFilterGroups = &all[1117]
+var _TriggerFilterGroups_member = &all[1118]
+
+var _TriggerList = &all[1119]
+var _TriggerList_member = &all[1120]
+
+var _TriggerRegexPattern = &all[1121]
+
+var _TriggerRegexPatternList = &all[1122]
+var _TriggerRegexPatternList_member = &all[1123]
+
+var _TriggerStatus = &all[1124]
+
+var _TriggerType = &all[1125]
+
+var UsageMetric = &all[1126]
+var UsageMetric_limit = &all[1127]
+var UsageMetric_usage = &all[1128]
+
+var _UserMessage = &all[1129]
+var _UserMessage_member = &all[1130]
+
+var UserMessageBlock = &all[1131]
+var UserMessageBlock_text = &all[1132]
+var UserMessageBlock_toolResult = &all[1133]
+
+var UserReference = &all[1134]
+var UserReference_userId = &all[1135]
+var UserReference_userType = &all[1136]
+
+var UserType = &all[1137]
+var UserType_IAM = &all[1138]
+var UserType_IDC = &all[1139]
+var UserType_IDP = &all[1140]
+
+var ValidationException = &all[1141]
+var ValidationException_message = &all[1142]
+var ValidationException_fieldList = &all[1143]
+
+var ValidationExceptionField = &all[1144]
+var ValidationExceptionField_path = &all[1145]
+var ValidationExceptionField_message = &all[1146]
+
+var _ValidationExceptionFieldList = &all[1147]
+var _ValidationExceptionFieldList_member = &all[1148]
+
+var ValidationStatus = &all[1149]
+var ValidationStatus_VALID = &all[1150]
+var ValidationStatus_INVALID = &all[1151]
+var ValidationStatus_PENDING_CONFIRMATION = &all[1152]
+
+var _VpcId = &all[1153]
+
+var Webhook = &all[1154]
+var Webhook_webhookUrl = &all[1155]
+var Webhook_webhookType = &all[1156]
+var Webhook_webhookId = &all[1157]
+
+var _WebhookSecret = &all[1158]
+
+var _WebhooksList = &all[1159]
+var _WebhooksList_member = &all[1160]
+
+var WebhookType = &all[1161]
+var WebhookType_HMAC = &all[1162]
+var WebhookType_API_KEY = &all[1163]
+var WebhookType_GITLAB = &all[1164]
+var WebhookType_PAGERDUTY = &all[1165]
+
+var _WebIdentityTokenAudienceList = &all[1166]
+var _WebIdentityTokenAudienceList_member = &all[1167]
+
+var WeeklyRecurrence = &all[1168]
+var WeeklyRecurrence_dayOfWeek = &all[1169]
+
+var AssociateServiceInput = &all[1170]
+var AssociateServiceInput_agentSpaceId = &all[1171]
+var AssociateServiceInput_serviceId = &all[1172]
+var AssociateServiceInput_configuration = &all[1173]
+var AssociateServiceInput_capabilities = &all[1174]
+
+var AssociateServiceOutput = &all[1175]
+var AssociateServiceOutput_association = &all[1176]
+var AssociateServiceOutput_webhook = &all[1177]
+
+var CreateAgentSpaceInput = &all[1178]
+var CreateAgentSpaceInput_name = &all[1179]
+var CreateAgentSpaceInput_description = &all[1180]
+var CreateAgentSpaceInput_locale = &all[1181]
+var CreateAgentSpaceInput_kmsKeyArn = &all[1182]
+var CreateAgentSpaceInput_clientToken = &all[1183]
+var CreateAgentSpaceInput_tags = &all[1184]
+var CreateAgentSpaceInput_preferences = &all[1185]
+
+var CreateAgentSpaceOutput = &all[1186]
+var CreateAgentSpaceOutput_agentSpace = &all[1187]
+var CreateAgentSpaceOutput_tags = &all[1188]
+
+var CreateAssetFileRequest = &all[1189]
+var CreateAssetFileRequest_agentSpaceId = &all[1190]
+var CreateAssetFileRequest_assetId = &all[1191]
+var CreateAssetFileRequest_path = &all[1192]
+var CreateAssetFileRequest_content = &all[1193]
+var CreateAssetFileRequest_metadata = &all[1194]
+var CreateAssetFileRequest_clientToken = &all[1195]
+
+var CreateAssetFileResponse = &all[1196]
+var CreateAssetFileResponse_file = &all[1197]
+
+var CreateAssetRequest = &all[1198]
+var CreateAssetRequest_agentSpaceId = &all[1199]
+var CreateAssetRequest_assetType = &all[1200]
+var CreateAssetRequest_metadata = &all[1201]
+var CreateAssetRequest_content = &all[1202]
+var CreateAssetRequest_clientToken = &all[1203]
+
+var CreateAssetResponse = &all[1204]
+var CreateAssetResponse_asset = &all[1205]
+
+var CreateBacklogTaskRequest = &all[1206]
+var CreateBacklogTaskRequest_agentSpaceId = &all[1207]
+var CreateBacklogTaskRequest_reference = &all[1208]
+var CreateBacklogTaskRequest_taskType = &all[1209]
+var CreateBacklogTaskRequest_title = &all[1210]
+var CreateBacklogTaskRequest_description = &all[1211]
+var CreateBacklogTaskRequest_priority = &all[1212]
+var CreateBacklogTaskRequest_clientToken = &all[1213]
+
+var CreateBacklogTaskResponse = &all[1214]
+var CreateBacklogTaskResponse_task = &all[1215]
+
+var CreateChatRequest = &all[1216]
+var CreateChatRequest_agentSpaceId = &all[1217]
+var CreateChatRequest_userId = &all[1218]
+var CreateChatRequest_userType = &all[1219]
+
+var CreateChatResponse = &all[1220]
+var CreateChatResponse_executionId = &all[1221]
+var CreateChatResponse_createdAt = &all[1222]
+
+var CreatePrivateConnectionInput = &all[1223]
+var CreatePrivateConnectionInput_name = &all[1224]
+var CreatePrivateConnectionInput_mode = &all[1225]
+var CreatePrivateConnectionInput_tags = &all[1226]
+
+var CreatePrivateConnectionOutput = &all[1227]
+var CreatePrivateConnectionOutput_name = &all[1228]
+var CreatePrivateConnectionOutput_type = &all[1229]
+var CreatePrivateConnectionOutput_resourceGatewayId = &all[1230]
+var CreatePrivateConnectionOutput_hostAddress = &all[1231]
+var CreatePrivateConnectionOutput_vpcId = &all[1232]
+var CreatePrivateConnectionOutput_resourceConfigurationId = &all[1233]
+var CreatePrivateConnectionOutput_status = &all[1234]
+var CreatePrivateConnectionOutput_certificateExpiryTime = &all[1235]
+var CreatePrivateConnectionOutput_dnsResolution = &all[1236]
+var CreatePrivateConnectionOutput_failureMessage = &all[1237]
+var CreatePrivateConnectionOutput_tags = &all[1238]
+
+var CreateTriggerRequest = &all[1239]
+var CreateTriggerRequest_agentSpaceId = &all[1240]
+var CreateTriggerRequest_type = &all[1241]
+var CreateTriggerRequest_condition = &all[1242]
+var CreateTriggerRequest_action = &all[1243]
+var CreateTriggerRequest_status = &all[1244]
+var CreateTriggerRequest_clientToken = &all[1245]
+
+var CreateTriggerResponse = &all[1246]
+var CreateTriggerResponse_trigger = &all[1247]
+
+var DeleteAgentSpaceInput = &all[1248]
+var DeleteAgentSpaceInput_agentSpaceId = &all[1249]
+
+var DeleteAgentSpaceOutput = &all[1250]
+
+var DeleteAssetFileRequest = &all[1251]
+var DeleteAssetFileRequest_agentSpaceId = &all[1252]
+var DeleteAssetFileRequest_assetId = &all[1253]
+var DeleteAssetFileRequest_path = &all[1254]
+
+var DeleteAssetFileResponse = &all[1255]
+
+var DeleteAssetRequest = &all[1256]
+var DeleteAssetRequest_agentSpaceId = &all[1257]
+var DeleteAssetRequest_assetId = &all[1258]
+
+var DeleteAssetResponse = &all[1259]
+
+var DeletePrivateConnectionInput = &all[1260]
+var DeletePrivateConnectionInput_name = &all[1261]
+
+var DeletePrivateConnectionOutput = &all[1262]
+var DeletePrivateConnectionOutput_name = &all[1263]
+var DeletePrivateConnectionOutput_status = &all[1264]
+
+var DeleteTriggerRequest = &all[1265]
+var DeleteTriggerRequest_agentSpaceId = &all[1266]
+var DeleteTriggerRequest_triggerId = &all[1267]
+
+var DeleteTriggerResponse = &all[1268]
+
+var DeregisterServiceInput = &all[1269]
+var DeregisterServiceInput_serviceId = &all[1270]
+
+var DeregisterServiceOutput = &all[1271]
+
+var DescribePrivateConnectionInput = &all[1272]
+var DescribePrivateConnectionInput_name = &all[1273]
+
+var DescribePrivateConnectionOutput = &all[1274]
+var DescribePrivateConnectionOutput_name = &all[1275]
+var DescribePrivateConnectionOutput_type = &all[1276]
+var DescribePrivateConnectionOutput_resourceGatewayId = &all[1277]
+var DescribePrivateConnectionOutput_hostAddress = &all[1278]
+var DescribePrivateConnectionOutput_vpcId = &all[1279]
+var DescribePrivateConnectionOutput_resourceConfigurationId = &all[1280]
+var DescribePrivateConnectionOutput_status = &all[1281]
+var DescribePrivateConnectionOutput_certificateExpiryTime = &all[1282]
+var DescribePrivateConnectionOutput_dnsResolution = &all[1283]
+var DescribePrivateConnectionOutput_failureMessage = &all[1284]
+var DescribePrivateConnectionOutput_tags = &all[1285]
+
+var DisableOperatorAppInput = &all[1286]
+var DisableOperatorAppInput_agentSpaceId = &all[1287]
+var DisableOperatorAppInput_authFlow = &all[1288]
+
+var DisassociateServiceInput = &all[1289]
+var DisassociateServiceInput_agentSpaceId = &all[1290]
+var DisassociateServiceInput_associationId = &all[1291]
+
+var DisassociateServiceOutput = &all[1292]
+
+var EnableOperatorAppInput = &all[1293]
+var EnableOperatorAppInput_agentSpaceId = &all[1294]
+var EnableOperatorAppInput_authFlow = &all[1295]
+var EnableOperatorAppInput_operatorAppRoleArn = &all[1296]
+var EnableOperatorAppInput_idcInstanceArn = &all[1297]
+var EnableOperatorAppInput_issuerUrl = &all[1298]
+var EnableOperatorAppInput_idpClientId = &all[1299]
+var EnableOperatorAppInput_idpClientSecret = &all[1300]
+var EnableOperatorAppInput_provider = &all[1301]
+
+var EnableOperatorAppOutput = &all[1302]
+var EnableOperatorAppOutput_agentSpaceId = &all[1303]
+var EnableOperatorAppOutput_operatorAppUrl = &all[1304]
+var EnableOperatorAppOutput_iam = &all[1305]
+var EnableOperatorAppOutput_idc = &all[1306]
+var EnableOperatorAppOutput_idp = &all[1307]
+
+var GetAccountUsageInput = &all[1308]
+
+var GetAccountUsageOutput = &all[1309]
+var GetAccountUsageOutput_monthlyAccountInvestigationHours = &all[1310]
+var GetAccountUsageOutput_monthlyAccountEvaluationHours = &all[1311]
+var GetAccountUsageOutput_monthlyAccountSystemLearningHours = &all[1312]
+var GetAccountUsageOutput_monthlyAccountOnDemandHours = &all[1313]
+var GetAccountUsageOutput_monthlyAccountGraderHours = &all[1314]
+var GetAccountUsageOutput_usagePeriodStartTime = &all[1315]
+var GetAccountUsageOutput_usagePeriodEndTime = &all[1316]
+
+var GetAgentSpaceInput = &all[1317]
+var GetAgentSpaceInput_agentSpaceId = &all[1318]
+var GetAgentSpaceInput_includedData = &all[1319]
+
+var GetAgentSpaceOutput = &all[1320]
+var GetAgentSpaceOutput_agentSpace = &all[1321]
+var GetAgentSpaceOutput_tags = &all[1322]
+
+var GetAssetContentRequest = &all[1323]
+var GetAssetContentRequest_agentSpaceId = &all[1324]
+var GetAssetContentRequest_assetId = &all[1325]
+var GetAssetContentRequest_assetVersion = &all[1326]
+
+var GetAssetContentResponse = &all[1327]
+var GetAssetContentResponse_content = &all[1328]
+var GetAssetContentResponse_version = &all[1329]
+
+var GetAssetFileRequest = &all[1330]
+var GetAssetFileRequest_agentSpaceId = &all[1331]
+var GetAssetFileRequest_assetId = &all[1332]
+var GetAssetFileRequest_path = &all[1333]
+var GetAssetFileRequest_assetVersion = &all[1334]
+
+var GetAssetFileResponse = &all[1335]
+var GetAssetFileResponse_file = &all[1336]
+
+var GetAssetRequest = &all[1337]
+var GetAssetRequest_agentSpaceId = &all[1338]
+var GetAssetRequest_assetId = &all[1339]
+var GetAssetRequest_assetVersion = &all[1340]
+
+var GetAssetResponse = &all[1341]
+var GetAssetResponse_asset = &all[1342]
+
+var GetAssociationInput = &all[1343]
+var GetAssociationInput_agentSpaceId = &all[1344]
+var GetAssociationInput_associationId = &all[1345]
+
+var GetAssociationOutput = &all[1346]
+var GetAssociationOutput_association = &all[1347]
+
+var GetBacklogTaskRequest = &all[1348]
+var GetBacklogTaskRequest_agentSpaceId = &all[1349]
+var GetBacklogTaskRequest_taskId = &all[1350]
+
+var GetBacklogTaskResponse = &all[1351]
+var GetBacklogTaskResponse_task = &all[1352]
+
+var GetOperatorAppInput = &all[1353]
+var GetOperatorAppInput_agentSpaceId = &all[1354]
+
+var GetOperatorAppOutput = &all[1355]
+var GetOperatorAppOutput_operatorAppUrl = &all[1356]
+var GetOperatorAppOutput_iam = &all[1357]
+var GetOperatorAppOutput_idc = &all[1358]
+var GetOperatorAppOutput_idp = &all[1359]
+
+var GetRecommendationRequest = &all[1360]
+var GetRecommendationRequest_agentSpaceId = &all[1361]
+var GetRecommendationRequest_recommendationId = &all[1362]
+var GetRecommendationRequest_recommendationVersion = &all[1363]
+
+var GetRecommendationResponse = &all[1364]
+var GetRecommendationResponse_recommendation = &all[1365]
+
+var GetServiceInput = &all[1366]
+var GetServiceInput_serviceId = &all[1367]
+
+var GetServiceOutput = &all[1368]
+var GetServiceOutput_service = &all[1369]
+var GetServiceOutput_tags = &all[1370]
+
+var GetTriggerRequest = &all[1371]
+var GetTriggerRequest_agentSpaceId = &all[1372]
+var GetTriggerRequest_triggerId = &all[1373]
+
+var GetTriggerResponse = &all[1374]
+var GetTriggerResponse_trigger = &all[1375]
+
+var ListAgentSpacesInput = &all[1376]
+var ListAgentSpacesInput_maxResults = &all[1377]
+var ListAgentSpacesInput_nextToken = &all[1378]
+var ListAgentSpacesInput_includedData = &all[1379]
+
+var ListAgentSpacesOutput = &all[1380]
+var ListAgentSpacesOutput_nextToken = &all[1381]
+var ListAgentSpacesOutput_agentSpaces = &all[1382]
+
+var ListAssetFilesRequest = &all[1383]
+var ListAssetFilesRequest_agentSpaceId = &all[1384]
+var ListAssetFilesRequest_assetId = &all[1385]
+var ListAssetFilesRequest_assetVersion = &all[1386]
+var ListAssetFilesRequest_nextToken = &all[1387]
+var ListAssetFilesRequest_maxResults = &all[1388]
+
+var ListAssetFilesResponse = &all[1389]
+var ListAssetFilesResponse_items = &all[1390]
+var ListAssetFilesResponse_nextToken = &all[1391]
+
+var ListAssetsRequest = &all[1392]
+var ListAssetsRequest_agentSpaceId = &all[1393]
+var ListAssetsRequest_assetType = &all[1394]
+var ListAssetsRequest_updatedAfter = &all[1395]
+var ListAssetsRequest_updatedBefore = &all[1396]
+var ListAssetsRequest_nextToken = &all[1397]
+var ListAssetsRequest_maxResults = &all[1398]
+
+var ListAssetsResponse = &all[1399]
+var ListAssetsResponse_items = &all[1400]
+var ListAssetsResponse_nextToken = &all[1401]
+
+var ListAssetTypesRequest = &all[1402]
+var ListAssetTypesRequest_nextToken = &all[1403]
+var ListAssetTypesRequest_maxResults = &all[1404]
+
+var ListAssetTypesResponse = &all[1405]
+var ListAssetTypesResponse_items = &all[1406]
+var ListAssetTypesResponse_nextToken = &all[1407]
+
+var ListAssetVersionsRequest = &all[1408]
+var ListAssetVersionsRequest_agentSpaceId = &all[1409]
+var ListAssetVersionsRequest_assetId = &all[1410]
+var ListAssetVersionsRequest_maxResults = &all[1411]
+var ListAssetVersionsRequest_nextToken = &all[1412]
+
+var ListAssetVersionsResponse = &all[1413]
+var ListAssetVersionsResponse_items = &all[1414]
+var ListAssetVersionsResponse_nextToken = &all[1415]
+
+var ListAssociationsInput = &all[1416]
+var ListAssociationsInput_agentSpaceId = &all[1417]
+var ListAssociationsInput_maxResults = &all[1418]
+var ListAssociationsInput_nextToken = &all[1419]
+var ListAssociationsInput_filterServiceTypes = &all[1420]
+
+var ListAssociationsOutput = &all[1421]
+var ListAssociationsOutput_nextToken = &all[1422]
+var ListAssociationsOutput_associations = &all[1423]
+
+var ListBacklogTasksRequest = &all[1424]
+var ListBacklogTasksRequest_agentSpaceId = &all[1425]
+var ListBacklogTasksRequest_filter = &all[1426]
+var ListBacklogTasksRequest_limit = &all[1427]
+var ListBacklogTasksRequest_nextToken = &all[1428]
+var ListBacklogTasksRequest_sortField = &all[1429]
+var ListBacklogTasksRequest_order = &all[1430]
+
+var ListBacklogTasksResponse = &all[1431]
+var ListBacklogTasksResponse_tasks = &all[1432]
+var ListBacklogTasksResponse_nextToken = &all[1433]
+
+var ListChatsRequest = &all[1434]
+var ListChatsRequest_agentSpaceId = &all[1435]
+var ListChatsRequest_userId = &all[1436]
+var ListChatsRequest_maxResults = &all[1437]
+var ListChatsRequest_nextToken = &all[1438]
+
+var ListChatsResponse = &all[1439]
+var ListChatsResponse_executions = &all[1440]
+var ListChatsResponse_nextToken = &all[1441]
+
+var ListExecutionsRequest = &all[1442]
+var ListExecutionsRequest_agentSpaceId = &all[1443]
+var ListExecutionsRequest_taskId = &all[1444]
+var ListExecutionsRequest_limit = &all[1445]
+var ListExecutionsRequest_nextToken = &all[1446]
+
+var ListExecutionsResponse = &all[1447]
+var ListExecutionsResponse_executions = &all[1448]
+var ListExecutionsResponse_nextToken = &all[1449]
+
+var ListGoalsRequest = &all[1450]
+var ListGoalsRequest_agentSpaceId = &all[1451]
+var ListGoalsRequest_status = &all[1452]
+var ListGoalsRequest_goalType = &all[1453]
+var ListGoalsRequest_limit = &all[1454]
+var ListGoalsRequest_nextToken = &all[1455]
+
+var ListGoalsResponse = &all[1456]
+var ListGoalsResponse_goals = &all[1457]
+var ListGoalsResponse_nextToken = &all[1458]
+
+var ListJournalRecordsRequest = &all[1459]
+var ListJournalRecordsRequest_agentSpaceId = &all[1460]
+var ListJournalRecordsRequest_executionId = &all[1461]
+var ListJournalRecordsRequest_limit = &all[1462]
+var ListJournalRecordsRequest_nextToken = &all[1463]
+var ListJournalRecordsRequest_recordType = &all[1464]
+var ListJournalRecordsRequest_order = &all[1465]
+
+var ListJournalRecordsResponse = &all[1466]
+var ListJournalRecordsResponse_records = &all[1467]
+var ListJournalRecordsResponse_nextToken = &all[1468]
+
+var ListPendingMessagesRequest = &all[1469]
+var ListPendingMessagesRequest_agentSpaceId = &all[1470]
+var ListPendingMessagesRequest_executionId = &all[1471]
+
+var ListPendingMessagesResponse = &all[1472]
+var ListPendingMessagesResponse_agentSpaceId = &all[1473]
+var ListPendingMessagesResponse_executionId = &all[1474]
+var ListPendingMessagesResponse_messages = &all[1475]
+var ListPendingMessagesResponse_createdAt = &all[1476]
+
+var ListPrivateConnectionsInput = &all[1477]
+
+var ListPrivateConnectionsOutput = &all[1478]
+var ListPrivateConnectionsOutput_privateConnections = &all[1479]
+
+var ListRecommendationsRequest = &all[1480]
+var ListRecommendationsRequest_agentSpaceId = &all[1481]
+var ListRecommendationsRequest_taskId = &all[1482]
+var ListRecommendationsRequest_goalId = &all[1483]
+var ListRecommendationsRequest_status = &all[1484]
+var ListRecommendationsRequest_priority = &all[1485]
+var ListRecommendationsRequest_limit = &all[1486]
+var ListRecommendationsRequest_nextToken = &all[1487]
+
+var ListRecommendationsResponse = &all[1488]
+var ListRecommendationsResponse_recommendations = &all[1489]
+var ListRecommendationsResponse_nextToken = &all[1490]
+
+var ListServicesInput = &all[1491]
+var ListServicesInput_maxResults = &all[1492]
+var ListServicesInput_nextToken = &all[1493]
+var ListServicesInput_filterServiceType = &all[1494]
+
+var ListServicesOutput = &all[1495]
+var ListServicesOutput_nextToken = &all[1496]
+var ListServicesOutput_services = &all[1497]
+
+var ListTagsForResourceRequest = &all[1498]
+var ListTagsForResourceRequest_resourceArn = &all[1499]
+
+var ListTagsForResourceResponse = &all[1500]
+var ListTagsForResourceResponse_tags = &all[1501]
+
+var ListTriggersRequest = &all[1502]
+var ListTriggersRequest_agentSpaceId = &all[1503]
+var ListTriggersRequest_status = &all[1504]
+var ListTriggersRequest_nextToken = &all[1505]
+var ListTriggersRequest_maxResults = &all[1506]
+
+var ListTriggersResponse = &all[1507]
+var ListTriggersResponse_items = &all[1508]
+var ListTriggersResponse_nextToken = &all[1509]
+
+var ListWebhooksInput = &all[1510]
+var ListWebhooksInput_agentSpaceId = &all[1511]
+var ListWebhooksInput_associationId = &all[1512]
+
+var ListWebhooksOutput = &all[1513]
+var ListWebhooksOutput_webhooks = &all[1514]
+
+var RegisterServiceInput = &all[1515]
+var RegisterServiceInput_service = &all[1516]
+var RegisterServiceInput_serviceDetails = &all[1517]
+var RegisterServiceInput_kmsKeyArn = &all[1518]
+var RegisterServiceInput_privateConnectionName = &all[1519]
+var RegisterServiceInput_targetUrlPrivateConnectionName = &all[1520]
+var RegisterServiceInput_exchangeUrlPrivateConnectionName = &all[1521]
+var RegisterServiceInput_name = &all[1522]
+var RegisterServiceInput_tags = &all[1523]
+
+var RegisterServiceOutput = &all[1524]
+var RegisterServiceOutput_serviceId = &all[1525]
+var RegisterServiceOutput_additionalStep = &all[1526]
+var RegisterServiceOutput_kmsKeyArn = &all[1527]
+var RegisterServiceOutput_tags = &all[1528]
+
+var SendMessageRequest = &all[1529]
+var SendMessageRequest_agentSpaceId = &all[1530]
+var SendMessageRequest_executionId = &all[1531]
+var SendMessageRequest_content = &all[1532]
+var SendMessageRequest_context = &all[1533]
+var SendMessageRequest_userId = &all[1534]
+var SendMessageRequest_assetIds = &all[1535]
+var SendMessageRequest_modelTier = &all[1536]
+
+var SendMessageResponse = &all[1537]
+var SendMessageResponse_events = &all[1538]
+
+var TagResourceRequest = &all[1539]
+var TagResourceRequest_resourceArn = &all[1540]
+var TagResourceRequest_tags = &all[1541]
+
+var TagResourceResponse = &all[1542]
+
+var UntagResourceRequest = &all[1543]
+var UntagResourceRequest_resourceArn = &all[1544]
+var UntagResourceRequest_tagKeys = &all[1545]
+
+var UntagResourceResponse = &all[1546]
+
+var UpdateAgentSpaceInput = &all[1547]
+var UpdateAgentSpaceInput_agentSpaceId = &all[1548]
+var UpdateAgentSpaceInput_name = &all[1549]
+var UpdateAgentSpaceInput_description = &all[1550]
+var UpdateAgentSpaceInput_locale = &all[1551]
+var UpdateAgentSpaceInput_preferences = &all[1552]
+
+var UpdateAgentSpaceOutput = &all[1553]
+var UpdateAgentSpaceOutput_agentSpace = &all[1554]
+
+var UpdateApprovalActionRequest = &all[1555]
+var UpdateApprovalActionRequest_agentSpaceId = &all[1556]
+var UpdateApprovalActionRequest_approvalId = &all[1557]
+var UpdateApprovalActionRequest_action = &all[1558]
+var UpdateApprovalActionRequest_finalPattern = &all[1559]
+var UpdateApprovalActionRequest_reason = &all[1560]
+var UpdateApprovalActionRequest_ttlSeconds = &all[1561]
+var UpdateApprovalActionRequest_singleUse = &all[1562]
+
+var UpdateApprovalActionResponse = &all[1563]
+var UpdateApprovalActionResponse_approvalId = &all[1564]
+var UpdateApprovalActionResponse_status = &all[1565]
+var UpdateApprovalActionResponse_expiresAt = &all[1566]
+
+var UpdateAssetFileRequest = &all[1567]
+var UpdateAssetFileRequest_agentSpaceId = &all[1568]
+var UpdateAssetFileRequest_assetId = &all[1569]
+var UpdateAssetFileRequest_path = &all[1570]
+var UpdateAssetFileRequest_content = &all[1571]
+var UpdateAssetFileRequest_metadata = &all[1572]
+var UpdateAssetFileRequest_clientToken = &all[1573]
+
+var UpdateAssetFileResponse = &all[1574]
+var UpdateAssetFileResponse_file = &all[1575]
+
+var UpdateAssetRequest = &all[1576]
+var UpdateAssetRequest_agentSpaceId = &all[1577]
+var UpdateAssetRequest_assetId = &all[1578]
+var UpdateAssetRequest_metadata = &all[1579]
+var UpdateAssetRequest_content = &all[1580]
+var UpdateAssetRequest_clientToken = &all[1581]
+
+var UpdateAssetResponse = &all[1582]
+var UpdateAssetResponse_asset = &all[1583]
+
+var UpdateAssociationInput = &all[1584]
+var UpdateAssociationInput_agentSpaceId = &all[1585]
+var UpdateAssociationInput_associationId = &all[1586]
+var UpdateAssociationInput_configuration = &all[1587]
+var UpdateAssociationInput_capabilities = &all[1588]
+
+var UpdateAssociationOutput = &all[1589]
+var UpdateAssociationOutput_association = &all[1590]
+var UpdateAssociationOutput_webhook = &all[1591]
+
+var UpdateBacklogTaskRequest = &all[1592]
+var UpdateBacklogTaskRequest_agentSpaceId = &all[1593]
+var UpdateBacklogTaskRequest_taskId = &all[1594]
+var UpdateBacklogTaskRequest_taskStatus = &all[1595]
+var UpdateBacklogTaskRequest_clientToken = &all[1596]
+
+var UpdateBacklogTaskResponse = &all[1597]
+var UpdateBacklogTaskResponse_task = &all[1598]
+
+var UpdateGoalRequest = &all[1599]
+var UpdateGoalRequest_agentSpaceId = &all[1600]
+var UpdateGoalRequest_goalId = &all[1601]
+var UpdateGoalRequest_evaluationSchedule = &all[1602]
+var UpdateGoalRequest_clientToken = &all[1603]
+
+var UpdateGoalResponse = &all[1604]
+var UpdateGoalResponse_goal = &all[1605]
+
+var UpdateOperatorAppIdpConfigInput = &all[1606]
+var UpdateOperatorAppIdpConfigInput_agentSpaceId = &all[1607]
+var UpdateOperatorAppIdpConfigInput_idpClientSecret = &all[1608]
+
+var UpdateOperatorAppIdpConfigOutput = &all[1609]
+var UpdateOperatorAppIdpConfigOutput_agentSpaceId = &all[1610]
+var UpdateOperatorAppIdpConfigOutput_idp = &all[1611]
+
+var UpdatePrivateConnectionCertificateInput = &all[1612]
+var UpdatePrivateConnectionCertificateInput_name = &all[1613]
+var UpdatePrivateConnectionCertificateInput_certificate = &all[1614]
+
+var UpdatePrivateConnectionCertificateOutput = &all[1615]
+var UpdatePrivateConnectionCertificateOutput_name = &all[1616]
+var UpdatePrivateConnectionCertificateOutput_type = &all[1617]
+var UpdatePrivateConnectionCertificateOutput_resourceGatewayId = &all[1618]
+var UpdatePrivateConnectionCertificateOutput_hostAddress = &all[1619]
+var UpdatePrivateConnectionCertificateOutput_vpcId = &all[1620]
+var UpdatePrivateConnectionCertificateOutput_resourceConfigurationId = &all[1621]
+var UpdatePrivateConnectionCertificateOutput_status = &all[1622]
+var UpdatePrivateConnectionCertificateOutput_certificateExpiryTime = &all[1623]
+var UpdatePrivateConnectionCertificateOutput_dnsResolution = &all[1624]
+var UpdatePrivateConnectionCertificateOutput_failureMessage = &all[1625]
+
+var UpdateRecommendationRequest = &all[1626]
+var UpdateRecommendationRequest_agentSpaceId = &all[1627]
+var UpdateRecommendationRequest_recommendationId = &all[1628]
+var UpdateRecommendationRequest_status = &all[1629]
+var UpdateRecommendationRequest_additionalContext = &all[1630]
+var UpdateRecommendationRequest_clientToken = &all[1631]
+
+var UpdateRecommendationResponse = &all[1632]
+var UpdateRecommendationResponse_recommendation = &all[1633]
+
+var UpdateTriggerRequest = &all[1634]
+var UpdateTriggerRequest_agentSpaceId = &all[1635]
+var UpdateTriggerRequest_triggerId = &all[1636]
+var UpdateTriggerRequest_status = &all[1637]
+var UpdateTriggerRequest_clientToken = &all[1638]
+
+var UpdateTriggerResponse = &all[1639]
+var UpdateTriggerResponse_trigger = &all[1640]
+
+var ValidateAwsAssociationsInput = &all[1641]
+var ValidateAwsAssociationsInput_agentSpaceId = &all[1642]
+
+var ValidateAwsAssociationsOutput = &all[1643]
+
+var DevOpsAgent = &smithy.ServiceSchema{Schema: &all[63], Version: "2026-01-01"}

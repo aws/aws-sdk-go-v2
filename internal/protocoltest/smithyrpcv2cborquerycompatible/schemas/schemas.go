@@ -13,13 +13,7 @@ const blob = "" +
 var set = smithy.SchemaSet{
 	Blob:       blob,
 	Namespaces: []string{"smithy.protocoltests.rpcv2Cbor"},
-	Records: []smithy.StaticRecord{
-		{StrOff: 24, Target: 0, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
-		{StrOff: 0, Target: 1, Traits: 1, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
-		{StrOff: 37, Target: 2, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 24, Target: 3, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 49, Target: 4, Traits: 2, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-	},
+	Len:        5,
 	Traits: []smithy.TraitSet{
 		{},
 		{Other: []smithy.Trait{&smithytraits.AWSQueryCompatible{}}},
@@ -28,22 +22,22 @@ var set = smithy.SchemaSet{
 	},
 }
 
-var handles = [5]smithy.Schema{
-	smithy.NewStaticSchema(&set, 0, 0),
-	smithy.NewStaticSchema(&set, 1, 0),
-	smithy.NewStaticSchema(&set, 2, 0),
-	smithy.NewStaticSchema(&set, 3, 0),
-	smithy.NewStaticSchema(&set, 4, 0),
+var all = [5]smithy.Schema{
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 24, Ord: 0, Target: 0, Traits: 0, StrLen: 7, Count: 0, Shape: uint8(smithy.ShapeTypeOperation), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 0, Ord: 1, Target: 1, Traits: 1, StrLen: 24, Count: 0, Shape: uint8(smithy.ShapeTypeService), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 37, Ord: 2, Target: 2, Traits: 0, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 24, Ord: 3, Target: 3, Traits: 0, StrLen: 13, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
+	smithy.NewStaticSchema(&set, smithy.StaticRecord{StrOff: 49, Ord: 4, Target: 4, Traits: 2, StrLen: 12, Count: 0, Shape: uint8(smithy.ShapeTypeStructure), Flags: 0}),
 }
 
-var GetItem = &handles[0]
+var GetItem = &all[0]
 
-var _RpcV2CborQueryCompatible = &handles[1]
+var _RpcV2CborQueryCompatible = &all[1]
 
-var GetItemInput = &handles[2]
+var GetItemInput = &all[2]
 
-var GetItemOutput = &handles[3]
+var GetItemOutput = &all[3]
 
-var ItemNotFound = &handles[4]
+var ItemNotFound = &all[4]
 
-var RpcV2CborQueryCompatible = &smithy.ServiceSchema{Schema: &handles[1], Version: "2099-01-01"}
+var RpcV2CborQueryCompatible = &smithy.ServiceSchema{Schema: &all[1], Version: "2099-01-01"}
