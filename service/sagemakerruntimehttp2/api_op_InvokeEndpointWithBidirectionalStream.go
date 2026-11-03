@@ -146,6 +146,16 @@ func (o *InvokeEndpointWithBidirectionalStreamOutput) GetInitialReply() <-chan I
 	return o.initialReply
 }
 
+func (v *InvokeEndpointWithBidirectionalStreamInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeEndpointWithBidirectionalStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeEndpointWithBidirectionalStreamOutput_InvokedProductionVariant:
+			v.InvokedProductionVariant = new(string)
+			return d.ReadString(schemas.InvokeEndpointWithBidirectionalStreamOutput_InvokedProductionVariant, v.InvokedProductionVariant)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeEndpointWithBidirectionalStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeEndpointWithBidirectionalStream, schemas.InvokeEndpointWithBidirectionalStreamInput, schemas.InvokeEndpointWithBidirectionalStreamOutput)}, middleware.After); err != nil {
 		return err

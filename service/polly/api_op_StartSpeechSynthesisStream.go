@@ -150,6 +150,13 @@ func (o *StartSpeechSynthesisStreamOutput) GetInitialReply() <-chan StartSpeechS
 	return o.initialReply
 }
 
+func (v *StartSpeechSynthesisStreamInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSpeechSynthesisStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSpeechSynthesisStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSpeechSynthesisStream, schemas.StartSpeechSynthesisStreamInput, schemas.StartSpeechSynthesisStreamOutput)}, middleware.After); err != nil {
 		return err

@@ -145,6 +145,13 @@ func (o *SendMessageOutput) GetInitialReply() <-chan SendMessageInitialReply {
 	return o.initialReply
 }
 
+func (v *SendMessageInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMessage, schemas.SendMessageRequest, schemas.SendMessageResponse)}, middleware.After); err != nil {
 		return err

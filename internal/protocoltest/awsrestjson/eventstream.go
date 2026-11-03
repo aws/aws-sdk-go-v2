@@ -3,6 +3,7 @@
 package awsrestjson
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
@@ -11,6 +12,7 @@ import (
 	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"io"
 	"sync"
 )
 
@@ -151,9 +153,10 @@ func (r *eventStreamReader) Closed() <-chan struct{} {
 }
 
 type deserializeOpEventStreamDuplexStream struct {
-	asyncResult    chan deserializeResult
-	options        *Options
-	existingResult *DuplexStreamOutput
+	asyncResult     chan deserializeResult
+	options         *Options
+	existingResult  *DuplexStreamOutput
+	initialResponse *initialResponseReader
 }
 
 func (*deserializeOpEventStreamDuplexStream) ID() string {
@@ -186,6 +189,17 @@ func (m *deserializeOpEventStreamDuplexStream) HandleDeserialize(
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+	if m.options.Protocol.HasInitialEventMessage() {
+		opInput, ok := getOperationInput(ctx).(smithy.Serializable)
+		if !ok {
+			return out, md, fmt.Errorf("operation input is not serializable")
+		}
+		var initial bytes.Buffer
+		if err = m.options.Protocol.SerializeInitialRequest(schemas.DuplexStreamInput, opInput, &initial); err != nil {
+			return out, md, fmt.Errorf("serialize initial request: %w", err)
+		}
+		inputStreamWriter = newInitialRequestWriter(inputStreamWriter, initial.Bytes())
+	}
 	eventWriter := &eventStreamWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.EventStream, inputStreamWriter),
 	}
@@ -200,8 +214,15 @@ func (m *deserializeOpEventStreamDuplexStream) HandleDeserialize(
 
 		asyncResult = make(chan deserializeResult, 1)
 		asyncReader := newAsyncEventStreamReader(asyncResult)
+		var eventStreamBody io.ReadCloser = asyncReader.pipeReader
+		if m.options.Protocol.HasInitialEventMessage() {
+			m.initialResponse = newInitialResponseReader(eventStreamBody, &DuplexStreamInitialReply{}, func(r io.Reader, out smithy.Deserializable) error {
+				return m.options.Protocol.DeserializeInitialResponse(schemas.DuplexStreamOutput, r, out)
+			})
+			eventStreamBody = m.initialResponse
+		}
 		eventReader := newEventStreamReader(
-			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, asyncReader.pipeReader),
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, eventStreamBody),
 		)
 
 		output.eventStream = NewDuplexStreamEventStream(func(stream *DuplexStreamEventStream) {
@@ -244,6 +265,15 @@ func (m *deserializeOpEventStreamDuplexStream) HandleDeserialize(
 	}
 
 	asyncResult <- deserializeResult{reader: resp.Body}
+	if m.options.Protocol.HasInitialEventMessage() {
+		ir, irErr := m.initialResponse.wait(ctx)
+		if irErr != nil {
+			_ = resp.Body.Close()
+			middleware.AddEventStreamOutputToMetadata(&md, output)
+			return out, md, fmt.Errorf("deserialize initial response: %w", irErr)
+		}
+		out.Result = ir
+	}
 	middleware.AddEventStreamOutputToMetadata(&md, output)
 	return out, md, nil
 }
@@ -293,6 +323,7 @@ func (m *deserializeOpEventStreamDuplexStreamWithDistinctStreams) HandleDeserial
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+
 	eventWriter := &eventStreamWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.EventStream, inputStreamWriter),
 	}
@@ -322,9 +353,10 @@ func (m *deserializeOpEventStreamDuplexStreamWithDistinctStreams) HandleDeserial
 }
 
 type deserializeOpEventStreamDuplexStreamWithInitialMessages struct {
-	asyncResult    chan deserializeResult
-	options        *Options
-	existingResult *DuplexStreamWithInitialMessagesOutput
+	asyncResult     chan deserializeResult
+	options         *Options
+	existingResult  *DuplexStreamWithInitialMessagesOutput
+	initialResponse *initialResponseReader
 }
 
 func (*deserializeOpEventStreamDuplexStreamWithInitialMessages) ID() string {
@@ -357,6 +389,17 @@ func (m *deserializeOpEventStreamDuplexStreamWithInitialMessages) HandleDeserial
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+	if m.options.Protocol.HasInitialEventMessage() {
+		opInput, ok := getOperationInput(ctx).(smithy.Serializable)
+		if !ok {
+			return out, md, fmt.Errorf("operation input is not serializable")
+		}
+		var initial bytes.Buffer
+		if err = m.options.Protocol.SerializeInitialRequest(schemas.DuplexStreamWithInitialMessagesInput, opInput, &initial); err != nil {
+			return out, md, fmt.Errorf("serialize initial request: %w", err)
+		}
+		inputStreamWriter = newInitialRequestWriter(inputStreamWriter, initial.Bytes())
+	}
 	eventWriter := &eventStreamWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.EventStream, inputStreamWriter),
 	}
@@ -371,8 +414,15 @@ func (m *deserializeOpEventStreamDuplexStreamWithInitialMessages) HandleDeserial
 
 		asyncResult = make(chan deserializeResult, 1)
 		asyncReader := newAsyncEventStreamReader(asyncResult)
+		var eventStreamBody io.ReadCloser = asyncReader.pipeReader
+		if m.options.Protocol.HasInitialEventMessage() {
+			m.initialResponse = newInitialResponseReader(eventStreamBody, &DuplexStreamWithInitialMessagesInitialReply{}, func(r io.Reader, out smithy.Deserializable) error {
+				return m.options.Protocol.DeserializeInitialResponse(schemas.DuplexStreamWithInitialMessagesOutput, r, out)
+			})
+			eventStreamBody = m.initialResponse
+		}
 		eventReader := newEventStreamReader(
-			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, asyncReader.pipeReader),
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, eventStreamBody),
 		)
 
 		output.eventStream = NewDuplexStreamWithInitialMessagesEventStream(func(stream *DuplexStreamWithInitialMessagesEventStream) {
@@ -415,6 +465,15 @@ func (m *deserializeOpEventStreamDuplexStreamWithInitialMessages) HandleDeserial
 	}
 
 	asyncResult <- deserializeResult{reader: resp.Body}
+	if m.options.Protocol.HasInitialEventMessage() {
+		ir, irErr := m.initialResponse.wait(ctx)
+		if irErr != nil {
+			_ = resp.Body.Close()
+			middleware.AddEventStreamOutputToMetadata(&md, output)
+			return out, md, fmt.Errorf("deserialize initial response: %w", irErr)
+		}
+		out.Result = ir
+	}
 	middleware.AddEventStreamOutputToMetadata(&md, output)
 	return out, md, nil
 }
@@ -464,6 +523,7 @@ func (m *deserializeOpEventStreamInputStream) HandleDeserialize(
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+
 	eventWriter := &eventStreamWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.EventStream, inputStreamWriter),
 	}
@@ -537,6 +597,7 @@ func (m *deserializeOpEventStreamInputStreamWithInitialRequest) HandleDeserializ
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+
 	eventWriter := &eventStreamWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.EventStream, inputStreamWriter),
 	}
@@ -566,9 +627,10 @@ func (m *deserializeOpEventStreamInputStreamWithInitialRequest) HandleDeserializ
 }
 
 type deserializeOpEventStreamOutputStream struct {
-	asyncResult    chan deserializeResult
-	options        *Options
-	existingResult *OutputStreamOutput
+	asyncResult     chan deserializeResult
+	options         *Options
+	existingResult  *OutputStreamOutput
+	initialResponse *initialResponseReader
 }
 
 func (*deserializeOpEventStreamOutputStream) ID() string {
@@ -594,8 +656,15 @@ func (m *deserializeOpEventStreamOutputStream) HandleDeserialize(
 
 		asyncResult = make(chan deserializeResult, 1)
 		asyncReader := newAsyncEventStreamReader(asyncResult)
+		var eventStreamBody io.ReadCloser = asyncReader.pipeReader
+		if m.options.Protocol.HasInitialEventMessage() {
+			m.initialResponse = newInitialResponseReader(eventStreamBody, &OutputStreamInitialReply{}, func(r io.Reader, out smithy.Deserializable) error {
+				return m.options.Protocol.DeserializeInitialResponse(schemas.OutputStreamOutput, r, out)
+			})
+			eventStreamBody = m.initialResponse
+		}
 		eventReader := newEventStreamReader(
-			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, asyncReader.pipeReader),
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, eventStreamBody),
 		)
 
 		output.eventStream = NewOutputStreamEventStream(func(stream *OutputStreamEventStream) {
@@ -638,14 +707,24 @@ func (m *deserializeOpEventStreamOutputStream) HandleDeserialize(
 	}
 
 	asyncResult <- deserializeResult{reader: resp.Body}
+	if m.options.Protocol.HasInitialEventMessage() {
+		ir, irErr := m.initialResponse.wait(ctx)
+		if irErr != nil {
+			_ = resp.Body.Close()
+			middleware.AddEventStreamOutputToMetadata(&md, output)
+			return out, md, fmt.Errorf("deserialize initial response: %w", irErr)
+		}
+		out.Result = ir
+	}
 	middleware.AddEventStreamOutputToMetadata(&md, output)
 	return out, md, nil
 }
 
 type deserializeOpEventStreamOutputStreamWithInitialResponse struct {
-	asyncResult    chan deserializeResult
-	options        *Options
-	existingResult *OutputStreamWithInitialResponseOutput
+	asyncResult     chan deserializeResult
+	options         *Options
+	existingResult  *OutputStreamWithInitialResponseOutput
+	initialResponse *initialResponseReader
 }
 
 func (*deserializeOpEventStreamOutputStreamWithInitialResponse) ID() string {
@@ -671,8 +750,15 @@ func (m *deserializeOpEventStreamOutputStreamWithInitialResponse) HandleDeserial
 
 		asyncResult = make(chan deserializeResult, 1)
 		asyncReader := newAsyncEventStreamReader(asyncResult)
+		var eventStreamBody io.ReadCloser = asyncReader.pipeReader
+		if m.options.Protocol.HasInitialEventMessage() {
+			m.initialResponse = newInitialResponseReader(eventStreamBody, &OutputStreamWithInitialResponseInitialReply{}, func(r io.Reader, out smithy.Deserializable) error {
+				return m.options.Protocol.DeserializeInitialResponse(schemas.OutputStreamWithInitialResponseOutput, r, out)
+			})
+			eventStreamBody = m.initialResponse
+		}
 		eventReader := newEventStreamReader(
-			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, asyncReader.pipeReader),
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, eventStreamBody),
 		)
 
 		output.eventStream = NewOutputStreamWithInitialResponseEventStream(func(stream *OutputStreamWithInitialResponseEventStream) {
@@ -715,6 +801,15 @@ func (m *deserializeOpEventStreamOutputStreamWithInitialResponse) HandleDeserial
 	}
 
 	asyncResult <- deserializeResult{reader: resp.Body}
+	if m.options.Protocol.HasInitialEventMessage() {
+		ir, irErr := m.initialResponse.wait(ctx)
+		if irErr != nil {
+			_ = resp.Body.Close()
+			middleware.AddEventStreamOutputToMetadata(&md, output)
+			return out, md, fmt.Errorf("deserialize initial response: %w", irErr)
+		}
+		out.Result = ir
+	}
 	middleware.AddEventStreamOutputToMetadata(&md, output)
 	return out, md, nil
 }

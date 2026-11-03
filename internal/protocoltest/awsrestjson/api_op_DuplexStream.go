@@ -85,6 +85,13 @@ func (o *DuplexStreamOutput) GetInitialReply() <-chan DuplexStreamInitialReply {
 	return o.initialReply
 }
 
+func (v *DuplexStreamInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplexStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDuplexStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DuplexStream, schemas.DuplexStreamInput, schemas.DuplexStreamOutput)}, middleware.After); err != nil {
 		return err

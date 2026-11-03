@@ -212,6 +212,13 @@ func (o *InvokeHarnessOutput) GetInitialReply() <-chan InvokeHarnessInitialReply
 	return o.initialReply
 }
 
+func (v *InvokeHarnessInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeHarnessResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeHarnessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeHarness, schemas.InvokeHarnessRequest, schemas.InvokeHarnessResponse)}, middleware.After); err != nil {
 		return err
