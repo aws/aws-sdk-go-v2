@@ -32,13 +32,13 @@ var set = smithy.SchemaSet{
 }
 
 var handles = [7]smithy.Schema{
-	smithy.NewStaticSchema(&set, 0),
-	smithy.NewStaticSchema(&set, 1),
-	smithy.NewStaticSchema(&set, 2),
-	smithy.NewStaticSchema(&set, 3),
-	smithy.NewStaticSchema(&set, 4),
-	smithy.NewStaticSchema(&set, 5),
-	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 0, 0),
+	smithy.NewStaticSchema(&set, 1, 0),
+	smithy.NewStaticSchema(&set, 2, 0),
+	smithy.NewStaticSchema(&set, 3, 0),
+	smithy.NewStaticSchema(&set, 4, 0),
+	smithy.NewStaticSchema(&set, 5, 0),
+	smithy.NewStaticSchema(&set, 6, 0),
 }
 
 var QueryCompatibleOperation = &handles[0]

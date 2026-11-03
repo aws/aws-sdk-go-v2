@@ -22,8 +22,8 @@ var set = smithy.SchemaSet{
 }
 
 var handles = [2]smithy.Schema{
-	smithy.NewStaticSchema(&set, 0),
-	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 0, 0),
+	smithy.NewStaticSchema(&set, 1, 0),
 }
 
 var NonQueryCompatibleOperation = &handles[0]
