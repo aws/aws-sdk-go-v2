@@ -1,8 +1,13 @@
 package s3
 
 import (
+	"bytes"
 	"context"
+	"fmt"
+	"io"
 	"net/http"
+	"regexp"
+	"strings"
 	"sync"
 	"testing"
 	"time"
@@ -18,6 +23,10 @@ type mockCreateSession struct {
 
 	calls []mockCreateSessionCall
 	times int
+
+	// AKIDs of the sigv4 credentials each CreateSession call was made with,
+	// as set by the per-call options
+	akids []string
 }
 
 type mockCreateSessionCall struct {
@@ -31,8 +40,20 @@ func (m *mockCreateSession) expectCalled(t *testing.T, times int) {
 	}
 }
 
-func (m *mockCreateSession) CreateSession(context.Context, *CreateSessionInput, ...func(*Options)) (*CreateSessionOutput, error) {
+func (m *mockCreateSession) CreateSession(ctx context.Context, _ *CreateSessionInput, optFns ...func(*Options)) (*CreateSessionOutput, error) {
 	defer m.wg.Done()
+	var opts Options
+	for _, fn := range optFns {
+		fn(&opts)
+	}
+	akid := ""
+	if opts.Credentials != nil {
+		if creds, err := opts.Credentials.Retrieve(ctx); err == nil {
+			akid = creds.AccessKeyID
+		}
+	}
+	m.akids = append(m.akids, akid)
+
 	o := m.calls[m.times]
 	m.times++
 	return o.output, o.err
@@ -307,4 +328,219 @@ func TestS3Express_OperationCredentialOverride(t *testing.T) {
 	}
 
 	createSessionClient.expectCalled(t, 2)
+
+	// each CreateSession must be signed with the credentials that key its
+	// cache entry
+	expectAKIDs := []string{"AKID0", "AKID1"}
+	if len(createSessionClient.akids) != len(expectAKIDs) {
+		t.Fatalf("expected CreateSession akids %v, got %v", expectAKIDs, createSessionClient.akids)
+	}
+	for i, v := range expectAKIDs {
+		if createSessionClient.akids[i] != v {
+			t.Errorf("CreateSession %d: expected akid %q, got %q", i, v, createSessionClient.akids[i])
+		}
+	}
+}
+
+var expressStubCredentialRe = regexp.MustCompile(`Credential=([^/]+)/`)
+
+// expressStubHTTP answers CreateSession with session credentials named after
+// the AKID that signed it, and records the session token of data-plane calls.
+type expressStubHTTP struct {
+	mu                 sync.Mutex
+	createSessionAKIDs []string
+	dataPlaneTokens    []string
+}
+
+func (s *expressStubHTTP) Do(r *http.Request) (*http.Response, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	akid := ""
+	if m := expressStubCredentialRe.FindStringSubmatch(r.Header.Get("Authorization")); m != nil {
+		akid = m[1]
+	}
+	if _, ok := r.URL.Query()["session"]; ok {
+		s.createSessionAKIDs = append(s.createSessionAKIDs, akid)
+		body := fmt.Sprintf(`<?xml version="1.0" encoding="UTF-8"?>
+<CreateSessionResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Credentials><SessionToken>SESSION_TOKEN_OF_%s</SessionToken><SecretAccessKey>SESSION_SECRET_OF_%s</SecretAccessKey><AccessKeyId>SESSION_AKID_OF_%s</AccessKeyId><Expiration>2099-01-01T00:00:00Z</Expiration></Credentials></CreateSessionResult>`, akid, akid, akid)
+		return &http.Response{
+			StatusCode: 200,
+			Header:     http.Header{"Content-Type": {"application/xml"}},
+			Body:       io.NopCloser(bytes.NewBufferString(body)),
+			Request:    r,
+		}, nil
+	}
+
+	s.dataPlaneTokens = append(s.dataPlaneTokens, r.Header.Get("X-Amz-S3session-Token"))
+	return &http.Response{
+		StatusCode: 200,
+		Header:     http.Header{},
+		Body:       io.NopCloser(bytes.NewBufferString("data")),
+		Request:    r,
+	}, nil
+}
+
+func expectStrings(t *testing.T, name string, expect, actual []string) {
+	t.Helper()
+	if len(expect) != len(actual) {
+		t.Errorf("%s: expected %v, got %v", name, expect, actual)
+		return
+	}
+	for i := range expect {
+		if expect[i] != actual[i] {
+			t.Errorf("%s: expected %v, got %v", name, expect, actual)
+			return
+		}
+	}
+}
+
+const expressTestBucket = "bucket--usw2-az1--x-s3"
+
+func TestS3Express_OperationCredentialOverrideSignsCreateSession(t *testing.T) {
+	stub := &expressStubHTTP{}
+	svc := New(Options{
+		Region:      "us-west-2",
+		Credentials: newMockCreds("AKID_A", "SECRET_A", ""),
+		HTTPClient:  stub,
+	})
+
+	out, err := svc.GetObject(context.Background(), &GetObjectInput{
+		Bucket: aws.String(expressTestBucket),
+		Key:    aws.String("key"),
+	}, func(o *Options) {
+		o.Credentials = newMockCreds("AKID_B", "SECRET_B", "")
+	})
+	if err != nil {
+		t.Fatalf("get object: %v", err)
+	}
+	out.Body.Close()
+
+	out, err = svc.GetObject(context.Background(), &GetObjectInput{
+		Bucket: aws.String(expressTestBucket),
+		Key:    aws.String("key"),
+	})
+	if err != nil {
+		t.Fatalf("get object: %v", err)
+	}
+	out.Body.Close()
+
+	expectStrings(t, "CreateSession signers", []string{"AKID_B", "AKID_A"}, stub.createSessionAKIDs)
+	expectStrings(t, "data-plane session tokens",
+		[]string{"SESSION_TOKEN_OF_AKID_B", "SESSION_TOKEN_OF_AKID_A"}, stub.dataPlaneTokens)
+}
+
+func TestS3Express_PresignCredentialOverrideSignsCreateSession(t *testing.T) {
+	stub := &expressStubHTTP{}
+	svc := New(Options{
+		Region:      "us-west-2",
+		Credentials: newMockCreds("AKID_A", "SECRET_A", ""),
+		HTTPClient:  stub,
+	})
+
+	req, err := NewPresignClient(svc).PresignGetObject(context.Background(), &GetObjectInput{
+		Bucket: aws.String(expressTestBucket),
+		Key:    aws.String("key"),
+	}, func(po *PresignOptions) {
+		po.ClientOptions = append(po.ClientOptions, func(o *Options) {
+			o.Credentials = newMockCreds("AKID_B", "SECRET_B", "")
+		})
+	})
+	if err != nil {
+		t.Fatalf("presign get object: %v", err)
+	}
+
+	expectStrings(t, "CreateSession signers", []string{"AKID_B"}, stub.createSessionAKIDs)
+	if !strings.Contains(req.URL, "SESSION_TOKEN_OF_AKID_B") {
+		t.Errorf("expected presigned URL to carry session of AKID_B, got %s", req.URL)
+	}
+}
+
+func TestS3Express_DerivedClientDoesNotRebindProvider(t *testing.T) {
+	stub1 := &expressStubHTTP{}
+	svc1 := New(Options{
+		Region:      "us-west-2",
+		Credentials: newMockCreds("AKID_A", "SECRET_A", ""),
+		HTTPClient:  stub1,
+	})
+
+	stub2 := &expressStubHTTP{}
+	svc2 := New(svc1.Options(), func(o *Options) {
+		o.Credentials = newMockCreds("AKID_B", "SECRET_B", "")
+		o.HTTPClient = stub2
+	})
+
+	if svc1.options.ExpressCredentials == svc2.options.ExpressCredentials {
+		t.Errorf("expected derived client to have its own express credentials provider")
+	}
+
+	for _, svc := range []*Client{svc1, svc2} {
+		out, err := svc.GetObject(context.Background(), &GetObjectInput{
+			Bucket: aws.String(expressTestBucket),
+			Key:    aws.String("key"),
+		})
+		if err != nil {
+			t.Fatalf("get object: %v", err)
+		}
+		out.Body.Close()
+	}
+
+	expectStrings(t, "client 1 CreateSession signers", []string{"AKID_A"}, stub1.createSessionAKIDs)
+	expectStrings(t, "client 1 data-plane session tokens", []string{"SESSION_TOKEN_OF_AKID_A"}, stub1.dataPlaneTokens)
+	expectStrings(t, "client 2 CreateSession signers", []string{"AKID_B"}, stub2.createSessionAKIDs)
+	expectStrings(t, "client 2 data-plane session tokens", []string{"SESSION_TOKEN_OF_AKID_B"}, stub2.dataPlaneTokens)
+}
+
+// rotatingCreds returns the first identity on its first call and the second
+// identity on every call after that.
+type rotatingCreds struct {
+	mu    sync.Mutex
+	calls int
+}
+
+func (r *rotatingCreds) Retrieve(context.Context) (aws.Credentials, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	r.calls++
+	if r.calls == 1 {
+		return aws.Credentials{AccessKeyID: "AKID_ROT1", SecretAccessKey: "SECRET_ROT1"}, nil
+	}
+	return aws.Credentials{AccessKeyID: "AKID_ROT2", SecretAccessKey: "SECRET_ROT2"}, nil
+}
+
+func TestS3Express_RotatingCredentialsSignCreateSessionWithCacheKeyIdentity(t *testing.T) {
+	mockClient := &mockCreateSession{
+		calls: []mockCreateSessionCall{
+			{
+				output: &CreateSessionOutput{
+					Credentials: &types.SessionCredentials{
+						AccessKeyId:     aws.String("AccessKeyId-0"),
+						Expiration:      aws.Time(time.Now().Add(time.Hour).UTC()),
+						SecretAccessKey: aws.String("SecretAccessKey-0"),
+						SessionToken:    aws.String("SessionToken-0"),
+					},
+				},
+			},
+		},
+	}
+	mockClient.wg.Add(1)
+
+	c := newDefaultS3ExpressCredentialsProvider()
+	c.client = mockClient
+	c.v4creds = &rotatingCreds{}
+
+	if _, err := c.Retrieve(context.Background(), "bucket"); err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+
+	mockClient.expectCalled(t, 1)
+	expectStrings(t, "CreateSession signers", []string{"AKID_ROT1"}, mockClient.akids)
+
+	key := cacheKey{
+		CredentialsHash: gethmac("AKID_ROT1", "SECRET_ROT1"),
+		Bucket:          "bucket",
+	}
+	if _, ok := c.cache.Get(key); !ok {
+		t.Errorf("expected session cached under the AKID_ROT1 key")
+	}
 }
