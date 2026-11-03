@@ -120,7 +120,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 833, Target: 27, Traits: 4, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1041, Target: 91, Traits: 4, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
 		{StrOff: 1251, Target: 92, Traits: 4, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 678, Target: 93, Traits: 4, StrLen: 18, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 678, Target: 93, Traits: 4, StrLen: 18, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 1},
 		{StrOff: 882, Target: 20, Traits: 4, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 579, Target: 22, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1172, Target: 32, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
@@ -136,7 +136,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 1200, Target: 28, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
 		{StrOff: 1068, Target: 74, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1305, Target: 36, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 316, Target: 109, Traits: 4, StrLen: 25, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 316, Target: 109, Traits: 4, StrLen: 25, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 2},
 		{StrOff: 882, Target: 20, Traits: 4, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1172, Target: 32, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1044, Target: 14, Traits: 4, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
@@ -204,6 +204,15 @@ var set = smithy.SchemaSet{
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+	},
+	Hashes: []smithy.StaticHash{
+		{Tab: 0, Mask: 31, Seed: 5},
+		{Tab: 32, Mask: 31, Seed: 7},
+	},
+	Slots: []uint16{
+		0, 0, 0, 0, 2, 0, 0, 0, 6, 0, 0, 1, 0, 0, 0, 0, 0, 8, 7, 0, 0, 5, 0, 0,
+		0, 9, 4, 3, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 5, 0, 7, 2, 0, 3, 0, 0, 0, 0,
+		0, 1, 0, 0, 0, 0, 8, 11, 6, 9, 0, 0, 0, 0, 10, 0,
 	},
 }
 

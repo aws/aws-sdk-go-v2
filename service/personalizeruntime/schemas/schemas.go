@@ -105,7 +105,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 63, Target: 81, Traits: 3, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
 		{StrOff: 322, Target: 29, Traits: 3, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
 		{StrOff: 357, Target: 59, Traits: 3, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 148, Target: 84, Traits: 3, StrLen: 25, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 148, Target: 84, Traits: 3, StrLen: 25, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 1},
 		{StrOff: 544, Target: 7, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 707, Target: 28, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 725, Target: 63, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
@@ -135,6 +135,13 @@ var set = smithy.SchemaSet{
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
+	Hashes: []smithy.StaticHash{
+		{Tab: 0, Mask: 31, Seed: 2},
+	},
+	Slots: []uint16{
+		0, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 10, 0, 0, 8, 0, 0, 0, 0, 0, 9, 0, 0, 0,
+		6, 5, 2, 0, 7, 3, 0, 0,
 	},
 }
 

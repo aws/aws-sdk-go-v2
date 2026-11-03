@@ -215,7 +215,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 1843, Target: 158, Traits: 31, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
 		{StrOff: 4024, Target: 189, Traits: 31, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
 		{StrOff: 158, Target: 160, Traits: 31, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 4024, Target: 195, Traits: 31, StrLen: 6, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4024, Target: 195, Traits: 31, StrLen: 6, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 1},
 		{StrOff: 2903, Target: 162, Traits: 31, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
 		{StrOff: 4024, Target: 219, Traits: 31, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 918, Target: 164, Traits: 31, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
@@ -249,7 +249,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 3381, Target: 600, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 3962, Target: 600, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 720, Target: 600, Traits: 31, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 164, Target: 195, Traits: 31, StrLen: 31, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 164, Target: 195, Traits: 31, StrLen: 31, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 0, Hash: 1},
 		{StrOff: 3913, Target: 600, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 3793, Target: 600, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 2239, Target: 600, Traits: 31, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
@@ -855,6 +855,14 @@ var set = smithy.SchemaSet{
 		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "buckets"}}, DirectMask: 0x1},
 		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "cleanAmplifyApp"}}, DirectMask: 0x1},
 		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "loginAuthConfig"}}, DirectMask: 0x1},
+	},
+	Hashes: []smithy.StaticHash{
+		{Tab: 0, Mask: 63, Seed: 4},
+	},
+	Slots: []uint16{
+		14, 0, 0, 1, 0, 0, 0, 2, 17, 7, 0, 0, 0, 15, 0, 0, 0, 0, 3, 0, 12, 11, 0, 0,
+		0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0,
+		9, 0, 0, 10, 0, 8, 0, 0, 16, 0, 0, 0, 0, 0, 6, 0,
 	},
 }
 

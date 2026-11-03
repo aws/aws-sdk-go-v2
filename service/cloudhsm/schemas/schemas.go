@@ -160,7 +160,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 1258, Target: 76, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 711, Target: 128, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
 		{StrOff: 1586, Target: 47, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 652, Target: 130, Traits: 0, StrLen: 20, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 652, Target: 130, Traits: 0, StrLen: 20, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 1},
 		{StrOff: 1586, Target: 47, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1399, Target: 76, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 672, Target: 51, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
@@ -173,7 +173,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 842, Target: 140, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
 		{StrOff: 1641, Target: 50, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1159, Target: 53, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 730, Target: 143, Traits: 0, StrLen: 19, Count: 21, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 730, Target: 143, Traits: 0, StrLen: 19, Count: 21, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 2},
 		{StrOff: 1641, Target: 50, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1258, Target: 54, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
 		{StrOff: 1258, Target: 76, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
@@ -277,6 +277,16 @@ var set = smithy.SchemaSet{
 		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DeleteHsmRequest"}}, DirectMask: 0x8},
 		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "HsmArn"}}, DirectMask: 0x8},
 		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "ModifyHsmRequest"}}, DirectMask: 0x8},
+	},
+	Hashes: []smithy.StaticHash{
+		{Tab: 0, Mask: 31, Seed: 2},
+		{Tab: 32, Mask: 63, Seed: 96},
+	},
+	Slots: []uint16{
+		0, 0, 4, 0, 0, 0, 2, 0, 0, 0, 0, 0, 7, 0, 3, 0, 0, 0, 0, 9, 0, 5, 0, 0,
+		0, 0, 6, 8, 0, 0, 0, 1, 20, 6, 14, 11, 0, 0, 0, 4, 0, 0, 0, 19, 15, 0, 7, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 16, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 17,
+		0, 0, 0, 0, 21, 9, 5, 0, 0, 0, 0, 18, 0, 12, 2, 1, 3, 0, 0, 0, 0, 0, 13, 0,
 	},
 }
 

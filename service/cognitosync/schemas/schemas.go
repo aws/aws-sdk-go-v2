@@ -236,7 +236,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 1829, Target: 131, Traits: 33, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1789, Target: 73, Traits: 34, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
 		{StrOff: 1493, Target: 132, Traits: 36, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 1285, Target: 203, Traits: 19, StrLen: 19, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1285, Target: 203, Traits: 19, StrLen: 19, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 1},
 		{StrOff: 1152, Target: 112, Traits: 19, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
 		{StrOff: 1829, Target: 131, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 32, Target: 72, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
@@ -374,6 +374,13 @@ var set = smithy.SchemaSet{
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "lastSyncCount"}}, DirectMask: 0x10},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "syncSessionToken"}}, DirectMask: 0x10},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-Client-Context"}}, DirectMask: 0x80},
+	},
+	Hashes: []smithy.StaticHash{
+		{Tab: 0, Mask: 31, Seed: 1},
+	},
+	Slots: []uint16{
+		0, 8, 0, 0, 0, 0, 0, 2, 0, 0, 3, 0, 6, 7, 0, 0, 0, 0, 0, 0, 5, 0, 4, 9,
+		1, 0, 0, 0, 0, 0, 0, 0,
 	},
 }
 

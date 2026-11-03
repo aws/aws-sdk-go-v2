@@ -608,7 +608,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 7415, Target: 126, Traits: 92, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 7415, Target: 126, Traits: 92, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 8118, Target: 126, Traits: 92, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 5916, Target: 510, Traits: 92, StrLen: 25, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5916, Target: 510, Traits: 92, StrLen: 25, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 1},
 		{StrOff: 7495, Target: 126, Traits: 97, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 4291, Target: 126, Traits: 92, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 6116, Target: 126, Traits: 92, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
@@ -1445,6 +1445,13 @@ var set = smithy.SchemaSet{
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
+	Hashes: []smithy.StaticHash{
+		{Tab: 0, Mask: 31, Seed: 4},
+	},
+	Slots: []uint16{
+		0, 5, 0, 0, 0, 0, 6, 0, 0, 0, 7, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 8, 2,
+		0, 9, 1, 0, 0, 0, 3, 0,
 	},
 }
 

@@ -266,7 +266,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 1720, Target: 253, Traits: 6, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 383, Target: 154, Traits: 6, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 957, Target: 82, Traits: 6, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 0, Target: 227, Traits: 10, StrLen: 36, Count: 14, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 0, Target: 227, Traits: 10, StrLen: 36, Count: 14, Type: uint8(smithy.ShapeTypeUnion), Flags: 0, Hash: 1},
 		{StrOff: 238, Target: 157, Traits: 6, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 1545, Target: 262, Traits: 6, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 1186, Target: 112, Traits: 6, StrLen: 17, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
@@ -363,7 +363,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 1322, Target: 245, Traits: 6, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
 		{StrOff: 2275, Target: 194, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 809, Target: 165, Traits: 6, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 263, Target: 324, Traits: 6, StrLen: 25, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 263, Target: 324, Traits: 6, StrLen: 25, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 2},
 		{StrOff: 2518, Target: 41, Traits: 26, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 2174, Target: 40, Traits: 26, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 2333, Target: 139, Traits: 26, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
@@ -373,7 +373,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 1065, Target: 152, Traits: 28, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 828, Target: 152, Traits: 36, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 2092, Target: 38, Traits: 33, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
-		{StrOff: 187, Target: 334, Traits: 6, StrLen: 26, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 187, Target: 334, Traits: 6, StrLen: 26, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 3},
 		{StrOff: 2266, Target: 152, Traits: 37, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 2070, Target: 152, Traits: 28, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 2341, Target: 152, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
@@ -392,7 +392,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 1438, Target: 65, Traits: 41, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
 		{StrOff: 1083, Target: 220, Traits: 33, StrLen: 18, Count: 6, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
 		{StrOff: 0, Target: 352, Traits: 6, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 847, Target: 227, Traits: 33, StrLen: 19, Count: 14, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 847, Target: 227, Traits: 33, StrLen: 19, Count: 14, Type: uint8(smithy.ShapeTypeUnion), Flags: 1, Hash: 1},
 		{StrOff: 2560, Target: 354, Traits: 6, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
 	},
 	Traits: []smithy.TraitSet{
@@ -450,6 +450,17 @@ var set = smithy.SchemaSet{
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-input-transcript"}}, DirectMask: 0x80},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-recognized-bot-member"}}, DirectMask: 0x80},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-conversation-mode"}}, DirectMask: 0x80},
+	},
+	Hashes: []smithy.StaticHash{
+		{Tab: 0, Mask: 31, Seed: 10},
+		{Tab: 32, Mask: 31, Seed: 1},
+		{Tab: 64, Mask: 31, Seed: 2},
+	},
+	Slots: []uint16{
+		11, 9, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 7, 14, 0, 8, 0, 6, 0, 0, 4, 12, 0, 5,
+		0, 10, 2, 13, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 0, 0, 0, 0, 0, 0, 4, 0, 3, 0,
+		9, 0, 0, 0, 0, 8, 0, 6, 0, 2, 0, 0, 0, 0, 0, 7, 10, 0, 0, 0, 0, 0, 0, 0,
+		4, 7, 0, 9, 3, 0, 2, 1, 6, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0,
 	},
 }
 

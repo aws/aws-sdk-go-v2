@@ -124,7 +124,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 245, Target: 100, Traits: 4, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
 		{StrOff: 652, Target: 65, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
 		{StrOff: 753, Target: 87, Traits: 4, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 232, Target: 103, Traits: 4, StrLen: 13, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 232, Target: 103, Traits: 4, StrLen: 13, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 1},
 		{StrOff: 592, Target: 16, Traits: 7, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 673, Target: 26, Traits: 8, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 604, Target: 30, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
@@ -192,6 +192,13 @@ var set = smithy.SchemaSet{
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "suggester"}}, DirectMask: 0x10},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80},
+	},
+	Hashes: []smithy.StaticHash{
+		{Tab: 0, Mask: 31, Seed: 33},
+	},
+	Slots: []uint16{
+		9, 6, 0, 0, 3, 0, 13, 0, 5, 2, 0, 0, 0, 0, 1, 0, 14, 0, 0, 0, 4, 0, 0, 0,
+		7, 8, 11, 0, 10, 12, 0, 0,
 	},
 }
 

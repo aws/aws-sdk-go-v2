@@ -118,8 +118,8 @@ var set = smithy.SchemaSet{
 		{StrOff: 1373, Target: 87, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
 		{StrOff: 425, Target: 88, Traits: 11, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
 		{StrOff: 1221, Target: 41, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 29, Target: 91, Traits: 6, StrLen: 6, Count: 15, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
-		{StrOff: 425, Target: 91, Traits: 6, StrLen: 25, Count: 15, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 29, Target: 91, Traits: 6, StrLen: 6, Count: 15, Type: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 1},
+		{StrOff: 425, Target: 91, Traits: 6, StrLen: 25, Count: 15, Type: uint8(smithy.ShapeTypeEnum), Flags: 0, Hash: 1},
 		{StrOff: 798, Target: 180, Traits: 6, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 971, Target: 180, Traits: 6, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 858, Target: 180, Traits: 6, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
@@ -196,7 +196,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 1328, Target: 22, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
 		{StrOff: 1337, Target: 45, Traits: 10, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1447, Target: 86, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
-		{StrOff: 756, Target: 168, Traits: 6, StrLen: 21, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 756, Target: 168, Traits: 6, StrLen: 21, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 2},
 		{StrOff: 1239, Target: 40, Traits: 6, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1114, Target: 70, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1405, Target: 47, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
@@ -252,6 +252,15 @@ var set = smithy.SchemaSet{
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "startingBlockIndex"}}, DirectMask: 0x10},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-Progress"}}, DirectMask: 0x80},
+	},
+	Hashes: []smithy.StaticHash{
+		{Tab: 0, Mask: 31, Seed: 67},
+		{Tab: 32, Mask: 31, Seed: 4},
+	},
+	Slots: []uint16{
+		0, 0, 0, 10, 3, 1, 0, 7, 0, 4, 0, 0, 15, 9, 6, 0, 0, 14, 0, 8, 13, 0, 0, 2,
+		5, 12, 0, 0, 0, 11, 0, 0, 0, 0, 0, 7, 0, 0, 0, 4, 0, 3, 0, 0, 11, 5, 0, 0,
+		8, 9, 0, 0, 0, 0, 10, 0, 2, 0, 0, 6, 0, 0, 0, 1,
 	},
 }
 

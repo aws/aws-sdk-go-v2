@@ -355,7 +355,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 4551, Target: 161, Traits: 49, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
 		{StrOff: 3272, Target: 288, Traits: 49, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
 		{StrOff: 5091, Target: 286, Traits: 49, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
-		{StrOff: 4003, Target: 290, Traits: 49, StrLen: 12, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4003, Target: 290, Traits: 49, StrLen: 12, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 1},
 		{StrOff: 4654, Target: 141, Traits: 49, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
 		{StrOff: 3698, Target: 262, Traits: 49, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 5163, Target: 302, Traits: 49, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
@@ -366,7 +366,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 4654, Target: 140, Traits: 49, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 4502, Target: 206, Traits: 49, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 4003, Target: 300, Traits: 49, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
-		{StrOff: 5091, Target: 290, Traits: 49, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5091, Target: 290, Traits: 49, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1, Hash: 1},
 		{StrOff: 4793, Target: 302, Traits: 49, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
 		{StrOff: 4874, Target: 597, Traits: 49, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 4978, Target: 597, Traits: 49, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
@@ -511,7 +511,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 4587, Target: 314, Traits: 49, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 4067, Target: 137, Traits: 49, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 3938, Target: 315, Traits: 49, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 3955, Target: 446, Traits: 49, StrLen: 16, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3955, Target: 446, Traits: 49, StrLen: 16, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 2},
 		{StrOff: 3698, Target: 262, Traits: 49, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 5163, Target: 302, Traits: 49, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
 		{StrOff: 4962, Target: 204, Traits: 49, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
@@ -846,6 +846,16 @@ var set = smithy.SchemaSet{
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "type"}}, DirectMask: 0x10},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxTables"}}, DirectMask: 0x10},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
+	Hashes: []smithy.StaticHash{
+		{Tab: 0, Mask: 31, Seed: 1},
+		{Tab: 32, Mask: 63, Seed: 2},
+	},
+	Slots: []uint16{
+		0, 0, 4, 5, 0, 0, 2, 0, 0, 6, 1, 0, 0, 0, 0, 0, 0, 0, 7, 0, 8, 0, 0, 0,
+		0, 0, 3, 9, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 11, 0, 5, 9, 14, 0, 0, 0, 0, 0, 0, 15, 0, 8, 10, 0, 0, 0, 7, 0, 3,
+		0, 0, 0, 0, 12, 0, 0, 0, 13, 17, 0, 0, 2, 0, 16, 0, 0, 0, 0, 0, 0, 0, 6, 0,
 	},
 }
 

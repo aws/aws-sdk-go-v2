@@ -20,7 +20,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 59, Target: 1, Traits: 1, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
 		{StrOff: 79, Target: 2, Traits: 2, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
 		{StrOff: 185, Target: 28, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 30, Target: 4, Traits: 2, StrLen: 29, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 30, Target: 4, Traits: 2, StrLen: 29, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 1},
 		{StrOff: 249, Target: 28, Traits: 4, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 154, Target: 28, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 115, Target: 29, Traits: 2, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
@@ -32,7 +32,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 165, Target: 34, Traits: 2, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
 		{StrOff: 79, Target: 2, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 143, Target: 35, Traits: 6, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
-		{StrOff: 0, Target: 16, Traits: 2, StrLen: 30, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 16, Traits: 2, StrLen: 30, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 2},
 		{StrOff: 249, Target: 28, Traits: 4, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 154, Target: 28, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 115, Target: 29, Traits: 2, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
@@ -64,6 +64,15 @@ var set = smithy.SchemaSet{
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "https://example.com",
 			Prefix: "xsi"}}, DirectMask: 0x8000},
 		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DoubleDribble"}}, DirectMask: 0x8},
+	},
+	Hashes: []smithy.StaticHash{
+		{Tab: 0, Mask: 31, Seed: 4},
+		{Tab: 32, Mask: 31, Seed: 4},
+	},
+	Slots: []uint16{
+		0, 5, 0, 8, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 10, 1, 9, 0, 0, 0, 0, 11, 0, 0,
+		0, 0, 7, 6, 0, 0, 2, 0, 0, 5, 0, 8, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 10, 1,
+		9, 0, 0, 0, 0, 11, 0, 0, 0, 0, 7, 6, 0, 0, 2, 0,
 	},
 }
 

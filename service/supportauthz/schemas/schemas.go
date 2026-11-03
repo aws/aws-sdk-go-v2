@@ -156,7 +156,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 704, Target: 70, Traits: 11, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1068, Target: 28, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1437, Target: 105, Traits: 11, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
-		{StrOff: 207, Target: 128, Traits: 11, StrLen: 25, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 207, Target: 128, Traits: 11, StrLen: 25, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 1},
 		{StrOff: 1429, Target: 44, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1441, Target: 27, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1079, Target: 38, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
@@ -185,7 +185,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 1079, Target: 15, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 560, Target: 155, Traits: 11, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
 		{StrOff: 472, Target: 71, Traits: 20, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
-		{StrOff: 495, Target: 157, Traits: 11, StrLen: 22, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 495, Target: 157, Traits: 11, StrLen: 22, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0, Hash: 2},
 		{StrOff: 1429, Target: 44, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1441, Target: 27, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1079, Target: 38, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
@@ -287,6 +287,15 @@ var set = smithy.SchemaSet{
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "supportCaseDisplayId"}}, DirectMask: 0x10},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "supportPermitStatuses"}}, DirectMask: 0x10},
 		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
+	Hashes: []smithy.StaticHash{
+		{Tab: 0, Mask: 31, Seed: 5},
+		{Tab: 32, Mask: 31, Seed: 5},
+	},
+	Slots: []uint16{
+		3, 2, 0, 0, 5, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 7, 4, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 8, 0, 1, 3, 2, 0, 0, 5, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6,
+		7, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 1,
 	},
 }
 

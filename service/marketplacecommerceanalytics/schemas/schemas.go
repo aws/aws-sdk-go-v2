@@ -36,7 +36,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 1429, Target: 41, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1075, Target: 6, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
 		{StrOff: 1279, Target: 7, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
-		{StrOff: 1268, Target: 8, Traits: 0, StrLen: 11, Count: 25, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1268, Target: 8, Traits: 0, StrLen: 11, Count: 25, Type: uint8(smithy.ShapeTypeEnum), Flags: 0, Hash: 1},
 		{StrOff: 50, Target: 67, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 397, Target: 67, Traits: 0, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 552, Target: 67, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
@@ -76,7 +76,7 @@ var set = smithy.SchemaSet{
 		{StrOff: 703, Target: 67, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 698, Target: 67, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
 		{StrOff: 1097, Target: 47, Traits: 0, StrLen: 22, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
-		{StrOff: 1373, Target: 8, Traits: 0, StrLen: 11, Count: 25, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1373, Target: 8, Traits: 0, StrLen: 11, Count: 25, Type: uint8(smithy.ShapeTypeEnum), Flags: 1, Hash: 1},
 		{StrOff: 1119, Target: 6, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
 		{StrOff: 1384, Target: 42, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
 		{StrOff: 1052, Target: 34, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
@@ -100,6 +100,14 @@ var set = smithy.SchemaSet{
 	Traits: []smithy.TraitSet{
 		{},
 		{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}},
+	},
+	Hashes: []smithy.StaticHash{
+		{Tab: 0, Mask: 63, Seed: 93},
+	},
+	Slots: []uint16{
+		23, 0, 0, 1, 0, 0, 0, 0, 21, 0, 15, 0, 0, 0, 0, 0, 17, 20, 0, 0, 2, 0, 18, 16,
+		0, 0, 0, 0, 0, 8, 3, 0, 13, 11, 0, 0, 14, 6, 0, 0, 0, 25, 5, 0, 0, 0, 7, 9,
+		24, 0, 4, 19, 22, 0, 0, 10, 0, 0, 12, 0, 0, 0, 0, 0,
 	},
 }
 
