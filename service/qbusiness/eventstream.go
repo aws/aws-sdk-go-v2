@@ -189,6 +189,7 @@ func (m *deserializeOpEventStreamChat) HandleDeserialize(
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+
 	eventWriter := &chatInputStreamWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.ChatInputStream, inputStreamWriter),
 	}

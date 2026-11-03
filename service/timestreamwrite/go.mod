@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.8
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.8
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.13.8
-	github.com/aws/smithy-go v1.28.7
+	github.com/aws/smithy-go v1.28.8
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../
