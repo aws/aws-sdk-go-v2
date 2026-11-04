@@ -1,8 +1,0 @@
-{
-    "id": "d8e31056-436c-4901-a5e3-abe883f04f49",
-    "type": "feature",
-    "description": "Adding support for copying and tagging option groups with cross-Region DB snapshot copies, in the same account or across accounts.",
-    "modules": [
-        "service/rds"
-    ]
-}

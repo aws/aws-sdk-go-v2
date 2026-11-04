@@ -1,3 +1,9 @@
+# v1.44.0 (2026-11-04)
+
+* **Feature**: Adds DefaultAmiList to DescribePlatformVersion to return the default AMI for each processor architecture that a platform version supports.
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.6 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

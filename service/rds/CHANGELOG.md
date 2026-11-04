@@ -1,3 +1,9 @@
+# v1.132.0 (2026-11-04)
+
+* **Feature**: Adding support for copying and tagging option groups with cross-Region DB snapshot copies, in the same account or across accounts.
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.131.2 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

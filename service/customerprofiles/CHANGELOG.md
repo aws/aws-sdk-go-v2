@@ -1,3 +1,8 @@
+# v1.75.1 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.75.0 (2026-10-30)
 
 * **Feature**: Adds support for template ingestion controls in the GetProfileObjectTypeTemplate API response.

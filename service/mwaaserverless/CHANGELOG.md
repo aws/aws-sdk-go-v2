@@ -1,3 +1,9 @@
+# v1.14.0 (2026-11-04)
+
+* **Feature**: Adding support to Environment Variables in MWAA Serverless
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.5 (2026-10-30)
 
 * **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.

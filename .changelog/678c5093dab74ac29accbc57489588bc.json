@@ -1,8 +1,0 @@
-{
-    "id": "678c5093-dab7-4ac2-9acc-bc57489588bc",
-    "type": "feature",
-    "description": "Release Software APIs- GetSoftwareV2, GetSoftwareStatisticsV2 and GetSoftwareResourcesV2 to list software packages with aggregated resource count, get aggregated software statistics, and find the resources that contain a specific software package.",
-    "modules": [
-        "service/securityhub"
-    ]
-}

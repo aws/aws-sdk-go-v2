@@ -1,8 +1,0 @@
-{
-    "id": "5b3f6c3c-e61d-40ae-ba89-6dc631afa0d2",
-    "type": "feature",
-    "description": "Adds DefaultAmiList to DescribePlatformVersion to return the default AMI for each processor architecture that a platform version supports.",
-    "modules": [
-        "service/elasticbeanstalk"
-    ]
-}

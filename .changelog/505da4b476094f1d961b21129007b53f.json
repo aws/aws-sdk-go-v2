@@ -1,8 +1,0 @@
-{
-    "id": "505da4b4-7609-4f1d-961b-21129007b53f",
-    "type": "feature",
-    "description": "Amazon S3 Tables now supports migrating AWS Glue Data Catalog tables into S3 Table buckets. This release adds the StartTableMigration, SyncTableMigration, UpdateTableMigration, CompleteTableMigration, GetTableMigration, and ListTableMigrations APIs.",
-    "modules": [
-        "service/s3tables"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.9.1 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2026-10-27)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

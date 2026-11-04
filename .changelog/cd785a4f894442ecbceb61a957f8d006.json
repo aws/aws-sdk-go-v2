@@ -1,8 +1,0 @@
-{
-    "id": "cd785a4f-8944-42ec-bceb-61a957f8d006",
-    "type": "feature",
-    "description": "Adds support for retrieving associated cases in contact responses. The Contact object now includes a Cases field containing case IDs and reference numbers linked to the contact.",
-    "modules": [
-        "service/connect"
-    ]
-}

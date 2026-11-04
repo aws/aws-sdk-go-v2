@@ -1,8 +1,0 @@
-{
-    "id": "b1778264-06a5-47c0-941c-e3a9f2a877a4",
-    "type": "feature",
-    "description": "Rules TBAC GA (Contact Lens V1) - Adds an optional ListFilter (CategoriesAttributeFilter with OrConditions, AndCondition and TagCondition) to ListRealtimeContactAnalysisSegments. This filters matched categories by rule tags. It also adds an optional RuleId to CategoryDetails in the response.",
-    "modules": [
-        "service/connectcontactlens"
-    ]
-}

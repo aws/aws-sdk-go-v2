@@ -1,8 +1,0 @@
-{
-    "id": "20d4f7a6-fe0c-4724-8b38-9b88b60372e8",
-    "type": "feature",
-    "description": "GetListing and SearchListings APIs now return G2 and PeerSpot review sources in review summaries.",
-    "modules": [
-        "service/marketplacediscovery"
-    ]
-}

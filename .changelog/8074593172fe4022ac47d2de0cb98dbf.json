@@ -1,8 +1,0 @@
-{
-    "id": "80745931-72fe-4022-ac47-d2de0cb98dbf",
-    "type": "feature",
-    "description": "Adds the crlDpRevocationEnabled field to enable automatic revocation checking using CRL distribution points in X.509 certificates.",
-    "modules": [
-        "service/rolesanywhere"
-    ]
-}

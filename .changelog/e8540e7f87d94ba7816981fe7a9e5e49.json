@@ -1,8 +1,0 @@
-{
-    "id": "e8540e7f-87d9-4ba7-8169-81fe7a9e5e49",
-    "type": "feature",
-    "description": "This release adds Migration Planning artifacts as a source environment for network migration definitions, and an optional clientToken on CreateNetworkMigrationDefinition so that retried requests don't create duplicate definitions.",
-    "modules": [
-        "service/mgn"
-    ]
-}
