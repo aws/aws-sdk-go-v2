@@ -135273,6 +135273,12 @@
                     "traits": {
                         "smithy.api#enumValue": "low"
                     }
+                },
+                "UNSUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unsupported"
+                    }
                 }
             }
         },

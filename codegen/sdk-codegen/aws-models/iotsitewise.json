@@ -7946,6 +7946,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "jobName": {
+                    "target": "com.amazonaws.iotsitewise#DatasetExportJobNameInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional name for the export job. When omitted, one will be created based on type of job\nand start time.</p>"
+                    }
+                },
                 "errorReportLocation": {
                     "target": "com.amazonaws.iotsitewise#ExportErrorReportLocation",
                     "traits": {
@@ -9411,6 +9417,28 @@
                     "max": 36
                 },
                 "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.iotsitewise#DatasetExportJobName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An optional name for a dataset export job. When omitted on CreateDatasetExportJob, one will be\ncreated based on type of job and start time.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 350
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x1f\\x7f]+$"
+            }
+        },
+        "com.amazonaws.iotsitewise#DatasetExportJobNameInput": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An optional name for a dataset export job. When omitted on CreateDatasetExportJob, one will be\ncreated based on type of job and start time.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x1f\\x7f]+$"
             }
         },
         "com.amazonaws.iotsitewise#DatasetExportJobStatus": {
@@ -12924,6 +12952,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "jobName": {
+                    "target": "com.amazonaws.iotsitewise#DatasetExportJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset export job.</p>"
+                    }
+                },
                 "status": {
                     "target": "com.amazonaws.iotsitewise#DatasetExportJobStatus",
                     "traits": {
@@ -16348,6 +16382,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for the dataset export job.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "jobName": {
+                    "target": "com.amazonaws.iotsitewise#DatasetExportJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset export job.</p>"
                     }
                 },
                 "status": {

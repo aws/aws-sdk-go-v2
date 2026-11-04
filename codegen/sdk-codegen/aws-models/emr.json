@@ -11190,10 +11190,36 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The KMS key ARN to encrypt the logs published to the given Amazon S3\n         destination.</p>"
                     }
+                },
+                "AdditionalInfo": {
+                    "target": "com.amazonaws.emr#StepAdditionalInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the step, including the YARN application IDs associated with the step and the resource manager that processed it.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>This represents a step in a cluster.</p>"
+            }
+        },
+        "com.amazonaws.emr#StepAdditionalInfo": {
+            "type": "structure",
+            "members": {
+                "ResourceManagerApplicationIds": {
+                    "target": "com.amazonaws.emr#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The YARN application IDs associated with the step.</p>"
+                    }
+                },
+                "ResourceManager": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address of the YARN resource manager that processed the step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional information about a step's execution, available after the step has started running.</p>"
             }
         },
         "com.amazonaws.emr#StepCancellationOption": {
@@ -11556,6 +11582,12 @@
                     "target": "com.amazonaws.emr#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The KMS key ARN to encrypt the logs published to the given Amazon S3 \n         destination.</p>"
+                    }
+                },
+                "AdditionalInfo": {
+                    "target": "com.amazonaws.emr#StepAdditionalInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the step, including the YARN application IDs associated with the step and the resource manager that processed it.</p>"
                     }
                 }
             },

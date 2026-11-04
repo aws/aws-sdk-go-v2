@@ -7897,6 +7897,53 @@
                 }
             }
         },
+        "com.amazonaws.connect#CaseEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#CaseEntry"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of cases associated with the contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#CaseEntry": {
+            "type": "structure",
+            "members": {
+                "CaseId": {
+                    "target": "com.amazonaws.connect#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of the case in UUID format.</p>"
+                    }
+                },
+                "CaseReferenceNumber": {
+                    "target": "com.amazonaws.connect#CaseReferenceNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A friendly number for the case. Reference numbers are not guaranteed to be unique.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a case associated with a contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#CaseId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                }
+            }
+        },
+        "com.amazonaws.connect#CaseReferenceNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.connect#CaseSlaConfiguration": {
             "type": "structure",
             "members": {
@@ -9052,6 +9099,12 @@
                     "target": "com.amazonaws.connect#TaskTemplateInfoV2",
                     "traits": {
                         "smithy.api#documentation": "<p>If this contact was created using a task template, this contains information about the task template.</p>"
+                    }
+                },
+                "Cases": {
+                    "target": "com.amazonaws.connect#CaseEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of cases associated with the contact. This field is populated when one or more cases have been linked to the contact.</p>"
                     }
                 },
                 "ContactDetails": {

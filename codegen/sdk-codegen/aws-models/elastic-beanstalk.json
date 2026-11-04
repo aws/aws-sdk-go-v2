@@ -1495,6 +1495,23 @@
                 }
             }
         },
+        "com.amazonaws.elasticbeanstalk#AmiArchitecture": {
+            "type": "enum",
+            "members": {
+                "X86_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "x86_64"
+                    }
+                },
+                "ARM64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "arm64"
+                    }
+                }
+            }
+        },
         "com.amazonaws.elasticbeanstalk#ApplicationArn": {
             "type": "string"
         },
@@ -2848,7 +2865,7 @@
                 "Process": {
                     "target": "com.amazonaws.elasticbeanstalk#ApplicationVersionProccess",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pre-processes and validates the environment manifest (<code>env.yaml</code>) and configuration files (<code>*.config</code> files in the\n        <code>.ebextensions</code> folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version\n      to an environment.</p>\n         <p>You must turn processing on for application versions that you create using CodeBuild or CodeCommit. For application versions built from a source bundle\n      in Amazon S3, processing is optional.</p>\n         <note>\n            <p>The <code>Process</code> option validates Elastic Beanstalk configuration files. It doesn't validate your application's configuration files, like proxy server\n        or Docker configuration.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Pre-processes and validates the environment manifest (<code>env.yaml</code>) and configuration files (<code>*.config</code> files in the\n        <code>.ebextensions</code> folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version\n      to an environment.</p>\n         <p>You must turn processing on for application versions that you create using CodeBuild or CodeCommit. For application versions built from a source bundle\n      in Amazon S3, processing is optional.</p>\n         <p>For application versions with <code>ImageConfiguration.Build</code>, <code>Process</code>\n      determines when Elastic Beanstalk builds the container image. Set it to <code>true</code> to build the\n      image when you create the application version. If you don't, Elastic Beanstalk builds the image when you\n      first deploy the application version to an environment.</p>\n         <note>\n            <p>The <code>Process</code> option validates Elastic Beanstalk configuration files. It doesn't validate your application's configuration files, like proxy server\n        or Docker configuration.</p>\n         </note>"
                     }
                 },
                 "Tags": {
@@ -3302,6 +3319,32 @@
                     "min": 4,
                     "max": 63
                 }
+            }
+        },
+        "com.amazonaws.elasticbeanstalk#DefaultAmi": {
+            "type": "structure",
+            "members": {
+                "Architecture": {
+                    "target": "com.amazonaws.elasticbeanstalk#AmiArchitecture",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The processor architecture of the AMI.</p>"
+                    }
+                },
+                "ImageId": {
+                    "target": "com.amazonaws.elasticbeanstalk#ImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AMI.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An AMI that Elastic Beanstalk uses by default for a platform version and processor\n      architecture.</p>"
+            }
+        },
+        "com.amazonaws.elasticbeanstalk#DefaultAmiList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticbeanstalk#DefaultAmi"
             }
         },
         "com.amazonaws.elasticbeanstalk#DeleteApplication": {
@@ -5788,7 +5831,7 @@
                 "Build": {
                     "target": "com.amazonaws.elasticbeanstalk#ImageBuildConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings that Elastic Beanstalk uses to build a container image from the source bundle of the\n      application version.</p>\n         <p>If you specify <code>Build</code>, also specify the request's <code>SourceBundle</code>\n      parameter, and don't specify <code>Source</code>.</p>"
+                        "smithy.api#documentation": "<p>Settings that Elastic Beanstalk uses to build a container image from the source bundle of the\n      application version.</p>\n         <p>If you specify <code>Build</code>, also specify the request's <code>SourceBundle</code>\n      parameter, and don't specify <code>Source</code>.</p>\n         <p>To build the image when you create the application version instead of on first deployment,\n      also set <code>Process</code> to <code>true</code>.</p>"
                     }
                 }
             },
@@ -6979,7 +7022,13 @@
                 "CustomAmiList": {
                     "target": "com.amazonaws.elasticbeanstalk#CustomAmiList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The custom AMIs supported by the platform version.</p>"
+                        "smithy.api#documentation": "<p>The AMIs of the platform version, by virtualization type. For Elastic Beanstalk managed platforms,\n      these are the default <code>x86_64</code> AMIs; for custom platforms, the <code>hvm</code>\n      entry is the AMI built for the platform version. To find a managed platform's default AMIs\n      for every supported processor architecture, including <code>arm64</code>, use <code>DefaultAmiList</code>.</p>"
+                    }
+                },
+                "DefaultAmiList": {
+                    "target": "com.amazonaws.elasticbeanstalk#DefaultAmiList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AMIs that Elastic Beanstalk uses by default for the platform version, one for each supported\n      processor architecture. When an environment doesn't specify a custom AMI, Elastic Beanstalk chooses the\n      default AMI that matches the environment's architecture.</p>\n         <p>This list isn't returned for custom platforms.</p>"
                     }
                 },
                 "SupportedTierList": {

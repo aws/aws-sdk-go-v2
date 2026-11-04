@@ -1874,6 +1874,20 @@
                                         "sourceUrl": "https://aws.amazon.com/marketplace/reviews/prodview-sampleSaasId",
                                         "averageRating": "4.5",
                                         "totalReviews": 128
+                                    },
+                                    {
+                                        "sourceName": "G2",
+                                        "sourceId": "G2",
+                                        "sourceUrl": "https://www.g2.com/products/sample-product/reviews",
+                                        "averageRating": "4.6",
+                                        "totalReviews": 1368
+                                    },
+                                    {
+                                        "sourceName": "PeerSpot",
+                                        "sourceId": "PEERSPOT",
+                                        "sourceUrl": "https://www.peerspot.com/products/sample-product-reviews",
+                                        "averageRating": "4.2",
+                                        "totalReviews": 19
                                     }
                                 ]
                             },
@@ -4329,33 +4343,6 @@
                         }
                     },
                     {
-                        "title": "List API Fulfillment Options with Dynamic Endpoint",
-                        "input": {
-                            "locale": "en-US",
-                            "productId": "prod-sampleApiDynamicId"
-                        },
-                        "output": {
-                            "locale": "en-US",
-                            "fulfillmentOptions": [
-                                {
-                                    "apiFulfillmentOption": {
-                                        "fulfillmentOptionId": "fo-sampleApiDynamicId",
-                                        "fulfillmentOptionType": "API",
-                                        "fulfillmentOptionDisplayName": "API-Based Agents & Tools",
-                                        "usageInstructions": "Deploy to your preferred region using the dynamic endpoint.",
-                                        "awsSupportedServices": [
-                                            {
-                                                "supportedServiceType": "BEDROCK_AGENTCORE",
-                                                "displayName": "Amazon Bedrock AgentCore",
-                                                "description": "A managed service that enables you to develop, deploy, and maintain AI agents seamlessly."
-                                            }
-                                        ]
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    {
                         "title": "List CloudFormation Template Fulfillment Options",
                         "input": {
                             "locale": "en-US",
@@ -6566,6 +6553,18 @@
                     "traits": {
                         "smithy.api#enumValue": "AWS_MARKETPLACE"
                     }
+                },
+                "G2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "G2"
+                    }
+                },
+                "PEERSPOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PEERSPOT"
+                    }
                 }
             }
         },
@@ -6575,14 +6574,14 @@
                 "sourceName": {
                     "target": "com.amazonaws.marketplacediscovery#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the review source, such as AWS Marketplace.</p>",
+                        "smithy.api#documentation": "<p>The name of the review source. This field has one of the following values:</p> <ul> <li> <p>AWS Marketplace</p> </li> <li> <p>G2</p> </li> <li> <p>PeerSpot</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "sourceId": {
                     "target": "com.amazonaws.marketplacediscovery#ReviewSourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The machine-readable identifier of the review source.</p>",
+                        "smithy.api#documentation": "<p>The machine-readable identifier of the review source. This field has one of the following values:</p> <ul> <li> <p> <code>AWS_MARKETPLACE</code> – The reviews come from AWS Marketplace.</p> </li> <li> <p> <code>G2</code> – The reviews come from G2.</p> </li> <li> <p> <code>PEERSPOT</code> – The reviews come from PeerSpot.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6628,7 +6627,7 @@
                 "reviewSourceSummaries": {
                     "target": "com.amazonaws.marketplacediscovery#ReviewSourceSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Review summaries from different sources, such as AWS Marketplace.</p>",
+                        "smithy.api#documentation": "<p>Review summaries from different sources, such as AWS Marketplace, G2, and PeerSpot.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7410,6 +7409,18 @@
                                                 "sourceId": "AWS_MARKETPLACE",
                                                 "averageRating": "4.5",
                                                 "totalReviews": 100
+                                            },
+                                            {
+                                                "sourceName": "G2",
+                                                "sourceId": "G2",
+                                                "averageRating": "4.6",
+                                                "totalReviews": 1368
+                                            },
+                                            {
+                                                "sourceName": "PeerSpot",
+                                                "sourceId": "PEERSPOT",
+                                                "averageRating": "4.2",
+                                                "totalReviews": 19
                                             }
                                         ]
                                     },

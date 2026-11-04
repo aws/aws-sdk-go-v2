@@ -1392,6 +1392,443 @@
         "com.amazonaws.dynamodb#BooleanObject": {
             "type": "boolean"
         },
+        "com.amazonaws.dynamodb#BulkOperationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 37,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationBytes": {
+            "type": "structure",
+            "members": {
+                "BulkPutBytes": {
+                    "target": "com.amazonaws.dynamodb#NonNegativeLongObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of bulk put bytes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the bulk put bytes used during a bulk operation.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationDescription": {
+            "type": "structure",
+            "members": {
+                "BulkOperationArn": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bulk operation.</p>"
+                    }
+                },
+                "BulkOperationStatus": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the bulk operation can be one of the following values:</p>\n         <dl>\n            <dt>\n                    IN_PROGRESS\n                </dt>\n            <dd>\n               <p>DynamoDB is processing the input.</p>\n            </dd>\n            <dt>\n                    COMPLETED\n                </dt>\n            <dd>\n               <p>The bulk operation finished without parsing or validation errors.\n                        Condition-check failures do not cause the operation to complete with\n                        errors.</p>\n            </dd>\n            <dt>\n                    COMPLETED_WITH_ERRORS\n                </dt>\n            <dd>\n               <p>The bulk operation finished, but DynamoDB couldn't process at\n                        least one input item because of a parsing or validation error. When you\n                        enable <code>ERROR</code> output, DynamoDB writes the details to the\n                        configured Amazon S3 output location.</p>\n            </dd>\n            <dt>\n                    CANCELLING\n                </dt>\n            <dd>\n               <p>DynamoDB accepted a cancellation request and is stopping the\n                        operation.</p>\n            </dd>\n            <dt>\n                    CANCELLED\n                </dt>\n            <dd>\n               <p>DynamoDB stopped the operation after a cancellation\n                        request.</p>\n            </dd>\n            <dt>\n                    FAILED\n                </dt>\n            <dd>\n               <p>The bulk operation failed. DynamoDB might write some items\n                        before the operation reaches this status. See <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BulkOperationDescription.html#DDB-Type-BulkOperationDescription-FailureCode\">FailureCode</a> and <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BulkOperationDescription.html#DDB-Type-BulkOperationDescription-FailureMessage\">FailureMessage</a> for details.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "TableDetails": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationTableDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list containing identifying information for the table targeted by the bulk\n            operation.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.dynamodb#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idempotency token associated with the start request.</p>"
+                    }
+                },
+                "InputS3Configuration": {
+                    "target": "com.amazonaws.dynamodb#InputS3Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 input configuration associated with the bulk operation.</p>"
+                    }
+                },
+                "OutputS3Configuration": {
+                    "target": "com.amazonaws.dynamodb#OutputS3Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 output configuration associated with the bulk operation.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationStartTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when DynamoDB accepted the start request.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationEndTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the operation reached a terminal status. DynamoDB omits this\n            value while the operation remains in progress.</p>"
+                    }
+                },
+                "ProcessedItemCount": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationItemCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of input items that DynamoDB has processed. This count includes\n            successful writes, parsing or validation failures, and condition-check failures.</p>"
+                    }
+                },
+                "ProcessedInputBytes": {
+                    "target": "com.amazonaws.dynamodb#ProcessedInputBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of bytes that DynamoDB has read from the Amazon S3 input\n            objects.</p>"
+                    }
+                },
+                "TotalInputBytes": {
+                    "target": "com.amazonaws.dynamodb#TotalInputBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total size, in bytes, of the Amazon S3 input objects. DynamoDB\n            omits this value until the initial input-size calculation completes.</p>"
+                    }
+                },
+                "BulkOperationUsage": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationUsageMultiple",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Usage information for the table and its indexes.</p>"
+                    }
+                },
+                "FailedItemCount": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationItemCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of processed input items that failed because of parsing or validation\n            errors. This count is included in <code>ProcessedItemCount</code>. Condition-check\n            failures do not increase this count.</p>"
+                    }
+                },
+                "FailureCode": {
+                    "target": "com.amazonaws.dynamodb#FailureCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A code that identifies why the bulk operation failed or was cancelled. DynamoDB returns this value only when <code>BulkOperationStatus</code> is\n                <code>FAILED</code> or <code>CANCELLED</code>.</p>"
+                    }
+                },
+                "FailureMessage": {
+                    "target": "com.amazonaws.dynamodb#FailureMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes why the bulk operation failed or was cancelled. DynamoDB returns this value only when <code>BulkOperationStatus</code> is\n                <code>FAILED</code> or <code>CANCELLED</code>.</p>"
+                    }
+                },
+                "MaxWriteRequestUnits": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationMaxWriteRequestUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum write request unit rate configured for the bulk operation.</p>"
+                    }
+                },
+                "PerformanceTier": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationPerformanceTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The performance tier selected for the bulk operation. Valid values are\n                <code>STANDARD</code> and <code>ACCELERATED</code>. If the start request omitted this\n            value, DynamoDB uses <code>STANDARD</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about a bulk operation.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationEndTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.dynamodb#BulkOperationInputFormat": {
+            "type": "enum",
+            "members": {
+                "DYNAMODB_JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DYNAMODB_JSON"
+                    }
+                },
+                "ION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationItemCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationMaxWriteRequestUnits": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1024
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^([0-9a-f]{16})+$"
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationPerformanceTier": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "ACCELERATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCELERATED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationStartTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.dynamodb#BulkOperationStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "COMPLETED_WITH_ERRORS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED_WITH_ERRORS"
+                    }
+                },
+                "CANCELLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLING"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationSummary": {
+            "type": "structure",
+            "members": {
+                "BulkOperationArn": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bulk operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BulkOperationStatus": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the bulk operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationStartTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when DynamoDB accepted the start request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationEndTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the operation reached a terminal status. DynamoDB omits this\n            value while the operation remains in progress.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a bulk operation.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationTableDetail": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.dynamodb#TableArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or ARN of the table associated with the bulk operation.</p>"
+                    }
+                },
+                "TableId": {
+                    "target": "com.amazonaws.dynamodb#TableId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the table associated with the bulk operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains identifying information for a table associated with a bulk operation.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationTableDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dynamodb#BulkOperationTableDetail"
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationUsage": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.dynamodb#TableArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or ARN of the table associated with the reported usage.</p>"
+                    }
+                },
+                "BulkPutBytes": {
+                    "target": "com.amazonaws.dynamodb#NonNegativeLongObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of bulk put bytes used by the operation. This value excludes bulk put\n            vector bytes.</p>"
+                    }
+                },
+                "Table": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of bulk put bytes for the table, excluding its indexes.</p>"
+                    }
+                },
+                "LocalSecondaryIndexes": {
+                    "target": "com.amazonaws.dynamodb#SecondaryIndexesBulkBytesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bulk put bytes used on each local secondary index affected by the operation, keyed\n            by index name.</p>"
+                    }
+                },
+                "GlobalSecondaryIndexes": {
+                    "target": "com.amazonaws.dynamodb#SecondaryIndexesBulkBytesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bulk put bytes used on each global secondary index affected by the operation,\n            keyed by index name.</p>"
+                    }
+                },
+                "VectorIndexes": {
+                    "target": "com.amazonaws.dynamodb#VectorIndexesBulkVectorBytesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bulk put vector bytes used on each vector index affected by the operation, keyed\n            by index name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the bytes used during a bulk operation, including a breakdown for the table\n            and its indexes.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationUsageMultiple": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dynamodb#BulkOperationUsage"
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationVectorBytes": {
+            "type": "structure",
+            "members": {
+                "BulkPutVectorBytes": {
+                    "target": "com.amazonaws.dynamodb#NonNegativeLongObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of bulk put vector bytes used on the vector index.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the bulk put vector bytes used by a vector index during a bulk\n            operation.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#BulkOperationsSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dynamodb#BulkOperationSummary"
+            }
+        },
+        "com.amazonaws.dynamodb#CancelBulkOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dynamodb#CancelBulkOperationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.dynamodb#CancelBulkOperationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dynamodb#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
+                "smithy.api#documentation": "<p>Cancels an in-progress bulk operation asynchronously. Cancellation doesn't remove\n            items that the operation has already written. Use <code>DescribeBulkOperation</code> to\n            monitor the operation until it reaches a terminal status.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#CancelBulkOperationInput": {
+            "type": "structure",
+            "members": {
+                "BulkOperationArn": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bulk operation to cancel.</p>",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "ResourceArn"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.dynamodb#CancelBulkOperationOutput": {
+            "type": "structure",
+            "members": {
+                "BulkOperationArn": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bulk operation for which DynamoDB\n            accepted the cancellation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BulkOperationStatus": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status returned after DynamoDB accepts the cancellation request. This\n            value is <code>CANCELLING</code>. Use <code>DescribeBulkOperation</code> to determine when\n            the operation reaches <code>CANCELLED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.dynamodb#CancellationReason": {
             "type": "structure",
             "members": {
@@ -3053,6 +3490,110 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.dynamodb#DescribeBulkOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dynamodb#DescribeBulkOperationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.dynamodb#DescribeBulkOperationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dynamodb#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
+                "smithy.api#documentation": "<p>Describes the specified bulk operation.</p>",
+                "smithy.waiters#waitable": {
+                    "BulkOperationCompleted": {
+                        "documentation": "Wait until a bulk operation is completed.",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "BulkOperationDescription.BulkOperationStatus",
+                                        "expected": "COMPLETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "BulkOperationDescription.BulkOperationStatus",
+                                        "expected": "COMPLETED_WITH_ERRORS",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "BulkOperationDescription.BulkOperationStatus",
+                                        "expected": "CANCELLED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "BulkOperationDescription.BulkOperationStatus",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 20
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#DescribeBulkOperationInput": {
+            "type": "structure",
+            "members": {
+                "BulkOperationArn": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bulk operation to describe.</p>",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "ResourceArn"
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.dynamodb#DescribeBulkOperationOutput": {
+            "type": "structure",
+            "members": {
+                "BulkOperationDescription": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about the bulk operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.dynamodb#DescribeContinuousBackups": {
             "type": "operation",
             "input": {
@@ -4072,6 +4613,9 @@
                     "target": "com.amazonaws.dynamodb#BatchWriteItem"
                 },
                 {
+                    "target": "com.amazonaws.dynamodb#CancelBulkOperation"
+                },
+                {
                     "target": "com.amazonaws.dynamodb#CreateBackup"
                 },
                 {
@@ -4094,6 +4638,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#DescribeBackup"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#DescribeBulkOperation"
                 },
                 {
                     "target": "com.amazonaws.dynamodb#DescribeContinuousBackups"
@@ -4159,6 +4706,9 @@
                     "target": "com.amazonaws.dynamodb#ListBackups"
                 },
                 {
+                    "target": "com.amazonaws.dynamodb#ListBulkOperations"
+                },
+                {
                     "target": "com.amazonaws.dynamodb#ListContributorInsights"
                 },
                 {
@@ -4196,6 +4746,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#SearchVectors"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#StartBulkPutItems"
                 },
                 {
                     "target": "com.amazonaws.dynamodb#TagResource"
@@ -4775,9 +5328,9 @@
                                 "properties": {
                                     "authSchemes": [
                                         {
-                                            "signingRegion": "us-east-1",
                                             "name": "sigv4",
-                                            "signingName": "dynamodb"
+                                            "signingName": "dynamodb",
+                                            "signingRegion": "us-east-1"
                                         }
                                     ]
                                 },
@@ -5367,9 +5920,9 @@
                                                         "properties": {
                                                             "authSchemes": [
                                                                 {
-                                                                    "signingRegion": "us-east-1",
                                                                     "name": "sigv4",
-                                                                    "signingName": "dynamodb"
+                                                                    "signingName": "dynamodb",
+                                                                    "signingRegion": "us-east-1"
                                                                 }
                                                             ]
                                                         },
@@ -20292,6 +20845,46 @@
                 "smithy.api#documentation": "<p> The format options for the data that was imported into the target table. There is one\n            value, CsvOption.</p>"
             }
         },
+        "com.amazonaws.dynamodb#InputS3Configuration": {
+            "type": "structure",
+            "members": {
+                "S3BucketOwner": {
+                    "target": "com.amazonaws.dynamodb#S3BucketOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the input bucket owner. If you omit this value,\n                DynamoDB uses the Amazon Web Services account ID of the requester.</p>\n         <note>\n            <p>\n               <code>S3BucketOwner</code> is required when the bucket is owned by another Amazon Web Services account.</p>\n         </note>"
+                    }
+                },
+                "S3Bucket": {
+                    "target": "com.amazonaws.dynamodb#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket that contains the input objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3KeyPrefix": {
+                    "target": "com.amazonaws.dynamodb#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional key prefix that limits the input to matching objects in the Amazon S3 bucket.</p>"
+                    }
+                },
+                "InputFormat": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationInputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the input objects. <code>DYNAMODB_JSON</code> uses JSON Lines, with one\n            JSON record per line. <code>ION</code> uses a sequence of Ion structs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InputCompressionType": {
+                    "target": "com.amazonaws.dynamodb#InputCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compression type of the input objects. Valid values are <code>GZIP</code>,\n                <code>ZSTD</code>, and <code>NONE</code>. If you don't specify a value, DynamoDB uses <code>NONE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the Amazon S3 location and format settings for bulk operation input.\n            The <code>S3Bucket</code> and <code>InputFormat</code> fields are required.</p>"
+            }
+        },
         "com.amazonaws.dynamodb#Integer": {
             "type": "integer",
             "traits": {
@@ -20799,6 +21392,81 @@
                     "target": "com.amazonaws.dynamodb#BackupArn",
                     "traits": {
                         "smithy.api#documentation": "<p> The ARN of the backup last evaluated when the current page of results was returned,\n            inclusive of the current page of results. This value may be specified as the\n                <code>ExclusiveStartBackupArn</code> of a new <code>ListBackups</code> operation in\n            order to fetch the next page of results. </p>\n         <p> If <code>LastEvaluatedBackupArn</code> is empty, then the last page of results has\n            been processed and there are no more results to be retrieved. </p>\n         <p> If <code>LastEvaluatedBackupArn</code> is not empty, this may or may not indicate\n            that there is more data to be returned. All results are guaranteed to have been returned\n            if and only if no value for <code>LastEvaluatedBackupArn</code> is returned. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.dynamodb#ListBulkOperations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dynamodb#ListBulkOperationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.dynamodb#ListBulkOperationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dynamodb#InvalidEndpointException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
+                "smithy.api#documentation": "<p>Lists bulk operations that started within the past 90 days for the current Amazon Web Services account and Amazon Web Services Region, with the most recent operations\n            first. Results are paginated. Use the <code>NextToken</code> parameter to retrieve\n            additional results.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "BulkOperationsSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#ListBulkOperationsInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.dynamodb#ListBulkOperationsMaxLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of bulk operation summaries to return in one page. If you don't\n            specify a value, DynamoDB uses 10.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional string that, if supplied, must be copied from the output of a previous\n            call to <code>ListBulkOperations</code>. When provided in this manner, the API fetches\n            the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.dynamodb#ListBulkOperationsMaxLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#ListBulkOperationsOutput": {
+            "type": "structure",
+            "members": {
+                "BulkOperationsSummaryList": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationsSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of bulk operation summaries for the current Amazon Web Services account and\n                Amazon Web Services Region.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If this value is returned, there are additional results to be displayed. To retrieve\n            them, call <code>ListBulkOperations</code> again, with <code>NextToken</code> set to this\n            value.</p>"
                     }
                 }
             },
@@ -21531,6 +22199,74 @@
                 "smithy.api#documentation": "<p>Overrides the on-demand throughput settings for this replica table. If you don't\n            specify a value for this parameter, it uses the source table's on-demand throughput\n            settings.</p>"
             }
         },
+        "com.amazonaws.dynamodb#OutputS3Configuration": {
+            "type": "structure",
+            "members": {
+                "S3BucketOwner": {
+                    "target": "com.amazonaws.dynamodb#S3BucketOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the output bucket owner. If you omit this value,\n                DynamoDB uses the Amazon Web Services account ID of the requester.</p>\n         <note>\n            <p>\n               <code>S3BucketOwner</code> is required when the bucket is owned by another Amazon Web Services account.</p>\n         </note>"
+                    }
+                },
+                "S3Bucket": {
+                    "target": "com.amazonaws.dynamodb#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket where DynamoDB writes output\n            records.</p>"
+                    }
+                },
+                "S3KeyPrefix": {
+                    "target": "com.amazonaws.dynamodb#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional key prefix under which DynamoDB writes the output records.</p>"
+                    }
+                },
+                "S3SseAlgorithm": {
+                    "target": "com.amazonaws.dynamodb#S3SseAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server-side encryption algorithm for the output objects. Valid values are\n                <code>AES256</code> and <code>KMS</code>. If you don't specify a value, Amazon S3 applies the destination bucket's default encryption settings.</p>"
+                    }
+                },
+                "S3SseKmsKeyId": {
+                    "target": "com.amazonaws.dynamodb#S3SseKmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the KMS key that encrypts the output objects. Specify\n            this value when <code>S3SseAlgorithm</code> is <code>KMS</code>. Don't specify it when the\n            algorithm is <code>AES256</code>.</p>"
+                    }
+                },
+                "OutputType": {
+                    "target": "com.amazonaws.dynamodb#OutputTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The following values describe the types of output that DynamoDB writes for\n            individual input items. Include one or both values.</p>\n         <dl>\n            <dt>\n                    ERROR\n                </dt>\n            <dd>\n               <p>Reports input records or input objects that DynamoDB couldn't\n                        process. This includes malformed input and item validation failures, such as\n                        a missing or incorrectly typed primary key attribute or an item that exceeds\n                        a DynamoDB limit.</p>\n            </dd>\n            <dt>\n                    CONDITION_CHECK_FAILURE\n                </dt>\n            <dd>\n               <p>Reports the attempted item and, when present, the existing item for a\n                        write whose condition expression evaluates to false.</p>\n            </dd>\n         </dl>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the Amazon S3 location, encryption settings, and output types for a\n            bulk operation. The <code>S3Bucket</code> and <code>OutputType</code> fields are\n            required.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#OutputTypeEnum": {
+            "type": "enum",
+            "members": {
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "CONDITION_CHECK_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONDITION_CHECK_FAILURE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#OutputTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dynamodb#OutputTypeEnum"
+            }
+        },
         "com.amazonaws.dynamodb#ParameterizedStatement": {
             "type": "structure",
             "members": {
@@ -21733,6 +22469,14 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#ProcessedInputBytes": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
                 }
             }
         },
@@ -24322,7 +25066,7 @@
                 "SearchConditionExpression": {
                     "target": "com.amazonaws.dynamodb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A condition expression used to filter the vector search results. The expression can\n            reference attributes defined in the vector index search schema, including\n            <code>HASH</code> and <code>INLINE_FILTER</code> key elements.</p>\n         <p>Only the equality operator (<code>=</code>) is supported for <code>HASH</code>\n            attributes. Comparison and range operators are supported for\n            <code>INLINE_FILTER</code> attributes. Only top-level attributes from the search\n            schema can be referenced.</p>"
+                        "smithy.api#documentation": "<p>A condition expression used to filter the vector search results. The expression can\n            reference attributes defined in the vector index search schema, including\n            <code>HASH</code> and <code>INLINE_FILTER</code> key elements.</p>\n         <p>The <code>HASH</code> and <code>INLINE_FILTER</code> attributes support only\n            the equality operator (<code>=</code>). You can reference only top-level attributes\n            from the search schema.</p>"
                     }
                 },
                 "TopK": {
@@ -24355,6 +25099,15 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.dynamodb#SecondaryIndexesBulkBytesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.dynamodb#IndexName"
+            },
+            "value": {
+                "target": "com.amazonaws.dynamodb#BulkOperationBytes"
             }
         },
         "com.amazonaws.dynamodb#SecondaryIndexesCapacityMap": {
@@ -24507,6 +25260,104 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the details of the features enabled on the table when the backup was created.\n            For example, LSIs, GSIs, streams, TTL. </p>"
+            }
+        },
+        "com.amazonaws.dynamodb#StartBulkPutItems": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dynamodb#StartBulkPutItemsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.dynamodb#StartBulkPutItemsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dynamodb#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
+                "smithy.api#documentation": "<p>Starts an asynchronous bulk operation that reads items from Amazon S3 and\n            writes them to an existing DynamoDB table, so you can efficiently load or\n            migrate large datasets.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#StartBulkPutItemsInput": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.dynamodb#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that ensures the bulk operation starts no more\n            than one time. During the 8 hours after the initial request, repeated requests that use\n            the same token and parameters return the same bulk operation. If a request reuses the\n            token with different parameters, DynamoDB returns an\n                <code>IdempotentParameterMismatchException</code>. If you omit the token, an Amazon Web Services SDK automatically generates one.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "InputS3Configuration": {
+                    "target": "com.amazonaws.dynamodb#InputS3Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location, data format, and compression settings for the input\n            objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputS3Configuration": {
+                    "target": "com.amazonaws.dynamodb#OutputS3Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location, encryption settings, and output types for the bulk\n            operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.dynamodb#TableArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or ARN of the existing DynamoDB table that receives the\n            items.</p>",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "ResourceArn"
+                        }
+                    }
+                },
+                "MaxWriteRequestUnits": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationMaxWriteRequestUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum rate, in write request units per second, at which the bulk operation\n            attempts to write. The value must be at least 1,024. With this setting, you limit only\n            the bulk operation; the table's provisioned or on-demand capacity settings don't\n            change. The actual write rate can be lower.</p>"
+                    }
+                },
+                "PerformanceTier": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationPerformanceTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The performance tier for the bulk operation. Valid values are\n                <code>STANDARD</code> and <code>ACCELERATED</code>. If you don't specify a value,\n            the operation uses <code>STANDARD</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.dynamodb#StartBulkPutItemsOutput": {
+            "type": "structure",
+            "members": {
+                "BulkOperationDescription": {
+                    "target": "com.amazonaws.dynamodb#BulkOperationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains detailed information about a bulk operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.dynamodb#StreamArn": {
@@ -25291,6 +26142,14 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#TotalInputBytes": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
                 }
             }
         },
@@ -27122,6 +27981,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.dynamodb#VectorIndexInfo"
+            }
+        },
+        "com.amazonaws.dynamodb#VectorIndexesBulkVectorBytesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.dynamodb#IndexName"
+            },
+            "value": {
+                "target": "com.amazonaws.dynamodb#BulkOperationVectorBytes"
             }
         },
         "com.amazonaws.dynamodb#VectorIndexesCapacityMap": {
