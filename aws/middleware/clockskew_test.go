@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"sync"
 	"testing"
 	"time"
 
@@ -165,7 +166,13 @@ func TestRecordResponseTimingClockSkewDisabled(t *testing.T) {
 func TestRecordResponseTimingSkewCases(t *testing.T) {
 	base := time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC)
 	at := func(sec int) time.Time { return base.Add(time.Duration(sec) * time.Second) }
+	dateHeader := func(sec int) http.Header {
+		return http.Header{"Date": []string{at(sec).Format(http.TimeFormat)}}
+	}
+	cachedHeader := dateHeader(3602)
+	cachedHeader.Set("Age", "30")
 
+	// wantOK=false means no skew candidate is recorded, wantSkew is unused.
 	cases := map[string]struct {
 		send, recv time.Time
 		headers    http.Header
@@ -173,49 +180,49 @@ func TestRecordResponseTimingSkewCases(t *testing.T) {
 		wantOK     bool
 	}{
 		"clocks agree": {
-			send: at(0), recv: at(1),
-			headers:  http.Header{"Date": []string{at(1).Format(http.TimeFormat)}},
+			send: at(0), recv: at(2),
+			headers:  dateHeader(2),
 			wantSkew: 0, wantOK: true,
 		},
 		"server ahead one hour": {
 			send: at(0), recv: at(2),
-			headers:  http.Header{"Date": []string{at(3602).Format(http.TimeFormat)}},
+			headers:  dateHeader(3602),
 			wantSkew: 3600 * time.Second, wantOK: true,
 		},
 		"server behind one hour": {
 			send: at(0), recv: at(2),
-			headers:  http.Header{"Date": []string{at(-3598).Format(http.TimeFormat)}},
+			headers:  dateHeader(-3598),
 			wantSkew: -3600 * time.Second, wantOK: true,
 		},
 		"slow request clocks agree": {
 			send: at(0), recv: at(620),
-			headers:  http.Header{"Date": []string{at(620).Format(http.TimeFormat)}},
+			headers:  dateHeader(620),
 			wantSkew: 0, wantOK: true,
 		},
 		"slow request server ahead": {
 			send: at(0), recv: at(620),
-			headers:  http.Header{"Date": []string{at(1220).Format(http.TimeFormat)}},
+			headers:  dateHeader(1220),
 			wantSkew: 600 * time.Second, wantOK: true,
 		},
 		"max trusted duration boundary": {
 			send: at(0), recv: at(900),
-			headers:  http.Header{"Date": []string{at(900).Format(http.TimeFormat)}},
+			headers:  dateHeader(900),
 			wantSkew: 0, wantOK: true,
 		},
 		"over max trusted duration": {
 			send: at(0), recv: at(901),
-			headers: http.Header{"Date": []string{at(901).Format(http.TimeFormat)}},
+			headers: dateHeader(901),
+			wantOK:  false,
 		},
 		"age header": {
 			send: at(0), recv: at(2),
-			headers: http.Header{
-				"Date": []string{at(3602).Format(http.TimeFormat)},
-				"Age":  []string{"30"},
-			},
+			headers: cachedHeader,
+			wantOK:  false,
 		},
 		"no date header": {
 			send: at(0), recv: at(2),
 			headers: http.Header{},
+			wantOK:  false,
 		},
 	}
 
@@ -263,13 +270,38 @@ func TestRecordResponseTimingSkewCases(t *testing.T) {
 	}
 }
 
+// fakeClock is a manually advanced clock shared between the test, the
+// RecordResponseTiming middleware and the test server's handler.
+type fakeClock struct {
+	mu  sync.Mutex
+	now time.Time
+}
+
+func (c *fakeClock) Now() time.Time {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	return c.now
+}
+
+func (c *fakeClock) Advance(d time.Duration) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.now = c.now.Add(d)
+}
+
 // runSkewServer sends one request through a stack with RecordResponseTiming
-// in the deserialize step against a local server.
-func runSkewServer(t *testing.T, handler http.HandlerFunc, body []byte, expectContinue bool) (smithymiddleware.Metadata, time.Time) {
+// in the deserialize step against a local server, with sdk.NowTime reading
+// clock. It returns once the stack returns, leaving the response body unread
+// as the generated deserializer would.
+func runSkewServer(t *testing.T, clock *fakeClock, handler http.HandlerFunc, body []byte, expectContinue bool) (smithymiddleware.Metadata, *smithyhttp.Response) {
 	t.Helper()
 
+	orig := sdk.NowTime
+	sdk.NowTime = clock.Now
+	t.Cleanup(func() { sdk.NowTime = orig })
+
 	srv := httptest.NewServer(handler)
-	defer srv.Close()
+	t.Cleanup(srv.Close)
 
 	tr := srv.Client().Transport.(*http.Transport).Clone()
 	tr.ExpectContinueTimeout = 5 * time.Second
@@ -307,83 +339,95 @@ func runSkewServer(t *testing.T, handler http.HandlerFunc, body []byte, expectCo
 		t.Fatal(err)
 	}
 
+	// The timeout turns a regression that blocks on the body inside the stack
+	// into a failure instead of a hang.
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	t.Cleanup(cancel)
+
 	h := smithymiddleware.DecorateHandler(smithyhttp.NewClientHandler(client), stack)
-	_, md, err := h.Handle(context.Background(), struct{}{})
+	_, md, err := h.Handle(ctx, struct{}{})
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	// Read the body after the stack returns, as the deserializer does.
-	if resp, ok := GetRawResponse(md).(*smithyhttp.Response); ok {
-		io.Copy(io.Discard, resp.Body)
-		resp.Body.Close()
+
+	resp, ok := GetRawResponse(md).(*smithyhttp.Response)
+	if !ok {
+		t.Fatalf("expected raw response in metadata, got %T", GetRawResponse(md))
 	}
-	return md, time.Now()
+	t.Cleanup(func() { resp.Body.Close() })
+	return md, resp
 }
 
-func assertSkewNearHour(t *testing.T, md smithymiddleware.Metadata) {
+func assertSkew(t *testing.T, md smithymiddleware.Metadata, want time.Duration) {
 	t.Helper()
 	skew, ok := GetAttemptSkew(md)
 	if !ok {
 		t.Fatal("expected skew to be recorded")
 	}
-	if skew < time.Hour-1500*time.Millisecond || skew > time.Hour+500*time.Millisecond {
-		t.Errorf("expected skew near 1h, got %v", skew)
+	if skew != want {
+		t.Errorf("expected skew %v, got %v", want, skew)
 	}
 }
 
 // TestRecordResponseTimingSkewFromHeaderArrival verifies the response time is
 // taken when Do returns with the headers, before a slow body is read.
 func TestRecordResponseTimingSkewFromHeaderArrival(t *testing.T) {
-	if testing.Short() {
-		t.Skip("skipping slow real server test in short mode")
-	}
+	clock := &fakeClock{now: time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC)}
+	start := clock.Now()
+	release := make(chan struct{})
 
-	md, end := runSkewServer(t, func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Date", time.Now().Add(time.Hour).UTC().Format(http.TimeFormat))
+	md, resp := runSkewServer(t, clock, func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Date", clock.Now().Add(time.Hour).UTC().Format(http.TimeFormat))
 		w.WriteHeader(http.StatusOK)
 		w.(http.Flusher).Flush()
-		time.Sleep(4 * time.Second)
+		select {
+		case <-release:
+		case <-r.Context().Done():
+			return
+		}
 		w.Write([]byte("response body"))
 	}, nil, false)
+
+	clock.Advance(4 * time.Second)
+	close(release)
+	io.Copy(io.Discard, resp.Body)
 
 	responseAt, ok := GetResponseAt(md)
 	if !ok {
 		t.Fatal("expected response at to be recorded")
 	}
-	if d := end.Sub(responseAt); d < 3*time.Second {
-		t.Errorf("expected response at to precede the body by at least 3s, got %v", d)
+	if !responseAt.Equal(start) {
+		t.Errorf("expected response at %v, got %v", start, responseAt)
 	}
-	assertSkewNearHour(t, md)
+	assertSkew(t, md, time.Hour)
 }
 
 // TestRecordResponseTimingSkewWith100Continue verifies that a "100 Continue"
 // interim response sent before the body upload is not used as the response
 // time.
 func TestRecordResponseTimingSkewWith100Continue(t *testing.T) {
-	if testing.Short() {
-		t.Skip("skipping slow real server test in short mode")
-	}
+	clock := &fakeClock{now: time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC)}
+	start := clock.Now()
+	expect := make(chan string, 1)
 
-	var gotExpect string
-	var sleptAt time.Time
-	md, _ := runSkewServer(t, func(w http.ResponseWriter, r *http.Request) {
-		gotExpect = r.Header.Get("Expect")
+	md, resp := runSkewServer(t, clock, func(w http.ResponseWriter, r *http.Request) {
+		expect <- r.Header.Get("Expect")
 		io.Copy(io.Discard, r.Body)
-		time.Sleep(3 * time.Second)
-		sleptAt = time.Now()
-		w.Header().Set("Date", time.Now().Add(time.Hour).UTC().Format(http.TimeFormat))
+		clock.Advance(3 * time.Second)
+		w.Header().Set("Date", clock.Now().Add(time.Hour).UTC().Format(http.TimeFormat))
 		w.WriteHeader(http.StatusOK)
 	}, make([]byte, 4<<20), true)
+	io.Copy(io.Discard, resp.Body)
 
-	if gotExpect != "100-continue" {
-		t.Fatalf("expected Expect 100-continue request, got %q", gotExpect)
+	if got := <-expect; got != "100-continue" {
+		t.Fatalf("expected Expect 100-continue request, got %q", got)
 	}
 	responseAt, ok := GetResponseAt(md)
 	if !ok {
 		t.Fatal("expected response at to be recorded")
 	}
-	if responseAt.Before(sleptAt) {
-		t.Errorf("expected response at %v not before final response %v", responseAt, sleptAt)
+	if want := start.Add(3 * time.Second); !responseAt.Equal(want) {
+		t.Errorf("expected response at %v, got %v", want, responseAt)
 	}
-	assertSkewNearHour(t, md)
+	assertSkew(t, md, time.Hour)
 }
