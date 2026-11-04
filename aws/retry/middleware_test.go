@@ -688,3 +688,29 @@ func cmpDiff(e, a interface{}) string {
 	}
 	return ""
 }
+
+func TestAttemptMiddlewareSetsAttemptNumberOnContext(t *testing.T) {
+	restoreSleep := sdk.TestingUseNopSleep()
+	defer restoreSleep()
+
+	am := NewAttemptMiddleware(NewStandard(), func(i any) any { return i })
+
+	var attemptNumbers []int
+	_, _, err := am.HandleFinalize(context.Background(), middleware.FinalizeInput{}, middleware.FinalizeHandlerFunc(
+		func(ctx context.Context, in middleware.FinalizeInput) (
+			out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+		) {
+			attemptNumbers = append(attemptNumbers, awsmiddle.GetAttemptNumber(ctx))
+			if len(attemptNumbers) < am.retryer.MaxAttempts() {
+				return out, metadata, mockRetryableError{b: true}
+			}
+			return out, metadata, nil
+		}))
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+
+	if e, a := []int{1, 2, 3}, attemptNumbers; !reflect.DeepEqual(e, a) {
+		t.Fatalf("expected attempt numbers %v on context, got %v", e, a)
+	}
+}

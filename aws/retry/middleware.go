@@ -127,6 +127,12 @@ func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeIn
 			AttemptClockSkew: attemptClockSkew,
 		})
 
+		// Expose the attempt number on the context so loggers bound to it in
+		// the inner steps of this attempt, e.g. request/response logging, can
+		// tie their entries to the attempt that produced them. Mirrors the
+		// attempt number of the retryMetadata recorded just above.
+		attemptCtx = internalcontext.SetAttemptNumberContext(attemptCtx, attemptNum)
+
 		var attemptResult AttemptResult
 
 		attemptCtx, span := tracing.StartSpan(attemptCtx, "Attempt", func(o *tracing.SpanOptions) {

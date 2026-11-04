@@ -117,6 +117,16 @@ type Config struct {
 
 	// The logger writer interface to write logging messages to. Defaults to
 	// standard error.
+	//
+	// Set the LogInvocationContext client log mode to have the entries the SDK
+	// logs for an in-flight operation prefixed with the identifiers available
+	// for it, e.g. the invocation id that ties a logged response to the request
+	// it belongs to when invocations share a single log output. When the client
+	// is not built through the config package, reach the same result by
+	// wrapping this logger with the NewCorrelatedLogger function of the
+	// github.com/aws/aws-sdk-go-v2/aws/middleware package. See that type's
+	// documentation for which entries are prefixed, and which identifiers are
+	// available where.
 	Logger logging.Logger
 
 	// Configures the events that will be sent to the configured logger. This

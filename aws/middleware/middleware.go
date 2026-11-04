@@ -39,6 +39,11 @@ func (r ClientRequestID) HandleBuild(ctx context.Context, in middleware.BuildInp
 	const invocationIDHeader = "Amz-Sdk-Invocation-Id"
 	req.Header[invocationIDHeader] = append(req.Header[invocationIDHeader][:0], invocationID)
 
+	// Record the invocation id on the context as well, so loggers and
+	// middleware running at or after this step can correlate a response with
+	// the request it belongs to without reaching for the request.
+	ctx = setInvocationID(ctx, invocationID)
+
 	return next.HandleBuild(ctx, in)
 }
 
