@@ -1,6 +1,7 @@
 package software.amazon.smithy.aws.go.codegen.customization.service.s3;
 
 import java.util.List;
+import java.util.Map;
 import software.amazon.smithy.aws.go.codegen.XmlProtocolUtils;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
@@ -11,11 +12,13 @@ import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.go.codegen.Writable;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.middleware.DeserializeStepMiddleware;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.OperationShape;
@@ -36,6 +39,7 @@ public class S3GetBucketLocation implements GoIntegration {
     private final String protocolName = "awsRestxml";
     private final String swapDeserializerFuncName = "swapDeserializerHelper";
     private final String getBucketLocationOpID = "GetBucketLocation";
+    private static final String UNWRAPPED_DESERIALIZER_NAME = "getBucketLocationDeserializer";
 
     /**
      * Return true if service is Amazon S3.
@@ -91,12 +95,101 @@ public class S3GetBucketLocation implements GoIntegration {
                 continue;
             }
 
+            if (!settings.useLegacySerde()) {
+                goDelegator.useShapeWriter(operation, this::writeUnwrappedXmlOutputDeserializer);
+                continue;
+            }
+
             goDelegator.useShapeWriter(operation, writer -> {
                 writeCustomDeserializer(writer, model, symbolProvider, service, operation);
                 writeDeserializerSwapFunction(writer, service, operation);
             });
         }
 
+    }
+
+    /**
+     * Schema serde has no per-operation document deserializer to delegate to, so instead of replacing the
+     * OperationDeserializer this wraps it. S3 returns the bare member element (<LocationConstraint>us-west-2</...>)
+     * with no element for the output structure, so the wrapper puts the body of a successful response inside a
+     * synthetic root element before the standard deserializer reads it.
+     */
+    private void writeUnwrappedXmlOutputDeserializer(GoWriter writer) {
+        writer.addUseImports(SmithyGoDependency.FMT);
+        writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
+
+        new UnwrappedXmlOutputDeserializer().accept(writer);
+        writer.write("");
+
+        var id = ProtocolUtils.OPERATION_DESERIALIZER_MIDDLEWARE_ID.getString().orElseThrow();
+        writer.writeDocs("Helper to wrap the standard deserializer");
+        writer.openBlock("func $L(stack *middleware.Stack) error {", "}", swapDeserializerFuncName, () -> {
+            writer.write("m, ok := stack.Deserialize.Get($S)", id);
+            writer.openBlock("if !ok {", "}", () -> {
+                writer.write("return fmt.Errorf($S)", id + " middleware not found");
+            });
+            writer.write("");
+            writer.write("_, err := stack.Deserialize.Swap($S, &$L{delegate: m})", id, UNWRAPPED_DESERIALIZER_NAME);
+            writer.write("return err");
+        });
+    }
+
+    private static class UnwrappedXmlOutputDeserializer extends DeserializeStepMiddleware {
+        @Override
+        public String getStructName() {
+            return UNWRAPPED_DESERIALIZER_NAME;
+        }
+
+        @Override
+        public String getId() {
+            return ProtocolUtils.OPERATION_DESERIALIZER_MIDDLEWARE_ID.getString().orElseThrow();
+        }
+
+        @Override
+        public Map<String, Symbol> getFields() {
+            return Map.of("delegate", SmithyGoDependency.SMITHY_MIDDLEWARE.interfaceSymbol("DeserializeMiddleware"));
+        }
+
+        @Override
+        public Writable getFuncBody() {
+            return writer -> {
+                writer.addUseImports(SmithyGoDependency.IO);
+                writer.addUseImports(SmithyGoDependency.STRINGS);
+                writer.addUseImports(SmithyGoDependency.SMITHY_HTTP_TRANSPORT);
+
+                writer.openBlock("return m.delegate.HandleDeserialize(ctx, in, middleware.DeserializeHandlerFunc(func(",
+                        "}))", () -> {
+                    writer.write("ctx context.Context, in middleware.DeserializeInput,");
+                    writer.write(") (");
+                    writer.write("middleware.DeserializeOutput, middleware.Metadata, error,");
+                    writer.write(") {");
+                    writer.write("out, md, err := next.HandleDeserialize(ctx, in)");
+                    writer.openBlock("if err != nil {", "}", () -> {
+                        writer.write("return out, md, err");
+                    });
+                    writer.write("");
+                    writer.write("resp, ok := out.RawResponse.(*smithyhttp.Response)");
+                    writer.openBlock("if !ok || resp.StatusCode < 200 || resp.StatusCode >= 300 {", "}", () -> {
+                        writer.write("return out, md, nil");
+                    });
+                    writer.write("");
+                    writer.openBlock("resp.Body = struct {", "}{", () -> {
+                        writer.write("io.Reader");
+                        writer.write("io.Closer");
+                    });
+                    writer.indent();
+                    writer.openBlock("io.MultiReader(", "),", () -> {
+                        writer.write("strings.NewReader($S),", "<LocationConstraint>");
+                        writer.write("resp.Body,");
+                        writer.write("strings.NewReader($S),", "</LocationConstraint>");
+                    });
+                    writer.write("resp.Body,");
+                    writer.dedent();
+                    writer.write("}");
+                    writer.write("return out, md, nil");
+                });
+            };
+        }
     }
 
     /**
