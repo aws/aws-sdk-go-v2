@@ -6,7 +6,6 @@ import (
 	"io"
 	"strconv"
 	"strings"
-	"sync/atomic"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -267,6 +266,9 @@ type GetObjectOutput struct {
 	AcceptRanges *string
 
 	// Object data.
+	//
+	// Body also implements io.Closer. A caller that stops reading before
+	// io.EOF should close it, or cancel the context, to stop the download.
 	Body io.Reader
 
 	// Indicates whether the object uses an S3 Bucket Key for server-side encryption
@@ -618,14 +620,11 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		}}
 
 	r := &concurrentReader{
-		ctx:             ctx,
-		buf:             make(map[int32]*outChunk),
-		partSize:        1,
-		options:         g.options.Copy(),
-		in:              g.in,
-		ch:              make(chan outChunk, g.options.Concurrency),
-		bufferThreshold: g.options.GetObjectBufferSize,
+		partSize: 1,
+		options:  g.options.Copy(),
+		in:       g.in,
 	}
+	r.initReader(ctx)
 
 	output := &GetObjectOutput{}
 	if g.options.GetObjectType == types.GetObjectParts {
@@ -653,13 +652,10 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 
 		partsCount := max(aws.ToInt32(out.PartsCount), 1)
 		partSize := max(aws.ToInt64(out.ContentLength), 1)
-		sectionParts := int32(max(1, g.options.GetObjectBufferSize/partSize))
-		capacity := sectionParts
-		r.sectionParts = sectionParts
 		r.partSize = partSize
-		atomic.StoreInt32(&r.capacity, min(capacity, partsCount))
 		r.partsCount = partsCount
-		r.getType = types.GetObjectParts
+		// size the window from the average part, since part 1 can be smaller
+		r.window = min(getWindow(g.options.Concurrency, g.options.GetObjectBufferSize, contentLength/int64(partsCount)), partsCount)
 	} else {
 		out, err := g.options.S3.HeadObject(ctx, &s3.HeadObjectInput{
 			Bucket:               g.in.Bucket,
@@ -696,14 +692,10 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		output.ContentRange = aws.String(fmt.Sprintf("bytes %d-%d/%d", r.pos, total-1, aws.ToInt64(out.ContentLength)))
 
 		partsCount := int32((contentLength-1)/g.options.PartSizeBytes + 1)
-		sectionParts := int32(max(1, g.options.GetObjectBufferSize/g.options.PartSizeBytes))
-		capacity := min(sectionParts, partsCount)
 		r.partSize = g.options.PartSizeBytes
-		atomic.StoreInt32(&r.capacity, capacity)
 		r.partsCount = partsCount
-		r.sectionParts = sectionParts
+		r.window = min(getWindow(g.options.Concurrency, g.options.GetObjectBufferSize, g.options.PartSizeBytes), partsCount)
 		r.totalBytes = total
-		r.getType = types.GetObjectRanges
 	}
 
 	r.etag = output.ETag

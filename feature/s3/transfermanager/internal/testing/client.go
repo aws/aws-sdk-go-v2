@@ -11,6 +11,7 @@ import (
 	"slices"
 	"strconv"
 	"sync"
+	"sync/atomic"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -39,6 +40,10 @@ type TransferManagerLoggingClient struct {
 	PartsCount int32
 
 	GetObjectInvocations int
+
+	// InFlight counts GetObject calls in progress, and MaxInFlight the most at once.
+	InFlight    atomic.Int32
+	MaxInFlight atomic.Int32
 
 	HeadObjectInputs []*s3.HeadObjectInput
 
@@ -223,8 +228,6 @@ func (c *TransferManagerLoggingClient) AbortMultipartUpload(ctx context.Context,
 // GetObject is the S3 GetObject API.
 func (c *TransferManagerLoggingClient) GetObject(ctx context.Context, params *s3.GetObjectInput, optFns ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
 	c.m.Lock()
-	defer c.m.Unlock()
-
 	c.traceOperation("GetObject", params)
 	c.GetObjectInvocations++
 
@@ -236,9 +239,21 @@ func (c *TransferManagerLoggingClient) GetObject(ctx context.Context, params *s3
 	}
 	c.Versions = append(c.Versions, aws.ToString(params.VersionId))
 	c.Etags = append(c.Etags, aws.ToString(params.IfMatch))
+	// call GetObjectFn outside the lock so blocking calls can overlap
+	fn := c.GetObjectFn
+	c.m.Unlock()
 
-	if c.GetObjectFn != nil {
-		return c.GetObjectFn(c, params)
+	cur := c.InFlight.Add(1)
+	defer c.InFlight.Add(-1)
+	for {
+		m := c.MaxInFlight.Load()
+		if cur <= m || c.MaxInFlight.CompareAndSwap(m, cur) {
+			break
+		}
+	}
+
+	if fn != nil {
+		return fn(c, params)
 	}
 
 	return &s3.GetObjectOutput{}, nil
@@ -499,9 +514,7 @@ type TestErrReader struct {
 
 // Read implements io.Reader.Read()
 func (r *TestErrReader) Read(p []byte) (int, error) {
-	to := len(r.Buf) - r.off
-
-	n := copy(p, r.Buf[r.off:to])
+	n := copy(p, r.Buf[r.off:])
 	r.off += n
 
 	if n < len(p) {
