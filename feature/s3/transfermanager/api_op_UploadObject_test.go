@@ -409,6 +409,67 @@ func TestUploadWithPartSizeIncreased(t *testing.T) {
 	}
 }
 
+// TestUploadMultipartTriggeredByThreshold tests that MultipartUploadThreshold is used
+// to decide when to use multipart upload. With a low threshold (1KB), a 100KB file
+// should trigger multipart upload even though it's smaller than PartSizeBytes (5MB).
+func TestUploadMultipartTriggeredByThreshold(t *testing.T) {
+	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, func(o *Options) {
+		o.MultipartUploadThreshold = 1024 // 1 KB threshold
+		o.PartSizeBytes = 5 * 1024 * 1024 // 5 MB part size (S3 minimum)
+	})
+
+	// Upload 100KB - this is > 1KB threshold, so should use multipart
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(make([]byte, 100*1024)), // 100 KB
+	})
+
+	if err != nil {
+		t.Errorf("expect no error but received %v", err)
+	}
+
+	// Should use multipart upload, not single upload (PutObject). The first part
+	// must be topped up from the 1 KB threshold read to the full 100 KB body.
+	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "CompleteMultipartUpload"},
+		*invocations); len(diff) > 0 {
+		t.Fatalf("expected multipart upload due to threshold: %s", diff)
+	}
+	if n := getReaderLength((*params)[1].(*s3.UploadPartInput).Body); n != 100*1024 {
+		t.Errorf("expected single part of %d bytes, got %d", 100*1024, n)
+	}
+}
+
+// TestUploadSingleWhenBelowThreshold tests that a body larger than PartSizeBytes
+// but smaller than MultipartUploadThreshold is sent whole in a single PutObject.
+func TestUploadSingleWhenBelowThreshold(t *testing.T) {
+	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, func(o *Options) {
+		o.MultipartUploadThreshold = 10 * 1024 * 1024 // 10 MB threshold
+		o.PartSizeBytes = 5 * 1024 * 1024             // 5 MB part size
+	})
+
+	// Upload 6MB - this is > PartSizeBytes but < threshold, so should use single upload
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(make([]byte, 6*1024*1024)), // 6 MB
+	})
+
+	if err != nil {
+		t.Errorf("expect no error but received %v", err)
+	}
+
+	// Should use single upload (PutObject), not multipart, with no truncation
+	if diff := cmpDiff([]string{"PutObject"}, *invocations); len(diff) > 0 {
+		t.Fatalf("expected single upload when below threshold: %s", diff)
+	}
+	if n := getReaderLength((*params)[0].(*s3.PutObjectInput).Body); n != 6*1024*1024 {
+		t.Errorf("expected PutObject body of %d bytes, got %d", 6*1024*1024, n)
+	}
+}
+
 func TestUploadOrderSingle(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c)
