@@ -1,6 +1,8 @@
 package v4
 
 import (
+	"crypto/sha256"
+	"crypto/subtle"
 	"strings"
 	"sync"
 	"time"
@@ -18,7 +20,11 @@ func lookupKey(service, region string) string {
 }
 
 type derivedKey struct {
-	AccessKey  string
+	AccessKey string
+	// SecretHash is a SHA-256 digest of the secret access key the entry was
+	// derived from. Some credential providers rotate the secret while keeping
+	// the access key ID, so the access key ID alone cannot identify the entry.
+	SecretHash [sha256.Size]byte
 	Date       time.Time
 	Credential []byte
 }
@@ -36,21 +42,23 @@ func newDerivedKeyCache() derivedKeyCache {
 
 func (s *derivedKeyCache) Get(credentials aws.Credentials, service, region string, signingTime SigningTime) []byte {
 	key := lookupKey(service, region)
+	secretHash := sha256.Sum256([]byte(credentials.SecretAccessKey))
 	s.mutex.RLock()
-	if cred, ok := s.get(key, credentials, signingTime.Time); ok {
+	if cred, ok := s.get(key, credentials, secretHash, signingTime.Time); ok {
 		s.mutex.RUnlock()
 		return cred
 	}
 	s.mutex.RUnlock()
 
 	s.mutex.Lock()
-	if cred, ok := s.get(key, credentials, signingTime.Time); ok {
+	if cred, ok := s.get(key, credentials, secretHash, signingTime.Time); ok {
 		s.mutex.Unlock()
 		return cred
 	}
 	cred := deriveKey(credentials.SecretAccessKey, service, region, signingTime)
 	entry := derivedKey{
 		AccessKey:  credentials.AccessKeyID,
+		SecretHash: secretHash,
 		Date:       signingTime.Time,
 		Credential: cred,
 	}
@@ -60,9 +68,11 @@ func (s *derivedKeyCache) Get(credentials aws.Credentials, service, region strin
 	return cred
 }
 
-func (s *derivedKeyCache) get(key string, credentials aws.Credentials, signingTime time.Time) ([]byte, bool) {
+func (s *derivedKeyCache) get(key string, credentials aws.Credentials, secretHash [sha256.Size]byte, signingTime time.Time) ([]byte, bool) {
 	cacheEntry, ok := s.retrieveFromCache(key)
-	if ok && cacheEntry.AccessKey == credentials.AccessKeyID && isSameDay(signingTime, cacheEntry.Date) {
+	if ok && cacheEntry.AccessKey == credentials.AccessKeyID &&
+		subtle.ConstantTimeCompare(cacheEntry.SecretHash[:], secretHash[:]) == 1 &&
+		isSameDay(signingTime, cacheEntry.Date) {
 		return cacheEntry.Credential, true
 	}
 	return nil, false
