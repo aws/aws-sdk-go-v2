@@ -1,0 +1,8 @@
+{
+    "id": "883b5a5a-94a1-46cd-aa07-0ae983cac1c8",
+    "type": "bugfix",
+    "description": "Compute the clock skew from the server Date header minus the time the response was received, instead of the midpoint of the request.",
+    "modules": [
+        "."
+    ]
+}
