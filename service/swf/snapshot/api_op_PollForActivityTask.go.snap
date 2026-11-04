@@ -1,5 +1,6 @@
 PollForActivityTask
 	Initialize stack step
+		SetLongPollingContext
 		OperationInputValidation
 	Serialize stack step
 		setOperationInput

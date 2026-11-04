@@ -11,6 +11,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/smithy-go"
 	smithytesting "github.com/aws/smithy-go/testing"
 )
@@ -246,5 +248,42 @@ func TestClient_GetCredentials_NoEndpoint(t *testing.T) {
 	}
 	if e, a := "endpoint not provided", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
+func TestTooManyRequestsRetry(t *testing.T) {
+	cases := map[string]struct {
+		Err        error
+		ExpectCost uint
+	}{
+		// A 429 is a throttling error.
+		"429": {
+			Err:        &EndpointError{Message: "You have made too many requests.", statusCode: 429},
+			ExpectCost: 5,
+		},
+		// Other retryable errors cost the standard retry cost.
+		"500": {
+			Err:        &EndpointError{Message: "Internal server error.", statusCode: 500},
+			ExpectCost: 14,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			rl := ratelimit.NewTokenRateLimit(500)
+			r := retry.NewStandard(addTooManyRequestsRetry, func(o *retry.StandardOptions) {
+				o.RateLimiter = rl
+			})
+
+			if !r.IsErrorRetryable(c.Err) {
+				t.Fatalf("expect error to be retryable")
+			}
+			if _, err := r.GetRetryToken(context.Background(), c.Err); err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			if e, a := 500-c.ExpectCost, rl.Remaining(); e != a {
+				t.Errorf("expect %v remaining retry tokens, got %v", e, a)
+			}
+		})
 	}
 }
