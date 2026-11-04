@@ -1,0 +1,8 @@
+{
+    "id": "71f278fe-3cd7-42fe-9a3c-d12d816820cb",
+    "type": "feature",
+    "description": "Adds support for an optional jobName on CreateDatasetExportJob. The jobName is returned by DescribeDatasetExportJob and ListDatasetExportJobs, making dataset export jobs easier to identify and track. If jobName is omitted, a default name is generated automatically.",
+    "modules": [
+        "service/iotsitewise"
+    ]
+}

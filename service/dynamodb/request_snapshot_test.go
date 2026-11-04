@@ -377,6 +377,33 @@ func TestCheckRequestSnapshot_BatchWriteItem(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CancelBulkOperation(t *testing.T) {
+	input := &CancelBulkOperationInput{
+		BulkOperationArn: ptr.String("__BulkOperationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelBulkOperation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelBulkOperation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateBackup(t *testing.T) {
 	input := &CreateBackupInput{
 		TableName:  ptr.String("__TableName__"),
@@ -852,6 +879,33 @@ func TestCheckRequestSnapshot_DescribeBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeBackup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeBulkOperation(t *testing.T) {
+	input := &DescribeBulkOperationInput{
+		BulkOperationArn: ptr.String("__BulkOperationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeBulkOperation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeBulkOperation"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1682,6 +1736,34 @@ func TestCheckRequestSnapshot_ListBackups(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBackups"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListBulkOperations(t *testing.T) {
+	input := &ListBulkOperationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListBulkOperations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBulkOperations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2549,6 +2631,54 @@ func TestCheckRequestSnapshot_SearchVectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchVectors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartBulkPutItems(t *testing.T) {
+	input := &StartBulkPutItemsInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		InputS3Configuration: &types.InputS3Configuration{
+			S3BucketOwner:        ptr.String("__S3BucketOwner__"),
+			S3Bucket:             ptr.String("__S3Bucket__"),
+			S3KeyPrefix:          ptr.String("__S3KeyPrefix__"),
+			InputFormat:          types.BulkOperationInputFormat("DYNAMODB_JSON"),
+			InputCompressionType: types.InputCompressionType("GZIP"),
+		},
+		OutputS3Configuration: &types.OutputS3Configuration{
+			S3BucketOwner:  ptr.String("__S3BucketOwner__"),
+			S3Bucket:       ptr.String("__S3Bucket__"),
+			S3KeyPrefix:    ptr.String("__S3KeyPrefix__"),
+			S3SseAlgorithm: types.S3SseAlgorithm("AES256"),
+			S3SseKmsKeyId:  ptr.String("__S3SseKmsKeyId__"),
+			OutputType: []types.OutputTypeEnum{
+				types.OutputTypeEnum("ERROR"),
+				types.OutputTypeEnum("ERROR"),
+			},
+		},
+		TableName:            ptr.String("__TableName__"),
+		MaxWriteRequestUnits: ptr.Int64(1),
+		PerformanceTier:      types.BulkOperationPerformanceTier("STANDARD"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartBulkPutItems(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartBulkPutItems"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4063,6 +4193,33 @@ func TestUpdateRequestSnapshot_BatchWriteItem(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CancelBulkOperation(t *testing.T) {
+	input := &CancelBulkOperationInput{
+		BulkOperationArn: ptr.String("__BulkOperationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelBulkOperation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelBulkOperation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateBackup(t *testing.T) {
 	input := &CreateBackupInput{
 		TableName:  ptr.String("__TableName__"),
@@ -4538,6 +4695,33 @@ func TestUpdateRequestSnapshot_DescribeBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeBackup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeBulkOperation(t *testing.T) {
+	input := &DescribeBulkOperationInput{
+		BulkOperationArn: ptr.String("__BulkOperationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeBulkOperation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeBulkOperation"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5368,6 +5552,34 @@ func TestUpdateRequestSnapshot_ListBackups(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBackups"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListBulkOperations(t *testing.T) {
+	input := &ListBulkOperationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListBulkOperations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBulkOperations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6235,6 +6447,54 @@ func TestUpdateRequestSnapshot_SearchVectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchVectors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartBulkPutItems(t *testing.T) {
+	input := &StartBulkPutItemsInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		InputS3Configuration: &types.InputS3Configuration{
+			S3BucketOwner:        ptr.String("__S3BucketOwner__"),
+			S3Bucket:             ptr.String("__S3Bucket__"),
+			S3KeyPrefix:          ptr.String("__S3KeyPrefix__"),
+			InputFormat:          types.BulkOperationInputFormat("DYNAMODB_JSON"),
+			InputCompressionType: types.InputCompressionType("GZIP"),
+		},
+		OutputS3Configuration: &types.OutputS3Configuration{
+			S3BucketOwner:  ptr.String("__S3BucketOwner__"),
+			S3Bucket:       ptr.String("__S3Bucket__"),
+			S3KeyPrefix:    ptr.String("__S3KeyPrefix__"),
+			S3SseAlgorithm: types.S3SseAlgorithm("AES256"),
+			S3SseKmsKeyId:  ptr.String("__S3SseKmsKeyId__"),
+			OutputType: []types.OutputTypeEnum{
+				types.OutputTypeEnum("ERROR"),
+				types.OutputTypeEnum("ERROR"),
+			},
+		},
+		TableName:            ptr.String("__TableName__"),
+		MaxWriteRequestUnits: ptr.Int64(1),
+		PerformanceTier:      types.BulkOperationPerformanceTier("STANDARD"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartBulkPutItems(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartBulkPutItems"); err != nil {
 		t.Fatal(err)
 	}
 }

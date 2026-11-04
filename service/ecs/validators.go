@@ -2186,6 +2186,40 @@ func validateDaemonLinuxParameters(v *types.DaemonLinuxParameters) error {
 	}
 }
 
+func validateDaemonVolume(v *types.DaemonVolume) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DaemonVolume"}
+	if v.LogDriverVolumeConfiguration != nil {
+		if err := validateLogDriverVolumeConfiguration(v.LogDriverVolumeConfiguration); err != nil {
+			invalidParams.AddNested("LogDriverVolumeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDaemonVolumeList(v []types.DaemonVolume) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DaemonVolumeList"}
+	for i := range v {
+		if err := validateDaemonVolume(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeploymentAlarms(v *types.DeploymentAlarms) error {
 	if v == nil {
 		return nil
@@ -2843,6 +2877,21 @@ func validateLogConfiguration(v *types.LogConfiguration) error {
 		if err := validateSecretList(v.SecretOptions); err != nil {
 			invalidParams.AddNested("SecretOptions", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogDriverVolumeConfiguration(v *types.LogDriverVolumeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogDriverVolumeConfiguration"}
+	if len(v.Driver) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Driver"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4658,6 +4707,11 @@ func validateOpRegisterDaemonTaskDefinitionInput(v *RegisterDaemonTaskDefinition
 	} else if v.ContainerDefinitions != nil {
 		if err := validateDaemonContainerDefinitionList(v.ContainerDefinitions); err != nil {
 			invalidParams.AddNested("ContainerDefinitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Volumes != nil {
+		if err := validateDaemonVolumeList(v.Volumes); err != nil {
+			invalidParams.AddNested("Volumes", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

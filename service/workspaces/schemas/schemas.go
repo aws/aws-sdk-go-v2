@@ -2068,7 +2068,7 @@ var OperatingSystem_Type *smithy.Schema
 var OperatingSystemName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "OperatingSystemName",
-}, smithy.ShapeTypeEnum, 14)
+}, smithy.ShapeTypeEnum, 20)
 var OperatingSystemName_AMAZON_LINUX_2 *smithy.Schema
 
 var OperatingSystemName_UBUNTU_18_04 *smithy.Schema
@@ -2096,6 +2096,18 @@ var OperatingSystemName_WINDOWS_SERVER_2025 *smithy.Schema
 var OperatingSystemName_RHEL_8 *smithy.Schema
 
 var OperatingSystemName_ROCKY_8 *smithy.Schema
+
+var OperatingSystemName_UBUNTU_24_04 *smithy.Schema
+
+var OperatingSystemName_RHEL_9 *smithy.Schema
+
+var OperatingSystemName_ROCKY_9 *smithy.Schema
+
+var OperatingSystemName_UBUNTU_26_04 *smithy.Schema
+
+var OperatingSystemName_RHEL_10 *smithy.Schema
+
+var OperatingSystemName_ROCKY_10 *smithy.Schema
 
 var _OperatingSystemNameList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -6027,6 +6039,18 @@ func init() {
 	OperatingSystemName_RHEL_8 = OperatingSystemName.AddMember("RHEL_8", smithyprelude.Unit)
 
 	OperatingSystemName_ROCKY_8 = OperatingSystemName.AddMember("ROCKY_8", smithyprelude.Unit)
+
+	OperatingSystemName_UBUNTU_24_04 = OperatingSystemName.AddMember("UBUNTU_24_04", smithyprelude.Unit)
+
+	OperatingSystemName_RHEL_9 = OperatingSystemName.AddMember("RHEL_9", smithyprelude.Unit)
+
+	OperatingSystemName_ROCKY_9 = OperatingSystemName.AddMember("ROCKY_9", smithyprelude.Unit)
+
+	OperatingSystemName_UBUNTU_26_04 = OperatingSystemName.AddMember("UBUNTU_26_04", smithyprelude.Unit)
+
+	OperatingSystemName_RHEL_10 = OperatingSystemName.AddMember("RHEL_10", smithyprelude.Unit)
+
+	OperatingSystemName_ROCKY_10 = OperatingSystemName.AddMember("ROCKY_10", smithyprelude.Unit)
 
 	GlobalAcceleratorForWorkSpace_Mode = GlobalAcceleratorForWorkSpace.AddMember("Mode", AGAModeForWorkSpaceEnum)
 

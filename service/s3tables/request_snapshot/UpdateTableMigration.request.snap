@@ -1,0 +1,5 @@
+POST /update-table-migration?migrationId=__MigrationId__&tableARN=__TableARN__
+
+Content-Type: application/json
+
+{"requestedState":"queued","updateDescription":"__UpdateDescription__"}

@@ -9640,6 +9640,143 @@ func TestUpdateResponseSnapshot_GetSecurityControlDefinition(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetSoftwareResourcesV2(t *testing.T) {
+	want := &GetSoftwareResourcesV2Output{
+		SoftwareResources: []types.SoftwareResourceResult{
+			{
+				AccountId:              ptr.String("__AccountId__"),
+				ResourceType:           ptr.String("__ResourceType__"),
+				Region:                 ptr.String("__Region__"),
+				ResourceId:             ptr.String("__ResourceId__"),
+				ResourceProvider:       ptr.String("__ResourceProvider__"),
+				ResourceOwnerOrgId:     ptr.String("__ResourceOwnerOrgId__"),
+				ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+				ResourceCloudPartition: ptr.String("__ResourceCloudPartition__"),
+				ResourceRegion:         ptr.String("__ResourceRegion__"),
+			},
+			{
+				AccountId:              ptr.String("__AccountId__"),
+				ResourceType:           ptr.String("__ResourceType__"),
+				Region:                 ptr.String("__Region__"),
+				ResourceId:             ptr.String("__ResourceId__"),
+				ResourceProvider:       ptr.String("__ResourceProvider__"),
+				ResourceOwnerOrgId:     ptr.String("__ResourceOwnerOrgId__"),
+				ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+				ResourceCloudPartition: ptr.String("__ResourceCloudPartition__"),
+				ResourceRegion:         ptr.String("__ResourceRegion__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.SecurityHubAPIService)
+	opSchema := smithy.NewOperationSchema(schemas.GetSoftwareResourcesV2, schemas.GetSoftwareResourcesV2Response, schemas.GetSoftwareResourcesV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetSoftwareResourcesV2.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetSoftwareStatisticsV2(t *testing.T) {
+	want := &GetSoftwareStatisticsV2Output{
+		GroupByResults: []types.GroupByResult{
+			{
+				GroupByField: ptr.String("__GroupByField__"),
+				GroupByValues: []types.GroupByValue{
+					{
+						FieldValue: ptr.String("__FieldValue__"),
+						Count:      ptr.Int32(1),
+					},
+					{
+						FieldValue: ptr.String("__FieldValue__"),
+						Count:      ptr.Int32(1),
+					},
+				},
+			},
+			{
+				GroupByField: ptr.String("__GroupByField__"),
+				GroupByValues: []types.GroupByValue{
+					{
+						FieldValue: ptr.String("__FieldValue__"),
+						Count:      ptr.Int32(1),
+					},
+					{
+						FieldValue: ptr.String("__FieldValue__"),
+						Count:      ptr.Int32(1),
+					},
+				},
+			},
+		},
+	}
+	proto := restjson1.New(schemas.SecurityHubAPIService)
+	opSchema := smithy.NewOperationSchema(schemas.GetSoftwareStatisticsV2, schemas.GetSoftwareStatisticsV2Response, schemas.GetSoftwareStatisticsV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetSoftwareStatisticsV2.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetSoftwareV2(t *testing.T) {
+	want := &GetSoftwareV2Output{
+		Software: []types.SoftwareResult{
+			{
+				PackageName:    ptr.String("__PackageName__"),
+				PackageVersion: ptr.String("__PackageVersion__"),
+				PackageType:    ptr.String("__PackageType__"),
+				ResourceCount:  ptr.Int32(1),
+			},
+			{
+				PackageName:    ptr.String("__PackageName__"),
+				PackageVersion: ptr.String("__PackageVersion__"),
+				PackageType:    ptr.String("__PackageType__"),
+				ResourceCount:  ptr.Int32(1),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.SecurityHubAPIService)
+	opSchema := smithy.NewOperationSchema(schemas.GetSoftwareV2, schemas.GetSoftwareV2Response, schemas.GetSoftwareV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetSoftwareV2.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_InviteMembers(t *testing.T) {
 	want := &InviteMembersOutput{
 		UnprocessedAccounts: []types.Result{

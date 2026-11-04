@@ -5282,6 +5282,16 @@ type DaemonVolume struct {
 	// volume persists on the host container instance and where it's stored.
 	Host *HostVolumeProperties
 
+	// The log driver volume configuration. With a log driver volume, the containers
+	// in a daemon task can read the log files that a log driver writes for the other
+	// tasks on the container instance. To read the log files, mount the volume into a
+	// container in the daemon task with mountPoints .
+	//
+	// Use host to bind mount a path on the container instance. Use
+	// logDriverVolumeConfiguration to read the log output of other tasks. You can't
+	// specify both for the same volume.
+	LogDriverVolumeConfiguration *LogDriverVolumeConfiguration
+
 	// The name of the volume. Up to 255 letters (uppercase and lowercase), numbers,
 	// underscores, and hyphens are allowed.
 	Name *string
@@ -5301,6 +5311,11 @@ func (v *DaemonVolume) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Host.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.LogDriverVolumeConfiguration != nil {
+		s.WriteStruct(schemas.DaemonVolume_logDriverVolumeConfiguration)
+		v.LogDriverVolumeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DaemonVolume_name, *v.Name)
 	}
@@ -5311,6 +5326,9 @@ func (v *DaemonVolume) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DaemonVolume_host:
 			v.Host = &HostVolumeProperties{}
 			return v.Host.Deserialize(d)
+		case schemas.DaemonVolume_logDriverVolumeConfiguration:
+			v.LogDriverVolumeConfiguration = &LogDriverVolumeConfiguration{}
+			return v.LogDriverVolumeConfiguration.Deserialize(d)
 		case schemas.DaemonVolume_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.DaemonVolume_name, v.Name)
@@ -11741,6 +11759,10 @@ func (v *LoadBalancer) Deserialize(d smithy.ShapeDeserializer) error {
 //
 //	, fluentd , gelf , json-file , journald , syslog , splunk , and awsfirelens .
 //
+// For tasks on Amazon ECS Managed Instances, the supported log drivers are awslogs
+//
+//	, splunk , awsfirelens , and json-file .
+//
 //	- This parameter requires version 1.18 of the Docker Remote API or greater on
 //	your container instance.
 //
@@ -11765,6 +11787,9 @@ type LogConfiguration struct {
 	//
 	// For tasks hosted on Amazon EC2 instances, the supported log drivers are awslogs
 	// , fluentd , gelf , json-file , journald , syslog , splunk , and awsfirelens .
+	//
+	// For tasks on Amazon ECS Managed Instances, the supported log drivers are awslogs
+	// , splunk , awsfirelens , and json-file .
 	//
 	// For more information about using the awslogs log driver, see [Send Amazon ECS logs to CloudWatch] in the Amazon
 	// Elastic Container Service Developer Guide.
@@ -11992,6 +12017,53 @@ func (v *LogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeLogConfigurationOptionsMap(d, schemas.LogConfiguration_options, &v.Options)
 		case schemas.LogConfiguration_secretOptions:
 			return deserializeSecretList(d, schemas.LogConfiguration_secretOptions, &v.SecretOptions)
+		}
+		return nil
+	})
+}
+
+// The configuration for a log driver volume in a daemon task definition. The
+// volume contains the log files for each container on the container instance that
+// uses the specified log driver in its logConfiguration . Containers that use a
+// different log driver don't write log files to the volume.
+//
+// For the json-file log driver, the volume has one directory for each container,
+// named with the container ID. Each directory contains the container's log file,
+// <container-id>-json.log , and any rotated log files. After a container stops and
+// Amazon ECS removes it, Amazon ECS deletes the container's directory. Read the
+// log files before the container is removed.
+type LogDriverVolumeConfiguration struct {
+
+	// The log driver whose log files the volume contains. The only supported value is
+	// json-file .
+	//
+	// This member is required.
+	Driver LogDriver
+
+	noSmithyDocumentSerde
+}
+
+func (v *LogDriverVolumeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogDriverVolumeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogDriverVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Driver != "" {
+		s.WriteString(schemas.LogDriverVolumeConfiguration_driver, string(v.Driver))
+	}
+}
+func (v *LogDriverVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogDriverVolumeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogDriverVolumeConfiguration_driver:
+			var ev string
+			if err := d.ReadString(schemas.LogDriverVolumeConfiguration_driver, &ev); err != nil {
+				return err
+			}
+			v.Driver = LogDriver(ev)
+			return nil
 		}
 		return nil
 	})
@@ -15838,6 +15910,9 @@ type ServiceConnectConfiguration struct {
 	//
 	// For tasks hosted on Amazon EC2 instances, the supported log drivers are awslogs
 	//   , fluentd , gelf , json-file , journald , syslog , splunk , and awsfirelens .
+	//
+	// For tasks on Amazon ECS Managed Instances, the supported log drivers are awslogs
+	//   , splunk , awsfirelens , and json-file .
 	//
 	//   - This parameter requires version 1.18 of the Docker Remote API or greater on
 	//   your container instance.

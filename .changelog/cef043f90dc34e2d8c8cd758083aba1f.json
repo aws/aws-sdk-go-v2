@@ -1,0 +1,8 @@
+{
+    "id": "cef043f9-0dc3-4e2d-8c8c-d758083aba1f",
+    "type": "feature",
+    "description": "Adding support to Environment Variables in MWAA Serverless",
+    "modules": [
+        "service/mwaaserverless"
+    ]
+}

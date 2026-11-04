@@ -1,0 +1,8 @@
+{
+    "id": "0a3ede88-faa5-4ab5-b371-ff06ae498d63",
+    "type": "feature",
+    "description": "Adds StartBulkPutItems, DescribeBulkOperation, ListBulkOperations, and CancelBulkOperation for asynchronously loading Amazon S3 datasets into existing DynamoDB tables.",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

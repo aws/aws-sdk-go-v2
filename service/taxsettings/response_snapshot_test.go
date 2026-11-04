@@ -674,6 +674,18 @@ func TestCheckResponseSnapshot_GetTaxRegistration(t *testing.T) {
 					TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
 					CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
 				},
+				ColombiaAdditionalInfo: &types.ColombiaAdditionalInfo{
+					ResponsibilityCodes: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TaxpayerTypeCode: ptr.String("__TaxpayerTypeCode__"),
+					IssueDate:        ptr.String("__IssueDate__"),
+				},
+			},
+			StatusReason: &types.TaxRegistrationStatusReason{
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
 			},
 			LegalAddress: &types.Address{
 				AddressLine1:     ptr.String("__AddressLine1__"),
@@ -1019,6 +1031,18 @@ func TestCheckResponseSnapshot_ListTaxRegistrations(t *testing.T) {
 							TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
 							CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
 						},
+						ColombiaAdditionalInfo: &types.ColombiaAdditionalInfo{
+							ResponsibilityCodes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TaxpayerTypeCode: ptr.String("__TaxpayerTypeCode__"),
+							IssueDate:        ptr.String("__IssueDate__"),
+						},
+					},
+					StatusReason: &types.TaxRegistrationStatusReason{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
 					},
 					Jurisdiction: &types.Jurisdiction{
 						StateOrRegion: ptr.String("__StateOrRegion__"),
@@ -1189,6 +1213,18 @@ func TestCheckResponseSnapshot_ListTaxRegistrations(t *testing.T) {
 							TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
 							CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
 						},
+						ColombiaAdditionalInfo: &types.ColombiaAdditionalInfo{
+							ResponsibilityCodes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TaxpayerTypeCode: ptr.String("__TaxpayerTypeCode__"),
+							IssueDate:        ptr.String("__IssueDate__"),
+						},
+					},
+					StatusReason: &types.TaxRegistrationStatusReason{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
 					},
 					Jurisdiction: &types.Jurisdiction{
 						StateOrRegion: ptr.String("__StateOrRegion__"),

@@ -86,9 +86,8 @@ type CopyDBSnapshotInput struct {
 	TargetDBSnapshotIdentifier *string
 
 	// Specifies whether to copy the DB option group associated with the source DB
-	// snapshot to the target Amazon Web Services account and associate with the target
-	// DB snapshot. The associated option group can be copied only with cross-account
-	// snapshot copy calls.
+	// snapshot to the target Amazon Web Services account or Amazon Web Services Region
+	// and associate it with the target DB snapshot.
 	CopyOptionGroup *bool
 
 	// Specifies whether to copy all tags from the source DB snapshot to the target DB
@@ -202,6 +201,18 @@ type CopyDBSnapshotInput struct {
 	// The AWS region the resource is in. The presigned URL will be created with this
 	// region, if the PresignURL member is empty set.
 	SourceRegion *string
+
+	// Tags to assign to the copied option group. By default, the copied option group
+	// isn't tagged.
+	//
+	// Valid Values:
+	//
+	//   - og - The copied option group.
+	//
+	// Constraints:
+	//
+	//   - Can only be specified when CopyOptionGroup is true
+	TagSpecifications []types.TagSpecification
 
 	// A list of tags.
 	//

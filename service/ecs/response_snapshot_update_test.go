@@ -7807,11 +7807,17 @@ func TestUpdateResponseSnapshot_DescribeDaemonTaskDefinition(t *testing.T) {
 					Host: &types.HostVolumeProperties{
 						SourcePath: ptr.String("__SourcePath__"),
 					},
+					LogDriverVolumeConfiguration: &types.LogDriverVolumeConfiguration{
+						Driver: types.LogDriver("json-file"),
+					},
 				},
 				{
 					Name: ptr.String("__Name__"),
 					Host: &types.HostVolumeProperties{
 						SourcePath: ptr.String("__SourcePath__"),
+					},
+					LogDriverVolumeConfiguration: &types.LogDriverVolumeConfiguration{
+						Driver: types.LogDriver("json-file"),
 					},
 				},
 			},

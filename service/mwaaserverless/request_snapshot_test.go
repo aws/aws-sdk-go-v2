@@ -242,6 +242,11 @@ func TestCheckRequestSnapshot_CreateWorkflow(t *testing.T) {
 				"__Member__",
 			},
 		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -679,6 +684,11 @@ func TestCheckRequestSnapshot_UpdateWorkflow(t *testing.T) {
 				"__Member__",
 			},
 		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		TriggerMode: ptr.String("__TriggerMode__"),
 	}
 	body := &bytes.Buffer{}
@@ -737,6 +747,11 @@ func TestUpdateRequestSnapshot_CreateWorkflow(t *testing.T) {
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
+			},
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		Tags: map[string]string{
@@ -1174,6 +1189,11 @@ func TestUpdateRequestSnapshot_UpdateWorkflow(t *testing.T) {
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
+			},
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		TriggerMode: ptr.String("__TriggerMode__"),

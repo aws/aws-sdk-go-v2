@@ -11,6 +11,10 @@ import (
 )
 
 // Stops an inference scheduler.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) StopInferenceScheduler(ctx context.Context, params *StopInferenceSchedulerInput, optFns ...func(*Options)) (*StopInferenceSchedulerOutput, error) {
 	if params == nil {
 		params = &StopInferenceSchedulerInput{}

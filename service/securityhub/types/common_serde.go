@@ -3443,7 +3443,57 @@ func serializeSignalsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []S
 	s.CloseList()
 }
 
+func serializeSoftwareCompositeFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SoftwareCompositeFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSoftwareGroupByRules(s smithy.ShapeSerializer, schema *smithy.Schema, v []SoftwareGroupByRule) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSoftwareList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SoftwareResult) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeSoftwarePackageList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SoftwarePackage) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSoftwareResourceResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SoftwareResourceResult) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSoftwareStringFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SoftwareStringFilter) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -10214,6 +10264,72 @@ func deserializeSignalsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]S
 	})
 }
 
+func deserializeSoftwareCompositeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SoftwareCompositeFilter) error {
+	*v = make([]SoftwareCompositeFilter, 0)
+	var vv SoftwareCompositeFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SoftwareCompositeFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = SoftwareCompositeFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSoftwareGroupByRules(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SoftwareGroupByRule) error {
+	*v = make([]SoftwareGroupByRule, 0)
+	var vv SoftwareGroupByRule
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SoftwareGroupByRule
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = SoftwareGroupByRule{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSoftwareList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SoftwareResult) error {
+	*v = make([]SoftwareResult, 0)
+	var vv SoftwareResult
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SoftwareResult
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = SoftwareResult{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeSoftwarePackageList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SoftwarePackage) error {
 	*v = make([]SoftwarePackage, 0)
 	var vv SoftwarePackage
@@ -10227,6 +10343,50 @@ func deserializeSoftwarePackageList(d smithy.ShapeDeserializer, s *smithy.Schema
 		}
 
 		vv = SoftwarePackage{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSoftwareResourceResultList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SoftwareResourceResult) error {
+	*v = make([]SoftwareResourceResult, 0)
+	var vv SoftwareResourceResult
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SoftwareResourceResult
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = SoftwareResourceResult{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSoftwareStringFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SoftwareStringFilter) error {
+	*v = make([]SoftwareStringFilter, 0)
+	var vv SoftwareStringFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SoftwareStringFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = SoftwareStringFilter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

@@ -150,6 +150,7 @@ func TestCheckResponseSnapshot_ListRealtimeContactAnalysisSegments(t *testing.T)
 									EndOffsetMillis:   ptr.Int32(1),
 								},
 							},
+							RuleId: ptr.String("__RuleId__"),
 						},
 					},
 				},
@@ -234,6 +235,7 @@ func TestCheckResponseSnapshot_ListRealtimeContactAnalysisSegments(t *testing.T)
 									EndOffsetMillis:   ptr.Int32(1),
 								},
 							},
+							RuleId: ptr.String("__RuleId__"),
 						},
 					},
 				},
@@ -293,6 +295,59 @@ func TestCheckResponseSnapshot_ListRealtimeContactAnalysisSegments(t *testing.T)
 		ContactId:  ptr.String("__ContactId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:         ptr.String("__TagKey__"),
+					TagValue:       ptr.String("__TagValue__"),
+					ComparisonType: types.TagComparisonType("EQUALS"),
+				},
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -319,6 +374,59 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		ContactId:  ptr.String("__ContactId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:         ptr.String("__TagKey__"),
+					TagValue:       ptr.String("__TagValue__"),
+					ComparisonType: types.TagComparisonType("EQUALS"),
+				},
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -349,6 +457,59 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		ContactId:  ptr.String("__ContactId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:         ptr.String("__TagKey__"),
+					TagValue:       ptr.String("__TagValue__"),
+					ComparisonType: types.TagComparisonType("EQUALS"),
+				},
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -379,6 +540,59 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		ContactId:  ptr.String("__ContactId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:         ptr.String("__TagKey__"),
+					TagValue:       ptr.String("__TagValue__"),
+					ComparisonType: types.TagComparisonType("EQUALS"),
+				},
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -409,6 +623,59 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		ContactId:  ptr.String("__ContactId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:         ptr.String("__TagKey__"),
+					TagValue:       ptr.String("__TagValue__"),
+					ComparisonType: types.TagComparisonType("EQUALS"),
+				},
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -439,6 +706,59 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		ContactId:  ptr.String("__ContactId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:         ptr.String("__TagKey__"),
+					TagValue:       ptr.String("__TagValue__"),
+					ComparisonType: types.TagComparisonType("EQUALS"),
+				},
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

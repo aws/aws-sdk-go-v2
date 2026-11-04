@@ -4517,12 +4517,25 @@ type ReviewSourceSummary struct {
 	// This member is required.
 	AverageRating *string
 
-	// The machine-readable identifier of the review source.
+	// The machine-readable identifier of the review source. This field has one of the
+	// following values:
+	//
+	//   - AWS_MARKETPLACE – The reviews come from AWS Marketplace.
+	//
+	//   - G2 – The reviews come from G2.
+	//
+	//   - PEERSPOT – The reviews come from PeerSpot.
 	//
 	// This member is required.
 	SourceId ReviewSourceId
 
-	// The name of the review source, such as AWS Marketplace.
+	// The name of the review source. This field has one of the following values:
+	//
+	//   - AWS Marketplace
+	//
+	//   - G2
+	//
+	//   - PeerSpot
 	//
 	// This member is required.
 	SourceName *string
@@ -4592,7 +4605,8 @@ func (v *ReviewSourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 // source.
 type ReviewSummary struct {
 
-	// Review summaries from different sources, such as AWS Marketplace.
+	// Review summaries from different sources, such as AWS Marketplace, G2, and
+	// PeerSpot.
 	//
 	// This member is required.
 	ReviewSourceSummaries []ReviewSourceSummary

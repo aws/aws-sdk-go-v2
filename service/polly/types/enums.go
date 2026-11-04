@@ -191,6 +191,23 @@ func (QuotaCode) Values() []QuotaCode {
 	}
 }
 
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeLexicon ResourceType = "lexicon"
+)
+
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"lexicon",
+	}
+}
+
 type ServiceCode string
 
 // Enum values for ServiceCode

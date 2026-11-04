@@ -59,6 +59,14 @@ func serializeSynthesisTasks(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 	s.CloseList()
 }
 
+func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeThrottlingReasonList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ThrottlingReason) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -217,6 +225,27 @@ func deserializeSynthesisTasks(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	})
 }
 
+func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeThrottlingReasonList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ThrottlingReason) error {
 	*v = make([]types.ThrottlingReason, 0)
 	var vv types.ThrottlingReason
@@ -279,6 +308,36 @@ func deserializeVoiceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
+func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
 		return nil
 	})
 }

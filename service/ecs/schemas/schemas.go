@@ -2007,10 +2007,12 @@ var DaemonTaskDefinitionSummary_status *smithy.Schema
 var DaemonVolume = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "DaemonVolume",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var DaemonVolume_name *smithy.Schema
 
 var DaemonVolume_host *smithy.Schema
+
+var DaemonVolume_logDriverVolumeConfiguration *smithy.Schema
 
 var _DaemonVolumeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -3739,6 +3741,12 @@ var LogDriver_AWSLOGS *smithy.Schema
 var LogDriver_SPLUNK *smithy.Schema
 
 var LogDriver_AWSFIRELENS *smithy.Schema
+
+var LogDriverVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "LogDriverVolumeConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var LogDriverVolumeConfiguration_driver *smithy.Schema
 
 var _Long = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -9472,9 +9480,13 @@ func init() {
 
 	HostVolumeProperties_sourcePath = HostVolumeProperties.AddMember("sourcePath", _String)
 
+	LogDriverVolumeConfiguration_driver = LogDriverVolumeConfiguration.AddMember("driver", LogDriver)
+
 	DaemonVolume_name = DaemonVolume.AddMember("name", _String)
 
 	DaemonVolume_host = DaemonVolume.AddMember("host", HostVolumeProperties)
+
+	DaemonVolume_logDriverVolumeConfiguration = DaemonVolume.AddMember("logDriverVolumeConfiguration", LogDriverVolumeConfiguration)
 
 	_DaemonVolumeList_member = _DaemonVolumeList.AddMember("member", DaemonVolume)
 

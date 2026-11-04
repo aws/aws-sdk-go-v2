@@ -12,6 +12,10 @@ import (
 // Deletes a machine learning model currently available for Amazon Lookout for
 // Equipment. This will prevent it from being used with an inference scheduler,
 // even one that is already set up.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) DeleteModel(ctx context.Context, params *DeleteModelInput, optFns ...func(*Options)) (*DeleteModelOutput, error) {
 	if params == nil {
 		params = &DeleteModelInput{}

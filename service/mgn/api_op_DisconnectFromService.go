@@ -21,7 +21,7 @@ import (
 // dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The
 // totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will
 // be set to zero; dataReplicationInfo.lagDuration and
-// dataReplicationInfo.lagDuration will be nullified.
+// dataReplicationInfo.etaDateTime will be nullified.
 func (c *Client) DisconnectFromService(ctx context.Context, params *DisconnectFromServiceInput, optFns ...func(*Options)) (*DisconnectFromServiceOutput, error) {
 	if params == nil {
 		params = &DisconnectFromServiceInput{}

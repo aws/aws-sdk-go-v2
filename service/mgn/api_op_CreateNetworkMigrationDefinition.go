@@ -4,6 +4,7 @@ package mgn
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
 	smithy "github.com/aws/smithy-go"
@@ -50,6 +51,10 @@ type CreateNetworkMigrationDefinitionInput struct {
 	// set to USE_EXISTING .
 	CidrMappings []types.CidrMapping
 
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
+	ClientToken *string
+
 	// A description of the network migration definition.
 	Description *string
 
@@ -83,6 +88,9 @@ func (v *CreateNetworkMigrationDefinitionInput) Serialize(s smithy.ShapeSerializ
 func (v *CreateNetworkMigrationDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CidrMappings != nil {
 		serializeCidrMappingsList(s, schemas.CreateNetworkMigrationDefinitionRequest_cidrMappings, v.CidrMappings)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateNetworkMigrationDefinitionRequest_clientToken, *v.ClientToken)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateNetworkMigrationDefinitionRequest_description, *v.Description)
@@ -298,6 +306,9 @@ func (c *Client) addOperationCreateNetworkMigrationDefinitionMiddlewares(stack *
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateNetworkMigrationDefinitionMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateNetworkMigrationDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -317,4 +328,37 @@ func (c *Client) addOperationCreateNetworkMigrationDefinitionMiddlewares(stack *
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateNetworkMigrationDefinition struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateNetworkMigrationDefinition) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateNetworkMigrationDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateNetworkMigrationDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateNetworkMigrationDefinitionInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateNetworkMigrationDefinitionMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateNetworkMigrationDefinition{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }

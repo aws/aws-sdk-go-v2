@@ -12982,6 +12982,13 @@ func awsAwsquery_serializeOpDocumentCopyDBSnapshotInput(v *CopyDBSnapshotInput, 
 		}
 	}
 
+	if v.TagSpecifications != nil {
+		objectKey := object.Key("TagSpecifications")
+		if err := awsAwsquery_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetCustomAvailabilityZone != nil {
 		objectKey := object.Key("TargetCustomAvailabilityZone")
 		objectKey.String(*v.TargetCustomAvailabilityZone)

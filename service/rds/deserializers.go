@@ -51146,6 +51146,19 @@ func awsAwsquery_deserializeDocumentOptionGroup(v **types.OptionGroup, decoder s
 				sv.SourceOptionGroup = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("SourceRegion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SourceRegion = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("VpcId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -51437,6 +51450,22 @@ func awsAwsquery_deserializeDocumentOptionGroupOption(v **types.OptionGroupOptio
 					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
 				}
 				sv.CopyableCrossAccount = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("CopyableCrossRegion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.CopyableCrossRegion = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("DefaultPort", t.Name.Local):

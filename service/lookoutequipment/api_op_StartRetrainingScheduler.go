@@ -11,6 +11,10 @@ import (
 )
 
 // Starts a retraining scheduler.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) StartRetrainingScheduler(ctx context.Context, params *StartRetrainingSchedulerInput, optFns ...func(*Options)) (*StartRetrainingSchedulerOutput, error) {
 	if params == nil {
 		params = &StartRetrainingSchedulerInput{}

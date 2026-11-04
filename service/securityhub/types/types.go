@@ -53492,6 +53492,156 @@ func (v *Signal) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Enables the creation of criteria for software packages in Security Hub.
+type SoftwareCompositeFilter struct {
+
+	// Provides an additional level of filtering, creating a three-layer nested
+	// structure. The first layer is a CompositeFilters array with a CompositeOperator
+	// ( AND / OR ). The second layer is a CompositeFilter object that contains direct
+	// filters and NestedCompositeFilters . The third layer is NestedCompositeFilters ,
+	// which contains additional filter conditions.
+	NestedCompositeFilters []SoftwareCompositeFilter
+
+	// The logical operator used to combine multiple filter conditions.
+	Operator AllowedOperators
+
+	// Enables filtering based on string field values.
+	StringFilters []SoftwareStringFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *SoftwareCompositeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareCompositeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareCompositeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NestedCompositeFilters != nil {
+		serializeSoftwareCompositeFilterList(s, schemas.SoftwareCompositeFilter_NestedCompositeFilters, v.NestedCompositeFilters)
+	}
+	if v.Operator != "" {
+		s.WriteString(schemas.SoftwareCompositeFilter_Operator, string(v.Operator))
+	}
+	if v.StringFilters != nil {
+		serializeSoftwareStringFilterList(s, schemas.SoftwareCompositeFilter_StringFilters, v.StringFilters)
+	}
+}
+func (v *SoftwareCompositeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareCompositeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareCompositeFilter_NestedCompositeFilters:
+			return deserializeSoftwareCompositeFilterList(d, schemas.SoftwareCompositeFilter_NestedCompositeFilters, &v.NestedCompositeFilters)
+		case schemas.SoftwareCompositeFilter_Operator:
+			var ev string
+			if err := d.ReadString(schemas.SoftwareCompositeFilter_Operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = AllowedOperators(ev)
+			return nil
+		case schemas.SoftwareCompositeFilter_StringFilters:
+			return deserializeSoftwareStringFilterList(d, schemas.SoftwareCompositeFilter_StringFilters, &v.StringFilters)
+		}
+		return nil
+	})
+}
+
+// Enables filtering of software packages and the resources that contain them.
+type SoftwareFilters struct {
+
+	// A collection of complex filtering conditions that can be applied to software
+	// packages.
+	CompositeFilters []SoftwareCompositeFilter
+
+	// The logical operator used to combine multiple filter conditions in the
+	// structure.
+	CompositeOperator AllowedOperators
+
+	noSmithyDocumentSerde
+}
+
+func (v *SoftwareFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompositeFilters != nil {
+		serializeSoftwareCompositeFilterList(s, schemas.SoftwareFilters_CompositeFilters, v.CompositeFilters)
+	}
+	if v.CompositeOperator != "" {
+		s.WriteString(schemas.SoftwareFilters_CompositeOperator, string(v.CompositeOperator))
+	}
+}
+func (v *SoftwareFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareFilters_CompositeFilters:
+			return deserializeSoftwareCompositeFilterList(d, schemas.SoftwareFilters_CompositeFilters, &v.CompositeFilters)
+		case schemas.SoftwareFilters_CompositeOperator:
+			var ev string
+			if err := d.ReadString(schemas.SoftwareFilters_CompositeOperator, &ev); err != nil {
+				return err
+			}
+			v.CompositeOperator = AllowedOperators(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Defines the configuration for organizing and categorizing software packages
+// installed on your resources.
+type SoftwareGroupByRule struct {
+
+	// Specifies the attribute that software statistics should be grouped by.
+	//
+	// This member is required.
+	GroupByField SoftwareGroupByField
+
+	// The criteria used to select the software packages included in the statistics.
+	// You can nest composite filters up to three levels deep.
+	Filters *SoftwareFilters
+
+	noSmithyDocumentSerde
+}
+
+func (v *SoftwareGroupByRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareGroupByRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareGroupByRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.SoftwareGroupByRule_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GroupByField != "" {
+		s.WriteString(schemas.SoftwareGroupByRule_GroupByField, string(v.GroupByField))
+	}
+}
+func (v *SoftwareGroupByRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareGroupByRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareGroupByRule_Filters:
+			v.Filters = &SoftwareFilters{}
+			return v.Filters.Deserialize(d)
+		case schemas.SoftwareGroupByRule_GroupByField:
+			var ev string
+			if err := d.ReadString(schemas.SoftwareGroupByRule_GroupByField, &ev); err != nil {
+				return err
+			}
+			v.GroupByField = SoftwareGroupByField(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about a software package.
 type SoftwarePackage struct {
 
@@ -53610,6 +53760,273 @@ func (v *SoftwarePackage) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SoftwarePackage_Version:
 			v.Version = new(string)
 			return d.ReadString(schemas.SoftwarePackage_Version, v.Version)
+		}
+		return nil
+	})
+}
+
+// Provides information about a resource that contains a software package.
+type SoftwareResourceResult struct {
+
+	// The Amazon Web Services account that recorded the resource data in Security Hub.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The Amazon Web Services Region that recorded the resource data in Security Hub.
+	//
+	// This member is required.
+	Region *string
+
+	// The unique identifier for a resource.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// The type of resource, for example AWS::EC2::Instance or AWS::Lambda::Function .
+	//
+	// This member is required.
+	ResourceType *string
+
+	// The cloud partition where the resource exists. For Amazon Web Services, valid
+	// values include aws , aws-cn , and aws-us-gov . This field isn't returned for
+	// cloud providers that don't use partitions.
+	ResourceCloudPartition *string
+
+	// The identifier of the cloud account that owns the resource. For Amazon Web
+	// Services resources, this is the Amazon Web Services account ID. For Azure
+	// resources, this is the Azure subscription ID.
+	ResourceOwnerAccountId *string
+
+	// The identifier of the cloud organization that owns the resource. For Amazon Web
+	// Services resources, this is the Organizations ID. For Azure resources, this is
+	// the Azure tenant ID.
+	ResourceOwnerOrgId *string
+
+	// The cloud provider where the resource exists. Valid values are AWS and Azure .
+	ResourceProvider *string
+
+	// The native cloud region where the resource is located. For Amazon Web Services,
+	// this is an Amazon Web Services Region (for example, us-east-1 ). For Azure
+	// resources, this is the Azure region (for example, westus2 ).
+	ResourceRegion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SoftwareResourceResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareResourceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareResourceResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.SoftwareResourceResult_AccountId, *v.AccountId)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.SoftwareResourceResult_Region, *v.Region)
+	}
+	if v.ResourceCloudPartition != nil {
+		s.WriteString(schemas.SoftwareResourceResult_ResourceCloudPartition, *v.ResourceCloudPartition)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.SoftwareResourceResult_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceOwnerAccountId != nil {
+		s.WriteString(schemas.SoftwareResourceResult_ResourceOwnerAccountId, *v.ResourceOwnerAccountId)
+	}
+	if v.ResourceOwnerOrgId != nil {
+		s.WriteString(schemas.SoftwareResourceResult_ResourceOwnerOrgId, *v.ResourceOwnerOrgId)
+	}
+	if v.ResourceProvider != nil {
+		s.WriteString(schemas.SoftwareResourceResult_ResourceProvider, *v.ResourceProvider)
+	}
+	if v.ResourceRegion != nil {
+		s.WriteString(schemas.SoftwareResourceResult_ResourceRegion, *v.ResourceRegion)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.SoftwareResourceResult_ResourceType, *v.ResourceType)
+	}
+}
+func (v *SoftwareResourceResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareResourceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareResourceResult_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.SoftwareResourceResult_AccountId, v.AccountId)
+		case schemas.SoftwareResourceResult_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.SoftwareResourceResult_Region, v.Region)
+		case schemas.SoftwareResourceResult_ResourceCloudPartition:
+			v.ResourceCloudPartition = new(string)
+			return d.ReadString(schemas.SoftwareResourceResult_ResourceCloudPartition, v.ResourceCloudPartition)
+		case schemas.SoftwareResourceResult_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.SoftwareResourceResult_ResourceId, v.ResourceId)
+		case schemas.SoftwareResourceResult_ResourceOwnerAccountId:
+			v.ResourceOwnerAccountId = new(string)
+			return d.ReadString(schemas.SoftwareResourceResult_ResourceOwnerAccountId, v.ResourceOwnerAccountId)
+		case schemas.SoftwareResourceResult_ResourceOwnerOrgId:
+			v.ResourceOwnerOrgId = new(string)
+			return d.ReadString(schemas.SoftwareResourceResult_ResourceOwnerOrgId, v.ResourceOwnerOrgId)
+		case schemas.SoftwareResourceResult_ResourceProvider:
+			v.ResourceProvider = new(string)
+			return d.ReadString(schemas.SoftwareResourceResult_ResourceProvider, v.ResourceProvider)
+		case schemas.SoftwareResourceResult_ResourceRegion:
+			v.ResourceRegion = new(string)
+			return d.ReadString(schemas.SoftwareResourceResult_ResourceRegion, v.ResourceRegion)
+		case schemas.SoftwareResourceResult_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.SoftwareResourceResult_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
+
+// Provides information about a software package installed on one or more of your
+// resources.
+type SoftwareResult struct {
+
+	// The name of the software package.
+	//
+	// This member is required.
+	PackageName *string
+
+	// The type of the software package, for example operating-system , application ,
+	// or library .
+	//
+	// This member is required.
+	PackageType *string
+
+	// The number of resources that contain this software package. To list these
+	// resources, call GetSoftwareResourcesV2 .
+	//
+	// This member is required.
+	ResourceCount *int32
+
+	// The version of the software package.
+	PackageVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SoftwareResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackageName != nil {
+		s.WriteString(schemas.SoftwareResult_PackageName, *v.PackageName)
+	}
+	if v.PackageType != nil {
+		s.WriteString(schemas.SoftwareResult_PackageType, *v.PackageType)
+	}
+	if v.PackageVersion != nil {
+		s.WriteString(schemas.SoftwareResult_PackageVersion, *v.PackageVersion)
+	}
+	if v.ResourceCount != nil {
+		s.WriteInt32(schemas.SoftwareResult_ResourceCount, *v.ResourceCount)
+	}
+}
+func (v *SoftwareResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareResult_PackageName:
+			v.PackageName = new(string)
+			return d.ReadString(schemas.SoftwareResult_PackageName, v.PackageName)
+		case schemas.SoftwareResult_PackageType:
+			v.PackageType = new(string)
+			return d.ReadString(schemas.SoftwareResult_PackageType, v.PackageType)
+		case schemas.SoftwareResult_PackageVersion:
+			v.PackageVersion = new(string)
+			return d.ReadString(schemas.SoftwareResult_PackageVersion, v.PackageVersion)
+		case schemas.SoftwareResult_ResourceCount:
+			v.ResourceCount = new(int32)
+			return d.ReadInt32(schemas.SoftwareResult_ResourceCount, v.ResourceCount)
+		}
+		return nil
+	})
+}
+
+// Defines the data boundary for a software query. Scopes determine which
+// organizational units or organizations to retrieve data from.
+type SoftwareScopes struct {
+
+	// A list of Organizations scopes to include in the query results. Each entry in
+	// the list specifies an organization or organizational unit to include for the
+	// delegated administrator's account. If the list specifies multiple entries, the
+	// entries are combined using OR logic.
+	AwsOrganizations []AwsOrganizationScope
+
+	noSmithyDocumentSerde
+}
+
+func (v *SoftwareScopes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareScopes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareScopes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsOrganizations != nil {
+		serializeAwsOrganizationScopeList(s, schemas.SoftwareScopes_AwsOrganizations, v.AwsOrganizations)
+	}
+}
+func (v *SoftwareScopes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareScopes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareScopes_AwsOrganizations:
+			return deserializeAwsOrganizationScopeList(d, schemas.SoftwareScopes_AwsOrganizations, &v.AwsOrganizations)
+		}
+		return nil
+	})
+}
+
+// Enables filtering of software packages based on string field values.
+type SoftwareStringFilter struct {
+
+	// The name of the field.
+	FieldName SoftwareStringField
+
+	// The string value and comparison operator to filter on. Supported comparisons
+	// are EQUALS , NOT_EQUALS , PREFIX , and PREFIX_NOT_EQUALS .
+	Filter *StringFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *SoftwareStringFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareStringFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareStringFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldName != "" {
+		s.WriteString(schemas.SoftwareStringFilter_FieldName, string(v.FieldName))
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.SoftwareStringFilter_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SoftwareStringFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareStringFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareStringFilter_FieldName:
+			var ev string
+			if err := d.ReadString(schemas.SoftwareStringFilter_FieldName, &ev); err != nil {
+				return err
+			}
+			v.FieldName = SoftwareStringField(ev)
+			return nil
+		case schemas.SoftwareStringFilter_Filter:
+			v.Filter = &StringFilter{}
+			return v.Filter.Deserialize(d)
 		}
 		return nil
 	})

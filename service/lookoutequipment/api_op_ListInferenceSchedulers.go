@@ -13,6 +13,10 @@ import (
 
 // Retrieves a list of all inference schedulers currently available for your
 // account.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListInferenceSchedulers(ctx context.Context, params *ListInferenceSchedulersInput, optFns ...func(*Options)) (*ListInferenceSchedulersOutput, error) {
 	if params == nil {
 		params = &ListInferenceSchedulersInput{}

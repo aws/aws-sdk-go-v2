@@ -15,6 +15,10 @@ import (
 // and if there isn't, the dataset, its metadata, and any associated data stored in
 // S3 will be deleted. This does not affect any models that used this dataset for
 // training and evaluation, but does prevent it from being used in the future.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}

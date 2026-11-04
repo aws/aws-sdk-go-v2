@@ -241,7 +241,7 @@ var AdditionalInfoRequest_mexicoAdditionalInfo *smithy.Schema
 var AdditionalInfoResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "AdditionalInfoResponse",
-}, smithy.ShapeTypeStructure, 28)
+}, smithy.ShapeTypeStructure, 29)
 var AdditionalInfoResponse_malaysiaAdditionalInfo *smithy.Schema
 
 var AdditionalInfoResponse_israelAdditionalInfo *smithy.Schema
@@ -297,6 +297,8 @@ var AdditionalInfoResponse_monacoAdditionalInfo *smithy.Schema
 var AdditionalInfoResponse_germanyAdditionalInfo *smithy.Schema
 
 var AdditionalInfoResponse_mexicoAdditionalInfo *smithy.Schema
+
+var AdditionalInfoResponse_colombiaAdditionalInfo *smithy.Schema
 
 var Address = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
@@ -503,6 +505,32 @@ var _CigNumber = smithy.NewSchema(smithy.ShapeID{
 var _City = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "City",
+}, smithy.ShapeTypeString, 0)
+
+var ColombiaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "ColombiaAdditionalInfo",
+}, smithy.ShapeTypeStructure, 3)
+var ColombiaAdditionalInfo_responsibilityCodes *smithy.Schema
+
+var ColombiaAdditionalInfo_taxpayerTypeCode *smithy.Schema
+
+var ColombiaAdditionalInfo_issueDate *smithy.Schema
+
+var _ColombiaResponsabilidadCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "ColombiaResponsabilidadCode",
+}, smithy.ShapeTypeString, 0)
+
+var _ColombiaResponsabilidadesList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "ColombiaResponsabilidadesList",
+}, smithy.ShapeTypeList, 1)
+var _ColombiaResponsabilidadesList_member *smithy.Schema
+
+var _ColombiaTipoContribuyenteCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "ColombiaTipoContribuyenteCode",
 }, smithy.ShapeTypeString, 0)
 
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
@@ -1088,6 +1116,16 @@ var _State = smithy.NewSchema(smithy.ShapeID{
 	Name:      "State",
 }, smithy.ShapeTypeString, 0)
 
+var _StatusReasonCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "StatusReasonCode",
+}, smithy.ShapeTypeString, 0)
+
+var _StatusReasonMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "StatusReasonMessage",
+}, smithy.ShapeTypeString, 0)
+
 var _Steuernummer = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "Steuernummer",
@@ -1241,7 +1279,7 @@ var _TaxOffice = smithy.NewSchema(smithy.ShapeID{
 var TaxRegistration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "TaxRegistration",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeStructure, 10, &smithytraits.Sensitive{})
 var TaxRegistration_registrationId *smithy.Schema
 
 var TaxRegistration_registrationType *smithy.Schema
@@ -1257,6 +1295,8 @@ var TaxRegistration_taxDocumentMetadatas *smithy.Schema
 var TaxRegistration_certifiedEmailId *smithy.Schema
 
 var TaxRegistration_additionalTaxInformation *smithy.Schema
+
+var TaxRegistration_statusReason *smithy.Schema
 
 var TaxRegistration_legalAddress *smithy.Schema
 
@@ -1322,10 +1362,18 @@ var TaxRegistrationStatus_DELETED *smithy.Schema
 
 var TaxRegistrationStatus_REJECTED *smithy.Schema
 
+var TaxRegistrationStatusReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "TaxRegistrationStatusReason",
+}, smithy.ShapeTypeStructure, 2)
+var TaxRegistrationStatusReason_code *smithy.Schema
+
+var TaxRegistrationStatusReason_message *smithy.Schema
+
 var TaxRegistrationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "TaxRegistrationType",
-}, smithy.ShapeTypeEnum, 9)
+}, smithy.ShapeTypeEnum, 14)
 var TaxRegistrationType_VAT *smithy.Schema
 
 var TaxRegistrationType_GST *smithy.Schema
@@ -1344,10 +1392,20 @@ var TaxRegistrationType_PAN *smithy.Schema
 
 var TaxRegistrationType_NIP *smithy.Schema
 
+var TaxRegistrationType_CUIT *smithy.Schema
+
+var TaxRegistrationType_CDI *smithy.Schema
+
+var TaxRegistrationType_RUT *smithy.Schema
+
+var TaxRegistrationType_NIE *smithy.Schema
+
+var TaxRegistrationType_CI *smithy.Schema
+
 var TaxRegistrationWithJurisdiction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "TaxRegistrationWithJurisdiction",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeStructure, 10, &smithytraits.Sensitive{})
 var TaxRegistrationWithJurisdiction_registrationId *smithy.Schema
 
 var TaxRegistrationWithJurisdiction_registrationType *smithy.Schema
@@ -1363,6 +1421,8 @@ var TaxRegistrationWithJurisdiction_taxDocumentMetadatas *smithy.Schema
 var TaxRegistrationWithJurisdiction_certifiedEmailId *smithy.Schema
 
 var TaxRegistrationWithJurisdiction_additionalTaxInformation *smithy.Schema
+
+var TaxRegistrationWithJurisdiction_statusReason *smithy.Schema
 
 var TaxRegistrationWithJurisdiction_jurisdiction *smithy.Schema
 
@@ -1726,6 +1786,16 @@ func init() {
 
 	TaxRegistrationType_NIP = TaxRegistrationType.AddMember("NIP", smithyprelude.Unit)
 
+	TaxRegistrationType_CUIT = TaxRegistrationType.AddMember("CUIT", smithyprelude.Unit)
+
+	TaxRegistrationType_CDI = TaxRegistrationType.AddMember("CDI", smithyprelude.Unit)
+
+	TaxRegistrationType_RUT = TaxRegistrationType.AddMember("RUT", smithyprelude.Unit)
+
+	TaxRegistrationType_NIE = TaxRegistrationType.AddMember("NIE", smithyprelude.Unit)
+
+	TaxRegistrationType_CI = TaxRegistrationType.AddMember("CI", smithyprelude.Unit)
+
 	TaxRegistrationStatus_VERIFIED = TaxRegistrationStatus.AddMember("VERIFIED", smithyprelude.Unit)
 
 	TaxRegistrationStatus_PENDING = TaxRegistrationStatus.AddMember("PENDING", smithyprelude.Unit)
@@ -1944,6 +2014,14 @@ func init() {
 
 	MexicoAdditionalInfo_cfdiUsageCode = MexicoAdditionalInfo.AddMember("cfdiUsageCode", _MexicoCfdiUsageCode)
 
+	_ColombiaResponsabilidadesList_member = _ColombiaResponsabilidadesList.AddMember("member", _ColombiaResponsabilidadCode)
+
+	ColombiaAdditionalInfo_responsibilityCodes = ColombiaAdditionalInfo.AddMember("responsibilityCodes", _ColombiaResponsabilidadesList)
+
+	ColombiaAdditionalInfo_taxpayerTypeCode = ColombiaAdditionalInfo.AddMember("taxpayerTypeCode", _ColombiaTipoContribuyenteCode)
+
+	ColombiaAdditionalInfo_issueDate = ColombiaAdditionalInfo.AddMember("issueDate", _DateString)
+
 	AdditionalInfoResponse_malaysiaAdditionalInfo = AdditionalInfoResponse.AddMember("malaysiaAdditionalInfo", MalaysiaAdditionalInfo)
 
 	AdditionalInfoResponse_israelAdditionalInfo = AdditionalInfoResponse.AddMember("israelAdditionalInfo", IsraelAdditionalInfo)
@@ -2000,6 +2078,12 @@ func init() {
 
 	AdditionalInfoResponse_mexicoAdditionalInfo = AdditionalInfoResponse.AddMember("mexicoAdditionalInfo", MexicoAdditionalInfo)
 
+	AdditionalInfoResponse_colombiaAdditionalInfo = AdditionalInfoResponse.AddMember("colombiaAdditionalInfo", ColombiaAdditionalInfo)
+
+	TaxRegistrationStatusReason_code = TaxRegistrationStatusReason.AddMember("code", _StatusReasonCode)
+
+	TaxRegistrationStatusReason_message = TaxRegistrationStatusReason.AddMember("message", _StatusReasonMessage)
+
 	Jurisdiction_stateOrRegion = Jurisdiction.AddMember("stateOrRegion", _State)
 
 	Jurisdiction_countryCode = Jurisdiction.AddMember("countryCode", _CountryCode)
@@ -2019,6 +2103,8 @@ func init() {
 	TaxRegistrationWithJurisdiction_certifiedEmailId = TaxRegistrationWithJurisdiction.AddMember("certifiedEmailId", _CertifiedEmailId)
 
 	TaxRegistrationWithJurisdiction_additionalTaxInformation = TaxRegistrationWithJurisdiction.AddMember("additionalTaxInformation", AdditionalInfoResponse)
+
+	TaxRegistrationWithJurisdiction_statusReason = TaxRegistrationWithJurisdiction.AddMember("statusReason", TaxRegistrationStatusReason)
 
 	TaxRegistrationWithJurisdiction_jurisdiction = TaxRegistrationWithJurisdiction.AddMember("jurisdiction", Jurisdiction)
 
@@ -2261,6 +2347,8 @@ func init() {
 	TaxRegistration_certifiedEmailId = TaxRegistration.AddMember("certifiedEmailId", _CertifiedEmailId)
 
 	TaxRegistration_additionalTaxInformation = TaxRegistration.AddMember("additionalTaxInformation", AdditionalInfoResponse)
+
+	TaxRegistration_statusReason = TaxRegistration.AddMember("statusReason", TaxRegistrationStatusReason)
 
 	TaxRegistration_legalAddress = TaxRegistration.AddMember("legalAddress", Address)
 

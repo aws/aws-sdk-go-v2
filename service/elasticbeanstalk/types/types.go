@@ -453,6 +453,19 @@ type CustomAmi struct {
 	noSmithyDocumentSerde
 }
 
+// An AMI that Elastic Beanstalk uses by default for a platform version and
+// processor architecture.
+type DefaultAmi struct {
+
+	// The processor architecture of the AMI.
+	Architecture AmiArchitecture
+
+	// The ID of the AMI.
+	ImageId *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an application version deployment.
 type Deployment struct {
 
@@ -827,6 +840,9 @@ type ImageConfiguration struct {
 	//
 	// If you specify Build , also specify the request's SourceBundle parameter, and
 	// don't specify Source .
+	//
+	// To build the image when you create the application version instead of on first
+	// deployment, also set Process to true .
 	Build *ImageBuildConfiguration
 
 	// The location of a container image that you built and pushed to a container
@@ -1145,7 +1161,11 @@ type PlatformBranchSummary struct {
 // Detailed information about a platform version.
 type PlatformDescription struct {
 
-	// The custom AMIs supported by the platform version.
+	// The AMIs of the platform version, by virtualization type. For Elastic Beanstalk
+	// managed platforms, these are the default x86_64 AMIs; for custom platforms, the
+	// hvm entry is the AMI built for the platform version. To find a managed
+	// platform's default AMIs for every supported processor architecture, including
+	// arm64 , use DefaultAmiList .
 	CustomAmiList []CustomAmi
 
 	// The date when the platform version was created.
@@ -1153,6 +1173,14 @@ type PlatformDescription struct {
 
 	// The date when the platform version was last updated.
 	DateUpdated *time.Time
+
+	// The AMIs that Elastic Beanstalk uses by default for the platform version, one
+	// for each supported processor architecture. When an environment doesn't specify a
+	// custom AMI, Elastic Beanstalk chooses the default AMI that matches the
+	// environment's architecture.
+	//
+	// This list isn't returned for custom platforms.
+	DefaultAmiList []DefaultAmi
 
 	// The description of the platform version.
 	Description *string

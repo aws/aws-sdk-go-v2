@@ -1,0 +1,8 @@
+{
+    "id": "4b72456d-230a-4b4c-9634-f2a71fa4a6c0",
+    "type": "feature",
+    "description": "Add the Unsupported SupportabilityScore to GetCapacityManagerSupportabilityScores.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -12370,9 +12370,10 @@ type SupportabilityScore string
 
 // Enum values for SupportabilityScore
 const (
-	SupportabilityScoreHigh   SupportabilityScore = "high"
-	SupportabilityScoreMedium SupportabilityScore = "medium"
-	SupportabilityScoreLow    SupportabilityScore = "low"
+	SupportabilityScoreHigh        SupportabilityScore = "high"
+	SupportabilityScoreMedium      SupportabilityScore = "medium"
+	SupportabilityScoreLow         SupportabilityScore = "low"
+	SupportabilityScoreUnsupported SupportabilityScore = "unsupported"
 )
 
 // Values returns all known values for SupportabilityScore. Note that this can be
@@ -12384,6 +12385,7 @@ func (SupportabilityScore) Values() []SupportabilityScore {
 		"high",
 		"medium",
 		"low",
+		"unsupported",
 	}
 }
 

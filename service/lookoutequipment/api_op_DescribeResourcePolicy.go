@@ -11,6 +11,10 @@ import (
 )
 
 // Provides the details of a resource policy attached to a resource.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) DescribeResourcePolicy(ctx context.Context, params *DescribeResourcePolicyInput, optFns ...func(*Options)) (*DescribeResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DescribeResourcePolicyInput{}

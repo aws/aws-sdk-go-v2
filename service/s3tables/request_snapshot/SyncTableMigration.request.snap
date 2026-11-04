@@ -1,0 +1,5 @@
+POST /sync-table-migration
+
+Content-Type: application/json
+
+{"migrationOutput":{"bucket":"__Bucket__","prefixes":{"objectCompatibilityReport":"__ObjectCompatibilityReport__","objectMigrationReport":"__ObjectMigrationReport__","tableCompatibilityReport":"__TableCompatibilityReport__"}},"reviewMigrationPlan":true,"roleARN":"__RoleARN__","tableARN":"__TableARN__"}

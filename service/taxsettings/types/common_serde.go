@@ -54,6 +54,14 @@ func serializeBatchPutTaxRegistrationErrors(s smithy.ShapeSerializer, schema *sm
 	s.CloseList()
 }
 
+func serializeColombiaResponsabilidadesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeMalaysiaServiceTaxCodesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MalaysiaServiceTaxCode) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -223,6 +231,27 @@ func deserializeBatchPutTaxRegistrationErrors(d smithy.ShapeDeserializer, s *smi
 
 		vv = BatchPutTaxRegistrationError{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeColombiaResponsabilidadesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

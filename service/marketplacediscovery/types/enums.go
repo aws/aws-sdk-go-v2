@@ -333,6 +333,8 @@ type ReviewSourceId string
 // Enum values for ReviewSourceId
 const (
 	ReviewSourceIdAwsMarketplace ReviewSourceId = "AWS_MARKETPLACE"
+	ReviewSourceIdG2             ReviewSourceId = "G2"
+	ReviewSourceIdPeerspot       ReviewSourceId = "PEERSPOT"
 )
 
 // Values returns all known values for ReviewSourceId. Note that this can be
@@ -342,6 +344,8 @@ const (
 func (ReviewSourceId) Values() []ReviewSourceId {
 	return []ReviewSourceId{
 		"AWS_MARKETPLACE",
+		"G2",
+		"PEERSPOT",
 	}
 }
 

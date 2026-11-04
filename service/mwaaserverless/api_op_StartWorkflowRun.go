@@ -54,8 +54,8 @@ type StartWorkflowRunInput struct {
 	// syntax.
 	OverrideParameters map[string]document.Interface
 
-	// Optional. The specific version of the workflow to execute. If not specified,
-	// the latest version is used.
+	// Optional. The specific version of the workflow to execute. If you don't specify
+	// a version, we use the latest version.
 	WorkflowVersion *string
 
 	noSmithyDocumentSerde

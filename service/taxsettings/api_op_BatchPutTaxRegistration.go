@@ -18,6 +18,11 @@ import (
 // To call this API operation for specific countries, see the following
 // country-specific requirements.
 //
+// Argentina
+//
+//   - RegistrationType valid values are CUIT (Clave Única de Identificación
+//     Tributaria) and CDI (Clave de Identificación).
+//
 // Bangladesh
 //
 //   - You must specify the tax registration certificate document in the
@@ -190,6 +195,11 @@ import (
 // Ukraine
 //
 //   - The sector valid values are Business and Individual .
+//
+// Uruguay
+//
+//   - RegistrationType valid values are RUT (Registro Único Tributario), NIE
+//     (Numero de Identificacion del Extranjero), and CI (Cedula Identidad).
 //
 // Philippines
 //

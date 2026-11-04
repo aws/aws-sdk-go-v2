@@ -3030,6 +3030,16 @@ var _DatasetExportJobId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DatasetExportJobId",
 }, smithy.ShapeTypeString, 0)
 
+var _DatasetExportJobName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iotsitewise",
+	Name:      "DatasetExportJobName",
+}, smithy.ShapeTypeString, 0)
+
+var _DatasetExportJobNameInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iotsitewise",
+	Name:      "DatasetExportJobNameInput",
+}, smithy.ShapeTypeString, 0)
+
 var DatasetExportJobStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotsitewise",
 	Name:      "DatasetExportJobStatus",
@@ -3628,8 +3638,10 @@ var ExportErrorReportLocation_s3Uri *smithy.Schema
 var ExportJobSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotsitewise",
 	Name:      "ExportJobSummary",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var ExportJobSummary_jobId *smithy.Schema
+
+var ExportJobSummary_jobName *smithy.Schema
 
 var ExportJobSummary_status *smithy.Schema
 
@@ -6352,7 +6364,7 @@ var CreateDashboardResponse_dashboardArn *smithy.Schema
 var CreateDatasetExportJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotsitewise",
 	Name:      "CreateDatasetExportJobRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var CreateDatasetExportJobRequest_workspaceName *smithy.Schema
 
 var CreateDatasetExportJobRequest_clientToken *smithy.Schema
@@ -6360,6 +6372,8 @@ var CreateDatasetExportJobRequest_clientToken *smithy.Schema
 var CreateDatasetExportJobRequest_destinationS3Uri *smithy.Schema
 
 var CreateDatasetExportJobRequest_input *smithy.Schema
+
+var CreateDatasetExportJobRequest_jobName *smithy.Schema
 
 var CreateDatasetExportJobRequest_errorReportLocation *smithy.Schema
 
@@ -7236,10 +7250,12 @@ var DescribeDatasetExportJobRequest_jobId *smithy.Schema
 var DescribeDatasetExportJobResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotsitewise",
 	Name:      "DescribeDatasetExportJobResponse",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var DescribeDatasetExportJobResponse_jobId *smithy.Schema
 
 var DescribeDatasetExportJobResponse_workspaceName *smithy.Schema
+
+var DescribeDatasetExportJobResponse_jobName *smithy.Schema
 
 var DescribeDatasetExportJobResponse_status *smithy.Schema
 
@@ -10824,6 +10840,8 @@ func init() {
 
 	ExportJobSummary_jobId = ExportJobSummary.AddMember("jobId", _DatasetExportJobId)
 
+	ExportJobSummary_jobName = ExportJobSummary.AddMember("jobName", _DatasetExportJobName)
+
 	ExportJobSummary_status = ExportJobSummary.AddMember("status", DatasetExportJobStatus)
 
 	ExportJobSummary_startedAt = ExportJobSummary.AddMember("startedAt", smithyprelude.Timestamp)
@@ -11854,6 +11872,8 @@ func init() {
 
 	CreateDatasetExportJobRequest_input = CreateDatasetExportJobRequest.AddMember("input", ProcessingInput)
 
+	CreateDatasetExportJobRequest_jobName = CreateDatasetExportJobRequest.AddMember("jobName", _DatasetExportJobNameInput)
+
 	CreateDatasetExportJobRequest_errorReportLocation = CreateDatasetExportJobRequest.AddMember("errorReportLocation", ExportErrorReportLocation)
 
 	CreateDatasetExportJobResponse_jobId = CreateDatasetExportJobResponse.AddMember("jobId", _DatasetExportJobId)
@@ -12429,6 +12449,8 @@ func init() {
 	DescribeDatasetExportJobResponse_jobId = DescribeDatasetExportJobResponse.AddMember("jobId", _DatasetExportJobId)
 
 	DescribeDatasetExportJobResponse_workspaceName = DescribeDatasetExportJobResponse.AddMember("workspaceName", _WorkspaceName)
+
+	DescribeDatasetExportJobResponse_jobName = DescribeDatasetExportJobResponse.AddMember("jobName", _DatasetExportJobName)
 
 	DescribeDatasetExportJobResponse_status = DescribeDatasetExportJobResponse.AddMember("status", DatasetExportJobStatus)
 

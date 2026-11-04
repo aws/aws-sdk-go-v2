@@ -4602,6 +4602,10 @@ type OptionGroup struct {
 	// Specifies the name of the option group from which this option group is copied.
 	SourceOptionGroup *string
 
+	// Specifies the Amazon Web Services Region for the option group from which this
+	// option group is copied.
+	SourceRegion *string
+
 	// If AllowsVpcAndNonVpcInstanceMemberships is false , this field is blank. If
 	// AllowsVpcAndNonVpcInstanceMemberships is true and this field is blank, then
 	// this option group can be applied to both VPC and non-VPC instances. If this
@@ -4631,6 +4635,9 @@ type OptionGroupOption struct {
 
 	// Indicates whether the option can be copied across Amazon Web Services accounts.
 	CopyableCrossAccount *bool
+
+	// Indicates whether the option can be copied across Amazon Web Services Regions.
+	CopyableCrossRegion *bool
 
 	// If the option requires a port, specifies the default port for the option.
 	DefaultPort *int32
@@ -5969,8 +5976,8 @@ type Tag struct {
 }
 
 // The tags to apply to resources when creating or modifying a DB instance or DB
-// cluster. When you specify a tag, you must specify the resource type to tag,
-// otherwise the request will fail.
+// cluster, or when copying a DB instance snapshot. When you specify a tag, you
+// must specify the resource type to tag, otherwise the request will fail.
 type TagSpecification struct {
 
 	// The type of resource to tag on creation.
@@ -5980,6 +5987,8 @@ type TagSpecification struct {
 	//   - auto-backup - The DB instance's automated backup.
 	//
 	//   - cluster-auto-backup - The DB cluster's automated backup.
+	//
+	//   - og - The copied option group. Valid only for CopyDBSnapshot .
 	ResourceType *string
 
 	// A list of tags.

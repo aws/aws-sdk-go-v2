@@ -1,0 +1,8 @@
+{
+    "id": "96724cd4-d958-4d44-99af-78deef896898",
+    "type": "feature",
+    "description": "Amazon Lookout for Equipment reached end of support on October 7, 2026. All Lookout for Equipment APIs are now marked as deprecated.",
+    "modules": [
+        "service/lookoutequipment"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "2ebf36e7-0f78-4f1d-bd46-163c6f65bb11",
+    "type": "feature",
+    "description": "Amazon ECS Managed Instances now supports the json-file log driver in task definitions. Daemon task definition volumes also support logDriverVolumeConfiguration, letting managed daemons read those logs.",
+    "modules": [
+        "service/ecs"
+    ]
+}

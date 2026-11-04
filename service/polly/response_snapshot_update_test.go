@@ -420,6 +420,32 @@ func TestUpdateResponseSnapshot_ListSpeechSynthesisTasks(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
+	want := &ListTagsForResourceOutput{
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceOutput, schemas.ListTagsForResourceOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListTagsForResource.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_PutLexicon(t *testing.T) {
 	want := &PutLexiconOutput{}
 	proto := restjson1.New(schemas.Parrot_v1)
@@ -510,6 +536,50 @@ func TestUpdateResponseSnapshot_SynthesizeSpeech(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("SynthesizeSpeech.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
+	want := &TagResourceOutput{}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceOutput, schemas.TagResourceOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("TagResource.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
+	want := &UntagResourceOutput{}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceOutput, schemas.UntagResourceOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UntagResource.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -714,6 +784,31 @@ func TestUpdateResponseSnapshot_Error_InvalidSsmlException(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_Error_InvalidTagParameterException(t *testing.T) {
+	want := &types.InvalidTagParameterException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.InvalidTagParameterException, schemas.InvalidTagParameterException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("InvalidTagParameterException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_Error_InvalidTaskIdException(t *testing.T) {
 	want := &types.InvalidTaskIdException{
 		Message: ptr.String("__Message__"),
@@ -889,6 +984,33 @@ func TestUpdateResponseSnapshot_Error_MaxLexiconsNumberExceededException(t *test
 	}
 }
 
+func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
+	want := &types.ResourceNotFoundException{
+		Message:      ptr.String("__Message__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.ResourceType("lexicon"),
+	}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 404, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 	want := &types.ServiceFailureException{
 		Message: ptr.String("__Message__"),
@@ -989,6 +1111,66 @@ func TestUpdateResponseSnapshot_Error_TextLengthExceededException(t *testing.T) 
 	}
 }
 
+func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
+	want := &types.ThrottlingException{
+		Message: ptr.String("__Message__"),
+		ThrottlingReasons: []types.ThrottlingReason{
+			{
+				Reason:   ptr.String("__Reason__"),
+				Resource: ptr.String("__Resource__"),
+			},
+			{
+				Reason:   ptr.String("__Reason__"),
+				Resource: ptr.String("__Resource__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ThrottlingException, schemas.ThrottlingException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ThrottlingException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
+	want := &types.TooManyTagsException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.PutLexicon, schemas.TooManyTagsException, schemas.TooManyTagsException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("TooManyTagsException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_Error_UnsupportedPlsAlphabetException(t *testing.T) {
 	want := &types.UnsupportedPlsAlphabetException{
 		Message: ptr.String("__Message__"),
@@ -1035,6 +1217,42 @@ func TestUpdateResponseSnapshot_Error_UnsupportedPlsLanguageException(t *testing
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UnsupportedPlsLanguageException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
+	want := &types.ValidationException{
+		Message: ptr.String("__Message__"),
+		Reason:  types.ValidationExceptionReason("unsupportedOperation"),
+		Fields: []types.ValidationExceptionField{
+			{
+				Name:    ptr.String("__Name__"),
+				Message: ptr.String("__Message__"),
+			},
+			{
+				Name:    ptr.String("__Name__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ValidationException, schemas.ValidationException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ValidationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

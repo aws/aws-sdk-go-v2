@@ -8362,6 +8362,136 @@ func awsAwsquery_deserializeDocumentCustomAmiListUnwrapped(v *[]types.CustomAmi,
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentDefaultAmi(v **types.DefaultAmi, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DefaultAmi
+	if *v == nil {
+		sv = &types.DefaultAmi{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Architecture", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Architecture = types.AmiArchitecture(xtv)
+			}
+
+		case strings.EqualFold("ImageId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ImageId = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDefaultAmiList(v *[]types.DefaultAmi, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.DefaultAmi
+	if *v == nil {
+		sv = make([]types.DefaultAmi, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.DefaultAmi
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentDefaultAmi(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDefaultAmiListUnwrapped(v *[]types.DefaultAmi, decoder smithyxml.NodeDecoder) error {
+	var sv []types.DefaultAmi
+	if *v == nil {
+		sv = make([]types.DefaultAmi, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.DefaultAmi
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentDefaultAmi(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentDeployment(v **types.Deployment, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11996,6 +12126,12 @@ func awsAwsquery_deserializeDocumentPlatformDescription(v **types.PlatformDescri
 					return err
 				}
 				sv.DateUpdated = ptr.Time(t)
+			}
+
+		case strings.EqualFold("DefaultAmiList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentDefaultAmiList(&sv.DefaultAmiList, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("Description", t.Name.Local):

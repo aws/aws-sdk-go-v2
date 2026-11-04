@@ -6061,6 +6061,16 @@ func TestCheckResponseSnapshot_DescribeContact(t *testing.T) {
 				Arn:  ptr.String("__Arn__"),
 				Name: ptr.String("__Name__"),
 			},
+			Cases: []types.CaseEntry{
+				{
+					CaseId:              ptr.String("__CaseId__"),
+					CaseReferenceNumber: ptr.String("__CaseReferenceNumber__"),
+				},
+				{
+					CaseId:              ptr.String("__CaseId__"),
+					CaseReferenceNumber: ptr.String("__CaseReferenceNumber__"),
+				},
+			},
 			ContactDetails: &types.ContactDetails{
 				Name:        ptr.String("__Name__"),
 				Description: ptr.String("__Description__"),

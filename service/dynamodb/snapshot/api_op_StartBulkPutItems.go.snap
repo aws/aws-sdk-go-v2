@@ -1,0 +1,33 @@
+StartBulkPutItems
+	Initialize stack step
+		OperationIdempotencyTokenAutoFill
+		OperationInputValidation
+	Serialize stack step
+		setOperationInput
+		ResolveEndpoint
+		OperationSerializer
+	Build stack step
+		ClientRequestID
+		UserAgent
+		RecursionDetection
+	Finalize stack step
+		DisableAcceptEncodingGzip
+		InterceptBeforeRetryLoop
+		Retry
+		InterceptAttempt
+		ResolveAuthScheme
+		GetIdentity
+		ResolveEndpointV2
+		disableHTTPS
+		DiscoverEndpoint
+		ComputePayloadHash
+		setLegacyContextSigningOptions
+		Signing
+	Deserialize stack step
+		AddRawResponseToMetadata
+		ResponseErrorWrapper
+		RequestIDRetriever
+		OperationDeserializer
+		RecordResponseTiming
+		DynamoDB:ResponseChecksumValidation
+		RequestResponseLogger

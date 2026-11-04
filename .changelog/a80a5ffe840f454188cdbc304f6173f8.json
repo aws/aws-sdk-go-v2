@@ -1,0 +1,8 @@
+{
+    "id": "a80a5ffe-840f-4541-88cd-bc304f6173f8",
+    "type": "feature",
+    "description": "Adds Colombia additional information (responsibility codes, taxpayer type code, and RUT issue date) and a rejection reason (statusReason) to tax registration responses, and adds Argentina and Uruguay tax registration types.",
+    "modules": [
+        "service/taxsettings"
+    ]
+}
