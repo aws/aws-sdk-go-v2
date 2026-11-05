@@ -4985,6 +4985,69 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.route53domains#RestoreDomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53domains#RestoreDomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53domains#RestoreDomainResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53domains#DuplicateRequest"
+                },
+                {
+                    "target": "com.amazonaws.route53domains#InvalidInput"
+                },
+                {
+                    "target": "com.amazonaws.route53domains#OperationLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.route53domains#UnsupportedTLD"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Restores a domain that has expired, or was deleted, before it becomes available\n\t\t\tfor others to register. The cost of restoring your domain is billed to your Amazon Web Services account.</p>\n         <p>Not every TLD registry supports restoring domains, and the period during which a\n\t\t\tdomain can be restored varies by TLD. To find out whether your domain can be restored\n\t\t\tand the period during which you can restore it, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html\">Domains that you can\n\t\t\t\tregister with Amazon Route 53</a> in the <i>Amazon Route 53 Developer\n\t\t\t\tGuide</i>.</p>\n         <important>\n            <p>Restoring a domain typically costs more, and sometimes much more, than registering\n\t\t\t\tor renewing a domain. To get the restoration price for a domain before you restore\n\t\t\t\tit, use <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetDomainPrices.html\">GetDomainPrices</a>.</p>\n         </important>\n         <p>Restoration is asynchronous. The response includes an operation ID that you can use\n\t\t\twith <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html\">GetOperationDetail</a> to track the progress of the request. When the restoration\n\t\t\tsucceeds, the domain reappears in the response to <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListDomains.html\">ListDomains</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-restore-expired.html\">Restoring an\n\t\t\t\texpired or deleted domain</a> in the <i>Amazon Route 53 Developer\n\t\t\t\tGuide</i>.</p>"
+            }
+        },
+        "com.amazonaws.route53domains#RestoreDomainRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.route53domains#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain that you want to restore. The domain must have been registered\n\t\t\tto the Amazon Web Services account that submits the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Consent": {
+                    "target": "com.amazonaws.route53domains#Consent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum price that you agree to pay to restore the domain name. This element is\n\t\t\trequired if the domain has registry premium pricing, and optional if the domain\n\t\t\tis priced at the standard rate for its TLD. If you include it and the restoration\n\t\t\tprice is more than <code>MaxPrice</code>, the request fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A <code>RestoreDomain</code> request includes the name of the domain that you want to\n\t\t\trestore and, optionally, the maximum price that you agree to pay.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53domains#RestoreDomainResponse": {
+            "type": "structure",
+            "members": {
+                "OperationId": {
+                    "target": "com.amazonaws.route53domains#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier for tracking the progress of the request. To query the operation status,\n\t\t\tuse <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html\">GetOperationDetail</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>RestoreDomain</code> response includes the following element.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.route53domains#RetrieveDomainAuthCode": {
             "type": "operation",
             "input": {
@@ -5123,6 +5186,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53domains#ResendOperationAuthorization"
+                },
+                {
+                    "target": "com.amazonaws.route53domains#RestoreDomain"
                 },
                 {
                     "target": "com.amazonaws.route53domains#RetrieveDomainAuthCode"

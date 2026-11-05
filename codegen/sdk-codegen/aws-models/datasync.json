@@ -180,6 +180,12 @@
                     "traits": {
                         "smithy.api#enumValue": "NONE"
                     }
+                },
+                "OIDC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OIDC"
+                    }
                 }
             }
         },
@@ -238,6 +244,58 @@
                         "smithy.api#enumValue": "BLOCK"
                     }
                 }
+            }
+        },
+        "com.amazonaws.datasync#AzureFederatedIdentityConfig": {
+            "type": "structure",
+            "members": {
+                "AwsIamRole": {
+                    "target": "com.amazonaws.datasync#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ARN for an Amazon Web Services role that allows DataSync to invoke STS GetWebIdentityToken API on behalf\n      of the customer account and to obtain Amazon Web Services STS JWT (web token).</p>"
+                    }
+                },
+                "AzureOidc": {
+                    "target": "com.amazonaws.datasync#AzureOidcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>External identity parameters for Azure Blob Storage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies federated identity parameters that allow DataSync to obtain an OpenID Connect token\n      for access to customer Azure Blob Storage. The token allows for temporary, short-term access to the\n      storage. DataSync automatically refreshes the token to assure uninterrupted access to the storage.</p>\n         <note>\n            <p>Federated identity parameters are an alternative to the <code>SasConfiguration</code> credentials\n        that are expected to be valid long-term (e.g. at least for the duration of DataSync task execution).\n        Do not specify federated identity and the SAS configuration for the same Azure Blob location.\n      </p>\n         </note>"
+            }
+        },
+        "com.amazonaws.datasync#AzureGuidString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.datasync#AzureOidcConfig": {
+            "type": "structure",
+            "members": {
+                "TenantId": {
+                    "target": "com.amazonaws.datasync#AzureGuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Azure tenant ID string.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.datasync#AzureGuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Azure client ID string.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>External identity parameters for Azure Blob Storage.</p>"
             }
         },
         "com.amazonaws.datasync#BytesPerSecond": {
@@ -425,7 +483,7 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.datasync#AzureBlobAuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the authentication method DataSync uses to access your Azure Blob\n      Storage. DataSync can access blob storage using a shared access signature\n      (SAS).</p>",
+                        "smithy.api#documentation": "<p>Specifies the authentication method DataSync uses to access your Azure Blob\n      Storage. DataSync can access blob storage using a shared access signature (SAS) or\n      an OpenID Connect (OIDC) token.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -433,6 +491,12 @@
                     "target": "com.amazonaws.datasync#AzureBlobSasConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the SAS configuration that allows DataSync to access your Azure Blob\n      Storage.</p>\n         <note>\n            <p>If you provide an authentication token using <code>SasConfiguration</code>, but do not\n        provide secret configuration details using <code>CmkSecretConfig</code> or\n          <code>CustomSecretConfig</code>, then DataSync stores the token using your\n          Amazon Web Services account's secrets manager secret.</p>\n         </note>"
+                    }
+                },
+                "FederatedIdentity": {
+                    "target": "com.amazonaws.datasync#AzureFederatedIdentityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the federated identity configuration that allows DataSync to access\n      your Azure Blob Storage using an OpenID Connect (OIDC) token instead of a shared access\n      signature (SAS). Provide either <code>FederatedIdentity</code> or\n        <code>SasConfiguration</code>, but not both.</p>"
                     }
                 },
                 "BlobType": {
@@ -1179,6 +1243,12 @@
                         "smithy.api#documentation": "<p>Specifies the secret key (for example, a password) if credentials are required to\n      authenticate with the object storage server.</p>\n         <note>\n            <p>If you provide a secret using <code>SecretKey</code>, but do not provide secret\n        configuration details using <code>CmkSecretConfig</code> or <code>CustomSecretConfig</code>,\n        then DataSync stores the token using your Amazon Web Services account's Secrets Manager secret.</p>\n         </note>"
                     }
                 },
+                "FederatedIdentity": {
+                    "target": "com.amazonaws.datasync#ObjectStorageFederatedIdentityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the federated identity configuration that allows DataSync to access\n      your object storage using an OpenID Connect (OIDC) token instead of a long-term access key and\n      secret key. Provide either <code>FederatedIdentity</code> or the\n        <code>AccessKey</code>/<code>SecretKey</code> credentials, but not both.</p>"
+                    }
+                },
                 "AgentArns": {
                     "target": "com.amazonaws.datasync#AgentArnList",
                     "traits": {
@@ -1542,7 +1612,7 @@
                 "TaskMode": {
                     "target": "com.amazonaws.datasync#TaskMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies one of the following task modes for your data transfer:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENHANCED</code> - Transfer virtually unlimited numbers of objects with higher\n          performance than Basic mode. Enhanced mode tasks optimize the data transfer process by\n          listing, preparing, transferring, and verifying data in parallel. Enhanced mode is\n          currently available for transfers between Amazon S3 locations, transfers between\n          Azure Blob and Amazon S3 without an agent, and transfers between other clouds and\n            Amazon S3 without an agent.</p>\n               <note>\n                  <p>To create an Enhanced mode task, the IAM role that you use to call\n            the <code>CreateTask</code> operation must have the\n              <code>iam:CreateServiceLinkedRole</code> permission.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>BASIC</code> (default) - Transfer files or objects between Amazon Web Services\n          storage and all other supported DataSync locations. Basic mode tasks are subject\n          to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/datasync-limits.html\">quotas</a> on the number of files, objects, and directories in a dataset. Basic\n          mode sequentially prepares, transfers, and verifies data, making it slower than Enhanced\n          mode for most workloads.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html#task-mode-differences\">Understanding\n        task mode differences</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies one of the following task modes for your data transfer:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENHANCED</code> - Transfer virtually unlimited numbers of objects with higher\n          performance than Basic mode. Enhanced mode tasks optimize the data transfer process by\n          listing, preparing, transferring, and verifying data in parallel. Enhanced mode is\n          currently available for all transfers except those that use Amazon S3 on Outposts.</p>\n               <note>\n                  <p>To create an Enhanced mode task, the IAM role that you use to call\n            the <code>CreateTask</code> operation must have the\n              <code>iam:CreateServiceLinkedRole</code> permission.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>BASIC</code> (default) - Transfer files or objects between Amazon Web Services\n          storage and all other supported DataSync locations. Basic mode tasks are subject\n          to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/datasync-limits.html\">quotas</a> on the number of files, objects, and directories in a dataset. Basic\n          mode sequentially prepares, transfers, and verifies data, making it slower than Enhanced\n          mode for most workloads.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html#task-mode-differences\">Understanding\n        task mode differences</a>.</p>"
                     }
                 }
             },
@@ -1861,7 +1931,13 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.datasync#AzureBlobAuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication method DataSync uses to access your Azure Blob Storage.\n        DataSync can access blob storage using a shared access signature (SAS).</p>"
+                        "smithy.api#documentation": "<p>The authentication method DataSync uses to access your Azure Blob Storage.\n        DataSync can access blob storage using a shared access signature (SAS) or an\n      OpenID Connect (OIDC) token.</p>"
+                    }
+                },
+                "FederatedIdentity": {
+                    "target": "com.amazonaws.datasync#AzureFederatedIdentityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The federated identity configuration that DataSync uses to access your Azure\n      Blob Storage using an OpenID Connect (OIDC) token.</p>"
                     }
                 },
                 "BlobType": {
@@ -2574,6 +2650,12 @@
                     "target": "com.amazonaws.datasync#ObjectStorageAccessKey",
                     "traits": {
                         "smithy.api#documentation": "<p>The access key (for example, a user name) required to authenticate with the object storage\n      system.</p>"
+                    }
+                },
+                "FederatedIdentity": {
+                    "target": "com.amazonaws.datasync#ObjectStorageFederatedIdentityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The federated identity configuration that DataSync uses to access your object\n      storage using an OpenID Connect (OIDC) token.</p>"
                     }
                 },
                 "ServerPort": {
@@ -5022,6 +5104,52 @@
                 }
             }
         },
+        "com.amazonaws.datasync#GoogleIdentityFederationResourceString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^(?!gcp-)[a-z][a-z0-9-]{2,30}[a-z0-9]$"
+            }
+        },
+        "com.amazonaws.datasync#GoogleOidcConfig": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.datasync#ProjectNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Human-readable project name (e.g. \"my-project\").</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProjectNumber": {
+                    "target": "com.amazonaws.datasync#ProjectNumberString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Numeric project ID as a string (e.g. \"123456789\").</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityPoolName": {
+                    "target": "com.amazonaws.datasync#GoogleIdentityFederationResourceString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Human-readable pool name (e.g. \"my-pool\").</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityProviderName": {
+                    "target": "com.amazonaws.datasync#GoogleIdentityFederationResourceString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Human-readable provider name (e.g. \"my-oidc-provider\").</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>External identity parameters for Google Cloud Storage.</p>"
+            }
+        },
         "com.amazonaws.datasync#HdfsAuthenticationType": {
             "type": "enum",
             "members": {
@@ -5320,7 +5448,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of DataSync agents that belong to an Amazon Web Services account in the Amazon Web Services Region specified in the request.</p>\n         <p>With pagination, you can reduce the number of agents returned in a response. If you get\n      a truncated list of agents in a response, the response contains a marker that you can specify\n      in your next request to fetch the next page of agents.</p>\n         <p>\n            <code>ListAgents</code> is eventually consistent. This means the result of running the\n      operation might not reflect that you just created or deleted an agent. For example, if you\n      create an agent with <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateAgent.html\">CreateAgent</a> and then\n      immediately run <code>ListAgents</code>, that agent might not show up in the list right away.\n      In situations like this, you can always confirm whether an agent has been created (or deleted)\n      by using <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeAgent.html\">DescribeAgent</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of DataSync agents that belong to an Amazon Web Services account in the Amazon Web Services Region specified in the request.</p>\n         <p>With pagination, you can reduce the number of agents returned in a response. If you get\n      a truncated list of agents in a response, the response contains a marker that you can specify\n      in your next request to fetch the next page of agents.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -6018,6 +6146,40 @@
                 }
             }
         },
+        "com.amazonaws.datasync#ObjectStorageExternalIdentityConfig": {
+            "type": "structure",
+            "members": {
+                "GoogleOidc": {
+                    "target": "com.amazonaws.datasync#GoogleOidcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>External identity parameters for Google Cloud Storage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies cloud-provider-specific external identity parameters used when exchanging the\n      Amazon Web Services web token for an OpenID Connect token at the object storage provider.</p>"
+            }
+        },
+        "com.amazonaws.datasync#ObjectStorageFederatedIdentityConfig": {
+            "type": "structure",
+            "members": {
+                "AwsIamRole": {
+                    "target": "com.amazonaws.datasync#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ARN for an Amazon Web Services role that allows DataSync to invoke STS GetWebIdentityToken API on behalf\n      of the customer account and to obtain Amazon Web Services STS JWT (web token).</p>"
+                    }
+                },
+                "ExternalIdentity": {
+                    "target": "com.amazonaws.datasync#ObjectStorageExternalIdentityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies cloud-provider-specific external identity parameters used when exchanging the\n      Amazon Web Services web token for an OpenID Connect token at the object storage provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies federated identity parameters that allow DataSync to obtain OpenID Connect token\n      for access to customer object storage. The token allows for temporary, short-term access to the\n      storage. DataSync automatically refreshes the token to assure uninterrupted access to the storage.</p>\n         <note>\n            <p>Federated identity parameters are an alternative to the <code>AccessKey</code>/<code>SecretKey</code>\n        credentials that are expected to be valid long-term (e.g. at least for the duration of DataSync task execution).\n        Do not specify federated identity and the key parameters for the same object storage location.\n      </p>\n         </note>"
+            }
+        },
         "com.amazonaws.datasync#ObjectStorageSecretKey": {
             "type": "string",
             "traits": {
@@ -6444,6 +6606,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies how your DataSync agent connects to Amazon Web Services using a\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc\">virtual private cloud (VPC) service endpoint</a>. An agent that uses a VPC endpoint\n      isn't accessible over the public internet.</p>"
+            }
+        },
+        "com.amazonaws.datasync#ProjectNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 6,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[a-z][a-z0-9-]{4,28}[a-z0-9]$"
+            }
+        },
+        "com.amazonaws.datasync#ProjectNumberString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^[0-9]+$"
             }
         },
         "com.amazonaws.datasync#QopConfiguration": {
@@ -7910,13 +8092,19 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.datasync#AzureBlobAuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the authentication method DataSync uses to access your Azure Blob\n      Storage. DataSync can access blob storage using a shared access signature\n      (SAS).</p>"
+                        "smithy.api#documentation": "<p>Specifies the authentication method DataSync uses to access your Azure Blob\n      Storage. DataSync can access blob storage using a shared access signature (SAS) or\n      an OpenID Connect (OIDC) token.</p>"
                     }
                 },
                 "SasConfiguration": {
                     "target": "com.amazonaws.datasync#AzureBlobSasConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the SAS configuration that allows DataSync to access your Azure Blob\n      Storage.</p>"
+                    }
+                },
+                "FederatedIdentity": {
+                    "target": "com.amazonaws.datasync#AzureFederatedIdentityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the federated identity configuration that allows DataSync to access\n      your Azure Blob Storage using an OpenID Connect (OIDC) token instead of a shared access\n      signature (SAS). Provide either <code>FederatedIdentity</code> or\n        <code>SasConfiguration</code>, but not both.</p>"
                     }
                 },
                 "BlobType": {
@@ -8508,6 +8696,12 @@
                     "target": "com.amazonaws.datasync#ObjectStorageSecretKey",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the secret key (for example, a password) if credentials are required to\n      authenticate with the object storage server.</p>\n         <note>\n            <p>If you provide a secret using <code>SecretKey</code>, but do not provide secret\n        configuration details using <code>CmkSecretConfig</code> or <code>CustomSecretConfig</code>,\n        then DataSync stores the token using your Amazon Web Services account's Secrets Manager secret.</p>\n         </note>"
+                    }
+                },
+                "FederatedIdentity": {
+                    "target": "com.amazonaws.datasync#ObjectStorageFederatedIdentityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the federated identity configuration that allows DataSync to access\n      your object storage using an OpenID Connect (OIDC) token instead of a long-term access key and\n      secret key. Provide either <code>FederatedIdentity</code> or the\n        <code>AccessKey</code>/<code>SecretKey</code> credentials, but not both.</p>"
                     }
                 },
                 "AgentArns": {

@@ -13162,7 +13162,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:cluster/[a-z0-9]{12})|([a-zA-Z0-9](-*[a-zA-Z0-9]){0,62})$"
+                "smithy.api#pattern": "^((arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:cluster/[a-z0-9]{12})|([a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}))$"
             }
         },
         "com.amazonaws.sagemaker#ClusterNetworkInterface": {
@@ -30853,7 +30853,7 @@
                             {
                                 "state": "success",
                                 "matcher": {
-                                    "errorType": "ResourceNotFoundException"
+                                    "errorType": "ResourceNotFound"
                                 }
                             },
                             {
@@ -31045,7 +31045,7 @@
                             {
                                 "state": "success",
                                 "matcher": {
-                                    "errorType": "ResourceNotFoundException"
+                                    "errorType": "ResourceNotFound"
                                 }
                             },
                             {
@@ -41397,7 +41397,7 @@
                     "min": 1,
                     "max": 5
                 },
-                "smithy.api#pattern": "^1Y|Y|([1-9]|1[0-1])M|M|[1-4]W|W|[1-6]D|D|([1-9]|1[0-9]|2[0-3])H|H|([1-9]|[1-5][0-9])min$"
+                "smithy.api#pattern": "^(1Y|Y|([1-9]|1[0-1])M|M|[1-4]W|W|[1-6]D|D|([1-9]|1[0-9]|2[0-3])H|H|([1-9]|[1-5][0-9])min)$"
             }
         },
         "com.amazonaws.sagemaker#ForecastHorizon": {
@@ -44659,7 +44659,7 @@
                     "min": 7,
                     "max": 21
                 },
-                "smithy.api#pattern": "^ami-[0-9a-fA-F]{8,17}|default$"
+                "smithy.api#pattern": "^(ami-[0-9a-fA-F]{8,17}|default)$"
             }
         },
         "com.amazonaws.sagemaker#ImageName": {
@@ -57329,6 +57329,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ProjectSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -59976,7 +59977,7 @@
                     "min": 0,
                     "max": 1
                 },
-                "smithy.api#pattern": "^1|2$"
+                "smithy.api#pattern": "^(1|2)$"
             }
         },
         "com.amazonaws.sagemaker#MlFlowResourceArn": {
@@ -68286,7 +68287,7 @@
                     "min": 0,
                     "max": 20
                 },
-                "smithy.api#pattern": "^(notebook-al1-v1|notebook-al2-v1|notebook-al2-v2|notebook-al2-v3|notebook-al2023-v1)$"
+                "smithy.api#pattern": "^(notebook-al1-v1|notebook-al2-v1|notebook-al2-v2|notebook-al2-v3|notebook-al2023-v1|notebook-al2023-v2)$"
             }
         },
         "com.amazonaws.sagemaker#PolicyString": {

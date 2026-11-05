@@ -4619,7 +4619,7 @@
                 "target": "com.amazonaws.securityagent#CreateMembershipResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new membership, granting a user access to an agent space within an application.</p>",
+                "smithy.api#documentation": "<p>Creates a new membership, granting a user or group access to an agent space within an application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/CreateMembership"
@@ -4653,7 +4653,7 @@
                 "memberType": {
                     "target": "com.amazonaws.securityagent#MembershipType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of member. Currently, only USER is supported.</p>",
+                        "smithy.api#documentation": "<p>The type of member. Use USER for an individual user or GROUP for an IAM Identity Center group. All members of a group have access to the agent space.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5998,7 +5998,7 @@
                 "target": "com.amazonaws.securityagent#DeleteMembershipResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a membership, revoking a user's access to an agent space.</p>",
+                "smithy.api#documentation": "<p>Deletes a membership, revoking a user's or group's access to an agent space.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DeleteMembership"
@@ -7773,6 +7773,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The type of GitLab access token.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#GroupMetadata": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the group.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about an IAM Identity Center group member, including the group display name and description.</p>"
             }
         },
         "com.amazonaws.securityagent#HostAddress": {
@@ -10789,6 +10809,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The user metadata for the member.</p>"
                     }
+                },
+                "group": {
+                    "target": "com.amazonaws.securityagent#GroupMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group metadata for the member.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10911,6 +10937,13 @@
                         "smithy.api#documentation": "<p>Human user member.</p>",
                         "smithy.api#enumValue": "USER"
                     }
+                },
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IAM Identity Center group member. All members of the group have access to the agent space.</p>",
+                        "smithy.api#enumValue": "GROUP"
+                    }
                 }
             },
             "traits": {
@@ -10925,6 +10958,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Show only user members.</p>",
                         "smithy.api#enumValue": "USER"
+                    }
+                },
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Show only group members.</p>",
+                        "smithy.api#enumValue": "GROUP"
                     }
                 },
                 "ALL": {
