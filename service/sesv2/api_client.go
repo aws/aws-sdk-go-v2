@@ -226,6 +226,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	ignoreAnonymousAuth(&options)
 
+	wrapCredentialsCache(&options)
+
 	finalizeServiceEndpointAuthResolver(&options)
 
 	resolveAuthSchemes(&options)

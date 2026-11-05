@@ -138,7 +138,7 @@ func (p *WebIdentityRoleProvider) Retrieve(ctx context.Context) (aws.Credentials
 		options.Retryer = retry.AddWithErrorCodes(options.Retryer, invalidIdentityTokenExceptionCode)
 	})
 	if err != nil {
-		return aws.Credentials{}, fmt.Errorf("failed to retrieve credentials, %w", err)
+		return aws.Credentials{}, classifyError(fmt.Errorf("failed to retrieve credentials, %w", err))
 	}
 	if err := validateCredentials(resp.Credentials); err != nil {
 		return aws.Credentials{}, fmt.Errorf("validate credentials, %w", err)
