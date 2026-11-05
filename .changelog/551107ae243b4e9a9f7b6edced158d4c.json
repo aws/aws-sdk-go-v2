@@ -1,0 +1,8 @@
+{
+    "id": "551107ae-243b-4e9a-9f7b-6edced158d4c",
+    "type": "feature",
+    "description": "Fixed the ImageDeleted and ImageVersionDeleted waiters to succeed on the ResourceNotFound error returned by DescribeImage and DescribeImageVersion",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

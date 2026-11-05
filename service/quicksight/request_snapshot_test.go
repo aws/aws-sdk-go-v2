@@ -18469,6 +18469,33 @@ func TestCheckRequestSnapshot_DescribeRefreshSchedule(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeResourcePermissions(t *testing.T) {
+	input := &DescribeResourcePermissionsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeResourcePermissions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeResourcePermissions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeRoleCustomPermission(t *testing.T) {
 	input := &DescribeRoleCustomPermissionInput{
 		Role:         types.Role("ADMIN"),
@@ -31099,6 +31126,35 @@ func TestCheckRequestSnapshot_UpdateRefreshSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRefreshSchedule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateResourcePermissions(t *testing.T) {
+	input := &UpdateResourcePermissionsInput{
+		AwsAccountId:           ptr.String("__AwsAccountId__"),
+		RoleType:               types.ServiceRoleType("QUICKSIGHT_MANAGED"),
+		CustomerManagedRoleArn: ptr.String("__CustomerManagedRoleArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateResourcePermissions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateResourcePermissions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -54077,6 +54133,33 @@ func TestUpdateRequestSnapshot_DescribeRefreshSchedule(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeResourcePermissions(t *testing.T) {
+	input := &DescribeResourcePermissionsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeResourcePermissions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeResourcePermissions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeRoleCustomPermission(t *testing.T) {
 	input := &DescribeRoleCustomPermissionInput{
 		Role:         types.Role("ADMIN"),
@@ -66707,6 +66790,35 @@ func TestUpdateRequestSnapshot_UpdateRefreshSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRefreshSchedule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateResourcePermissions(t *testing.T) {
+	input := &UpdateResourcePermissionsInput{
+		AwsAccountId:           ptr.String("__AwsAccountId__"),
+		RoleType:               types.ServiceRoleType("QUICKSIGHT_MANAGED"),
+		CustomerManagedRoleArn: ptr.String("__CustomerManagedRoleArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateResourcePermissions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateResourcePermissions"); err != nil {
 		t.Fatal(err)
 	}
 }

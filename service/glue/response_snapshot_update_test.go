@@ -4828,6 +4828,12 @@ func TestUpdateResponseSnapshot_BatchGetJobs(t *testing.T) {
 				},
 				MaintenanceWindow: ptr.String("__MaintenanceWindow__"),
 				ProfileName:       ptr.String("__ProfileName__"),
+				AutoUpgradeMetadata: &types.AutoUpgradeMetadata{
+					TargetVersion: ptr.String("__TargetVersion__"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+					Status:        types.AutoUpgradeStatus("OBSERVING"),
+					AnalysisId:    ptr.String("__AnalysisId__"),
+				},
 			},
 			{
 				Name:                 ptr.String("__Name__"),
@@ -7579,6 +7585,12 @@ func TestUpdateResponseSnapshot_BatchGetJobs(t *testing.T) {
 				},
 				MaintenanceWindow: ptr.String("__MaintenanceWindow__"),
 				ProfileName:       ptr.String("__ProfileName__"),
+				AutoUpgradeMetadata: &types.AutoUpgradeMetadata{
+					TargetVersion: ptr.String("__TargetVersion__"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+					Status:        types.AutoUpgradeStatus("OBSERVING"),
+					AnalysisId:    ptr.String("__AnalysisId__"),
+				},
 			},
 		},
 		JobsNotFound: []string{
@@ -19154,6 +19166,12 @@ func TestUpdateResponseSnapshot_GetJob(t *testing.T) {
 			},
 			MaintenanceWindow: ptr.String("__MaintenanceWindow__"),
 			ProfileName:       ptr.String("__ProfileName__"),
+			AutoUpgradeMetadata: &types.AutoUpgradeMetadata{
+				TargetVersion: ptr.String("__TargetVersion__"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+				Status:        types.AutoUpgradeStatus("OBSERVING"),
+				AnalysisId:    ptr.String("__AnalysisId__"),
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.AWSGlue)
@@ -19388,6 +19406,38 @@ func TestUpdateResponseSnapshot_GetJobRuns(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetJobRuns.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetJobUpgradeAnalysis(t *testing.T) {
+	want := &GetJobUpgradeAnalysisOutput{
+		JobName:                       ptr.String("__JobName__"),
+		AnalysisId:                    ptr.String("__AnalysisId__"),
+		Status:                        types.Status("OBSERVING"),
+		SourceVersion:                 ptr.String("__SourceVersion__"),
+		TargetVersion:                 ptr.String("__TargetVersion__"),
+		AnalysisType:                  types.AnalysisType("AUTO_UPGRADE"),
+		AutoUpgradeEvaluationSummary:  ptr.String("__AutoUpgradeEvaluationSummary__"),
+		ErrorMessage:                  ptr.String("__ErrorMessage__"),
+		AutoUpgradeEligibilitySummary: ptr.String("__AutoUpgradeEligibilitySummary__"),
+	}
+	proto := awsjson.New11(schemas.AWSGlue)
+	opSchema := smithy.NewOperationSchema(schemas.GetJobUpgradeAnalysis, schemas.GetJobUpgradeAnalysisResponse, schemas.GetJobUpgradeAnalysisResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetJobUpgradeAnalysis.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -22145,6 +22195,12 @@ func TestUpdateResponseSnapshot_GetJobs(t *testing.T) {
 				},
 				MaintenanceWindow: ptr.String("__MaintenanceWindow__"),
 				ProfileName:       ptr.String("__ProfileName__"),
+				AutoUpgradeMetadata: &types.AutoUpgradeMetadata{
+					TargetVersion: ptr.String("__TargetVersion__"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+					Status:        types.AutoUpgradeStatus("OBSERVING"),
+					AnalysisId:    ptr.String("__AnalysisId__"),
+				},
 			},
 			{
 				Name:                 ptr.String("__Name__"),
@@ -24896,6 +24952,12 @@ func TestUpdateResponseSnapshot_GetJobs(t *testing.T) {
 				},
 				MaintenanceWindow: ptr.String("__MaintenanceWindow__"),
 				ProfileName:       ptr.String("__ProfileName__"),
+				AutoUpgradeMetadata: &types.AutoUpgradeMetadata{
+					TargetVersion: ptr.String("__TargetVersion__"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+					Status:        types.AutoUpgradeStatus("OBSERVING"),
+					AnalysisId:    ptr.String("__AnalysisId__"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -35529,6 +35591,31 @@ func TestUpdateResponseSnapshot_StartJobRun(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_StartJobUpgradeAnalysis(t *testing.T) {
+	want := &StartJobUpgradeAnalysisOutput{
+		AnalysisId: ptr.String("__AnalysisId__"),
+		JobName:    ptr.String("__JobName__"),
+	}
+	proto := awsjson.New11(schemas.AWSGlue)
+	opSchema := smithy.NewOperationSchema(schemas.StartJobUpgradeAnalysis, schemas.StartJobUpgradeAnalysisResponse, schemas.StartJobUpgradeAnalysisResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartJobUpgradeAnalysis.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_StartMLEvaluationTaskRun(t *testing.T) {
 	want := &StartMLEvaluationTaskRunOutput{
 		TaskRunId: ptr.String("__TaskRunId__"),
@@ -35733,6 +35820,28 @@ func TestUpdateResponseSnapshot_StopCrawlerSchedule(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StopCrawlerSchedule.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StopJobUpgradeAnalysis(t *testing.T) {
+	want := &StopJobUpgradeAnalysisOutput{}
+	proto := awsjson.New11(schemas.AWSGlue)
+	opSchema := smithy.NewOperationSchema(schemas.StopJobUpgradeAnalysis, schemas.StopJobUpgradeAnalysisResponse, schemas.StopJobUpgradeAnalysisResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StopJobUpgradeAnalysis.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -470,6 +470,26 @@ func (m *validateOpResendOperationAuthorization) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRestoreDomain struct {
+}
+
+func (*validateOpRestoreDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRestoreDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RestoreDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRestoreDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRetrieveDomainAuthCode struct {
 }
 
@@ -700,6 +720,10 @@ func addOpRenewDomainValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpResendOperationAuthorizationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpResendOperationAuthorization{}, middleware.After)
+}
+
+func addOpRestoreDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRestoreDomain{}, middleware.After)
 }
 
 func addOpRetrieveDomainAuthCodeValidationMiddleware(stack *middleware.Stack) error {
@@ -1286,6 +1310,26 @@ func validateOpResendOperationAuthorizationInput(v *ResendOperationAuthorization
 	invalidParams := smithy.InvalidParamsError{Context: "ResendOperationAuthorizationInput"}
 	if v.OperationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OperationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRestoreDomainInput(v *RestoreDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestoreDomainInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Consent != nil {
+		if err := validateConsent(v.Consent); err != nil {
+			invalidParams.AddNested("Consent", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

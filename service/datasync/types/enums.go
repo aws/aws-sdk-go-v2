@@ -67,6 +67,7 @@ type AzureBlobAuthenticationType string
 const (
 	AzureBlobAuthenticationTypeSas  AzureBlobAuthenticationType = "SAS"
 	AzureBlobAuthenticationTypeNone AzureBlobAuthenticationType = "NONE"
+	AzureBlobAuthenticationTypeOidc AzureBlobAuthenticationType = "OIDC"
 )
 
 // Values returns all known values for AzureBlobAuthenticationType. Note that this
@@ -77,6 +78,7 @@ func (AzureBlobAuthenticationType) Values() []AzureBlobAuthenticationType {
 	return []AzureBlobAuthenticationType{
 		"SAS",
 		"NONE",
+		"OIDC",
 	}
 }
 

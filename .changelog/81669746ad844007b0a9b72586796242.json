@@ -1,0 +1,8 @@
+{
+    "id": "81669746-ad84-4007-b0a9-b72586796242",
+    "type": "feature",
+    "description": "AWS Lambda MicroVMs now support the x86-64 CPU architecture, which you can select in addition to ARM64 (Graviton) when launching a MicroVM.",
+    "modules": [
+        "service/lambdamicrovms"
+    ]
+}

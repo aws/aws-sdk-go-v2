@@ -1,0 +1,5 @@
+PUT /knowledgeBases/__KnowledgeBaseId__/replicaKey
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","replicaKmsKey":{"arn":"__Arn__"}}

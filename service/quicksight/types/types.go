@@ -50417,8 +50417,8 @@ type OneDriveClientCredentials struct {
 	// This member is required.
 	CertThumbprint *string
 
-	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key
-	// used to encrypt the OneDrive certificate credentials. This field is required.
+	// The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to
+	// encrypt the OneDrive certificate credentials. This field is required.
 	//
 	// This member is required.
 	KmsKeyArn *string
@@ -61619,8 +61619,8 @@ type SharePointClientCredentials struct {
 	// This member is required.
 	CertThumbprint *string
 
-	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key
-	// used to encrypt the SharePoint certificate credentials. This field is required.
+	// The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to
+	// encrypt the SharePoint certificate credentials. This field is required.
 	//
 	// This member is required.
 	KmsKeyArn *string

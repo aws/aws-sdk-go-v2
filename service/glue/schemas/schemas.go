@@ -797,6 +797,11 @@ var GetJobs = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetJobs",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetJobUpgradeAnalysis = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GetJobUpgradeAnalysis",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetMapping = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GetMapping",
@@ -1359,6 +1364,11 @@ var StartJobRun = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StartJobRun",
 }, smithy.ShapeTypeOperation, 0)
 
+var StartJobUpgradeAnalysis = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "StartJobUpgradeAnalysis",
+}, smithy.ShapeTypeOperation, 0)
+
 var StartMaterializedViewRefreshTaskRun = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "StartMaterializedViewRefreshTaskRun",
@@ -1402,6 +1412,11 @@ var StopCrawler = smithy.NewSchema(smithy.ShapeID{
 var StopCrawlerSchedule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "StopCrawlerSchedule",
+}, smithy.ShapeTypeOperation, 0)
+
+var StopJobUpgradeAnalysis = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "StopJobUpgradeAnalysis",
 }, smithy.ShapeTypeOperation, 0)
 
 var StopMaterializedViewRefreshTaskRun = smithy.NewSchema(smithy.ShapeID{
@@ -1871,6 +1886,12 @@ var AmazonRedshiftTarget_Data *smithy.Schema
 
 var AmazonRedshiftTarget_Inputs *smithy.Schema
 
+var AnalysisType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "AnalysisType",
+}, smithy.ShapeTypeEnum, 1)
+var AnalysisType_AUTO_UPGRADE *smithy.Schema
+
 var AnnotationError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "AnnotationError",
@@ -2131,6 +2152,34 @@ var AutoDataQuality = smithy.NewSchema(smithy.ShapeID{
 var AutoDataQuality_IsEnabled *smithy.Schema
 
 var AutoDataQuality_EvaluationContext *smithy.Schema
+
+var AutoUpgradeMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "AutoUpgradeMetadata",
+}, smithy.ShapeTypeStructure, 4)
+var AutoUpgradeMetadata_TargetVersion *smithy.Schema
+
+var AutoUpgradeMetadata_SourceVersion *smithy.Schema
+
+var AutoUpgradeMetadata_Status *smithy.Schema
+
+var AutoUpgradeMetadata_AnalysisId *smithy.Schema
+
+var AutoUpgradeStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "AutoUpgradeStatus",
+}, smithy.ShapeTypeEnum, 6)
+var AutoUpgradeStatus_OBSERVING *smithy.Schema
+
+var AutoUpgradeStatus_UPGRADING *smithy.Schema
+
+var AutoUpgradeStatus_UPGRADE_SUCCEEDED *smithy.Schema
+
+var AutoUpgradeStatus_UPGRADE_FAILED *smithy.Schema
+
+var AutoUpgradeStatus_STOPPED *smithy.Schema
+
+var AutoUpgradeStatus_WAITING_FOR_CONSENT *smithy.Schema
 
 var _AWSManagedClientApplicationReference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -7674,6 +7723,11 @@ var IcebergUpdateAction_ADD_ENCRYPTION_KEY *smithy.Schema
 
 var IcebergUpdateAction_REMOVE_ENCRYPTION_KEY *smithy.Schema
 
+var _Id = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "Id",
+}, smithy.ShapeTypeString, 0)
+
 var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "IdempotentParameterMismatchException",
@@ -8413,7 +8467,7 @@ var _JdbcTargetList_member *smithy.Schema
 var Job = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "Job",
-}, smithy.ShapeTypeStructure, 27)
+}, smithy.ShapeTypeStructure, 28)
 var Job_Name *smithy.Schema
 
 var Job_JobMode *smithy.Schema
@@ -8467,6 +8521,8 @@ var Job_SourceControlDetails *smithy.Schema
 var Job_MaintenanceWindow *smithy.Schema
 
 var Job_ProfileName *smithy.Schema
+
+var Job_AutoUpgradeMetadata *smithy.Schema
 
 var JobBookmarkEntry = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -9514,6 +9570,11 @@ var MySQLCatalogTarget_Inputs *smithy.Schema
 var MySQLCatalogTarget_Database *smithy.Schema
 
 var MySQLCatalogTarget_Table *smithy.Schema
+
+var _Name = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "Name",
+}, smithy.ShapeTypeString, 0)
 
 var _NameString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -12594,6 +12655,24 @@ var _StatisticSummaryList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _StatisticSummaryList_member *smithy.Schema
 
+var Status = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "Status",
+}, smithy.ShapeTypeEnum, 7)
+var Status_OBSERVING *smithy.Schema
+
+var Status_WAITING_FOR_CONSENT *smithy.Schema
+
+var Status_UPGRADING *smithy.Schema
+
+var Status_SUCCEEDED *smithy.Schema
+
+var Status_FAILED *smithy.Schema
+
+var Status_TIMEOUT *smithy.Schema
+
+var Status_STOPPED *smithy.Schema
+
 var StatusDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "StatusDetails",
@@ -13710,6 +13789,14 @@ var UpdateXMLClassifierRequest_Name *smithy.Schema
 var UpdateXMLClassifierRequest_Classification *smithy.Schema
 
 var UpdateXMLClassifierRequest_RowTag *smithy.Schema
+
+var UpgradeConsent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "UpgradeConsent",
+}, smithy.ShapeTypeEnum, 2)
+var UpgradeConsent_APPROVE *smithy.Schema
+
+var UpgradeConsent_DECLINE *smithy.Schema
 
 var UpsertRedshiftTargetOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -17073,6 +17160,36 @@ var GetJobsResponse_Jobs *smithy.Schema
 
 var GetJobsResponse_NextToken *smithy.Schema
 
+var GetJobUpgradeAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GetJobUpgradeAnalysisRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetJobUpgradeAnalysisRequest_analysisId *smithy.Schema
+
+var GetJobUpgradeAnalysisRequest_jobName *smithy.Schema
+
+var GetJobUpgradeAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GetJobUpgradeAnalysisResponse",
+}, smithy.ShapeTypeStructure, 9)
+var GetJobUpgradeAnalysisResponse_jobName *smithy.Schema
+
+var GetJobUpgradeAnalysisResponse_analysisId *smithy.Schema
+
+var GetJobUpgradeAnalysisResponse_status *smithy.Schema
+
+var GetJobUpgradeAnalysisResponse_sourceVersion *smithy.Schema
+
+var GetJobUpgradeAnalysisResponse_targetVersion *smithy.Schema
+
+var GetJobUpgradeAnalysisResponse_analysisType *smithy.Schema
+
+var GetJobUpgradeAnalysisResponse_autoUpgradeEvaluationSummary *smithy.Schema
+
+var GetJobUpgradeAnalysisResponse_errorMessage *smithy.Schema
+
+var GetJobUpgradeAnalysisResponse_autoUpgradeEligibilitySummary *smithy.Schema
+
 var GetMappingRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GetMappingRequest",
@@ -19338,6 +19455,24 @@ var StartJobRunResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var StartJobRunResponse_JobRunId *smithy.Schema
 
+var StartJobUpgradeAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "StartJobUpgradeAnalysisRequest",
+}, smithy.ShapeTypeStructure, 3)
+var StartJobUpgradeAnalysisRequest_jobName *smithy.Schema
+
+var StartJobUpgradeAnalysisRequest_analysisId *smithy.Schema
+
+var StartJobUpgradeAnalysisRequest_upgradeConsent *smithy.Schema
+
+var StartJobUpgradeAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "StartJobUpgradeAnalysisResponse",
+}, smithy.ShapeTypeStructure, 2)
+var StartJobUpgradeAnalysisResponse_analysisId *smithy.Schema
+
+var StartJobUpgradeAnalysisResponse_jobName *smithy.Schema
+
 var StartMaterializedViewRefreshTaskRunRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "StartMaterializedViewRefreshTaskRunRequest",
@@ -19458,6 +19593,19 @@ var StopCrawlerScheduleRequest_CrawlerName *smithy.Schema
 var StopCrawlerScheduleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "StopCrawlerScheduleResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var StopJobUpgradeAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "StopJobUpgradeAnalysisRequest",
+}, smithy.ShapeTypeStructure, 2)
+var StopJobUpgradeAnalysisRequest_jobName *smithy.Schema
+
+var StopJobUpgradeAnalysisRequest_analysisId *smithy.Schema
+
+var StopJobUpgradeAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "StopJobUpgradeAnalysisResponse",
 }, smithy.ShapeTypeStructure, 0)
 
 var StopMaterializedViewRefreshTaskRunRequest = smithy.NewSchema(smithy.ShapeID{
@@ -20372,6 +20520,8 @@ func init() {
 
 	AmazonRedshiftTarget_Inputs = AmazonRedshiftTarget.AddMember("Inputs", _OneInput)
 
+	AnalysisType_AUTO_UPGRADE = AnalysisType.AddMember("AUTO_UPGRADE", smithyprelude.Unit)
+
 	AnnotationError_ProfileId = AnnotationError.AddMember("ProfileId", _HashString)
 
 	AnnotationError_StatisticId = AnnotationError.AddMember("StatisticId", _HashString)
@@ -20619,6 +20769,26 @@ func init() {
 	AutoDataQuality_IsEnabled = AutoDataQuality.AddMember("IsEnabled", _BooleanValue)
 
 	AutoDataQuality_EvaluationContext = AutoDataQuality.AddMember("EvaluationContext", _EnclosedInStringProperty)
+
+	AutoUpgradeStatus_OBSERVING = AutoUpgradeStatus.AddMember("OBSERVING", smithyprelude.Unit)
+
+	AutoUpgradeStatus_UPGRADING = AutoUpgradeStatus.AddMember("UPGRADING", smithyprelude.Unit)
+
+	AutoUpgradeStatus_UPGRADE_SUCCEEDED = AutoUpgradeStatus.AddMember("UPGRADE_SUCCEEDED", smithyprelude.Unit)
+
+	AutoUpgradeStatus_UPGRADE_FAILED = AutoUpgradeStatus.AddMember("UPGRADE_FAILED", smithyprelude.Unit)
+
+	AutoUpgradeStatus_STOPPED = AutoUpgradeStatus.AddMember("STOPPED", smithyprelude.Unit)
+
+	AutoUpgradeStatus_WAITING_FOR_CONSENT = AutoUpgradeStatus.AddMember("WAITING_FOR_CONSENT", smithyprelude.Unit)
+
+	AutoUpgradeMetadata_TargetVersion = AutoUpgradeMetadata.AddMember("TargetVersion", _GlueVersionString)
+
+	AutoUpgradeMetadata_SourceVersion = AutoUpgradeMetadata.AddMember("SourceVersion", _GlueVersionString)
+
+	AutoUpgradeMetadata_Status = AutoUpgradeMetadata.AddMember("Status", AutoUpgradeStatus)
+
+	AutoUpgradeMetadata_AnalysisId = AutoUpgradeMetadata.AddMember("AnalysisId", _IdString)
 
 	BackfillErrorCode_ENCRYPTED_PARTITION_ERROR = BackfillErrorCode.AddMember("ENCRYPTED_PARTITION_ERROR", smithyprelude.Unit)
 
@@ -25994,6 +26164,8 @@ func init() {
 
 	Job_ProfileName = Job.AddMember("ProfileName", _NameString)
 
+	Job_AutoUpgradeMetadata = Job.AddMember("AutoUpgradeMetadata", AutoUpgradeMetadata)
+
 	JobBookmarkEntry_JobName = JobBookmarkEntry.AddMember("JobName", _JobName)
 
 	JobBookmarkEntry_Version = JobBookmarkEntry.AddMember("Version", _IntegerValue)
@@ -26866,6 +27038,20 @@ func init() {
 
 	_StatisticSummaryList_member = _StatisticSummaryList.AddMember("member", StatisticSummary)
 
+	Status_OBSERVING = Status.AddMember("OBSERVING", smithyprelude.Unit)
+
+	Status_WAITING_FOR_CONSENT = Status.AddMember("WAITING_FOR_CONSENT", smithyprelude.Unit)
+
+	Status_UPGRADING = Status.AddMember("UPGRADING", smithyprelude.Unit)
+
+	Status_SUCCEEDED = Status.AddMember("SUCCEEDED", smithyprelude.Unit)
+
+	Status_FAILED = Status.AddMember("FAILED", smithyprelude.Unit)
+
+	Status_TIMEOUT = Status.AddMember("TIMEOUT", smithyprelude.Unit)
+
+	Status_STOPPED = Status.AddMember("STOPPED", smithyprelude.Unit)
+
 	SupportedDialect_Dialect = SupportedDialect.AddMember("Dialect", ViewDialect)
 
 	SupportedDialect_DialectVersion = SupportedDialect.AddMember("DialectVersion", _ViewDialectVersionString)
@@ -27153,6 +27339,10 @@ func init() {
 	UpdateXMLClassifierRequest_Classification = UpdateXMLClassifierRequest.AddMember("Classification", _Classification)
 
 	UpdateXMLClassifierRequest_RowTag = UpdateXMLClassifierRequest.AddMember("RowTag", _RowTag)
+
+	UpgradeConsent_APPROVE = UpgradeConsent.AddMember("APPROVE", smithyprelude.Unit)
+
+	UpgradeConsent_DECLINE = UpgradeConsent.AddMember("DECLINE", smithyprelude.Unit)
 
 	UsageProfileDefinition_Name = UsageProfileDefinition.AddMember("Name", _NameString)
 
@@ -28906,6 +29096,28 @@ func init() {
 
 	GetJobsResponse_NextToken = GetJobsResponse.AddMember("NextToken", _GenericString)
 
+	GetJobUpgradeAnalysisRequest_analysisId = GetJobUpgradeAnalysisRequest.AddMember("analysisId", _Id)
+
+	GetJobUpgradeAnalysisRequest_jobName = GetJobUpgradeAnalysisRequest.AddMember("jobName", _Name)
+
+	GetJobUpgradeAnalysisResponse_jobName = GetJobUpgradeAnalysisResponse.AddMember("jobName", _Name)
+
+	GetJobUpgradeAnalysisResponse_analysisId = GetJobUpgradeAnalysisResponse.AddMember("analysisId", _Id)
+
+	GetJobUpgradeAnalysisResponse_status = GetJobUpgradeAnalysisResponse.AddMember("status", Status)
+
+	GetJobUpgradeAnalysisResponse_sourceVersion = GetJobUpgradeAnalysisResponse.AddMember("sourceVersion", smithyprelude.String)
+
+	GetJobUpgradeAnalysisResponse_targetVersion = GetJobUpgradeAnalysisResponse.AddMember("targetVersion", smithyprelude.String)
+
+	GetJobUpgradeAnalysisResponse_analysisType = GetJobUpgradeAnalysisResponse.AddMember("analysisType", AnalysisType)
+
+	GetJobUpgradeAnalysisResponse_autoUpgradeEvaluationSummary = GetJobUpgradeAnalysisResponse.AddMember("autoUpgradeEvaluationSummary", smithyprelude.String)
+
+	GetJobUpgradeAnalysisResponse_errorMessage = GetJobUpgradeAnalysisResponse.AddMember("errorMessage", smithyprelude.String)
+
+	GetJobUpgradeAnalysisResponse_autoUpgradeEligibilitySummary = GetJobUpgradeAnalysisResponse.AddMember("autoUpgradeEligibilitySummary", smithyprelude.String)
+
 	GetMappingRequest_Source = GetMappingRequest.AddMember("Source", CatalogEntry)
 
 	GetMappingRequest_Sinks = GetMappingRequest.AddMember("Sinks", _CatalogEntries)
@@ -30300,6 +30512,16 @@ func init() {
 
 	StartJobRunResponse_JobRunId = StartJobRunResponse.AddMember("JobRunId", _IdString)
 
+	StartJobUpgradeAnalysisRequest_jobName = StartJobUpgradeAnalysisRequest.AddMember("jobName", _Name)
+
+	StartJobUpgradeAnalysisRequest_analysisId = StartJobUpgradeAnalysisRequest.AddMember("analysisId", _Id)
+
+	StartJobUpgradeAnalysisRequest_upgradeConsent = StartJobUpgradeAnalysisRequest.AddMember("upgradeConsent", UpgradeConsent)
+
+	StartJobUpgradeAnalysisResponse_analysisId = StartJobUpgradeAnalysisResponse.AddMember("analysisId", _Id)
+
+	StartJobUpgradeAnalysisResponse_jobName = StartJobUpgradeAnalysisResponse.AddMember("jobName", _Name)
+
 	StartMaterializedViewRefreshTaskRunRequest_CatalogId = StartMaterializedViewRefreshTaskRunRequest.AddMember("CatalogId", _CatalogIdString)
 
 	StartMaterializedViewRefreshTaskRunRequest_DatabaseName = StartMaterializedViewRefreshTaskRunRequest.AddMember("DatabaseName", _NameString)
@@ -30345,6 +30567,10 @@ func init() {
 	StopCrawlerRequest_Name = StopCrawlerRequest.AddMember("Name", _NameString)
 
 	StopCrawlerScheduleRequest_CrawlerName = StopCrawlerScheduleRequest.AddMember("CrawlerName", _NameString)
+
+	StopJobUpgradeAnalysisRequest_jobName = StopJobUpgradeAnalysisRequest.AddMember("jobName", _Name)
+
+	StopJobUpgradeAnalysisRequest_analysisId = StopJobUpgradeAnalysisRequest.AddMember("analysisId", _Id)
 
 	StopMaterializedViewRefreshTaskRunRequest_CatalogId = StopMaterializedViewRefreshTaskRunRequest.AddMember("CatalogId", _CatalogIdString)
 

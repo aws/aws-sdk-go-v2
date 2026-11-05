@@ -1,0 +1,8 @@
+{
+    "id": "3a634e11-c8a8-46b0-a494-541476f07315",
+    "type": "feature",
+    "description": "Route 53 Domains now supports restoring domains. This release adds the RestoreDomain API to self-serve domain restoration.",
+    "modules": [
+        "service/route53domains"
+    ]
+}

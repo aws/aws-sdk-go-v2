@@ -62,6 +62,12 @@ type UpdateLocationObjectStorageInput struct {
 	// Management (IAM) role that provides access to the secret.
 	CustomSecretConfig *types.CustomSecretConfig
 
+	// Specifies the federated identity configuration that allows DataSync to access
+	// your object storage using an OpenID Connect (OIDC) token instead of a long-term
+	// access key and secret key. Provide either FederatedIdentity or the AccessKey /
+	// SecretKey credentials, but not both.
+	FederatedIdentity *types.ObjectStorageFederatedIdentityConfig
+
 	// Specifies the secret key (for example, a password) if credentials are required
 	// to authenticate with the object storage server.
 	//
@@ -136,6 +142,11 @@ func (v *UpdateLocationObjectStorageInput) SerializeMembers(s smithy.ShapeSerial
 	if v.CustomSecretConfig != nil {
 		s.WriteStruct(schemas.UpdateLocationObjectStorageRequest_CustomSecretConfig)
 		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FederatedIdentity != nil {
+		s.WriteStruct(schemas.UpdateLocationObjectStorageRequest_FederatedIdentity)
+		v.FederatedIdentity.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.LocationArn != nil {

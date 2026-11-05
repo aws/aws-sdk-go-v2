@@ -1,0 +1,8 @@
+{
+    "id": "911969e2-a819-4b03-93c6-80ef44ee64a1",
+    "type": "feature",
+    "description": "Adds account-level retention policies with dry run preview and the Essentials log group class to Amazon CloudWatch Logs",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

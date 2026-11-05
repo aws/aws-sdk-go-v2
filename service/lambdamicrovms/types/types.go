@@ -366,6 +366,9 @@ type ManagedMicrovmImageVersion struct {
 	// deprecated; do not use it for new MicroVM images).
 	Status ManagedMicrovmImageVersionStatus
 
+	// CPU configurations supported by this managed base image version.
+	SupportedCpuConfigurations []CpuConfiguration
+
 	// The timestamp when the version was last updated.
 	UpdatedAt *time.Time
 
@@ -391,6 +394,9 @@ func (v *ManagedMicrovmImageVersion) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Status != "" {
 		s.WriteString(schemas.ManagedMicrovmImageVersion_status, string(v.Status))
 	}
+	if v.SupportedCpuConfigurations != nil {
+		serializeCpuConfigurationList(s, schemas.ManagedMicrovmImageVersion_supportedCpuConfigurations, v.SupportedCpuConfigurations)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.ManagedMicrovmImageVersion_updatedAt, *v.UpdatedAt)
 	}
@@ -414,6 +420,8 @@ func (v *ManagedMicrovmImageVersion) Deserialize(d smithy.ShapeDeserializer) err
 			}
 			v.Status = ManagedMicrovmImageVersionStatus(ev)
 			return nil
+		case schemas.ManagedMicrovmImageVersion_supportedCpuConfigurations:
+			return deserializeCpuConfigurationList(d, schemas.ManagedMicrovmImageVersion_supportedCpuConfigurations, &v.SupportedCpuConfigurations)
 		case schemas.ManagedMicrovmImageVersion_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.ManagedMicrovmImageVersion_updatedAt, v.UpdatedAt)
@@ -875,7 +883,8 @@ type MicrovmImageVersionSummary struct {
 	// The description of the version.
 	Description *string
 
-	// The list of egress network connectors available to the MicroVM at runtime.
+	// The list of egress network connectors available to the MicroVM at image build
+	// time.
 	EgressNetworkConnectors []string
 
 	// Environment variables set in the MicroVM runtime environment.

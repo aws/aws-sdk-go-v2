@@ -1,0 +1,8 @@
+{
+    "id": "ed4d3e73-85fc-4d13-8195-d4678f216d3d",
+    "type": "feature",
+    "description": "Adds support for federated identity on Azure Blob Storage and object storage locations, enabling DataSync to authenticate to Azure and Google Cloud Storage using Workload Identity Federation (WIF) over OpenID Connect (OIDC) instead of stored long-lived credentials.",
+    "modules": [
+        "service/datasync"
+    ]
+}

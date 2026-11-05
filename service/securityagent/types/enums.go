@@ -427,6 +427,9 @@ type MembershipType string
 const (
 	// Human user member.
 	MembershipTypeUser MembershipType = "USER"
+	// IAM Identity Center group member. All members of the group have access to the
+	// agent space.
+	MembershipTypeGroup MembershipType = "GROUP"
 )
 
 // Values returns all known values for MembershipType. Note that this can be
@@ -436,6 +439,7 @@ const (
 func (MembershipType) Values() []MembershipType {
 	return []MembershipType{
 		"USER",
+		"GROUP",
 	}
 }
 
@@ -445,6 +449,8 @@ type MembershipTypeFilter string
 const (
 	// Show only user members.
 	MembershipTypeFilterUser MembershipTypeFilter = "USER"
+	// Show only group members.
+	MembershipTypeFilterGroup MembershipTypeFilter = "GROUP"
 	// Show all member types.
 	MembershipTypeFilterAll MembershipTypeFilter = "ALL"
 )
@@ -456,6 +462,7 @@ const (
 func (MembershipTypeFilter) Values() []MembershipTypeFilter {
 	return []MembershipTypeFilter{
 		"USER",
+		"GROUP",
 		"ALL",
 	}
 }

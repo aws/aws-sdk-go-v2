@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: FmrsService.UpdateLocationAzureBlob
 
-{"AccessTier":"HOT","AgentArns":["__Member__","__Member__"],"AuthenticationType":"SAS","BlobType":"BLOCK","CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"LocationArn":"__LocationArn__","SasConfiguration":{"Token":"__Token__"},"Subdirectory":"__Subdirectory__"}
+{"AccessTier":"HOT","AgentArns":["__Member__","__Member__"],"AuthenticationType":"SAS","BlobType":"BLOCK","CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"FederatedIdentity":{"AwsIamRole":"__AwsIamRole__","AzureOidc":{"ClientId":"__ClientId__","TenantId":"__TenantId__"}},"LocationArn":"__LocationArn__","SasConfiguration":{"Token":"__Token__"},"Subdirectory":"__Subdirectory__"}

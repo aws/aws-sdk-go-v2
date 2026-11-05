@@ -3373,6 +3373,11 @@ var _MaxTokens = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MaxTokens",
 }, smithy.ShapeTypeInteger, 0)
 
+var _MediaId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "MediaId",
+}, smithy.ShapeTypeString, 0)
+
 var _Memories = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "Memories",
@@ -5412,12 +5417,14 @@ var GetAgentMemoryResponse_memoryContents *smithy.Schema
 var GetDocumentContentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "GetDocumentContentRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var GetDocumentContentRequest_knowledgeBaseId *smithy.Schema
 
 var GetDocumentContentRequest_dataSourceId *smithy.Schema
 
 var GetDocumentContentRequest_documentId *smithy.Schema
+
+var GetDocumentContentRequest_mediaId *smithy.Schema
 
 var GetDocumentContentRequest_outputFormat *smithy.Schema
 
@@ -8589,6 +8596,8 @@ func init() {
 	GetDocumentContentRequest_dataSourceId = GetDocumentContentRequest.AddMember("dataSourceId", _DataSourceId, &smithytraits.HTTPLabel{})
 
 	GetDocumentContentRequest_documentId = GetDocumentContentRequest.AddMember("documentId", _DocumentId, &smithytraits.HTTPLabel{})
+
+	GetDocumentContentRequest_mediaId = GetDocumentContentRequest.AddMember("mediaId", _MediaId)
 
 	GetDocumentContentRequest_outputFormat = GetDocumentContentRequest.AddMember("outputFormat", DocumentOutputFormat)
 

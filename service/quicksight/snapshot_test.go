@@ -1670,6 +1670,18 @@ func TestCheckSnapshot_DescribeRefreshSchedule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeResourcePermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeResourcePermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeResourcePermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeRoleCustomPermission(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeRoleCustomPermission(context.Background(), nil, func(o *Options) {
@@ -3391,6 +3403,18 @@ func TestCheckSnapshot_UpdateRefreshSchedule(t *testing.T) {
 	_, err := svc.UpdateRefreshSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateRefreshSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateResourcePermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateResourcePermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateResourcePermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5257,6 +5281,18 @@ func TestUpdateSnapshot_DescribeRefreshSchedule(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeResourcePermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeResourcePermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeResourcePermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeRoleCustomPermission(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeRoleCustomPermission(context.Background(), nil, func(o *Options) {
@@ -6978,6 +7014,18 @@ func TestUpdateSnapshot_UpdateRefreshSchedule(t *testing.T) {
 	_, err := svc.UpdateRefreshSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateRefreshSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateResourcePermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateResourcePermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateResourcePermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

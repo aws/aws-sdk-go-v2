@@ -1361,6 +1361,71 @@ func (v *AutoDataQuality) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The auto-upgrade assessment information for a job configured with
+// glueVersion=auto.
+type AutoUpgradeMetadata struct {
+
+	// The unique identifier of the auto-upgrade assessment analysis.
+	AnalysisId *string
+
+	// The source Glue runtime version the job was running before auto-version was
+	// enabled.
+	SourceVersion *string
+
+	// The current auto-upgrade lifecycle status (OBSERVING, UPGRADING,
+	// UPGRADE_SUCCEEDED, UPGRADE_FAILED, STOPPED, WAITING_FOR_CONSENT).
+	Status AutoUpgradeStatus
+
+	// The target Glue runtime version the job is being upgraded to.
+	TargetVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutoUpgradeMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoUpgradeMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoUpgradeMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.AutoUpgradeMetadata_AnalysisId, *v.AnalysisId)
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.AutoUpgradeMetadata_SourceVersion, *v.SourceVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AutoUpgradeMetadata_Status, string(v.Status))
+	}
+	if v.TargetVersion != nil {
+		s.WriteString(schemas.AutoUpgradeMetadata_TargetVersion, *v.TargetVersion)
+	}
+}
+func (v *AutoUpgradeMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoUpgradeMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoUpgradeMetadata_AnalysisId:
+			v.AnalysisId = new(string)
+			return d.ReadString(schemas.AutoUpgradeMetadata_AnalysisId, v.AnalysisId)
+		case schemas.AutoUpgradeMetadata_SourceVersion:
+			v.SourceVersion = new(string)
+			return d.ReadString(schemas.AutoUpgradeMetadata_SourceVersion, v.SourceVersion)
+		case schemas.AutoUpgradeMetadata_Status:
+			var ev string
+			if err := d.ReadString(schemas.AutoUpgradeMetadata_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutoUpgradeStatus(ev)
+			return nil
+		case schemas.AutoUpgradeMetadata_TargetVersion:
+			v.TargetVersion = new(string)
+			return d.ReadString(schemas.AutoUpgradeMetadata_TargetVersion, v.TargetVersion)
+		}
+		return nil
+	})
+}
+
 // A list of errors that can occur when registering partition indexes for an
 // existing table.
 //
@@ -19085,6 +19150,10 @@ type Job struct {
 	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
 
+	// The auto-upgrade assessment information for a job configured with
+	// glueVersion=auto. This field is null when the job is not configured to auto.
+	AutoUpgradeMetadata *AutoUpgradeMetadata
+
 	// The representation of a directed acyclic graph on which both the Glue Studio
 	// visual component and Glue Studio code generation is based.
 	CodeGenConfigurationNodes map[string]CodeGenConfigurationNode
@@ -19313,6 +19382,11 @@ func (v *Job) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllocatedCapacity != 0 {
 		s.WriteInt32(schemas.Job_AllocatedCapacity, v.AllocatedCapacity)
 	}
+	if v.AutoUpgradeMetadata != nil {
+		s.WriteStruct(schemas.Job_AutoUpgradeMetadata)
+		v.AutoUpgradeMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CodeGenConfigurationNodes != nil {
 		serializeCodeGenConfigurationNodes(s, schemas.Job_CodeGenConfigurationNodes, v.CodeGenConfigurationNodes)
 	}
@@ -19407,6 +19481,9 @@ func (v *Job) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.Job_AllocatedCapacity:
 			return d.ReadInt32(schemas.Job_AllocatedCapacity, &v.AllocatedCapacity)
+		case schemas.Job_AutoUpgradeMetadata:
+			v.AutoUpgradeMetadata = &AutoUpgradeMetadata{}
+			return v.AutoUpgradeMetadata.Deserialize(d)
 		case schemas.Job_CodeGenConfigurationNodes:
 			return deserializeCodeGenConfigurationNodes(d, schemas.Job_CodeGenConfigurationNodes, &v.CodeGenConfigurationNodes)
 		case schemas.Job_Command:

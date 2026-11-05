@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"items":[{"createdAt":946684800,"imageArn":"__ImageArn__","imageVersion":"__ImageVersion__","status":"AVAILABLE","updatedAt":946684800},{"createdAt":946684800,"imageArn":"__ImageArn__","imageVersion":"__ImageVersion__","status":"AVAILABLE","updatedAt":946684800}],"nextToken":"__NextToken__"}
+{"items":[{"createdAt":946684800,"imageArn":"__ImageArn__","imageVersion":"__ImageVersion__","status":"AVAILABLE","supportedCpuConfigurations":[{"architecture":"ARM_64"},{"architecture":"ARM_64"}],"updatedAt":946684800},{"createdAt":946684800,"imageArn":"__ImageArn__","imageVersion":"__ImageVersion__","status":"AVAILABLE","supportedCpuConfigurations":[{"architecture":"ARM_64"},{"architecture":"ARM_64"}],"updatedAt":946684800}],"nextToken":"__NextToken__"}

@@ -4773,6 +4773,47 @@ func (v *GitLabResourceCapabilities) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+// Contains metadata about an IAM Identity Center group member, including the
+// group display name and description.
+type GroupMetadata struct {
+
+	// The description of the group.
+	Description *string
+
+	// The display name of the group.
+	DisplayName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GroupMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GroupMetadata_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GroupMetadata_displayName, *v.DisplayName)
+	}
+}
+func (v *GroupMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupMetadata_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GroupMetadata_description, v.Description)
+		case schemas.GroupMetadata_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GroupMetadata_displayName, v.DisplayName)
+		}
+		return nil
+	})
+}
+
 // Contains HTTP route verification details for a target domain, including the
 // route path and token to serve for domain ownership verification.
 type HttpVerification struct {
@@ -5950,9 +5991,27 @@ func (v *LogLocation) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // The following types satisfy this interface:
 //
+//	MemberMetadataMemberGroup
 //	MemberMetadataMemberUser
 type MemberMetadata interface {
 	isMemberMetadata()
+}
+
+// The group metadata for the member.
+type MemberMetadataMemberGroup struct {
+	Value GroupMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*MemberMetadataMemberGroup) isMemberMetadata() {}
+func (v *MemberMetadataMemberGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberMetadata_group)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MemberMetadataMemberGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The user metadata for the member.

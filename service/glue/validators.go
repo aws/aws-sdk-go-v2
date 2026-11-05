@@ -2690,6 +2690,26 @@ func (m *validateOpGetJobRuns) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetJobUpgradeAnalysis struct {
+}
+
+func (*validateOpGetJobUpgradeAnalysis) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetJobUpgradeAnalysis) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetJobUpgradeAnalysisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetJobUpgradeAnalysisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMapping struct {
 }
 
@@ -4270,6 +4290,26 @@ func (m *validateOpStartJobRun) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartJobUpgradeAnalysis struct {
+}
+
+func (*validateOpStartJobUpgradeAnalysis) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartJobUpgradeAnalysis) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartJobUpgradeAnalysisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartJobUpgradeAnalysisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartMaterializedViewRefreshTaskRun struct {
 }
 
@@ -4445,6 +4485,26 @@ func (m *validateOpStopCrawlerSchedule) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopCrawlerScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopJobUpgradeAnalysis struct {
+}
+
+func (*validateOpStopJobUpgradeAnalysis) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopJobUpgradeAnalysis) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopJobUpgradeAnalysisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopJobUpgradeAnalysisInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5686,6 +5746,10 @@ func addOpGetJobRunsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetJobRuns{}, middleware.After)
 }
 
+func addOpGetJobUpgradeAnalysisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetJobUpgradeAnalysis{}, middleware.After)
+}
+
 func addOpGetMappingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMapping{}, middleware.After)
 }
@@ -6002,6 +6066,10 @@ func addOpStartJobRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartJobRun{}, middleware.After)
 }
 
+func addOpStartJobUpgradeAnalysisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartJobUpgradeAnalysis{}, middleware.After)
+}
+
 func addOpStartMaterializedViewRefreshTaskRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartMaterializedViewRefreshTaskRun{}, middleware.After)
 }
@@ -6036,6 +6104,10 @@ func addOpStopCrawlerValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStopCrawlerScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopCrawlerSchedule{}, middleware.After)
+}
+
+func addOpStopJobUpgradeAnalysisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopJobUpgradeAnalysis{}, middleware.After)
 }
 
 func addOpStopMaterializedViewRefreshTaskRunValidationMiddleware(stack *middleware.Stack) error {
@@ -13691,6 +13763,24 @@ func validateOpGetJobRunsInput(v *GetJobRunsInput) error {
 	}
 }
 
+func validateOpGetJobUpgradeAnalysisInput(v *GetJobUpgradeAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetJobUpgradeAnalysisInput"}
+	if v.AnalysisId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisId"))
+	}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetMappingInput(v *GetMappingInput) error {
 	if v == nil {
 		return nil
@@ -15171,6 +15261,21 @@ func validateOpStartJobRunInput(v *StartJobRunInput) error {
 	}
 }
 
+func validateOpStartJobUpgradeAnalysisInput(v *StartJobUpgradeAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartJobUpgradeAnalysisInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartMaterializedViewRefreshTaskRunInput(v *StartMaterializedViewRefreshTaskRunInput) error {
 	if v == nil {
 		return nil
@@ -15313,6 +15418,24 @@ func validateOpStopCrawlerScheduleInput(v *StopCrawlerScheduleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopCrawlerScheduleInput"}
 	if v.CrawlerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CrawlerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopJobUpgradeAnalysisInput(v *StopJobUpgradeAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopJobUpgradeAnalysisInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.AnalysisId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

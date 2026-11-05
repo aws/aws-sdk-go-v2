@@ -1107,6 +1107,30 @@ func TestUpdateResponseSnapshot_ResendOperationAuthorization(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_RestoreDomain(t *testing.T) {
+	want := &RestoreDomainOutput{
+		OperationId: ptr.String("__OperationId__"),
+	}
+	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	opSchema := smithy.NewOperationSchema(schemas.RestoreDomain, schemas.RestoreDomainResponse, schemas.RestoreDomainResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("RestoreDomain.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_RetrieveDomainAuthCode(t *testing.T) {
 	want := &RetrieveDomainAuthCodeOutput{
 		AuthCode: ptr.String("__AuthCode__"),

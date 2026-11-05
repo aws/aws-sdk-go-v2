@@ -755,8 +755,8 @@ func (v *CustomDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 // against an OpenID Connect identity provider.
 type CustomJWTAuthorizerConfiguration struct {
 
-	// The OpenID Connect discovery URL used to retrieve the identity provider's
-	// metadata and signing keys.
+	// The OpenID Connect discovery or OAuth 2.0 authorization server metadata URL
+	// used to retrieve the identity provider's metadata and signing keys.
 	//
 	// This member is required.
 	DiscoveryUrl *string

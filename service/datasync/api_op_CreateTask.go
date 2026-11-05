@@ -104,9 +104,8 @@ type CreateTaskInput struct {
 	//   - ENHANCED - Transfer virtually unlimited numbers of objects with higher
 	//   performance than Basic mode. Enhanced mode tasks optimize the data transfer
 	//   process by listing, preparing, transferring, and verifying data in parallel.
-	//   Enhanced mode is currently available for transfers between Amazon S3 locations,
-	//   transfers between Azure Blob and Amazon S3 without an agent, and transfers
-	//   between other clouds and Amazon S3 without an agent.
+	//   Enhanced mode is currently available for all transfers except those that use
+	//   Amazon S3 on Outposts.
 	//
 	// To create an Enhanced mode task, the IAM role that you use to call the
 	//   CreateTask operation must have the iam:CreateServiceLinkedRole permission.

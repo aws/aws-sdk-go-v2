@@ -1874,6 +1874,18 @@ func TestCheckSnapshot_GetJobs(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetJobUpgradeAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetJobUpgradeAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetJobUpgradeAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetMapping(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMapping(context.Background(), nil, func(o *Options) {
@@ -3170,6 +3182,18 @@ func TestCheckSnapshot_StartJobRun(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartJobUpgradeAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartJobUpgradeAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartJobUpgradeAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartMaterializedViewRefreshTaskRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMaterializedViewRefreshTaskRun(context.Background(), nil, func(o *Options) {
@@ -3271,6 +3295,18 @@ func TestCheckSnapshot_StopCrawlerSchedule(t *testing.T) {
 	_, err := svc.StopCrawlerSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopCrawlerSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopJobUpgradeAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopJobUpgradeAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopJobUpgradeAnalysis")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5545,6 +5581,18 @@ func TestUpdateSnapshot_GetJobs(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetJobUpgradeAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetJobUpgradeAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetJobUpgradeAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetMapping(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMapping(context.Background(), nil, func(o *Options) {
@@ -6841,6 +6889,18 @@ func TestUpdateSnapshot_StartJobRun(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartJobUpgradeAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartJobUpgradeAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartJobUpgradeAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartMaterializedViewRefreshTaskRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMaterializedViewRefreshTaskRun(context.Background(), nil, func(o *Options) {
@@ -6942,6 +7002,18 @@ func TestUpdateSnapshot_StopCrawlerSchedule(t *testing.T) {
 	_, err := svc.StopCrawlerSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopCrawlerSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopJobUpgradeAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopJobUpgradeAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopJobUpgradeAnalysis")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

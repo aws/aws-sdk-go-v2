@@ -1823,6 +1823,16 @@ func serializeRecommendationTriggerList(s smithy.ShapeSerializer, schema *smithy
 	s.CloseList()
 }
 
+func serializeReplicaKmsKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ReplicaKmsKey) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeRetrievalFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RetrievalFilterConfiguration) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -3423,6 +3433,28 @@ func deserializeRecommendationTriggerList(d smithy.ShapeDeserializer, s *smithy.
 		}
 
 		vv = RecommendationTrigger{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeReplicaKmsKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ReplicaKmsKey) error {
+	*v = make([]ReplicaKmsKey, 0)
+	var vv ReplicaKmsKey
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ReplicaKmsKey
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ReplicaKmsKey{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

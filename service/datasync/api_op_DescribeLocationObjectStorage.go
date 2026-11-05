@@ -76,6 +76,10 @@ type DescribeLocationObjectStorageOutput struct {
 	// Management (IAM) role that provides access to the secret.
 	CustomSecretConfig *types.CustomSecretConfig
 
+	// The federated identity configuration that DataSync uses to access your object
+	// storage using an OpenID Connect (OIDC) token.
+	FederatedIdentity *types.ObjectStorageFederatedIdentityConfig
+
 	// The ARN of the object storage system location.
 	LocationArn *string
 
@@ -131,6 +135,11 @@ func (v *DescribeLocationObjectStorageOutput) SerializeMembers(s smithy.ShapeSer
 		v.CustomSecretConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.FederatedIdentity != nil {
+		s.WriteStruct(schemas.DescribeLocationObjectStorageResponse_FederatedIdentity)
+		v.FederatedIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LocationArn != nil {
 		s.WriteString(schemas.DescribeLocationObjectStorageResponse_LocationArn, *v.LocationArn)
 	}
@@ -169,6 +178,9 @@ func (v *DescribeLocationObjectStorageOutput) Deserialize(d smithy.ShapeDeserial
 		case schemas.DescribeLocationObjectStorageResponse_CustomSecretConfig:
 			v.CustomSecretConfig = &types.CustomSecretConfig{}
 			return v.CustomSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationObjectStorageResponse_FederatedIdentity:
+			v.FederatedIdentity = &types.ObjectStorageFederatedIdentityConfig{}
+			return v.FederatedIdentity.Deserialize(d)
 		case schemas.DescribeLocationObjectStorageResponse_LocationArn:
 			v.LocationArn = new(string)
 			return d.ReadString(schemas.DescribeLocationObjectStorageResponse_LocationArn, v.LocationArn)

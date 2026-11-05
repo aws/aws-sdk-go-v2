@@ -5025,6 +5025,12 @@ func TestCheckResponseSnapshot_BatchGetJobs(t *testing.T) {
 				},
 				MaintenanceWindow: ptr.String("__MaintenanceWindow__"),
 				ProfileName:       ptr.String("__ProfileName__"),
+				AutoUpgradeMetadata: &types.AutoUpgradeMetadata{
+					TargetVersion: ptr.String("__TargetVersion__"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+					Status:        types.AutoUpgradeStatus("OBSERVING"),
+					AnalysisId:    ptr.String("__AnalysisId__"),
+				},
 			},
 			{
 				Name:                 ptr.String("__Name__"),
@@ -7776,6 +7782,12 @@ func TestCheckResponseSnapshot_BatchGetJobs(t *testing.T) {
 				},
 				MaintenanceWindow: ptr.String("__MaintenanceWindow__"),
 				ProfileName:       ptr.String("__ProfileName__"),
+				AutoUpgradeMetadata: &types.AutoUpgradeMetadata{
+					TargetVersion: ptr.String("__TargetVersion__"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+					Status:        types.AutoUpgradeStatus("OBSERVING"),
+					AnalysisId:    ptr.String("__AnalysisId__"),
+				},
 			},
 		},
 		JobsNotFound: []string{
@@ -23631,6 +23643,12 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 			},
 			MaintenanceWindow: ptr.String("__MaintenanceWindow__"),
 			ProfileName:       ptr.String("__ProfileName__"),
+			AutoUpgradeMetadata: &types.AutoUpgradeMetadata{
+				TargetVersion: ptr.String("__TargetVersion__"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+				Status:        types.AutoUpgradeStatus("OBSERVING"),
+				AnalysisId:    ptr.String("__AnalysisId__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetJob.response")
@@ -23867,6 +23885,38 @@ func TestCheckResponseSnapshot_GetJobRuns(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetJobRuns.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetJobUpgradeAnalysis(t *testing.T) {
+	want := &GetJobUpgradeAnalysisOutput{
+		JobName:                       ptr.String("__JobName__"),
+		AnalysisId:                    ptr.String("__AnalysisId__"),
+		Status:                        types.Status("OBSERVING"),
+		SourceVersion:                 ptr.String("__SourceVersion__"),
+		TargetVersion:                 ptr.String("__TargetVersion__"),
+		AnalysisType:                  types.AnalysisType("AUTO_UPGRADE"),
+		AutoUpgradeEvaluationSummary:  ptr.String("__AutoUpgradeEvaluationSummary__"),
+		ErrorMessage:                  ptr.String("__ErrorMessage__"),
+		AutoUpgradeEligibilitySummary: ptr.String("__AutoUpgradeEligibilitySummary__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetJobUpgradeAnalysis.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetJobUpgradeAnalysis(context.Background(), &GetJobUpgradeAnalysisInput{
+		AnalysisId: ptr.String("__AnalysisId__"),
+		JobName:    ptr.String("__JobName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetJobUpgradeAnalysis.response", err)
 	}
 }
 
@@ -26623,6 +26673,12 @@ func TestCheckResponseSnapshot_GetJobs(t *testing.T) {
 				},
 				MaintenanceWindow: ptr.String("__MaintenanceWindow__"),
 				ProfileName:       ptr.String("__ProfileName__"),
+				AutoUpgradeMetadata: &types.AutoUpgradeMetadata{
+					TargetVersion: ptr.String("__TargetVersion__"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+					Status:        types.AutoUpgradeStatus("OBSERVING"),
+					AnalysisId:    ptr.String("__AnalysisId__"),
+				},
 			},
 			{
 				Name:                 ptr.String("__Name__"),
@@ -29374,6 +29430,12 @@ func TestCheckResponseSnapshot_GetJobs(t *testing.T) {
 				},
 				MaintenanceWindow: ptr.String("__MaintenanceWindow__"),
 				ProfileName:       ptr.String("__ProfileName__"),
+				AutoUpgradeMetadata: &types.AutoUpgradeMetadata{
+					TargetVersion: ptr.String("__TargetVersion__"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+					Status:        types.AutoUpgradeStatus("OBSERVING"),
+					AnalysisId:    ptr.String("__AnalysisId__"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -41882,6 +41944,32 @@ func TestCheckResponseSnapshot_StartJobRun(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartJobUpgradeAnalysis(t *testing.T) {
+	want := &StartJobUpgradeAnalysisOutput{
+		AnalysisId: ptr.String("__AnalysisId__"),
+		JobName:    ptr.String("__JobName__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartJobUpgradeAnalysis.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartJobUpgradeAnalysis(context.Background(), &StartJobUpgradeAnalysisInput{
+		JobName:        ptr.String("__JobName__"),
+		AnalysisId:     ptr.String("__AnalysisId__"),
+		UpgradeConsent: types.UpgradeConsent("APPROVE"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartJobUpgradeAnalysis.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartMLEvaluationTaskRun(t *testing.T) {
 	want := &StartMLEvaluationTaskRunOutput{
 		TaskRunId: ptr.String("__TaskRunId__"),
@@ -42089,6 +42177,28 @@ func TestCheckResponseSnapshot_StopCrawlerSchedule(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StopCrawlerSchedule.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StopJobUpgradeAnalysis(t *testing.T) {
+	want := &StopJobUpgradeAnalysisOutput{}
+	status, header, body, err := serdeRespReadSnapshot("StopJobUpgradeAnalysis.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StopJobUpgradeAnalysis(context.Background(), &StopJobUpgradeAnalysisInput{
+		JobName:    ptr.String("__JobName__"),
+		AnalysisId: ptr.String("__AnalysisId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StopJobUpgradeAnalysis.response", err)
 	}
 }
 

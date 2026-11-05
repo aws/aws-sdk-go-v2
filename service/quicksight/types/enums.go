@@ -5597,6 +5597,25 @@ func (SelfUpgradeStatus) Values() []SelfUpgradeStatus {
 	}
 }
 
+type ServiceRoleType string
+
+// Enum values for ServiceRoleType
+const (
+	ServiceRoleTypeQuicksightManaged ServiceRoleType = "QUICKSIGHT_MANAGED"
+	ServiceRoleTypeCustomerManaged   ServiceRoleType = "CUSTOMER_MANAGED"
+)
+
+// Values returns all known values for ServiceRoleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceRoleType) Values() []ServiceRoleType {
+	return []ServiceRoleType{
+		"QUICKSIGHT_MANAGED",
+		"CUSTOMER_MANAGED",
+	}
+}
+
 type ServiceType string
 
 // Enum values for ServiceType

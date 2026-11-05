@@ -1,0 +1,8 @@
+{
+    "id": "20337fd2-c1c6-4ac6-9191-b4797cab7174",
+    "type": "feature",
+    "description": "Amazon Bedrock Managed Knowledge Base now supports an optional mediaId parameter in GetDocumentContent that you can use to retrieve images embedded in source documents.",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

@@ -236,7 +236,7 @@ var ApplicationSourceConfig_ExternalUrlConfig *smithy.Schema
 var ApplicationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "ApplicationSummary",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var ApplicationSummary_Arn *smithy.Schema
 
 var ApplicationSummary_Id *smithy.Schema
@@ -248,6 +248,8 @@ var ApplicationSummary_Namespace *smithy.Schema
 var ApplicationSummary_CreatedTime *smithy.Schema
 
 var ApplicationSummary_LastModifiedTime *smithy.Schema
+
+var ApplicationSummary_LastModifiedRegion *smithy.Schema
 
 var ApplicationSummary_IsService *smithy.Schema
 
@@ -665,6 +667,11 @@ var _PublicationList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _PublicationList_member *smithy.Schema
 
+var _RegionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appintegrations",
+	Name:      "RegionName",
+}, smithy.ShapeTypeString, 0)
+
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "ResourceNotFoundException",
@@ -948,7 +955,7 @@ var GetApplicationRequest_Arn *smithy.Schema
 var GetApplicationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "GetApplicationResponse",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 19)
 var GetApplicationResponse_Arn *smithy.Schema
 
 var GetApplicationResponse_Id *smithy.Schema
@@ -968,6 +975,8 @@ var GetApplicationResponse_Publications *smithy.Schema
 var GetApplicationResponse_CreatedTime *smithy.Schema
 
 var GetApplicationResponse_LastModifiedTime *smithy.Schema
+
+var GetApplicationResponse_LastModifiedRegion *smithy.Schema
 
 var GetApplicationResponse_Tags *smithy.Schema
 
@@ -1300,6 +1309,8 @@ func init() {
 
 	ApplicationSummary_LastModifiedTime = ApplicationSummary.AddMember("LastModifiedTime", _Timestamp)
 
+	ApplicationSummary_LastModifiedRegion = ApplicationSummary.AddMember("LastModifiedRegion", _RegionName)
+
 	ApplicationSummary_IsService = ApplicationSummary.AddMember("IsService", _Boolean)
 
 	ApplicationSummary_ApplicationType = ApplicationSummary.AddMember("ApplicationType", ApplicationType)
@@ -1603,6 +1614,8 @@ func init() {
 	GetApplicationResponse_CreatedTime = GetApplicationResponse.AddMember("CreatedTime", _Timestamp)
 
 	GetApplicationResponse_LastModifiedTime = GetApplicationResponse.AddMember("LastModifiedTime", _Timestamp)
+
+	GetApplicationResponse_LastModifiedRegion = GetApplicationResponse.AddMember("LastModifiedRegion", _RegionName)
 
 	GetApplicationResponse_Tags = GetApplicationResponse.AddMember("Tags", _TagMap)
 

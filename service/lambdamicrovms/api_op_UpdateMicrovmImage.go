@@ -69,7 +69,8 @@ type UpdateMicrovmImageInput struct {
 	// The description of the MicroVM image.
 	Description *string
 
-	// The list of egress network connectors available to the MicroVM at runtime.
+	// The list of egress network connectors available to the MicroVM at image build
+	// time.
 	EgressNetworkConnectors []string
 
 	// Environment variables set in the MicroVM runtime environment.
@@ -202,7 +203,8 @@ type UpdateMicrovmImageOutput struct {
 	// The description of the MicroVM image.
 	Description *string
 
-	// The list of egress network connectors available to the MicroVM at runtime.
+	// The list of egress network connectors available to the MicroVM at image build
+	// time.
 	EgressNetworkConnectors []string
 
 	// Environment variables set in the MicroVM runtime environment.

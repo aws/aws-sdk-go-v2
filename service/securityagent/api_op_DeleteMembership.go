@@ -10,7 +10,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes a membership, revoking a user's access to an agent space.
+// Deletes a membership, revoking a user's or group's access to an agent space.
 func (c *Client) DeleteMembership(ctx context.Context, params *DeleteMembershipInput, optFns ...func(*Options)) (*DeleteMembershipOutput, error) {
 	if params == nil {
 		params = &DeleteMembershipInput{}

@@ -139,6 +139,12 @@ func serializeIntegrationFilter(s smithy.ShapeSerializer, schema *smithy.Schema,
 
 func serializeMemberMetadata(s smithy.ShapeSerializer, schema *smithy.Schema, v MemberMetadata) {
 	switch vv := v.(type) {
+	case *MemberMetadataMemberGroup:
+		s.WriteUnion(schema, schemas.MemberMetadata_group)
+		s.WriteStruct(schemas.MemberMetadata_group)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *MemberMetadataMemberUser:
 		s.WriteUnion(schema, schemas.MemberMetadata_user)
 		s.WriteStruct(schemas.MemberMetadata_user)
@@ -391,6 +397,10 @@ func deserializeIntegrationFilter(d smithy.ShapeDeserializer, s *smithy.Schema, 
 func deserializeMemberMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *MemberMetadata) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.MemberMetadata_group:
+			vv := &MemberMetadataMemberGroup{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.MemberMetadata_user:
 			vv := &MemberMetadataMemberUser{}
 			*v = vv

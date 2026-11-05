@@ -377,8 +377,9 @@ func TestUpdateResponseSnapshot_GetApplication(t *testing.T) {
 				Description: ptr.String("__Description__"),
 			},
 		},
-		CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -560,24 +561,26 @@ func TestUpdateResponseSnapshot_ListApplications(t *testing.T) {
 	want := &ListApplicationsOutput{
 		Applications: []types.ApplicationSummary{
 			{
-				Arn:              ptr.String("__Arn__"),
-				Id:               ptr.String("__Id__"),
-				Name:             ptr.String("__Name__"),
-				Namespace:        ptr.String("__Namespace__"),
-				CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				IsService:        true,
-				ApplicationType:  types.ApplicationType("STANDARD"),
+				Arn:                ptr.String("__Arn__"),
+				Id:                 ptr.String("__Id__"),
+				Name:               ptr.String("__Name__"),
+				Namespace:          ptr.String("__Namespace__"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				IsService:          true,
+				ApplicationType:    types.ApplicationType("STANDARD"),
 			},
 			{
-				Arn:              ptr.String("__Arn__"),
-				Id:               ptr.String("__Id__"),
-				Name:             ptr.String("__Name__"),
-				Namespace:        ptr.String("__Namespace__"),
-				CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				IsService:        true,
-				ApplicationType:  types.ApplicationType("STANDARD"),
+				Arn:                ptr.String("__Arn__"),
+				Id:                 ptr.String("__Id__"),
+				Name:               ptr.String("__Name__"),
+				Namespace:          ptr.String("__Namespace__"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				IsService:          true,
+				ApplicationType:    types.ApplicationType("STANDARD"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -992,7 +995,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonAppIntegrationService)
-	opSchema := smithy.NewOperationSchema(schemas.UpdateApplication, schemas.ConflictException, schemas.ConflictException)
+	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

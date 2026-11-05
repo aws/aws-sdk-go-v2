@@ -8947,6 +8947,34 @@ func TestCheckRequestSnapshot_GetJobs(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetJobUpgradeAnalysis(t *testing.T) {
+	input := &GetJobUpgradeAnalysisInput{
+		AnalysisId: ptr.String("__AnalysisId__"),
+		JobName:    ptr.String("__JobName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetJobUpgradeAnalysis(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetJobUpgradeAnalysis"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetMapping(t *testing.T) {
 	input := &GetMappingInput{
 		Source: &types.CatalogEntry{
@@ -13846,6 +13874,35 @@ func TestCheckRequestSnapshot_StartJobRun(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_StartJobUpgradeAnalysis(t *testing.T) {
+	input := &StartJobUpgradeAnalysisInput{
+		JobName:        ptr.String("__JobName__"),
+		AnalysisId:     ptr.String("__AnalysisId__"),
+		UpgradeConsent: types.UpgradeConsent("APPROVE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartJobUpgradeAnalysis(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartJobUpgradeAnalysis"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StartMaterializedViewRefreshTaskRun(t *testing.T) {
 	input := &StartMaterializedViewRefreshTaskRunInput{
 		CatalogId:    ptr.String("__CatalogId__"),
@@ -14096,6 +14153,34 @@ func TestCheckRequestSnapshot_StopCrawlerSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopCrawlerSchedule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StopJobUpgradeAnalysis(t *testing.T) {
+	input := &StopJobUpgradeAnalysisInput{
+		JobName:    ptr.String("__JobName__"),
+		AnalysisId: ptr.String("__AnalysisId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopJobUpgradeAnalysis(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopJobUpgradeAnalysis"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -28013,6 +28098,34 @@ func TestUpdateRequestSnapshot_GetJobs(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetJobUpgradeAnalysis(t *testing.T) {
+	input := &GetJobUpgradeAnalysisInput{
+		AnalysisId: ptr.String("__AnalysisId__"),
+		JobName:    ptr.String("__JobName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetJobUpgradeAnalysis(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetJobUpgradeAnalysis"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetMapping(t *testing.T) {
 	input := &GetMappingInput{
 		Source: &types.CatalogEntry{
@@ -32912,6 +33025,35 @@ func TestUpdateRequestSnapshot_StartJobRun(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_StartJobUpgradeAnalysis(t *testing.T) {
+	input := &StartJobUpgradeAnalysisInput{
+		JobName:        ptr.String("__JobName__"),
+		AnalysisId:     ptr.String("__AnalysisId__"),
+		UpgradeConsent: types.UpgradeConsent("APPROVE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartJobUpgradeAnalysis(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartJobUpgradeAnalysis"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_StartMaterializedViewRefreshTaskRun(t *testing.T) {
 	input := &StartMaterializedViewRefreshTaskRunInput{
 		CatalogId:    ptr.String("__CatalogId__"),
@@ -33162,6 +33304,34 @@ func TestUpdateRequestSnapshot_StopCrawlerSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopCrawlerSchedule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StopJobUpgradeAnalysis(t *testing.T) {
+	input := &StopJobUpgradeAnalysisInput{
+		JobName:    ptr.String("__JobName__"),
+		AnalysisId: ptr.String("__AnalysisId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopJobUpgradeAnalysis(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopJobUpgradeAnalysis"); err != nil {
 		t.Fatal(err)
 	}
 }
