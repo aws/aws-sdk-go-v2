@@ -1,3 +1,7 @@
+# v1.73.1 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.73.0 (2026-11-04)
 
 * **Feature**: Adds StartBulkPutItems, DescribeBulkOperation, ListBulkOperations, and CancelBulkOperation for asynchronously loading Amazon S3 datasets into existing DynamoDB tables.

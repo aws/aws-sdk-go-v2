@@ -1,3 +1,8 @@
+# v1.78.0 (2026-11-05)
+
+* **Feature**: Adds support for OAuth2 Authorization Server Metadata (RFC 8414) discovery URLs in custom JWT authorizer and OAuth2 credential provider configurations.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.77.2 (2026-11-04)
 
 * **Dependency Update**: Update to smithy-go v1.28.8.

@@ -1,3 +1,8 @@
+# v1.69.0 (2026-11-05)
+
+* **Feature**: Adds support for federated identity on Azure Blob Storage and object storage locations, enabling DataSync to authenticate to Azure and Google Cloud Storage using Workload Identity Federation (WIF) over OpenID Connect (OIDC) instead of stored long-lived credentials.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.68.5 (2026-11-04)
 
 * **Dependency Update**: Update to smithy-go v1.28.8.

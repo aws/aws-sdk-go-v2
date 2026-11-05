@@ -1,3 +1,43 @@
+# Release (2026-11-05)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.47.7
+  * **Bug Fix**: Compute the clock skew from the server Date header minus the time the response was received, instead of the midpoint of the request.
+* `github.com/aws/aws-sdk-go-v2/service/accountaccessruntime`: [v1.0.0](service/accountaccessruntime/CHANGELOG.md#v100-2026-11-05)
+  * **Release**: New AWS service client module
+  * **Feature**: Adds SDK support for Account Access user portal operations, enabling users to list out and get credentials for role assignments configured in AWS IAM Account Access Manager.
+* `github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol`: [v1.9.0](service/agentregistrycontrol/CHANGELOG.md#v190-2026-11-05)
+  * **Feature**: Adds support for OAuth2 Authorization Server Metadata (RFC 8414) discovery URLs in custom JWT authorizer.
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.53.0](service/appintegrations/CHANGELOG.md#v1530-2026-11-05)
+  * **Feature**: This release adds a LastModifiedRegion field to GetApplication and ListApplications so customers can see which Region an application was last modified in.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.78.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1780-2026-11-05)
+  * **Feature**: Adds support for OAuth2 Authorization Server Metadata (RFC 8414) discovery URLs in custom JWT authorizer and OAuth2 credential provider configurations.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.67.0](service/bedrockagentruntime/CHANGELOG.md#v1670-2026-11-05)
+  * **Feature**: Amazon Bedrock Managed Knowledge Base now supports an optional mediaId parameter in GetDocumentContent that you can use to retrieve images embedded in source documents.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.92.0](service/cloudwatchlogs/CHANGELOG.md#v1920-2026-11-05)
+  * **Feature**: Adds account-level retention policies with dry run preview and the Essentials log group class to Amazon CloudWatch Logs
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.69.0](service/datasync/CHANGELOG.md#v1690-2026-11-05)
+  * **Feature**: Adds support for federated identity on Azure Blob Storage and object storage locations, enabling DataSync to authenticate to Azure and Google Cloud Storage using Workload Identity Federation (WIF) over OpenID Connect (OIDC) instead of stored long-lived credentials.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.173.0](service/glue/CHANGELOG.md#v11730-2026-11-05)
+  * **Feature**: AWS Glue Spark ETL jobs can now auto-upgrade to the latest version. Set GlueVersion to Auto, then track progress with the AutoVersionStatus field in GetJob. Use StartJobUpgradeAnalysis to approve or decline an upgrade, GetJobUpgradeAnalysis to view details, and StopJobUpgradeAnalysis to stop it.
+* `github.com/aws/aws-sdk-go-v2/service/lambdamicrovms`: [v1.12.0](service/lambdamicrovms/CHANGELOG.md#v1120-2026-11-05)
+  * **Feature**: AWS Lambda MicroVMs now support the x86-64 CPU architecture, which you can select in addition to ARM64 (Graviton) when launching a MicroVM.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.43.0](service/qconnect/CHANGELOG.md#v1430-2026-11-05)
+  * **Feature**: Adds support for real-time agent assistance and self-service with Amazon Connect Global Resiliency, including cross-Region replication of supported AI agent resources and configurations.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.139.0](service/quicksight/CHANGELOG.md#v11390-2026-11-05)
+  * **Feature**: Amazon QuickSight adds APIs to view account service role settings and switch to or replace a customer-managed IAM role.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.46.0](service/route53domains/CHANGELOG.md#v1460-2026-11-05)
+  * **Feature**: Route 53 Domains now supports restoring domains. This release adds the RestoreDomain API to self-serve domain restoration.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.287.0](service/sagemaker/CHANGELOG.md#v12870-2026-11-05)
+  * **Feature**: Fixed the ImageDeleted and ImageVersionDeleted waiters to succeed on the ResourceNotFound error returned by DescribeImage and DescribeImageVersion
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.28.0](service/securityagent/CHANGELOG.md#v1280-2026-11-05)
+  * **Feature**: Adds support for IAM Identity Center groups as Agent Space members. CreateMembership, DeleteMembership, and ListMemberships now accept the GROUP member type. ListMemberships can filter by USER, GROUP, or ALL, and returns group display name and description.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.85.0](service/wafv2/CHANGELOG.md#v1850-2026-11-05)
+  * **Feature**: AWS WAF customers who monetize AI traffic on Web ACLs can now configure payments through connected accounts (Stripe).
+
 # Release (2026-11-04)
 
 ## General Highlights

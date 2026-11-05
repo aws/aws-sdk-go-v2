@@ -1,3 +1,8 @@
+# v1.139.0 (2026-11-05)
+
+* **Feature**: Amazon QuickSight adds APIs to view account service role settings and switch to or replace a customer-managed IAM role.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.138.4 (2026-11-04)
 
 * **Dependency Update**: Update to smithy-go v1.28.8.

@@ -1,3 +1,8 @@
+# v1.92.0 (2026-11-05)
+
+* **Feature**: Adds account-level retention policies with dry run preview and the Essentials log group class to Amazon CloudWatch Logs
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.91.1 (2026-11-04)
 
 * **Dependency Update**: Update to smithy-go v1.28.8.

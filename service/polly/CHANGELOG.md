@@ -1,3 +1,7 @@
+# v1.68.1 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.68.0 (2026-11-04)
 
 * **Feature**: Amazon Polly now supports tagging lexicons. Use the new TagResource, UntagResource and ListTagsForResource APIs, or add tags when creating a lexicon with PutLexicon, to organize lexicons and control access with tag-based (ABAC) IAM policies.

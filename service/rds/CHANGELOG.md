@@ -1,3 +1,7 @@
+# v1.132.1 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.132.0 (2026-11-04)
 
 * **Feature**: Adding support for copying and tagging option groups with cross-Region DB snapshot copies, in the same account or across accounts.

@@ -1,3 +1,7 @@
+# v1.57.1 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.0 (2026-11-04)
 
 * **Feature**: This release adds Migration Planning artifacts as a source environment for network migration definitions, and an optional clientToken on CreateNetworkMigrationDefinition so that retried requests don't create duplicate definitions.

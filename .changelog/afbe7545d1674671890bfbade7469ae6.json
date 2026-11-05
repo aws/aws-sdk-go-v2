@@ -1,8 +1,0 @@
-{
-    "id": "afbe7545-d167-4671-890b-fbade7469ae6",
-    "type": "feature",
-    "description": "Adds support for OAuth2 Authorization Server Metadata (RFC 8414) discovery URLs in custom JWT authorizer and OAuth2 credential provider configurations.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

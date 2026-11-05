@@ -1,3 +1,7 @@
+# v1.44.1 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2026-11-04)
 
 * **Feature**: Rules TBAC GA (Contact Lens V1) - Adds an optional ListFilter (CategoriesAttributeFilter with OrConditions, AndCondition and TagCondition) to ListRealtimeContactAnalysisSegments. This filters matched categories by rule tags. It also adds an optional RuleId to CategoryDetails in the response.

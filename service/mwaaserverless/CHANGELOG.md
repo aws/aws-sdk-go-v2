@@ -1,3 +1,7 @@
+# v1.14.1 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2026-11-04)
 
 * **Feature**: Adding support to Environment Variables in MWAA Serverless

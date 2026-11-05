@@ -1,3 +1,8 @@
+# v1.46.0 (2026-11-05)
+
+* **Feature**: Route 53 Domains now supports restoring domains. This release adds the RestoreDomain API to self-serve domain restoration.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.5 (2026-11-04)
 
 * **Dependency Update**: Update to smithy-go v1.28.8.

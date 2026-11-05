@@ -3,10 +3,10 @@ module github.com/aws/aws-sdk-go-v2/service/marketplacediscovery
 go 1.24
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.47.6
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.9
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.9
-	github.com/aws/aws-sdk-go-v2/internal/v4a v1.5.9
+	github.com/aws/aws-sdk-go-v2 v1.47.7
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.10
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.10
+	github.com/aws/aws-sdk-go-v2/internal/v4a v1.5.10
 	github.com/aws/smithy-go v1.28.8
 )
 

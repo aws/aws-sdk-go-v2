@@ -1,8 +1,0 @@
-{
-    "id": "8c531361-5136-44ee-944c-ba7f77fe4c19",
-    "type": "feature",
-    "description": "AWS WAF customers who monetize AI traffic on Web ACLs can now configure payments through connected accounts (Stripe).",
-    "modules": [
-        "service/wafv2"
-    ]
-}

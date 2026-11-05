@@ -1,3 +1,8 @@
+# v1.173.0 (2026-11-05)
+
+* **Feature**: AWS Glue Spark ETL jobs can now auto-upgrade to the latest version. Set GlueVersion to Auto, then track progress with the AutoVersionStatus field in GetJob. Use StartJobUpgradeAnalysis to approve or decline an upgrade, GetJobUpgradeAnalysis to view details, and StopJobUpgradeAnalysis to stop it.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.172.3 (2026-11-04)
 
 * **Dependency Update**: Update to smithy-go v1.28.8.

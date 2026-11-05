@@ -1,8 +1,0 @@
-{
-    "id": "7534947a-24b4-4dee-a9e2-2337b9883684",
-    "type": "feature",
-    "description": "Amazon QuickSight adds APIs to view account service role settings and switch to or replace a customer-managed IAM role.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

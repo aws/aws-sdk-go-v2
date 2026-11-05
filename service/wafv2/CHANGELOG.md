@@ -1,3 +1,8 @@
+# v1.85.0 (2026-11-05)
+
+* **Feature**: AWS WAF customers who monetize AI traffic on Web ACLs can now configure payments through connected accounts (Stripe).
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.84.2 (2026-11-04)
 
 * **Dependency Update**: Update to smithy-go v1.28.8.

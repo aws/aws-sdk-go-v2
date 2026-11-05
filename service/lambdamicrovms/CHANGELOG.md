@@ -1,3 +1,8 @@
+# v1.12.0 (2026-11-05)
+
+* **Feature**: AWS Lambda MicroVMs now support the x86-64 CPU architecture, which you can select in addition to ARM64 (Graviton) when launching a MicroVM.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.6 (2026-11-04)
 
 * **Dependency Update**: Update to smithy-go v1.28.8.

@@ -1,8 +1,0 @@
-{
-    "id": "9fea367c-5058-4d47-abc3-58bb8ffb102f",
-    "type": "feature",
-    "description": "Adds SDK support for Account Access user portal operations, enabling users to list out and get credentials for role assignments configured in AWS IAM Account Access Manager.",
-    "modules": [
-        "service/accountaccessruntime"
-    ]
-}

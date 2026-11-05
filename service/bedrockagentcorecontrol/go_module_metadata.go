@@ -3,4 +3,4 @@
 package bedrockagentcorecontrol
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.77.2"
+const goModuleVersion = "1.78.0"

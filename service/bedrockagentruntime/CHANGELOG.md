@@ -1,3 +1,8 @@
+# v1.67.0 (2026-11-05)
+
+* **Feature**: Amazon Bedrock Managed Knowledge Base now supports an optional mediaId parameter in GetDocumentContent that you can use to retrieve images embedded in source documents.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.66.1 (2026-11-04)
 
 * **Dependency Update**: Update to smithy-go v1.28.8.

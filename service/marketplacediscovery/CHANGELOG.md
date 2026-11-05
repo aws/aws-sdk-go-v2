@@ -1,3 +1,7 @@
+# v1.13.1 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2026-11-04)
 
 * **Feature**: GetListing and SearchListings APIs now return G2 and PeerSpot review sources in review summaries.

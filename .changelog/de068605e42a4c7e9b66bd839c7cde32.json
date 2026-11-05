@@ -1,8 +1,0 @@
-{
-    "id": "de068605-e42a-4c7e-9b66-bd839c7cde32",
-    "type": "feature",
-    "description": "This release adds a LastModifiedRegion field to GetApplication and ListApplications so customers can see which Region an application was last modified in.",
-    "modules": [
-        "service/appintegrations"
-    ]
-}
