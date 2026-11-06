@@ -1,3 +1,7 @@
+# v1.287.1 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.287.0 (2026-11-05)
 
 * **Feature**: Fixed the ImageDeleted and ImageVersionDeleted waiters to succeed on the ResourceNotFound error returned by DescribeImage and DescribeImageVersion

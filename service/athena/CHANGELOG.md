@@ -1,3 +1,8 @@
+# v1.67.0 (2026-11-06)
+
+* **Feature**: Added support for Athena System Tables which writes Athena usage data to AWS S3 managed tables in Apache Iceberg format. Adds CreateSystemTableConfiguration, UpdateSystemTableConfiguration, DeleteSystemTableConfiguration, GetSystemTableConfiguration, and ListSystemTableStatuses.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.66.10 (2026-11-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

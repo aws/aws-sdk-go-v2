@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/feature/rds/auth
 
 go 1.24
 
-require github.com/aws/aws-sdk-go-v2 v1.47.7
+require github.com/aws/aws-sdk-go-v2 v1.47.8
 
 require github.com/aws/smithy-go v1.28.8 // indirect
 

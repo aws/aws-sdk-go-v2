@@ -1,3 +1,7 @@
+# v1.53.1 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.0 (2026-11-05)
 
 * **Feature**: This release adds a LastModifiedRegion field to GetApplication and ListApplications so customers can see which Region an application was last modified in.

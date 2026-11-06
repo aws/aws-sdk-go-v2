@@ -1,8 +1,0 @@
-{
-    "id": "7c0b7f63-d298-4f92-b739-29ce37817316",
-    "type": "feature",
-    "description": "Amazon Connect Cases adds two Bulk Case Actions operations. BatchCreateRelatedItem adds a Comment-type related item to up to 100 cases per request, BatchUpdateCase updates fields (title, status, customer ID, custom) on up to 100 cases. Same domain, per-case success and failure results returned.",
-    "modules": [
-        "service/connectcases"
-    ]
-}

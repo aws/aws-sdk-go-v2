@@ -1,8 +1,0 @@
-{
-    "id": "7dc58149-252e-44da-9631-d5faa315d462",
-    "type": "feature",
-    "description": "AWS Systems Manager now provides two new APIs - RegisterDefaultHostManagementConfiguration and DeregisterDefaultHostManagementConfiguration - along with a new DefaultHostManagementConfiguration CloudFormation resource type.",
-    "modules": [
-        "service/ssm"
-    ]
-}

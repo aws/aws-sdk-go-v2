@@ -1,3 +1,34 @@
+# Release (2026-11-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.67.0](service/athena/CHANGELOG.md#v1670-2026-11-06)
+  * **Feature**: Added support for Athena System Tables which writes Athena usage data to AWS S3 managed tables in Apache Iceberg format. Adds CreateSystemTableConfiguration, UpdateSystemTableConfiguration, DeleteSystemTableConfiguration, GetSystemTableConfiguration, and ListSystemTableStatuses.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.80.0](service/autoscaling/CHANGELOG.md#v1800-2026-11-06)
+  * **Feature**: Amazon EC2 Auto Scaling now lets you exclude managed resources from describe API responses using the new optional IncludeManagedResources parameter. Set this parameter to false to exclude managed resources from the response. By default, managed resources are included.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.70.0](service/bedrockagent/CHANGELOG.md#v1700-2026-11-06)
+  * **Feature**: Add support for configuring searchability for metadata fields via UpdateKnowledgeBase request for Managed Knowledge Base. Once a field is marked as searchable it can be queried via query text and is factored into Managed Knowledge Base's ranking algorithm.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.213.0](service/connect/CHANGELOG.md#v12130-2026-11-06)
+  * **Feature**: Rules in Amazon Connect now support ending email contacts associated to a case based on case events.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.51.0](service/connectcases/CHANGELOG.md#v1510-2026-11-06)
+  * **Feature**: Amazon Connect Cases adds two Bulk Case Actions operations. BatchCreateRelatedItem adds a Comment-type related item to up to 100 cases per request, BatchUpdateCase updates fields (title, status, customer ID, custom) on up to 100 cases. Same domain, per-case success and failure results returned.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.83.0](service/datazone/CHANGELOG.md#v1830-2026-11-06)
+  * **Feature**: Adds support for updating OAuth 2.0 connection settings with UpdateConnection.
+* `github.com/aws/aws-sdk-go-v2/service/eksauth`: [v1.24.0](service/eksauth/CHANGELOG.md#v1240-2026-11-06)
+  * **Feature**: Added workloadIdentityProviderArn to the AssumeRoleForPodIdentity API response.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.174.0](service/glue/CHANGELOG.md#v11740-2026-11-06)
+  * **Feature**: Adds support for user-defined functions governed by AWS Lake Formation.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.71.0](service/lightsail/CHANGELOG.md#v1710-2026-11-06)
+  * **Feature**: Marking fields as sensitive in GetInstanceAccessDetails, CreateKeyPair, DownloadDefaultKeyPair, CreateBucketAccessKey, CreateContainerServiceRegistryLogin, and GetRelationalDatabase responses.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.108.0](service/mediaconvert/CHANGELOG.md#v11080-2026-11-06)
+  * **Feature**: Smart subtitling uses AWS Elemental Inference to generate captions from your content's audio, in embedded, burn-in, DVB-Sub, IMSC, SMI, SRT, teletext, TTML, or WebVTT outputs. Also fixes HEVC passthrough writing an incomplete codecs string to DASH and HLS manifests.
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.46.0](service/ram/CHANGELOG.md#v1460-2026-11-06)
+  * **Feature**: Adds support for using managed permission template parameters, discovering shared customer-managed permissions, and managing customer-managed permission deprecation.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.82.0](service/ssm/CHANGELOG.md#v1820-2026-11-06)
+  * **Feature**: AWS Systems Manager now provides two new APIs - RegisterDefaultHostManagementConfiguration and DeregisterDefaultHostManagementConfiguration - along with a new DefaultHostManagementConfiguration CloudFormation resource type.
+
 # Release (2026-11-05)
 
 ## General Highlights

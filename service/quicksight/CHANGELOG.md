@@ -1,3 +1,7 @@
+# v1.139.1 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.139.0 (2026-11-05)
 
 * **Feature**: Amazon QuickSight adds APIs to view account service role settings and switch to or replace a customer-managed IAM role.

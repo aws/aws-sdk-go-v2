@@ -1,3 +1,8 @@
+# v1.174.0 (2026-11-06)
+
+* **Feature**: Adds support for user-defined functions governed by AWS Lake Formation.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.173.0 (2026-11-05)
 
 * **Feature**: AWS Glue Spark ETL jobs can now auto-upgrade to the latest version. Set GlueVersion to Auto, then track progress with the AutoVersionStatus field in GetJob. Use StartJobUpgradeAnalysis to approve or decline an upgrade, GetJobUpgradeAnalysis to view details, and StopJobUpgradeAnalysis to stop it.

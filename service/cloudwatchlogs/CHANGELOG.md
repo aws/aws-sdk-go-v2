@@ -1,3 +1,7 @@
+# v1.92.1 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.92.0 (2026-11-05)
 
 * **Feature**: Adds account-level retention policies with dry run preview and the Essentials log group class to Amazon CloudWatch Logs

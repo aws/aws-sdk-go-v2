@@ -1,3 +1,8 @@
+# v1.24.0 (2026-11-06)
+
+* **Feature**: Added workloadIdentityProviderArn to the AssumeRoleForPodIdentity API response.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.3 (2026-11-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

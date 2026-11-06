@@ -1,8 +1,0 @@
-{
-    "id": "cfd4189d-4076-4624-b255-ab6f87688a4b",
-    "type": "feature",
-    "description": "Added support for Athena System Tables which writes Athena usage data to AWS S3 managed tables in Apache Iceberg format. Adds CreateSystemTableConfiguration, UpdateSystemTableConfiguration, DeleteSystemTableConfiguration, GetSystemTableConfiguration, and ListSystemTableStatuses.",
-    "modules": [
-        "service/athena"
-    ]
-}

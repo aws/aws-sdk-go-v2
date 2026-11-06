@@ -1,8 +1,0 @@
-{
-    "id": "1552883f-67db-4ab5-adbb-5e6fb39341b9",
-    "type": "feature",
-    "description": "Adds support for user-defined functions governed by AWS Lake Formation.",
-    "modules": [
-        "service/glue"
-    ]
-}

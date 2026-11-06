@@ -1,3 +1,7 @@
+# v1.69.1 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.69.0 (2026-11-05)
 
 * **Feature**: Adds support for federated identity on Azure Blob Storage and object storage locations, enabling DataSync to authenticate to Azure and Google Cloud Storage using Workload Identity Federation (WIF) over OpenID Connect (OIDC) instead of stored long-lived credentials.

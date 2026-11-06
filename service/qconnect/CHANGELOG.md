@@ -1,3 +1,7 @@
+# v1.43.1 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2026-11-05)
 
 * **Feature**: Adds support for real-time agent assistance and self-service with Amazon Connect Global Resiliency, including cross-Region replication of supported AI agent resources and configurations.

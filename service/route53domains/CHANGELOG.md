@@ -1,3 +1,7 @@
+# v1.46.1 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.46.0 (2026-11-05)
 
 * **Feature**: Route 53 Domains now supports restoring domains. This release adds the RestoreDomain API to self-serve domain restoration.

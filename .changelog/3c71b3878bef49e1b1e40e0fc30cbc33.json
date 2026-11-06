@@ -1,8 +1,0 @@
-{
-    "id": "3c71b387-8bef-49e1-b1e4-0e0fc30cbc33",
-    "type": "feature",
-    "description": "Marking fields as sensitive in GetInstanceAccessDetails, CreateKeyPair, DownloadDefaultKeyPair, CreateBucketAccessKey, CreateContainerServiceRegistryLogin, and GetRelationalDatabase responses.",
-    "modules": [
-        "service/lightsail"
-    ]
-}

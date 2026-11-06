@@ -1,3 +1,8 @@
+# v1.82.0 (2026-11-06)
+
+* **Feature**: AWS Systems Manager now provides two new APIs - RegisterDefaultHostManagementConfiguration and DeregisterDefaultHostManagementConfiguration - along with a new DefaultHostManagementConfiguration CloudFormation resource type.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.81.4 (2026-11-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

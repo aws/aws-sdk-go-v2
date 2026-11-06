@@ -1,3 +1,8 @@
+# v1.83.0 (2026-11-06)
+
+* **Feature**: Adds support for updating OAuth 2.0 connection settings with UpdateConnection.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.82.4 (2026-11-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

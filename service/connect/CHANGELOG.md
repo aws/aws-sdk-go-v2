@@ -1,3 +1,8 @@
+# v1.213.0 (2026-11-06)
+
+* **Feature**: Rules in Amazon Connect now support ending email contacts associated to a case based on case events.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.212.1 (2026-11-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions
