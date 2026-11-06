@@ -43,6 +43,10 @@ func asProfile(line string) *lineTokenProfile { // " [ type name ] ; comment"
 	}
 }
 
+// credential_process values are run through a shell (sh -c / cmd.exe /C),
+// which does its own unquoting, so the quotes must be kept.
+const credentialProcessKey = "credential_process"
+
 func asProperty(line string) *lineTokenProperty {
 	if isLineSpace(rune(line[0])) {
 		return nil
@@ -55,9 +59,15 @@ func asProperty(line string) *lineTokenProperty {
 		return nil
 	}
 
+	key := strings.ToLower(k) // LEGACY: normalize key case
+	value := legacyStrconv(v) // LEGACY: see func docs
+	if key == credentialProcessKey {
+		value = v // keep the quotes, the shell needs them
+	}
+
 	return &lineTokenProperty{
-		Key:   strings.ToLower(k), // LEGACY: normalize key case
-		Value: legacyStrconv(v),   // LEGACY: see func docs
+		Key:   key,
+		Value: value,
 	}
 }
 
