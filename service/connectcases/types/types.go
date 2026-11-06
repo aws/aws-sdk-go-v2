@@ -338,7 +338,280 @@ func (v *BasicLayout) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Boolean condition for a rule. In the Amazon Connect admin website, case rules
+// Information about a related item that wasn't created.
+type BatchCreateRelatedItemErrorEntry struct {
+
+	// The identifiers of the case that the related item wasn't created for.
+	//
+	// This member is required.
+	CaseIdentifier *CaseIdentifier
+
+	// The error code. For possible values, see failedItems .
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// A message that describes the error.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchCreateRelatedItemErrorEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateRelatedItemErrorEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateRelatedItemErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseIdentifier != nil {
+		s.WriteStruct(schemas.BatchCreateRelatedItemErrorEntry_caseIdentifier)
+		v.CaseIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchCreateRelatedItemErrorEntry_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchCreateRelatedItemErrorEntry_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *BatchCreateRelatedItemErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateRelatedItemErrorEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateRelatedItemErrorEntry_caseIdentifier:
+			v.CaseIdentifier = &CaseIdentifier{}
+			return v.CaseIdentifier.Deserialize(d)
+		case schemas.BatchCreateRelatedItemErrorEntry_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchCreateRelatedItemErrorEntry_errorCode, v.ErrorCode)
+		case schemas.BatchCreateRelatedItemErrorEntry_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchCreateRelatedItemErrorEntry_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
+// Identifies a case to associate the related item with in a BatchCreateRelatedItem
+// request.
+type BatchCreateRelatedItemIdentifier struct {
+
+	// The identifier of the case to associate the related item with. Specify either
+	// the case ID or the reference ID.
+	//
+	// This member is required.
+	CaseIdentifier CaseIdentifierUnion
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchCreateRelatedItemIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateRelatedItemIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateRelatedItemIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseIdentifier != nil {
+		serializeCaseIdentifierUnion(s, schemas.BatchCreateRelatedItemIdentifier_caseIdentifier, v.CaseIdentifier)
+	}
+}
+func (v *BatchCreateRelatedItemIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateRelatedItemIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateRelatedItemIdentifier_caseIdentifier:
+			return deserializeCaseIdentifierUnion(d, schemas.BatchCreateRelatedItemIdentifier_caseIdentifier, &v.CaseIdentifier)
+		}
+		return nil
+	})
+}
+
+// Information about a related item that was created.
+type BatchCreateRelatedItemSuccessEntry struct {
+
+	// The identifiers of the case that the related item is associated with.
+	//
+	// This member is required.
+	CaseIdentifier *CaseIdentifier
+
+	// The Amazon Resource Name (ARN) of the related item.
+	//
+	// This member is required.
+	RelatedItemArn *string
+
+	// The unique identifier of the related item.
+	//
+	// This member is required.
+	RelatedItemId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchCreateRelatedItemSuccessEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateRelatedItemSuccessEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateRelatedItemSuccessEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseIdentifier != nil {
+		s.WriteStruct(schemas.BatchCreateRelatedItemSuccessEntry_caseIdentifier)
+		v.CaseIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelatedItemArn != nil {
+		s.WriteString(schemas.BatchCreateRelatedItemSuccessEntry_relatedItemArn, *v.RelatedItemArn)
+	}
+	if v.RelatedItemId != nil {
+		s.WriteString(schemas.BatchCreateRelatedItemSuccessEntry_relatedItemId, *v.RelatedItemId)
+	}
+}
+func (v *BatchCreateRelatedItemSuccessEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateRelatedItemSuccessEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateRelatedItemSuccessEntry_caseIdentifier:
+			v.CaseIdentifier = &CaseIdentifier{}
+			return v.CaseIdentifier.Deserialize(d)
+		case schemas.BatchCreateRelatedItemSuccessEntry_relatedItemArn:
+			v.RelatedItemArn = new(string)
+			return d.ReadString(schemas.BatchCreateRelatedItemSuccessEntry_relatedItemArn, v.RelatedItemArn)
+		case schemas.BatchCreateRelatedItemSuccessEntry_relatedItemId:
+			v.RelatedItemId = new(string)
+			return d.ReadString(schemas.BatchCreateRelatedItemSuccessEntry_relatedItemId, v.RelatedItemId)
+		}
+		return nil
+	})
+}
+
+// Information about a case that wasn't updated.
+type BatchUpdateCaseErrorEntry struct {
+
+	// The identifiers of the case that wasn't updated.
+	//
+	// This member is required.
+	CaseIdentifier *CaseIdentifier
+
+	// The error code. For possible values, see failedCases .
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// A message that describes the error.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchUpdateCaseErrorEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateCaseErrorEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateCaseErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseIdentifier != nil {
+		s.WriteStruct(schemas.BatchUpdateCaseErrorEntry_caseIdentifier)
+		v.CaseIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchUpdateCaseErrorEntry_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchUpdateCaseErrorEntry_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *BatchUpdateCaseErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateCaseErrorEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateCaseErrorEntry_caseIdentifier:
+			v.CaseIdentifier = &CaseIdentifier{}
+			return v.CaseIdentifier.Deserialize(d)
+		case schemas.BatchUpdateCaseErrorEntry_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchUpdateCaseErrorEntry_errorCode, v.ErrorCode)
+		case schemas.BatchUpdateCaseErrorEntry_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchUpdateCaseErrorEntry_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
+// Identifies a case to update in a BatchUpdateCase request.
+type BatchUpdateCaseIdentifier struct {
+
+	// The identifier of the case to update. Specify either the case ID or the
+	// reference ID.
+	//
+	// This member is required.
+	CaseIdentifier CaseIdentifierUnion
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchUpdateCaseIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateCaseIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateCaseIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseIdentifier != nil {
+		serializeCaseIdentifierUnion(s, schemas.BatchUpdateCaseIdentifier_caseIdentifier, v.CaseIdentifier)
+	}
+}
+func (v *BatchUpdateCaseIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateCaseIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateCaseIdentifier_caseIdentifier:
+			return deserializeCaseIdentifierUnion(d, schemas.BatchUpdateCaseIdentifier_caseIdentifier, &v.CaseIdentifier)
+		}
+		return nil
+	})
+}
+
+// Information about a case that was updated.
+type BatchUpdateCaseSuccessEntry struct {
+
+	// The identifiers of the updated case.
+	//
+	// This member is required.
+	CaseIdentifier *CaseIdentifier
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchUpdateCaseSuccessEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateCaseSuccessEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateCaseSuccessEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseIdentifier != nil {
+		s.WriteStruct(schemas.BatchUpdateCaseSuccessEntry_caseIdentifier)
+		v.CaseIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchUpdateCaseSuccessEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateCaseSuccessEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateCaseSuccessEntry_caseIdentifier:
+			v.CaseIdentifier = &CaseIdentifier{}
+			return v.CaseIdentifier.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Boolean condition for a rule. In the Connect Customer admin website, case rules
 // are known as case field conditions. For more information about case field
 // conditions, see [Add case field conditions to a case template].
 //
@@ -424,7 +697,7 @@ func (v *BooleanConditionMemberOrAll) Deserialize(d smithy.ShapeDeserializer) er
 	return v.Value.Deserialize(d)
 }
 
-// Boolean operands for a condition. In the Amazon Connect admin website, case
+// Boolean operands for a condition. In the Connect Customer admin website, case
 // rules are known as case field conditions. For more information about case field
 // conditions, see [Add case field conditions to a case template].
 //
@@ -601,9 +874,101 @@ func (v *CaseFilterMemberTag) Deserialize(d smithy.ShapeDeserializer) error {
 	return deserializeTagFilter(d, schemas.CaseFilter_tag, &v.Value)
 }
 
+// The identifiers of a case that a batch operation returns.
+type CaseIdentifier struct {
+
+	// The unique identifier of the case.
+	CaseId *string
+
+	// The reference ID of the case. Cases created before reference IDs were available
+	// don't have one.
+	ReferenceId *string
+
+	// The reference number of the case. Reference numbers aren't guaranteed to be
+	// unique. BatchUpdateCase and BatchCreateRelatedItem don't return this value.
+	ReferenceNumber *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CaseIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaseIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaseIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.CaseIdentifier_caseId, *v.CaseId)
+	}
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.CaseIdentifier_referenceId, *v.ReferenceId)
+	}
+	if v.ReferenceNumber != nil {
+		s.WriteString(schemas.CaseIdentifier_referenceNumber, *v.ReferenceNumber)
+	}
+}
+func (v *CaseIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaseIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaseIdentifier_caseId:
+			v.CaseId = new(string)
+			return d.ReadString(schemas.CaseIdentifier_caseId, v.CaseId)
+		case schemas.CaseIdentifier_referenceId:
+			v.ReferenceId = new(string)
+			return d.ReadString(schemas.CaseIdentifier_referenceId, v.ReferenceId)
+		case schemas.CaseIdentifier_referenceNumber:
+			v.ReferenceNumber = new(string)
+			return d.ReadString(schemas.CaseIdentifier_referenceNumber, v.ReferenceNumber)
+		}
+		return nil
+	})
+}
+
+// Identifies a case by its case ID or its reference ID. Specify only one member.
+//
+// The following types satisfy this interface:
+//
+//	CaseIdentifierUnionMemberCaseId
+//	CaseIdentifierUnionMemberReferenceId
+type CaseIdentifierUnion interface {
+	isCaseIdentifierUnion()
+}
+
+// The unique identifier of the case.
+type CaseIdentifierUnionMemberCaseId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CaseIdentifierUnionMemberCaseId) isCaseIdentifierUnion() {}
+func (v *CaseIdentifierUnionMemberCaseId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.CaseIdentifierUnion_caseId, v.Value)
+}
+func (v *CaseIdentifierUnionMemberCaseId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.CaseIdentifierUnion_caseId, &v.Value)
+}
+
+// The reference ID of the case. Reference IDs are unique within a domain, and
+// uniqueness isn't case sensitive.
+type CaseIdentifierUnionMemberReferenceId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CaseIdentifierUnionMemberReferenceId) isCaseIdentifierUnion() {}
+func (v *CaseIdentifierUnionMemberReferenceId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.CaseIdentifierUnion_referenceId, v.Value)
+}
+func (v *CaseIdentifierUnionMemberReferenceId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.CaseIdentifierUnion_referenceId, &v.Value)
+}
+
 // Represents what rule type should take place, under what conditions. In the
-// Amazon Connect admin website, case rules are known as case field conditions. For
-// more information about case field conditions, see [Add case field conditions to a case template].
+// Connect Customer admin website, case rules are known as case field conditions.
+// For more information about case field conditions, see [Add case field conditions to a case template].
 //
 // The following types satisfy this interface:
 //
@@ -668,7 +1033,7 @@ func (v *CaseRuleDetailsMemberRequired) Deserialize(d smithy.ShapeDeserializer) 
 	return v.Value.Deserialize(d)
 }
 
-// Error for batch describe case rules API failure. In the Amazon Connect admin
+// Error for batch describe case rules API failure. In the Connect Customer admin
 // website, case rules are known as case field conditions. For more information
 // about case field conditions, see [Add case field conditions to a case template].
 //
@@ -758,7 +1123,7 @@ func (v *CaseRuleIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Summary information of this case rule. In the Amazon Connect admin website,
+// Summary information of this case rule. In the Connect Customer admin website,
 // case rules are known as case field conditions. For more information about case
 // field conditions, see [Add case field conditions to a case template].
 //
@@ -1003,7 +1368,7 @@ func (v *CommentUpdateContent) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // A compound condition that combines multiple boolean conditions using logical
-// operators. In the Amazon Connect admin website, case rules are known as case
+// operators. In the Connect Customer admin website, case rules are known as case
 // field conditions. For more information about case field conditions, see [Add case field conditions to a case template].
 //
 // [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
@@ -1138,10 +1503,10 @@ func (v *ConnectCaseInputContent) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// An object that represents an Amazon Connect contact object.
+// An object that represents an Connect Customer contact object.
 type Contact struct {
 
-	// A unique identifier of a contact in Amazon Connect.
+	// A unique identifier of a contact in Connect Customer.
 	//
 	// This member is required.
 	ContactArn *string
@@ -1171,7 +1536,7 @@ func (v *Contact) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// An object that represents a content of an Amazon Connect contact object.
+// An object that represents a content of an Connect Customer contact object.
 type ContactContent struct {
 
 	// A list of channels to filter on for related items of type Contact .
@@ -1185,7 +1550,7 @@ type ContactContent struct {
 	// This member is required.
 	ConnectedToSystemTime *time.Time
 
-	// A unique identifier of a contact in Amazon Connect.
+	// A unique identifier of a contact in Connect Customer.
 	//
 	// This member is required.
 	ContactArn *string
@@ -1233,7 +1598,7 @@ type ContactFilter struct {
 	// A list of channels to filter on for related items of type Contact .
 	Channel []string
 
-	// A unique identifier of a contact in Amazon Connect.
+	// A unique identifier of a contact in Connect Customer.
 	ContactArn *string
 
 	noSmithyDocumentSerde
@@ -1547,7 +1912,7 @@ func (v *EmptyFieldValue) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Represents an empty operand value. In the Amazon Connect admin website, case
+// Represents an empty operand value. In the Connect Customer admin website, case
 // rules are known as case field conditions. For more information about case field
 // conditions, see [Add case field conditions to a case template].
 //
@@ -1932,6 +2297,47 @@ func (v *FieldIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Identifies a field by its ID or by its name. Specify only one member.
+// Identifying a field by name is supported only in BatchUpdateCase .
+//
+// The following types satisfy this interface:
+//
+//	FieldIdentifierUnionMemberId
+//	FieldIdentifierUnionMemberName
+type FieldIdentifierUnion interface {
+	isFieldIdentifierUnion()
+}
+
+// The unique identifier of the field.
+type FieldIdentifierUnionMemberId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldIdentifierUnionMemberId) isFieldIdentifierUnion() {}
+func (v *FieldIdentifierUnionMemberId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.FieldIdentifierUnion_id, v.Value)
+}
+func (v *FieldIdentifierUnionMemberId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.FieldIdentifierUnion_id, &v.Value)
+}
+
+// The name of the field.
+type FieldIdentifierUnionMemberName struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldIdentifierUnionMemberName) isFieldIdentifierUnion() {}
+func (v *FieldIdentifierUnionMemberName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.FieldIdentifierUnion_name, v.Value)
+}
+func (v *FieldIdentifierUnionMemberName) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.FieldIdentifierUnion_name, &v.Value)
+}
+
 // Object for field related information.
 type FieldItem struct {
 
@@ -2263,6 +2669,48 @@ func (v *FieldValue) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A field and the value to set for it.
+type FieldValueInput struct {
+
+	// The field to update, identified by field ID or field name.
+	//
+	// This member is required.
+	FieldIdentifier FieldIdentifierUnion
+
+	// The value to set for the field.
+	//
+	// This member is required.
+	Value FieldValueUnion
+
+	noSmithyDocumentSerde
+}
+
+func (v *FieldValueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FieldValueInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FieldValueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldIdentifier != nil {
+		serializeFieldIdentifierUnion(s, schemas.FieldValueInput_fieldIdentifier, v.FieldIdentifier)
+	}
+	if v.Value != nil {
+		serializeFieldValueUnion(s, schemas.FieldValueInput_value, v.Value)
+	}
+}
+func (v *FieldValueInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FieldValueInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FieldValueInput_fieldIdentifier:
+			return deserializeFieldIdentifierUnion(d, schemas.FieldValueInput_fieldIdentifier, &v.FieldIdentifier)
+		case schemas.FieldValueInput_value:
+			return deserializeFieldValueUnion(d, schemas.FieldValueInput_value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Object to store union of Field values.
 //
 // The Summary system field accepts up to 3000 characters, while all other fields
@@ -2359,10 +2807,10 @@ func (v *FieldValueUnionMemberUserArnValue) Deserialize(d smithy.ShapeDeserializ
 	return d.ReadString(schemas.FieldValueUnion_userArnValue, &v.Value)
 }
 
-// An object that represents a content of an Amazon Connect file object.
+// An object that represents a content of an Connect Customer file object.
 type FileContent struct {
 
-	// The Amazon Resource Name (ARN) of a File in Amazon Connect.
+	// The Amazon Resource Name (ARN) of a File in Connect Customer.
 	//
 	// This member is required.
 	FileArn *string
@@ -2423,8 +2871,8 @@ func (v *FileFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Detailed case rule information. In the Amazon Connect admin website, case rules
-// are known as case field conditions. For more information about case field
+// Detailed case rule information. In the Connect Customer admin website, case
+// rules are known as case field conditions. For more information about case field
 // conditions, see [Add case field conditions to a case template].
 //
 // [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
@@ -2462,7 +2910,7 @@ type GetCaseRuleResponse struct {
 	// Timestamp when the resource was created or last modified.
 	LastModifiedTime *time.Time
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 
@@ -2579,7 +3027,7 @@ type GetFieldResponse struct {
 	// Timestamp at which the resource was created or last modified.
 	LastModifiedTime *time.Time
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 
@@ -2861,9 +3309,9 @@ func (v *LayoutSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Represents the left hand operand in the condition. In the Amazon Connect admin
-// website, case rules are known as case field conditions. For more information
-// about case field conditions, see [Add case field conditions to a case template].
+// Represents the left hand operand in the condition. In the Connect Customer
+// admin website, case rules are known as case field conditions. For more
+// information about case field conditions, see [Add case field conditions to a case template].
 //
 // The following types satisfy this interface:
 //
@@ -2889,9 +3337,9 @@ func (v *OperandOneMemberFieldId) Deserialize(d smithy.ShapeDeserializer) error 
 	return d.ReadString(schemas.OperandOne_fieldId, &v.Value)
 }
 
-// Represents the right hand operand in the condition. In the Amazon Connect admin
-// website, case rules are known as case field conditions. For more information
-// about case field conditions, see [Add case field conditions to a case template].
+// Represents the right hand operand in the condition. In the Connect Customer
+// admin website, case rules are known as case field conditions. For more
+// information about case field conditions, see [Add case field conditions to a case template].
 //
 // The following types satisfy this interface:
 //
@@ -3041,7 +3489,7 @@ func (v *RelatedItemContentMemberComment) Deserialize(d smithy.ShapeDeserializer
 	return v.Value.Deserialize(d)
 }
 
-// Represents the Amazon Connect case to be created as a related item.
+// Represents the Connect Customer case to be created as a related item.
 type RelatedItemContentMemberConnectCase struct {
 	Value ConnectCaseContent
 
@@ -3190,7 +3638,7 @@ func (v *RelatedItemInputContentMemberComment) Deserialize(d smithy.ShapeDeseria
 	return v.Value.Deserialize(d)
 }
 
-// Represents the Amazon Connect case to be created as a related item.
+// Represents the Connect Customer case to be created as a related item.
 type RelatedItemInputContentMemberConnectCase struct {
 	Value ConnectCaseInputContent
 
@@ -3207,7 +3655,7 @@ func (v *RelatedItemInputContentMemberConnectCase) Deserialize(d smithy.ShapeDes
 	return v.Value.Deserialize(d)
 }
 
-// Object representing a contact in Amazon Connect as an API request field.
+// Object representing a contact in Connect Customer as an API request field.
 type RelatedItemInputContentMemberContact struct {
 	Value Contact
 
@@ -3304,7 +3752,7 @@ func (v *RelatedItemTypeFilterMemberComment) Deserialize(d smithy.ShapeDeseriali
 	return v.Value.Deserialize(d)
 }
 
-// Represents the Amazon Connect case to be created as a related item.
+// Represents the Connect Customer case to be created as a related item.
 type RelatedItemTypeFilterMemberConnectCase struct {
 	Value ConnectCaseFilter
 
@@ -3434,9 +3882,9 @@ func (v *RelatedItemUpdateContentMemberCustom) Deserialize(d smithy.ShapeDeseria
 	return v.Value.Deserialize(d)
 }
 
-// Required rule type, used to indicate whether a field is required. In the Amazon
-// Connect admin website, case rules are known as case field conditions. For more
-// information about case field conditions, see [Add case field conditions to a case template].
+// Required rule type, used to indicate whether a field is required. In the
+// Connect Customer admin website, case rules are known as case field conditions.
+// For more information about case field conditions, see [Add case field conditions to a case template].
 //
 // [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
 type RequiredCaseRule struct {
@@ -3550,7 +3998,7 @@ type SearchAllRelatedItemsResponseItem struct {
 	// Represents the entity that performed the action.
 	PerformedBy UserUnion
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 
@@ -3686,7 +4134,7 @@ type SearchCasesResponseItem struct {
 	// This member is required.
 	TemplateId *string
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 
@@ -3757,7 +4205,7 @@ type SearchRelatedItemsResponseItem struct {
 	// Represents the creator of the related item.
 	PerformedBy UserUnion
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 
@@ -4135,7 +4583,7 @@ type Sort struct {
 	// This member is required.
 	FieldId *string
 
-	// A structured set of sort terms
+	// Whether results should be sorted in ascending or descending order.
 	//
 	// This member is required.
 	SortOrder Order
@@ -4291,8 +4739,8 @@ func (v *TagValue) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// An association representing a case rule acting upon a field. In the Amazon
-// Connect admin website, case rules are known as case field conditions. For more
+// An association representing a case rule acting upon a field. In the Connect
+// Customer admin website, case rules are known as case field conditions. For more
 // information about case field conditions, see [Add case field conditions to a case template].
 //
 // [Add case field conditions to a case template]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
@@ -4475,7 +4923,7 @@ func (v *UserUnionMemberCustomEntity) Deserialize(d smithy.ShapeDeserializer) er
 	return d.ReadString(schemas.UserUnion_customEntity, &v.Value)
 }
 
-// Represents the Amazon Connect ARN of the user.
+// Represents the Connect Customer ARN of the user.
 type UserUnionMemberUserArn struct {
 	Value string
 
@@ -4504,10 +4952,12 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAuditEventFieldValueUnion() {}
 func (*UnknownUnionMember) isBooleanCondition()          {}
 func (*UnknownUnionMember) isCaseFilter()                {}
+func (*UnknownUnionMember) isCaseIdentifierUnion()       {}
 func (*UnknownUnionMember) isCaseRuleDetails()           {}
 func (*UnknownUnionMember) isCustomFieldsFilter()        {}
 func (*UnknownUnionMember) isFieldAttributes()           {}
 func (*UnknownUnionMember) isFieldFilter()               {}
+func (*UnknownUnionMember) isFieldIdentifierUnion()      {}
 func (*UnknownUnionMember) isFieldValueUnion()           {}
 func (*UnknownUnionMember) isLayoutContent()             {}
 func (*UnknownUnionMember) isOperandOne()                {}

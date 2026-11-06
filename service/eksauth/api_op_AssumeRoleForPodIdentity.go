@@ -117,6 +117,10 @@ type AssumeRoleForPodIdentityOutput struct {
 	// This member is required.
 	Subject *types.Subject
 
+	// The ARN of the workload identity provider for the returned credentials.
+	// Returned only for associations with workload identity enabled.
+	WorkloadIdentityProviderArn *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -153,6 +157,9 @@ func (v *AssumeRoleForPodIdentityOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.Subject.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.WorkloadIdentityProviderArn != nil {
+		s.WriteString(schemas.AssumeRoleForPodIdentityResponse_workloadIdentityProviderArn, *v.WorkloadIdentityProviderArn)
+	}
 }
 func (v *AssumeRoleForPodIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssumeRoleForPodIdentityResponse, func(s *smithy.Schema) error {
@@ -172,6 +179,9 @@ func (v *AssumeRoleForPodIdentityOutput) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.AssumeRoleForPodIdentityResponse_subject:
 			v.Subject = &types.Subject{}
 			return v.Subject.Deserialize(d)
+		case schemas.AssumeRoleForPodIdentityResponse_workloadIdentityProviderArn:
+			v.WorkloadIdentityProviderArn = new(string)
+			return d.ReadString(schemas.AssumeRoleForPodIdentityResponse_workloadIdentityProviderArn, v.WorkloadIdentityProviderArn)
 		}
 		return nil
 	})

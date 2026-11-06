@@ -3907,6 +3907,55 @@ func (v *SessionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The enablement status of a single system table. Because system tables are
+// enabled at the account level, every status reflects the same account-wide state.
+type SystemTableStatus struct {
+
+	// Indicates whether the system table is enabled for the account.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The name of the system table, such as QUERY_EXECUTIONS .
+	//
+	// This member is required.
+	TableName SystemTableType
+
+	noSmithyDocumentSerde
+}
+
+func (v *SystemTableStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SystemTableStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SystemTableStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SystemTableStatus_Enabled, *v.Enabled)
+	}
+	if v.TableName != "" {
+		s.WriteString(schemas.SystemTableStatus_TableName, string(v.TableName))
+	}
+}
+func (v *SystemTableStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SystemTableStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SystemTableStatus_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SystemTableStatus_Enabled, v.Enabled)
+		case schemas.SystemTableStatus_TableName:
+			var ev string
+			if err := d.ReadString(schemas.SystemTableStatus_TableName, &ev); err != nil {
+				return err
+			}
+			v.TableName = SystemTableType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains metadata for a table.
 type TableMetadata struct {
 
@@ -4404,6 +4453,10 @@ type WorkGroupConfiguration struct {
 	// is set, Athena issues an error that no output location is provided.
 	ResultConfiguration *ResultConfiguration
 
+	// The read-only enablement status of each system table for the account. This
+	// field is returned by GetWorkGroupand is ignored on write.
+	SystemTableStatuses []SystemTableStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -4475,6 +4528,9 @@ func (v *WorkGroupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ResultConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SystemTableStatuses != nil {
+		serializeSystemTableStatusList(s, schemas.WorkGroupConfiguration_SystemTableStatuses, v.SystemTableStatuses)
+	}
 }
 func (v *WorkGroupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WorkGroupConfiguration, func(s *smithy.Schema) error {
@@ -4524,6 +4580,8 @@ func (v *WorkGroupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.WorkGroupConfiguration_ResultConfiguration:
 			v.ResultConfiguration = &ResultConfiguration{}
 			return v.ResultConfiguration.Deserialize(d)
+		case schemas.WorkGroupConfiguration_SystemTableStatuses:
+			return deserializeSystemTableStatusList(d, schemas.WorkGroupConfiguration_SystemTableStatuses, &v.SystemTableStatuses)
 		}
 		return nil
 	})

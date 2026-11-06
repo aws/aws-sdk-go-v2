@@ -2298,6 +2298,12 @@ type AuthenticationConfigurationPatch struct {
 	// The basic authentication credentials of a connection.
 	BasicAuthenticationCredentials *BasicAuthenticationCredentials
 
+	// The OAuth2 properties, such as the client application, grant type, and token
+	// URL, that you want to update for a connection. Only the properties that you
+	// specify are updated; the connection keeps its existing values for the properties
+	// that you omit.
+	OAuth2Properties *OAuth2PropertiesPatch
+
 	// The secret ARN of a connection.
 	SecretArn *string
 
@@ -2316,6 +2322,11 @@ func (v *AuthenticationConfigurationPatch) SerializeMembers(s smithy.ShapeSerial
 		v.BasicAuthenticationCredentials.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.OAuth2Properties != nil {
+		s.WriteStruct(schemas.AuthenticationConfigurationPatch_oAuth2Properties)
+		v.OAuth2Properties.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SecretArn != nil {
 		s.WriteString(schemas.AuthenticationConfigurationPatch_secretArn, *v.SecretArn)
 	}
@@ -2326,6 +2337,9 @@ func (v *AuthenticationConfigurationPatch) Deserialize(d smithy.ShapeDeserialize
 		case schemas.AuthenticationConfigurationPatch_basicAuthenticationCredentials:
 			v.BasicAuthenticationCredentials = &BasicAuthenticationCredentials{}
 			return v.BasicAuthenticationCredentials.Deserialize(d)
+		case schemas.AuthenticationConfigurationPatch_oAuth2Properties:
+			v.OAuth2Properties = &OAuth2PropertiesPatch{}
+			return v.OAuth2Properties.Deserialize(d)
 		case schemas.AuthenticationConfigurationPatch_secretArn:
 			v.SecretArn = new(string)
 			return d.ReadString(schemas.AuthenticationConfigurationPatch_secretArn, v.SecretArn)
@@ -13758,6 +13772,72 @@ func (v *OAuth2Properties) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.OAuth2Properties_tokenUrl, v.TokenUrl)
 		case schemas.OAuth2Properties_tokenUrlParametersMap:
 			return deserializeTokenUrlParametersMap(d, schemas.OAuth2Properties_tokenUrlParametersMap, &v.TokenUrlParametersMap)
+		}
+		return nil
+	})
+}
+
+// Contains the OAuth2 properties, such as the client application, grant type, and
+// token URL, that you want to update for a connection.
+type OAuth2PropertiesPatch struct {
+
+	// The OAuth2 client application of the OAuth2 properties to update.
+	OAuth2ClientApplication *OAuth2ClientApplication
+
+	// The OAuth2 grant type of the OAuth2 properties to update.
+	OAuth2GrantType OAuth2GrantType
+
+	// The OAuth2 token URL of the OAuth2 properties to update.
+	TokenUrl *string
+
+	// The OAuth2 token URL parameter map of the OAuth2 properties to update, for
+	// example the scope. If you specify an empty map, the existing parameters are
+	// kept.
+	TokenUrlParametersMap map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OAuth2PropertiesPatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OAuth2PropertiesPatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OAuth2PropertiesPatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OAuth2ClientApplication != nil {
+		s.WriteStruct(schemas.OAuth2PropertiesPatch_oAuth2ClientApplication)
+		v.OAuth2ClientApplication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OAuth2GrantType != "" {
+		s.WriteString(schemas.OAuth2PropertiesPatch_oAuth2GrantType, string(v.OAuth2GrantType))
+	}
+	if v.TokenUrl != nil {
+		s.WriteString(schemas.OAuth2PropertiesPatch_tokenUrl, *v.TokenUrl)
+	}
+	if v.TokenUrlParametersMap != nil {
+		serializeTokenUrlParametersMap(s, schemas.OAuth2PropertiesPatch_tokenUrlParametersMap, v.TokenUrlParametersMap)
+	}
+}
+func (v *OAuth2PropertiesPatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OAuth2PropertiesPatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OAuth2PropertiesPatch_oAuth2ClientApplication:
+			v.OAuth2ClientApplication = &OAuth2ClientApplication{}
+			return v.OAuth2ClientApplication.Deserialize(d)
+		case schemas.OAuth2PropertiesPatch_oAuth2GrantType:
+			var ev string
+			if err := d.ReadString(schemas.OAuth2PropertiesPatch_oAuth2GrantType, &ev); err != nil {
+				return err
+			}
+			v.OAuth2GrantType = OAuth2GrantType(ev)
+			return nil
+		case schemas.OAuth2PropertiesPatch_tokenUrl:
+			v.TokenUrl = new(string)
+			return d.ReadString(schemas.OAuth2PropertiesPatch_tokenUrl, v.TokenUrl)
+		case schemas.OAuth2PropertiesPatch_tokenUrlParametersMap:
+			return deserializeTokenUrlParametersMap(d, schemas.OAuth2PropertiesPatch_tokenUrlParametersMap, &v.TokenUrlParametersMap)
 		}
 		return nil
 	})

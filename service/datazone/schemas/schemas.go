@@ -2024,10 +2024,12 @@ var AuthenticationConfigurationInput_customAuthenticationCredentials *smithy.Sch
 var AuthenticationConfigurationPatch = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "AuthenticationConfigurationPatch",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var AuthenticationConfigurationPatch_secretArn *smithy.Schema
 
 var AuthenticationConfigurationPatch_basicAuthenticationCredentials *smithy.Schema
+
+var AuthenticationConfigurationPatch_oAuth2Properties *smithy.Schema
 
 var AuthenticationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -5984,6 +5986,18 @@ var OAuth2Properties_tokenUrlParametersMap *smithy.Schema
 var OAuth2Properties_authorizationCodeProperties *smithy.Schema
 
 var OAuth2Properties_oAuth2Credentials *smithy.Schema
+
+var OAuth2PropertiesPatch = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "OAuth2PropertiesPatch",
+}, smithy.ShapeTypeStructure, 4)
+var OAuth2PropertiesPatch_oAuth2GrantType *smithy.Schema
+
+var OAuth2PropertiesPatch_oAuth2ClientApplication *smithy.Schema
+
+var OAuth2PropertiesPatch_tokenUrl *smithy.Schema
+
+var OAuth2PropertiesPatch_tokenUrlParametersMap *smithy.Schema
 
 var OpenLineageRunEventSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -15625,9 +15639,19 @@ func init() {
 
 	AuthenticationConfigurationInput_customAuthenticationCredentials = AuthenticationConfigurationInput.AddMember("customAuthenticationCredentials", _CredentialMap)
 
+	OAuth2PropertiesPatch_oAuth2GrantType = OAuth2PropertiesPatch.AddMember("oAuth2GrantType", OAuth2GrantType)
+
+	OAuth2PropertiesPatch_oAuth2ClientApplication = OAuth2PropertiesPatch.AddMember("oAuth2ClientApplication", OAuth2ClientApplication)
+
+	OAuth2PropertiesPatch_tokenUrl = OAuth2PropertiesPatch.AddMember("tokenUrl", smithyprelude.String)
+
+	OAuth2PropertiesPatch_tokenUrlParametersMap = OAuth2PropertiesPatch.AddMember("tokenUrlParametersMap", _TokenUrlParametersMap)
+
 	AuthenticationConfigurationPatch_secretArn = AuthenticationConfigurationPatch.AddMember("secretArn", smithyprelude.String)
 
 	AuthenticationConfigurationPatch_basicAuthenticationCredentials = AuthenticationConfigurationPatch.AddMember("basicAuthenticationCredentials", BasicAuthenticationCredentials)
+
+	AuthenticationConfigurationPatch_oAuth2Properties = AuthenticationConfigurationPatch.AddMember("oAuth2Properties", OAuth2PropertiesPatch)
 
 	_AuthorizedPrincipalIdentifiers_member = _AuthorizedPrincipalIdentifiers.AddMember("member", _AuthorizedPrincipalIdentifier)
 

@@ -73,6 +73,12 @@ type CreateResourceShareInput struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	PermissionArns []string
 
+	// Specifies the template parameter values for each permission being associated
+	// that has template parameters. Each entry maps a permission ARN to the parameter
+	// values to use when rendering the permission template for this resource share.
+	// You must provide values for all parameters declared in each permission template.
+	PermissionTemplateParameters []types.PermissionArnAndTemplateParameters
+
 	// Specifies a list of one or more principals to associate with the resource share.
 	//
 	// You can include the following values:
@@ -138,6 +144,9 @@ func (v *CreateResourceShareInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.PermissionArns != nil {
 		serializePermissionArnList(s, schemas.CreateResourceShareRequest_permissionArns, v.PermissionArns)
+	}
+	if v.PermissionTemplateParameters != nil {
+		serializePermissionArnAndTemplateParametersList(s, schemas.CreateResourceShareRequest_permissionTemplateParameters, v.PermissionTemplateParameters)
 	}
 	if v.Principals != nil {
 		serializePrincipalArnOrIdList(s, schemas.CreateResourceShareRequest_principals, v.Principals)

@@ -1690,6 +1690,25 @@ func (GlueResourceType) Values() []GlueResourceType {
 	}
 }
 
+type GovernanceMode string
+
+// Enum values for GovernanceMode
+const (
+	GovernanceModeIamOnly       GovernanceMode = "IAM_ONLY"
+	GovernanceModeLakeFormation GovernanceMode = "LAKE_FORMATION"
+)
+
+// Values returns all known values for GovernanceMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GovernanceMode) Values() []GovernanceMode {
+	return []GovernanceMode{
+		"IAM_ONLY",
+		"LAKE_FORMATION",
+	}
+}
+
 type HTTPMethod string
 
 // Enum values for HTTPMethod

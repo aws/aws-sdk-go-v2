@@ -10771,6 +10771,27 @@ func (v *EncryptionConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// End associated emails related to a case.
+type EndAssociatedEmailsActionDefinition struct {
+	noSmithyDocumentSerde
+}
+
+func (v *EndAssociatedEmailsActionDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndAssociatedEmailsActionDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndAssociatedEmailsActionDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EndAssociatedEmailsActionDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndAssociatedEmailsActionDefinition, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // End associated tasks related to a case.
 type EndAssociatedTasksActionDefinition struct {
 	noSmithyDocumentSerde
@@ -29352,6 +29373,11 @@ type RuleAction struct {
 	// OnPostChatAnalysisAvailable .
 	CreateCaseAction *CreateCaseActionDefinition
 
+	// Information about the end associated emails action.
+	//
+	// Supported only for TriggerEventSource values: OnCaseUpdate .
+	EndAssociatedEmailsAction *EndAssociatedEmailsActionDefinition
+
 	// Information about the end associated tasks action.
 	//
 	// Supported only for TriggerEventSource values: OnCaseUpdate .
@@ -29425,6 +29451,11 @@ func (v *RuleAction) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CreateCaseAction.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.EndAssociatedEmailsAction != nil {
+		s.WriteStruct(schemas.RuleAction_EndAssociatedEmailsAction)
+		v.EndAssociatedEmailsAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.EndAssociatedTasksAction != nil {
 		s.WriteStruct(schemas.RuleAction_EndAssociatedTasksAction)
 		v.EndAssociatedTasksAction.SerializeMembers(s)
@@ -29485,6 +29516,9 @@ func (v *RuleAction) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RuleAction_CreateCaseAction:
 			v.CreateCaseAction = &CreateCaseActionDefinition{}
 			return v.CreateCaseAction.Deserialize(d)
+		case schemas.RuleAction_EndAssociatedEmailsAction:
+			v.EndAssociatedEmailsAction = &EndAssociatedEmailsActionDefinition{}
+			return v.EndAssociatedEmailsAction.Deserialize(d)
 		case schemas.RuleAction_EndAssociatedTasksAction:
 			v.EndAssociatedTasksAction = &EndAssociatedTasksActionDefinition{}
 			return v.EndAssociatedTasksAction.Deserialize(d)

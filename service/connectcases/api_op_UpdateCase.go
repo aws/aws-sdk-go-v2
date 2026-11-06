@@ -10,11 +10,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// If you provide a value for PerformedBy.UserArn you must also have [connect:DescribeUser] permission
-// on the User ARN resource that you provide
+// If you provide a value for PerformedBy.UserArn , you must also have the [connect:DescribeUser]
+// permission on the user ARN that you provide.
 //
 // Updates the values of fields on a case. Fields to be updated are received as an
-// array of id/value pairs identical to the CreateCase input .
+// array of id/value pairs identical to the CreateCase input.
 //
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.

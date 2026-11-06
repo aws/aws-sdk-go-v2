@@ -7585,6 +7585,11 @@ func awsAwsquery_serializeOpDocumentDescribeAutoScalingGroupsInput(v *DescribeAu
 		objectKey.Boolean(*v.IncludeInstances)
 	}
 
+	if v.IncludeManagedResources != nil {
+		objectKey := object.Key("IncludeManagedResources")
+		objectKey.Boolean(*v.IncludeManagedResources)
+	}
+
 	if v.MaxRecords != nil {
 		objectKey := object.Key("MaxRecords")
 		objectKey.Integer(*v.MaxRecords)
@@ -7601,6 +7606,11 @@ func awsAwsquery_serializeOpDocumentDescribeAutoScalingGroupsInput(v *DescribeAu
 func awsAwsquery_serializeOpDocumentDescribeAutoScalingInstancesInput(v *DescribeAutoScalingInstancesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.IncludeManagedResources != nil {
+		objectKey := object.Key("IncludeManagedResources")
+		objectKey.Boolean(*v.IncludeManagedResources)
+	}
 
 	if v.InstanceIds != nil {
 		objectKey := object.Key("InstanceIds")
@@ -7749,6 +7759,11 @@ func awsAwsquery_serializeOpDocumentDescribeNotificationConfigurationsInput(v *D
 		}
 	}
 
+	if v.IncludeManagedResources != nil {
+		objectKey := object.Key("IncludeManagedResources")
+		objectKey.Boolean(*v.IncludeManagedResources)
+	}
+
 	if v.MaxRecords != nil {
 		objectKey := object.Key("MaxRecords")
 		objectKey.Integer(*v.MaxRecords)
@@ -7769,6 +7784,11 @@ func awsAwsquery_serializeOpDocumentDescribePoliciesInput(v *DescribePoliciesInp
 	if v.AutoScalingGroupName != nil {
 		objectKey := object.Key("AutoScalingGroupName")
 		objectKey.String(*v.AutoScalingGroupName)
+	}
+
+	if v.IncludeManagedResources != nil {
+		objectKey := object.Key("IncludeManagedResources")
+		objectKey.Boolean(*v.IncludeManagedResources)
 	}
 
 	if v.MaxRecords != nil {
@@ -7826,6 +7846,11 @@ func awsAwsquery_serializeOpDocumentDescribeScalingActivitiesInput(v *DescribeSc
 		objectKey.Boolean(*v.IncludeDeletedGroups)
 	}
 
+	if v.IncludeManagedResources != nil {
+		objectKey := object.Key("IncludeManagedResources")
+		objectKey.Boolean(*v.IncludeManagedResources)
+	}
+
 	if v.MaxRecords != nil {
 		objectKey := object.Key("MaxRecords")
 		objectKey.Integer(*v.MaxRecords)
@@ -7851,6 +7876,11 @@ func awsAwsquery_serializeOpDocumentDescribeScheduledActionsInput(v *DescribeSch
 	if v.EndTime != nil {
 		objectKey := object.Key("EndTime")
 		objectKey.String(smithytime.FormatDateTime(*v.EndTime))
+	}
+
+	if v.IncludeManagedResources != nil {
+		objectKey := object.Key("IncludeManagedResources")
+		objectKey.Boolean(*v.IncludeManagedResources)
 	}
 
 	if v.MaxRecords != nil {
@@ -7887,6 +7917,11 @@ func awsAwsquery_serializeOpDocumentDescribeTagsInput(v *DescribeTagsInput, valu
 		if err := awsAwsquery_serializeDocumentFilters(v.Filters, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.IncludeManagedResources != nil {
+		objectKey := object.Key("IncludeManagedResources")
+		objectKey.Boolean(*v.IncludeManagedResources)
 	}
 
 	if v.MaxRecords != nil {

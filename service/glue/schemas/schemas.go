@@ -7230,6 +7230,14 @@ var _GlueVersionString = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GlueVersionString",
 }, smithy.ShapeTypeString, 0)
 
+var GovernanceMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GovernanceMode",
+}, smithy.ShapeTypeEnum, 2)
+var GovernanceMode_IAM_ONLY *smithy.Schema
+
+var GovernanceMode_LAKE_FORMATION *smithy.Schema
+
 var GovernedCatalogSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GovernedCatalogSource",
@@ -10935,10 +10943,12 @@ var ResourceType_ARCHIVE *smithy.Schema
 var ResourceUri = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ResourceUri",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ResourceUri_ResourceType *smithy.Schema
 
 var ResourceUri_Uri *smithy.Schema
+
+var ResourceUri_LastModified *smithy.Schema
 
 var _ResourceUriList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -13849,7 +13859,7 @@ var _UsageProfileDefinitionList_member *smithy.Schema
 var UserDefinedFunction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "UserDefinedFunction",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 11)
 var UserDefinedFunction_FunctionName *smithy.Schema
 
 var UserDefinedFunction_DatabaseName *smithy.Schema
@@ -13866,12 +13876,16 @@ var UserDefinedFunction_CreateTime *smithy.Schema
 
 var UserDefinedFunction_ResourceUris *smithy.Schema
 
+var UserDefinedFunction_ArtifactLocation *smithy.Schema
+
+var UserDefinedFunction_GovernanceMode *smithy.Schema
+
 var UserDefinedFunction_CatalogId *smithy.Schema
 
 var UserDefinedFunctionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "UserDefinedFunctionInput",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 8)
 var UserDefinedFunctionInput_FunctionName *smithy.Schema
 
 var UserDefinedFunctionInput_ClassName *smithy.Schema
@@ -13883,6 +13897,10 @@ var UserDefinedFunctionInput_FunctionType *smithy.Schema
 var UserDefinedFunctionInput_OwnerType *smithy.Schema
 
 var UserDefinedFunctionInput_ResourceUris *smithy.Schema
+
+var UserDefinedFunctionInput_ArtifactLocation *smithy.Schema
+
+var UserDefinedFunctionInput_GovernanceMode *smithy.Schema
 
 var _UserDefinedFunctionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -25764,6 +25782,10 @@ func init() {
 
 	_GlueTables_member = _GlueTables.AddMember("member", GlueTable)
 
+	GovernanceMode_IAM_ONLY = GovernanceMode.AddMember("IAM_ONLY", smithyprelude.Unit)
+
+	GovernanceMode_LAKE_FORMATION = GovernanceMode.AddMember("LAKE_FORMATION", smithyprelude.Unit)
+
 	IcebergEncryptedKey_KeyId = IcebergEncryptedKey.AddMember("KeyId", _EncryptionKeyIdString)
 
 	IcebergEncryptedKey_EncryptedKeyMetadata = IcebergEncryptedKey.AddMember("EncryptedKeyMetadata", _EncryptedKeyMetadataString)
@@ -26706,6 +26728,8 @@ func init() {
 
 	ResourceUri_Uri = ResourceUri.AddMember("Uri", _URI)
 
+	ResourceUri_LastModified = ResourceUri.AddMember("LastModified", _Timestamp)
+
 	_ResourceUriList_member = _ResourceUriList.AddMember("member", ResourceUri)
 
 	RestConfiguration_GlobalSourceConfiguration = RestConfiguration.AddMember("GlobalSourceConfiguration", SourceConfiguration)
@@ -27370,6 +27394,10 @@ func init() {
 
 	UserDefinedFunction_ResourceUris = UserDefinedFunction.AddMember("ResourceUris", _ResourceUriList)
 
+	UserDefinedFunction_ArtifactLocation = UserDefinedFunction.AddMember("ArtifactLocation", _URI)
+
+	UserDefinedFunction_GovernanceMode = UserDefinedFunction.AddMember("GovernanceMode", GovernanceMode)
+
 	UserDefinedFunction_CatalogId = UserDefinedFunction.AddMember("CatalogId", _CatalogIdString)
 
 	UserDefinedFunctionInput_FunctionName = UserDefinedFunctionInput.AddMember("FunctionName", _NameString)
@@ -27383,6 +27411,10 @@ func init() {
 	UserDefinedFunctionInput_OwnerType = UserDefinedFunctionInput.AddMember("OwnerType", PrincipalType)
 
 	UserDefinedFunctionInput_ResourceUris = UserDefinedFunctionInput.AddMember("ResourceUris", _ResourceUriList)
+
+	UserDefinedFunctionInput_ArtifactLocation = UserDefinedFunctionInput.AddMember("ArtifactLocation", _URI)
+
+	UserDefinedFunctionInput_GovernanceMode = UserDefinedFunctionInput.AddMember("GovernanceMode", GovernanceMode)
 
 	_UserDefinedFunctionList_member = _UserDefinedFunctionList.AddMember("member", UserDefinedFunction)
 

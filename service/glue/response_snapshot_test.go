@@ -15245,12 +15245,16 @@ func TestCheckResponseSnapshot_CreateUserDefinedFunction(t *testing.T) {
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
+			ArtifactLocation: ptr.String("__ArtifactLocation__"),
+			GovernanceMode:   types.GovernanceMode("IAM_ONLY"),
 		},
 	})
 	if err != nil {
@@ -34824,13 +34828,17 @@ func TestCheckResponseSnapshot_GetUserDefinedFunction(t *testing.T) {
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
-			CatalogId: ptr.String("__CatalogId__"),
+			ArtifactLocation: ptr.String("__ArtifactLocation__"),
+			GovernanceMode:   types.GovernanceMode("IAM_ONLY"),
+			CatalogId:        ptr.String("__CatalogId__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetUserDefinedFunction.response")
@@ -34869,13 +34877,17 @@ func TestCheckResponseSnapshot_GetUserDefinedFunctions(t *testing.T) {
 					{
 						ResourceType: types.ResourceType("JAR"),
 						Uri:          ptr.String("__Uri__"),
+						LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 					{
 						ResourceType: types.ResourceType("JAR"),
 						Uri:          ptr.String("__Uri__"),
+						LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 				},
-				CatalogId: ptr.String("__CatalogId__"),
+				ArtifactLocation: ptr.String("__ArtifactLocation__"),
+				GovernanceMode:   types.GovernanceMode("IAM_ONLY"),
+				CatalogId:        ptr.String("__CatalogId__"),
 			},
 			{
 				FunctionName: ptr.String("__FunctionName__"),
@@ -34889,13 +34901,17 @@ func TestCheckResponseSnapshot_GetUserDefinedFunctions(t *testing.T) {
 					{
 						ResourceType: types.ResourceType("JAR"),
 						Uri:          ptr.String("__Uri__"),
+						LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 					{
 						ResourceType: types.ResourceType("JAR"),
 						Uri:          ptr.String("__Uri__"),
+						LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 				},
-				CatalogId: ptr.String("__CatalogId__"),
+				ArtifactLocation: ptr.String("__ArtifactLocation__"),
+				GovernanceMode:   types.GovernanceMode("IAM_ONLY"),
+				CatalogId:        ptr.String("__CatalogId__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -47465,12 +47481,16 @@ func TestCheckResponseSnapshot_UpdateUserDefinedFunction(t *testing.T) {
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
+			ArtifactLocation: ptr.String("__ArtifactLocation__"),
+			GovernanceMode:   types.GovernanceMode("IAM_ONLY"),
 		},
 	})
 	if err != nil {

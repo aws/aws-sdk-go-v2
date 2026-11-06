@@ -80,6 +80,12 @@ type ReplacePermissionAssociationsInput struct {
 	// shares that use the specified version of the managed permission.
 	FromPermissionVersion *int32
 
+	// Specifies the template parameter values to apply when replacing the permission.
+	// You must provide values for all parameters declared in the target permission
+	// template. This parameter is required only if the target permission (
+	// toPermissionArn ) has template parameters.
+	PermissionTemplateParameters []types.PermissionTemplateParameterInput
+
 	noSmithyDocumentSerde
 }
 
@@ -98,6 +104,9 @@ func (v *ReplacePermissionAssociationsInput) SerializeMembers(s smithy.ShapeSeri
 	}
 	if v.FromPermissionVersion != nil {
 		s.WriteInt32(schemas.ReplacePermissionAssociationsRequest_fromPermissionVersion, *v.FromPermissionVersion)
+	}
+	if v.PermissionTemplateParameters != nil {
+		serializePermissionTemplateParameterInputList(s, schemas.ReplacePermissionAssociationsRequest_permissionTemplateParameters, v.PermissionTemplateParameters)
 	}
 	if v.ToPermissionArn != nil {
 		s.WriteString(schemas.ReplacePermissionAssociationsRequest_toPermissionArn, *v.ToPermissionArn)

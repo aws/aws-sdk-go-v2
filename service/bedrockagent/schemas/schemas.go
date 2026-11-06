@@ -1909,6 +1909,14 @@ var _FieldsForReranking = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
 var _FieldsForReranking_member *smithy.Schema
 
+var FieldType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "FieldType",
+}, smithy.ShapeTypeEnum, 2)
+var FieldType_STRING *smithy.Schema
+
+var FieldType_STRING_LIST *smithy.Schema
+
 var _FilteredObjectType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "FilteredObjectType",
@@ -2932,7 +2940,7 @@ var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
 var KnowledgeBase = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "KnowledgeBase",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var KnowledgeBase_knowledgeBaseId *smithy.Schema
 
 var KnowledgeBase_name *smithy.Schema
@@ -2954,6 +2962,8 @@ var KnowledgeBase_createdAt *smithy.Schema
 var KnowledgeBase_updatedAt *smithy.Schema
 
 var KnowledgeBase_failureReasons *smithy.Schema
+
+var KnowledgeBase_metadataConfigurations *smithy.Schema
 
 var _KnowledgeBaseArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -3323,6 +3333,16 @@ var MetadataAttributeValue_stringValue *smithy.Schema
 
 var MetadataAttributeValue_stringListValue *smithy.Schema
 
+var MetadataConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "MetadataConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var MetadataConfiguration_name *smithy.Schema
+
+var MetadataConfiguration_type *smithy.Schema
+
+var MetadataConfiguration_searchability *smithy.Schema
+
 var MetadataConfigurationForReranking = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "MetadataConfigurationForReranking",
@@ -3330,6 +3350,17 @@ var MetadataConfigurationForReranking = smithy.NewSchema(smithy.ShapeID{
 var MetadataConfigurationForReranking_selectionMode *smithy.Schema
 
 var MetadataConfigurationForReranking_selectiveModeConfiguration *smithy.Schema
+
+var _MetadataConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "MetadataConfigurations",
+}, smithy.ShapeTypeList, 1)
+var _MetadataConfigurations_member *smithy.Schema
+
+var _MetadataKeyName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "MetadataKeyName",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var MetadataSourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -4681,6 +4712,14 @@ var SalesforceSourceConfiguration_hostUrl *smithy.Schema
 var SalesforceSourceConfiguration_authType *smithy.Schema
 
 var SalesforceSourceConfiguration_credentialsSecretArn *smithy.Schema
+
+var SearchableStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "SearchableStatus",
+}, smithy.ShapeTypeEnum, 2)
+var SearchableStatus_ENABLED *smithy.Schema
+
+var SearchableStatus_DISABLED *smithy.Schema
 
 var _SecretArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -7299,7 +7338,7 @@ var UpdateFlowResponse_definition *smithy.Schema
 var UpdateKnowledgeBaseRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "UpdateKnowledgeBaseRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var UpdateKnowledgeBaseRequest_knowledgeBaseId *smithy.Schema
 
 var UpdateKnowledgeBaseRequest_name *smithy.Schema
@@ -7311,6 +7350,8 @@ var UpdateKnowledgeBaseRequest_roleArn *smithy.Schema
 var UpdateKnowledgeBaseRequest_knowledgeBaseConfiguration *smithy.Schema
 
 var UpdateKnowledgeBaseRequest_storageConfiguration *smithy.Schema
+
+var UpdateKnowledgeBaseRequest_metadataConfigurations *smithy.Schema
 
 var UpdateKnowledgeBaseResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -8509,6 +8550,10 @@ func init() {
 
 	_FieldsForReranking_member = _FieldsForReranking.AddMember("member", FieldForReranking)
 
+	FieldType_STRING = FieldType.AddMember("STRING", smithyprelude.Unit)
+
+	FieldType_STRING_LIST = FieldType.AddMember("STRING_LIST", smithyprelude.Unit)
+
 	FlowAliasConcurrencyConfiguration_type = FlowAliasConcurrencyConfiguration.AddMember("type", ConcurrencyType)
 
 	FlowAliasConcurrencyConfiguration_maxConcurrency = FlowAliasConcurrencyConfiguration.AddMember("maxConcurrency", smithyprelude.Integer)
@@ -9489,6 +9534,18 @@ func init() {
 
 	KnowledgeBaseStatus_UPDATE_UNSUCCESSFUL = KnowledgeBaseStatus.AddMember("UPDATE_UNSUCCESSFUL", smithyprelude.Unit)
 
+	SearchableStatus_ENABLED = SearchableStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	SearchableStatus_DISABLED = SearchableStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	MetadataConfiguration_name = MetadataConfiguration.AddMember("name", _MetadataKeyName)
+
+	MetadataConfiguration_type = MetadataConfiguration.AddMember("type", FieldType)
+
+	MetadataConfiguration_searchability = MetadataConfiguration.AddMember("searchability", SearchableStatus)
+
+	_MetadataConfigurations_member = _MetadataConfigurations.AddMember("member", MetadataConfiguration)
+
 	KnowledgeBase_knowledgeBaseId = KnowledgeBase.AddMember("knowledgeBaseId", _Id)
 
 	KnowledgeBase_name = KnowledgeBase.AddMember("name", _Name)
@@ -9510,6 +9567,8 @@ func init() {
 	KnowledgeBase_updatedAt = KnowledgeBase.AddMember("updatedAt", _DateTimestamp)
 
 	KnowledgeBase_failureReasons = KnowledgeBase.AddMember("failureReasons", _FailureReasons)
+
+	KnowledgeBase_metadataConfigurations = KnowledgeBase.AddMember("metadataConfigurations", _MetadataConfigurations)
 
 	KnowledgeBaseDocument_metadata = KnowledgeBaseDocument.AddMember("metadata", DocumentMetadata)
 
@@ -10896,6 +10955,8 @@ func init() {
 	UpdateKnowledgeBaseRequest_knowledgeBaseConfiguration = UpdateKnowledgeBaseRequest.AddMember("knowledgeBaseConfiguration", KnowledgeBaseConfiguration)
 
 	UpdateKnowledgeBaseRequest_storageConfiguration = UpdateKnowledgeBaseRequest.AddMember("storageConfiguration", StorageConfiguration)
+
+	UpdateKnowledgeBaseRequest_metadataConfigurations = UpdateKnowledgeBaseRequest.AddMember("metadataConfigurations", _MetadataConfigurations)
 
 	UpdateKnowledgeBaseResponse_knowledgeBase = UpdateKnowledgeBaseResponse.AddMember("knowledgeBase", KnowledgeBase)
 

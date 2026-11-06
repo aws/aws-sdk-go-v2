@@ -224,10 +224,10 @@ func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
-// The service quota has been exceeded. For a list of service quotas, see [Amazon Connect Service Quotas] in the
-// Amazon Connect Administrator Guide.
+// The service quota has been exceeded. For a list of service quotas, see [Connect Customer Service Quotas] in the
+// Connect Customer Administrator Guide.
 //
-// [Amazon Connect Service Quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
+// [Connect Customer Service Quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
 type ServiceQuotaExceededException struct {
 	Message *string
 

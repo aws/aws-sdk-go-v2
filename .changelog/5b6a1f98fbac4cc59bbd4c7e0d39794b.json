@@ -1,0 +1,8 @@
+{
+    "id": "5b6a1f98-fbac-4cc5-9bbd-4c7e0d39794b",
+    "type": "feature",
+    "description": "Added workloadIdentityProviderArn to the AssumeRoleForPodIdentity API response.",
+    "modules": [
+        "service/eksauth"
+    ]
+}

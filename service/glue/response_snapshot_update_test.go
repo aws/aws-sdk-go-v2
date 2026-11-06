@@ -29984,13 +29984,17 @@ func TestUpdateResponseSnapshot_GetUserDefinedFunction(t *testing.T) {
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
-			CatalogId: ptr.String("__CatalogId__"),
+			ArtifactLocation: ptr.String("__ArtifactLocation__"),
+			GovernanceMode:   types.GovernanceMode("IAM_ONLY"),
+			CatalogId:        ptr.String("__CatalogId__"),
 		},
 	}
 	proto := awsjson.New11(schemas.AWSGlue)
@@ -30028,13 +30032,17 @@ func TestUpdateResponseSnapshot_GetUserDefinedFunctions(t *testing.T) {
 					{
 						ResourceType: types.ResourceType("JAR"),
 						Uri:          ptr.String("__Uri__"),
+						LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 					{
 						ResourceType: types.ResourceType("JAR"),
 						Uri:          ptr.String("__Uri__"),
+						LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 				},
-				CatalogId: ptr.String("__CatalogId__"),
+				ArtifactLocation: ptr.String("__ArtifactLocation__"),
+				GovernanceMode:   types.GovernanceMode("IAM_ONLY"),
+				CatalogId:        ptr.String("__CatalogId__"),
 			},
 			{
 				FunctionName: ptr.String("__FunctionName__"),
@@ -30048,13 +30056,17 @@ func TestUpdateResponseSnapshot_GetUserDefinedFunctions(t *testing.T) {
 					{
 						ResourceType: types.ResourceType("JAR"),
 						Uri:          ptr.String("__Uri__"),
+						LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 					{
 						ResourceType: types.ResourceType("JAR"),
 						Uri:          ptr.String("__Uri__"),
+						LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 				},
-				CatalogId: ptr.String("__CatalogId__"),
+				ArtifactLocation: ptr.String("__ArtifactLocation__"),
+				GovernanceMode:   types.GovernanceMode("IAM_ONLY"),
+				CatalogId:        ptr.String("__CatalogId__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

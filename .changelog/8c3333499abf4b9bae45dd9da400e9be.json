@@ -1,0 +1,8 @@
+{
+    "id": "8c333349-9abf-4b9b-ae45-dd9da400e9be",
+    "type": "feature",
+    "description": "Adds support for updating OAuth 2.0 connection settings with UpdateConnection.",
+    "modules": [
+        "service/datazone"
+    ]
+}

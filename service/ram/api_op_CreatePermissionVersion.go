@@ -86,6 +86,12 @@ type CreatePermissionVersionInput struct {
 	// [UUID type of value.]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
+	// Specifies a list of template parameter declarations for this version of the
+	// permission. Each declaration defines a named placeholder that can be used in the
+	// policy template. Because each version is independent, you can define the same or
+	// a different set of template parameters for each version.
+	PermissionTemplateParameters []types.PermissionTemplateParameterDeclaration
+
 	noSmithyDocumentSerde
 }
 
@@ -102,6 +108,9 @@ func (v *CreatePermissionVersionInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.PermissionArn != nil {
 		s.WriteString(schemas.CreatePermissionVersionRequest_permissionArn, *v.PermissionArn)
 	}
+	if v.PermissionTemplateParameters != nil {
+		serializePermissionTemplateParameterDeclarationList(s, schemas.CreatePermissionVersionRequest_permissionTemplateParameters, v.PermissionTemplateParameters)
+	}
 	if v.PolicyTemplate != nil {
 		s.WriteString(schemas.CreatePermissionVersionRequest_policyTemplate, *v.PolicyTemplate)
 	}
@@ -115,7 +124,10 @@ type CreatePermissionVersionOutput struct {
 	// also have the same values that you used in the first call.
 	ClientToken *string
 
-	// Information about a RAM managed permission.
+	// The details of the new permission version, including its [Amazon Resource Name (ARN)], version number,
+	// status, and policy document.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Permission *types.ResourceSharePermissionDetail
 
 	// Metadata pertaining to the operation's result.

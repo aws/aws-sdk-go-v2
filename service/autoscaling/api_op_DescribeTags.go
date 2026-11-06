@@ -44,8 +44,18 @@ type DescribeTagsInput struct {
 	// per filter type (for example, auto-scaling-group ) is 1000.
 	Filters []types.Filter
 
+	//  Specifies whether to include tags for managed Auto Scaling groups in the
+	// response. When set to true (default), the response includes tags for managed
+	// Auto Scaling groups.
+	IncludeManagedResources *bool
+
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -116,6 +126,11 @@ func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, op
 type DescribeTagsPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

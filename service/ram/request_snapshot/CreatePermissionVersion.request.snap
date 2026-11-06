@@ -2,4 +2,4 @@ POST /createpermissionversion
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","permissionArn":"__PermissionArn__","policyTemplate":"__PolicyTemplate__"}
+{"clientToken":"__ClientToken__","permissionArn":"__PermissionArn__","permissionTemplateParameters":[{"description":"__Description__","name":"__Name__","type":"STRING"},{"description":"__Description__","name":"__Name__","type":"STRING"}],"policyTemplate":"__PolicyTemplate__"}

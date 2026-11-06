@@ -11,7 +11,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Lists all case rules in a Cases domain. In the Amazon Connect admin website,
+// Lists all case rules in a Cases domain. In the Connect Customer admin website,
 // case rules are known as case field conditions. For more information about case
 // field conditions, see [Add case field conditions to a case template].
 //

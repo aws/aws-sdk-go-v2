@@ -67,6 +67,10 @@ type CreateTemplateInput struct {
 
 	// A list of fields that must contain a value for a case to be successfully
 	// created with this template.
+	//
+	// To require a Customer Profile when creating cases, include customer_id in this
+	// list. If customer_id is omitted, the Customer Profile field is optional and can
+	// be added, changed, or removed after case creation.
 	RequiredFields []types.RequiredField
 
 	// A list of case rules (also known as [case field conditions]) on a template.

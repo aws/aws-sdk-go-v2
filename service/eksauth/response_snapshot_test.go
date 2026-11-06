@@ -128,6 +128,7 @@ func TestCheckResponseSnapshot_AssumeRoleForPodIdentity(t *testing.T) {
 			AccessKeyId:     ptr.String("__AccessKeyId__"),
 			Expiration:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
+		WorkloadIdentityProviderArn: ptr.String("__WorkloadIdentityProviderArn__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssumeRoleForPodIdentity.response")
 	if errors.Is(err, fs.ErrNotExist) {

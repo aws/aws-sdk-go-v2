@@ -5,6 +5,7 @@ package ram
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -64,6 +65,12 @@ type AssociateResourceSharePermissionInput struct {
 	// [UUID type of value.]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
+	// Specifies the template parameter values for the permission being associated.
+	// You must provide values for all parameters declared in the permission template.
+	// This parameter is required only if the specified permission has template
+	// parameters.
+	PermissionTemplateParameters []types.PermissionTemplateParameterInput
+
 	// Specifies the version of the RAM permission to associate with the resource
 	// share. You can specify only the version that is currently set as the default
 	// version for the permission. If you also set the replace pararameter to true ,
@@ -101,6 +108,9 @@ func (v *AssociateResourceSharePermissionInput) SerializeMembers(s smithy.ShapeS
 	}
 	if v.PermissionArn != nil {
 		s.WriteString(schemas.AssociateResourceSharePermissionRequest_permissionArn, *v.PermissionArn)
+	}
+	if v.PermissionTemplateParameters != nil {
+		serializePermissionTemplateParameterInputList(s, schemas.AssociateResourceSharePermissionRequest_permissionTemplateParameters, v.PermissionTemplateParameters)
 	}
 	if v.PermissionVersion != nil {
 		s.WriteInt32(schemas.AssociateResourceSharePermissionRequest_permissionVersion, *v.PermissionVersion)

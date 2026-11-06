@@ -85,8 +85,18 @@ type DescribeScalingActivitiesInput struct {
 	// Indicates whether to include scaling activity from deleted Auto Scaling groups.
 	IncludeDeletedGroups *bool
 
+	//  Specifies whether to include scaling activities for managed Auto Scaling
+	// groups in the response. When set to true (default), the response includes
+	// scaling activities for managed Auto Scaling groups.
+	IncludeManagedResources *bool
+
 	// The maximum number of items to return with this call. The default value is 100
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -161,6 +171,11 @@ func (c *Client) addOperationDescribeScalingActivitiesMiddlewares(stack *middlew
 type DescribeScalingActivitiesPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 100
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

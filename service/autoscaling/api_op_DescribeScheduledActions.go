@@ -41,8 +41,18 @@ type DescribeScheduledActionsInput struct {
 	// provided, this property is ignored.
 	EndTime *time.Time
 
+	//  Specifies whether to include scheduled actions for managed Auto Scaling groups
+	// in the response. When set to true (default), the response includes scheduled
+	// actions for managed Auto Scaling groups.
+	IncludeManagedResources *bool
+
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -125,6 +135,11 @@ func (c *Client) addOperationDescribeScheduledActionsMiddlewares(stack *middlewa
 type DescribeScheduledActionsPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

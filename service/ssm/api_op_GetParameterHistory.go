@@ -22,6 +22,16 @@ import (
 // then you must also update the key alias the parameter uses to reference KMS.
 // Otherwise, GetParameterHistory retrieves whatever the original key alias was
 // referencing.
+//
+// This operation is authorized against the ssm:GetParameterHistory action, not
+// against ssm:GetParameter . Because parameter history includes every version of a
+// parameter, including the current one, a principal who is denied ssm:GetParameter
+// , ssm:GetParameters , and ssm:GetParametersByPath but allowed
+// ssm:GetParameterHistory can still read the current value. To restrict access to
+// a parameter value, deny every action that can return it. For more information,
+// see [How Parameter Store authorizes parameter retrieval]in the Amazon Web Services Systems Manager User Guide.
+//
+// [How Parameter Store authorizes parameter retrieval]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html
 func (c *Client) GetParameterHistory(ctx context.Context, params *GetParameterHistoryInput, optFns ...func(*Options)) (*GetParameterHistoryOutput, error) {
 	if params == nil {
 		params = &GetParameterHistoryInput{}

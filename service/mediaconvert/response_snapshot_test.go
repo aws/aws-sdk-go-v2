@@ -177,6 +177,11 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 					},
 				},
 			},
+			ElementalInferenceSettings: &types.ElementalInferenceSettings{
+				FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+					FeedArn: ptr.String("__FeedArn__"),
+				},
+			},
 			ErrorCode:    ptr.Int32(1),
 			ErrorMessage: ptr.String("__ErrorMessage__"),
 			HopDestinations: []types.HopDestination{
@@ -2257,6 +2262,10 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -2361,8 +2370,13 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -2467,6 +2481,7 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -3515,6 +3530,10 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -3619,8 +3638,13 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -3725,6 +3749,7 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -5266,6 +5291,10 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -5370,8 +5399,13 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -5476,6 +5510,7 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -6524,6 +6559,10 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -6628,8 +6667,13 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -6734,6 +6778,7 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -7469,6 +7514,11 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 		},
 		BillingTagsSource:  types.BillingTagsSource("QUEUE"),
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ElementalInferenceSettings: &types.ElementalInferenceSettings{
+			FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+				FeedArn: ptr.String("__FeedArn__"),
+			},
+		},
 		HopDestinations: []types.HopDestination{
 			{
 				Priority:    ptr.Int32(1),
@@ -9482,6 +9532,10 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -9586,8 +9640,13 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -9692,6 +9751,7 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -10740,6 +10800,10 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -10844,8 +10908,13 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -10950,6 +11019,7 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -12491,6 +12561,10 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -12595,8 +12669,13 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -12701,6 +12780,7 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -13749,6 +13829,10 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -13853,8 +13937,13 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -13959,6 +14048,7 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -14683,6 +14773,11 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 			Category:    ptr.String("__Category__"),
 			CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Description: ptr.String("__Description__"),
+			ElementalInferenceSettings: &types.ElementalInferenceSettings{
+				FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+					FeedArn: ptr.String("__FeedArn__"),
+				},
+			},
 			HopDestinations: []types.HopDestination{
 				{
 					Priority:    ptr.Int32(1),
@@ -16641,6 +16736,10 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -16745,8 +16844,13 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -16851,6 +16955,7 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -17899,6 +18004,10 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -18003,8 +18112,13 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -18109,6 +18223,7 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -19650,6 +19765,10 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -19754,8 +19873,13 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -19860,6 +19984,7 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -20908,6 +21033,10 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -21012,8 +21141,13 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -21118,6 +21252,7 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -21833,6 +21968,11 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 		},
 		Category:    ptr.String("__Category__"),
 		Description: ptr.String("__Description__"),
+		ElementalInferenceSettings: &types.ElementalInferenceSettings{
+			FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+				FeedArn: ptr.String("__FeedArn__"),
+			},
+		},
 		HopDestinations: []types.HopDestination{
 			{
 				Priority:    ptr.Int32(1),
@@ -23790,6 +23930,10 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -23894,8 +24038,13 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -24000,6 +24149,7 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -25048,6 +25198,10 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -25152,8 +25306,13 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -25258,6 +25417,7 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -26799,6 +26959,10 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -26903,8 +27067,13 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -27009,6 +27178,7 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -28057,6 +28227,10 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -28161,8 +28335,13 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -28267,6 +28446,7 @@ func TestCheckResponseSnapshot_CreateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -31754,6 +31934,11 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 					},
 				},
 			},
+			ElementalInferenceSettings: &types.ElementalInferenceSettings{
+				FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+					FeedArn: ptr.String("__FeedArn__"),
+				},
+			},
 			ErrorCode:    ptr.Int32(1),
 			ErrorMessage: ptr.String("__ErrorMessage__"),
 			HopDestinations: []types.HopDestination{
@@ -33834,6 +34019,10 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -33938,8 +34127,13 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -34044,6 +34238,7 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -35092,6 +35287,10 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -35196,8 +35395,13 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -35302,6 +35506,7 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -36843,6 +37048,10 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -36947,8 +37156,13 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -37053,6 +37267,7 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -38101,6 +38316,10 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -38205,8 +38424,13 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -38311,6 +38535,7 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -39061,6 +39286,11 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 			Category:    ptr.String("__Category__"),
 			CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Description: ptr.String("__Description__"),
+			ElementalInferenceSettings: &types.ElementalInferenceSettings{
+				FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+					FeedArn: ptr.String("__FeedArn__"),
+				},
+			},
 			HopDestinations: []types.HopDestination{
 				{
 					Priority:    ptr.Int32(1),
@@ -41019,6 +41249,10 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -41123,8 +41357,13 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -41229,6 +41468,7 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -42277,6 +42517,10 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -42381,8 +42625,13 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -42487,6 +42736,7 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -44028,6 +44278,10 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -44132,8 +44386,13 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -44238,6 +44497,7 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -45286,6 +45546,10 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -45390,8 +45654,13 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -45496,6 +45765,7 @@ func TestCheckResponseSnapshot_GetJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -46245,6 +46515,11 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 						},
 					},
 				},
+				ElementalInferenceSettings: &types.ElementalInferenceSettings{
+					FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+						FeedArn: ptr.String("__FeedArn__"),
+					},
+				},
 				ErrorCode:    ptr.Int32(1),
 				ErrorMessage: ptr.String("__ErrorMessage__"),
 				HopDestinations: []types.HopDestination{
@@ -48325,6 +48600,10 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -48429,8 +48708,13 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -48535,6 +48819,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -49583,6 +49868,10 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -49687,8 +49976,13 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -49793,6 +50087,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -51334,6 +51629,10 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -51438,8 +51737,13 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -51544,6 +51848,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -52592,6 +52897,10 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -52696,8 +53005,13 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -52802,6 +53116,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -53548,6 +53863,11 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 						},
 					},
 				},
+				ElementalInferenceSettings: &types.ElementalInferenceSettings{
+					FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+						FeedArn: ptr.String("__FeedArn__"),
+					},
+				},
 				ErrorCode:    ptr.Int32(1),
 				ErrorMessage: ptr.String("__ErrorMessage__"),
 				HopDestinations: []types.HopDestination{
@@ -55628,6 +55948,10 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -55732,8 +56056,13 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -55838,6 +56167,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -56886,6 +57216,10 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -56990,8 +57324,13 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -57096,6 +57435,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -58637,6 +58977,10 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -58741,8 +59085,13 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -58847,6 +59196,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -59895,6 +60245,10 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -59999,8 +60353,13 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -60105,6 +60464,7 @@ func TestCheckResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -62215,6 +62575,11 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 				Category:    ptr.String("__Category__"),
 				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Description: ptr.String("__Description__"),
+				ElementalInferenceSettings: &types.ElementalInferenceSettings{
+					FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+						FeedArn: ptr.String("__FeedArn__"),
+					},
+				},
 				HopDestinations: []types.HopDestination{
 					{
 						Priority:    ptr.Int32(1),
@@ -64173,6 +64538,10 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -64277,8 +64646,13 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -64383,6 +64757,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -65431,6 +65806,10 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -65535,8 +65914,13 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -65641,6 +66025,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -67182,6 +67567,10 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -67286,8 +67675,13 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -67392,6 +67786,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -68440,6 +68835,10 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -68544,8 +68943,13 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -68650,6 +69054,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -69358,6 +69763,11 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 				Category:    ptr.String("__Category__"),
 				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Description: ptr.String("__Description__"),
+				ElementalInferenceSettings: &types.ElementalInferenceSettings{
+					FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+						FeedArn: ptr.String("__FeedArn__"),
+					},
+				},
 				HopDestinations: []types.HopDestination{
 					{
 						Priority:    ptr.Int32(1),
@@ -71316,6 +71726,10 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -71420,8 +71834,13 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -71526,6 +71945,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -72574,6 +72994,10 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -72678,8 +73102,13 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -72784,6 +73213,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -74325,6 +74755,10 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -74429,8 +74863,13 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -74535,6 +74974,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -75583,6 +76023,10 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -75687,8 +76131,13 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -75793,6 +76242,7 @@ func TestCheckResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -76548,6 +76998,11 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 						},
 					},
 				},
+				ElementalInferenceSettings: &types.ElementalInferenceSettings{
+					FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+						FeedArn: ptr.String("__FeedArn__"),
+					},
+				},
 				ErrorCode:    ptr.Int32(1),
 				ErrorMessage: ptr.String("__ErrorMessage__"),
 				HopDestinations: []types.HopDestination{
@@ -78628,6 +79083,10 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -78732,8 +79191,13 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -78838,6 +79302,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -79886,6 +80351,10 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -79990,8 +80459,13 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -80096,6 +80570,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -81637,6 +82112,10 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -81741,8 +82220,13 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -81847,6 +82331,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -82895,6 +83380,10 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -82999,8 +83488,13 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -83105,6 +83599,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -83851,6 +84346,11 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 						},
 					},
 				},
+				ElementalInferenceSettings: &types.ElementalInferenceSettings{
+					FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+						FeedArn: ptr.String("__FeedArn__"),
+					},
+				},
 				ErrorCode:    ptr.Int32(1),
 				ErrorMessage: ptr.String("__ErrorMessage__"),
 				HopDestinations: []types.HopDestination{
@@ -85931,6 +86431,10 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -86035,8 +86539,13 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -86141,6 +86650,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -87189,6 +87699,10 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -87293,8 +87807,13 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -87399,6 +87918,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -88940,6 +89460,10 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -89044,8 +89568,13 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -89150,6 +89679,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -90198,6 +90728,10 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -90302,8 +90836,13 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -90408,6 +90947,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -94432,6 +94972,11 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 						},
 					},
 				},
+				ElementalInferenceSettings: &types.ElementalInferenceSettings{
+					FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+						FeedArn: ptr.String("__FeedArn__"),
+					},
+				},
 				ErrorCode:    ptr.Int32(1),
 				ErrorMessage: ptr.String("__ErrorMessage__"),
 				HopDestinations: []types.HopDestination{
@@ -96512,6 +97057,10 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -96616,8 +97165,13 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -96722,6 +97276,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -97770,6 +98325,10 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -97874,8 +98433,13 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -97980,6 +98544,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -99521,6 +100086,10 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -99625,8 +100194,13 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -99731,6 +100305,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -100779,6 +101354,10 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -100883,8 +101462,13 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -100989,6 +101573,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -101735,6 +102320,11 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 						},
 					},
 				},
+				ElementalInferenceSettings: &types.ElementalInferenceSettings{
+					FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+						FeedArn: ptr.String("__FeedArn__"),
+					},
+				},
 				ErrorCode:    ptr.Int32(1),
 				ErrorMessage: ptr.String("__ErrorMessage__"),
 				HopDestinations: []types.HopDestination{
@@ -103815,6 +104405,10 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -103919,8 +104513,13 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -104025,6 +104624,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -105073,6 +105673,10 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -105177,8 +105781,13 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -105283,6 +105892,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -106824,6 +107434,10 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -106928,8 +107542,13 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -107034,6 +107653,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -108082,6 +108702,10 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 									},
 									CaptionDescriptions: []types.CaptionDescription{
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -108186,8 +108810,13 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 										{
+											AudioSourceNames: []string{
+												"__Member__",
+												"__Member__",
+											},
 											CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 											CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 											DestinationSettings: &types.CaptionDestinationSettings{
@@ -108292,6 +108921,7 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											LanguageCode:        types.LanguageCode("ENG"),
 											LanguageDescription: ptr.String("__LanguageDescription__"),
+											Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 										},
 									},
 									ContainerSettings: &types.ContainerSettings{
@@ -109139,6 +109769,11 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 			Category:    ptr.String("__Category__"),
 			CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Description: ptr.String("__Description__"),
+			ElementalInferenceSettings: &types.ElementalInferenceSettings{
+				FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+					FeedArn: ptr.String("__FeedArn__"),
+				},
+			},
 			HopDestinations: []types.HopDestination{
 				{
 					Priority:    ptr.Int32(1),
@@ -111097,6 +111732,10 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -111201,8 +111840,13 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -111307,6 +111951,7 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -112355,6 +113000,10 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -112459,8 +113108,13 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -112565,6 +113219,7 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -114106,6 +114761,10 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -114210,8 +114869,13 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -114316,6 +114980,7 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -115364,6 +116029,10 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 								},
 								CaptionDescriptions: []types.CaptionDescription{
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -115468,8 +116137,13 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 									{
+										AudioSourceNames: []string{
+											"__Member__",
+											"__Member__",
+										},
 										CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 										CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 										DestinationSettings: &types.CaptionDestinationSettings{
@@ -115574,6 +116248,7 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										},
 										LanguageCode:        types.LanguageCode("ENG"),
 										LanguageDescription: ptr.String("__LanguageDescription__"),
+										Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 									},
 								},
 								ContainerSettings: &types.ContainerSettings{
@@ -116289,6 +116964,11 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 		},
 		Category:    ptr.String("__Category__"),
 		Description: ptr.String("__Description__"),
+		ElementalInferenceSettings: &types.ElementalInferenceSettings{
+			FeedConfigurationSource: &types.ElementalInferenceFeedConfigurationSource{
+				FeedArn: ptr.String("__FeedArn__"),
+			},
+		},
 		HopDestinations: []types.HopDestination{
 			{
 				Priority:    ptr.Int32(1),
@@ -118246,6 +118926,10 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -118350,8 +119034,13 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -118456,6 +119145,7 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -119504,6 +120194,10 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -119608,8 +120302,13 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -119714,6 +120413,7 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -121255,6 +121955,10 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -121359,8 +122063,13 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -121465,6 +122174,7 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{
@@ -122513,6 +123223,10 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 							},
 							CaptionDescriptions: []types.CaptionDescription{
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -122617,8 +123331,13 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 								{
+									AudioSourceNames: []string{
+										"__Member__",
+										"__Member__",
+									},
 									CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
 									CustomLanguageCode:  ptr.String("__CustomLanguageCode__"),
 									DestinationSettings: &types.CaptionDestinationSettings{
@@ -122723,6 +123442,7 @@ func TestCheckResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 									},
 									LanguageCode:        types.LanguageCode("ENG"),
 									LanguageDescription: ptr.String("__LanguageDescription__"),
+									Source:              types.CaptionSource("INPUT_CAPTION_SELECTOR"),
 								},
 							},
 							ContainerSettings: &types.ContainerSettings{

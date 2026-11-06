@@ -141,6 +141,69 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_BatchCreateRelatedItem(t *testing.T) {
+	want := &BatchCreateRelatedItemOutput{
+		SuccessfulItems: []types.BatchCreateRelatedItemSuccessEntry{
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+				RelatedItemId:  ptr.String("__RelatedItemId__"),
+				RelatedItemArn: ptr.String("__RelatedItemArn__"),
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+				RelatedItemId:  ptr.String("__RelatedItemId__"),
+				RelatedItemArn: ptr.String("__RelatedItemArn__"),
+			},
+		},
+		FailedItems: []types.BatchCreateRelatedItemErrorEntry{
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonConnectCases)
+	opSchema := smithy.NewOperationSchema(schemas.BatchCreateRelatedItem, schemas.BatchCreateRelatedItemResponse, schemas.BatchCreateRelatedItemResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("BatchCreateRelatedItem.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_BatchGetCaseRule(t *testing.T) {
 	want := &BatchGetCaseRuleOutput{
 		CaseRules: []types.GetCaseRuleResponse{
@@ -370,6 +433,65 @@ func TestUpdateResponseSnapshot_BatchPutFieldOptions(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("BatchPutFieldOptions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_BatchUpdateCase(t *testing.T) {
+	want := &BatchUpdateCaseOutput{
+		SuccessfulCases: []types.BatchUpdateCaseSuccessEntry{
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+			},
+		},
+		FailedCases: []types.BatchUpdateCaseErrorEntry{
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+			{
+				CaseIdentifier: &types.CaseIdentifier{
+					CaseId:          ptr.String("__CaseId__"),
+					ReferenceNumber: ptr.String("__ReferenceNumber__"),
+					ReferenceId:     ptr.String("__ReferenceId__"),
+				},
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonConnectCases)
+	opSchema := smithy.NewOperationSchema(schemas.BatchUpdateCase, schemas.BatchUpdateCaseResponse, schemas.BatchUpdateCaseResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("BatchUpdateCase.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1816,7 +1938,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonConnectCases)
-	opSchema := smithy.NewOperationSchema(schemas.BatchGetCaseRule, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	opSchema := smithy.NewOperationSchema(schemas.BatchCreateRelatedItem, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1841,7 +1963,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonConnectCases)
-	opSchema := smithy.NewOperationSchema(schemas.CreateCase, schemas.ConflictException, schemas.ConflictException)
+	opSchema := smithy.NewOperationSchema(schemas.BatchCreateRelatedItem, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1867,7 +1989,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		RetryAfterSeconds: ptr.Int32(1),
 	}
 	proto := restjson1.New(schemas.AmazonConnectCases)
-	opSchema := smithy.NewOperationSchema(schemas.BatchGetCaseRule, schemas.InternalServerException, schemas.InternalServerException)
+	opSchema := smithy.NewOperationSchema(schemas.BatchCreateRelatedItem, schemas.InternalServerException, schemas.InternalServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1894,7 +2016,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		ResourceType: ptr.String("__ResourceType__"),
 	}
 	proto := restjson1.New(schemas.AmazonConnectCases)
-	opSchema := smithy.NewOperationSchema(schemas.BatchGetCaseRule, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
+	opSchema := smithy.NewOperationSchema(schemas.BatchCreateRelatedItem, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1919,7 +2041,7 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonConnectCases)
-	opSchema := smithy.NewOperationSchema(schemas.BatchPutFieldOptions, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
+	opSchema := smithy.NewOperationSchema(schemas.BatchCreateRelatedItem, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1944,7 +2066,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonConnectCases)
-	opSchema := smithy.NewOperationSchema(schemas.BatchGetCaseRule, schemas.ThrottlingException, schemas.ThrottlingException)
+	opSchema := smithy.NewOperationSchema(schemas.BatchCreateRelatedItem, schemas.ThrottlingException, schemas.ThrottlingException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1969,7 +2091,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonConnectCases)
-	opSchema := smithy.NewOperationSchema(schemas.BatchGetCaseRule, schemas.ValidationException, schemas.ValidationException)
+	opSchema := smithy.NewOperationSchema(schemas.BatchCreateRelatedItem, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

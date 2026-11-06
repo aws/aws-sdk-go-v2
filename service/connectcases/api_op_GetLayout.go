@@ -102,7 +102,7 @@ type GetLayoutOutput struct {
 	// Timestamp at which the resource was created or last modified.
 	LastModifiedTime *time.Time
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 

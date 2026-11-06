@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"failedItems":[{"caseIdentifier":{"caseId":"__CaseId__","referenceId":"__ReferenceId__","referenceNumber":"__ReferenceNumber__"},"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"},{"caseIdentifier":{"caseId":"__CaseId__","referenceId":"__ReferenceId__","referenceNumber":"__ReferenceNumber__"},"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"}],"successfulItems":[{"caseIdentifier":{"caseId":"__CaseId__","referenceId":"__ReferenceId__","referenceNumber":"__ReferenceNumber__"},"relatedItemArn":"__RelatedItemArn__","relatedItemId":"__RelatedItemId__"},{"caseIdentifier":{"caseId":"__CaseId__","referenceId":"__ReferenceId__","referenceNumber":"__ReferenceNumber__"},"relatedItemArn":"__RelatedItemArn__","relatedItemId":"__RelatedItemId__"}]}

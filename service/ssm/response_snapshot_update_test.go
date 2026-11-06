@@ -1831,6 +1831,28 @@ func TestUpdateResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeregisterDefaultHostManagementConfiguration(t *testing.T) {
+	want := &DeregisterDefaultHostManagementConfigurationOutput{}
+	proto := awsjson.New11(schemas.AmazonSSM)
+	opSchema := smithy.NewOperationSchema(schemas.DeregisterDefaultHostManagementConfiguration, schemas.DeregisterDefaultHostManagementConfigurationResult, schemas.DeregisterDefaultHostManagementConfigurationResult)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeregisterDefaultHostManagementConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeregisterManagedInstance(t *testing.T) {
 	want := &DeregisterManagedInstanceOutput{}
 	proto := awsjson.New11(schemas.AmazonSSM)
@@ -9208,6 +9230,30 @@ func TestUpdateResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("PutResourcePolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_RegisterDefaultHostManagementConfiguration(t *testing.T) {
+	want := &RegisterDefaultHostManagementConfigurationOutput{
+		RoleArn: ptr.String("__RoleArn__"),
+	}
+	proto := awsjson.New11(schemas.AmazonSSM)
+	opSchema := smithy.NewOperationSchema(schemas.RegisterDefaultHostManagementConfiguration, schemas.RegisterDefaultHostManagementConfigurationResult, schemas.RegisterDefaultHostManagementConfigurationResult)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("RegisterDefaultHostManagementConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

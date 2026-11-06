@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes a layout from a cases template. You can delete up to 100 layouts per
+// Deletes a layout from a Cases template. You can delete up to 100 layouts per
 // domain.
 //
 // After a layout is deleted:

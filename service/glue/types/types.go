@@ -25811,6 +25811,12 @@ func (v *RenameField) Deserialize(d smithy.ShapeDeserializer) error {
 // The URIs for function resources.
 type ResourceUri struct {
 
+	// The time at which the resource was last modified in Amazon S3. Glue records
+	// this value when you create or update a function whose GovernanceMode is
+	// LAKE_FORMATION . Analytics engines use it to verify that the resource hasn't
+	// changed. This is an output-only field.
+	LastModified *time.Time
+
 	// The type of the resource.
 	ResourceType ResourceType
 
@@ -25827,6 +25833,9 @@ func (v *ResourceUri) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceUri) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastModified != nil {
+		s.WriteTime(schemas.ResourceUri_LastModified, *v.LastModified)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.ResourceUri_ResourceType, string(v.ResourceType))
 	}
@@ -25837,6 +25846,9 @@ func (v *ResourceUri) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ResourceUri) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceUri, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ResourceUri_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.ResourceUri_LastModified, v.LastModified)
 		case schemas.ResourceUri_ResourceType:
 			var ev string
 			if err := d.ReadString(schemas.ResourceUri_ResourceType, &ev); err != nil {
@@ -35419,6 +35431,11 @@ func (v *UsageProfileDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 // Represents the equivalent of a Hive user-defined function ( UDF ) definition.
 type UserDefinedFunction struct {
 
+	// The Amazon S3 location that contains the function's artifacts. This location
+	// must be registered with Lake Formation. Glue returns this field only for
+	// functions whose GovernanceMode is LAKE_FORMATION .
+	ArtifactLocation *string
+
 	// The ID of the Data Catalog in which the function resides.
 	CatalogId *string
 
@@ -35436,6 +35453,12 @@ type UserDefinedFunction struct {
 
 	// The type of the function.
 	FunctionType FunctionType
+
+	// How access to the function is governed. IAM_ONLY means access is controlled by
+	// IAM permissions only. LAKE_FORMATION means Lake Formation permissions ( EXECUTE
+	// , DESCRIBE , ALTER , and DROP ) also control who can run, describe, update, and
+	// delete the function.
+	GovernanceMode GovernanceMode
 
 	// The owner of the function.
 	OwnerName *string
@@ -35456,6 +35479,9 @@ func (v *UserDefinedFunction) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UserDefinedFunction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactLocation != nil {
+		s.WriteString(schemas.UserDefinedFunction_ArtifactLocation, *v.ArtifactLocation)
+	}
 	if v.CatalogId != nil {
 		s.WriteString(schemas.UserDefinedFunction_CatalogId, *v.CatalogId)
 	}
@@ -35474,6 +35500,9 @@ func (v *UserDefinedFunction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FunctionType != "" {
 		s.WriteString(schemas.UserDefinedFunction_FunctionType, string(v.FunctionType))
 	}
+	if v.GovernanceMode != "" {
+		s.WriteString(schemas.UserDefinedFunction_GovernanceMode, string(v.GovernanceMode))
+	}
 	if v.OwnerName != nil {
 		s.WriteString(schemas.UserDefinedFunction_OwnerName, *v.OwnerName)
 	}
@@ -35487,6 +35516,9 @@ func (v *UserDefinedFunction) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *UserDefinedFunction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UserDefinedFunction, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UserDefinedFunction_ArtifactLocation:
+			v.ArtifactLocation = new(string)
+			return d.ReadString(schemas.UserDefinedFunction_ArtifactLocation, v.ArtifactLocation)
 		case schemas.UserDefinedFunction_CatalogId:
 			v.CatalogId = new(string)
 			return d.ReadString(schemas.UserDefinedFunction_CatalogId, v.CatalogId)
@@ -35509,6 +35541,13 @@ func (v *UserDefinedFunction) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.FunctionType = FunctionType(ev)
 			return nil
+		case schemas.UserDefinedFunction_GovernanceMode:
+			var ev string
+			if err := d.ReadString(schemas.UserDefinedFunction_GovernanceMode, &ev); err != nil {
+				return err
+			}
+			v.GovernanceMode = GovernanceMode(ev)
+			return nil
 		case schemas.UserDefinedFunction_OwnerName:
 			v.OwnerName = new(string)
 			return d.ReadString(schemas.UserDefinedFunction_OwnerName, v.OwnerName)
@@ -35529,6 +35568,11 @@ func (v *UserDefinedFunction) Deserialize(d smithy.ShapeDeserializer) error {
 // A structure used to create or update a user-defined function.
 type UserDefinedFunctionInput struct {
 
+	// The Amazon S3 location that contains the function's artifacts. Required when
+	// GovernanceMode is LAKE_FORMATION . You must register the location with Lake
+	// Formation, and every resource URI must be under this location.
+	ArtifactLocation *string
+
 	// The Java class that contains the function code.
 	ClassName *string
 
@@ -35537,6 +35581,25 @@ type UserDefinedFunctionInput struct {
 
 	// The type of the function.
 	FunctionType FunctionType
+
+	// How access to the function is governed. Specify LAKE_FORMATION to manage access
+	// to the function with Lake Formation permissions. If you don't specify a value,
+	// the default is IAM_ONLY . You can't change the governance mode after the
+	// function is created.
+	//
+	// When GovernanceMode is LAKE_FORMATION :
+	//
+	//   - You must be a data lake administrator or have all permissions on the Data
+	//   Catalog with the grant option.
+	//
+	//   - You must have the DATA_LOCATION_ACCESS permission on the ArtifactLocation ,
+	//   unless you're a data lake administrator.
+	//
+	//   - You must specify from 1 to 10 resource URIs, each under the ArtifactLocation
+	//   .
+	//
+	//   - You can't rename the function.
+	GovernanceMode GovernanceMode
 
 	// The owner of the function.
 	OwnerName *string
@@ -35557,6 +35620,9 @@ func (v *UserDefinedFunctionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UserDefinedFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactLocation != nil {
+		s.WriteString(schemas.UserDefinedFunctionInput_ArtifactLocation, *v.ArtifactLocation)
+	}
 	if v.ClassName != nil {
 		s.WriteString(schemas.UserDefinedFunctionInput_ClassName, *v.ClassName)
 	}
@@ -35565,6 +35631,9 @@ func (v *UserDefinedFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.FunctionType != "" {
 		s.WriteString(schemas.UserDefinedFunctionInput_FunctionType, string(v.FunctionType))
+	}
+	if v.GovernanceMode != "" {
+		s.WriteString(schemas.UserDefinedFunctionInput_GovernanceMode, string(v.GovernanceMode))
 	}
 	if v.OwnerName != nil {
 		s.WriteString(schemas.UserDefinedFunctionInput_OwnerName, *v.OwnerName)
@@ -35579,6 +35648,9 @@ func (v *UserDefinedFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *UserDefinedFunctionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UserDefinedFunctionInput, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UserDefinedFunctionInput_ArtifactLocation:
+			v.ArtifactLocation = new(string)
+			return d.ReadString(schemas.UserDefinedFunctionInput_ArtifactLocation, v.ArtifactLocation)
 		case schemas.UserDefinedFunctionInput_ClassName:
 			v.ClassName = new(string)
 			return d.ReadString(schemas.UserDefinedFunctionInput_ClassName, v.ClassName)
@@ -35591,6 +35663,13 @@ func (v *UserDefinedFunctionInput) Deserialize(d smithy.ShapeDeserializer) error
 				return err
 			}
 			v.FunctionType = FunctionType(ev)
+			return nil
+		case schemas.UserDefinedFunctionInput_GovernanceMode:
+			var ev string
+			if err := d.ReadString(schemas.UserDefinedFunctionInput_GovernanceMode, &ev); err != nil {
+				return err
+			}
+			v.GovernanceMode = GovernanceMode(ev)
 			return nil
 		case schemas.UserDefinedFunctionInput_OwnerName:
 			v.OwnerName = new(string)

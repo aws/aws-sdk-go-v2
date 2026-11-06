@@ -15,6 +15,12 @@ import (
 //
 // To get information about a single parameter, you can use the GetParameter operation instead.
 //
+// This operation is authorized against the ssm:GetParameters action, not against
+// ssm:GetParameter . Denying ssm:GetParameter for a parameter doesn't prevent a
+// principal from retrieving that parameter with this operation. To restrict access
+// to a parameter value, deny every action that can return it. For more
+// information, see [How Parameter Store authorizes parameter retrieval]in the Amazon Web Services Systems Manager User Guide.
+//
 // Parameter names can't contain spaces. The service removes any spaces specified
 // for the beginning or end of a parameter name. If the specified name for a
 // parameter contains spaces between characters, the request fails with a
@@ -35,6 +41,7 @@ import (
 // ThrottlingException: Rate exceeded errors, enable higher throughput. For more
 // information, see [Changing Parameter Store throughput].
 //
+// [How Parameter Store authorizes parameter retrieval]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html
 // [Changing Parameter Store throughput]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html
 func (c *Client) GetParameters(ctx context.Context, params *GetParametersInput, optFns ...func(*Options)) (*GetParametersOutput, error) {
 	if params == nil {

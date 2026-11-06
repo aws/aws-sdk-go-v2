@@ -1496,6 +1496,11 @@ var ___stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936 = smithy.NewS
 	Name:      "__stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936",
 }, smithy.ShapeTypeString, 0)
 
+var ___stringPatternArnAwsElementalInferenceFeedAZ0919 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "__stringPatternArnAwsElementalInferenceFeedAZ0919",
+}, smithy.ShapeTypeString, 0)
+
 var ___stringPatternArnAwsUsGovAcm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "__stringPatternArnAwsUsGovAcm",
@@ -2884,7 +2889,9 @@ var BurninSubtitleTeletextSpacing_AUTO *smithy.Schema
 var CaptionDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "CaptionDescription",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 7)
+var CaptionDescription_AudioSourceNames *smithy.Schema
+
 var CaptionDescription_CaptionSelectorName *smithy.Schema
 
 var CaptionDescription_CustomLanguageCode *smithy.Schema
@@ -2894,6 +2901,8 @@ var CaptionDescription_DestinationSettings *smithy.Schema
 var CaptionDescription_LanguageCode *smithy.Schema
 
 var CaptionDescription_LanguageDescription *smithy.Schema
+
+var CaptionDescription_Source *smithy.Schema
 
 var CaptionDescriptionPreset = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -2968,6 +2977,14 @@ var CaptionSelector_CustomLanguageCode *smithy.Schema
 var CaptionSelector_LanguageCode *smithy.Schema
 
 var CaptionSelector_SourceSettings *smithy.Schema
+
+var CaptionSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "CaptionSource",
+}, smithy.ShapeTypeEnum, 2)
+var CaptionSource_INPUT_CAPTION_SELECTOR *smithy.Schema
+
+var CaptionSource_SMART_SUBTITLE *smithy.Schema
 
 var CaptionSourceByteRateLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -4851,8 +4868,10 @@ var ElementalInferenceConfiguration_Feeds *smithy.Schema
 var ElementalInferenceFeature = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "ElementalInferenceFeature",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var ElementalInferenceFeature_SMART_CROP *smithy.Schema
+
+var ElementalInferenceFeature_SMART_SUBTITLE *smithy.Schema
 
 var ElementalInferenceFeed = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -4861,6 +4880,12 @@ var ElementalInferenceFeed = smithy.NewSchema(smithy.ShapeID{
 var ElementalInferenceFeed_Arn *smithy.Schema
 
 var ElementalInferenceFeed_FeedManagementState *smithy.Schema
+
+var ElementalInferenceFeedConfigurationSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "ElementalInferenceFeedConfigurationSource",
+}, smithy.ShapeTypeStructure, 1)
+var ElementalInferenceFeedConfigurationSource_FeedArn *smithy.Schema
 
 var ElementalInferenceFeedManagementState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -4873,6 +4898,12 @@ var ElementalInferenceFeedManagementState_ASSOCIATED *smithy.Schema
 var ElementalInferenceFeedManagementState_PENDING_DELETION *smithy.Schema
 
 var ElementalInferenceFeedManagementState_DELETED *smithy.Schema
+
+var ElementalInferenceSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "ElementalInferenceSettings",
+}, smithy.ShapeTypeStructure, 1)
+var ElementalInferenceSettings_FeedConfigurationSource *smithy.Schema
 
 var EmbeddedConvert608To708 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -6805,7 +6836,7 @@ var InternalServerErrorException_Message *smithy.Schema
 var Job = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "Job",
-}, smithy.ShapeTypeStructure, 32)
+}, smithy.ShapeTypeStructure, 33)
 var Job_AccelerationSettings *smithy.Schema
 
 var Job_AccelerationStatus *smithy.Schema
@@ -6821,6 +6852,8 @@ var Job_CreatedAt *smithy.Schema
 var Job_CurrentPhase *smithy.Schema
 
 var Job_ElementalInferenceConfiguration *smithy.Schema
+
+var Job_ElementalInferenceSettings *smithy.Schema
 
 var Job_ErrorCode *smithy.Schema
 
@@ -6987,7 +7020,7 @@ var JobStatus_ERROR *smithy.Schema
 var JobTemplate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "JobTemplate",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var JobTemplate_AccelerationSettings *smithy.Schema
 
 var JobTemplate_Arn *smithy.Schema
@@ -6997,6 +7030,8 @@ var JobTemplate_Category *smithy.Schema
 var JobTemplate_CreatedAt *smithy.Schema
 
 var JobTemplate_Description *smithy.Schema
+
+var JobTemplate_ElementalInferenceSettings *smithy.Schema
 
 var JobTemplate_HopDestinations *smithy.Schema
 
@@ -10951,12 +10986,14 @@ var CancelJobResponse = smithy.NewSchema(smithy.ShapeID{
 var CreateJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "CreateJobRequest",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var CreateJobRequest_AccelerationSettings *smithy.Schema
 
 var CreateJobRequest_BillingTagsSource *smithy.Schema
 
 var CreateJobRequest_ClientRequestToken *smithy.Schema
+
+var CreateJobRequest_ElementalInferenceSettings *smithy.Schema
 
 var CreateJobRequest_HopDestinations *smithy.Schema
 
@@ -10989,12 +11026,14 @@ var CreateJobResponse_Job *smithy.Schema
 var CreateJobTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "CreateJobTemplateRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var CreateJobTemplateRequest_AccelerationSettings *smithy.Schema
 
 var CreateJobTemplateRequest_Category *smithy.Schema
 
 var CreateJobTemplateRequest_Description *smithy.Schema
+
+var CreateJobTemplateRequest_ElementalInferenceSettings *smithy.Schema
 
 var CreateJobTemplateRequest_HopDestinations *smithy.Schema
 
@@ -11435,12 +11474,14 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateJobTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "UpdateJobTemplateRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var UpdateJobTemplateRequest_AccelerationSettings *smithy.Schema
 
 var UpdateJobTemplateRequest_Category *smithy.Schema
 
 var UpdateJobTemplateRequest_Description *smithy.Schema
+
+var UpdateJobTemplateRequest_ElementalInferenceSettings *smithy.Schema
 
 var UpdateJobTemplateRequest_HopDestinations *smithy.Schema
 
@@ -13131,6 +13172,12 @@ func init() {
 
 	CaptionDestinationSettings_WebvttDestinationSettings = CaptionDestinationSettings.AddMember("WebvttDestinationSettings", WebvttDestinationSettings, &smithytraits.JSONName{Name: "webvttDestinationSettings"})
 
+	CaptionSource_INPUT_CAPTION_SELECTOR = CaptionSource.AddMember("INPUT_CAPTION_SELECTOR", smithyprelude.Unit)
+
+	CaptionSource_SMART_SUBTITLE = CaptionSource.AddMember("SMART_SUBTITLE", smithyprelude.Unit)
+
+	CaptionDescription_AudioSourceNames = CaptionDescription.AddMember("AudioSourceNames", ___listOf__stringMin1, &smithytraits.JSONName{Name: "audioSourceNames"})
+
 	CaptionDescription_CaptionSelectorName = CaptionDescription.AddMember("CaptionSelectorName", ___stringMin1, &smithytraits.JSONName{Name: "captionSelectorName"})
 
 	CaptionDescription_CustomLanguageCode = CaptionDescription.AddMember("CustomLanguageCode", ___stringPatternAZaZ23AZaZ, &smithytraits.JSONName{Name: "customLanguageCode"})
@@ -13140,6 +13187,8 @@ func init() {
 	CaptionDescription_LanguageCode = CaptionDescription.AddMember("LanguageCode", LanguageCode, &smithytraits.JSONName{Name: "languageCode"})
 
 	CaptionDescription_LanguageDescription = CaptionDescription.AddMember("LanguageDescription", ___string, &smithytraits.JSONName{Name: "languageDescription"})
+
+	CaptionDescription_Source = CaptionDescription.AddMember("Source", CaptionSource, &smithytraits.JSONName{Name: "source"})
 
 	___listOfCaptionDescription_member = ___listOfCaptionDescription.AddMember("member", CaptionDescription)
 
@@ -13238,6 +13287,8 @@ func init() {
 	___listOfDashIsoImageBasedTrickPlayVariant_member = ___listOfDashIsoImageBasedTrickPlayVariant.AddMember("member", DashIsoImageBasedTrickPlayVariant)
 
 	ElementalInferenceFeature_SMART_CROP = ElementalInferenceFeature.AddMember("SMART_CROP", smithyprelude.Unit)
+
+	ElementalInferenceFeature_SMART_SUBTITLE = ElementalInferenceFeature.AddMember("SMART_SUBTITLE", smithyprelude.Unit)
 
 	___listOfElementalInferenceFeature_member = ___listOfElementalInferenceFeature.AddMember("member", ElementalInferenceFeature)
 
@@ -13996,6 +14047,10 @@ func init() {
 	ElementalInferenceConfiguration_Features = ElementalInferenceConfiguration.AddMember("Features", ___listOfElementalInferenceFeature, &smithytraits.JSONName{Name: "features"})
 
 	ElementalInferenceConfiguration_Feeds = ElementalInferenceConfiguration.AddMember("Feeds", ___listOfElementalInferenceFeed, &smithytraits.JSONName{Name: "feeds"})
+
+	ElementalInferenceFeedConfigurationSource_FeedArn = ElementalInferenceFeedConfigurationSource.AddMember("FeedArn", ___stringPatternArnAwsElementalInferenceFeedAZ0919, &smithytraits.JSONName{Name: "feedArn"})
+
+	ElementalInferenceSettings_FeedConfigurationSource = ElementalInferenceSettings.AddMember("FeedConfigurationSource", ElementalInferenceFeedConfigurationSource, &smithytraits.JSONName{Name: "feedConfigurationSource"})
 
 	JobMessages_Info = JobMessages.AddMember("Info", ___listOf__string, &smithytraits.JSONName{Name: "info"})
 
@@ -17433,6 +17488,8 @@ func init() {
 
 	Job_ElementalInferenceConfiguration = Job.AddMember("ElementalInferenceConfiguration", ElementalInferenceConfiguration, &smithytraits.JSONName{Name: "elementalInferenceConfiguration"})
 
+	Job_ElementalInferenceSettings = Job.AddMember("ElementalInferenceSettings", ElementalInferenceSettings, &smithytraits.JSONName{Name: "elementalInferenceSettings"})
+
 	Job_ErrorCode = Job.AddMember("ErrorCode", ___integer, &smithytraits.JSONName{Name: "errorCode"})
 
 	Job_ErrorMessage = Job.AddMember("ErrorMessage", ___string, &smithytraits.JSONName{Name: "errorMessage"})
@@ -17554,6 +17611,8 @@ func init() {
 	JobTemplate_CreatedAt = JobTemplate.AddMember("CreatedAt", ___timestampUnix, &smithytraits.JSONName{Name: "createdAt"})
 
 	JobTemplate_Description = JobTemplate.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
+
+	JobTemplate_ElementalInferenceSettings = JobTemplate.AddMember("ElementalInferenceSettings", ElementalInferenceSettings, &smithytraits.JSONName{Name: "elementalInferenceSettings"})
 
 	JobTemplate_HopDestinations = JobTemplate.AddMember("HopDestinations", ___listOfHopDestination, &smithytraits.JSONName{Name: "hopDestinations"})
 
@@ -18153,6 +18212,8 @@ func init() {
 
 	CreateJobRequest_ClientRequestToken = CreateJobRequest.AddMember("ClientRequestToken", ___string, &smithytraits.JSONName{Name: "clientRequestToken"})
 
+	CreateJobRequest_ElementalInferenceSettings = CreateJobRequest.AddMember("ElementalInferenceSettings", ElementalInferenceSettings, &smithytraits.JSONName{Name: "elementalInferenceSettings"})
+
 	CreateJobRequest_HopDestinations = CreateJobRequest.AddMember("HopDestinations", ___listOfHopDestination, &smithytraits.JSONName{Name: "hopDestinations"})
 
 	CreateJobRequest_JobEngineVersion = CreateJobRequest.AddMember("JobEngineVersion", ___string, &smithytraits.JSONName{Name: "jobEngineVersion"})
@@ -18182,6 +18243,8 @@ func init() {
 	CreateJobTemplateRequest_Category = CreateJobTemplateRequest.AddMember("Category", ___string, &smithytraits.JSONName{Name: "category"})
 
 	CreateJobTemplateRequest_Description = CreateJobTemplateRequest.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
+
+	CreateJobTemplateRequest_ElementalInferenceSettings = CreateJobTemplateRequest.AddMember("ElementalInferenceSettings", ElementalInferenceSettings, &smithytraits.JSONName{Name: "elementalInferenceSettings"})
 
 	CreateJobTemplateRequest_HopDestinations = CreateJobTemplateRequest.AddMember("HopDestinations", ___listOfHopDestination, &smithytraits.JSONName{Name: "hopDestinations"})
 
@@ -18394,6 +18457,8 @@ func init() {
 	UpdateJobTemplateRequest_Category = UpdateJobTemplateRequest.AddMember("Category", ___string, &smithytraits.JSONName{Name: "category"})
 
 	UpdateJobTemplateRequest_Description = UpdateJobTemplateRequest.AddMember("Description", ___string, &smithytraits.JSONName{Name: "description"})
+
+	UpdateJobTemplateRequest_ElementalInferenceSettings = UpdateJobTemplateRequest.AddMember("ElementalInferenceSettings", ElementalInferenceSettings, &smithytraits.JSONName{Name: "elementalInferenceSettings"})
 
 	UpdateJobTemplateRequest_HopDestinations = UpdateJobTemplateRequest.AddMember("HopDestinations", ___listOfHopDestination, &smithytraits.JSONName{Name: "hopDestinations"})
 

@@ -27,6 +27,11 @@ func (c *Client) DescribeAutoScalingInstances(ctx context.Context, params *Descr
 
 type DescribeAutoScalingInstancesInput struct {
 
+	//  Specifies whether to include managed Auto Scaling instances in the response.
+	// When set to true (default), the response includes managed Auto Scaling
+	// instances.
+	IncludeManagedResources *bool
+
 	// The IDs of the instances. If you omit this property, all Auto Scaling instances
 	// are described. If you specify an ID that does not exist, it is ignored with no
 	// error.
@@ -36,6 +41,11 @@ type DescribeAutoScalingInstancesInput struct {
 
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 50 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -107,6 +117,11 @@ func (c *Client) addOperationDescribeAutoScalingInstancesMiddlewares(stack *midd
 type DescribeAutoScalingInstancesPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 50 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

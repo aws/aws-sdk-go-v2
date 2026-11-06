@@ -210,6 +210,26 @@ func (m *validateOpCreatePresignedNotebookUrl) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSystemTableConfiguration struct {
+}
+
+func (*validateOpCreateSystemTableConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSystemTableConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSystemTableConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSystemTableConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateWorkGroup struct {
 }
 
@@ -325,6 +345,26 @@ func (m *validateOpDeletePreparedStatement) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePreparedStatementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSystemTableConfiguration struct {
+}
+
+func (*validateOpDeleteSystemTableConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSystemTableConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSystemTableConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSystemTableConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -705,6 +745,26 @@ func (m *validateOpGetSessionStatus) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSessionStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSystemTableConfiguration struct {
+}
+
+func (*validateOpGetSystemTableConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSystemTableConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSystemTableConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSystemTableConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1250,6 +1310,26 @@ func (m *validateOpUpdatePreparedStatement) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSystemTableConfiguration struct {
+}
+
+func (*validateOpUpdateSystemTableConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSystemTableConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSystemTableConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSystemTableConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateWorkGroup struct {
 }
 
@@ -1310,6 +1390,10 @@ func addOpCreatePresignedNotebookUrlValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpCreatePresignedNotebookUrl{}, middleware.After)
 }
 
+func addOpCreateSystemTableConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSystemTableConfiguration{}, middleware.After)
+}
+
 func addOpCreateWorkGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkGroup{}, middleware.After)
 }
@@ -1332,6 +1416,10 @@ func addOpDeleteNotebookValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeletePreparedStatementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePreparedStatement{}, middleware.After)
+}
+
+func addOpDeleteSystemTableConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSystemTableConfiguration{}, middleware.After)
 }
 
 func addOpDeleteWorkGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1408,6 +1496,10 @@ func addOpGetSessionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetSessionStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSessionStatus{}, middleware.After)
+}
+
+func addOpGetSystemTableConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSystemTableConfiguration{}, middleware.After)
 }
 
 func addOpGetTableMetadataValidationMiddleware(stack *middleware.Stack) error {
@@ -1516,6 +1608,10 @@ func addOpUpdateNotebookMetadataValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdatePreparedStatementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePreparedStatement{}, middleware.After)
+}
+
+func addOpUpdateSystemTableConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSystemTableConfiguration{}, middleware.After)
 }
 
 func addOpUpdateWorkGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1779,6 +1875,41 @@ func validateS3LoggingConfiguration(v *types.S3LoggingConfiguration) error {
 	}
 }
 
+func validateSystemTableStatus(v *types.SystemTableStatus) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SystemTableStatus"}
+	if len(v.TableName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSystemTableStatusList(v []types.SystemTableStatus) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SystemTableStatusList"}
+	for i := range v {
+		if err := validateSystemTableStatus(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateWorkGroupConfiguration(v *types.WorkGroupConfiguration) error {
 	if v == nil {
 		return nil
@@ -1807,6 +1938,11 @@ func validateWorkGroupConfiguration(v *types.WorkGroupConfiguration) error {
 	if v.QueryResultsS3AccessGrantsConfiguration != nil {
 		if err := validateQueryResultsS3AccessGrantsConfiguration(v.QueryResultsS3AccessGrantsConfiguration); err != nil {
 			invalidParams.AddNested("QueryResultsS3AccessGrantsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SystemTableStatuses != nil {
+		if err := validateSystemTableStatusList(v.SystemTableStatuses); err != nil {
+			invalidParams.AddNested("SystemTableStatuses", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2027,6 +2163,21 @@ func validateOpCreatePresignedNotebookUrlInput(v *CreatePresignedNotebookUrlInpu
 	}
 }
 
+func validateOpCreateSystemTableConfigurationInput(v *CreateSystemTableConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSystemTableConfigurationInput"}
+	if len(v.TableName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateWorkGroupInput(v *CreateWorkGroupInput) error {
 	if v == nil {
 		return nil
@@ -2117,6 +2268,21 @@ func validateOpDeletePreparedStatementInput(v *DeletePreparedStatementInput) err
 	}
 	if v.WorkGroup == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSystemTableConfigurationInput(v *DeleteSystemTableConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSystemTableConfigurationInput"}
+	if len(v.TableName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2408,6 +2574,21 @@ func validateOpGetSessionStatusInput(v *GetSessionStatusInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetSessionStatusInput"}
 	if v.SessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSystemTableConfigurationInput(v *GetSystemTableConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSystemTableConfigurationInput"}
+	if len(v.TableName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2882,6 +3063,21 @@ func validateOpUpdatePreparedStatementInput(v *UpdatePreparedStatementInput) err
 	}
 	if v.QueryStatement == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryStatement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSystemTableConfigurationInput(v *UpdateSystemTableConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSystemTableConfigurationInput"}
+	if len(v.TableName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

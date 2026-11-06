@@ -5138,6 +5138,11 @@ var _RevocationReason = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RevocationReason",
 }, smithy.ShapeTypeString, 0)
 
+var _SensitiveBase64 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "SensitiveBase64",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _SensitiveNonEmptyString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "SensitiveNonEmptyString",
@@ -8185,7 +8190,7 @@ func init() {
 
 	AccessKey_accessKeyId = AccessKey.AddMember("accessKeyId", _IAMAccessKeyId)
 
-	AccessKey_secretAccessKey = AccessKey.AddMember("secretAccessKey", _NonEmptyString)
+	AccessKey_secretAccessKey = AccessKey.AddMember("secretAccessKey", _SensitiveNonEmptyString)
 
 	AccessKey_status = AccessKey.AddMember("status", StatusType)
 
@@ -9271,7 +9276,7 @@ func init() {
 
 	ContainerServiceRegistryLogin_username = ContainerServiceRegistryLogin.AddMember("username", _string)
 
-	ContainerServiceRegistryLogin_password = ContainerServiceRegistryLogin.AddMember("password", _string)
+	ContainerServiceRegistryLogin_password = ContainerServiceRegistryLogin.AddMember("password", _SensitiveString)
 
 	ContainerServiceRegistryLogin_expiresAt = ContainerServiceRegistryLogin.AddMember("expiresAt", _IsoDate)
 
@@ -9875,7 +9880,7 @@ func init() {
 
 	Instance_systemStatus = Instance.AddMember("systemStatus", InstanceHealthStatus)
 
-	PasswordData_ciphertext = PasswordData.AddMember("ciphertext", _string)
+	PasswordData_ciphertext = PasswordData.AddMember("ciphertext", _SensitiveString)
 
 	PasswordData_keyPairName = PasswordData.AddMember("keyPairName", _ResourceName)
 
@@ -9891,11 +9896,11 @@ func init() {
 
 	InstanceAccessDetails_ipv6Addresses = InstanceAccessDetails.AddMember("ipv6Addresses", _Ipv6AddressList)
 
-	InstanceAccessDetails_password = InstanceAccessDetails.AddMember("password", _string)
+	InstanceAccessDetails_password = InstanceAccessDetails.AddMember("password", _SensitiveString)
 
 	InstanceAccessDetails_passwordData = InstanceAccessDetails.AddMember("passwordData", PasswordData)
 
-	InstanceAccessDetails_privateKey = InstanceAccessDetails.AddMember("privateKey", _string)
+	InstanceAccessDetails_privateKey = InstanceAccessDetails.AddMember("privateKey", _SensitiveString)
 
 	InstanceAccessDetails_protocol = InstanceAccessDetails.AddMember("protocol", InstanceAccessProtocol)
 
@@ -10617,7 +10622,7 @@ func init() {
 
 	_PendingMaintenanceActionList_member = _PendingMaintenanceActionList.AddMember("member", PendingMaintenanceAction)
 
-	PendingModifiedRelationalDatabaseValues_masterUserPassword = PendingModifiedRelationalDatabaseValues.AddMember("masterUserPassword", _string)
+	PendingModifiedRelationalDatabaseValues_masterUserPassword = PendingModifiedRelationalDatabaseValues.AddMember("masterUserPassword", _SensitiveString)
 
 	PendingModifiedRelationalDatabaseValues_engineVersion = PendingModifiedRelationalDatabaseValues.AddMember("engineVersion", _string)
 
@@ -11283,7 +11288,7 @@ func init() {
 
 	CreateKeyPairResult_publicKeyBase64 = CreateKeyPairResult.AddMember("publicKeyBase64", _Base64)
 
-	CreateKeyPairResult_privateKeyBase64 = CreateKeyPairResult.AddMember("privateKeyBase64", _Base64)
+	CreateKeyPairResult_privateKeyBase64 = CreateKeyPairResult.AddMember("privateKeyBase64", _SensitiveBase64)
 
 	CreateKeyPairResult_operation = CreateKeyPairResult.AddMember("operation", Operation)
 
@@ -11501,7 +11506,7 @@ func init() {
 
 	DownloadDefaultKeyPairResult_publicKeyBase64 = DownloadDefaultKeyPairResult.AddMember("publicKeyBase64", _Base64)
 
-	DownloadDefaultKeyPairResult_privateKeyBase64 = DownloadDefaultKeyPairResult.AddMember("privateKeyBase64", _Base64)
+	DownloadDefaultKeyPairResult_privateKeyBase64 = DownloadDefaultKeyPairResult.AddMember("privateKeyBase64", _SensitiveBase64)
 
 	DownloadDefaultKeyPairResult_createdAt = DownloadDefaultKeyPairResult.AddMember("createdAt", _IsoDate)
 

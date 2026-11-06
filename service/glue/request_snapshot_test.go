@@ -6205,12 +6205,16 @@ func TestCheckRequestSnapshot_CreateUserDefinedFunction(t *testing.T) {
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
+			ArtifactLocation: ptr.String("__ArtifactLocation__"),
+			GovernanceMode:   types.GovernanceMode("IAM_ONLY"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -19296,12 +19300,16 @@ func TestCheckRequestSnapshot_UpdateUserDefinedFunction(t *testing.T) {
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
+			ArtifactLocation: ptr.String("__ArtifactLocation__"),
+			GovernanceMode:   types.GovernanceMode("IAM_ONLY"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -25356,12 +25364,16 @@ func TestUpdateRequestSnapshot_CreateUserDefinedFunction(t *testing.T) {
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
+			ArtifactLocation: ptr.String("__ArtifactLocation__"),
+			GovernanceMode:   types.GovernanceMode("IAM_ONLY"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -38447,12 +38459,16 @@ func TestUpdateRequestSnapshot_UpdateUserDefinedFunction(t *testing.T) {
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 				{
 					ResourceType: types.ResourceType("JAR"),
 					Uri:          ptr.String("__Uri__"),
+					LastModified: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
+			ArtifactLocation: ptr.String("__ArtifactLocation__"),
+			GovernanceMode:   types.GovernanceMode("IAM_ONLY"),
 		},
 	}
 	body := &bytes.Buffer{}

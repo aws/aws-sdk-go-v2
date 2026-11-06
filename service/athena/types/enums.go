@@ -429,6 +429,40 @@ func (StatementType) Values() []StatementType {
 	}
 }
 
+type SystemTableName string
+
+// Enum values for SystemTableName
+const (
+	SystemTableNameAll SystemTableName = "ALL"
+)
+
+// Values returns all known values for SystemTableName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SystemTableName) Values() []SystemTableName {
+	return []SystemTableName{
+		"ALL",
+	}
+}
+
+type SystemTableType string
+
+// Enum values for SystemTableType
+const (
+	SystemTableTypeQueryExecutions SystemTableType = "QUERY_EXECUTIONS"
+)
+
+// Values returns all known values for SystemTableType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SystemTableType) Values() []SystemTableType {
+	return []SystemTableType{
+		"QUERY_EXECUTIONS",
+	}
+}
+
 type ThrottleReason string
 
 // Enum values for ThrottleReason
