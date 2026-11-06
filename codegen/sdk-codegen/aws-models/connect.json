@@ -206,6 +206,12 @@
                         "smithy.api#enumValue": "END_ASSOCIATED_TASKS"
                     }
                 },
+                "END_ASSOCIATED_EMAILS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "END_ASSOCIATED_EMAILS"
+                    }
+                },
                 "SUBMIT_AUTO_EVALUATION": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -25577,6 +25583,13 @@
                         "smithy.api#enumValue": "KMS"
                     }
                 }
+            }
+        },
+        "com.amazonaws.connect#EndAssociatedEmailsActionDefinition": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>End associated emails related to a case.</p>"
             }
         },
         "com.amazonaws.connect#EndAssociatedTasksActionDefinition": {
@@ -52776,6 +52789,12 @@
                     "target": "com.amazonaws.connect#EndAssociatedTasksActionDefinition",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the end associated tasks action.</p>\n         <p>Supported only for <code>TriggerEventSource</code> values: <code>OnCaseUpdate</code>.</p>"
+                    }
+                },
+                "EndAssociatedEmailsAction": {
+                    "target": "com.amazonaws.connect#EndAssociatedEmailsActionDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the end associated emails action.</p>\n         <p>Supported only for <code>TriggerEventSource</code> values: <code>OnCaseUpdate</code>.</p>"
                     }
                 },
                 "SubmitAutoEvaluationAction": {

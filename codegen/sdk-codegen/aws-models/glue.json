@@ -31203,6 +31203,23 @@
                 "smithy.api#pattern": "^((\\w+\\.)+\\w+|auto)$"
             }
         },
+        "com.amazonaws.glue#GovernanceMode": {
+            "type": "enum",
+            "members": {
+                "IAM_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_ONLY"
+                    }
+                },
+                "LAKE_FORMATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAKE_FORMATION"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#GovernedCatalogSource": {
             "type": "structure",
             "members": {
@@ -44057,6 +44074,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The URI for accessing the resource.</p>"
                     }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the resource was last modified in Amazon S3. Glue records this\n      value when you create or update a function whose <code>GovernanceMode</code> is <code>LAKE_FORMATION</code>.\n      Analytics engines use it to verify that the resource hasn't changed. This is an output-only field.</p>"
+                    }
                 }
             },
             "traits": {
@@ -56145,6 +56168,18 @@
                         "smithy.api#documentation": "<p>The resource URIs for the function.</p>"
                     }
                 },
+                "ArtifactLocation": {
+                    "target": "com.amazonaws.glue#URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location that contains the function's artifacts. This location must be registered\n      with Lake Formation. Glue returns this field only for functions whose\n      <code>GovernanceMode</code> is <code>LAKE_FORMATION</code>.</p>"
+                    }
+                },
+                "GovernanceMode": {
+                    "target": "com.amazonaws.glue#GovernanceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How access to the function is governed. <code>IAM_ONLY</code> means access is controlled by IAM\n      permissions only. <code>LAKE_FORMATION</code> means Lake Formation permissions (<code>EXECUTE</code>,\n      <code>DESCRIBE</code>, <code>ALTER</code>, and <code>DROP</code>) also control who can run, describe, update,\n      and delete the function.</p>"
+                    }
+                },
                 "CatalogId": {
                     "target": "com.amazonaws.glue#CatalogIdString",
                     "traits": {
@@ -56193,6 +56228,18 @@
                     "target": "com.amazonaws.glue#ResourceUriList",
                     "traits": {
                         "smithy.api#documentation": "<p>The resource URIs for the function.</p>"
+                    }
+                },
+                "ArtifactLocation": {
+                    "target": "com.amazonaws.glue#URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location that contains the function's artifacts. Required when\n      <code>GovernanceMode</code> is <code>LAKE_FORMATION</code>. You must register the location with\n      Lake Formation, and every resource URI must be under this location.</p>"
+                    }
+                },
+                "GovernanceMode": {
+                    "target": "com.amazonaws.glue#GovernanceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How access to the function is governed. Specify <code>LAKE_FORMATION</code> to manage access to the\n      function with Lake Formation permissions. If you don't specify a value, the default is\n      <code>IAM_ONLY</code>. You can't change the governance mode after the function is created.</p>\n         <p>When <code>GovernanceMode</code> is <code>LAKE_FORMATION</code>:</p>\n         <ul>\n            <li>\n               <p>You must be a data lake administrator or have all permissions on the Data Catalog with the\n        grant option.</p>\n            </li>\n            <li>\n               <p>You must have the <code>DATA_LOCATION_ACCESS</code> permission on the\n        <code>ArtifactLocation</code>, unless you're a data lake administrator.</p>\n            </li>\n            <li>\n               <p>You must specify from 1 to 10 resource URIs, each under the <code>ArtifactLocation</code>.</p>\n            </li>\n            <li>\n               <p>You can't rename the function.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

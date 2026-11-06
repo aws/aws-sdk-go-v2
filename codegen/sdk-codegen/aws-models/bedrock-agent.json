@@ -7813,6 +7813,26 @@
                 "smithy.api#pattern": "^.*$"
             }
         },
+        "com.amazonaws.bedrockagent#FieldType": {
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
+                    }
+                },
+                "STRING_LIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING_LIST"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data type of a custom metadata field. Valid values:</p> <ul> <li> <p> <code>STRING</code> – The field holds a single string value.</p> </li> <li> <p> <code>STRING_LIST</code> – The field holds a list of string values.</p> </li> </ul>"
+            }
+        },
         "com.amazonaws.bedrockagent#FieldsForReranking": {
             "type": "list",
             "member": {
@@ -12282,6 +12302,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of reasons that the API operation on the knowledge base failed.</p>"
                     }
+                },
+                "metadataConfigurations": {
+                    "target": "com.amazonaws.bedrockagent#MetadataConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom metadata field configurations of the knowledge base. Each configuration specifies whether its field is searchable (<code>ENABLED</code> or <code>DISABLED</code>).</p> <p>If the update fails, the knowledge base status becomes <code>UPDATE_UNSUCCESSFUL</code>, the field configurations revert to their previous values, and <code>failureReasons</code> describes the cause. You can retry the update from <code>UPDATE_UNSUCCESSFUL</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14960,6 +14986,35 @@
                 "target": "com.amazonaws.bedrockagent#MetadataAttribute"
             }
         },
+        "com.amazonaws.bedrockagent#MetadataConfiguration": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.bedrockagent#MetadataKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom metadata field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#FieldType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the custom metadata field. Valid values are <code>STRING</code> and <code>STRING_LIST</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "searchability": {
+                    "target": "com.amazonaws.bedrockagent#SearchableStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the custom metadata field is searchable. Valid values:</p> <ul> <li> <p> <code>ENABLED</code> – The field is searchable.</p> </li> <li> <p> <code>DISABLED</code> – The field is not searchable.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration of a single custom metadata field in a knowledge base, including its name, data type, and whether the field is searchable.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#MetadataConfigurationForReranking": {
             "type": "structure",
             "members": {
@@ -14979,6 +15034,30 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies how metadata fields should be handled during the reranking process.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MetadataConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#MetadataConfiguration"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of up to 30 custom metadata field configurations.</p>",
+                "smithy.api#length": {
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#MetadataKeyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a custom metadata field.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_][a-zA-Z0-9_-]*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagent#MetadataSourceType": {
@@ -18513,6 +18592,26 @@
                 "smithy.api#documentation": "<p>The endpoint information to connect to your Salesforce data source.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#SearchableStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether a custom metadata field is searchable. The knowledge base matches query text against the values of searchable fields.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#SecretArn": {
             "type": "string",
             "traits": {
@@ -21195,6 +21294,12 @@
                     "target": "com.amazonaws.bedrockagent#StorageConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the configuration for the vector store used for the knowledge base. You must use the same configuration as when the knowledge base was created.</p>"
+                    }
+                },
+                "metadataConfigurations": {
+                    "target": "com.amazonaws.bedrockagent#MetadataConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies up to 30 custom metadata field configurations for a managed knowledge base.</p> <p>The list that you specify replaces the existing configurations. The update removes any configuration that you leave out, and its field is no longer searchable. An empty list removes all configurations. If you don't specify a list, the existing configurations don't change.</p>"
                     }
                 }
             },

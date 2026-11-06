@@ -77,7 +77,7 @@
                         "x-amzn-trace-id"
                     ]
                 },
-                "smithy.api#documentation": "<ul> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Cases.html\">Cases actions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Cases.html\">Cases data types</a> </p> </li> </ul> <p>With Amazon Connect Cases, your agents can track and manage customer issues that require multiple interactions, follow-up tasks, and teams in your contact center. A case represents a customer issue. It records the issue, the steps and interactions taken to resolve the issue, and the outcome. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Amazon Connect Cases</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<ul> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Cases.html\">Cases actions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Cases.html\">Cases data types</a> </p> </li> </ul> <p>With Connect Customer Cases, your agents can track and manage customer issues that require multiple interactions, follow-up tasks, and teams in your contact center. A case represents a customer issue. It records the issue, the steps and interactions taken to resolve the issue, and the outcome. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Connect Customer Cases</a> in the <i>Connect Customer Administrator Guide</i>.</p>",
                 "smithy.api#title": "Amazon Connect Cases",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -1125,6 +1125,222 @@
                 "smithy.api#documentation": "<p>Content specific to <code>BasicLayout</code> type. It configures fields in the top panel and More Info tab of agent application. </p>"
             }
         },
+        "com.amazonaws.connectcases#BatchCreateRelatedItem": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#BatchCreateRelatedItemRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#BatchCreateRelatedItemResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "name": "CreateRelatedItem",
+                    "relativeDocumentation": "API_CreateRelatedItem.html",
+                    "resources": {
+                        "required": {
+                            "Domain": {},
+                            "Case": {},
+                            "RelatedItem": {}
+                        }
+                    },
+                    "createsResources": [
+                        "RelatedItem"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Creates a comment and associates it with multiple cases in a single request. All cases must belong to the same domain. This operation supports only the Comment related item type.</p> <p>Each case is processed independently. If some cases fail, the remaining cases still receive the related item. To determine whether individual items failed, inspect the <code>failedItems</code> array in the response.</p> <p>The entire request fails, and no related items are created, in the following cases:</p> <ul> <li> <p>The specified domain doesn't exist.</p> </li> <li> <p>A reference ID doesn't match any case in the domain.</p> </li> <li> <p>The request contains duplicate case IDs.</p> </li> <li> <p>The content isn't comment content.</p> </li> </ul> <note> <p>This operation uses the same IAM action as <a href=\"https://docs.aws.amazon.com/cases/latest/APIReference/API_CreateRelatedItem.html\">CreateRelatedItem</a> (<code>cases:CreateRelatedItem</code>). You can use the <code>cases:IsBatchAction</code> condition key in IAM policies to allow or deny batch operations independently from single-case operations.</p> </note> <note> <p>If you provide a value for <code>performedBy.userArn</code>, you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">DescribeUser</a> permission on the ARN of the user that you provide.</p> </note> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Connect Customer endpoints and quotas</a>.</p>",
+                "smithy.api#http": {
+                    "uri": "/cases:batchCreateRelatedItem",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#BatchCreateRelatedItemErrorEntry": {
+            "type": "structure",
+            "members": {
+                "caseIdentifier": {
+                    "target": "com.amazonaws.connectcases#CaseIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the case that the related item wasn't created for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code. For possible values, see <code>failedItems</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a related item that wasn't created.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#BatchCreateRelatedItemErrorEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#BatchCreateRelatedItemErrorEntry"
+            }
+        },
+        "com.amazonaws.connectcases#BatchCreateRelatedItemIdentifier": {
+            "type": "structure",
+            "members": {
+                "caseIdentifier": {
+                    "target": "com.amazonaws.connectcases#CaseIdentifierUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the case to associate the related item with. Specify either the case ID or the reference ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a case to associate the related item with in a <code>BatchCreateRelatedItem</code> request.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#BatchCreateRelatedItemIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#BatchCreateRelatedItemIdentifier"
+            }
+        },
+        "com.amazonaws.connectcases#BatchCreateRelatedItemRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.connectcases#RelatedItemInputContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the related item to be created. The same content is applied to every case in the request. Only comment content is supported for batch creation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cases": {
+                    "target": "com.amazonaws.connectcases#BatchCreateRelatedItemIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of cases to associate the related item with. All cases must belong to the same domain.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "performedBy": {
+                    "target": "com.amazonaws.connectcases#UserUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity that created the related item.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p> <p>If you retry a request with the same client token, the service returns the original response instead of processing the request again. If you reuse a client token with different request parameters, the request fails with a <code>ConflictException</code>.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "max": 64
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connectcases#BatchCreateRelatedItemResponse": {
+            "type": "structure",
+            "members": {
+                "successfulItems": {
+                    "target": "com.amazonaws.connectcases#BatchCreateRelatedItemSuccessEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of related items that were successfully created and associated with their cases.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failedItems": {
+                    "target": "com.amazonaws.connectcases#BatchCreateRelatedItemErrorEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of related items that were not created. Each entry includes an error code and message. Possible error codes include:</p> <ul> <li> <p> <code>CASE_NOT_FOUND</code> - No case exists with the specified case ID.</p> </li> <li> <p> <code>VALIDATION_ERROR</code> - The request contains invalid input.</p> </li> <li> <p> <code>CONFLICT</code> - Another operation is in progress on the case, such as a concurrent update or a merge of the case into another case.</p> </li> <li> <p> <code>THROTTLED</code> - The request rate exceeded the allowed limit.</p> </li> <li> <p> <code>ACCESS_DENIED</code> - The caller lacks permission to perform the operation.</p> </li> <li> <p> <code>SERVICE_QUOTA_EXCEEDED</code> - The request exceeded a service quota.</p> </li> <li> <p> <code>DOMAIN_NOT_FOUND</code> - The case domain was deleted while the request was being processed.</p> </li> <li> <p> <code>INTERNAL_ERROR</code> - An unexpected error occurred on the server.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connectcases#BatchCreateRelatedItemSuccessEntry": {
+            "type": "structure",
+            "members": {
+                "caseIdentifier": {
+                    "target": "com.amazonaws.connectcases#CaseIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the case that the related item is associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relatedItemId": {
+                    "target": "com.amazonaws.connectcases#RelatedItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relatedItemArn": {
+                    "target": "com.amazonaws.connectcases#RelatedItemArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a related item that was created.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#BatchCreateRelatedItemSuccessEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#BatchCreateRelatedItemSuccessEntry"
+            }
+        },
         "com.amazonaws.connectcases#BatchGetCaseRule": {
             "type": "operation",
             "input": {
@@ -1151,7 +1367,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a batch of case rules. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>",
+                "smithy.api#documentation": "<p>Gets a batch of case rules. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/rules-batch",
                     "method": "POST"
@@ -1422,6 +1638,223 @@
                 }
             }
         },
+        "com.amazonaws.connectcases#BatchUpdateCase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#BatchUpdateCaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#BatchUpdateCaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "name": "UpdateCase",
+                    "relativeDocumentation": "API_UpdateCase.html",
+                    "resources": {
+                        "required": {
+                            "Domain": {},
+                            "Case": {},
+                            "Field": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Updates fields on multiple cases in a single request. All cases must belong to the same domain. Set the title, status, and customer ID through the top-level <code>title</code>, <code>status</code>, and <code>customerId</code> parameters, and set other fields through the <code>fields</code> array.</p> <p>Each case is processed independently. If some cases fail, the remaining cases are still updated. To determine whether individual cases failed, inspect the <code>failedCases</code> array in the response.</p> <p>The entire request fails, and no cases are updated, in the following cases:</p> <ul> <li> <p>The specified domain doesn't exist.</p> </li> <li> <p>A reference ID doesn't match any case in the domain.</p> </li> <li> <p>The request contains duplicate case IDs.</p> </li> <li> <p>The request doesn't specify any update. Provide at least one entry in <code>fields</code>, or a <code>title</code>, <code>status</code>, or <code>customerId</code>.</p> </li> <li> <p>A field identifier in <code>fields</code> doesn't resolve to a field in the domain, for example, an unknown field name.</p> </li> <li> <p>A field name contains a pipe (<code>|</code>) or comma (<code>,</code>) character.</p> </li> <li> <p> <code>fields</code> includes <code>title</code>, <code>status</code>, or <code>customerId</code>.</p> </li> </ul> <note> <p>This operation uses the same IAM action as <a href=\"https://docs.aws.amazon.com/cases/latest/APIReference/API_UpdateCase.html\">UpdateCase</a> (<code>cases:UpdateCase</code>). You can use the <code>cases:IsBatchAction</code> condition key in IAM policies to allow or deny batch operations independently from single-case operations.</p> </note> <note> <p>If you provide a value for <code>performedBy.userArn</code>, you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">DescribeUser</a> permission on the ARN of the user that you provide.</p> </note> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Connect Customer endpoints and quotas</a>.</p>",
+                "smithy.api#http": {
+                    "uri": "/cases:batchUpdateCase",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#BatchUpdateCaseErrorEntry": {
+            "type": "structure",
+            "members": {
+                "caseIdentifier": {
+                    "target": "com.amazonaws.connectcases#CaseIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the case that wasn't updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code. For possible values, see <code>failedCases</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a case that wasn't updated.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#BatchUpdateCaseErrorEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#BatchUpdateCaseErrorEntry"
+            }
+        },
+        "com.amazonaws.connectcases#BatchUpdateCaseIdentifier": {
+            "type": "structure",
+            "members": {
+                "caseIdentifier": {
+                    "target": "com.amazonaws.connectcases#CaseIdentifierUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the case to update. Specify either the case ID or the reference ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a case to update in a <code>BatchUpdateCase</code> request.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#BatchUpdateCaseIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#BatchUpdateCaseIdentifier"
+            }
+        },
+        "com.amazonaws.connectcases#BatchUpdateCaseRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cases": {
+                    "target": "com.amazonaws.connectcases#BatchUpdateCaseIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of cases to update. All cases must belong to the same domain.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldValueInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, each with a <code>fieldIdentifier</code> and a <code>value</code>. You can identify each field by its ID or by its name; identifying a field by name is supported only in <code>BatchUpdateCase</code>. The same field values are applied to every case in the request. This field must be present, but can be an empty list when you provide the top-level <code>title</code>, <code>status</code>, or <code>customerId</code> parameters. Do not include <code>title</code>, <code>status</code>, or <code>customerId</code> in this list; set those values only through their top-level parameters. Duplicating them in <code>fields</code> results in a validation error.</p>",
+                        "smithy.api#length": {
+                            "max": 220
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "performedBy": {
+                    "target": "com.amazonaws.connectcases#UserUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity that performed the action.</p>"
+                    }
+                },
+                "title": {
+                    "target": "com.amazonaws.connectcases#CaseTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title to apply to all cases in the request.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.connectcases#CaseStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status to apply to all cases in the request.</p>"
+                    }
+                },
+                "customerId": {
+                    "target": "com.amazonaws.connectcases#CustomerProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the customer profile to associate with all cases in the request.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p> <p>If you retry a request with the same client token, the service returns the original response instead of processing the request again. If you reuse a client token with different request parameters, the request fails with a <code>ConflictException</code>.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "max": 64
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connectcases#BatchUpdateCaseResponse": {
+            "type": "structure",
+            "members": {
+                "successfulCases": {
+                    "target": "com.amazonaws.connectcases#BatchUpdateCaseSuccessEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of cases that were successfully updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failedCases": {
+                    "target": "com.amazonaws.connectcases#BatchUpdateCaseErrorEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of cases that were not updated. Each entry includes an error code and message. Possible error codes include:</p> <ul> <li> <p> <code>CASE_NOT_FOUND</code> - No case exists with the specified case ID.</p> </li> <li> <p> <code>VALIDATION_ERROR</code> - The request contains invalid input.</p> </li> <li> <p> <code>CONFLICT</code> - Another operation is in progress on the case, such as a concurrent update or a merge of the case into another case.</p> </li> <li> <p> <code>THROTTLED</code> - The request rate exceeded the allowed limit.</p> </li> <li> <p> <code>ACCESS_DENIED</code> - The caller lacks permission to perform the operation.</p> </li> <li> <p> <code>SERVICE_QUOTA_EXCEEDED</code> - The request exceeded a service quota.</p> </li> <li> <p> <code>DOMAIN_NOT_FOUND</code> - The case domain was deleted while the request was being processed.</p> </li> <li> <p> <code>INTERNAL_ERROR</code> - An unexpected error occurred on the server.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connectcases#BatchUpdateCaseSuccessEntry": {
+            "type": "structure",
+            "members": {
+                "caseIdentifier": {
+                    "target": "com.amazonaws.connectcases#CaseIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the updated case.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a case that was updated.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#BatchUpdateCaseSuccessEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#BatchUpdateCaseSuccessEntry"
+            }
+        },
         "com.amazonaws.connectcases#BooleanCondition": {
             "type": "union",
             "members": {
@@ -1451,7 +1884,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Boolean condition for a rule. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
+                "smithy.api#documentation": "<p>Boolean condition for a rule. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
             }
         },
         "com.amazonaws.connectcases#BooleanConditionList": {
@@ -1491,7 +1924,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Boolean operands for a condition. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
+                "smithy.api#documentation": "<p>Boolean operands for a condition. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
             }
         },
         "com.amazonaws.connectcases#Case": {
@@ -1522,6 +1955,12 @@
                 }
             ],
             "collectionOperations": [
+                {
+                    "target": "com.amazonaws.connectcases#BatchCreateRelatedItem"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#BatchUpdateCase"
+                },
                 {
                     "target": "com.amazonaws.connectcases#ListCasesForContact"
                 },
@@ -1620,7 +2059,54 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 500
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9\\-._/:#=+-]*$"
+            }
+        },
+        "com.amazonaws.connectcases#CaseIdentifier": {
+            "type": "structure",
+            "members": {
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the case.</p>"
+                    }
+                },
+                "referenceNumber": {
+                    "target": "com.amazonaws.connectcases#ReferenceNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference number of the case. Reference numbers aren't guaranteed to be unique. <code>BatchUpdateCase</code> and <code>BatchCreateRelatedItem</code> don't return this value.</p>"
+                    }
+                },
+                "referenceId": {
+                    "target": "com.amazonaws.connectcases#ReferenceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference ID of the case. Cases created before reference IDs were available don't have one.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The identifiers of a case that a batch operation returns.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#CaseIdentifierUnion": {
+            "type": "union",
+            "members": {
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the case.</p>"
+                    }
+                },
+                "referenceId": {
+                    "target": "com.amazonaws.connectcases#ReferenceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference ID of the case. Reference IDs are unique within a domain, and uniqueness isn't case sensitive.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a case by its case ID or its reference ID. Specify only one member.</p>"
             }
         },
         "com.amazonaws.connectcases#CaseRule": {
@@ -1696,7 +2182,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents what rule type should take place, under what conditions. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
+                "smithy.api#documentation": "<p>Represents what rule type should take place, under what conditions. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
             }
         },
         "com.amazonaws.connectcases#CaseRuleError": {
@@ -1724,7 +2210,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Error for batch describe case rules API failure. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
+                "smithy.api#documentation": "<p>Error for batch describe case rules API failure. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
             }
         },
         "com.amazonaws.connectcases#CaseRuleId": {
@@ -1812,13 +2298,23 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information of this case rule. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
+                "smithy.api#documentation": "<p>Summary information of this case rule. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
             }
         },
         "com.amazonaws.connectcases#CaseRuleSummaryList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connectcases#CaseRuleSummary"
+            }
+        },
+        "com.amazonaws.connectcases#CaseStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\s]+$"
             }
         },
         "com.amazonaws.connectcases#CaseSummary": {
@@ -1847,6 +2343,17 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connectcases#CaseSummary"
+            }
+        },
+        "com.amazonaws.connectcases#CaseTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.connectcases#Channel": {
@@ -1947,7 +2454,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A compound condition that combines multiple boolean conditions using logical operators. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
+                "smithy.api#documentation": "<p>A compound condition that combines multiple boolean conditions using logical operators. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
             }
         },
         "com.amazonaws.connectcases#ConflictException": {
@@ -2022,13 +2529,13 @@
                 "contactArn": {
                     "target": "com.amazonaws.connectcases#ContactArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier of a contact in Amazon Connect.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier of a contact in Connect Customer.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents an Amazon Connect contact object. </p>"
+                "smithy.api#documentation": "<p>An object that represents an Connect Customer contact object. </p>"
             }
         },
         "com.amazonaws.connectcases#ContactArn": {
@@ -2046,7 +2553,7 @@
                 "contactArn": {
                     "target": "com.amazonaws.connectcases#ContactArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier of a contact in Amazon Connect.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier of a contact in Connect Customer.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2066,7 +2573,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents a content of an Amazon Connect contact object.</p>"
+                "smithy.api#documentation": "<p>An object that represents a content of an Connect Customer contact object.</p>"
             }
         },
         "com.amazonaws.connectcases#ContactFilter": {
@@ -2084,7 +2591,7 @@
                 "contactArn": {
                     "target": "com.amazonaws.connectcases#ContactArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier of a contact in Amazon Connect.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier of a contact in Connect Customer.</p>"
                     }
                 }
             },
@@ -2121,7 +2628,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>If you provide a value for <code>PerformedBy.UserArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">connect:DescribeUser</a> permission on the User ARN resource that you provide</p> </note> <p>Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.</p> <p>When creating a case from a template that has tag propagation configurations, the specified tags are automatically applied to the case.</p> <p>The following fields are required when creating a case:</p> <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul>",
+                "smithy.api#documentation": "<note> <p>If you provide a value for <code>PerformedBy.UserArn</code>, you must also have the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">connect:DescribeUser</a> permission on the user ARN that you provide.</p> </note> <p>Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.</p> <p>When creating a case from a template that has tag propagation configurations, the specified tags are automatically applied to the case.</p> <p>The following field is always required when creating a case:</p> <ul> <li> <p> <code>title</code> </p> </li> </ul> <p>The following field may be required depending on the template configuration:</p> <ul> <li> <p> <code>customer_id</code> - Required only if the template's <code>requiredFields</code> list includes <code>customer_id</code>. When required, provide the full customer profile ARN in this format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account_ID:domains/your_profiles_domain_name/profiles/profile_ID</code>. When not required, the field is optional and can be omitted, added, changed, or removed after case creation.</p> </li> </ul>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/cases",
                     "method": "POST"
@@ -2173,7 +2680,7 @@
                 "tags": {
                     "target": "com.amazonaws.connectcases#MutableTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
                 }
             }
@@ -2229,7 +2736,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new case rule. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a new case rule. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/case-rules",
                     "method": "POST"
@@ -2324,7 +2831,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.</p> <important> <p>This will not associate your connect instance to Cases domain. Instead, use the Amazon Connect <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateIntegrationAssociation.html\">CreateIntegrationAssociation</a> API. You need specific IAM permissions to successfully associate the Cases domain. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/required-permissions-iam-cases.html#onboard-cases-iam\">Onboard to Cases</a>.</p> </important>",
+                "smithy.api#documentation": "<p>Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Connect Customer instance can be associated with only one Cases domain.</p> <important> <p>This will not associate your connect instance to Cases domain. Instead, use the Connect Customer <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateIntegrationAssociation.html\">CreateIntegrationAssociation</a> API. You need specific IAM permissions to successfully associate the Cases domain. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/required-permissions-iam-cases.html#onboard-cases-iam\">Onboard to Cases</a>.</p> </important>",
                 "smithy.api#http": {
                     "uri": "/domains",
                     "method": "POST"
@@ -2582,7 +3089,21 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a related item (comments, tasks, and contacts) and associates it with a case.</p> <p>There's a quota for the number of fields allowed in a Custom type related item. See <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas\">Amazon Connect Cases quotas</a>.</p> <p> <b>Use cases</b> </p> <p>Following are examples of related items that you may want to associate with a case:</p> <ul> <li> <p>Related contacts, such as calls, chats, emails tasks</p> </li> <li> <p>Comments, for agent notes</p> </li> <li> <p>SLAs, to capture target resolution goals</p> </li> <li> <p>Cases, to capture related Amazon Connect Cases</p> </li> <li> <p>Files, such as policy documentation or customer-provided attachments</p> </li> <li> <p>Custom related items, which provide flexibility for you to define related items that such as bookings, orders, products, notices, and more</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>If you are associating a contact to a case by passing in <code>Contact</code> for a <code>type</code>, you must have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeContact.html\">DescribeContact</a> permission on the ARN of the contact that you provide in <code>content.contact.contactArn</code>.</p> </li> <li> <p>A Related Item is a resource that is associated with a case. It may or may not have an external identifier linking it to an external resource (for example, a <code>contactArn</code>). All Related Items have their own internal identifier, the <code>relatedItemArn</code>. Examples of related items include <code>comments</code> and <code>contacts</code>.</p> </li> <li> <p>If you provide a value for <code>performedBy.userArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">DescribeUser</a> permission on the ARN of the user that you provide.</p> </li> <li> <p>The <code>type</code> field is reserved for internal use only.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and quotas</a>.</p>",
+                "aws.iam#iamAction": {
+                    "name": "CreateRelatedItem",
+                    "relativeDocumentation": "API_CreateRelatedItem.html",
+                    "resources": {
+                        "required": {
+                            "Domain": {},
+                            "Case": {},
+                            "RelatedItem": {}
+                        }
+                    },
+                    "createsResources": [
+                        "RelatedItem"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Creates a related item (comments, tasks, and contacts) and associates it with a case.</p> <p>There's a quota for the number of fields allowed in a Custom type related item. See <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas\">Connect Customer Cases quotas</a>.</p> <p> <b>Use cases</b> </p> <p>Following are examples of related items that you may want to associate with a case:</p> <ul> <li> <p>Related contacts, such as calls, chats, emails tasks</p> </li> <li> <p>Comments, for agent notes</p> </li> <li> <p>SLAs, to capture target resolution goals</p> </li> <li> <p>Cases, to capture related Connect Customer Cases</p> </li> <li> <p>Files, such as policy documentation or customer-provided attachments</p> </li> <li> <p>Custom related items, which provide flexibility for you to define related items that such as bookings, orders, products, notices, and more</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>If you are associating a contact to a case by passing in <code>Contact</code> for a <code>type</code>, you must have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeContact.html\">DescribeContact</a> permission on the ARN of the contact that you provide in <code>content.contact.contactArn</code>.</p> </li> <li> <p>A Related Item is a resource that is associated with a case. It may or may not have an external identifier linking it to an external resource (for example, a <code>contactArn</code>). All Related Items have their own internal identifier, the <code>relatedItemArn</code>. Examples of related items include <code>comments</code> and <code>contacts</code>.</p> </li> <li> <p>If you provide a value for <code>performedBy.userArn</code>, you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">DescribeUser</a> permission on the ARN of the user that you provide.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Connect Customer endpoints and quotas</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/cases/{caseId}/related-items/",
                     "method": "POST"
@@ -2723,7 +3244,7 @@
                 "requiredFields": {
                     "target": "com.amazonaws.connectcases#RequiredFieldList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of fields that must contain a value for a case to be successfully created with this template.</p>"
+                        "smithy.api#documentation": "<p>A list of fields that must contain a value for a case to be successfully created with this template.</p> <p>To require a Customer Profile when creating cases, include <code>customer_id</code> in this list. If <code>customer_id</code> is omitted, the Customer Profile field is optional and can be added, changed, or removed after case creation.</p>"
                     }
                 },
                 "status": {
@@ -2890,6 +3411,16 @@
                 "smithy.api#documentation": "<p>Represents the updated content of a <code>Custom</code> related item.</p>"
             }
         },
+        "com.amazonaws.connectcases#CustomerProfileArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9/_\\-:.]+$"
+            }
+        },
         "com.amazonaws.connectcases#DeleteCase": {
             "type": "operation",
             "input": {
@@ -2981,7 +3512,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a case rule. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes a case rule. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/case-rules/{caseRuleId}",
                     "method": "DELETE"
@@ -3049,7 +3580,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a Cases domain.</p> <note> <p>After deleting your domain you must disassociate the deleted domain from your Amazon Connect instance with another API call before being able to use Cases again with this Amazon Connect instance. See <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteIntegrationAssociation.html\">DeleteIntegrationAssociation</a>.</p> </note>",
+                "smithy.api#documentation": "<p>Deletes a Cases domain.</p> <note> <p>After deleting your domain you must disassociate the deleted domain from your Connect Customer instance with another API call before being able to use Cases again with this Connect Customer instance. See <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteIntegrationAssociation.html\">DeleteIntegrationAssociation</a>.</p> </note>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}",
                     "method": "DELETE"
@@ -3106,7 +3637,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a field from a cases template.</p> <p>After a field is deleted:</p> <ul> <li> <p>You can still retrieve the field by calling <code>BatchGetField</code>.</p> </li> <li> <p>You cannot update a deleted field by calling <code>UpdateField</code>; it throws a <code>ValidationException</code>.</p> </li> <li> <p>Deleted fields are not included in the <code>ListFields</code> response.</p> </li> <li> <p>Calling <code>CreateCase</code> with a deleted field throws a <code>ValidationException</code> denoting which field identifiers in the request have been deleted.</p> </li> <li> <p>Calling <code>GetCase</code> with a deleted field identifier returns the deleted field's value if one exists.</p> </li> <li> <p>Calling <code>UpdateCase</code> with a deleted field ID throws a <code>ValidationException</code> if the case does not already contain a value for the deleted field. Otherwise it succeeds, allowing you to update or remove (using <code>emptyValue: {}</code>) the field's value from the case.</p> </li> <li> <p> <code>GetTemplate</code> does not return field IDs for deleted fields.</p> </li> <li> <p> <code>GetLayout</code> does not return field IDs for deleted fields.</p> </li> <li> <p>Calling <code>SearchCases</code> with the deleted field ID as a filter returns any cases that have a value for the deleted field that matches the filter criteria.</p> </li> <li> <p>Calling <code>SearchCases</code> with a <code>searchTerm</code> value that matches a deleted field's value on a case returns the case in the response.</p> </li> <li> <p>Calling <code>BatchPutFieldOptions</code> with a deleted field ID throw a <code>ValidationException</code>.</p> </li> <li> <p>Calling <code>GetCaseEventConfiguration</code> does not return field IDs for deleted fields.</p> </li> </ul>",
+                "smithy.api#documentation": "<p>Deletes a field from a Cases template.</p> <p>After a field is deleted:</p> <ul> <li> <p>You can still retrieve the field by calling <code>BatchGetField</code>.</p> </li> <li> <p>You cannot update a deleted field by calling <code>UpdateField</code>; it throws a <code>ValidationException</code>.</p> </li> <li> <p>Deleted fields are not included in the <code>ListFields</code> response.</p> </li> <li> <p>Calling <code>CreateCase</code> with a deleted field throws a <code>ValidationException</code> denoting which field identifiers in the request have been deleted.</p> </li> <li> <p>Calling <code>GetCase</code> with a deleted field identifier returns the deleted field's value if one exists.</p> </li> <li> <p>Calling <code>UpdateCase</code> with a deleted field ID throws a <code>ValidationException</code> if the case does not already contain a value for the deleted field. Otherwise it succeeds, allowing you to update or remove (using <code>emptyValue: {}</code>) the field's value from the case.</p> </li> <li> <p> <code>GetTemplate</code> does not return field IDs for deleted fields.</p> </li> <li> <p> <code>GetLayout</code> does not return field IDs for deleted fields.</p> </li> <li> <p>Calling <code>SearchCases</code> with the deleted field ID as a filter returns any cases that have a value for the deleted field that matches the filter criteria.</p> </li> <li> <p>Calling <code>SearchCases</code> with a <code>searchTerm</code> value that matches a deleted field's value on a case returns the case in the response.</p> </li> <li> <p>Calling <code>BatchPutFieldOptions</code> with a deleted field ID throw a <code>ValidationException</code>.</p> </li> <li> <p>Calling <code>GetCaseEventConfiguration</code> does not return field IDs for deleted fields.</p> </li> </ul>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/fields/{fieldId}",
                     "method": "DELETE"
@@ -3174,7 +3705,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a layout from a cases template. You can delete up to 100 layouts per domain.</p> <p>After a layout is deleted:</p> <ul> <li> <p>You can still retrieve the layout by calling <code>GetLayout</code>.</p> </li> <li> <p>You cannot update a deleted layout by calling <code>UpdateLayout</code>; it throws a <code>ValidationException</code>.</p> </li> <li> <p>Deleted layouts are not included in the <code>ListLayouts</code> response.</p> </li> </ul>",
+                "smithy.api#documentation": "<p>Deletes a layout from a Cases template. You can delete up to 100 layouts per domain.</p> <p>After a layout is deleted:</p> <ul> <li> <p>You can still retrieve the layout by calling <code>GetLayout</code>.</p> </li> <li> <p>You cannot update a deleted layout by calling <code>UpdateLayout</code>; it throws a <code>ValidationException</code>.</p> </li> <li> <p>Deleted layouts are not included in the <code>ListLayouts</code> response.</p> </li> </ul>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/layouts/{layoutId}",
                     "method": "DELETE"
@@ -3315,7 +3846,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a cases template. You can delete up to 100 templates per domain.</p> <p>After a cases template is deleted:</p> <ul> <li> <p>You can still retrieve the template by calling <code>GetTemplate</code>.</p> </li> <li> <p>You cannot update the template. </p> </li> <li> <p>You cannot create a case by using the deleted template.</p> </li> <li> <p>Deleted templates are not included in the <code>ListTemplates</code> response.</p> </li> </ul>",
+                "smithy.api#documentation": "<p>Deletes a Cases template. You can delete up to 100 templates per domain.</p> <p>After a Cases template is deleted:</p> <ul> <li> <p>You can still retrieve the template by calling <code>GetTemplate</code>.</p> </li> <li> <p>You cannot update the template. </p> </li> <li> <p>You cannot create a case by using the deleted template.</p> </li> <li> <p>Deleted templates are not included in the <code>ListTemplates</code> response.</p> </li> </ul>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/templates/{templateId}",
                     "method": "DELETE"
@@ -3489,7 +4020,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Represents an empty operand value. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
+                "smithy.api#documentation": "<p>Represents an empty operand value. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
             }
         },
         "com.amazonaws.connectcases#EventBridgeConfiguration": {
@@ -3732,6 +4263,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connectcases#FieldIdentifier"
+            }
+        },
+        "com.amazonaws.connectcases#FieldIdentifierUnion": {
+            "type": "union",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the field.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#FieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a field by its ID or by its name. Specify only one member. Identifying a field by name is supported only in <code>BatchUpdateCase</code>.</p>"
             }
         },
         "com.amazonaws.connectcases#FieldItem": {
@@ -4009,6 +4560,34 @@
                 "smithy.api#documentation": "<p>Object for case field values.</p>"
             }
         },
+        "com.amazonaws.connectcases#FieldValueInput": {
+            "type": "structure",
+            "members": {
+                "fieldIdentifier": {
+                    "target": "com.amazonaws.connectcases#FieldIdentifierUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to update, identified by field ID or field name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.connectcases#FieldValueUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to set for the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A field and the value to set for it.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#FieldValueInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#FieldValueInput"
+            }
+        },
         "com.amazonaws.connectcases#FieldValueList": {
             "type": "list",
             "member": {
@@ -4071,13 +4650,13 @@
                 "fileArn": {
                     "target": "com.amazonaws.connectcases#FileArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a File in Amazon Connect.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a File in Connect Customer.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents a content of an Amazon Connect file object.</p>"
+                "smithy.api#documentation": "<p>An object that represents a content of an Connect Customer file object.</p>"
             }
         },
         "com.amazonaws.connectcases#FileFilter": {
@@ -4362,7 +4941,7 @@
                 "tags": {
                     "target": "com.amazonaws.connectcases#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
                 }
             }
@@ -4426,12 +5005,12 @@
                 "tags": {
                     "target": "com.amazonaws.connectcases#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Detailed case rule information. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
+                "smithy.api#documentation": "<p>Detailed case rule information. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
             }
         },
         "com.amazonaws.connectcases#GetDomain": {
@@ -4522,7 +5101,7 @@
                 "tags": {
                     "target": "com.amazonaws.connectcases#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
                 }
             }
@@ -4574,7 +5153,7 @@
                 "tags": {
                     "target": "com.amazonaws.connectcases#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
                 },
                 "deleted": {
@@ -4696,7 +5275,7 @@
                 "tags": {
                     "target": "com.amazonaws.connectcases#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
                 },
                 "deleted": {
@@ -4820,7 +5399,7 @@
                 "tags": {
                     "target": "com.amazonaws.connectcases#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
                 },
                 "status": {
@@ -5083,7 +5662,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all case rules in a Cases domain. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>",
+                "smithy.api#documentation": "<p>Lists all case rules in a Cases domain. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/rules-list/",
                     "method": "POST"
@@ -5204,7 +5783,7 @@
                 "contactArn": {
                     "target": "com.amazonaws.connectcases#ContactArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier of a contact in Amazon Connect.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier of a contact in Connect Customer.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5648,7 +6227,7 @@
                 "tags": {
                     "target": "com.amazonaws.connectcases#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
                 }
             }
@@ -5801,7 +6380,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the left hand operand in the condition. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the left hand operand in the condition. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
             }
         },
         "com.amazonaws.connectcases#OperandTwo": {
@@ -5837,7 +6416,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the right hand operand in the condition. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the right hand operand in the condition. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
             }
         },
         "com.amazonaws.connectcases#Order": {
@@ -5937,7 +6516,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds case event publishing configuration. For a complete list of fields you can add to the event message, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html\">Create case fields</a> in the <i>Amazon Connect Administrator Guide</i> </p>",
+                "smithy.api#documentation": "<p>Adds case event publishing configuration. For a complete list of fields you can add to the event message, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html\">Create case fields</a> in the <i>Connect Customer Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/case-event-configuration",
                     "method": "PUT"
@@ -5967,6 +6546,26 @@
         "com.amazonaws.connectcases#PutCaseEventConfigurationResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.connectcases#ReferenceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9\\-._/:#=+-]*$"
+            }
+        },
+        "com.amazonaws.connectcases#ReferenceNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9\\-._/:#=+-]*$"
+            }
         },
         "com.amazonaws.connectcases#RelatedItem": {
             "type": "resource",
@@ -6038,7 +6637,7 @@
                 "connectCase": {
                     "target": "com.amazonaws.connectcases#ConnectCaseContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the Amazon Connect case to be created as a related item.</p>"
+                        "smithy.api#documentation": "<p>Represents the Connect Customer case to be created as a related item.</p>"
                     }
                 },
                 "custom": {
@@ -6088,7 +6687,7 @@
                 "contact": {
                     "target": "com.amazonaws.connectcases#Contact",
                     "traits": {
-                        "smithy.api#documentation": "<p>Object representing a contact in Amazon Connect as an API request field.</p>"
+                        "smithy.api#documentation": "<p>Object representing a contact in Connect Customer as an API request field.</p>"
                     }
                 },
                 "comment": {
@@ -6112,7 +6711,7 @@
                 "connectCase": {
                     "target": "com.amazonaws.connectcases#ConnectCaseInputContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the Amazon Connect case to be created as a related item.</p>"
+                        "smithy.api#documentation": "<p>Represents the Connect Customer case to be created as a related item.</p>"
                     }
                 },
                 "custom": {
@@ -6187,7 +6786,7 @@
                 "connectCase": {
                     "target": "com.amazonaws.connectcases#ConnectCaseFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the Amazon Connect case to be created as a related item.</p>"
+                        "smithy.api#documentation": "<p>Represents the Connect Customer case to be created as a related item.</p>"
                     }
                 },
                 "custom": {
@@ -6234,7 +6833,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Required rule type, used to indicate whether a field is required. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
+                "smithy.api#documentation": "<p>Required rule type, used to indicate whether a field is required. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
             }
         },
         "com.amazonaws.connectcases#RequiredField": {
@@ -6338,7 +6937,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for related items across all cases within a domain. This is a global search operation that returns related items from multiple cases, unlike the case-specific <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchRelatedItems.html\">SearchRelatedItems</a> API.</p> <p> <b>Use cases</b> </p> <p>Following are common uses cases for this API:</p> <ul> <li> <p>Find cases with similar issues across the domain. For example, search for all cases containing comments about \"product defect\" to identify patterns and existing solutions.</p> </li> <li> <p>Locate all cases associated with specific contacts or orders. For example, find all cases linked to a contactArn to understand the complete customer journey. </p> </li> <li> <p>Monitor SLA compliance across cases. For example, search for all cases with \"Active\" SLA status to prioritize remediation efforts.</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>This API returns case identifiers, not complete case objects. To retrieve full case details, you must make additional calls to the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetCase.html\">GetCase</a> API for each returned case ID. </p> </li> <li> <p>This API searches across related items content, not case fields. Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchCases.html\">SearchCases</a> API to search within case field values.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and quotas</a>.</p>",
+                "smithy.api#documentation": "<p>Searches for related items across all cases within a domain. This is a global search operation that returns related items from multiple cases, unlike the case-specific <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchRelatedItems.html\">SearchRelatedItems</a> API.</p> <p> <b>Use cases</b> </p> <p>Following are common uses cases for this API:</p> <ul> <li> <p>Find cases with similar issues across the domain. For example, search for all cases containing comments about \"product defect\" to identify patterns and existing solutions.</p> </li> <li> <p>Locate all cases associated with specific contacts or orders. For example, find all cases linked to a contactArn to understand the complete customer journey. </p> </li> <li> <p>Monitor SLA compliance across cases. For example, search for all cases with \"Active\" SLA status to prioritize remediation efforts.</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>This API returns case identifiers, not complete case objects. To retrieve full case details, you must make additional calls to the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetCase.html\">GetCase</a> API for each returned case ID. </p> </li> <li> <p>This API searches across related items content, not case fields. Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchCases.html\">SearchCases</a> API to search within case field values.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Connect Customer endpoints and quotas</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/related-items-search",
                     "method": "POST"
@@ -6472,7 +7071,7 @@
                 "tags": {
                     "target": "com.amazonaws.connectcases#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
                 }
             },
@@ -6702,7 +7301,7 @@
                 "tags": {
                     "target": "com.amazonaws.connectcases#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
                 }
             },
@@ -6862,7 +7461,7 @@
                 "tags": {
                     "target": "com.amazonaws.connectcases#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
                 },
                 "performedBy": {
@@ -6932,7 +7531,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The service quota has been exceeded. For a list of service quotas, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>The service quota has been exceeded. For a list of service quotas, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Connect Customer Service Quotas</a> in the <i>Connect Customer Administrator Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -7163,7 +7762,7 @@
                 "sortOrder": {
                     "target": "com.amazonaws.connectcases#Order",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structured set of sort terms</p>",
+                        "smithy.api#documentation": "<p>Whether results should be sorted in ascending or descending order.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7310,7 +7909,7 @@
                 "tags": {
                     "target": "com.amazonaws.connectcases#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>",
+                        "smithy.api#documentation": "<p>A map of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7464,7 +8063,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An association representing a case rule acting upon a field. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
+                "smithy.api#documentation": "<p>An association representing a case rule acting upon a field. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
             }
         },
         "com.amazonaws.connectcases#TemplateStatus": {
@@ -7665,7 +8264,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>If you provide a value for <code>PerformedBy.UserArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">connect:DescribeUser</a> permission on the User ARN resource that you provide</p> </note> <p>Updates the values of fields on a case. Fields to be updated are received as an array of id/value pairs identical to the <code>CreateCase</code> input .</p> <p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>",
+                "aws.iam#iamAction": {
+                    "name": "UpdateCase",
+                    "relativeDocumentation": "API_UpdateCase.html",
+                    "resources": {
+                        "required": {
+                            "Domain": {},
+                            "Case": {},
+                            "Field": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<note> <p>If you provide a value for <code>PerformedBy.UserArn</code>, you must also have the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">connect:DescribeUser</a> permission on the user ARN that you provide.</p> </note> <p>Updates the values of fields on a case. Fields to be updated are received as an array of id/value pairs identical to the <code>CreateCase</code> input.</p> <p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/cases/{caseId}",
                     "method": "PUT"
@@ -7742,7 +8352,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a case rule. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>",
+                "smithy.api#documentation": "<p>Updates a case rule. In the Connect Customer admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/case-rules/{caseRuleId}",
                     "method": "PUT"
@@ -7985,7 +8595,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the content of a related item associated with a case. The following related item types are supported:</p> <ul> <li> <p> <b>Comment</b> - Update the text content of an existing comment</p> </li> <li> <p> <b>Custom</b> - Update the fields of a custom related item. You can add, modify, and remove fields from a custom related item. There's a quota for the number of fields allowed in a Custom type related item. See <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas\">Amazon Connect Cases quotas</a>.</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>When updating a Custom related item, all existing and new fields, and their associated values should be included in the request. Fields not included as part of this request will be removed.</p> </li> <li> <p>If you provide a value for <code>performedBy.userArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">DescribeUser</a> permission on the ARN of the user that you provide.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html#system-case-fields\">System case fields</a> cannot be used in a custom related item.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and quotas</a>.</p>",
+                "smithy.api#documentation": "<p>Updates the content of a related item associated with a case. The following related item types are supported:</p> <ul> <li> <p> <b>Comment</b> - Update the text content of an existing comment</p> </li> <li> <p> <b>Custom</b> - Update the fields of a custom related item. You can add, modify, and remove fields from a custom related item. There's a quota for the number of fields allowed in a Custom type related item. See <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas\">Connect Customer Cases quotas</a>.</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>When updating a Custom related item, all existing and new fields, and their associated values should be included in the request. Fields not included as part of this request will be removed.</p> </li> <li> <p>If you provide a value for <code>performedBy.userArn</code>, you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">DescribeUser</a> permission on the ARN of the user that you provide.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html#system-case-fields\">System case fields</a> cannot be used in a custom related item.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Connect Customer endpoints and quotas</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/cases/{caseId}/related-items/{relatedItemId}",
                     "method": "PUT"
@@ -8079,7 +8689,7 @@
                 "tags": {
                     "target": "com.amazonaws.connectcases#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
                 },
                 "lastUpdatedUser": {
@@ -8179,7 +8789,7 @@
                 "requiredFields": {
                     "target": "com.amazonaws.connectcases#RequiredFieldList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of fields that must contain a value for a case to be successfully created with this template.</p>"
+                        "smithy.api#documentation": "<p>A list of fields that must contain a value for a case to be successfully created with this template.</p> <p>To require a Customer Profile when creating cases, include <code>customer_id</code> in this list. If <code>customer_id</code> is omitted, the Customer Profile field is optional and can be added, changed, or removed after case creation.</p>"
                     }
                 },
                 "status": {
@@ -8221,7 +8831,7 @@
                 "userArn": {
                     "target": "com.amazonaws.connectcases#UserArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the Amazon Connect ARN of the user.</p>"
+                        "smithy.api#documentation": "<p>Represents the Connect Customer ARN of the user.</p>"
                     }
                 },
                 "customEntity": {

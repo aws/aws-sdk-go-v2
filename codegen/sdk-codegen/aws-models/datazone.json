@@ -2421,6 +2421,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The basic authentication credentials of a connection.</p>"
                     }
+                },
+                "oAuth2Properties": {
+                    "target": "com.amazonaws.datazone#OAuth2PropertiesPatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2 properties, such as the client application, grant type, and token URL, that you want to update for a connection. Only the properties that you specify are updated; the connection keeps its existing values for the properties that you omit.</p>"
+                    }
                 }
             },
             "traits": {
@@ -32616,6 +32622,42 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The OAuth2 properties.</p>"
+            }
+        },
+        "com.amazonaws.datazone#OAuth2PropertiesPatch": {
+            "type": "structure",
+            "members": {
+                "oAuth2GrantType": {
+                    "target": "com.amazonaws.datazone#OAuth2GrantType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2 grant type of the OAuth2 properties to update.</p>"
+                    }
+                },
+                "oAuth2ClientApplication": {
+                    "target": "com.amazonaws.datazone#OAuth2ClientApplication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2 client application of the OAuth2 properties to update.</p>"
+                    }
+                },
+                "tokenUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2 token URL of the OAuth2 properties to update.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]$"
+                    }
+                },
+                "tokenUrlParametersMap": {
+                    "target": "com.amazonaws.datazone#TokenUrlParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth2 token URL parameter map of the OAuth2 properties to update, for example the scope. If you specify an empty map, the existing parameters are kept.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the OAuth2 properties, such as the client application, grant type, and token URL, that you want to update for a connection.</p>"
             }
         },
         "com.amazonaws.datazone#OpenLineageRunEventSummary": {
