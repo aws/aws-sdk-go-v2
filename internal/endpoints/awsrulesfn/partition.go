@@ -1,6 +1,20 @@
 package awsrulesfn
 
-import "regexp"
+import (
+	"regexp"
+	"sync"
+)
+
+var regexCache sync.Map // pattern string -> *regexp.Regexp
+
+func getCompiledRegex(pattern string) *regexp.Regexp {
+	if v, ok := regexCache.Load(pattern); ok {
+		return v.(*regexp.Regexp)
+	}
+	re := regexp.MustCompile(pattern)
+	actual, _ := regexCache.LoadOrStore(pattern, re)
+	return actual.(*regexp.Regexp)
+}
 
 // Partition provides the metadata describing an AWS partition.
 type Partition struct {
@@ -39,7 +53,7 @@ func getPartition(partitions []Partition, region string) *PartitionConfig {
 	}
 
 	for _, partition := range partitions {
-		regionRegex := regexp.MustCompile(partition.RegionRegex)
+		regionRegex := getCompiledRegex(partition.RegionRegex)
 		if regionRegex.MatchString(region) {
 			v := partition.DefaultConfig
 			return &v
