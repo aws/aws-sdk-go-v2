@@ -1,5 +1,5 @@
 module github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding
 
-go 1.29
+go 1.24
 
-require github.com/aws/smithy-go v1.30.2
+require github.com/aws/smithy-go v1.28.8
