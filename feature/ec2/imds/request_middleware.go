@@ -54,6 +54,13 @@ func addRequestMiddleware(stack *middleware.Stack,
 		return err
 	}
 
+	if len(options.AppID) > 0 {
+		err = awsmiddleware.AddSDKAgentKey(awsmiddleware.ApplicationIdentifier, options.AppID)(stack)
+		if err != nil {
+			return err
+		}
+	}
+
 	// Operation timeout
 	err = stack.Initialize.Add(&operationTimeout{
 		Disabled:       options.DisableDefaultTimeout,
