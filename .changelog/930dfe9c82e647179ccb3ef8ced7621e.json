@@ -1,8 +1,0 @@
-{
-    "id": "930dfe9c-82e6-4717-9ccb-3ef8ced7621e",
-    "type": "feature",
-    "description": "Adds the CreateBearerToken API, which exchanges your IAM credentials for a bearer token that can be used to access supported AWS services.",
-    "modules": [
-        "service/signin"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "aa2ef820-8f7d-4d44-8d8c-8ff91ca9357f",
-    "type": "feature",
-    "description": "Adds support for Workday Data Connect and Workday Live Data Query connection types in Amazon DataZone connection APIs.",
-    "modules": [
-        "service/datazone"
-    ]
-}

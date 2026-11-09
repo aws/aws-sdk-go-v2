@@ -1,3 +1,7 @@
+# v1.175.0 (2026-11-09)
+
+* **Feature**: We are releasing five new APIs to allow customers to enable Catalog-level data quality monitoring in AWS Glue Data Catalog, a new feature to perform data quality evaluation on collections of GDC tables selected by the customer, on a schedule or event-driven basis, using a custom or managed ruleset.
+
 # v1.174.0 (2026-11-06)
 
 * **Feature**: Adds support for user-defined functions governed by AWS Lake Formation.

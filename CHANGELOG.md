@@ -1,3 +1,32 @@
+# Release (2026-11-09)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.79.0](service/batch/CHANGELOG.md#v1790-2026-11-09)
+  * **Feature**: Adds support for additional Amazon EKS security context settings in AWS Batch. Pod-level settings include fsGroup, runAsUser, runAsGroup, runAsNonRoot, and seccompProfile. Container-level settings add Linux capabilities and seccompProfile to existing runAsUser, runAsGroup, and runAsNonRoot support.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.57.0](service/bedrockagentcore/CHANGELOG.md#v1570-2026-11-09)
+  * **Feature**: Adds the InvokeWebSearch API, which searches the web using the AWS-managed web search and returns ranked results with a text extract from each page. Results can be filtered by domain and by publication time.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.84.0](service/datazone/CHANGELOG.md#v1840-2026-11-09)
+  * **Feature**: Adds support for Workday Data Connect and Workday Live Data Query connection types in Amazon DataZone connection APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.105.0](service/ecs/CHANGELOG.md#v11050-2026-11-09)
+  * **Feature**: Amazon ECS Managed Instances now supports isolated and confidential tasks, which run in AWS Nitro Sandboxes. Configure them with trustedExecutionConfiguration in task definitions and nitroEnclavesEnabled in capacity providers.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.52.0](service/elasticsearchservice/CHANGELOG.md#v1520-2026-11-09)
+  * **Feature**: Adds cloned blue-green upgrades for Amazon OpenSearch Service domains. UpgradeElasticsearchDomain accepts DeploymentStrategyOptions to upgrade on a cloned cluster, the new UpdateClone API shifts search traffic, cuts over and sets retention, and DescribeDomainChangeProgress reports upgrade details.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.25.0](service/evs/CHANGELOG.md#v1250-2026-11-09)
+  * **Feature**: Amazon EVS adds support for r7i.metal-24xl and r7i.metal-48xl EC2 bare metal instance types for self-deployed VMware Cloud Foundation environments. These diskless instance types use customer-connected external NFS storage, such as Amazon FSx for NetApp ONTAP, instead of local NVMe and vSAN.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.175.0](service/glue/CHANGELOG.md#v11750-2026-11-09)
+  * **Feature**: We are releasing five new APIs to allow customers to enable Catalog-level data quality monitoring in AWS Glue Data Catalog, a new feature to perform data quality evaluation on collections of GDC tables selected by the customer, on a schedule or event-driven basis, using a custom or managed ruleset.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.88.0](service/opensearch/CHANGELOG.md#v1880-2026-11-09)
+  * **Feature**: Adds cloned blue-green upgrades for Amazon OpenSearch Service domains. UpgradeDomain accepts DeploymentStrategyOptions to upgrade on a cloned cluster, the new UpdateClone API shifts search traffic, cuts over and sets retention, and DescribeDomainChangeProgress reports the upgrade details.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.80.0](service/s3control/CHANGELOG.md#v1800-2026-11-09)
+  * **Feature**: Adds support for cross-account access grants with InstanceScope parameter for GetDataAccess and ListCallerAccessGrants operations in S3 Access Grants.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.288.0](service/sagemaker/CHANGELOG.md#v12880-2026-11-09)
+  * **Feature**: Adds support for pipelines that AWS manages, filter ListPipelines by ManagedBy and run them with your own role via RoleArn on StartPipelineExecution. Adds pipeline version aliases to reference versions by name. Adds HubContent step metadata to ListPipelineExecutionSteps.
+* `github.com/aws/aws-sdk-go-v2/service/signin`: [v1.13.0](service/signin/CHANGELOG.md#v1130-2026-11-09)
+  * **Feature**: Adds the CreateBearerToken API, which exchanges your IAM credentials for a bearer token that can be used to access supported AWS services.
+
 # Release (2026-11-06)
 
 ## General Highlights

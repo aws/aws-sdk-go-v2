@@ -1,3 +1,7 @@
+# v1.88.0 (2026-11-09)
+
+* **Feature**: Adds cloned blue-green upgrades for Amazon OpenSearch Service domains. UpgradeDomain accepts DeploymentStrategyOptions to upgrade on a cloned cluster, the new UpdateClone API shifts search traffic, cuts over and sets retention, and DescribeDomainChangeProgress reports the upgrade details.
+
 # v1.87.4 (2026-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

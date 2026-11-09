@@ -1,3 +1,7 @@
+# v1.105.0 (2026-11-09)
+
+* **Feature**: Amazon ECS Managed Instances now supports isolated and confidential tasks, which run in AWS Nitro Sandboxes. Configure them with trustedExecutionConfiguration in task definitions and nitroEnclavesEnabled in capacity providers.
+
 # v1.104.2 (2026-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

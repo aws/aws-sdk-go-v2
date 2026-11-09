@@ -1,3 +1,7 @@
+# v1.79.0 (2026-11-09)
+
+* **Feature**: Adds support for additional Amazon EKS security context settings in AWS Batch. Pod-level settings include fsGroup, runAsUser, runAsGroup, runAsNonRoot, and seccompProfile. Container-level settings add Linux capabilities and seccompProfile to existing runAsUser, runAsGroup, and runAsNonRoot support.
+
 # v1.78.10 (2026-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

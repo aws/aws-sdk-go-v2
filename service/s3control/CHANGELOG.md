@@ -1,3 +1,7 @@
+# v1.80.0 (2026-11-09)
+
+* **Feature**: Adds support for cross-account access grants with InstanceScope parameter for GetDataAccess and ListCallerAccessGrants operations in S3 Access Grants.
+
 # v1.79.9 (2026-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

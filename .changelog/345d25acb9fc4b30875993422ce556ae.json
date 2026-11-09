@@ -1,8 +1,0 @@
-{
-    "id": "345d25ac-b9fc-4b30-8759-93422ce556ae",
-    "type": "feature",
-    "description": "Amazon ECS Managed Instances now supports isolated and confidential tasks, which run in AWS Nitro Sandboxes. Configure them with trustedExecutionConfiguration in task definitions and nitroEnclavesEnabled in capacity providers.",
-    "modules": [
-        "service/ecs"
-    ]
-}

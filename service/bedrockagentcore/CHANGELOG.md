@@ -1,3 +1,7 @@
+# v1.57.0 (2026-11-09)
+
+* **Feature**: Adds the InvokeWebSearch API, which searches the web using the AWS-managed web search and returns ranked results with a text extract from each page. Results can be filtered by domain and by publication time.
+
 # v1.56.4 (2026-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

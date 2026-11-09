@@ -1,3 +1,7 @@
+# v1.84.0 (2026-11-09)
+
+* **Feature**: Adds support for Workday Data Connect and Workday Live Data Query connection types in Amazon DataZone connection APIs.
+
 # v1.83.0 (2026-11-06)
 
 * **Feature**: Adds support for updating OAuth 2.0 connection settings with UpdateConnection.
