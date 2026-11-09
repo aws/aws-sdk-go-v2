@@ -20,6 +20,7 @@ var defaultAWSConfigResolvers = []awsConfigResolver{
 	// logging mode.
 	resolveLogger,
 	resolveClientLogMode,
+	resolveInvocationContextLogging,
 
 	// Sets the HTTP client and configuration to use for making requests using
 	// the HTTP transport.
