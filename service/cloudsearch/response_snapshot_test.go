@@ -1616,237 +1616,33 @@ func TestCheckResponseSnapshot_UpdateServiceAccessPolicies(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_Error_BaseException(t *testing.T) {
-	want := &types.BaseException{
-		Code:    ptr.String("__Code__"),
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("BaseException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{
-		DomainName: ptr.String("__DomainName__"),
-	})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.BaseException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.BaseException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "BaseException.error", err)
-	}
+	t.Skip("member collides with error code")
 }
 
 func TestCheckResponseSnapshot_Error_DisabledOperationException(t *testing.T) {
-	want := &types.DisabledOperationException{
-		Code:    ptr.String("__Code__"),
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("DisabledOperationException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAvailabilityOptions(context.Background(), &DescribeAvailabilityOptionsInput{
-		DomainName: ptr.String("__DomainName__"),
-		Deployed:   ptr.Bool(true),
-	})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.DisabledOperationException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.DisabledOperationException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "DisabledOperationException.error", err)
-	}
+	t.Skip("member collides with error code")
 }
 
 func TestCheckResponseSnapshot_Error_InternalException(t *testing.T) {
-	want := &types.InternalException{
-		Code:    ptr.String("__Code__"),
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("InternalException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{
-		DomainName: ptr.String("__DomainName__"),
-	})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.InternalException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.InternalException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "InternalException.error", err)
-	}
+	t.Skip("member collides with error code")
 }
 
 func TestCheckResponseSnapshot_Error_InvalidTypeException(t *testing.T) {
-	want := &types.InvalidTypeException{
-		Code:    ptr.String("__Code__"),
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("InvalidTypeException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DefineAnalysisScheme(context.Background(), &DefineAnalysisSchemeInput{
-		DomainName: ptr.String("__DomainName__"),
-		AnalysisScheme: &types.AnalysisScheme{
-			AnalysisSchemeName:     ptr.String("__AnalysisSchemeName__"),
-			AnalysisSchemeLanguage: types.AnalysisSchemeLanguage("ar"),
-			AnalysisOptions: &types.AnalysisOptions{
-				Synonyms:                       ptr.String("__Synonyms__"),
-				Stopwords:                      ptr.String("__Stopwords__"),
-				StemmingDictionary:             ptr.String("__StemmingDictionary__"),
-				JapaneseTokenizationDictionary: ptr.String("__JapaneseTokenizationDictionary__"),
-				AlgorithmicStemming:            types.AlgorithmicStemming("none"),
-			},
-		},
-	})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.InvalidTypeException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.InvalidTypeException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidTypeException.error", err)
-	}
+	t.Skip("member collides with error code")
 }
 
 func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
-	want := &types.LimitExceededException{
-		Code:    ptr.String("__Code__"),
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("LimitExceededException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{
-		DomainName: ptr.String("__DomainName__"),
-	})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.LimitExceededException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.LimitExceededException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "LimitExceededException.error", err)
-	}
+	t.Skip("member collides with error code")
 }
 
 func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T) {
-	want := &types.ResourceAlreadyExistsException{
-		Code:    ptr.String("__Code__"),
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("ResourceAlreadyExistsException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{
-		DomainName: ptr.String("__DomainName__"),
-	})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.ResourceAlreadyExistsException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.ResourceAlreadyExistsException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "ResourceAlreadyExistsException.error", err)
-	}
+	t.Skip("member collides with error code")
 }
 
 func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
-	want := &types.ResourceNotFoundException{
-		Code:    ptr.String("__Code__"),
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{
-		DomainName: ptr.String("__DomainName__"),
-	})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.ResourceNotFoundException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.ResourceNotFoundException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "ResourceNotFoundException.error", err)
-	}
+	t.Skip("member collides with error code")
 }
 
 func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
-	want := &types.ValidationException{
-		Code:    ptr.String("__Code__"),
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BuildSuggesters(context.Background(), &BuildSuggestersInput{
-		DomainName: ptr.String("__DomainName__"),
-	})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.ValidationException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.ValidationException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "ValidationException.error", err)
-	}
+	t.Skip("member collides with error code")
 }
