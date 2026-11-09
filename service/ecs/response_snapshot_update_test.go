@@ -316,6 +316,7 @@ func TestUpdateResponseSnapshot_CreateCapacityProvider(t *testing.T) {
 						ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 						ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 					},
+					NitroEnclavesEnabled: ptr.Bool(true),
 				},
 				PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 				InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -2068,6 +2069,7 @@ func TestUpdateResponseSnapshot_DeleteCapacityProvider(t *testing.T) {
 						ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 						ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 					},
+					NitroEnclavesEnabled: ptr.Bool(true),
 				},
 				PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 				InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -4259,6 +4261,10 @@ func TestUpdateResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 					SizeInGiB: 1,
 				},
 				EnableFaultInjection: ptr.Bool(true),
+				TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+					IsolationMode:     types.IsolationMode("SHARED"),
+					AttestationPolicy: ptr.String("__AttestationPolicy__"),
+				},
 			},
 			{
 				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
@@ -4986,6 +4992,10 @@ func TestUpdateResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 					SizeInGiB: 1,
 				},
 				EnableFaultInjection: ptr.Bool(true),
+				TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+					IsolationMode:     types.IsolationMode("SHARED"),
+					AttestationPolicy: ptr.String("__AttestationPolicy__"),
+				},
 			},
 		},
 		Failures: []types.Failure{
@@ -6054,6 +6064,10 @@ func TestUpdateResponseSnapshot_DeregisterTaskDefinition(t *testing.T) {
 				SizeInGiB: 1,
 			},
 			EnableFaultInjection: ptr.Bool(true),
+			TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+				IsolationMode:     types.IsolationMode("SHARED"),
+				AttestationPolicy: ptr.String("__AttestationPolicy__"),
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
@@ -6201,6 +6215,7 @@ func TestUpdateResponseSnapshot_DescribeCapacityProviders(t *testing.T) {
 							ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 							ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 						},
+						NitroEnclavesEnabled: ptr.Bool(true),
 					},
 					PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 					InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -6346,6 +6361,7 @@ func TestUpdateResponseSnapshot_DescribeCapacityProviders(t *testing.T) {
 							ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 							ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 						},
+						NitroEnclavesEnabled: ptr.Bool(true),
 					},
 					PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 					InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -12836,6 +12852,10 @@ func TestUpdateResponseSnapshot_DescribeTaskDefinition(t *testing.T) {
 				SizeInGiB: 1,
 			},
 			EnableFaultInjection: ptr.Bool(true),
+			TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+				IsolationMode:     types.IsolationMode("SHARED"),
+				AttestationPolicy: ptr.String("__AttestationPolicy__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -13488,6 +13508,10 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
 				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
+				},
 			},
 			{
 				Attachments: []types.Attachment{
@@ -13864,6 +13888,10 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 				FargateEphemeralStorage: &types.TaskEphemeralStorage{
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
+				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
 				},
 			},
 		},
@@ -15787,6 +15815,10 @@ func TestUpdateResponseSnapshot_RegisterTaskDefinition(t *testing.T) {
 				SizeInGiB: 1,
 			},
 			EnableFaultInjection: ptr.Bool(true),
+			TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+				IsolationMode:     types.IsolationMode("SHARED"),
+				AttestationPolicy: ptr.String("__AttestationPolicy__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -16198,6 +16230,10 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
 				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
+				},
 			},
 			{
 				Attachments: []types.Attachment{
@@ -16574,6 +16610,10 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 				FargateEphemeralStorage: &types.TaskEphemeralStorage{
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
+				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
 				},
 			},
 		},
@@ -16989,6 +17029,10 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
 				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
+				},
 			},
 			{
 				Attachments: []types.Attachment{
@@ -17365,6 +17409,10 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 				FargateEphemeralStorage: &types.TaskEphemeralStorage{
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
+				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
 				},
 			},
 		},
@@ -17803,6 +17851,10 @@ func TestUpdateResponseSnapshot_StopTask(t *testing.T) {
 				SizeInGiB: 1,
 				KmsKeyId:  ptr.String("__KmsKeyId__"),
 			},
+			TrustedExecutionSummary: &types.TrustedExecutionSummary{
+				IsolationMode:           types.IsolationMode("SHARED"),
+				AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
@@ -18065,6 +18117,7 @@ func TestUpdateResponseSnapshot_UpdateCapacityProvider(t *testing.T) {
 						ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 						ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 					},
+					NitroEnclavesEnabled: ptr.Bool(true),
 				},
 				PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 				InfrastructureOptimization: &types.InfrastructureOptimization{

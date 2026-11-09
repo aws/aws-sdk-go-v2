@@ -4633,6 +4633,10 @@ func awsRestxml_serializeOpHttpBindingsGetDataAccessInput(v *GetDataAccessInput,
 		encoder.SetQuery("durationSeconds").Integer(*v.DurationSeconds)
 	}
 
+	if len(v.InstanceScope) > 0 {
+		encoder.SetQuery("instanceScope").String(string(v.InstanceScope))
+	}
+
 	if len(v.Permission) > 0 {
 		encoder.SetQuery("permission").String(string(v.Permission))
 	}
@@ -5887,6 +5891,10 @@ func awsRestxml_serializeOpHttpBindingsListCallerAccessGrantsInput(v *ListCaller
 
 	if v.GrantScope != nil {
 		encoder.SetQuery("grantscope").String(*v.GrantScope)
+	}
+
+	if len(v.InstanceScope) > 0 {
+		encoder.SetQuery("instanceScope").String(string(v.InstanceScope))
 	}
 
 	if v.MaxResults != 0 {

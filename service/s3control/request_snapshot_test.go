@@ -2120,6 +2120,7 @@ func TestCheckRequestSnapshot_GetDataAccess(t *testing.T) {
 		Privilege:       types.Privilege("Minimal"),
 		TargetType:      types.S3PrefixType("Object"),
 		AuditContext:    ptr.String("__AuditContext__"),
+		InstanceScope:   types.InstanceScope("SELF"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2586,6 +2587,7 @@ func TestCheckRequestSnapshot_ListCallerAccessGrants(t *testing.T) {
 		NextToken:            ptr.String("__NextToken__"),
 		MaxResults:           1,
 		AllowedByApplication: true,
+		InstanceScope:        types.InstanceScope("SELF"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5958,6 +5960,7 @@ func TestUpdateRequestSnapshot_GetDataAccess(t *testing.T) {
 		Privilege:       types.Privilege("Minimal"),
 		TargetType:      types.S3PrefixType("Object"),
 		AuditContext:    ptr.String("__AuditContext__"),
+		InstanceScope:   types.InstanceScope("SELF"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6424,6 +6427,7 @@ func TestUpdateRequestSnapshot_ListCallerAccessGrants(t *testing.T) {
 		NextToken:            ptr.String("__NextToken__"),
 		MaxResults:           1,
 		AllowedByApplication: true,
+		InstanceScope:        types.InstanceScope("SELF"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -9880,6 +9880,472 @@ func (v *DataQualityEncryption) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Additional run options for each evaluation of a data quality evaluation
+// configuration.
+type DataQualityEvaluationConfigAdditionalRunOptions struct {
+
+	// Specifies whether to enable CloudWatch metrics.
+	CloudWatchMetricsEnabled *bool
+
+	// Set the evaluation method for composite rules in the ruleset to ROW/COLUMN
+	CompositeRuleEvaluationMethod DQCompositeRuleEvaluationMethod
+
+	// A custom prefix for the CloudWatch log group names. When specified, evaluation
+	// run logs are written to /error and /output instead of the default
+	// /aws-glue/data-quality/error and /aws-glue/data-quality/output log groups.
+	CustomLogGroupPrefix *string
+
+	// The configuration for writing rule results to a Glue Data Catalog table.
+	DataQualityRuleResults *DataQualityRuleResultsOptions
+
+	// The observation mode for the evaluation run. Specifies how anomaly detection
+	// bounds are calculated.
+	ObservationMode ObservationMode
+
+	// The configuration for writing observation results to a Glue Data Catalog table.
+	ObservationResults *ObservationResultsOptions
+
+	// The scope of the observation for the evaluation run. Specifies whether anomaly
+	// detection is enabled or disabled.
+	ObservationScope ObservationConfiguration
+
+	// The configuration for writing profiling results to a Glue Data Catalog table.
+	ProfilingResults *ProfilingResultsOptions
+
+	// Prefix for Amazon S3 to store results.
+	ResultsS3Prefix *string
+
+	// The configuration for writing row-level evaluation results to a Glue Data
+	// Catalog table.
+	RowLevelResults *RowLevelResultsOptions
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityEvaluationConfigAdditionalRunOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityEvaluationConfigAdditionalRunOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityEvaluationConfigAdditionalRunOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchMetricsEnabled != nil {
+		s.WriteBool(schemas.DataQualityEvaluationConfigAdditionalRunOptions_CloudWatchMetricsEnabled, *v.CloudWatchMetricsEnabled)
+	}
+	if v.CompositeRuleEvaluationMethod != "" {
+		s.WriteString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_CompositeRuleEvaluationMethod, string(v.CompositeRuleEvaluationMethod))
+	}
+	if v.CustomLogGroupPrefix != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_CustomLogGroupPrefix, *v.CustomLogGroupPrefix)
+	}
+	if v.DataQualityRuleResults != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigAdditionalRunOptions_DataQualityRuleResults)
+		v.DataQualityRuleResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObservationMode != "" {
+		s.WriteString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationMode, string(v.ObservationMode))
+	}
+	if v.ObservationResults != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationResults)
+		v.ObservationResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObservationScope != "" {
+		s.WriteString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationScope, string(v.ObservationScope))
+	}
+	if v.ProfilingResults != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ProfilingResults)
+		v.ProfilingResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResultsS3Prefix != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ResultsS3Prefix, *v.ResultsS3Prefix)
+	}
+	if v.RowLevelResults != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigAdditionalRunOptions_RowLevelResults)
+		v.RowLevelResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataQualityEvaluationConfigAdditionalRunOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityEvaluationConfigAdditionalRunOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_CloudWatchMetricsEnabled:
+			v.CloudWatchMetricsEnabled = new(bool)
+			return d.ReadBool(schemas.DataQualityEvaluationConfigAdditionalRunOptions_CloudWatchMetricsEnabled, v.CloudWatchMetricsEnabled)
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_CompositeRuleEvaluationMethod:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_CompositeRuleEvaluationMethod, &ev); err != nil {
+				return err
+			}
+			v.CompositeRuleEvaluationMethod = DQCompositeRuleEvaluationMethod(ev)
+			return nil
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_CustomLogGroupPrefix:
+			v.CustomLogGroupPrefix = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_CustomLogGroupPrefix, v.CustomLogGroupPrefix)
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_DataQualityRuleResults:
+			v.DataQualityRuleResults = &DataQualityRuleResultsOptions{}
+			return v.DataQualityRuleResults.Deserialize(d)
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationMode, &ev); err != nil {
+				return err
+			}
+			v.ObservationMode = ObservationMode(ev)
+			return nil
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationResults:
+			v.ObservationResults = &ObservationResultsOptions{}
+			return v.ObservationResults.Deserialize(d)
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationScope:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ObservationScope, &ev); err != nil {
+				return err
+			}
+			v.ObservationScope = ObservationConfiguration(ev)
+			return nil
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_ProfilingResults:
+			v.ProfilingResults = &ProfilingResultsOptions{}
+			return v.ProfilingResults.Deserialize(d)
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_ResultsS3Prefix:
+			v.ResultsS3Prefix = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigAdditionalRunOptions_ResultsS3Prefix, v.ResultsS3Prefix)
+		case schemas.DataQualityEvaluationConfigAdditionalRunOptions_RowLevelResults:
+			v.RowLevelResults = &RowLevelResultsOptions{}
+			return v.RowLevelResults.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The data source that a data quality evaluation configuration applies to.
+type DataQualityEvaluationConfigDataSource struct {
+
+	// The Glue Data Catalog tables that the configuration applies to.
+	GlueTables *DataQualityEvaluationConfigGlueTables
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityEvaluationConfigDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityEvaluationConfigDataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityEvaluationConfigDataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlueTables != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigDataSource_GlueTables)
+		v.GlueTables.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataQualityEvaluationConfigDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityEvaluationConfigDataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityEvaluationConfigDataSource_GlueTables:
+			v.GlueTables = &DataQualityEvaluationConfigGlueTables{}
+			return v.GlueTables.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Identifies the Glue Data Catalog tables that a data quality evaluation
+// configuration applies to.
+type DataQualityEvaluationConfigGlueTables struct {
+
+	// A unique identifier for the Glue Data Catalog.
+	//
+	// This member is required.
+	CatalogId *string
+
+	// Options for reading the table. The following keys are supported:
+	//
+	//   - pushDownPredicate : to filter on partitions without having to list and read
+	//   all the files in your dataset.
+	//
+	//   - catalogPartitionPredicate : to use server-side partition pruning using
+	//   partition indexes in the Glue Data Catalog.
+	AdditionalOptions map[string]string
+
+	// The name of the connection to the Glue Data Catalog.
+	ConnectionName *string
+
+	// A database name in the Glue Data Catalog.
+	DatabaseName *string
+
+	// SQL Query of SparkSQL format that can be used to pre-process the data for the
+	// table in Glue Data Catalog, before running the Data Quality Operation.
+	//
+	// For the CATALOG and DATABASE levels, use the {{DATABASE_NAME}} and
+	// {{TABLE_NAME}} placeholders, which are filled in for each table.
+	PreProcessingQuery *string
+
+	// For the CATALOG and DATABASE levels, a glob pattern, such as orders_* , that
+	// selects tables. If you don't specify a pattern, every table at the level is in
+	// scope. For the TABLE level, the name of the table.
+	TableNamePattern *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityEvaluationConfigGlueTables) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityEvaluationConfigGlueTables)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityEvaluationConfigGlueTables) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalOptions != nil {
+		serializeGlueTableAdditionalOptions(s, schemas.DataQualityEvaluationConfigGlueTables_AdditionalOptions, v.AdditionalOptions)
+	}
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigGlueTables_CatalogId, *v.CatalogId)
+	}
+	if v.ConnectionName != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigGlueTables_ConnectionName, *v.ConnectionName)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigGlueTables_DatabaseName, *v.DatabaseName)
+	}
+	if v.PreProcessingQuery != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigGlueTables_PreProcessingQuery, *v.PreProcessingQuery)
+	}
+	if v.TableNamePattern != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigGlueTables_TableNamePattern, *v.TableNamePattern)
+	}
+}
+func (v *DataQualityEvaluationConfigGlueTables) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityEvaluationConfigGlueTables, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityEvaluationConfigGlueTables_AdditionalOptions:
+			return deserializeGlueTableAdditionalOptions(d, schemas.DataQualityEvaluationConfigGlueTables_AdditionalOptions, &v.AdditionalOptions)
+		case schemas.DataQualityEvaluationConfigGlueTables_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigGlueTables_CatalogId, v.CatalogId)
+		case schemas.DataQualityEvaluationConfigGlueTables_ConnectionName:
+			v.ConnectionName = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigGlueTables_ConnectionName, v.ConnectionName)
+		case schemas.DataQualityEvaluationConfigGlueTables_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigGlueTables_DatabaseName, v.DatabaseName)
+		case schemas.DataQualityEvaluationConfigGlueTables_PreProcessingQuery:
+			v.PreProcessingQuery = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigGlueTables_PreProcessingQuery, v.PreProcessingQuery)
+		case schemas.DataQualityEvaluationConfigGlueTables_TableNamePattern:
+			v.TableNamePattern = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigGlueTables_TableNamePattern, v.TableNamePattern)
+		}
+		return nil
+	})
+}
+
+// The data source that a data quality evaluation configuration applies to.
+type DataQualityEvaluationConfigListDataSource struct {
+
+	// The Glue Data Catalog tables that the configuration applies to.
+	GlueTables *DataQualityEvaluationConfigListGlueTables
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityEvaluationConfigListDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityEvaluationConfigListDataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityEvaluationConfigListDataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlueTables != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigListDataSource_GlueTables)
+		v.GlueTables.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataQualityEvaluationConfigListDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityEvaluationConfigListDataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityEvaluationConfigListDataSource_GlueTables:
+			v.GlueTables = &DataQualityEvaluationConfigListGlueTables{}
+			return v.GlueTables.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Describes a data quality evaluation configuration.
+type DataQualityEvaluationConfigListDetails struct {
+
+	// The time when the configuration was created.
+	CreatedOn *time.Time
+
+	// The catalog, database, or table that the configuration applies to.
+	DataSource *DataQualityEvaluationConfigListDataSource
+
+	// The evaluation run mode of the configuration's results, which is
+	// EVALUATION_CONFIG .
+	EvaluationRunMode DataQualityEvaluationRunMode
+
+	// The time when the configuration was last modified.
+	LastModifiedOn *time.Time
+
+	// The Glue Data Catalog hierarchical level that the configuration applies to.
+	Level DataQualityEvaluationConfigLevel
+
+	// The built-in ruleset that tables are evaluated with.
+	ManagedRulesetName DataQualityEvaluationConfigManagedRuleset
+
+	// The name of the data quality evaluation configuration.
+	Name *string
+
+	// Specifies whether evaluations are paused.
+	PauseRuns *bool
+
+	// The name of the data quality ruleset that tables are evaluated with.
+	RulesetName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityEvaluationConfigListDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityEvaluationConfigListDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityEvaluationConfigListDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedOn != nil {
+		s.WriteTime(schemas.DataQualityEvaluationConfigListDetails_CreatedOn, *v.CreatedOn)
+	}
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.DataQualityEvaluationConfigListDetails_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityEvaluationConfigListDetails_EvaluationRunMode, string(v.EvaluationRunMode))
+	}
+	if v.LastModifiedOn != nil {
+		s.WriteTime(schemas.DataQualityEvaluationConfigListDetails_LastModifiedOn, *v.LastModifiedOn)
+	}
+	if v.Level != "" {
+		s.WriteString(schemas.DataQualityEvaluationConfigListDetails_Level, string(v.Level))
+	}
+	if v.ManagedRulesetName != "" {
+		s.WriteString(schemas.DataQualityEvaluationConfigListDetails_ManagedRulesetName, string(v.ManagedRulesetName))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigListDetails_Name, *v.Name)
+	}
+	if v.PauseRuns != nil {
+		s.WriteBool(schemas.DataQualityEvaluationConfigListDetails_PauseRuns, *v.PauseRuns)
+	}
+	if v.RulesetName != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigListDetails_RulesetName, *v.RulesetName)
+	}
+}
+func (v *DataQualityEvaluationConfigListDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityEvaluationConfigListDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityEvaluationConfigListDetails_CreatedOn:
+			v.CreatedOn = new(time.Time)
+			return d.ReadTime(schemas.DataQualityEvaluationConfigListDetails_CreatedOn, v.CreatedOn)
+		case schemas.DataQualityEvaluationConfigListDetails_DataSource:
+			v.DataSource = &DataQualityEvaluationConfigListDataSource{}
+			return v.DataSource.Deserialize(d)
+		case schemas.DataQualityEvaluationConfigListDetails_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityEvaluationConfigListDetails_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
+		case schemas.DataQualityEvaluationConfigListDetails_LastModifiedOn:
+			v.LastModifiedOn = new(time.Time)
+			return d.ReadTime(schemas.DataQualityEvaluationConfigListDetails_LastModifiedOn, v.LastModifiedOn)
+		case schemas.DataQualityEvaluationConfigListDetails_Level:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityEvaluationConfigListDetails_Level, &ev); err != nil {
+				return err
+			}
+			v.Level = DataQualityEvaluationConfigLevel(ev)
+			return nil
+		case schemas.DataQualityEvaluationConfigListDetails_ManagedRulesetName:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityEvaluationConfigListDetails_ManagedRulesetName, &ev); err != nil {
+				return err
+			}
+			v.ManagedRulesetName = DataQualityEvaluationConfigManagedRuleset(ev)
+			return nil
+		case schemas.DataQualityEvaluationConfigListDetails_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigListDetails_Name, v.Name)
+		case schemas.DataQualityEvaluationConfigListDetails_PauseRuns:
+			v.PauseRuns = new(bool)
+			return d.ReadBool(schemas.DataQualityEvaluationConfigListDetails_PauseRuns, v.PauseRuns)
+		case schemas.DataQualityEvaluationConfigListDetails_RulesetName:
+			v.RulesetName = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigListDetails_RulesetName, v.RulesetName)
+		}
+		return nil
+	})
+}
+
+// Identifies the Glue Data Catalog tables that a data quality evaluation
+// configuration applies to.
+type DataQualityEvaluationConfigListGlueTables struct {
+
+	// A unique identifier for the Glue Data Catalog.
+	//
+	// This member is required.
+	CatalogId *string
+
+	// A database name in the Glue Data Catalog.
+	DatabaseName *string
+
+	// For the CATALOG and DATABASE levels, a glob pattern, such as orders_* , that
+	// selects tables. If you don't specify a pattern, every table at the level is in
+	// scope. For the TABLE level, the name of the table.
+	TableNamePattern *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityEvaluationConfigListGlueTables) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityEvaluationConfigListGlueTables)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityEvaluationConfigListGlueTables) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigListGlueTables_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigListGlueTables_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableNamePattern != nil {
+		s.WriteString(schemas.DataQualityEvaluationConfigListGlueTables_TableNamePattern, *v.TableNamePattern)
+	}
+}
+func (v *DataQualityEvaluationConfigListGlueTables) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityEvaluationConfigListGlueTables, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityEvaluationConfigListGlueTables_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigListGlueTables_CatalogId, v.CatalogId)
+		case schemas.DataQualityEvaluationConfigListGlueTables_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigListGlueTables_DatabaseName, v.DatabaseName)
+		case schemas.DataQualityEvaluationConfigListGlueTables_TableNamePattern:
+			v.TableNamePattern = new(string)
+			return d.ReadString(schemas.DataQualityEvaluationConfigListGlueTables_TableNamePattern, v.TableNamePattern)
+		}
+		return nil
+	})
+}
+
 // Additional run options you can specify for an evaluation run.
 type DataQualityEvaluationRunAdditionalRunOptions struct {
 
@@ -10224,6 +10690,10 @@ type DataQualityResult struct {
 	// The date and time when this data quality run completed.
 	CompletedOn *time.Time
 
+	// The name of the data quality evaluation configuration that started the
+	// evaluation run, returned when EvaluationRunMode is EVALUATION_CONFIG .
+	DataQualityEvaluationConfig *string
+
 	// The table associated with the data quality result, if any.
 	DataSource *DataSource
 
@@ -10231,6 +10701,12 @@ type DataQualityResult struct {
 	// assigned some sort of name and data quality nodes will have names. In the case
 	// of multiple nodes, the evaluationContext can differentiate the nodes.
 	EvaluationContext *string
+
+	// How the evaluation run that produced the result started: ON_DEMAND for a run
+	// started by StartDataQualityRulesetEvaluationRun , or EVALUATION_CONFIG for a
+	// run started by a data quality evaluation configuration. Not returned for results
+	// that no evaluation run produced, such as results from any ETL job.
+	EvaluationRunMode DataQualityEvaluationRunMode
 
 	// The job name associated with the data quality result, if any.
 	JobName *string
@@ -10285,6 +10761,9 @@ func (v *DataQualityResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CompletedOn != nil {
 		s.WriteTime(schemas.DataQualityResult_CompletedOn, *v.CompletedOn)
 	}
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.DataQualityResult_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.DataQualityResult_DataSource)
 		v.DataSource.SerializeMembers(s)
@@ -10292,6 +10771,9 @@ func (v *DataQualityResult) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.EvaluationContext != nil {
 		s.WriteString(schemas.DataQualityResult_EvaluationContext, *v.EvaluationContext)
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityResult_EvaluationRunMode, string(v.EvaluationRunMode))
 	}
 	if v.JobName != nil {
 		s.WriteString(schemas.DataQualityResult_JobName, *v.JobName)
@@ -10335,12 +10817,22 @@ func (v *DataQualityResult) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DataQualityResult_CompletedOn:
 			v.CompletedOn = new(time.Time)
 			return d.ReadTime(schemas.DataQualityResult_CompletedOn, v.CompletedOn)
+		case schemas.DataQualityResult_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.DataQualityResult_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.DataQualityResult_DataSource:
 			v.DataSource = &DataSource{}
 			return v.DataSource.Deserialize(d)
 		case schemas.DataQualityResult_EvaluationContext:
 			v.EvaluationContext = new(string)
 			return d.ReadString(schemas.DataQualityResult_EvaluationContext, v.EvaluationContext)
+		case schemas.DataQualityResult_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityResult_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.DataQualityResult_JobName:
 			v.JobName = new(string)
 			return d.ReadString(schemas.DataQualityResult_JobName, v.JobName)
@@ -10377,8 +10869,18 @@ func (v *DataQualityResult) Deserialize(d smithy.ShapeDeserializer) error {
 // Describes a data quality result.
 type DataQualityResultDescription struct {
 
+	// The name of the data quality evaluation configuration that started the
+	// evaluation run, returned when EvaluationRunMode is EVALUATION_CONFIG .
+	DataQualityEvaluationConfig *string
+
 	// The table name associated with the data quality result.
 	DataSource *DataSource
+
+	// How the evaluation run that produced the result started: ON_DEMAND for a run
+	// started by StartDataQualityRulesetEvaluationRun , or EVALUATION_CONFIG for a
+	// run started by a data quality evaluation configuration. Not returned for results
+	// that no evaluation run produced, such as results from any ETL job.
+	EvaluationRunMode DataQualityEvaluationRunMode
 
 	// The job name associated with the data quality result.
 	JobName *string
@@ -10402,10 +10904,16 @@ func (v *DataQualityResultDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataQualityResultDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.DataQualityResultDescription_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.DataQualityResultDescription_DataSource)
 		v.DataSource.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityResultDescription_EvaluationRunMode, string(v.EvaluationRunMode))
 	}
 	if v.JobName != nil {
 		s.WriteString(schemas.DataQualityResultDescription_JobName, *v.JobName)
@@ -10423,9 +10931,19 @@ func (v *DataQualityResultDescription) SerializeMembers(s smithy.ShapeSerializer
 func (v *DataQualityResultDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataQualityResultDescription, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DataQualityResultDescription_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.DataQualityResultDescription_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.DataQualityResultDescription_DataSource:
 			v.DataSource = &DataSource{}
 			return v.DataSource.Deserialize(d)
+		case schemas.DataQualityResultDescription_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityResultDescription_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.DataQualityResultDescription_JobName:
 			v.JobName = new(string)
 			return d.ReadString(schemas.DataQualityResultDescription_JobName, v.JobName)
@@ -10446,9 +10964,17 @@ func (v *DataQualityResultDescription) Deserialize(d smithy.ShapeDeserializer) e
 // Criteria used to return data quality results.
 type DataQualityResultFilterCriteria struct {
 
+	// Filter results by the evaluation configuration name which started the
+	// evaluation run.
+	DataQualityEvaluationConfig *string
+
 	// Filter results by the specified data source. For example, retrieving all
 	// results for an Glue table.
 	DataSource *DataSource
+
+	// Filter results by how their evaluation run started: ON_DEMAND or
+	// EVALUATION_CONFIG . Results that no evaluation run produced match neither value.
+	EvaluationRunMode DataQualityEvaluationRunMode
 
 	// Filter results by the specified job name.
 	JobName *string
@@ -10472,10 +10998,16 @@ func (v *DataQualityResultFilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataQualityResultFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.DataQualityResultFilterCriteria_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.DataQualityResultFilterCriteria_DataSource)
 		v.DataSource.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityResultFilterCriteria_EvaluationRunMode, string(v.EvaluationRunMode))
 	}
 	if v.JobName != nil {
 		s.WriteString(schemas.DataQualityResultFilterCriteria_JobName, *v.JobName)
@@ -10493,9 +11025,19 @@ func (v *DataQualityResultFilterCriteria) SerializeMembers(s smithy.ShapeSeriali
 func (v *DataQualityResultFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataQualityResultFilterCriteria, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DataQualityResultFilterCriteria_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.DataQualityResultFilterCriteria_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.DataQualityResultFilterCriteria_DataSource:
 			v.DataSource = &DataSource{}
 			return v.DataSource.Deserialize(d)
+		case schemas.DataQualityResultFilterCriteria_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityResultFilterCriteria_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.DataQualityResultFilterCriteria_JobName:
 			v.JobName = new(string)
 			return d.ReadString(schemas.DataQualityResultFilterCriteria_JobName, v.JobName)
@@ -10516,6 +11058,10 @@ func (v *DataQualityResultFilterCriteria) Deserialize(d smithy.ShapeDeserializer
 // Describes a data quality result returned by ListDataQualityResultsV2 .
 type DataQualityResultsV2Description struct {
 
+	// The name of the data quality evaluation configuration that started the
+	// evaluation run, returned when EvaluationRunMode is EVALUATION_CONFIG .
+	DataQualityEvaluationConfig *string
+
 	// The table associated with the data quality result, if any.
 	DataSource *DataSource
 
@@ -10531,6 +11077,12 @@ type DataQualityResultsV2Description struct {
 	// The evaluation context for the data quality result. This value identifies a
 	// specific data quality result, or a series of related results, within a run.
 	EvaluationContext *string
+
+	// How the evaluation run that produced the result started: ON_DEMAND for a run
+	// started by StartDataQualityRulesetEvaluationRun , or EVALUATION_CONFIG for a
+	// run started by a data quality evaluation configuration. Not returned for results
+	// that no evaluation run produced, such as results from any ETL job.
+	EvaluationRunMode DataQualityEvaluationRunMode
 
 	// The unique result ID for this data quality result.
 	ResultId *string
@@ -10548,6 +11100,9 @@ func (v *DataQualityResultsV2Description) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataQualityResultsV2Description) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.DataQualityResultsV2Description_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.DataQualityResultsV2Description_DataSource)
 		v.DataSource.SerializeMembers(s)
@@ -10562,6 +11117,9 @@ func (v *DataQualityResultsV2Description) SerializeMembers(s smithy.ShapeSeriali
 	if v.EvaluationContext != nil {
 		s.WriteString(schemas.DataQualityResultsV2Description_EvaluationContext, *v.EvaluationContext)
 	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityResultsV2Description_EvaluationRunMode, string(v.EvaluationRunMode))
+	}
 	if v.ResultId != nil {
 		s.WriteString(schemas.DataQualityResultsV2Description_ResultId, *v.ResultId)
 	}
@@ -10572,6 +11130,9 @@ func (v *DataQualityResultsV2Description) SerializeMembers(s smithy.ShapeSeriali
 func (v *DataQualityResultsV2Description) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataQualityResultsV2Description, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DataQualityResultsV2Description_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.DataQualityResultsV2Description_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.DataQualityResultsV2Description_DataSource:
 			v.DataSource = &DataSource{}
 			return v.DataSource.Deserialize(d)
@@ -10582,6 +11143,13 @@ func (v *DataQualityResultsV2Description) Deserialize(d smithy.ShapeDeserializer
 		case schemas.DataQualityResultsV2Description_EvaluationContext:
 			v.EvaluationContext = new(string)
 			return d.ReadString(schemas.DataQualityResultsV2Description_EvaluationContext, v.EvaluationContext)
+		case schemas.DataQualityResultsV2Description_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityResultsV2Description_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.DataQualityResultsV2Description_ResultId:
 			v.ResultId = new(string)
 			return d.ReadString(schemas.DataQualityResultsV2Description_ResultId, v.ResultId)
@@ -10597,6 +11165,10 @@ func (v *DataQualityResultsV2Description) Deserialize(d smithy.ShapeDeserializer
 // ListDataQualityResultsV2 .
 type DataQualityResultsV2FilterCriteria struct {
 
+	// Filter results by the evaluation configuration name which started the
+	// evaluation run.
+	DataQualityEvaluationConfig *string
+
 	// The data source used to filter the results. For example, you can retrieve all
 	// results for an Glue table. DatabaseName and TableName are required. If you omit
 	// CatalogId , the catalog of the calling account is used.
@@ -10610,6 +11182,10 @@ type DataQualityResultsV2FilterCriteria struct {
 
 	// The evaluation context to filter results by.
 	EvaluationContext *string
+
+	// Filter results by how their evaluation run started: ON_DEMAND or
+	// EVALUATION_CONFIG . Results that no evaluation run produced match neither value.
+	EvaluationRunMode DataQualityEvaluationRunMode
 
 	// The time after which to include published results.
 	PublishedAfter *time.Time
@@ -10627,6 +11203,9 @@ func (v *DataQualityResultsV2FilterCriteria) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DataQualityResultsV2FilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.DataQualityResultsV2FilterCriteria_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.DataQualityResultsV2FilterCriteria_DataSource)
 		v.DataSource.SerializeMembers(s)
@@ -10638,6 +11217,9 @@ func (v *DataQualityResultsV2FilterCriteria) SerializeMembers(s smithy.ShapeSeri
 	if v.EvaluationContext != nil {
 		s.WriteString(schemas.DataQualityResultsV2FilterCriteria_EvaluationContext, *v.EvaluationContext)
 	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityResultsV2FilterCriteria_EvaluationRunMode, string(v.EvaluationRunMode))
+	}
 	if v.PublishedAfter != nil {
 		s.WriteTime(schemas.DataQualityResultsV2FilterCriteria_PublishedAfter, *v.PublishedAfter)
 	}
@@ -10648,6 +11230,9 @@ func (v *DataQualityResultsV2FilterCriteria) SerializeMembers(s smithy.ShapeSeri
 func (v *DataQualityResultsV2FilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataQualityResultsV2FilterCriteria, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DataQualityResultsV2FilterCriteria_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.DataQualityResultsV2FilterCriteria_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.DataQualityResultsV2FilterCriteria_DataSource:
 			v.DataSource = &DataSource{}
 			return v.DataSource.Deserialize(d)
@@ -10656,6 +11241,13 @@ func (v *DataQualityResultsV2FilterCriteria) Deserialize(d smithy.ShapeDeseriali
 		case schemas.DataQualityResultsV2FilterCriteria_EvaluationContext:
 			v.EvaluationContext = new(string)
 			return d.ReadString(schemas.DataQualityResultsV2FilterCriteria_EvaluationContext, v.EvaluationContext)
+		case schemas.DataQualityResultsV2FilterCriteria_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityResultsV2FilterCriteria_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.DataQualityResultsV2FilterCriteria_PublishedAfter:
 			v.PublishedAfter = new(time.Time)
 			return d.ReadTime(schemas.DataQualityResultsV2FilterCriteria_PublishedAfter, v.PublishedAfter)
@@ -10684,6 +11276,10 @@ type DataQualityResultV2Item struct {
 	// analyzer.
 	AnalyzerResults []DataQualityAnalyzerResult
 
+	// The name of the data quality evaluation configuration that started the
+	// evaluation run, returned when EvaluationRunMode is EVALUATION_CONFIG .
+	DataQualityEvaluationConfig *string
+
 	// The table associated with the data quality result, if any.
 	DataSource *DataSource
 
@@ -10699,6 +11295,12 @@ type DataQualityResultV2Item struct {
 	// The evaluation context for the data quality result. This value identifies a
 	// specific data quality result, or a series of related results, within a run.
 	EvaluationContext *string
+
+	// How the evaluation run that produced the result started: ON_DEMAND for a run
+	// started by StartDataQualityRulesetEvaluationRun , or EVALUATION_CONFIG for a
+	// run started by a data quality evaluation configuration. Not returned for results
+	// that no evaluation run produced, such as results from any ETL job.
+	EvaluationRunMode DataQualityEvaluationRunMode
 
 	// The date and time when this data quality run completed.
 	ExecutionCompletedOn *time.Time
@@ -10744,6 +11346,9 @@ func (v *DataQualityResultV2Item) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AnalyzerResults != nil {
 		serializeDataQualityAnalyzerResults(s, schemas.DataQualityResultV2Item_AnalyzerResults, v.AnalyzerResults)
 	}
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.DataQualityResultV2Item_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.DataQualityResultV2Item_DataSource)
 		v.DataSource.SerializeMembers(s)
@@ -10757,6 +11362,9 @@ func (v *DataQualityResultV2Item) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.EvaluationContext != nil {
 		s.WriteString(schemas.DataQualityResultV2Item_EvaluationContext, *v.EvaluationContext)
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.DataQualityResultV2Item_EvaluationRunMode, string(v.EvaluationRunMode))
 	}
 	if v.ExecutionCompletedOn != nil {
 		s.WriteTime(schemas.DataQualityResultV2Item_ExecutionCompletedOn, *v.ExecutionCompletedOn)
@@ -10794,6 +11402,9 @@ func (v *DataQualityResultV2Item) Deserialize(d smithy.ShapeDeserializer) error 
 			return v.AggregatedMetrics.Deserialize(d)
 		case schemas.DataQualityResultV2Item_AnalyzerResults:
 			return deserializeDataQualityAnalyzerResults(d, schemas.DataQualityResultV2Item_AnalyzerResults, &v.AnalyzerResults)
+		case schemas.DataQualityResultV2Item_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.DataQualityResultV2Item_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.DataQualityResultV2Item_DataSource:
 			v.DataSource = &DataSource{}
 			return v.DataSource.Deserialize(d)
@@ -10804,6 +11415,13 @@ func (v *DataQualityResultV2Item) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.DataQualityResultV2Item_EvaluationContext:
 			v.EvaluationContext = new(string)
 			return d.ReadString(schemas.DataQualityResultV2Item_EvaluationContext, v.EvaluationContext)
+		case schemas.DataQualityResultV2Item_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityResultV2Item_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.DataQualityResultV2Item_ExecutionCompletedOn:
 			v.ExecutionCompletedOn = new(time.Time)
 			return d.ReadTime(schemas.DataQualityResultV2Item_ExecutionCompletedOn, v.ExecutionCompletedOn)
@@ -11665,16 +12283,23 @@ func (v *DataQualityTargetTable) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 type DataQualityTelemetry struct {
+
+	//
 	Engine DataQualityEngine
 
+	//
 	FlagsEnabled map[string]string
 
+	//
 	HostRuntimeVersion *string
 
+	//
 	LibraryVersion *string
 
+	//
 	SparkVersion *string
 
+	//
 	VcpuHours *float64
 
 	noSmithyDocumentSerde

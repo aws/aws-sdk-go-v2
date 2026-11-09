@@ -810,6 +810,26 @@ func (m *validateOpInvokeHarness) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInvokeWebSearch struct {
+}
+
+func (*validateOpInvokeWebSearch) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInvokeWebSearch) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InvokeWebSearchInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInvokeWebSearchInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListActors struct {
 }
 
@@ -1448,6 +1468,10 @@ func addOpInvokeCodeInterpreterValidationMiddleware(stack *middleware.Stack) err
 
 func addOpInvokeHarnessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeHarness{}, middleware.After)
+}
+
+func addOpInvokeWebSearchValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInvokeWebSearch{}, middleware.After)
 }
 
 func addOpListActorsValidationMiddleware(stack *middleware.Stack) error {
@@ -5206,6 +5230,24 @@ func validateOpInvokeHarnessInput(v *InvokeHarnessInput) error {
 		if err := validateHarnessSkills(v.Skills); err != nil {
 			invalidParams.AddNested("Skills", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInvokeWebSearchInput(v *InvokeWebSearchInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeWebSearchInput"}
+	if v.WebSearchId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WebSearchId"))
+	}
+	if v.SearchQuery == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SearchQuery"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

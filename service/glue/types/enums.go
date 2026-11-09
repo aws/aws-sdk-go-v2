@@ -1077,6 +1077,90 @@ func (DataQualityEngine) Values() []DataQualityEngine {
 	}
 }
 
+type DataQualityEvaluationConfigLevel string
+
+// Enum values for DataQualityEvaluationConfigLevel
+const (
+	DataQualityEvaluationConfigLevelCatalog  DataQualityEvaluationConfigLevel = "CATALOG"
+	DataQualityEvaluationConfigLevelDatabase DataQualityEvaluationConfigLevel = "DATABASE"
+	DataQualityEvaluationConfigLevelTable    DataQualityEvaluationConfigLevel = "TABLE"
+)
+
+// Values returns all known values for DataQualityEvaluationConfigLevel. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityEvaluationConfigLevel) Values() []DataQualityEvaluationConfigLevel {
+	return []DataQualityEvaluationConfigLevel{
+		"CATALOG",
+		"DATABASE",
+		"TABLE",
+	}
+}
+
+type DataQualityEvaluationConfigManagedRuleset string
+
+// Enum values for DataQualityEvaluationConfigManagedRuleset
+const (
+	DataQualityEvaluationConfigManagedRulesetSimple   DataQualityEvaluationConfigManagedRuleset = "SIMPLE"
+	DataQualityEvaluationConfigManagedRulesetAdvanced DataQualityEvaluationConfigManagedRuleset = "ADVANCED"
+)
+
+// Values returns all known values for DataQualityEvaluationConfigManagedRuleset.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityEvaluationConfigManagedRuleset) Values() []DataQualityEvaluationConfigManagedRuleset {
+	return []DataQualityEvaluationConfigManagedRuleset{
+		"SIMPLE",
+		"ADVANCED",
+	}
+}
+
+type DataQualityEvaluationConfigTrigger string
+
+// Enum values for DataQualityEvaluationConfigTrigger
+const (
+	DataQualityEvaluationConfigTriggerOnce           DataQualityEvaluationConfigTrigger = "ONCE"
+	DataQualityEvaluationConfigTriggerSchedule       DataQualityEvaluationConfigTrigger = "SCHEDULE"
+	DataQualityEvaluationConfigTriggerMetadataChange DataQualityEvaluationConfigTrigger = "METADATA_CHANGE"
+)
+
+// Values returns all known values for DataQualityEvaluationConfigTrigger. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityEvaluationConfigTrigger) Values() []DataQualityEvaluationConfigTrigger {
+	return []DataQualityEvaluationConfigTrigger{
+		"ONCE",
+		"SCHEDULE",
+		"METADATA_CHANGE",
+	}
+}
+
+type DataQualityEvaluationRunMode string
+
+// Enum values for DataQualityEvaluationRunMode
+const (
+	DataQualityEvaluationRunModeOnDemand         DataQualityEvaluationRunMode = "ON_DEMAND"
+	DataQualityEvaluationRunModeEvaluationConfig DataQualityEvaluationRunMode = "EVALUATION_CONFIG"
+)
+
+// Values returns all known values for DataQualityEvaluationRunMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityEvaluationRunMode) Values() []DataQualityEvaluationRunMode {
+	return []DataQualityEvaluationRunMode{
+		"ON_DEMAND",
+		"EVALUATION_CONFIG",
+	}
+}
+
 type DataQualityModelStatus string
 
 // Enum values for DataQualityModelStatus

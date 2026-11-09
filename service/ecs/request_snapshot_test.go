@@ -385,6 +385,7 @@ func TestCheckRequestSnapshot_CreateCapacityProvider(t *testing.T) {
 					ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 					ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 				},
+				NitroEnclavesEnabled: ptr.Bool(true),
 			},
 			PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 			InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -4327,6 +4328,10 @@ func TestCheckRequestSnapshot_RegisterTaskDefinition(t *testing.T) {
 			OperatingSystemFamily: types.OSFamily("WINDOWS_SERVER_2019_FULL"),
 		},
 		EnableFaultInjection: ptr.Bool(true),
+		TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+			IsolationMode:     types.IsolationMode("SHARED"),
+			AttestationPolicy: ptr.String("__AttestationPolicy__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6528,6 +6533,7 @@ func TestUpdateRequestSnapshot_CreateCapacityProvider(t *testing.T) {
 					ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 					ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 				},
+				NitroEnclavesEnabled: ptr.Bool(true),
 			},
 			PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 			InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -10470,6 +10476,10 @@ func TestUpdateRequestSnapshot_RegisterTaskDefinition(t *testing.T) {
 			OperatingSystemFamily: types.OSFamily("WINDOWS_SERVER_2019_FULL"),
 		},
 		EnableFaultInjection: ptr.Bool(true),
+		TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+			IsolationMode:     types.IsolationMode("SHARED"),
+			AttestationPolicy: ptr.String("__AttestationPolicy__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

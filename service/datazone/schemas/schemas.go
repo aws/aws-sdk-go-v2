@@ -2506,7 +2506,7 @@ var ConnectionSummary_scope *smithy.Schema
 var ConnectionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "ConnectionType",
-}, smithy.ShapeTypeEnum, 27)
+}, smithy.ShapeTypeEnum, 29)
 var ConnectionType_ATHENA *smithy.Schema
 
 var ConnectionType_BIGQUERY *smithy.Schema
@@ -2560,6 +2560,10 @@ var ConnectionType_ICEBERGRESTCATALOG *smithy.Schema
 var ConnectionType_SNOWFLAKEICEBERGRESTCATALOG *smithy.Schema
 
 var ConnectionType_DATABRICKSICEBERGRESTCATALOG *smithy.Schema
+
+var ConnectionType_WORKDAYICEBERGRESTCATALOG *smithy.Schema
+
+var ConnectionType_WORKDAYLDQ *smithy.Schema
 
 var ConnectivityProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -4468,7 +4472,7 @@ var GlueConnectionPatch_authenticationConfiguration *smithy.Schema
 var GlueConnectionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "GlueConnectionType",
-}, smithy.ShapeTypeEnum, 16)
+}, smithy.ShapeTypeEnum, 18)
 var GlueConnectionType_SNOWFLAKE *smithy.Schema
 
 var GlueConnectionType_BIGQUERY *smithy.Schema
@@ -4500,6 +4504,10 @@ var GlueConnectionType_ICEBERGRESTCATALOG *smithy.Schema
 var GlueConnectionType_SNOWFLAKEICEBERGRESTCATALOG *smithy.Schema
 
 var GlueConnectionType_DATABRICKSICEBERGRESTCATALOG *smithy.Schema
+
+var GlueConnectionType_WORKDAYICEBERGRESTCATALOG *smithy.Schema
+
+var GlueConnectionType_WORKDAYLDQ *smithy.Schema
 
 var GlueOAuth2Credentials = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -15793,6 +15801,10 @@ func init() {
 
 	GlueConnectionType_DATABRICKSICEBERGRESTCATALOG = GlueConnectionType.AddMember("DATABRICKSICEBERGRESTCATALOG", smithyprelude.Unit)
 
+	GlueConnectionType_WORKDAYICEBERGRESTCATALOG = GlueConnectionType.AddMember("WORKDAYICEBERGRESTCATALOG", smithyprelude.Unit)
+
+	GlueConnectionType_WORKDAYLDQ = GlueConnectionType.AddMember("WORKDAYLDQ", smithyprelude.Unit)
+
 	GlueConnectionInput_connectionProperties = GlueConnectionInput.AddMember("connectionProperties", _ConnectionProperties)
 
 	GlueConnectionInput_physicalConnectionRequirements = GlueConnectionInput.AddMember("physicalConnectionRequirements", PhysicalConnectionRequirements)
@@ -16466,6 +16478,10 @@ func init() {
 	ConnectionType_SNOWFLAKEICEBERGRESTCATALOG = ConnectionType.AddMember("SNOWFLAKEICEBERGRESTCATALOG", smithyprelude.Unit)
 
 	ConnectionType_DATABRICKSICEBERGRESTCATALOG = ConnectionType.AddMember("DATABRICKSICEBERGRESTCATALOG", smithyprelude.Unit)
+
+	ConnectionType_WORKDAYICEBERGRESTCATALOG = ConnectionType.AddMember("WORKDAYICEBERGRESTCATALOG", smithyprelude.Unit)
+
+	ConnectionType_WORKDAYLDQ = ConnectionType.AddMember("WORKDAYLDQ", smithyprelude.Unit)
 
 	_MatchCriteria_member = _MatchCriteria.AddMember("member", smithyprelude.String)
 

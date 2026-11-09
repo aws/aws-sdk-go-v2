@@ -11,7 +11,8 @@ import (
 	"time"
 )
 
-// Updates an existing designation. Managed designations cannot be modified.
+// Updates an existing user-created designation. Managed designations cannot be
+// modified. Omit a field to leave its current value unchanged.
 func (c *Client) UpdateDesignation(ctx context.Context, params *UpdateDesignationInput, optFns ...func(*Options)) (*UpdateDesignationOutput, error) {
 	if params == nil {
 		params = &UpdateDesignationInput{}
@@ -40,8 +41,8 @@ type UpdateDesignationInput struct {
 	// This member is required.
 	Identifier *string
 
-	// Whether deletion protection is enabled for this designation. Omit to keep the
-	// existing value.
+	// Specifies whether deletion protection is enabled for this designation. Omit to
+	// keep the existing value.
 	DeletionProtection *bool
 
 	// The updated human-readable description of the designation and its intended use.
@@ -50,7 +51,7 @@ type UpdateDesignationInput struct {
 	// The updated name of the designation. The name must be unique within the domain.
 	Name *string
 
-	// The updated Cedar permit policy.
+	// The updated Cedar permit policy. Omit to keep the existing policy.
 	Policy *string
 
 	noSmithyDocumentSerde
@@ -92,15 +93,18 @@ type UpdateDesignationOutput struct {
 	// This member is required.
 	CreatedBy *string
 
-	// Whether deletion protection is enabled for this designation. When true,
-	// DeleteDesignation is rejected until protection is disabled via
-	// UpdateDesignation.
+	// Specifies whether deletion protection is enabled for this designation. When true
+	// , DeleteDesignation is rejected until protection is disabled through
+	// UpdateDesignation .
 	//
 	// This member is required.
 	DeletionProtection *bool
 
-	// The classification of this designation. MANAGED designations are system-defined
-	// and cannot be modified or deleted.
+	// The classification of this designation. Valid values:
+	//
+	//   - MANAGED — System-defined designations that cannot be modified or deleted.
+	//
+	//   - USER_CREATED — Designations created through CreateDesignation .
 	//
 	// This member is required.
 	DesignationType types.DesignationType
@@ -120,7 +124,7 @@ type UpdateDesignationOutput struct {
 	// This member is required.
 	Name *string
 
-	// The Cedar permit policy that governs what actions holders of this designation
+	// The Cedar permit policy that governs the actions holders of this designation
 	// are allowed to perform.
 	//
 	// This member is required.

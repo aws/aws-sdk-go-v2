@@ -1630,6 +1630,26 @@ func (m *validateOpUpdateApplication) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateClone struct {
+}
+
+func (*validateOpUpdateClone) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateClone) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCloneInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCloneInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDataSource struct {
 }
 
@@ -2134,6 +2154,10 @@ func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateApplication{}, middleware.After)
 }
 
+func addOpUpdateCloneValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateClone{}, middleware.After)
+}
+
 func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataSource{}, middleware.After)
 }
@@ -2264,11 +2288,41 @@ func validateColdStorageOptions(v *types.ColdStorageOptions) error {
 	}
 }
 
+func validateCutoverRequestOptions(v *types.CutoverRequestOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CutoverRequestOptions"}
+	if len(v.Target) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeploymentStrategyOptions(v *types.DeploymentStrategyOptions) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeploymentStrategyOptions"}
+	if len(v.DeploymentStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeploymentStrategyOverrideOptions(v *types.DeploymentStrategyOverrideOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeploymentStrategyOverrideOptions"}
 	if len(v.DeploymentStrategy) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentStrategy"))
 	}
@@ -2716,6 +2770,21 @@ func validateTagList(v []types.Tag) error {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrafficSplitRequestOptions(v *types.TrafficSplitRequestOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrafficSplitRequestOptions"}
+	if len(v.Strategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Strategy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4204,6 +4273,31 @@ func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
 	}
 }
 
+func validateOpUpdateCloneInput(v *UpdateCloneInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCloneInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.TrafficSplitOptions != nil {
+		if err := validateTrafficSplitRequestOptions(v.TrafficSplitOptions); err != nil {
+			invalidParams.AddNested("TrafficSplitOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CutoverOptions != nil {
+		if err := validateCutoverRequestOptions(v.CutoverOptions); err != nil {
+			invalidParams.AddNested("CutoverOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
 	if v == nil {
 		return nil
@@ -4409,6 +4503,11 @@ func validateOpUpgradeDomainInput(v *UpgradeDomainInput) error {
 	}
 	if v.TargetVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetVersion"))
+	}
+	if v.DeploymentStrategyOptions != nil {
+		if err := validateDeploymentStrategyOverrideOptions(v.DeploymentStrategyOptions); err != nil {
+			invalidParams.AddNested("DeploymentStrategyOptions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "3902180d-8e5c-4e40-a9bb-694fc74c0f7b",
+    "type": "feature",
+    "description": "Adds support for pipelines that AWS manages, filter ListPipelines by ManagedBy and run them with your own role via RoleArn on StartPipelineExecution. Adds pipeline version aliases to reference versions by name. Adds HubContent step metadata to ListPipelineExecutionSteps.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

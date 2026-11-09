@@ -3601,6 +3601,21 @@ func validateTmpfsList(v []types.Tmpfs) error {
 	}
 }
 
+func validateTrustedExecutionConfiguration(v *types.TrustedExecutionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrustedExecutionConfiguration"}
+	if len(v.IsolationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IsolationMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUlimit(v *types.Ulimit) error {
 	if v == nil {
 		return nil
@@ -4754,6 +4769,11 @@ func validateOpRegisterTaskDefinitionInput(v *RegisterTaskDefinitionInput) error
 	if v.EphemeralStorage != nil {
 		if err := validateEphemeralStorage(v.EphemeralStorage); err != nil {
 			invalidParams.AddNested("EphemeralStorage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TrustedExecutionConfiguration != nil {
+		if err := validateTrustedExecutionConfiguration(v.TrustedExecutionConfiguration); err != nil {
+			invalidParams.AddNested("TrustedExecutionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

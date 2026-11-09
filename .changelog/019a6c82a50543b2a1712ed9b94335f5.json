@@ -1,0 +1,8 @@
+{
+    "id": "019a6c82-a505-43b2-a171-2ed9b94335f5",
+    "type": "feature",
+    "description": "Adds cloned blue-green upgrades for Amazon OpenSearch Service domains. UpgradeElasticsearchDomain accepts DeploymentStrategyOptions to upgrade on a cloned cluster, the new UpdateClone API shifts search traffic, cuts over and sets retention, and DescribeDomainChangeProgress reports upgrade details.",
+    "modules": [
+        "service/elasticsearchservice"
+    ]
+}

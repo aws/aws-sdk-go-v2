@@ -1,0 +1,8 @@
+{
+    "id": "458e6098-9867-409a-ade9-c78052dfc561",
+    "type": "feature",
+    "description": "Adds support for cross-account access grants with InstanceScope parameter for GetDataAccess and ListCallerAccessGrants operations in S3 Access Grants.",
+    "modules": [
+        "service/s3control"
+    ]
+}

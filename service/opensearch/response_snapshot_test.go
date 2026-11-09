@@ -2343,6 +2343,17 @@ func TestCheckResponseSnapshot_DescribeDomainChangeProgress(t *testing.T) {
 			LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ConfigChangeStatus: types.ConfigChangeStatus("Pending"),
 			InitiatedBy:        types.InitiatedBy("CUSTOMER"),
+			ClonedBlueGreenUpgradeDetails: &types.ClonedBlueGreenUpgradeDetails{
+				TrafficSplit: &types.TrafficPercents{
+					PrimaryReadTrafficPercent: 1,
+					CloneReadTrafficPercent:   1,
+				},
+				ScheduledAction: &types.ClonedBlueGreenScheduledAction{
+					Action:        types.ClonedBlueGreenScheduledActionType("AutomaticCutoverToPrimaryCluster"),
+					ScheduledTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				RetentionInHours: ptr.Int32(1),
+			},
 			ValidationFailures: []types.ValidationFailure{
 				{
 					Code:     ptr.String("__Code__"),
@@ -6364,6 +6375,58 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateClone(t *testing.T) {
+	want := &UpdateCloneOutput{
+		DomainName: ptr.String("__DomainName__"),
+		ChangeId:   ptr.String("__ChangeId__"),
+		CutoverOptions: &types.CutoverOptions{
+			Target: types.CutoverTarget("ClonedCluster"),
+			Status: types.CutoverStatus("InProgress"),
+		},
+		TrafficSplitOptions: &types.TrafficSplitOptions{
+			Current: &types.TrafficPercents{
+				PrimaryReadTrafficPercent: 1,
+				CloneReadTrafficPercent:   1,
+			},
+			Target: &types.TrafficPercents{
+				PrimaryReadTrafficPercent: 1,
+				CloneReadTrafficPercent:   1,
+			},
+			Status: types.TrafficSplitStatus("InProgress"),
+		},
+		RetentionOptions: &types.RetentionOptionsMemberRetentionInHours{
+			Value: 1,
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateClone.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateClone(context.Background(), &UpdateCloneInput{
+		DomainName: ptr.String("__DomainName__"),
+		TrafficSplitOptions: &types.TrafficSplitRequestOptions{
+			Strategy:                types.TrafficStrategy("ShiftReadTrafficPercent"),
+			CloneReadTrafficPercent: 1,
+		},
+		CutoverOptions: &types.CutoverRequestOptions{
+			Target: types.CutoverTarget("ClonedCluster"),
+		},
+		RetentionOptions: &types.RetentionOptionsMemberRetentionInHours{
+			Value: 1,
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateClone.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 	want := &UpdateDataSourceOutput{
 		Message: ptr.String("__Message__"),
@@ -7331,6 +7394,14 @@ func TestCheckResponseSnapshot_UpgradeDomain(t *testing.T) {
 		AdvancedOptions: map[string]string{
 			"key0": "__Value__",
 		},
+		DeploymentStrategyOptions: &types.DeploymentStrategyOverrideOptions{
+			DeploymentStrategy: types.DeploymentStrategyOverride("ClonedBlueGreen"),
+			ClonedBlueGreenOptions: &types.ClonedBlueGreenOptions{
+				RetentionOptions: &types.RetentionOptionsMemberRetentionInHours{
+					Value: 1,
+				},
+			},
+		},
 		ChangeProgressDetails: &types.ChangeProgressDetails{
 			ChangeId:           ptr.String("__ChangeId__"),
 			Message:            ptr.String("__Message__"),
@@ -7354,6 +7425,14 @@ func TestCheckResponseSnapshot_UpgradeDomain(t *testing.T) {
 		PerformCheckOnly: ptr.Bool(true),
 		AdvancedOptions: map[string]string{
 			"key0": "__Value__",
+		},
+		DeploymentStrategyOptions: &types.DeploymentStrategyOverrideOptions{
+			DeploymentStrategy: types.DeploymentStrategyOverride("ClonedBlueGreen"),
+			ClonedBlueGreenOptions: &types.ClonedBlueGreenOptions{
+				RetentionOptions: &types.RetentionOptionsMemberRetentionInHours{
+					Value: 1,
+				},
+			},
 		},
 	})
 	if err != nil {

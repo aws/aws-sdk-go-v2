@@ -1,0 +1,5 @@
+POST /v1/token?x-amz-token-request-type=bearer
+
+Content-Type: application/json
+
+{"duration":1,"grant_type":"__GrantType__","resource":"__Resource__"}

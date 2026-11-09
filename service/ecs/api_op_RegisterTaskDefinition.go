@@ -96,8 +96,6 @@ type RegisterTaskDefinitionInput struct {
 	//
 	//   - Linux platform version 1.4.0 or later.
 	//
-	//   - Windows platform version 1.0.0 or later.
-	//
 	// [Using data volumes in tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html
 	EphemeralStorage *types.EphemeralStorage
 
@@ -305,6 +303,12 @@ type RegisterTaskDefinitionInput struct {
 	// [IAM Roles for Tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
 	TaskRoleArn *string
 
+	// The trusted execution configuration for tasks that use this task definition,
+	// including the isolation mode and, if configured, an attestation policy.
+	//
+	// Trusted execution is supported only for Amazon ECS Managed Instances.
+	TrustedExecutionConfiguration *types.TrustedExecutionConfiguration
+
 	// A list of volume definitions in JSON format that containers in your task might
 	// use.
 	Volumes []types.Volume
@@ -375,6 +379,11 @@ func (v *RegisterTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer)
 	}
 	if v.TaskRoleArn != nil {
 		s.WriteString(schemas.RegisterTaskDefinitionRequest_taskRoleArn, *v.TaskRoleArn)
+	}
+	if v.TrustedExecutionConfiguration != nil {
+		s.WriteStruct(schemas.RegisterTaskDefinitionRequest_trustedExecutionConfiguration)
+		v.TrustedExecutionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Volumes != nil {
 		serializeVolumeList(s, schemas.RegisterTaskDefinitionRequest_volumes, v.Volumes)

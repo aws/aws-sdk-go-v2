@@ -1954,6 +1954,16 @@ func serializeExperimentSummaries(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseList()
 }
 
+func serializeExtensionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExtensionSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeFeatureAdditions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FeatureDefinition) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -3106,6 +3116,14 @@ func serializePipelineSummaryList(s smithy.ShapeSerializer, schema *smithy.Schem
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePipelineVersionAliasList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -7050,6 +7068,28 @@ func deserializeExperimentSummaries(d smithy.ShapeDeserializer, s *smithy.Schema
 	})
 }
 
+func deserializeExtensionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExtensionSummary) error {
+	*v = make([]types.ExtensionSummary, 0)
+	var vv types.ExtensionSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExtensionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ExtensionSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeFeatureAdditions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FeatureDefinition) error {
 	*v = make([]types.FeatureDefinition, 0)
 	var vv types.FeatureDefinition
@@ -9694,6 +9734,27 @@ func deserializePipelineSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema
 
 		vv = types.PipelineSummary{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePipelineVersionAliasList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

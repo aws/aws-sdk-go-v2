@@ -486,7 +486,7 @@ var _AcceleratorManufacturerSet_member *smithy.Schema
 var AcceleratorName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "AcceleratorName",
-}, smithy.ShapeTypeEnum, 12)
+}, smithy.ShapeTypeEnum, 14)
 var AcceleratorName_A100 *smithy.Schema
 
 var AcceleratorName_INFERENTIA *smithy.Schema
@@ -510,6 +510,10 @@ var AcceleratorName_A10G *smithy.Schema
 var AcceleratorName_H100 *smithy.Schema
 
 var AcceleratorName_T4G *smithy.Schema
+
+var AcceleratorName_L40S *smithy.Schema
+
+var AcceleratorName_L4 *smithy.Schema
 
 var _AcceleratorNameSet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -656,6 +660,12 @@ var _AttachmentStateChanges = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AttachmentStateChanges",
 }, smithy.ShapeTypeList, 1)
 var _AttachmentStateChanges_member *smithy.Schema
+
+var AttestationPolicyStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "AttestationPolicyStatus",
+}, smithy.ShapeTypeEnum, 1)
+var AttestationPolicyStatus_CONFIGURED *smithy.Schema
 
 var Attribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -3480,7 +3490,7 @@ var InstanceHealthCheckType_AGENT_CONNECTIVITY *smithy.Schema
 var InstanceLaunchTemplate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "InstanceLaunchTemplate",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var InstanceLaunchTemplate_ec2InstanceProfileArn *smithy.Schema
 
 var InstanceLaunchTemplate_networkConfiguration *smithy.Schema
@@ -3500,6 +3510,8 @@ var InstanceLaunchTemplate_instanceRequirements *smithy.Schema
 var InstanceLaunchTemplate_fipsEnabled *smithy.Schema
 
 var InstanceLaunchTemplate_capacityReservations *smithy.Schema
+
+var InstanceLaunchTemplate_nitroEnclavesEnabled *smithy.Schema
 
 var InstanceLaunchTemplateUpdate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -3599,6 +3611,16 @@ var IpcMode_HOST *smithy.Schema
 var IpcMode_TASK *smithy.Schema
 
 var IpcMode_NONE *smithy.Schema
+
+var IsolationMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "IsolationMode",
+}, smithy.ShapeTypeEnum, 3)
+var IsolationMode_SHARED *smithy.Schema
+
+var IsolationMode_ISOLATED_SANDBOX *smithy.Schema
+
+var IsolationMode_CONFIDENTIAL_SANDBOX *smithy.Schema
 
 var KernelCapabilities = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -5492,7 +5514,7 @@ var TargetType_CONTAINER_INSTANCE *smithy.Schema
 var Task = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "Task",
-}, smithy.ShapeTypeStructure, 37)
+}, smithy.ShapeTypeStructure, 38)
 var Task_attachments *smithy.Schema
 
 var Task_attributes *smithy.Schema
@@ -5567,10 +5589,12 @@ var Task_ephemeralStorage *smithy.Schema
 
 var Task_fargateEphemeralStorage *smithy.Schema
 
+var Task_trustedExecutionSummary *smithy.Schema
+
 var TaskDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "TaskDefinition",
-}, smithy.ShapeTypeStructure, 26)
+}, smithy.ShapeTypeStructure, 27)
 var TaskDefinition_taskDefinitionArn *smithy.Schema
 
 var TaskDefinition_containerDefinitions *smithy.Schema
@@ -5622,6 +5646,8 @@ var TaskDefinition_registeredBy *smithy.Schema
 var TaskDefinition_ephemeralStorage *smithy.Schema
 
 var TaskDefinition_enableFaultInjection *smithy.Schema
+
+var TaskDefinition_trustedExecutionConfiguration *smithy.Schema
 
 var TaskDefinitionFamilyStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -5948,6 +5974,22 @@ var TransportProtocol = smithy.NewSchema(smithy.ShapeID{
 var TransportProtocol_TCP *smithy.Schema
 
 var TransportProtocol_UDP *smithy.Schema
+
+var TrustedExecutionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "TrustedExecutionConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var TrustedExecutionConfiguration_isolationMode *smithy.Schema
+
+var TrustedExecutionConfiguration_attestationPolicy *smithy.Schema
+
+var TrustedExecutionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "TrustedExecutionSummary",
+}, smithy.ShapeTypeStructure, 2)
+var TrustedExecutionSummary_isolationMode *smithy.Schema
+
+var TrustedExecutionSummary_attestationPolicyStatus *smithy.Schema
 
 var Ulimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -7480,7 +7522,7 @@ var RegisterDaemonTaskDefinitionResponse_daemonTaskDefinitionArn *smithy.Schema
 var RegisterTaskDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "RegisterTaskDefinitionRequest",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 19)
 var RegisterTaskDefinitionRequest_family *smithy.Schema
 
 var RegisterTaskDefinitionRequest_taskRoleArn *smithy.Schema
@@ -7516,6 +7558,8 @@ var RegisterTaskDefinitionRequest_ephemeralStorage *smithy.Schema
 var RegisterTaskDefinitionRequest_runtimePlatform *smithy.Schema
 
 var RegisterTaskDefinitionRequest_enableFaultInjection *smithy.Schema
+
+var RegisterTaskDefinitionRequest_trustedExecutionConfiguration *smithy.Schema
 
 var RegisterTaskDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -8066,6 +8110,10 @@ func init() {
 
 	AcceleratorName_T4G = AcceleratorName.AddMember("T4G", smithyprelude.Unit)
 
+	AcceleratorName_L40S = AcceleratorName.AddMember("L40S", smithyprelude.Unit)
+
+	AcceleratorName_L4 = AcceleratorName.AddMember("L4", smithyprelude.Unit)
+
 	_AcceleratorNameSet_member = _AcceleratorNameSet.AddMember("member", AcceleratorName, &smithytraits.XMLName{Name: "item"})
 
 	AcceleratorTotalMemoryMiBRequest_min = AcceleratorTotalMemoryMiBRequest.AddMember("min", _BoxedInteger)
@@ -8141,6 +8189,8 @@ func init() {
 	AttachmentStateChange_status = AttachmentStateChange.AddMember("status", _String)
 
 	_AttachmentStateChanges_member = _AttachmentStateChanges.AddMember("member", AttachmentStateChange)
+
+	AttestationPolicyStatus_CONFIGURED = AttestationPolicyStatus.AddMember("CONFIGURED", smithyprelude.Unit)
 
 	TargetType_CONTAINER_INSTANCE = TargetType.AddMember("CONTAINER_INSTANCE", smithyprelude.Unit)
 
@@ -8387,6 +8437,8 @@ func init() {
 	InstanceLaunchTemplate_fipsEnabled = InstanceLaunchTemplate.AddMember("fipsEnabled", _BoxedBoolean)
 
 	InstanceLaunchTemplate_capacityReservations = InstanceLaunchTemplate.AddMember("capacityReservations", CapacityReservationRequest)
+
+	InstanceLaunchTemplate_nitroEnclavesEnabled = InstanceLaunchTemplate.AddMember("nitroEnclavesEnabled", _BoxedBoolean)
 
 	PropagateMITags_CAPACITY_PROVIDER = PropagateMITags.AddMember("CAPACITY_PROVIDER", smithyprelude.Unit)
 
@@ -10588,6 +10640,12 @@ func init() {
 
 	IpcMode_NONE = IpcMode.AddMember("NONE", smithyprelude.Unit)
 
+	IsolationMode_SHARED = IsolationMode.AddMember("SHARED", smithyprelude.Unit)
+
+	IsolationMode_ISOLATED_SANDBOX = IsolationMode.AddMember("ISOLATED_SANDBOX", smithyprelude.Unit)
+
+	IsolationMode_CONFIDENTIAL_SANDBOX = IsolationMode.AddMember("CONFIDENTIAL_SANDBOX", smithyprelude.Unit)
+
 	LimitExceededException_message = LimitExceededException.AddMember("message", _String)
 
 	LoadBalancer_targetGroupArn = LoadBalancer.AddMember("targetGroupArn", _String)
@@ -11208,6 +11266,10 @@ func init() {
 
 	TaskEphemeralStorage_kmsKeyId = TaskEphemeralStorage.AddMember("kmsKeyId", _String)
 
+	TrustedExecutionSummary_isolationMode = TrustedExecutionSummary.AddMember("isolationMode", IsolationMode)
+
+	TrustedExecutionSummary_attestationPolicyStatus = TrustedExecutionSummary.AddMember("attestationPolicyStatus", AttestationPolicyStatus)
+
 	Task_attachments = Task.AddMember("attachments", _Attachments)
 
 	Task_attributes = Task.AddMember("attributes", _Attributes)
@@ -11282,6 +11344,8 @@ func init() {
 
 	Task_fargateEphemeralStorage = Task.AddMember("fargateEphemeralStorage", TaskEphemeralStorage)
 
+	Task_trustedExecutionSummary = Task.AddMember("trustedExecutionSummary", TrustedExecutionSummary)
+
 	Volume_name = Volume.AddMember("name", _String)
 
 	Volume_host = Volume.AddMember("host", HostVolumeProperties)
@@ -11311,6 +11375,10 @@ func init() {
 	TaskDefinitionPlacementConstraint_expression = TaskDefinitionPlacementConstraint.AddMember("expression", _String)
 
 	_TaskDefinitionPlacementConstraints_member = _TaskDefinitionPlacementConstraints.AddMember("member", TaskDefinitionPlacementConstraint)
+
+	TrustedExecutionConfiguration_isolationMode = TrustedExecutionConfiguration.AddMember("isolationMode", IsolationMode)
+
+	TrustedExecutionConfiguration_attestationPolicy = TrustedExecutionConfiguration.AddMember("attestationPolicy", _String)
 
 	TaskDefinition_taskDefinitionArn = TaskDefinition.AddMember("taskDefinitionArn", _String)
 
@@ -11363,6 +11431,8 @@ func init() {
 	TaskDefinition_ephemeralStorage = TaskDefinition.AddMember("ephemeralStorage", EphemeralStorage)
 
 	TaskDefinition_enableFaultInjection = TaskDefinition.AddMember("enableFaultInjection", _BoxedBoolean)
+
+	TaskDefinition_trustedExecutionConfiguration = TaskDefinition.AddMember("trustedExecutionConfiguration", TrustedExecutionConfiguration)
 
 	TaskDefinitionFamilyStatus_ACTIVE = TaskDefinitionFamilyStatus.AddMember("ACTIVE", smithyprelude.Unit)
 
@@ -12285,6 +12355,8 @@ func init() {
 	RegisterTaskDefinitionRequest_runtimePlatform = RegisterTaskDefinitionRequest.AddMember("runtimePlatform", RuntimePlatform)
 
 	RegisterTaskDefinitionRequest_enableFaultInjection = RegisterTaskDefinitionRequest.AddMember("enableFaultInjection", _BoxedBoolean)
+
+	RegisterTaskDefinitionRequest_trustedExecutionConfiguration = RegisterTaskDefinitionRequest.AddMember("trustedExecutionConfiguration", TrustedExecutionConfiguration)
 
 	RegisterTaskDefinitionResponse_taskDefinition = RegisterTaskDefinitionResponse.AddMember("taskDefinition", TaskDefinition)
 

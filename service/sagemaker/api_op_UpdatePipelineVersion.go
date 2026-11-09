@@ -5,6 +5,7 @@ package sagemaker
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -37,6 +38,9 @@ type UpdatePipelineVersionInput struct {
 	// This member is required.
 	PipelineVersionId *int64
 
+	// The aliases to add to or remove from the pipeline version.
+	PipelineVersionAliasOperations *types.AliasOperations
+
 	// The description of the pipeline version.
 	PipelineVersionDescription *string
 
@@ -55,6 +59,11 @@ func (v *UpdatePipelineVersionInput) Serialize(s smithy.ShapeSerializer) {
 func (v *UpdatePipelineVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PipelineArn != nil {
 		s.WriteString(schemas.UpdatePipelineVersionRequest_PipelineArn, *v.PipelineArn)
+	}
+	if v.PipelineVersionAliasOperations != nil {
+		s.WriteStruct(schemas.UpdatePipelineVersionRequest_PipelineVersionAliasOperations)
+		v.PipelineVersionAliasOperations.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.PipelineVersionDescription != nil {
 		s.WriteString(schemas.UpdatePipelineVersionRequest_PipelineVersionDescription, *v.PipelineVersionDescription)

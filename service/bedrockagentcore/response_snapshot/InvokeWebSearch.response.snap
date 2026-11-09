@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"results":[{"publishedAt":"2000-01-01T00:00:00Z","text":"__Text__","title":"__Title__","url":"__Url__"},{"publishedAt":"2000-01-01T00:00:00Z","text":"__Text__","title":"__Title__","url":"__Url__"}]}

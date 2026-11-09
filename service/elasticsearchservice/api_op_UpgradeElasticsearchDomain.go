@@ -43,6 +43,10 @@ type UpgradeElasticsearchDomainInput struct {
 	// This member is required.
 	TargetVersion *string
 
+	// Overrides the deployment strategy for this upgrade. To run a cloned blue/green
+	// upgrade, set DeploymentStrategy to ClonedBlueGreen .
+	DeploymentStrategyOptions *types.DeploymentStrategyOverrideOptions
+
 	//  This flag, when set to True, indicates that an Upgrade Eligibility Check needs
 	// to be performed. This will not actually perform the Upgrade.
 	PerformCheckOnly *bool
@@ -57,6 +61,11 @@ func (v *UpgradeElasticsearchDomainInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpgradeElasticsearchDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentStrategyOptions != nil {
+		s.WriteStruct(schemas.UpgradeElasticsearchDomainRequest_DeploymentStrategyOptions)
+		v.DeploymentStrategyOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.UpgradeElasticsearchDomainRequest_DomainName, *v.DomainName)
 	}
@@ -73,6 +82,9 @@ type UpgradeElasticsearchDomainOutput struct {
 
 	// Specifies change details of the domain configuration change.
 	ChangeProgressDetails *types.ChangeProgressDetails
+
+	// The deployment strategy override used for the upgrade.
+	DeploymentStrategyOptions *types.DeploymentStrategyOverrideOptions
 
 	// The name of an Elasticsearch domain. Domain names are unique across the domains
 	// owned by an account within an AWS region. Domain names start with a letter or
@@ -105,6 +117,11 @@ func (v *UpgradeElasticsearchDomainOutput) SerializeMembers(s smithy.ShapeSerial
 		v.ChangeProgressDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.DeploymentStrategyOptions != nil {
+		s.WriteStruct(schemas.UpgradeElasticsearchDomainResponse_DeploymentStrategyOptions)
+		v.DeploymentStrategyOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.UpgradeElasticsearchDomainResponse_DomainName, *v.DomainName)
 	}
@@ -121,6 +138,9 @@ func (v *UpgradeElasticsearchDomainOutput) Deserialize(d smithy.ShapeDeserialize
 		case schemas.UpgradeElasticsearchDomainResponse_ChangeProgressDetails:
 			v.ChangeProgressDetails = &types.ChangeProgressDetails{}
 			return v.ChangeProgressDetails.Deserialize(d)
+		case schemas.UpgradeElasticsearchDomainResponse_DeploymentStrategyOptions:
+			v.DeploymentStrategyOptions = &types.DeploymentStrategyOverrideOptions{}
+			return v.DeploymentStrategyOptions.Deserialize(d)
 		case schemas.UpgradeElasticsearchDomainResponse_DomainName:
 			v.DomainName = new(string)
 			return d.ReadString(schemas.UpgradeElasticsearchDomainResponse_DomainName, v.DomainName)

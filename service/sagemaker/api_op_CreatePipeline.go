@@ -65,6 +65,14 @@ type CreatePipelineInput struct {
 	// The display name of the pipeline.
 	PipelineDisplayName *string
 
+	// The aliases to assign to the first version of the pipeline. You can use an
+	// alias instead of a pipeline version ID to start an execution, describe the
+	// pipeline, or list its executions. Each alias can contain 1-128 letters, numbers,
+	// periods (.), hyphens (-), and underscores (_), and can't consist of numbers
+	// only. An alias must be unique within the pipeline, and a version can have up to
+	// 10 aliases.
+	PipelineVersionAliases []string
+
 	// A list of tags to apply to the created pipeline.
 	Tags []types.Tag
 
@@ -102,6 +110,9 @@ func (v *CreatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.PipelineName != nil {
 		s.WriteString(schemas.CreatePipelineRequest_PipelineName, *v.PipelineName)
+	}
+	if v.PipelineVersionAliases != nil {
+		serializePipelineVersionAliasList(s, schemas.CreatePipelineRequest_PipelineVersionAliases, v.PipelineVersionAliases)
 	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreatePipelineRequest_RoleArn, *v.RoleArn)

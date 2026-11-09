@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChangeId":"__ChangeId__","CutoverOptions":{"Status":"InProgress","Target":"ClonedCluster"},"DomainName":"__DomainName__","RetentionOptions":{"RetentionInHours":1},"TrafficSplitOptions":{"Current":{"CloneReadTrafficPercent":1,"PrimaryReadTrafficPercent":1},"Status":"InProgress","Target":{"CloneReadTrafficPercent":1,"PrimaryReadTrafficPercent":1}}}

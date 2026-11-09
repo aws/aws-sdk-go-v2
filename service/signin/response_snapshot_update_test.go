@@ -140,6 +140,32 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_CreateBearerToken(t *testing.T) {
+	want := &CreateBearerTokenOutput{
+		AccessToken: ptr.String("__AccessToken__"),
+		TokenType:   ptr.String("__TokenType__"),
+		ExpiresIn:   ptr.Int32(1),
+	}
+	proto := restjson1.New(schemas.Signin)
+	opSchema := smithy.NewOperationSchema(schemas.CreateBearerToken, schemas.CreateBearerTokenResponse, schemas.CreateBearerTokenResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateBearerToken.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateOAuth2Token(t *testing.T) {
 	want := &CreateOAuth2TokenOutput{
 		TokenOutput: &types.CreateOAuth2TokenResponseBody{
@@ -530,7 +556,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.Signin)
-	opSchema := smithy.NewOperationSchema(schemas.CreateOAuth2Token, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateBearerToken, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -582,7 +608,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.Signin)
-	opSchema := smithy.NewOperationSchema(schemas.CreateOAuth2Token, schemas.InternalServerException, schemas.InternalServerException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateBearerToken, schemas.InternalServerException, schemas.InternalServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -738,7 +764,7 @@ func TestUpdateResponseSnapshot_Error_TooManyRequestsError(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.Signin)
-	opSchema := smithy.NewOperationSchema(schemas.CreateOAuth2Token, schemas.TooManyRequestsError, schemas.TooManyRequestsError)
+	opSchema := smithy.NewOperationSchema(schemas.CreateBearerToken, schemas.TooManyRequestsError, schemas.TooManyRequestsError)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -764,7 +790,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.Signin)
-	opSchema := smithy.NewOperationSchema(schemas.CreateOAuth2Token, schemas.ValidationException, schemas.ValidationException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateBearerToken, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

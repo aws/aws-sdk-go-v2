@@ -5885,7 +5885,9 @@ func (v *DeploymentProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Summary representation of a designation returned by list operations.
+// The summary representation of a designation returned by ListDesignations . The
+// summary omits the Cedar permit policy. Call GetDesignation to retrieve the full
+// designation record including the policy.
 type DesignationSummary struct {
 
 	// The identifier of the Amazon DataZone user who created the designation.
@@ -5893,7 +5895,9 @@ type DesignationSummary struct {
 	// This member is required.
 	CreatedBy *string
 
-	// Whether deletion protection is enabled for this designation.
+	// Specifies whether deletion protection is enabled for this designation. When true
+	// , DeleteDesignation is rejected until protection is disabled through
+	// UpdateDesignation .
 	//
 	// This member is required.
 	DeletionProtection *bool
@@ -5919,7 +5923,11 @@ type DesignationSummary struct {
 	// A human-readable description of the designation and its intended use.
 	Description *string
 
-	// The classification of this designation.
+	// The classification of this designation. Valid values:
+	//
+	//   - MANAGED — System-defined designation.
+	//
+	//   - USER_CREATED — User-created designation.
 	DesignationType DesignationType
 
 	// The date and time when the designation was last updated.

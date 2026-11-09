@@ -7377,8 +7377,6 @@ func (v *ElbGatewayResources) Deserialize(d smithy.ShapeDeserializer) error {
 //
 //   - Linux platform version 1.4.0 or later.
 //
-//   - Windows platform version 1.0.0 or later.
-//
 // Consider the following when using the Fargate launch type:
 //
 //   - The file is handled like a native Docker env-file.
@@ -7446,8 +7444,6 @@ func (v *EnvironmentFile) Deserialize(d smithy.ShapeDeserializer) error {
 // platforms:
 //
 //   - Linux platform version 1.4.0 or later.
-//
-//   - Windows platform version 1.0.0 or later.
 //
 // [Using data volumes in tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html
 type EphemeralStorage struct {
@@ -10753,6 +10749,23 @@ type InstanceLaunchTemplate struct {
 	// [Detailed monitoring for Amazon ECS Managed Instances]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/detailed-monitoring-managed-instances.html
 	Monitoring ManagedInstancesMonitoringOptions
 
+	// Specifies whether instances that this capacity provider launches have [Nitro Sandbox] enabled.
+	// Enable this setting to run tasks that use the ISOLATED_SANDBOX or
+	// CONFIDENTIAL_SANDBOX isolation mode.
+	//
+	// When you enable this setting, the capacity provider must include at least one
+	// instance type that supports Nitro Sandbox. You can't enable this setting
+	// together with local storage (the useLocalStorage setting in
+	// localStorageConfiguration ).
+	//
+	// The default value is false .
+	//
+	// For more information, see [Isolated and confidential tasks] in Amazon Elastic Container Service Developer Guide.
+	//
+	// [Nitro Sandbox]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/amazon-ec2-nitro-sandboxes.html
+	// [Isolated and confidential tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/isolated-confidential-tasks.html
+	NitroEnclavesEnabled *bool
+
 	// The storage configuration for Amazon ECS Managed Instances. This defines the
 	// data volume properties for the instances.
 	StorageConfiguration *ManagedInstancesStorageConfiguration
@@ -10802,6 +10815,9 @@ func (v *InstanceLaunchTemplate) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NetworkConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.NitroEnclavesEnabled != nil {
+		s.WriteBool(schemas.InstanceLaunchTemplate_nitroEnclavesEnabled, *v.NitroEnclavesEnabled)
+	}
 	if v.StorageConfiguration != nil {
 		s.WriteStruct(schemas.InstanceLaunchTemplate_storageConfiguration)
 		v.StorageConfiguration.SerializeMembers(s)
@@ -10846,6 +10862,9 @@ func (v *InstanceLaunchTemplate) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.InstanceLaunchTemplate_networkConfiguration:
 			v.NetworkConfiguration = &ManagedInstancesNetworkConfiguration{}
 			return v.NetworkConfiguration.Deserialize(d)
+		case schemas.InstanceLaunchTemplate_nitroEnclavesEnabled:
+			v.NitroEnclavesEnabled = new(bool)
+			return d.ReadBool(schemas.InstanceLaunchTemplate_nitroEnclavesEnabled, v.NitroEnclavesEnabled)
 		case schemas.InstanceLaunchTemplate_storageConfiguration:
 			v.StorageConfiguration = &ManagedInstancesStorageConfiguration{}
 			return v.StorageConfiguration.Deserialize(d)
@@ -18428,6 +18447,13 @@ type Task struct {
 	// The ARN of the task definition that creates the task.
 	TaskDefinitionArn *string
 
+	// A summary of the trusted execution configuration for the task, including the
+	// isolation mode. This is a read-only view of the configuration that was set on
+	// the task definition.
+	//
+	// Trusted execution is supported only for Amazon ECS Managed Instances.
+	TrustedExecutionSummary *TrustedExecutionSummary
+
 	// The version counter for the task. Every time a task experiences a change that
 	// starts a CloudWatch event, the version counter is incremented. If you replicate
 	// your Amazon ECS task state with CloudWatch Events, you can compare the version
@@ -18560,6 +18586,11 @@ func (v *Task) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TaskDefinitionArn != nil {
 		s.WriteString(schemas.Task_taskDefinitionArn, *v.TaskDefinitionArn)
 	}
+	if v.TrustedExecutionSummary != nil {
+		s.WriteStruct(schemas.Task_trustedExecutionSummary)
+		v.TrustedExecutionSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Version != 0 {
 		s.WriteInt64(schemas.Task_version, v.Version)
 	}
@@ -18685,6 +18716,9 @@ func (v *Task) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Task_taskDefinitionArn:
 			v.TaskDefinitionArn = new(string)
 			return d.ReadString(schemas.Task_taskDefinitionArn, v.TaskDefinitionArn)
+		case schemas.Task_trustedExecutionSummary:
+			v.TrustedExecutionSummary = &TrustedExecutionSummary{}
+			return v.TrustedExecutionSummary.Deserialize(d)
 		case schemas.Task_version:
 			return d.ReadInt64(schemas.Task_version, &v.Version)
 		}
@@ -18962,6 +18996,12 @@ type TaskDefinition struct {
 	// [IAM roles for Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security-ecs-iam-role-overview.html
 	TaskRoleArn *string
 
+	// The trusted execution configuration for tasks that use this task definition,
+	// including the isolation mode and, if configured, an attestation policy.
+	//
+	// Trusted execution is supported only for Amazon ECS Managed Instances.
+	TrustedExecutionConfiguration *TrustedExecutionConfiguration
+
 	// The list of data volume definitions for the task. For more information, see [Using data volumes in tasks] in
 	// the Amazon Elastic Container Service Developer Guide.
 	//
@@ -19061,6 +19101,11 @@ func (v *TaskDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TaskRoleArn != nil {
 		s.WriteString(schemas.TaskDefinition_taskRoleArn, *v.TaskRoleArn)
 	}
+	if v.TrustedExecutionConfiguration != nil {
+		s.WriteStruct(schemas.TaskDefinition_trustedExecutionConfiguration)
+		v.TrustedExecutionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Volumes != nil {
 		serializeVolumeList(s, schemas.TaskDefinition_volumes, v.Volumes)
 	}
@@ -19152,6 +19197,9 @@ func (v *TaskDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TaskDefinition_taskRoleArn:
 			v.TaskRoleArn = new(string)
 			return d.ReadString(schemas.TaskDefinition_taskRoleArn, v.TaskRoleArn)
+		case schemas.TaskDefinition_trustedExecutionConfiguration:
+			v.TrustedExecutionConfiguration = &TrustedExecutionConfiguration{}
+			return v.TrustedExecutionConfiguration.Deserialize(d)
 		case schemas.TaskDefinition_volumes:
 			return deserializeVolumeList(d, schemas.TaskDefinition_volumes, &v.Volumes)
 		}
@@ -19554,8 +19602,6 @@ type TaskOverride struct {
 	// following platform versions:
 	//
 	//   - Linux platform version 1.4.0 or later.
-	//
-	//   - Windows platform version 1.0.0 or later.
 	EphemeralStorage *EphemeralStorage
 
 	// The Amazon Resource Name (ARN) of the task execution role override for the
@@ -20227,6 +20273,157 @@ func (v *TotalLocalStorageGBRequest) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.TotalLocalStorageGBRequest_min:
 			v.Min = new(float64)
 			return d.ReadFloat64(schemas.TotalLocalStorageGBRequest_min, v.Min)
+		}
+		return nil
+	})
+}
+
+// The trusted execution configuration for a task. This configuration controls the
+// isolation mode and attestation policy. You set this configuration when you
+// register a task definition.
+//
+// Trusted execution is supported only for Amazon ECS Managed Instances.
+type TrustedExecutionConfiguration struct {
+
+	// The isolation mode for tasks that use this task definition. The isolation mode
+	// determines how a task is isolated from other tasks on the same Amazon EC2
+	// instance.
+	//
+	//   - SHARED : The task shares the underlying Amazon EC2 instance with other
+	//   tasks. This is the default isolation mode.
+	//
+	//   - ISOLATED_SANDBOX : The task runs in its own [Nitro Sandbox], which is a lightweight
+	//   virtual machine that is isolated by the Amazon Web Services Nitro System. Each
+	//   task's sandbox is isolated from every other task's sandbox on the same Amazon
+	//   EC2 instance, so one task can't access another task's memory or storage. For
+	//   more information, see [Isolated and confidential tasks]in Amazon Elastic Container Service Developer Guide.
+	//
+	//   - CONFIDENTIAL_SANDBOX : The task runs in its own [Nitro Sandbox], which is a lightweight
+	//   virtual machine that is isolated by the Amazon Web Services Nitro System, with
+	//   cryptographic attestation. The host can't access the sandbox's memory or
+	//   storage, and only the approved workload can decrypt data that you encrypt with
+	//   your Key Management Service key. For more information, see [Isolated and confidential tasks]in Amazon Elastic
+	//   Container Service Developer Guide.
+	//
+	// [Nitro Sandbox]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/amazon-ec2-nitro-sandboxes.html
+	// [Isolated and confidential tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/isolated-confidential-tasks.html
+	//
+	// This member is required.
+	IsolationMode IsolationMode
+
+	// The base64-encoded attestation policy envelope for the task. The policy
+	// specifies which containers are allowed to run and the runtime configuration that
+	// is cryptographically attested. This parameter is required when isolationMode is
+	// CONFIDENTIAL_SANDBOX .
+	AttestationPolicy *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrustedExecutionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrustedExecutionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrustedExecutionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttestationPolicy != nil {
+		s.WriteString(schemas.TrustedExecutionConfiguration_attestationPolicy, *v.AttestationPolicy)
+	}
+	if v.IsolationMode != "" {
+		s.WriteString(schemas.TrustedExecutionConfiguration_isolationMode, string(v.IsolationMode))
+	}
+}
+func (v *TrustedExecutionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrustedExecutionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrustedExecutionConfiguration_attestationPolicy:
+			v.AttestationPolicy = new(string)
+			return d.ReadString(schemas.TrustedExecutionConfiguration_attestationPolicy, v.AttestationPolicy)
+		case schemas.TrustedExecutionConfiguration_isolationMode:
+			var ev string
+			if err := d.ReadString(schemas.TrustedExecutionConfiguration_isolationMode, &ev); err != nil {
+				return err
+			}
+			v.IsolationMode = IsolationMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A summary of the trusted execution configuration for a task. This is a
+// read-only view of the isolation configuration that was set on the task
+// definition. Use it to see a task's isolation configuration in the response to
+// DescribeTasks , RunTask , or StopTask without calling DescribeTaskDefinition .
+// This summary never includes the attestation policy itself.
+//
+// Trusted execution is supported only for Amazon ECS Managed Instances.
+type TrustedExecutionSummary struct {
+
+	// The isolation mode that the task runs in. This value mirrors the isolationMode
+	// that was set in the task definition's TrustedExecutionConfiguration .
+	//
+	//   - SHARED : The task shares the underlying Amazon EC2 instance with other
+	//   tasks. This is the default isolation mode.
+	//
+	//   - ISOLATED_SANDBOX : The task runs in its own [Nitro Sandbox], which is a lightweight
+	//   virtual machine that is isolated by the Amazon Web Services Nitro System. Each
+	//   task's sandbox is isolated from every other task's sandbox on the same Amazon
+	//   EC2 instance, so one task can't access another task's memory or storage. For
+	//   more information, see [Isolated and confidential tasks]in Amazon Elastic Container Service Developer Guide.
+	//
+	//   - CONFIDENTIAL_SANDBOX : The task runs in its own [Nitro Sandbox], which is a lightweight
+	//   virtual machine that is isolated by the Amazon Web Services Nitro System, with
+	//   cryptographic attestation. The host can't access the sandbox's memory or
+	//   storage, and only the approved workload can decrypt data that you encrypt with
+	//   your Key Management Service key. For more information, see [Isolated and confidential tasks]in Amazon Elastic
+	//   Container Service Developer Guide.
+	//
+	// [Nitro Sandbox]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/amazon-ec2-nitro-sandboxes.html
+	// [Isolated and confidential tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/isolated-confidential-tasks.html
+	//
+	// This member is required.
+	IsolationMode IsolationMode
+
+	// The status of the attestation policy for the task. This value is present only
+	// for tasks that use the CONFIDENTIAL_SANDBOX isolation mode.
+	AttestationPolicyStatus AttestationPolicyStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrustedExecutionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrustedExecutionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrustedExecutionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttestationPolicyStatus != "" {
+		s.WriteString(schemas.TrustedExecutionSummary_attestationPolicyStatus, string(v.AttestationPolicyStatus))
+	}
+	if v.IsolationMode != "" {
+		s.WriteString(schemas.TrustedExecutionSummary_isolationMode, string(v.IsolationMode))
+	}
+}
+func (v *TrustedExecutionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrustedExecutionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrustedExecutionSummary_attestationPolicyStatus:
+			var ev string
+			if err := d.ReadString(schemas.TrustedExecutionSummary_attestationPolicyStatus, &ev); err != nil {
+				return err
+			}
+			v.AttestationPolicyStatus = AttestationPolicyStatus(ev)
+			return nil
+		case schemas.TrustedExecutionSummary_isolationMode:
+			var ev string
+			if err := d.ReadString(schemas.TrustedExecutionSummary_isolationMode, &ev); err != nil {
+				return err
+			}
+			v.IsolationMode = IsolationMode(ev)
+			return nil
 		}
 		return nil
 	})

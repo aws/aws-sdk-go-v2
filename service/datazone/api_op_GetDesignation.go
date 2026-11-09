@@ -11,7 +11,9 @@ import (
 	"time"
 )
 
-// Gets the details of a designation, including its Cedar policy.
+// Gets the details of a designation, including its Cedar permit policy. Returns
+// the full designation record for both system-managed and user-created
+// designations.
 func (c *Client) GetDesignation(ctx context.Context, params *GetDesignationInput, optFns ...func(*Options)) (*GetDesignationOutput, error) {
 	if params == nil {
 		params = &GetDesignationInput{}
@@ -66,15 +68,18 @@ type GetDesignationOutput struct {
 	// This member is required.
 	CreatedBy *string
 
-	// Whether deletion protection is enabled for this designation. When true,
-	// DeleteDesignation is rejected until protection is disabled via
-	// UpdateDesignation.
+	// Specifies whether deletion protection is enabled for this designation. When true
+	// , DeleteDesignation is rejected until protection is disabled through
+	// UpdateDesignation .
 	//
 	// This member is required.
 	DeletionProtection *bool
 
-	// The classification of this designation. MANAGED designations are system-defined
-	// and cannot be modified or deleted.
+	// The classification of this designation. Valid values:
+	//
+	//   - MANAGED — System-defined designations that cannot be modified or deleted.
+	//
+	//   - USER_CREATED — Designations created through CreateDesignation .
 	//
 	// This member is required.
 	DesignationType types.DesignationType
@@ -94,7 +99,7 @@ type GetDesignationOutput struct {
 	// This member is required.
 	Name *string
 
-	// The Cedar permit policy that governs what actions holders of this designation
+	// The Cedar permit policy that governs the actions holders of this designation
 	// are allowed to perform.
 	//
 	// This member is required.

@@ -283,6 +283,7 @@ func TestCheckResponseSnapshot_CreateCapacityProvider(t *testing.T) {
 						ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 						ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 					},
+					NitroEnclavesEnabled: ptr.Bool(true),
 				},
 				PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 				InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -435,6 +436,7 @@ func TestCheckResponseSnapshot_CreateCapacityProvider(t *testing.T) {
 					ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 					ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 				},
+				NitroEnclavesEnabled: ptr.Bool(true),
 			},
 			PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 			InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -2943,6 +2945,7 @@ func TestCheckResponseSnapshot_DeleteCapacityProvider(t *testing.T) {
 						ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 						ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 					},
+					NitroEnclavesEnabled: ptr.Bool(true),
 				},
 				PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 				InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -5130,6 +5133,10 @@ func TestCheckResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 					SizeInGiB: 1,
 				},
 				EnableFaultInjection: ptr.Bool(true),
+				TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+					IsolationMode:     types.IsolationMode("SHARED"),
+					AttestationPolicy: ptr.String("__AttestationPolicy__"),
+				},
 			},
 			{
 				TaskDefinitionArn: ptr.String("__TaskDefinitionArn__"),
@@ -5857,6 +5864,10 @@ func TestCheckResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 					SizeInGiB: 1,
 				},
 				EnableFaultInjection: ptr.Bool(true),
+				TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+					IsolationMode:     types.IsolationMode("SHARED"),
+					AttestationPolicy: ptr.String("__AttestationPolicy__"),
+				},
 			},
 		},
 		Failures: []types.Failure{
@@ -6930,6 +6941,10 @@ func TestCheckResponseSnapshot_DeregisterTaskDefinition(t *testing.T) {
 				SizeInGiB: 1,
 			},
 			EnableFaultInjection: ptr.Bool(true),
+			TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+				IsolationMode:     types.IsolationMode("SHARED"),
+				AttestationPolicy: ptr.String("__AttestationPolicy__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeregisterTaskDefinition.response")
@@ -7076,6 +7091,7 @@ func TestCheckResponseSnapshot_DescribeCapacityProviders(t *testing.T) {
 							ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 							ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 						},
+						NitroEnclavesEnabled: ptr.Bool(true),
 					},
 					PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 					InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -7221,6 +7237,7 @@ func TestCheckResponseSnapshot_DescribeCapacityProviders(t *testing.T) {
 							ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 							ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 						},
+						NitroEnclavesEnabled: ptr.Bool(true),
 					},
 					PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 					InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -13748,6 +13765,10 @@ func TestCheckResponseSnapshot_DescribeTaskDefinition(t *testing.T) {
 				SizeInGiB: 1,
 			},
 			EnableFaultInjection: ptr.Bool(true),
+			TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+				IsolationMode:     types.IsolationMode("SHARED"),
+				AttestationPolicy: ptr.String("__AttestationPolicy__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -14411,6 +14432,10 @@ func TestCheckResponseSnapshot_DescribeTasks(t *testing.T) {
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
 				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
+				},
 			},
 			{
 				Attachments: []types.Attachment{
@@ -14787,6 +14812,10 @@ func TestCheckResponseSnapshot_DescribeTasks(t *testing.T) {
 				FargateEphemeralStorage: &types.TaskEphemeralStorage{
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
+				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
 				},
 			},
 		},
@@ -17313,6 +17342,10 @@ func TestCheckResponseSnapshot_RegisterTaskDefinition(t *testing.T) {
 				SizeInGiB: 1,
 			},
 			EnableFaultInjection: ptr.Bool(true),
+			TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+				IsolationMode:     types.IsolationMode("SHARED"),
+				AttestationPolicy: ptr.String("__AttestationPolicy__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -18044,6 +18077,10 @@ func TestCheckResponseSnapshot_RegisterTaskDefinition(t *testing.T) {
 			OperatingSystemFamily: types.OSFamily("WINDOWS_SERVER_2019_FULL"),
 		},
 		EnableFaultInjection: ptr.Bool(true),
+		TrustedExecutionConfiguration: &types.TrustedExecutionConfiguration{
+			IsolationMode:     types.IsolationMode("SHARED"),
+			AttestationPolicy: ptr.String("__AttestationPolicy__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -18432,6 +18469,10 @@ func TestCheckResponseSnapshot_RunTask(t *testing.T) {
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
 				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
+				},
 			},
 			{
 				Attachments: []types.Attachment{
@@ -18808,6 +18849,10 @@ func TestCheckResponseSnapshot_RunTask(t *testing.T) {
 				FargateEphemeralStorage: &types.TaskEphemeralStorage{
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
+				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
 				},
 			},
 		},
@@ -19511,6 +19556,10 @@ func TestCheckResponseSnapshot_StartTask(t *testing.T) {
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
 				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
+				},
 			},
 			{
 				Attachments: []types.Attachment{
@@ -19887,6 +19936,10 @@ func TestCheckResponseSnapshot_StartTask(t *testing.T) {
 				FargateEphemeralStorage: &types.TaskEphemeralStorage{
 					SizeInGiB: 1,
 					KmsKeyId:  ptr.String("__KmsKeyId__"),
+				},
+				TrustedExecutionSummary: &types.TrustedExecutionSummary{
+					IsolationMode:           types.IsolationMode("SHARED"),
+					AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
 				},
 			},
 		},
@@ -20581,6 +20634,10 @@ func TestCheckResponseSnapshot_StopTask(t *testing.T) {
 				SizeInGiB: 1,
 				KmsKeyId:  ptr.String("__KmsKeyId__"),
 			},
+			TrustedExecutionSummary: &types.TrustedExecutionSummary{
+				IsolationMode:           types.IsolationMode("SHARED"),
+				AttestationPolicyStatus: types.AttestationPolicyStatus("CONFIGURED"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StopTask.response")
@@ -20971,6 +21028,7 @@ func TestCheckResponseSnapshot_UpdateCapacityProvider(t *testing.T) {
 						ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 						ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 					},
+					NitroEnclavesEnabled: ptr.Bool(true),
 				},
 				PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 				InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -25133,6 +25191,7 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 					ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 					ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 				},
+				NitroEnclavesEnabled: ptr.Bool(true),
 			},
 			PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 			InfrastructureOptimization: &types.InfrastructureOptimization{
@@ -26077,6 +26136,7 @@ func TestCheckResponseSnapshot_Error_UpdateInProgressException(t *testing.T) {
 					ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
 					ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
 				},
+				NitroEnclavesEnabled: ptr.Bool(true),
 			},
 			PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
 			InfrastructureOptimization: &types.InfrastructureOptimization{

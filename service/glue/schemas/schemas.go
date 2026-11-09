@@ -187,6 +187,11 @@ var CreateDatabase = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateDatabase",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateDataQualityEvaluationConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "CreateDataQualityEvaluationConfig",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateDataQualityRuleset = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "CreateDataQualityRuleset",
@@ -380,6 +385,11 @@ var DeleteCustomEntityType = smithy.NewSchema(smithy.ShapeID{
 var DeleteDatabase = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DeleteDatabase",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteDataQualityEvaluationConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DeleteDataQualityEvaluationConfig",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteDataQualityRuleset = smithy.NewSchema(smithy.ShapeID{
@@ -684,6 +694,11 @@ var GetDataCatalogExportConfiguration = smithy.NewSchema(smithy.ShapeID{
 var GetDataflowGraph = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GetDataflowGraph",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetDataQualityEvaluationConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GetDataQualityEvaluationConfig",
 }, smithy.ShapeTypeOperation, 0)
 
 var GetDataQualityModel = smithy.NewSchema(smithy.ShapeID{
@@ -1052,6 +1067,11 @@ var ListCrawls = smithy.NewSchema(smithy.ShapeID{
 var ListCustomEntityTypes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ListCustomEntityTypes",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListDataQualityEvaluationConfigs = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "ListDataQualityEvaluationConfigs",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListDataQualityResults = smithy.NewSchema(smithy.ShapeID{
@@ -1509,6 +1529,11 @@ var UpdateCrawlerSchedule = smithy.NewSchema(smithy.ShapeID{
 var UpdateDatabase = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "UpdateDatabase",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateDataQualityEvaluationConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "UpdateDataQualityEvaluationConfig",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdateDataQualityRuleset = smithy.NewSchema(smithy.ShapeID{
@@ -5105,6 +5130,140 @@ var DataQualityEngine_SPARK *smithy.Schema
 
 var DataQualityEngine_PYTHON *smithy.Schema
 
+var DataQualityEvaluationConfigAdditionalRunOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationConfigAdditionalRunOptions",
+}, smithy.ShapeTypeStructure, 10)
+var DataQualityEvaluationConfigAdditionalRunOptions_CloudWatchMetricsEnabled *smithy.Schema
+
+var DataQualityEvaluationConfigAdditionalRunOptions_ResultsS3Prefix *smithy.Schema
+
+var DataQualityEvaluationConfigAdditionalRunOptions_CompositeRuleEvaluationMethod *smithy.Schema
+
+var DataQualityEvaluationConfigAdditionalRunOptions_RowLevelResults *smithy.Schema
+
+var DataQualityEvaluationConfigAdditionalRunOptions_ProfilingResults *smithy.Schema
+
+var DataQualityEvaluationConfigAdditionalRunOptions_ObservationScope *smithy.Schema
+
+var DataQualityEvaluationConfigAdditionalRunOptions_ObservationMode *smithy.Schema
+
+var DataQualityEvaluationConfigAdditionalRunOptions_DataQualityRuleResults *smithy.Schema
+
+var DataQualityEvaluationConfigAdditionalRunOptions_ObservationResults *smithy.Schema
+
+var DataQualityEvaluationConfigAdditionalRunOptions_CustomLogGroupPrefix *smithy.Schema
+
+var DataQualityEvaluationConfigDataSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationConfigDataSource",
+}, smithy.ShapeTypeStructure, 1)
+var DataQualityEvaluationConfigDataSource_GlueTables *smithy.Schema
+
+var DataQualityEvaluationConfigGlueTables = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationConfigGlueTables",
+}, smithy.ShapeTypeStructure, 6)
+var DataQualityEvaluationConfigGlueTables_CatalogId *smithy.Schema
+
+var DataQualityEvaluationConfigGlueTables_DatabaseName *smithy.Schema
+
+var DataQualityEvaluationConfigGlueTables_TableNamePattern *smithy.Schema
+
+var DataQualityEvaluationConfigGlueTables_PreProcessingQuery *smithy.Schema
+
+var DataQualityEvaluationConfigGlueTables_ConnectionName *smithy.Schema
+
+var DataQualityEvaluationConfigGlueTables_AdditionalOptions *smithy.Schema
+
+var DataQualityEvaluationConfigLevel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationConfigLevel",
+}, smithy.ShapeTypeEnum, 3)
+var DataQualityEvaluationConfigLevel_CATALOG *smithy.Schema
+
+var DataQualityEvaluationConfigLevel_DATABASE *smithy.Schema
+
+var DataQualityEvaluationConfigLevel_TABLE *smithy.Schema
+
+var _DataQualityEvaluationConfigList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationConfigList",
+}, smithy.ShapeTypeList, 1)
+var _DataQualityEvaluationConfigList_member *smithy.Schema
+
+var DataQualityEvaluationConfigListDataSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationConfigListDataSource",
+}, smithy.ShapeTypeStructure, 1)
+var DataQualityEvaluationConfigListDataSource_GlueTables *smithy.Schema
+
+var DataQualityEvaluationConfigListDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationConfigListDetails",
+}, smithy.ShapeTypeStructure, 9)
+var DataQualityEvaluationConfigListDetails_Name *smithy.Schema
+
+var DataQualityEvaluationConfigListDetails_EvaluationRunMode *smithy.Schema
+
+var DataQualityEvaluationConfigListDetails_CreatedOn *smithy.Schema
+
+var DataQualityEvaluationConfigListDetails_LastModifiedOn *smithy.Schema
+
+var DataQualityEvaluationConfigListDetails_Level *smithy.Schema
+
+var DataQualityEvaluationConfigListDetails_DataSource *smithy.Schema
+
+var DataQualityEvaluationConfigListDetails_RulesetName *smithy.Schema
+
+var DataQualityEvaluationConfigListDetails_ManagedRulesetName *smithy.Schema
+
+var DataQualityEvaluationConfigListDetails_PauseRuns *smithy.Schema
+
+var DataQualityEvaluationConfigListGlueTables = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationConfigListGlueTables",
+}, smithy.ShapeTypeStructure, 3)
+var DataQualityEvaluationConfigListGlueTables_CatalogId *smithy.Schema
+
+var DataQualityEvaluationConfigListGlueTables_DatabaseName *smithy.Schema
+
+var DataQualityEvaluationConfigListGlueTables_TableNamePattern *smithy.Schema
+
+var DataQualityEvaluationConfigManagedRuleset = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationConfigManagedRuleset",
+}, smithy.ShapeTypeEnum, 2)
+var DataQualityEvaluationConfigManagedRuleset_SIMPLE *smithy.Schema
+
+var DataQualityEvaluationConfigManagedRuleset_ADVANCED *smithy.Schema
+
+var _DataQualityEvaluationConfigPageSize = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationConfigPageSize",
+}, smithy.ShapeTypeInteger, 0)
+
+var _DataQualityEvaluationConfigScheduleExpression = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationConfigScheduleExpression",
+}, smithy.ShapeTypeString, 0)
+
+var DataQualityEvaluationConfigTrigger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationConfigTrigger",
+}, smithy.ShapeTypeEnum, 3)
+var DataQualityEvaluationConfigTrigger_ONCE *smithy.Schema
+
+var DataQualityEvaluationConfigTrigger_SCHEDULE *smithy.Schema
+
+var DataQualityEvaluationConfigTrigger_METADATA_CHANGE *smithy.Schema
+
+var _DataQualityEvaluationConfigTriggers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationConfigTriggers",
+}, smithy.ShapeTypeList, 1)
+var _DataQualityEvaluationConfigTriggers_member *smithy.Schema
+
 var DataQualityEvaluationRunAdditionalRunOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DataQualityEvaluationRunAdditionalRunOptions",
@@ -5128,6 +5287,14 @@ var DataQualityEvaluationRunAdditionalRunOptions_ObservationMode *smithy.Schema
 var DataQualityEvaluationRunAdditionalRunOptions_DataQualityRuleResults *smithy.Schema
 
 var DataQualityEvaluationRunAdditionalRunOptions_ObservationResults *smithy.Schema
+
+var DataQualityEvaluationRunMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DataQualityEvaluationRunMode",
+}, smithy.ShapeTypeEnum, 2)
+var DataQualityEvaluationRunMode_ON_DEMAND *smithy.Schema
+
+var DataQualityEvaluationRunMode_EVALUATION_CONFIG *smithy.Schema
 
 var _DataQualityFlagsEnabled = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -5197,8 +5364,12 @@ var _DataQualityObservations_member *smithy.Schema
 var DataQualityResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DataQualityResult",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 17)
 var DataQualityResult_ResultId *smithy.Schema
+
+var DataQualityResult_EvaluationRunMode *smithy.Schema
+
+var DataQualityResult_DataQualityEvaluationConfig *smithy.Schema
 
 var DataQualityResult_ProfileId *smithy.Schema
 
@@ -5231,8 +5402,12 @@ var DataQualityResult_AggregatedMetrics *smithy.Schema
 var DataQualityResultDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DataQualityResultDescription",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 7)
 var DataQualityResultDescription_ResultId *smithy.Schema
+
+var DataQualityResultDescription_EvaluationRunMode *smithy.Schema
+
+var DataQualityResultDescription_DataQualityEvaluationConfig *smithy.Schema
 
 var DataQualityResultDescription_DataSource *smithy.Schema
 
@@ -5251,7 +5426,7 @@ var _DataQualityResultDescriptionList_member *smithy.Schema
 var DataQualityResultFilterCriteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DataQualityResultFilterCriteria",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 7)
 var DataQualityResultFilterCriteria_DataSource *smithy.Schema
 
 var DataQualityResultFilterCriteria_JobName *smithy.Schema
@@ -5261,6 +5436,10 @@ var DataQualityResultFilterCriteria_JobRunId *smithy.Schema
 var DataQualityResultFilterCriteria_StartedAfter *smithy.Schema
 
 var DataQualityResultFilterCriteria_StartedBefore *smithy.Schema
+
+var DataQualityResultFilterCriteria_EvaluationRunMode *smithy.Schema
+
+var DataQualityResultFilterCriteria_DataQualityEvaluationConfig *smithy.Schema
 
 var _DataQualityResultIdList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -5283,8 +5462,12 @@ var _DataQualityResultsList_member *smithy.Schema
 var DataQualityResultsV2Description = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DataQualityResultsV2Description",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 8)
 var DataQualityResultsV2Description_ResultId *smithy.Schema
+
+var DataQualityResultsV2Description_EvaluationRunMode *smithy.Schema
+
+var DataQualityResultsV2Description_DataQualityEvaluationConfig *smithy.Schema
 
 var DataQualityResultsV2Description_DataSource *smithy.Schema
 
@@ -5305,7 +5488,7 @@ var _DataQualityResultsV2DescriptionList_member *smithy.Schema
 var DataQualityResultsV2FilterCriteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DataQualityResultsV2FilterCriteria",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 7)
 var DataQualityResultsV2FilterCriteria_DataSource *smithy.Schema
 
 var DataQualityResultsV2FilterCriteria_PublishedAfter *smithy.Schema
@@ -5316,6 +5499,10 @@ var DataQualityResultsV2FilterCriteria_Dimensions *smithy.Schema
 
 var DataQualityResultsV2FilterCriteria_EvaluationContext *smithy.Schema
 
+var DataQualityResultsV2FilterCriteria_EvaluationRunMode *smithy.Schema
+
+var DataQualityResultsV2FilterCriteria_DataQualityEvaluationConfig *smithy.Schema
+
 var _DataQualityResultV2IdList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DataQualityResultV2IdList",
@@ -5325,8 +5512,12 @@ var _DataQualityResultV2IdList_member *smithy.Schema
 var DataQualityResultV2Item = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DataQualityResultV2Item",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 17)
 var DataQualityResultV2Item_ResultId *smithy.Schema
+
+var DataQualityResultV2Item_EvaluationRunMode *smithy.Schema
+
+var DataQualityResultV2Item_DataQualityEvaluationConfig *smithy.Schema
 
 var DataQualityResultV2Item_DataSource *smithy.Schema
 
@@ -14909,6 +15100,50 @@ var CreateDatabaseResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateDatabaseResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var CreateDataQualityEvaluationConfigRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "CreateDataQualityEvaluationConfigRequest",
+}, smithy.ShapeTypeStructure, 16)
+var CreateDataQualityEvaluationConfigRequest_Name *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_Level *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_DataSource *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_RulesetName *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_ManagedRulesetName *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_Triggers *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_ScheduleExpression *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_StartAt *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_EndAt *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_Role *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_NumberOfWorkers *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_Timeout *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_AdditionalRunOptions *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_AdditionalDataSources *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_Tags *smithy.Schema
+
+var CreateDataQualityEvaluationConfigRequest_ClientToken *smithy.Schema
+
+var CreateDataQualityEvaluationConfigResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "CreateDataQualityEvaluationConfigResponse",
+}, smithy.ShapeTypeStructure, 2)
+var CreateDataQualityEvaluationConfigResponse_Name *smithy.Schema
+
+var CreateDataQualityEvaluationConfigResponse_EvaluationRunMode *smithy.Schema
+
 var CreateDataQualityRulesetRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "CreateDataQualityRulesetRequest",
@@ -15756,6 +15991,17 @@ var DeleteDatabaseRequest_Name *smithy.Schema
 var DeleteDatabaseResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DeleteDatabaseResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteDataQualityEvaluationConfigRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DeleteDataQualityEvaluationConfigRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteDataQualityEvaluationConfigRequest_Name *smithy.Schema
+
+var DeleteDataQualityEvaluationConfigResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "DeleteDataQualityEvaluationConfigResponse",
 }, smithy.ShapeTypeStructure, 0)
 
 var DeleteDataQualityRulesetRequest = smithy.NewSchema(smithy.ShapeID{
@@ -16709,6 +16955,52 @@ var GetDataflowGraphResponse_DagNodes *smithy.Schema
 
 var GetDataflowGraphResponse_DagEdges *smithy.Schema
 
+var GetDataQualityEvaluationConfigRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GetDataQualityEvaluationConfigRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetDataQualityEvaluationConfigRequest_Name *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GetDataQualityEvaluationConfigResponse",
+}, smithy.ShapeTypeStructure, 18)
+var GetDataQualityEvaluationConfigResponse_Name *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_EvaluationRunMode *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_CreatedOn *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_LastModifiedOn *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_Level *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_DataSource *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_RulesetName *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_ManagedRulesetName *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_Triggers *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_ScheduleExpression *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_StartAt *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_EndAt *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_PauseRuns *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_Role *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_NumberOfWorkers *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_Timeout *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_AdditionalRunOptions *smithy.Schema
+
+var GetDataQualityEvaluationConfigResponse_AdditionalDataSources *smithy.Schema
+
 var GetDataQualityModelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GetDataQualityModelRequest",
@@ -16754,8 +17046,12 @@ var GetDataQualityResultRequest_ResultId *smithy.Schema
 var GetDataQualityResultResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GetDataQualityResultResponse",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 17)
 var GetDataQualityResultResponse_ResultId *smithy.Schema
+
+var GetDataQualityResultResponse_EvaluationRunMode *smithy.Schema
+
+var GetDataQualityResultResponse_DataQualityEvaluationConfig *smithy.Schema
 
 var GetDataQualityResultResponse_ProfileId *smithy.Schema
 
@@ -16794,8 +17090,12 @@ var GetDataQualityResultV2Request_ResultId *smithy.Schema
 var GetDataQualityResultV2Response = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GetDataQualityResultV2Response",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 18)
 var GetDataQualityResultV2Response_ResultId *smithy.Schema
+
+var GetDataQualityResultV2Response_EvaluationRunMode *smithy.Schema
+
+var GetDataQualityResultV2Response_DataQualityEvaluationConfig *smithy.Schema
 
 var GetDataQualityResultV2Response_DataSource *smithy.Schema
 
@@ -18256,6 +18556,24 @@ var ListCustomEntityTypesResponse = smithy.NewSchema(smithy.ShapeID{
 var ListCustomEntityTypesResponse_CustomEntityTypes *smithy.Schema
 
 var ListCustomEntityTypesResponse_NextToken *smithy.Schema
+
+var ListDataQualityEvaluationConfigsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "ListDataQualityEvaluationConfigsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListDataQualityEvaluationConfigsRequest_Level *smithy.Schema
+
+var ListDataQualityEvaluationConfigsRequest_MaxResults *smithy.Schema
+
+var ListDataQualityEvaluationConfigsRequest_NextToken *smithy.Schema
+
+var ListDataQualityEvaluationConfigsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "ListDataQualityEvaluationConfigsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListDataQualityEvaluationConfigsResponse_DataQualityEvaluationConfigs *smithy.Schema
+
+var ListDataQualityEvaluationConfigsResponse_NextToken *smithy.Schema
 
 var ListDataQualityResultsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -19935,6 +20253,78 @@ var UpdateDatabaseResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "UpdateDatabaseResponse",
 }, smithy.ShapeTypeStructure, 0)
+
+var UpdateDataQualityEvaluationConfigRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "UpdateDataQualityEvaluationConfigRequest",
+}, smithy.ShapeTypeStructure, 14)
+var UpdateDataQualityEvaluationConfigRequest_Name *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigRequest_DataSource *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigRequest_RulesetName *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigRequest_ManagedRulesetName *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigRequest_Triggers *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigRequest_ScheduleExpression *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigRequest_StartAt *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigRequest_EndAt *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigRequest_PauseRuns *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigRequest_Role *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigRequest_NumberOfWorkers *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigRequest_Timeout *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigRequest_AdditionalRunOptions *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigRequest_AdditionalDataSources *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "UpdateDataQualityEvaluationConfigResponse",
+}, smithy.ShapeTypeStructure, 18)
+var UpdateDataQualityEvaluationConfigResponse_Name *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_EvaluationRunMode *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_CreatedOn *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_LastModifiedOn *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_Level *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_DataSource *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_RulesetName *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_ManagedRulesetName *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_Triggers *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_ScheduleExpression *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_StartAt *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_EndAt *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_PauseRuns *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_Role *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_NumberOfWorkers *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_Timeout *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_AdditionalRunOptions *smithy.Schema
+
+var UpdateDataQualityEvaluationConfigResponse_AdditionalDataSources *smithy.Schema
 
 var UpdateDataQualityRulesetRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -24666,6 +25056,94 @@ func init() {
 
 	ObservationResultsOptions_CatalogTableConfig = ObservationResultsOptions.AddMember("CatalogTableConfig", CatalogTableConfigOptions)
 
+	DataQualityEvaluationConfigAdditionalRunOptions_CloudWatchMetricsEnabled = DataQualityEvaluationConfigAdditionalRunOptions.AddMember("CloudWatchMetricsEnabled", _NullableBoolean)
+
+	DataQualityEvaluationConfigAdditionalRunOptions_ResultsS3Prefix = DataQualityEvaluationConfigAdditionalRunOptions.AddMember("ResultsS3Prefix", _UriString)
+
+	DataQualityEvaluationConfigAdditionalRunOptions_CompositeRuleEvaluationMethod = DataQualityEvaluationConfigAdditionalRunOptions.AddMember("CompositeRuleEvaluationMethod", DQCompositeRuleEvaluationMethod)
+
+	DataQualityEvaluationConfigAdditionalRunOptions_RowLevelResults = DataQualityEvaluationConfigAdditionalRunOptions.AddMember("RowLevelResults", RowLevelResultsOptions)
+
+	DataQualityEvaluationConfigAdditionalRunOptions_ProfilingResults = DataQualityEvaluationConfigAdditionalRunOptions.AddMember("ProfilingResults", ProfilingResultsOptions)
+
+	DataQualityEvaluationConfigAdditionalRunOptions_ObservationScope = DataQualityEvaluationConfigAdditionalRunOptions.AddMember("ObservationScope", ObservationConfiguration)
+
+	DataQualityEvaluationConfigAdditionalRunOptions_ObservationMode = DataQualityEvaluationConfigAdditionalRunOptions.AddMember("ObservationMode", ObservationMode)
+
+	DataQualityEvaluationConfigAdditionalRunOptions_DataQualityRuleResults = DataQualityEvaluationConfigAdditionalRunOptions.AddMember("DataQualityRuleResults", DataQualityRuleResultsOptions)
+
+	DataQualityEvaluationConfigAdditionalRunOptions_ObservationResults = DataQualityEvaluationConfigAdditionalRunOptions.AddMember("ObservationResults", ObservationResultsOptions)
+
+	DataQualityEvaluationConfigAdditionalRunOptions_CustomLogGroupPrefix = DataQualityEvaluationConfigAdditionalRunOptions.AddMember("CustomLogGroupPrefix", _GenericString)
+
+	_GlueTableAdditionalOptions_key = _GlueTableAdditionalOptions.AddMember("key", _NameString)
+
+	_GlueTableAdditionalOptions_value = _GlueTableAdditionalOptions.AddMember("value", _DescriptionString)
+
+	DataQualityEvaluationConfigGlueTables_CatalogId = DataQualityEvaluationConfigGlueTables.AddMember("CatalogId", _NameString)
+
+	DataQualityEvaluationConfigGlueTables_DatabaseName = DataQualityEvaluationConfigGlueTables.AddMember("DatabaseName", _NameString)
+
+	DataQualityEvaluationConfigGlueTables_TableNamePattern = DataQualityEvaluationConfigGlueTables.AddMember("TableNamePattern", _NameString)
+
+	DataQualityEvaluationConfigGlueTables_PreProcessingQuery = DataQualityEvaluationConfigGlueTables.AddMember("PreProcessingQuery", _PreProcessingQueryString)
+
+	DataQualityEvaluationConfigGlueTables_ConnectionName = DataQualityEvaluationConfigGlueTables.AddMember("ConnectionName", _NameString)
+
+	DataQualityEvaluationConfigGlueTables_AdditionalOptions = DataQualityEvaluationConfigGlueTables.AddMember("AdditionalOptions", _GlueTableAdditionalOptions)
+
+	DataQualityEvaluationConfigDataSource_GlueTables = DataQualityEvaluationConfigDataSource.AddMember("GlueTables", DataQualityEvaluationConfigGlueTables)
+
+	DataQualityEvaluationConfigLevel_CATALOG = DataQualityEvaluationConfigLevel.AddMember("CATALOG", smithyprelude.Unit)
+
+	DataQualityEvaluationConfigLevel_DATABASE = DataQualityEvaluationConfigLevel.AddMember("DATABASE", smithyprelude.Unit)
+
+	DataQualityEvaluationConfigLevel_TABLE = DataQualityEvaluationConfigLevel.AddMember("TABLE", smithyprelude.Unit)
+
+	DataQualityEvaluationRunMode_ON_DEMAND = DataQualityEvaluationRunMode.AddMember("ON_DEMAND", smithyprelude.Unit)
+
+	DataQualityEvaluationRunMode_EVALUATION_CONFIG = DataQualityEvaluationRunMode.AddMember("EVALUATION_CONFIG", smithyprelude.Unit)
+
+	DataQualityEvaluationConfigListGlueTables_CatalogId = DataQualityEvaluationConfigListGlueTables.AddMember("CatalogId", _NameString)
+
+	DataQualityEvaluationConfigListGlueTables_DatabaseName = DataQualityEvaluationConfigListGlueTables.AddMember("DatabaseName", _NameString)
+
+	DataQualityEvaluationConfigListGlueTables_TableNamePattern = DataQualityEvaluationConfigListGlueTables.AddMember("TableNamePattern", _NameString)
+
+	DataQualityEvaluationConfigListDataSource_GlueTables = DataQualityEvaluationConfigListDataSource.AddMember("GlueTables", DataQualityEvaluationConfigListGlueTables)
+
+	DataQualityEvaluationConfigManagedRuleset_SIMPLE = DataQualityEvaluationConfigManagedRuleset.AddMember("SIMPLE", smithyprelude.Unit)
+
+	DataQualityEvaluationConfigManagedRuleset_ADVANCED = DataQualityEvaluationConfigManagedRuleset.AddMember("ADVANCED", smithyprelude.Unit)
+
+	DataQualityEvaluationConfigListDetails_Name = DataQualityEvaluationConfigListDetails.AddMember("Name", _NameString)
+
+	DataQualityEvaluationConfigListDetails_EvaluationRunMode = DataQualityEvaluationConfigListDetails.AddMember("EvaluationRunMode", DataQualityEvaluationRunMode)
+
+	DataQualityEvaluationConfigListDetails_CreatedOn = DataQualityEvaluationConfigListDetails.AddMember("CreatedOn", _Timestamp)
+
+	DataQualityEvaluationConfigListDetails_LastModifiedOn = DataQualityEvaluationConfigListDetails.AddMember("LastModifiedOn", _Timestamp)
+
+	DataQualityEvaluationConfigListDetails_Level = DataQualityEvaluationConfigListDetails.AddMember("Level", DataQualityEvaluationConfigLevel)
+
+	DataQualityEvaluationConfigListDetails_DataSource = DataQualityEvaluationConfigListDetails.AddMember("DataSource", DataQualityEvaluationConfigListDataSource)
+
+	DataQualityEvaluationConfigListDetails_RulesetName = DataQualityEvaluationConfigListDetails.AddMember("RulesetName", _NameString)
+
+	DataQualityEvaluationConfigListDetails_ManagedRulesetName = DataQualityEvaluationConfigListDetails.AddMember("ManagedRulesetName", DataQualityEvaluationConfigManagedRuleset)
+
+	DataQualityEvaluationConfigListDetails_PauseRuns = DataQualityEvaluationConfigListDetails.AddMember("PauseRuns", _NullableBoolean)
+
+	_DataQualityEvaluationConfigList_member = _DataQualityEvaluationConfigList.AddMember("member", DataQualityEvaluationConfigListDetails)
+
+	DataQualityEvaluationConfigTrigger_ONCE = DataQualityEvaluationConfigTrigger.AddMember("ONCE", smithyprelude.Unit)
+
+	DataQualityEvaluationConfigTrigger_SCHEDULE = DataQualityEvaluationConfigTrigger.AddMember("SCHEDULE", smithyprelude.Unit)
+
+	DataQualityEvaluationConfigTrigger_METADATA_CHANGE = DataQualityEvaluationConfigTrigger.AddMember("METADATA_CHANGE", smithyprelude.Unit)
+
+	_DataQualityEvaluationConfigTriggers_member = _DataQualityEvaluationConfigTriggers.AddMember("member", DataQualityEvaluationConfigTrigger)
+
 	DataQualityEvaluationRunAdditionalRunOptions_CloudWatchMetricsEnabled = DataQualityEvaluationRunAdditionalRunOptions.AddMember("CloudWatchMetricsEnabled", _NullableBoolean)
 
 	DataQualityEvaluationRunAdditionalRunOptions_ResultsS3Prefix = DataQualityEvaluationRunAdditionalRunOptions.AddMember("ResultsS3Prefix", _UriString)
@@ -24689,10 +25167,6 @@ func init() {
 	_DataQualityFlagsEnabled_key = _DataQualityFlagsEnabled.AddMember("key", _NameString)
 
 	_DataQualityFlagsEnabled_value = _DataQualityFlagsEnabled.AddMember("value", _NameString)
-
-	_GlueTableAdditionalOptions_key = _GlueTableAdditionalOptions.AddMember("key", _NameString)
-
-	_GlueTableAdditionalOptions_value = _GlueTableAdditionalOptions.AddMember("value", _DescriptionString)
 
 	DataQualityGlueTable_DatabaseName = DataQualityGlueTable.AddMember("DatabaseName", _NameString)
 
@@ -24784,6 +25258,10 @@ func init() {
 
 	DataQualityResult_ResultId = DataQualityResult.AddMember("ResultId", _HashString)
 
+	DataQualityResult_EvaluationRunMode = DataQualityResult.AddMember("EvaluationRunMode", DataQualityEvaluationRunMode)
+
+	DataQualityResult_DataQualityEvaluationConfig = DataQualityResult.AddMember("DataQualityEvaluationConfig", _NameString)
+
 	DataQualityResult_ProfileId = DataQualityResult.AddMember("ProfileId", _HashString)
 
 	DataQualityResult_Score = DataQualityResult.AddMember("Score", _GenericBoundedDouble)
@@ -24814,6 +25292,10 @@ func init() {
 
 	DataQualityResultDescription_ResultId = DataQualityResultDescription.AddMember("ResultId", _HashString)
 
+	DataQualityResultDescription_EvaluationRunMode = DataQualityResultDescription.AddMember("EvaluationRunMode", DataQualityEvaluationRunMode)
+
+	DataQualityResultDescription_DataQualityEvaluationConfig = DataQualityResultDescription.AddMember("DataQualityEvaluationConfig", _NameString)
+
 	DataQualityResultDescription_DataSource = DataQualityResultDescription.AddMember("DataSource", DataSource)
 
 	DataQualityResultDescription_JobName = DataQualityResultDescription.AddMember("JobName", _NameString)
@@ -24834,6 +25316,10 @@ func init() {
 
 	DataQualityResultFilterCriteria_StartedBefore = DataQualityResultFilterCriteria.AddMember("StartedBefore", _Timestamp)
 
+	DataQualityResultFilterCriteria_EvaluationRunMode = DataQualityResultFilterCriteria.AddMember("EvaluationRunMode", DataQualityEvaluationRunMode)
+
+	DataQualityResultFilterCriteria_DataQualityEvaluationConfig = DataQualityResultFilterCriteria.AddMember("DataQualityEvaluationConfig", _NameString)
+
 	_DataQualityResultIdList_member = _DataQualityResultIdList.AddMember("member", _HashString)
 
 	_DataQualityResultIds_member = _DataQualityResultIds.AddMember("member", _HashString)
@@ -24849,6 +25335,10 @@ func init() {
 	_PublishDataQualityResultDescriptors_value = _PublishDataQualityResultDescriptors.AddMember("value", _NameString)
 
 	DataQualityResultsV2Description_ResultId = DataQualityResultsV2Description.AddMember("ResultId", _HashString)
+
+	DataQualityResultsV2Description_EvaluationRunMode = DataQualityResultsV2Description.AddMember("EvaluationRunMode", DataQualityEvaluationRunMode)
+
+	DataQualityResultsV2Description_DataQualityEvaluationConfig = DataQualityResultsV2Description.AddMember("DataQualityEvaluationConfig", _NameString)
 
 	DataQualityResultsV2Description_DataSource = DataQualityResultsV2Description.AddMember("DataSource", DataSource)
 
@@ -24872,6 +25362,10 @@ func init() {
 
 	DataQualityResultsV2FilterCriteria_EvaluationContext = DataQualityResultsV2FilterCriteria.AddMember("EvaluationContext", _NameString)
 
+	DataQualityResultsV2FilterCriteria_EvaluationRunMode = DataQualityResultsV2FilterCriteria.AddMember("EvaluationRunMode", DataQualityEvaluationRunMode)
+
+	DataQualityResultsV2FilterCriteria_DataQualityEvaluationConfig = DataQualityResultsV2FilterCriteria.AddMember("DataQualityEvaluationConfig", _NameString)
+
 	_DataQualityResultV2IdList_member = _DataQualityResultV2IdList.AddMember("member", _HashString)
 
 	_PublishDataQualityResultTags_key = _PublishDataQualityResultTags.AddMember("key", _NameString)
@@ -24879,6 +25373,10 @@ func init() {
 	_PublishDataQualityResultTags_value = _PublishDataQualityResultTags.AddMember("value", _NameString)
 
 	DataQualityResultV2Item_ResultId = DataQualityResultV2Item.AddMember("ResultId", _HashString)
+
+	DataQualityResultV2Item_EvaluationRunMode = DataQualityResultV2Item.AddMember("EvaluationRunMode", DataQualityEvaluationRunMode)
+
+	DataQualityResultV2Item_DataQualityEvaluationConfig = DataQualityResultV2Item.AddMember("DataQualityEvaluationConfig", _NameString)
 
 	DataQualityResultV2Item_DataSource = DataQualityResultV2Item.AddMember("DataSource", DataSource)
 
@@ -27824,6 +28322,42 @@ func init() {
 
 	CreateDatabaseRequest_Tags = CreateDatabaseRequest.AddMember("Tags", _TagsMap)
 
+	CreateDataQualityEvaluationConfigRequest_Name = CreateDataQualityEvaluationConfigRequest.AddMember("Name", _NameString)
+
+	CreateDataQualityEvaluationConfigRequest_Level = CreateDataQualityEvaluationConfigRequest.AddMember("Level", DataQualityEvaluationConfigLevel)
+
+	CreateDataQualityEvaluationConfigRequest_DataSource = CreateDataQualityEvaluationConfigRequest.AddMember("DataSource", DataQualityEvaluationConfigDataSource)
+
+	CreateDataQualityEvaluationConfigRequest_RulesetName = CreateDataQualityEvaluationConfigRequest.AddMember("RulesetName", _NameString)
+
+	CreateDataQualityEvaluationConfigRequest_ManagedRulesetName = CreateDataQualityEvaluationConfigRequest.AddMember("ManagedRulesetName", DataQualityEvaluationConfigManagedRuleset)
+
+	CreateDataQualityEvaluationConfigRequest_Triggers = CreateDataQualityEvaluationConfigRequest.AddMember("Triggers", _DataQualityEvaluationConfigTriggers)
+
+	CreateDataQualityEvaluationConfigRequest_ScheduleExpression = CreateDataQualityEvaluationConfigRequest.AddMember("ScheduleExpression", _DataQualityEvaluationConfigScheduleExpression)
+
+	CreateDataQualityEvaluationConfigRequest_StartAt = CreateDataQualityEvaluationConfigRequest.AddMember("StartAt", _Timestamp)
+
+	CreateDataQualityEvaluationConfigRequest_EndAt = CreateDataQualityEvaluationConfigRequest.AddMember("EndAt", _Timestamp)
+
+	CreateDataQualityEvaluationConfigRequest_Role = CreateDataQualityEvaluationConfigRequest.AddMember("Role", _RoleString)
+
+	CreateDataQualityEvaluationConfigRequest_NumberOfWorkers = CreateDataQualityEvaluationConfigRequest.AddMember("NumberOfWorkers", _NullableInteger)
+
+	CreateDataQualityEvaluationConfigRequest_Timeout = CreateDataQualityEvaluationConfigRequest.AddMember("Timeout", _Timeout)
+
+	CreateDataQualityEvaluationConfigRequest_AdditionalRunOptions = CreateDataQualityEvaluationConfigRequest.AddMember("AdditionalRunOptions", DataQualityEvaluationConfigAdditionalRunOptions)
+
+	CreateDataQualityEvaluationConfigRequest_AdditionalDataSources = CreateDataQualityEvaluationConfigRequest.AddMember("AdditionalDataSources", _DataSourceMap)
+
+	CreateDataQualityEvaluationConfigRequest_Tags = CreateDataQualityEvaluationConfigRequest.AddMember("Tags", _TagsMap)
+
+	CreateDataQualityEvaluationConfigRequest_ClientToken = CreateDataQualityEvaluationConfigRequest.AddMember("ClientToken", _ClientTokenString)
+
+	CreateDataQualityEvaluationConfigResponse_Name = CreateDataQualityEvaluationConfigResponse.AddMember("Name", _NameString)
+
+	CreateDataQualityEvaluationConfigResponse_EvaluationRunMode = CreateDataQualityEvaluationConfigResponse.AddMember("EvaluationRunMode", DataQualityEvaluationRunMode)
+
 	CreateDataQualityRulesetRequest_Name = CreateDataQualityRulesetRequest.AddMember("Name", _NameString)
 
 	CreateDataQualityRulesetRequest_Description = CreateDataQualityRulesetRequest.AddMember("Description", _DescriptionString)
@@ -28360,6 +28894,8 @@ func init() {
 
 	DeleteDatabaseRequest_Name = DeleteDatabaseRequest.AddMember("Name", _NameString)
 
+	DeleteDataQualityEvaluationConfigRequest_Name = DeleteDataQualityEvaluationConfigRequest.AddMember("Name", _NameString)
+
 	DeleteDataQualityRulesetRequest_Name = DeleteDataQualityRulesetRequest.AddMember("Name", _NameString)
 
 	DeleteDevEndpointRequest_EndpointName = DeleteDevEndpointRequest.AddMember("EndpointName", _GenericString)
@@ -28828,6 +29364,44 @@ func init() {
 
 	GetDataflowGraphResponse_DagEdges = GetDataflowGraphResponse.AddMember("DagEdges", _DagEdges)
 
+	GetDataQualityEvaluationConfigRequest_Name = GetDataQualityEvaluationConfigRequest.AddMember("Name", _NameString)
+
+	GetDataQualityEvaluationConfigResponse_Name = GetDataQualityEvaluationConfigResponse.AddMember("Name", _NameString)
+
+	GetDataQualityEvaluationConfigResponse_EvaluationRunMode = GetDataQualityEvaluationConfigResponse.AddMember("EvaluationRunMode", DataQualityEvaluationRunMode)
+
+	GetDataQualityEvaluationConfigResponse_CreatedOn = GetDataQualityEvaluationConfigResponse.AddMember("CreatedOn", _Timestamp)
+
+	GetDataQualityEvaluationConfigResponse_LastModifiedOn = GetDataQualityEvaluationConfigResponse.AddMember("LastModifiedOn", _Timestamp)
+
+	GetDataQualityEvaluationConfigResponse_Level = GetDataQualityEvaluationConfigResponse.AddMember("Level", DataQualityEvaluationConfigLevel)
+
+	GetDataQualityEvaluationConfigResponse_DataSource = GetDataQualityEvaluationConfigResponse.AddMember("DataSource", DataQualityEvaluationConfigDataSource)
+
+	GetDataQualityEvaluationConfigResponse_RulesetName = GetDataQualityEvaluationConfigResponse.AddMember("RulesetName", _NameString)
+
+	GetDataQualityEvaluationConfigResponse_ManagedRulesetName = GetDataQualityEvaluationConfigResponse.AddMember("ManagedRulesetName", DataQualityEvaluationConfigManagedRuleset)
+
+	GetDataQualityEvaluationConfigResponse_Triggers = GetDataQualityEvaluationConfigResponse.AddMember("Triggers", _DataQualityEvaluationConfigTriggers)
+
+	GetDataQualityEvaluationConfigResponse_ScheduleExpression = GetDataQualityEvaluationConfigResponse.AddMember("ScheduleExpression", _DataQualityEvaluationConfigScheduleExpression)
+
+	GetDataQualityEvaluationConfigResponse_StartAt = GetDataQualityEvaluationConfigResponse.AddMember("StartAt", _Timestamp)
+
+	GetDataQualityEvaluationConfigResponse_EndAt = GetDataQualityEvaluationConfigResponse.AddMember("EndAt", _Timestamp)
+
+	GetDataQualityEvaluationConfigResponse_PauseRuns = GetDataQualityEvaluationConfigResponse.AddMember("PauseRuns", _NullableBoolean)
+
+	GetDataQualityEvaluationConfigResponse_Role = GetDataQualityEvaluationConfigResponse.AddMember("Role", _RoleString)
+
+	GetDataQualityEvaluationConfigResponse_NumberOfWorkers = GetDataQualityEvaluationConfigResponse.AddMember("NumberOfWorkers", _NullableInteger)
+
+	GetDataQualityEvaluationConfigResponse_Timeout = GetDataQualityEvaluationConfigResponse.AddMember("Timeout", _Timeout)
+
+	GetDataQualityEvaluationConfigResponse_AdditionalRunOptions = GetDataQualityEvaluationConfigResponse.AddMember("AdditionalRunOptions", DataQualityEvaluationConfigAdditionalRunOptions)
+
+	GetDataQualityEvaluationConfigResponse_AdditionalDataSources = GetDataQualityEvaluationConfigResponse.AddMember("AdditionalDataSources", _DataSourceMap)
+
 	GetDataQualityModelRequest_StatisticId = GetDataQualityModelRequest.AddMember("StatisticId", _HashString)
 
 	GetDataQualityModelRequest_ProfileId = GetDataQualityModelRequest.AddMember("ProfileId", _HashString)
@@ -28851,6 +29425,10 @@ func init() {
 	GetDataQualityResultRequest_ResultId = GetDataQualityResultRequest.AddMember("ResultId", _HashString)
 
 	GetDataQualityResultResponse_ResultId = GetDataQualityResultResponse.AddMember("ResultId", _HashString)
+
+	GetDataQualityResultResponse_EvaluationRunMode = GetDataQualityResultResponse.AddMember("EvaluationRunMode", DataQualityEvaluationRunMode)
+
+	GetDataQualityResultResponse_DataQualityEvaluationConfig = GetDataQualityResultResponse.AddMember("DataQualityEvaluationConfig", _NameString)
 
 	GetDataQualityResultResponse_ProfileId = GetDataQualityResultResponse.AddMember("ProfileId", _HashString)
 
@@ -28883,6 +29461,10 @@ func init() {
 	GetDataQualityResultV2Request_ResultId = GetDataQualityResultV2Request.AddMember("ResultId", _HashString)
 
 	GetDataQualityResultV2Response_ResultId = GetDataQualityResultV2Response.AddMember("ResultId", _HashString)
+
+	GetDataQualityResultV2Response_EvaluationRunMode = GetDataQualityResultV2Response.AddMember("EvaluationRunMode", DataQualityEvaluationRunMode)
+
+	GetDataQualityResultV2Response_DataQualityEvaluationConfig = GetDataQualityResultV2Response.AddMember("DataQualityEvaluationConfig", _NameString)
 
 	GetDataQualityResultV2Response_DataSource = GetDataQualityResultV2Response.AddMember("DataSource", DataSource)
 
@@ -29797,6 +30379,16 @@ func init() {
 	ListCustomEntityTypesResponse_CustomEntityTypes = ListCustomEntityTypesResponse.AddMember("CustomEntityTypes", _CustomEntityTypes)
 
 	ListCustomEntityTypesResponse_NextToken = ListCustomEntityTypesResponse.AddMember("NextToken", _PaginationToken)
+
+	ListDataQualityEvaluationConfigsRequest_Level = ListDataQualityEvaluationConfigsRequest.AddMember("Level", DataQualityEvaluationConfigLevel)
+
+	ListDataQualityEvaluationConfigsRequest_MaxResults = ListDataQualityEvaluationConfigsRequest.AddMember("MaxResults", _DataQualityEvaluationConfigPageSize)
+
+	ListDataQualityEvaluationConfigsRequest_NextToken = ListDataQualityEvaluationConfigsRequest.AddMember("NextToken", _PaginationToken)
+
+	ListDataQualityEvaluationConfigsResponse_DataQualityEvaluationConfigs = ListDataQualityEvaluationConfigsResponse.AddMember("DataQualityEvaluationConfigs", _DataQualityEvaluationConfigList)
+
+	ListDataQualityEvaluationConfigsResponse_NextToken = ListDataQualityEvaluationConfigsResponse.AddMember("NextToken", _PaginationToken)
 
 	ListDataQualityResultsRequest_Filter = ListDataQualityResultsRequest.AddMember("Filter", DataQualityResultFilterCriteria)
 
@@ -30757,6 +31349,70 @@ func init() {
 	UpdateDatabaseRequest_Name = UpdateDatabaseRequest.AddMember("Name", _NameString)
 
 	UpdateDatabaseRequest_DatabaseInput = UpdateDatabaseRequest.AddMember("DatabaseInput", DatabaseInput)
+
+	UpdateDataQualityEvaluationConfigRequest_Name = UpdateDataQualityEvaluationConfigRequest.AddMember("Name", _NameString)
+
+	UpdateDataQualityEvaluationConfigRequest_DataSource = UpdateDataQualityEvaluationConfigRequest.AddMember("DataSource", DataQualityEvaluationConfigDataSource)
+
+	UpdateDataQualityEvaluationConfigRequest_RulesetName = UpdateDataQualityEvaluationConfigRequest.AddMember("RulesetName", _NameString)
+
+	UpdateDataQualityEvaluationConfigRequest_ManagedRulesetName = UpdateDataQualityEvaluationConfigRequest.AddMember("ManagedRulesetName", DataQualityEvaluationConfigManagedRuleset)
+
+	UpdateDataQualityEvaluationConfigRequest_Triggers = UpdateDataQualityEvaluationConfigRequest.AddMember("Triggers", _DataQualityEvaluationConfigTriggers)
+
+	UpdateDataQualityEvaluationConfigRequest_ScheduleExpression = UpdateDataQualityEvaluationConfigRequest.AddMember("ScheduleExpression", _DataQualityEvaluationConfigScheduleExpression)
+
+	UpdateDataQualityEvaluationConfigRequest_StartAt = UpdateDataQualityEvaluationConfigRequest.AddMember("StartAt", _Timestamp)
+
+	UpdateDataQualityEvaluationConfigRequest_EndAt = UpdateDataQualityEvaluationConfigRequest.AddMember("EndAt", _Timestamp)
+
+	UpdateDataQualityEvaluationConfigRequest_PauseRuns = UpdateDataQualityEvaluationConfigRequest.AddMember("PauseRuns", _NullableBoolean)
+
+	UpdateDataQualityEvaluationConfigRequest_Role = UpdateDataQualityEvaluationConfigRequest.AddMember("Role", _RoleString)
+
+	UpdateDataQualityEvaluationConfigRequest_NumberOfWorkers = UpdateDataQualityEvaluationConfigRequest.AddMember("NumberOfWorkers", _NullableInteger)
+
+	UpdateDataQualityEvaluationConfigRequest_Timeout = UpdateDataQualityEvaluationConfigRequest.AddMember("Timeout", _Timeout)
+
+	UpdateDataQualityEvaluationConfigRequest_AdditionalRunOptions = UpdateDataQualityEvaluationConfigRequest.AddMember("AdditionalRunOptions", DataQualityEvaluationConfigAdditionalRunOptions)
+
+	UpdateDataQualityEvaluationConfigRequest_AdditionalDataSources = UpdateDataQualityEvaluationConfigRequest.AddMember("AdditionalDataSources", _DataSourceMap)
+
+	UpdateDataQualityEvaluationConfigResponse_Name = UpdateDataQualityEvaluationConfigResponse.AddMember("Name", _NameString)
+
+	UpdateDataQualityEvaluationConfigResponse_EvaluationRunMode = UpdateDataQualityEvaluationConfigResponse.AddMember("EvaluationRunMode", DataQualityEvaluationRunMode)
+
+	UpdateDataQualityEvaluationConfigResponse_CreatedOn = UpdateDataQualityEvaluationConfigResponse.AddMember("CreatedOn", _Timestamp)
+
+	UpdateDataQualityEvaluationConfigResponse_LastModifiedOn = UpdateDataQualityEvaluationConfigResponse.AddMember("LastModifiedOn", _Timestamp)
+
+	UpdateDataQualityEvaluationConfigResponse_Level = UpdateDataQualityEvaluationConfigResponse.AddMember("Level", DataQualityEvaluationConfigLevel)
+
+	UpdateDataQualityEvaluationConfigResponse_DataSource = UpdateDataQualityEvaluationConfigResponse.AddMember("DataSource", DataQualityEvaluationConfigDataSource)
+
+	UpdateDataQualityEvaluationConfigResponse_RulesetName = UpdateDataQualityEvaluationConfigResponse.AddMember("RulesetName", _NameString)
+
+	UpdateDataQualityEvaluationConfigResponse_ManagedRulesetName = UpdateDataQualityEvaluationConfigResponse.AddMember("ManagedRulesetName", DataQualityEvaluationConfigManagedRuleset)
+
+	UpdateDataQualityEvaluationConfigResponse_Triggers = UpdateDataQualityEvaluationConfigResponse.AddMember("Triggers", _DataQualityEvaluationConfigTriggers)
+
+	UpdateDataQualityEvaluationConfigResponse_ScheduleExpression = UpdateDataQualityEvaluationConfigResponse.AddMember("ScheduleExpression", _DataQualityEvaluationConfigScheduleExpression)
+
+	UpdateDataQualityEvaluationConfigResponse_StartAt = UpdateDataQualityEvaluationConfigResponse.AddMember("StartAt", _Timestamp)
+
+	UpdateDataQualityEvaluationConfigResponse_EndAt = UpdateDataQualityEvaluationConfigResponse.AddMember("EndAt", _Timestamp)
+
+	UpdateDataQualityEvaluationConfigResponse_PauseRuns = UpdateDataQualityEvaluationConfigResponse.AddMember("PauseRuns", _NullableBoolean)
+
+	UpdateDataQualityEvaluationConfigResponse_Role = UpdateDataQualityEvaluationConfigResponse.AddMember("Role", _RoleString)
+
+	UpdateDataQualityEvaluationConfigResponse_NumberOfWorkers = UpdateDataQualityEvaluationConfigResponse.AddMember("NumberOfWorkers", _NullableInteger)
+
+	UpdateDataQualityEvaluationConfigResponse_Timeout = UpdateDataQualityEvaluationConfigResponse.AddMember("Timeout", _Timeout)
+
+	UpdateDataQualityEvaluationConfigResponse_AdditionalRunOptions = UpdateDataQualityEvaluationConfigResponse.AddMember("AdditionalRunOptions", DataQualityEvaluationConfigAdditionalRunOptions)
+
+	UpdateDataQualityEvaluationConfigResponse_AdditionalDataSources = UpdateDataQualityEvaluationConfigResponse.AddMember("AdditionalDataSources", _DataSourceMap)
 
 	UpdateDataQualityRulesetRequest_Name = UpdateDataQualityRulesetRequest.AddMember("Name", _NameString)
 

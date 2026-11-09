@@ -64,6 +64,10 @@ type GetDataQualityResultOutput struct {
 	// The date and time when the run for this data quality result was completed.
 	CompletedOn *time.Time
 
+	// The name of the data quality evaluation configuration that started the
+	// evaluation run, returned when EvaluationRunMode is EVALUATION_CONFIG .
+	DataQualityEvaluationConfig *string
+
 	// The table associated with the data quality result, if any.
 	DataSource *types.DataSource
 
@@ -71,6 +75,12 @@ type GetDataQualityResultOutput struct {
 	// assigned some sort of name and data quality nodes will have names. In the case
 	// of multiple nodes, the evaluationContext can differentiate the nodes.
 	EvaluationContext *string
+
+	// How the evaluation run that produced the result started: ON_DEMAND for a run
+	// started by StartDataQualityRulesetEvaluationRun , or EVALUATION_CONFIG for a
+	// run started by a data quality evaluation configuration. Not returned for results
+	// that no evaluation run produced, such as results from any ETL job.
+	EvaluationRunMode types.DataQualityEvaluationRunMode
 
 	// The job name associated with the data quality result, if any.
 	JobName *string
@@ -128,6 +138,9 @@ func (v *GetDataQualityResultOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CompletedOn != nil {
 		s.WriteTime(schemas.GetDataQualityResultResponse_CompletedOn, *v.CompletedOn)
 	}
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.GetDataQualityResultResponse_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.GetDataQualityResultResponse_DataSource)
 		v.DataSource.SerializeMembers(s)
@@ -135,6 +148,9 @@ func (v *GetDataQualityResultOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 	if v.EvaluationContext != nil {
 		s.WriteString(schemas.GetDataQualityResultResponse_EvaluationContext, *v.EvaluationContext)
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.GetDataQualityResultResponse_EvaluationRunMode, string(v.EvaluationRunMode))
 	}
 	if v.JobName != nil {
 		s.WriteString(schemas.GetDataQualityResultResponse_JobName, *v.JobName)
@@ -178,12 +194,22 @@ func (v *GetDataQualityResultOutput) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.GetDataQualityResultResponse_CompletedOn:
 			v.CompletedOn = new(time.Time)
 			return d.ReadTime(schemas.GetDataQualityResultResponse_CompletedOn, v.CompletedOn)
+		case schemas.GetDataQualityResultResponse_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.GetDataQualityResultResponse_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.GetDataQualityResultResponse_DataSource:
 			v.DataSource = &types.DataSource{}
 			return v.DataSource.Deserialize(d)
 		case schemas.GetDataQualityResultResponse_EvaluationContext:
 			v.EvaluationContext = new(string)
 			return d.ReadString(schemas.GetDataQualityResultResponse_EvaluationContext, v.EvaluationContext)
+		case schemas.GetDataQualityResultResponse_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.GetDataQualityResultResponse_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = types.DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.GetDataQualityResultResponse_JobName:
 			v.JobName = new(string)
 			return d.ReadString(schemas.GetDataQualityResultResponse_JobName, v.JobName)

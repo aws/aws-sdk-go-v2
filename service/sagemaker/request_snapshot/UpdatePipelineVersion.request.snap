@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: SageMaker.UpdatePipelineVersion
 
-{"PipelineArn":"__PipelineArn__","PipelineVersionDescription":"__PipelineVersionDescription__","PipelineVersionDisplayName":"__PipelineVersionDisplayName__","PipelineVersionId":1}
+{"PipelineArn":"__PipelineArn__","PipelineVersionAliasOperations":{"Add":["__Member__","__Member__"],"Remove":["__Member__","__Member__"]},"PipelineVersionDescription":"__PipelineVersionDescription__","PipelineVersionDisplayName":"__PipelineVersionDisplayName__","PipelineVersionId":1}
