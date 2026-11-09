@@ -4111,6 +4111,20 @@
                         "smithy.api#documentation": "<p>A Databricks Unity Catalog (Iceberg REST) connection type.</p>",
                         "smithy.api#enumValue": "DATABRICKSICEBERGRESTCATALOG"
                     }
+                },
+                "WORKDAYICEBERGRESTCATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Workday Data Connect (Iceberg REST) catalog connection type.</p>",
+                        "smithy.api#enumValue": "WORKDAYICEBERGRESTCATALOG"
+                    }
+                },
+                "WORKDAYLDQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Workday Live Data Query connection type.</p>",
+                        "smithy.api#enumValue": "WORKDAYLDQ"
+                    }
                 }
             }
         },
@@ -6161,7 +6175,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Creates a new user-defined designation with a Cedar permit policy.\nThe designation defines a named role that can be assigned to project members.",
+                "smithy.api#documentation": "<p>Creates a new user-defined designation with a Cedar permit policy. The designation defines a named role that can be assigned to project members through <code>CreateProjectMembership</code> or granted through <code>AddPolicyGrant</code>.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -6196,7 +6210,7 @@
                 "policy": {
                     "target": "com.amazonaws.datazone#CedarDesignationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "The Cedar permit policy that defines what actions holders of this\ndesignation are allowed to perform.",
+                        "smithy.api#documentation": "<p>The Cedar permit policy that defines the actions holders of this designation are allowed to perform.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6204,7 +6218,7 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#default": true,
-                        "smithy.api#documentation": "Whether deletion protection is enabled for this designation. Defaults to true when omitted."
+                        "smithy.api#documentation": "<p>Specifies whether deletion protection is enabled for this designation. Defaults to <code>true</code> when omitted. When enabled, <code>DeleteDesignation</code> is rejected until protection is disabled through <code>UpdateDesignation</code>.</p>"
                     }
                 }
             },
@@ -6245,21 +6259,21 @@
                 "designationType": {
                     "target": "com.amazonaws.datazone#DesignationType",
                     "traits": {
-                        "smithy.api#documentation": "The classification of this designation. MANAGED designations are\nsystem-defined and cannot be modified or deleted.",
+                        "smithy.api#documentation": "<p>The classification of this designation. Valid values:</p> <ul> <li> <p> <code>MANAGED</code> — System-defined designations that cannot be modified or deleted.</p> </li> <li> <p> <code>USER_CREATED</code> — Designations created through <code>CreateDesignation</code>.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "policy": {
                     "target": "com.amazonaws.datazone#CedarDesignationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "The Cedar permit policy that governs what actions holders of this\ndesignation are allowed to perform.",
+                        "smithy.api#documentation": "<p>The Cedar permit policy that governs the actions holders of this designation are allowed to perform.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "deletionProtection": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "Whether deletion protection is enabled for this designation. When true,\nDeleteDesignation is rejected until protection is disabled via UpdateDesignation.",
+                        "smithy.api#documentation": "<p>Specifies whether deletion protection is enabled for this designation. When <code>true</code>, <code>DeleteDesignation</code> is rejected until protection is disabled through <code>UpdateDesignation</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13018,7 +13032,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Deletes a designation. Managed designations cannot be deleted.\nThis operation is idempotent.",
+                "smithy.api#documentation": "<p>Deletes a user-created designation. Managed designations cannot be deleted. The call fails if the designation has <code>deletionProtection</code> enabled or if any project member still holds it. This operation is idempotent.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -14859,13 +14873,13 @@
                 "designationType": {
                     "target": "com.amazonaws.datazone#DesignationType",
                     "traits": {
-                        "smithy.api#documentation": "The classification of this designation."
+                        "smithy.api#documentation": "<p>The classification of this designation. Valid values:</p> <ul> <li> <p> <code>MANAGED</code> — System-defined designation.</p> </li> <li> <p> <code>USER_CREATED</code> — User-created designation.</p> </li> </ul>"
                     }
                 },
                 "deletionProtection": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "Whether deletion protection is enabled for this designation.",
+                        "smithy.api#documentation": "<p>Specifies whether deletion protection is enabled for this designation. When <code>true</code>, <code>DeleteDesignation</code> is rejected until protection is disabled through <code>UpdateDesignation</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14892,7 +14906,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Summary representation of a designation returned by list operations."
+                "smithy.api#documentation": "<p>The summary representation of a designation returned by <code>ListDesignations</code>. The summary omits the Cedar permit policy. Call <code>GetDesignation</code> to retrieve the full designation record including the policy.</p>"
             }
         },
         "com.amazonaws.datazone#DesignationType": {
@@ -18900,7 +18914,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Gets the details of a designation, including its Cedar policy.",
+                "smithy.api#documentation": "<p>Gets the details of a designation, including its Cedar permit policy. Returns the full designation record for both system-managed and user-created designations.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -18966,21 +18980,21 @@
                 "designationType": {
                     "target": "com.amazonaws.datazone#DesignationType",
                     "traits": {
-                        "smithy.api#documentation": "The classification of this designation. MANAGED designations are\nsystem-defined and cannot be modified or deleted.",
+                        "smithy.api#documentation": "<p>The classification of this designation. Valid values:</p> <ul> <li> <p> <code>MANAGED</code> — System-defined designations that cannot be modified or deleted.</p> </li> <li> <p> <code>USER_CREATED</code> — Designations created through <code>CreateDesignation</code>.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "policy": {
                     "target": "com.amazonaws.datazone#CedarDesignationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "The Cedar permit policy that governs what actions holders of this\ndesignation are allowed to perform.",
+                        "smithy.api#documentation": "<p>The Cedar permit policy that governs the actions holders of this designation are allowed to perform.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "deletionProtection": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "Whether deletion protection is enabled for this designation. When true,\nDeleteDesignation is rejected until protection is disabled via UpdateDesignation.",
+                        "smithy.api#documentation": "<p>Specifies whether deletion protection is enabled for this designation. When <code>true</code>, <code>DeleteDesignation</code> is rejected until protection is disabled through <code>UpdateDesignation</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -24459,6 +24473,20 @@
                         "smithy.api#documentation": "<p>A Databricks Unity Catalog (Iceberg REST) connection type.</p>",
                         "smithy.api#enumValue": "DATABRICKSICEBERGRESTCATALOG"
                     }
+                },
+                "WORKDAYICEBERGRESTCATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Workday Data Connect (Iceberg REST) catalog connection type.</p>",
+                        "smithy.api#enumValue": "WORKDAYICEBERGRESTCATALOG"
+                    }
+                },
+                "WORKDAYLDQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Workday Live Data Query connection type.</p>",
+                        "smithy.api#enumValue": "WORKDAYLDQ"
+                    }
                 }
             }
         },
@@ -27270,7 +27298,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Lists the designations in a domain. Returns system-managed designations\nfirst, followed by user-created designations sorted alphabetically by name.",
+                "smithy.api#documentation": "<p>Lists the designations in a domain. The response returns system-managed designations first, followed by user-created designations in alphabetical order by name. Results are paginated. Use <code>nextToken</code> to retrieve additional pages of results.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -42840,7 +42868,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Updates an existing designation. Managed designations cannot be modified.",
+                "smithy.api#documentation": "<p>Updates an existing user-created designation. Managed designations cannot be modified. Omit a field to leave its current value unchanged.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PATCH",
@@ -42882,13 +42910,13 @@
                 "policy": {
                     "target": "com.amazonaws.datazone#CedarDesignationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "The updated Cedar permit policy."
+                        "smithy.api#documentation": "<p>The updated Cedar permit policy. Omit to keep the existing policy.</p>"
                     }
                 },
                 "deletionProtection": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "Whether deletion protection is enabled for this designation. Omit to keep the existing value."
+                        "smithy.api#documentation": "<p>Specifies whether deletion protection is enabled for this designation. Omit to keep the existing value.</p>"
                     }
                 }
             },
@@ -42929,21 +42957,21 @@
                 "designationType": {
                     "target": "com.amazonaws.datazone#DesignationType",
                     "traits": {
-                        "smithy.api#documentation": "The classification of this designation. MANAGED designations are\nsystem-defined and cannot be modified or deleted.",
+                        "smithy.api#documentation": "<p>The classification of this designation. Valid values:</p> <ul> <li> <p> <code>MANAGED</code> — System-defined designations that cannot be modified or deleted.</p> </li> <li> <p> <code>USER_CREATED</code> — Designations created through <code>CreateDesignation</code>.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "policy": {
                     "target": "com.amazonaws.datazone#CedarDesignationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "The Cedar permit policy that governs what actions holders of this\ndesignation are allowed to perform.",
+                        "smithy.api#documentation": "<p>The Cedar permit policy that governs the actions holders of this designation are allowed to perform.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "deletionProtection": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "Whether deletion protection is enabled for this designation. When true,\nDeleteDesignation is rejected until protection is disabled via UpdateDesignation.",
+                        "smithy.api#documentation": "<p>Specifies whether deletion protection is enabled for this designation. When <code>true</code>, <code>DeleteDesignation</code> is rejected until protection is disabled through <code>UpdateDesignation</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
