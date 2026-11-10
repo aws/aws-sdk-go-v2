@@ -1,0 +1,9 @@
+{
+    "id": "d888156e-9ddf-4265-a777-db51f1598142",
+    "type": "bugfix",
+    "description": "Fix a panic in `Marshal` and `MarshalMap` when a typed nil pointer with a pointer-receiver `Marshaler` is held in an interface or is the inner pointer of a double pointer. These values are encoded as `AttributeValueMemberNULL` again.",
+    "modules": [
+        "feature/dynamodb/attributevalue",
+        "feature/dynamodbstreams/attributevalue"
+    ]
+}
