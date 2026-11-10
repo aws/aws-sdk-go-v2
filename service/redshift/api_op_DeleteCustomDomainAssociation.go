@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteCustomDomainAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomDomainAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomDomainAssociationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomDomainAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DeleteCustomDomainAssociationMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.DeleteCustomDomainAssociationMessage_CustomDomainName, *v.CustomDomainName)
+	}
+}
+
 type DeleteCustomDomainAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteCustomDomainAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomDomainAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomDomainAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCustomDomainAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteCustomDomainAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomDomainAssociation, schemas.DeleteCustomDomainAssociationMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteCustomDomainAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomDomainAssociation, schemas.DeleteCustomDomainAssociationMessage, nil), output: &DeleteCustomDomainAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -221,9 +221,10 @@ func TestUpdateResponseSnapshot_CreateTrustAnchor(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -443,9 +444,10 @@ func TestUpdateResponseSnapshot_DeleteTrustAnchor(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -597,9 +599,10 @@ func TestUpdateResponseSnapshot_DisableTrustAnchor(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -751,9 +754,10 @@ func TestUpdateResponseSnapshot_EnableTrustAnchor(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -971,9 +975,10 @@ func TestUpdateResponseSnapshot_GetTrustAnchor(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -1298,9 +1303,10 @@ func TestUpdateResponseSnapshot_ListTrustAnchors(t *testing.T) {
 						Value: "__SourceDataMemberX509CertificateData__",
 					},
 				},
-				Enabled:   ptr.Bool(true),
-				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Enabled:                ptr.Bool(true),
+				CrlDpRevocationEnabled: ptr.Bool(true),
+				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				NotificationSettings: []types.NotificationSettingDetail{
 					{
 						Enabled:      ptr.Bool(true),
@@ -1328,9 +1334,10 @@ func TestUpdateResponseSnapshot_ListTrustAnchors(t *testing.T) {
 						Value: "__SourceDataMemberX509CertificateData__",
 					},
 				},
-				Enabled:   ptr.Bool(true),
-				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Enabled:                ptr.Bool(true),
+				CrlDpRevocationEnabled: ptr.Bool(true),
+				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				NotificationSettings: []types.NotificationSettingDetail{
 					{
 						Enabled:      ptr.Bool(true),
@@ -1450,9 +1457,10 @@ func TestUpdateResponseSnapshot_PutNotificationSettings(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -1503,9 +1511,10 @@ func TestUpdateResponseSnapshot_ResetNotificationSettings(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -1701,9 +1710,10 @@ func TestUpdateResponseSnapshot_UpdateTrustAnchor(t *testing.T) {
 					Value: "__SourceDataMemberX509CertificateData__",
 				},
 			},
-			Enabled:   ptr.Bool(true),
-			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Enabled:                ptr.Bool(true),
+			CrlDpRevocationEnabled: ptr.Bool(true),
+			CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			NotificationSettings: []types.NotificationSettingDetail{
 				{
 					Enabled:      ptr.Bool(true),
@@ -1788,6 +1798,32 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 404, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
+	want := &types.ServiceUnavailableException{
+		Message:           ptr.String("__Message__"),
+		RetryAfterSeconds: ptr.Int32(1),
+	}
+	proto := restjson1.New(schemas.RolesAnywhere)
+	opSchema := smithy.NewOperationSchema(schemas.CreateProfile, schemas.ServiceUnavailableException, schemas.ServiceUnavailableException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ServiceUnavailableException.error", 503, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DeleteEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.DeleteEndpointInput_EndpointArn, *v.EndpointArn)
+	}
+}
+
 type DeleteEndpointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +61,26 @@ type DeleteEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEndpoint, schemas.DeleteEndpointInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEndpoint, schemas.DeleteEndpointInput, nil), output: &DeleteEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

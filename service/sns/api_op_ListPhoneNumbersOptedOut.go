@@ -5,6 +5,8 @@ package sns
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type ListPhoneNumbersOptedOutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPhoneNumbersOptedOutInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPhoneNumbersOptedOutInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPhoneNumbersOptedOutInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPhoneNumbersOptedOutInput_nextToken, *v.NextToken)
+	}
+}
+
 // The response from the ListPhoneNumbersOptedOut action.
 type ListPhoneNumbersOptedOutOutput struct {
 
@@ -59,13 +73,37 @@ type ListPhoneNumbersOptedOutOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPhoneNumbersOptedOutOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPhoneNumbersOptedOutResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPhoneNumbersOptedOutOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPhoneNumbersOptedOutResponse_nextToken, *v.NextToken)
+	}
+	if v.PhoneNumbers != nil {
+		serializePhoneNumberList(s, schemas.ListPhoneNumbersOptedOutResponse_phoneNumbers, v.PhoneNumbers)
+	}
+}
+func (v *ListPhoneNumbersOptedOutOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPhoneNumbersOptedOutResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPhoneNumbersOptedOutResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPhoneNumbersOptedOutResponse_nextToken, v.NextToken)
+		case schemas.ListPhoneNumbersOptedOutResponse_phoneNumbers:
+			return deserializePhoneNumberList(d, schemas.ListPhoneNumbersOptedOutResponse_phoneNumbers, &v.PhoneNumbers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPhoneNumbersOptedOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListPhoneNumbersOptedOut{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPhoneNumbersOptedOut, schemas.ListPhoneNumbersOptedOutInput, schemas.ListPhoneNumbersOptedOutResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListPhoneNumbersOptedOut{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPhoneNumbersOptedOut, schemas.ListPhoneNumbersOptedOutInput, schemas.ListPhoneNumbersOptedOutResponse), output: &ListPhoneNumbersOptedOutOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

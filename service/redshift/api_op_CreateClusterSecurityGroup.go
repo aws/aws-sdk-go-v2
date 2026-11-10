@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,24 @@ type CreateClusterSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterSecurityGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSecurityGroupName != nil {
+		s.WriteString(schemas.CreateClusterSecurityGroupMessage_ClusterSecurityGroupName, *v.ClusterSecurityGroupName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateClusterSecurityGroupMessage_Description, *v.Description)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateClusterSecurityGroupMessage_Tags, v.Tags)
+	}
+}
+
 type CreateClusterSecurityGroupOutput struct {
 
 	// Describes a security group.
@@ -71,13 +91,34 @@ type CreateClusterSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterSecurityGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterSecurityGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterSecurityGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSecurityGroup != nil {
+		s.WriteStruct(schemas.CreateClusterSecurityGroupResult_ClusterSecurityGroup)
+		v.ClusterSecurityGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateClusterSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterSecurityGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterSecurityGroupResult_ClusterSecurityGroup:
+			v.ClusterSecurityGroup = &types.ClusterSecurityGroup{}
+			return v.ClusterSecurityGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateClusterSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterSecurityGroup, schemas.CreateClusterSecurityGroupMessage, schemas.CreateClusterSecurityGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateClusterSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterSecurityGroup, schemas.CreateClusterSecurityGroupMessage, schemas.CreateClusterSecurityGroupResult), output: &CreateClusterSecurityGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

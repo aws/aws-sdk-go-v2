@@ -1,3 +1,17 @@
+# v1.85.1 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.85.0 (2026-11-05)
+
+* **Feature**: AWS WAF customers who monetize AI traffic on Web ACLs can now configure payments through connected accounts (Stripe).
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.84.2 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.84.1 (2026-10-30)
 
 * **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.

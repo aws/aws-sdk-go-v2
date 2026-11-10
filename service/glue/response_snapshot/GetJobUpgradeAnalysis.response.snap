@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetJobUpgradeAnalysis
+
+{"analysisId":"__AnalysisId__","analysisType":"AUTO_UPGRADE","autoUpgradeEligibilitySummary":"__AutoUpgradeEligibilitySummary__","autoUpgradeEvaluationSummary":"__AutoUpgradeEvaluationSummary__","errorMessage":"__ErrorMessage__","jobName":"__JobName__","sourceVersion":"__SourceVersion__","status":"OBSERVING","targetVersion":"__TargetVersion__"}

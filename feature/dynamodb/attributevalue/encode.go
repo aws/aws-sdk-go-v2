@@ -459,7 +459,7 @@ func (e *Encoder) encode(v reflect.Value, fieldTag tag) (types.AttributeValue, e
 	// Handle both pointers and interface conversion into types
 	v = valueElem(v)
 
-	if v.Kind() != reflect.Invalid {
+	if v.Kind() != reflect.Invalid && !isNilPointer(v) {
 		if av, err := e.tryMarshaler(v); err != nil {
 			return nil, err
 		} else if e.options.OmitNullAttributeValues && fieldTag.OmitEmpty && isNullAttributeValue(av) {
@@ -834,6 +834,10 @@ func valueElem(v reflect.Value) reflect.Value {
 	}
 
 	return v
+}
+
+func isNilPointer(v reflect.Value) bool {
+	return v.Kind() == reflect.Pointer && v.IsNil()
 }
 
 func isZeroValue(v reflect.Value) bool {

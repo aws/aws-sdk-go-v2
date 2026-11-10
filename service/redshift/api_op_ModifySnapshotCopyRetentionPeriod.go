@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,24 @@ type ModifySnapshotCopyRetentionPeriodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifySnapshotCopyRetentionPeriodInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifySnapshotCopyRetentionPeriodMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifySnapshotCopyRetentionPeriodInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ModifySnapshotCopyRetentionPeriodMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Manual != nil {
+		s.WriteBool(schemas.ModifySnapshotCopyRetentionPeriodMessage_Manual, *v.Manual)
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteInt32(schemas.ModifySnapshotCopyRetentionPeriodMessage_RetentionPeriod, *v.RetentionPeriod)
+	}
+}
+
 type ModifySnapshotCopyRetentionPeriodOutput struct {
 
 	// Describes a cluster.
@@ -87,13 +107,34 @@ type ModifySnapshotCopyRetentionPeriodOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifySnapshotCopyRetentionPeriodOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifySnapshotCopyRetentionPeriodResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifySnapshotCopyRetentionPeriodOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.ModifySnapshotCopyRetentionPeriodResult_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifySnapshotCopyRetentionPeriodOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifySnapshotCopyRetentionPeriodResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifySnapshotCopyRetentionPeriodResult_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifySnapshotCopyRetentionPeriodMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifySnapshotCopyRetentionPeriod{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifySnapshotCopyRetentionPeriod, schemas.ModifySnapshotCopyRetentionPeriodMessage, schemas.ModifySnapshotCopyRetentionPeriodResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifySnapshotCopyRetentionPeriod{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifySnapshotCopyRetentionPeriod, schemas.ModifySnapshotCopyRetentionPeriodMessage, schemas.ModifySnapshotCopyRetentionPeriodResult), output: &ModifySnapshotCopyRetentionPeriodOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

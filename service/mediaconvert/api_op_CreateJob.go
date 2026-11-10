@@ -61,6 +61,9 @@ type CreateJobInput struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/apireference/idempotency.html.
 	ClientRequestToken *string
 
+	// The Elemental Inference settings used in this job.
+	ElementalInferenceSettings *types.ElementalInferenceSettings
+
 	// Optional. Use queue hopping to avoid overly long waits in the backlog of the
 	// queue that you submit your job to. Specify an alternate queue and the maximum
 	// time that your job will wait in the initial queue before hopping. For more
@@ -137,6 +140,11 @@ func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.CreateJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ElementalInferenceSettings != nil {
+		s.WriteStruct(schemas.CreateJobRequest_ElementalInferenceSettings)
+		v.ElementalInferenceSettings.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.HopDestinations != nil {
 		serialize__listOfHopDestination(s, schemas.CreateJobRequest_HopDestinations, v.HopDestinations)

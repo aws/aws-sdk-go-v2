@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeAutoScalingNotificationTypesResponse><DescribeAutoScalingNotificationTypesResult><AutoScalingNotificationTypes><member>__Member__</member><member>__Member__</member></AutoScalingNotificationTypes></DescribeAutoScalingNotificationTypesResult></DescribeAutoScalingNotificationTypesResponse>

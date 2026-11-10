@@ -4,6 +4,8 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -80,6 +82,27 @@ type BacktrackDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BacktrackDBClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BacktrackDBClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BacktrackDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BacktrackTo != nil {
+		s.WriteTime(schemas.BacktrackDBClusterMessage_BacktrackTo, *v.BacktrackTo)
+	}
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.BacktrackDBClusterMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.Force != nil {
+		s.WriteBool(schemas.BacktrackDBClusterMessage_Force, *v.Force)
+	}
+	if v.UseEarliestTimeOnPointInTimeUnavailable != nil {
+		s.WriteBool(schemas.BacktrackDBClusterMessage_UseEarliestTimeOnPointInTimeUnavailable, *v.UseEarliestTimeOnPointInTimeUnavailable)
+	}
+}
+
 // This data type is used as a response element in the DescribeDBClusterBacktracks
 // action.
 type BacktrackDBClusterOutput struct {
@@ -121,13 +144,62 @@ type BacktrackDBClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BacktrackDBClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBClusterBacktrack)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BacktrackDBClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BacktrackIdentifier != nil {
+		s.WriteString(schemas.DBClusterBacktrack_BacktrackIdentifier, *v.BacktrackIdentifier)
+	}
+	if v.BacktrackRequestCreationTime != nil {
+		s.WriteTime(schemas.DBClusterBacktrack_BacktrackRequestCreationTime, *v.BacktrackRequestCreationTime)
+	}
+	if v.BacktrackTo != nil {
+		s.WriteTime(schemas.DBClusterBacktrack_BacktrackTo, *v.BacktrackTo)
+	}
+	if v.BacktrackedFrom != nil {
+		s.WriteTime(schemas.DBClusterBacktrack_BacktrackedFrom, *v.BacktrackedFrom)
+	}
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.DBClusterBacktrack_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DBClusterBacktrack_Status, *v.Status)
+	}
+}
+func (v *BacktrackDBClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBClusterBacktrack, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBClusterBacktrack_BacktrackIdentifier:
+			v.BacktrackIdentifier = new(string)
+			return d.ReadString(schemas.DBClusterBacktrack_BacktrackIdentifier, v.BacktrackIdentifier)
+		case schemas.DBClusterBacktrack_BacktrackRequestCreationTime:
+			v.BacktrackRequestCreationTime = new(time.Time)
+			return d.ReadTime(schemas.DBClusterBacktrack_BacktrackRequestCreationTime, v.BacktrackRequestCreationTime)
+		case schemas.DBClusterBacktrack_BacktrackTo:
+			v.BacktrackTo = new(time.Time)
+			return d.ReadTime(schemas.DBClusterBacktrack_BacktrackTo, v.BacktrackTo)
+		case schemas.DBClusterBacktrack_BacktrackedFrom:
+			v.BacktrackedFrom = new(time.Time)
+			return d.ReadTime(schemas.DBClusterBacktrack_BacktrackedFrom, v.BacktrackedFrom)
+		case schemas.DBClusterBacktrack_DBClusterIdentifier:
+			v.DBClusterIdentifier = new(string)
+			return d.ReadString(schemas.DBClusterBacktrack_DBClusterIdentifier, v.DBClusterIdentifier)
+		case schemas.DBClusterBacktrack_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DBClusterBacktrack_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBacktrackDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpBacktrackDBCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BacktrackDBCluster, schemas.BacktrackDBClusterMessage, schemas.DBClusterBacktrack)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpBacktrackDBCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BacktrackDBCluster, schemas.BacktrackDBClusterMessage, schemas.DBClusterBacktrack), output: &BacktrackDBClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

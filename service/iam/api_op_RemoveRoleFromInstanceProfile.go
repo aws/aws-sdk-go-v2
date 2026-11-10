@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,21 @@ type RemoveRoleFromInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveRoleFromInstanceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveRoleFromInstanceProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveRoleFromInstanceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceProfileName != nil {
+		s.WriteString(schemas.RemoveRoleFromInstanceProfileRequest_InstanceProfileName, *v.InstanceProfileName)
+	}
+	if v.RoleName != nil {
+		s.WriteString(schemas.RemoveRoleFromInstanceProfileRequest_RoleName, *v.RoleName)
+	}
+}
+
 type RemoveRoleFromInstanceProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +85,26 @@ type RemoveRoleFromInstanceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveRoleFromInstanceProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveRoleFromInstanceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveRoleFromInstanceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveRoleFromInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveRoleFromInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveRoleFromInstanceProfile, schemas.RemoveRoleFromInstanceProfileRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRemoveRoleFromInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveRoleFromInstanceProfile, schemas.RemoveRoleFromInstanceProfileRequest, nil), output: &RemoveRoleFromInstanceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

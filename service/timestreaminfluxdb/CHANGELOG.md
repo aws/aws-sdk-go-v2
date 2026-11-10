@@ -1,3 +1,16 @@
+# v1.33.3 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.33.2 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.33.1 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2026-10-30)
 
 * **Feature**: Add DeploymentConfiguration field to CreateDbCluster and UpdateDbCluster APIs to support creation of heterogenous InfluxDB v3 Enterprise clusters.

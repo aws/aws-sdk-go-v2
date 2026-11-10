@@ -11,8 +11,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Lists the designations in a domain. Returns system-managed designations first,
-// followed by user-created designations sorted alphabetically by name.
+// Lists the designations in a domain. The response returns system-managed
+// designations first, followed by user-created designations in alphabetical order
+// by name. Results are paginated. Use nextToken to retrieve additional pages of
+// results.
 func (c *Client) ListDesignations(ctx context.Context, params *ListDesignationsInput, optFns ...func(*Options)) (*ListDesignationsOutput, error) {
 	if params == nil {
 		params = &ListDesignationsInput{}

@@ -2648,6 +2648,43 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateClusterExtension(t *testing.T) {
+	want := &CreateClusterExtensionOutput{
+		ExtensionArn: ptr.String("__ExtensionArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateClusterExtension.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateClusterExtension(context.Background(), &CreateClusterExtensionInput{
+		ClusterArn:          ptr.String("__ClusterArn__"),
+		ExtensionName:       ptr.String("__ExtensionName__"),
+		ExtensionVersion:    ptr.String("__ExtensionVersion__"),
+		ConfigurationValues: ptr.String("__ConfigurationValues__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateClusterExtension.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateClusterSchedulerConfig(t *testing.T) {
 	want := &CreateClusterSchedulerConfigOutput{
 		ClusterSchedulerConfigArn: ptr.String("__ClusterSchedulerConfigArn__"),
@@ -8507,6 +8544,10 @@ func TestCheckResponseSnapshot_CreatePipeline(t *testing.T) {
 		ParallelismConfiguration: &types.ParallelismConfiguration{
 			MaxParallelExecutionSteps: ptr.Int32(1),
 		},
+		PipelineVersionAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -10417,6 +10458,30 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteCluster.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteClusterExtension(t *testing.T) {
+	want := &DeleteClusterExtensionOutput{
+		ExtensionArn: ptr.String("__ExtensionArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteClusterExtension.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteClusterExtension(context.Background(), &DeleteClusterExtensionInput{
+		ClusterArn:   ptr.String("__ClusterArn__"),
+		ExtensionArn: ptr.String("__ExtensionArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteClusterExtension.response", err)
 	}
 }
 
@@ -14118,6 +14183,43 @@ func TestCheckResponseSnapshot_DescribeClusterEvent(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeClusterEvent.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeClusterExtension(t *testing.T) {
+	want := &DescribeClusterExtensionOutput{
+		ExtensionDetails: &types.ExtensionDetails{
+			ClusterArn:          ptr.String("__ClusterArn__"),
+			ExtensionArn:        ptr.String("__ExtensionArn__"),
+			ExtensionName:       ptr.String("__ExtensionName__"),
+			ExtensionVersion:    ptr.String("__ExtensionVersion__"),
+			Status:              types.ExtensionStatus("Creating"),
+			ConfigurationValues: ptr.String("__ConfigurationValues__"),
+			CreationTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NodeSummary: &types.ExtensionNodeSummary{
+			TotalCount:  ptr.Int32(1),
+			ActiveCount: ptr.Int32(1),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeClusterExtension.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeClusterExtension(context.Background(), &DescribeClusterExtensionInput{
+		ClusterArn:   ptr.String("__ClusterArn__"),
+		ExtensionArn: ptr.String("__ExtensionArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeClusterExtension.response", err)
 	}
 }
 
@@ -21374,6 +21476,10 @@ func TestCheckResponseSnapshot_DescribePipeline(t *testing.T) {
 		},
 		PipelineVersionDisplayName: ptr.String("__PipelineVersionDisplayName__"),
 		PipelineVersionDescription: ptr.String("__PipelineVersionDescription__"),
+		PipelineVersionAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribePipeline.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -21384,8 +21490,9 @@ func TestCheckResponseSnapshot_DescribePipeline(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.DescribePipeline(context.Background(), &DescribePipelineInput{
-		PipelineName:      ptr.String("__PipelineName__"),
-		PipelineVersionId: ptr.Int64(1),
+		PipelineName:         ptr.String("__PipelineName__"),
+		PipelineVersionId:    ptr.Int64(1),
+		PipelineVersionAlias: ptr.String("__PipelineVersionAlias__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -21472,6 +21579,11 @@ func TestCheckResponseSnapshot_DescribePipelineExecution(t *testing.T) {
 			MlflowResourceArn:    ptr.String("__MlflowResourceArn__"),
 			MlflowExperimentName: ptr.String("__MlflowExperimentName__"),
 		},
+		PipelineVersionAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RoleArn: ptr.String("__RoleArn__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribePipelineExecution.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -24772,6 +24884,49 @@ func TestCheckResponseSnapshot_ListClusterEvents(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListClusterEvents.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListClusterExtensions(t *testing.T) {
+	want := &ListClusterExtensionsOutput{
+		Extensions: []types.ExtensionSummary{
+			{
+				ExtensionArn:     ptr.String("__ExtensionArn__"),
+				ExtensionName:    ptr.String("__ExtensionName__"),
+				ExtensionVersion: ptr.String("__ExtensionVersion__"),
+				Status:           types.ExtensionStatus("Creating"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ExtensionArn:     ptr.String("__ExtensionArn__"),
+				ExtensionName:    ptr.String("__ExtensionName__"),
+				ExtensionVersion: ptr.String("__ExtensionVersion__"),
+				Status:           types.ExtensionStatus("Creating"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListClusterExtensions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListClusterExtensions(context.Background(), &ListClusterExtensionsInput{
+		ClusterArn:         ptr.String("__ClusterArn__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListClusterExtensions.response", err)
 	}
 }
 
@@ -28098,6 +28253,10 @@ func TestCheckResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 							Index:    ptr.Int32(1),
 						},
 					},
+					HubContent: &types.HubContentStepMetadata{
+						HubArn:        ptr.String("__HubArn__"),
+						HubContentArn: ptr.String("__HubContentArn__"),
+					},
 				},
 				AttemptCount: ptr.Int32(1),
 				SelectiveExecutionResult: &types.SelectiveExecutionResult{
@@ -28292,6 +28451,10 @@ func TestCheckResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 							Index:    ptr.Int32(1),
 						},
 					},
+					HubContent: &types.HubContentStepMetadata{
+						HubArn:        ptr.String("__HubArn__"),
+						HubContentArn: ptr.String("__HubContentArn__"),
+					},
 				},
 				AttemptCount: ptr.Int32(1),
 				SelectiveExecutionResult: &types.SelectiveExecutionResult{
@@ -28338,6 +28501,10 @@ func TestCheckResponseSnapshot_ListPipelineExecutions(t *testing.T) {
 				PipelineExecutionDescription:   ptr.String("__PipelineExecutionDescription__"),
 				PipelineExecutionDisplayName:   ptr.String("__PipelineExecutionDisplayName__"),
 				PipelineExecutionFailureReason: ptr.String("__PipelineExecutionFailureReason__"),
+				PipelineVersionAliases: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			{
 				PipelineExecutionArn:           ptr.String("__PipelineExecutionArn__"),
@@ -28346,6 +28513,10 @@ func TestCheckResponseSnapshot_ListPipelineExecutions(t *testing.T) {
 				PipelineExecutionDescription:   ptr.String("__PipelineExecutionDescription__"),
 				PipelineExecutionDisplayName:   ptr.String("__PipelineExecutionDisplayName__"),
 				PipelineExecutionFailureReason: ptr.String("__PipelineExecutionFailureReason__"),
+				PipelineVersionAliases: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -28359,13 +28530,14 @@ func TestCheckResponseSnapshot_ListPipelineExecutions(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListPipelineExecutions(context.Background(), &ListPipelineExecutionsInput{
-		PipelineName:  ptr.String("__PipelineName__"),
-		CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		SortBy:        types.SortPipelineExecutionsBy("CreationTime"),
-		SortOrder:     types.SortOrder("Ascending"),
-		NextToken:     ptr.String("__NextToken__"),
-		MaxResults:    ptr.Int32(1),
+		PipelineName:         ptr.String("__PipelineName__"),
+		CreatedAfter:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBefore:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SortBy:               types.SortPipelineExecutionsBy("CreationTime"),
+		SortOrder:            types.SortOrder("Ascending"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+		PipelineVersionAlias: ptr.String("__PipelineVersionAlias__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -28420,6 +28592,10 @@ func TestCheckResponseSnapshot_ListPipelineVersions(t *testing.T) {
 				PipelineVersionDescription:        ptr.String("__PipelineVersionDescription__"),
 				PipelineVersionDisplayName:        ptr.String("__PipelineVersionDisplayName__"),
 				LastExecutionPipelineExecutionArn: ptr.String("__LastExecutionPipelineExecutionArn__"),
+				PipelineVersionAliases: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			{
 				PipelineArn:                       ptr.String("__PipelineArn__"),
@@ -28428,6 +28604,10 @@ func TestCheckResponseSnapshot_ListPipelineVersions(t *testing.T) {
 				PipelineVersionDescription:        ptr.String("__PipelineVersionDescription__"),
 				PipelineVersionDisplayName:        ptr.String("__PipelineVersionDisplayName__"),
 				LastExecutionPipelineExecutionArn: ptr.String("__LastExecutionPipelineExecutionArn__"),
+				PipelineVersionAliases: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -28498,6 +28678,7 @@ func TestCheckResponseSnapshot_ListPipelines(t *testing.T) {
 		SortOrder:          types.SortOrder("Ascending"),
 		NextToken:          ptr.String("__NextToken__"),
 		MaxResults:         ptr.Int32(1),
+		ManagedBy:          types.PipelineManagedBy("AWS"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -33046,6 +33227,10 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 					LastExecutedPipelineExecutionArn:         ptr.String("__LastExecutedPipelineExecutionArn__"),
 					LastExecutedPipelineExecutionDisplayName: ptr.String("__LastExecutedPipelineExecutionDisplayName__"),
 					LastExecutedPipelineExecutionStatus:      types.PipelineExecutionStatus("Executing"),
+					PipelineVersionAliases: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 				FeatureGroup: &types.FeatureGroup{
 					FeatureGroupArn:             ptr.String("__FeatureGroupArn__"),
@@ -38300,6 +38485,10 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 					LastExecutedPipelineExecutionArn:         ptr.String("__LastExecutedPipelineExecutionArn__"),
 					LastExecutedPipelineExecutionDisplayName: ptr.String("__LastExecutedPipelineExecutionDisplayName__"),
 					LastExecutedPipelineExecutionStatus:      types.PipelineExecutionStatus("Executing"),
+					PipelineVersionAliases: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 				FeatureGroup: &types.FeatureGroup{
 					FeatureGroupArn:             ptr.String("__FeatureGroupArn__"),
@@ -40999,6 +41188,8 @@ func TestCheckResponseSnapshot_StartPipelineExecution(t *testing.T) {
 		},
 		PipelineVersionId:    ptr.Int64(1),
 		MlflowExperimentName: ptr.String("__MlflowExperimentName__"),
+		PipelineVersionAlias: ptr.String("__PipelineVersionAlias__"),
+		RoleArn:              ptr.String("__RoleArn__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -42104,6 +42295,33 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateCluster.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateClusterExtension(t *testing.T) {
+	want := &UpdateClusterExtensionOutput{
+		ExtensionArn: ptr.String("__ExtensionArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateClusterExtension.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateClusterExtension(context.Background(), &UpdateClusterExtensionInput{
+		ClusterArn:          ptr.String("__ClusterArn__"),
+		ExtensionArn:        ptr.String("__ExtensionArn__"),
+		ExtensionVersion:    ptr.String("__ExtensionVersion__"),
+		ConfigurationValues: ptr.String("__ConfigurationValues__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateClusterExtension.response", err)
 	}
 }
 
@@ -44659,6 +44877,10 @@ func TestCheckResponseSnapshot_UpdatePipeline(t *testing.T) {
 		ParallelismConfiguration: &types.ParallelismConfiguration{
 			MaxParallelExecutionSteps: ptr.Int32(1),
 		},
+		PipelineVersionAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -44714,6 +44936,16 @@ func TestCheckResponseSnapshot_UpdatePipelineVersion(t *testing.T) {
 		PipelineVersionId:          ptr.Int64(1),
 		PipelineVersionDisplayName: ptr.String("__PipelineVersionDisplayName__"),
 		PipelineVersionDescription: ptr.String("__PipelineVersionDescription__"),
+		PipelineVersionAliasOperations: &types.AliasOperations{
+			Add: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Remove: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -45611,24 +45843,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateClusterSchedulerConfig(context.Background(), &CreateClusterSchedulerConfigInput{
-		Name:       ptr.String("__Name__"),
-		ClusterArn: ptr.String("__ClusterArn__"),
-		SchedulerConfig: &types.SchedulerConfig{
-			PriorityClasses: []types.PriorityClass{
-				{
-					Name:   ptr.String("__Name__"),
-					Weight: ptr.Int32(1),
-				},
-				{
-					Name:   ptr.String("__Name__"),
-					Weight: ptr.Int32(1),
-				},
-			},
-			FairShare:           types.FairShare("Enabled"),
-			IdleResourceSharing: types.IdleResourceSharing("Enabled"),
-		},
-		Description: ptr.String("__Description__"),
+	_, opErr := svc.CreateClusterExtension(context.Background(), &CreateClusterExtensionInput{
+		ClusterArn:          ptr.String("__ClusterArn__"),
+		ExtensionName:       ptr.String("__ExtensionName__"),
+		ExtensionVersion:    ptr.String("__ExtensionVersion__"),
+		ConfigurationValues: ptr.String("__ConfigurationValues__"),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -45639,6 +45858,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

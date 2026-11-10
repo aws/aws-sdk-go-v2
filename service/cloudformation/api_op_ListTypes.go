@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -101,6 +103,38 @@ type ListTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTypesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeprecatedStatus != "" {
+		s.WriteString(schemas.ListTypesInput_DeprecatedStatus, string(v.DeprecatedStatus))
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListTypesInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTypesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTypesInput_NextToken, *v.NextToken)
+	}
+	if v.ProvisioningType != "" {
+		s.WriteString(schemas.ListTypesInput_ProvisioningType, string(v.ProvisioningType))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListTypesInput_Type, string(v.Type))
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.ListTypesInput_Visibility, string(v.Visibility))
+	}
+}
+
 type ListTypesOutput struct {
 
 	// If the request doesn't return all the remaining results, NextToken is set to a
@@ -119,13 +153,37 @@ type ListTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTypesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTypesOutput_NextToken, *v.NextToken)
+	}
+	if v.TypeSummaries != nil {
+		serializeTypeSummaries(s, schemas.ListTypesOutput_TypeSummaries, v.TypeSummaries)
+	}
+}
+func (v *ListTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTypesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTypesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTypesOutput_NextToken, v.NextToken)
+		case schemas.ListTypesOutput_TypeSummaries:
+			return deserializeTypeSummaries(d, schemas.ListTypesOutput_TypeSummaries, &v.TypeSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypes, schemas.ListTypesInput, schemas.ListTypesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypes, schemas.ListTypesInput, schemas.ListTypesOutput), output: &ListTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

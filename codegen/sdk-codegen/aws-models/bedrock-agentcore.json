@@ -475,6 +475,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#InvokeHarness"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#InvokeWebSearch"
                 }
             ],
             "resources": [
@@ -4962,6 +4965,50 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> Contains the descriptor configuration for a registry record. Only the field that matches the record's <code>descriptorType</code> is populated.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DomainFilter": {
+            "type": "structure",
+            "members": {
+                "include": {
+                    "target": "com.amazonaws.bedrockagentcore#DomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domains to return results from. Results from other domains are not returned.</p>"
+                    }
+                },
+                "exclude": {
+                    "target": "com.amazonaws.bedrockagentcore#DomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domains to never return results from.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The domains to include in or exclude from the results. A root domain also matches its subdomains. For example, <code>example.com</code> also matches <code>docs.example.com</code>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DomainList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#DomainName"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of domain names.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DomainName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A domain name, for example <code>example.com</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$"
             }
         },
         "com.amazonaws.bedrockagentcore#DomainPattern": {
@@ -11842,6 +11889,133 @@
                 "smithy.api#streaming": {}
             }
         },
+        "com.amazonaws.bedrockagentcore#InvokeWebSearch": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcore#InvokeWebSearchInput"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcore#InvokeWebSearchOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches the web and returns a ranked list of results. Each result includes a text extract from the page.</p> <p>You can filter the results by domain and by publication date.</p> <p>To use this operation, you must have the <code>bedrock-agentcore:InvokeWebSearch</code> permission on the resource <code>arn:${Partition}:bedrock-agentcore:${Region}:aws:tool/web-search.v1</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Search the web for recent pages from one domain",
+                        "input": {
+                            "webSearchId": "web-search.v1",
+                            "searchQuery": "Amazon Bedrock AgentCore web search",
+                            "maxResults": 1,
+                            "filters": {
+                                "domainFilter": {
+                                    "include": [
+                                        "example.com"
+                                    ]
+                                },
+                                "publishedDateFilter": {
+                                    "publishedAfter": "2026-01-01T00:00:00Z"
+                                }
+                            }
+                        },
+                        "output": {
+                            "results": [
+                                {
+                                    "title": "Getting started with web search",
+                                    "url": "https://docs.example.com/web-search/getting-started",
+                                    "text": "Web search lets an agent find current information on the public web and cite its sources.",
+                                    "publishedAt": "2026-03-15T08:00:00Z"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/web-search/{webSearchId}/invoke",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#InvokeWebSearchInput": {
+            "type": "structure",
+            "members": {
+                "webSearchId": {
+                    "target": "com.amazonaws.bedrockagentcore#WebSearchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the web search tool to invoke. The Amazon Web Services-managed web search tool is <code>web-search.v1</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "searchQuery": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text to search for.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 200
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return. Defaults to 25.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 25
+                        }
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.bedrockagentcore#WebSearchFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to apply to the search results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request for the <code>InvokeWebSearch</code> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#InvokeWebSearchOutput": {
+            "type": "structure",
+            "members": {
+                "results": {
+                    "target": "com.amazonaws.bedrockagentcore#WebSearchResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search results, in ranked order.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response for the <code>InvokeWebSearch</code> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentcore#JwtKeyId": {
             "type": "string",
             "traits": {
@@ -16009,6 +16183,26 @@
                 "smithy.api#documentation": "<p>Union type representing different proxy authentication methods. Currently supports HTTP Basic Authentication (username and password).</p>"
             }
         },
+        "com.amazonaws.bedrockagentcore#PublishedDateFilter": {
+            "type": "structure",
+            "members": {
+                "publishedAfter": {
+                    "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The earliest publication time of the results, inclusive.</p>"
+                    }
+                },
+                "publishedBefore": {
+                    "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest publication time of the results, inclusive. A date without a time, such as one passed to the AWS CLI, means midnight UTC. To include a whole day, use the last second of that day, for example <code>2026-01-31T23:59:59Z</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A publication time range for the results. Both bounds are optional, and both are inclusive. If <code>publishedAfter</code> is later than <code>publishedBefore</code>, the request fails with a <code>ValidationException</code>.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#RecommendationArn": {
             "type": "string",
             "traits": {
@@ -17590,6 +17784,30 @@
                 "smithy.api#documentation": "<p>The exception that occurs when the request would cause a service quota to be exceeded. Review your service quotas and either reduce your request rate or request a quota increase.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait before you retry the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service can't handle the request right now. Retry the request. If the response includes <code>retryAfterSeconds</code>, wait that many seconds before you retry.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503,
+                "smithy.api#retryable": {}
             }
         },
         "com.amazonaws.bedrockagentcore#SessionFilter": {
@@ -20937,6 +21155,79 @@
                     "min": 320,
                     "max": 3840
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#WebSearchFilters": {
+            "type": "structure",
+            "members": {
+                "domainFilter": {
+                    "target": "com.amazonaws.bedrockagentcore#DomainFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domains to include in or exclude from the results.</p>"
+                    }
+                },
+                "publishedDateFilter": {
+                    "target": "com.amazonaws.bedrockagentcore#PublishedDateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publication time range of the results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filters to apply to a web search.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#WebSearchId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The identifier of a web search tool, for example <code>web-search.v1</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-z0-9]+([.-][a-z0-9]+)*$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#WebSearchResult": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the page.</p>"
+                    }
+                },
+                "url": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the page.</p>"
+                    }
+                },
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A text extract from the page.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "publishedAt": {
+                    "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the page was published. This field is absent when the publication time is not known.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A web search result.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#WebSearchResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#WebSearchResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of web search results, in ranked order.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#WorkloadIdentityNameType": {

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeSSLPoliciesResponse><DescribeSSLPoliciesResult><NextMarker>__NextMarker__</NextMarker><SslPolicies><member><Ciphers><member><Name>__Name__</Name><Priority>1</Priority></member><member><Name>__Name__</Name><Priority>1</Priority></member></Ciphers><Name>__Name__</Name><SslProtocols><member>__Member__</member><member>__Member__</member></SslProtocols><SupportedLoadBalancerTypes><member>__Member__</member><member>__Member__</member></SupportedLoadBalancerTypes></member><member><Ciphers><member><Name>__Name__</Name><Priority>1</Priority></member><member><Name>__Name__</Name><Priority>1</Priority></member></Ciphers><Name>__Name__</Name><SslProtocols><member>__Member__</member><member>__Member__</member></SslProtocols><SupportedLoadBalancerTypes><member>__Member__</member><member>__Member__</member></SupportedLoadBalancerTypes></member></SslPolicies></DescribeSSLPoliciesResult></DescribeSSLPoliciesResponse>

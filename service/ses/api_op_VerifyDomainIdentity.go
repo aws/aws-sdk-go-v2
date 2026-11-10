@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,18 @@ type VerifyDomainIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyDomainIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyDomainIdentityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyDomainIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.VerifyDomainIdentityRequest_Domain, *v.Domain)
+	}
+}
+
 // Returns a TXT record that you must publish to the DNS server of your domain to
 // complete domain verification with Amazon SES.
 type VerifyDomainIdentityOutput struct {
@@ -68,13 +82,32 @@ type VerifyDomainIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyDomainIdentityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyDomainIdentityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyDomainIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VerificationToken != nil {
+		s.WriteString(schemas.VerifyDomainIdentityResponse_VerificationToken, *v.VerificationToken)
+	}
+}
+func (v *VerifyDomainIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyDomainIdentityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifyDomainIdentityResponse_VerificationToken:
+			v.VerificationToken = new(string)
+			return d.ReadString(schemas.VerifyDomainIdentityResponse_VerificationToken, v.VerificationToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyDomainIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpVerifyDomainIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyDomainIdentity, schemas.VerifyDomainIdentityRequest, schemas.VerifyDomainIdentityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpVerifyDomainIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyDomainIdentity, schemas.VerifyDomainIdentityRequest, schemas.VerifyDomainIdentityResponse), output: &VerifyDomainIdentityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

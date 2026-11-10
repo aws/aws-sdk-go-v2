@@ -1,3 +1,17 @@
+# v1.43.1 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.0 (2026-11-05)
+
+* **Feature**: Adds support for real-time agent assistance and self-service with Amazon Connect Global Resiliency, including cross-Region replication of supported AI agent resources and configurations.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.42.8 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.7 (2026-10-30)
 
 * **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.

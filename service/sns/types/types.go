@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -31,6 +33,43 @@ type BatchResultErrorEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchResultErrorEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchResultErrorEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchResultErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.BatchResultErrorEntry_Code, *v.Code)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.BatchResultErrorEntry_Id, *v.Id)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchResultErrorEntry_Message, *v.Message)
+	}
+	s.WriteBool(schemas.BatchResultErrorEntry_SenderFault, v.SenderFault)
+}
+func (v *BatchResultErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchResultErrorEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchResultErrorEntry_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.BatchResultErrorEntry_Code, v.Code)
+		case schemas.BatchResultErrorEntry_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.BatchResultErrorEntry_Id, v.Id)
+		case schemas.BatchResultErrorEntry_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchResultErrorEntry_Message, v.Message)
+		case schemas.BatchResultErrorEntry_SenderFault:
+			return d.ReadBool(schemas.BatchResultErrorEntry_SenderFault, &v.SenderFault)
+		}
+		return nil
+	})
+}
+
 // The endpoint for mobile app and device.
 type Endpoint struct {
 
@@ -41,6 +80,33 @@ type Endpoint struct {
 	EndpointArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Endpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Endpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeMapStringToString(s, schemas.Endpoint_Attributes, v.Attributes)
+	}
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.Endpoint_EndpointArn, *v.EndpointArn)
+	}
+}
+func (v *Endpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Endpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Endpoint_Attributes:
+			return deserializeMapStringToString(d, schemas.Endpoint_Attributes, &v.Attributes)
+		case schemas.Endpoint_EndpointArn:
+			v.EndpointArn = new(string)
+			return d.ReadString(schemas.Endpoint_EndpointArn, v.EndpointArn)
+		}
+		return nil
+	})
 }
 
 // The user-specified message attribute value. For string data types, the value
@@ -79,6 +145,39 @@ type MessageAttributeValue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MessageAttributeValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageAttributeValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageAttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BinaryValue != nil {
+		s.WriteBlob(schemas.MessageAttributeValue_BinaryValue, v.BinaryValue)
+	}
+	if v.DataType != nil {
+		s.WriteString(schemas.MessageAttributeValue_DataType, *v.DataType)
+	}
+	if v.StringValue != nil {
+		s.WriteString(schemas.MessageAttributeValue_StringValue, *v.StringValue)
+	}
+}
+func (v *MessageAttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageAttributeValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageAttributeValue_BinaryValue:
+			return d.ReadBlob(schemas.MessageAttributeValue_BinaryValue, &v.BinaryValue)
+		case schemas.MessageAttributeValue_DataType:
+			v.DataType = new(string)
+			return d.ReadString(schemas.MessageAttributeValue_DataType, v.DataType)
+		case schemas.MessageAttributeValue_StringValue:
+			v.StringValue = new(string)
+			return d.ReadString(schemas.MessageAttributeValue_StringValue, v.StringValue)
+		}
+		return nil
+	})
+}
+
 // A list of phone numbers and their metadata.
 type PhoneNumberInformation struct {
 
@@ -103,6 +202,61 @@ type PhoneNumberInformation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PhoneNumberInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhoneNumberInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhoneNumberInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.PhoneNumberInformation_CreatedAt, *v.CreatedAt)
+	}
+	if v.Iso2CountryCode != nil {
+		s.WriteString(schemas.PhoneNumberInformation_Iso2CountryCode, *v.Iso2CountryCode)
+	}
+	if v.NumberCapabilities != nil {
+		serializeNumberCapabilityList(s, schemas.PhoneNumberInformation_NumberCapabilities, v.NumberCapabilities)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.PhoneNumberInformation_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.RouteType != "" {
+		s.WriteString(schemas.PhoneNumberInformation_RouteType, string(v.RouteType))
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.PhoneNumberInformation_Status, *v.Status)
+	}
+}
+func (v *PhoneNumberInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhoneNumberInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhoneNumberInformation_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.PhoneNumberInformation_CreatedAt, v.CreatedAt)
+		case schemas.PhoneNumberInformation_Iso2CountryCode:
+			v.Iso2CountryCode = new(string)
+			return d.ReadString(schemas.PhoneNumberInformation_Iso2CountryCode, v.Iso2CountryCode)
+		case schemas.PhoneNumberInformation_NumberCapabilities:
+			return deserializeNumberCapabilityList(d, schemas.PhoneNumberInformation_NumberCapabilities, &v.NumberCapabilities)
+		case schemas.PhoneNumberInformation_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.PhoneNumberInformation_PhoneNumber, v.PhoneNumber)
+		case schemas.PhoneNumberInformation_RouteType:
+			var ev string
+			if err := d.ReadString(schemas.PhoneNumberInformation_RouteType, &ev); err != nil {
+				return err
+			}
+			v.RouteType = RouteType(ev)
+			return nil
+		case schemas.PhoneNumberInformation_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.PhoneNumberInformation_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Platform application object.
 type PlatformApplication struct {
 
@@ -113,6 +267,33 @@ type PlatformApplication struct {
 	PlatformApplicationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PlatformApplication) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlatformApplication)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlatformApplication) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeMapStringToString(s, schemas.PlatformApplication_Attributes, v.Attributes)
+	}
+	if v.PlatformApplicationArn != nil {
+		s.WriteString(schemas.PlatformApplication_PlatformApplicationArn, *v.PlatformApplicationArn)
+	}
+}
+func (v *PlatformApplication) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlatformApplication, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlatformApplication_Attributes:
+			return deserializeMapStringToString(d, schemas.PlatformApplication_Attributes, &v.Attributes)
+		case schemas.PlatformApplication_PlatformApplicationArn:
+			v.PlatformApplicationArn = new(string)
+			return d.ReadString(schemas.PlatformApplication_PlatformApplicationArn, v.PlatformApplicationArn)
+		}
+		return nil
+	})
 }
 
 // Contains the details of a single Amazon SNS message along with an Id that
@@ -237,6 +418,63 @@ type PublishBatchRequestEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishBatchRequestEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishBatchRequestEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishBatchRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.PublishBatchRequestEntry_Id, *v.Id)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.PublishBatchRequestEntry_Message, *v.Message)
+	}
+	if v.MessageAttributes != nil {
+		serializeMessageAttributeMap(s, schemas.PublishBatchRequestEntry_MessageAttributes, v.MessageAttributes)
+	}
+	if v.MessageDeduplicationId != nil {
+		s.WriteString(schemas.PublishBatchRequestEntry_MessageDeduplicationId, *v.MessageDeduplicationId)
+	}
+	if v.MessageGroupId != nil {
+		s.WriteString(schemas.PublishBatchRequestEntry_MessageGroupId, *v.MessageGroupId)
+	}
+	if v.MessageStructure != nil {
+		s.WriteString(schemas.PublishBatchRequestEntry_MessageStructure, *v.MessageStructure)
+	}
+	if v.Subject != nil {
+		s.WriteString(schemas.PublishBatchRequestEntry_Subject, *v.Subject)
+	}
+}
+func (v *PublishBatchRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublishBatchRequestEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublishBatchRequestEntry_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.PublishBatchRequestEntry_Id, v.Id)
+		case schemas.PublishBatchRequestEntry_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PublishBatchRequestEntry_Message, v.Message)
+		case schemas.PublishBatchRequestEntry_MessageAttributes:
+			return deserializeMessageAttributeMap(d, schemas.PublishBatchRequestEntry_MessageAttributes, &v.MessageAttributes)
+		case schemas.PublishBatchRequestEntry_MessageDeduplicationId:
+			v.MessageDeduplicationId = new(string)
+			return d.ReadString(schemas.PublishBatchRequestEntry_MessageDeduplicationId, v.MessageDeduplicationId)
+		case schemas.PublishBatchRequestEntry_MessageGroupId:
+			v.MessageGroupId = new(string)
+			return d.ReadString(schemas.PublishBatchRequestEntry_MessageGroupId, v.MessageGroupId)
+		case schemas.PublishBatchRequestEntry_MessageStructure:
+			v.MessageStructure = new(string)
+			return d.ReadString(schemas.PublishBatchRequestEntry_MessageStructure, v.MessageStructure)
+		case schemas.PublishBatchRequestEntry_Subject:
+			v.Subject = new(string)
+			return d.ReadString(schemas.PublishBatchRequestEntry_Subject, v.Subject)
+		}
+		return nil
+	})
+}
+
 // Encloses data related to a successful message in a batch request for topic.
 type PublishBatchResultEntry struct {
 
@@ -255,6 +493,40 @@ type PublishBatchResultEntry struct {
 	SequenceNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PublishBatchResultEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishBatchResultEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishBatchResultEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.PublishBatchResultEntry_Id, *v.Id)
+	}
+	if v.MessageId != nil {
+		s.WriteString(schemas.PublishBatchResultEntry_MessageId, *v.MessageId)
+	}
+	if v.SequenceNumber != nil {
+		s.WriteString(schemas.PublishBatchResultEntry_SequenceNumber, *v.SequenceNumber)
+	}
+}
+func (v *PublishBatchResultEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublishBatchResultEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublishBatchResultEntry_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.PublishBatchResultEntry_Id, v.Id)
+		case schemas.PublishBatchResultEntry_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.PublishBatchResultEntry_MessageId, v.MessageId)
+		case schemas.PublishBatchResultEntry_SequenceNumber:
+			v.SequenceNumber = new(string)
+			return d.ReadString(schemas.PublishBatchResultEntry_SequenceNumber, v.SequenceNumber)
+		}
+		return nil
+	})
 }
 
 // A verified or pending destination phone number in the SMS sandbox.
@@ -280,6 +552,38 @@ type SMSSandboxPhoneNumber struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SMSSandboxPhoneNumber) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SMSSandboxPhoneNumber)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SMSSandboxPhoneNumber) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.SMSSandboxPhoneNumber_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SMSSandboxPhoneNumber_Status, string(v.Status))
+	}
+}
+func (v *SMSSandboxPhoneNumber) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SMSSandboxPhoneNumber, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SMSSandboxPhoneNumber_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.SMSSandboxPhoneNumber_PhoneNumber, v.PhoneNumber)
+		case schemas.SMSSandboxPhoneNumber_Status:
+			var ev string
+			if err := d.ReadString(schemas.SMSSandboxPhoneNumber_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SMSSandboxPhoneNumberVerificationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A wrapper type for the attributes of an Amazon SNS subscription.
 type Subscription struct {
 
@@ -301,6 +605,52 @@ type Subscription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Subscription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Subscription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Subscription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteString(schemas.Subscription_Endpoint, *v.Endpoint)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.Subscription_Owner, *v.Owner)
+	}
+	if v.Protocol != nil {
+		s.WriteString(schemas.Subscription_Protocol, *v.Protocol)
+	}
+	if v.SubscriptionArn != nil {
+		s.WriteString(schemas.Subscription_SubscriptionArn, *v.SubscriptionArn)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.Subscription_TopicArn, *v.TopicArn)
+	}
+}
+func (v *Subscription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Subscription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Subscription_Endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.Subscription_Endpoint, v.Endpoint)
+		case schemas.Subscription_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.Subscription_Owner, v.Owner)
+		case schemas.Subscription_Protocol:
+			v.Protocol = new(string)
+			return d.ReadString(schemas.Subscription_Protocol, v.Protocol)
+		case schemas.Subscription_SubscriptionArn:
+			v.SubscriptionArn = new(string)
+			return d.ReadString(schemas.Subscription_SubscriptionArn, v.SubscriptionArn)
+		case schemas.Subscription_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.Subscription_TopicArn, v.TopicArn)
+		}
+		return nil
+	})
+}
+
 // The list of tags to be added to the specified topic.
 type Tag struct {
 
@@ -317,6 +667,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // A wrapper type for the topic's Amazon Resource Name (ARN). To retrieve a
 // topic's attributes, use GetTopicAttributes .
 type Topic struct {
@@ -325,6 +703,28 @@ type Topic struct {
 	TopicArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Topic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Topic)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Topic) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TopicArn != nil {
+		s.WriteString(schemas.Topic_TopicArn, *v.TopicArn)
+	}
+}
+func (v *Topic) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Topic, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Topic_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.Topic_TopicArn, v.TopicArn)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

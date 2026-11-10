@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,21 @@ type DeleteIdentityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdentityPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdentityPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdentityPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identity != nil {
+		s.WriteString(schemas.DeleteIdentityPolicyRequest_Identity, *v.Identity)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.DeleteIdentityPolicyRequest_PolicyName, *v.PolicyName)
+	}
+}
+
 // An empty element returned on a successful request.
 type DeleteIdentityPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -69,13 +86,26 @@ type DeleteIdentityPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdentityPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdentityPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdentityPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteIdentityPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIdentityPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIdentityPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteIdentityPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdentityPolicy, schemas.DeleteIdentityPolicyRequest, schemas.DeleteIdentityPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteIdentityPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdentityPolicy, schemas.DeleteIdentityPolicyRequest, schemas.DeleteIdentityPolicyResponse), output: &DeleteIdentityPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package docdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type RebootDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootDBInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootDBInstanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootDBInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.RebootDBInstanceMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.ForceFailover != nil {
+		s.WriteBool(schemas.RebootDBInstanceMessage_ForceFailover, *v.ForceFailover)
+	}
+}
+
 type RebootDBInstanceOutput struct {
 
 	// Detailed information about an instance.
@@ -63,13 +80,34 @@ type RebootDBInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootDBInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootDBInstanceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootDBInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstance != nil {
+		s.WriteStruct(schemas.RebootDBInstanceResult_DBInstance)
+		v.DBInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RebootDBInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootDBInstanceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootDBInstanceResult_DBInstance:
+			v.DBInstance = &types.DBInstance{}
+			return v.DBInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRebootDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootDBInstance, schemas.RebootDBInstanceMessage, schemas.RebootDBInstanceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRebootDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootDBInstance, schemas.RebootDBInstanceMessage, schemas.RebootDBInstanceResult), output: &RebootDBInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

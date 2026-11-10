@@ -2845,6 +2845,47 @@ func (v *AlgorithmValidationSpecification) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
+// The aliases to add to and remove from a pipeline version. An alias can't appear
+// in both lists. After the update, the version can have up to 10 aliases.
+type AliasOperations struct {
+
+	// The aliases to add to the pipeline version. If you assigned an alias to another
+	// version of the same pipeline, you must remove it from that version before you
+	// add it here.
+	Add []string
+
+	// The aliases to remove from the pipeline version.
+	Remove []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AliasOperations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AliasOperations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AliasOperations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Add != nil {
+		serializePipelineVersionAliasList(s, schemas.AliasOperations_Add, v.Add)
+	}
+	if v.Remove != nil {
+		serializePipelineVersionAliasList(s, schemas.AliasOperations_Remove, v.Remove)
+	}
+}
+func (v *AliasOperations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AliasOperations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AliasOperations_Add:
+			return deserializePipelineVersionAliasList(d, schemas.AliasOperations_Add, &v.Add)
+		case schemas.AliasOperations_Remove:
+			return deserializePipelineVersionAliasList(d, schemas.AliasOperations_Remove, &v.Remove)
+		}
+		return nil
+	})
+}
+
 // A collection of settings that configure the Amazon Q experience within the
 // domain.
 type AmazonQSettings struct {
@@ -21237,6 +21278,271 @@ func (v *ExplainerConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Details of an extension installed on a SageMaker HyperPod cluster.
+type ExtensionDetails struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on which the
+	// extension is installed.
+	//
+	// This member is required.
+	ClusterArn *string
+
+	// The Amazon Resource Name (ARN) of the extension.
+	//
+	// This member is required.
+	ExtensionArn *string
+
+	// The name of the extension.
+	//
+	// This member is required.
+	ExtensionName *string
+
+	// The version of the extension. While SageMaker HyperPod creates or updates the
+	// extension, some nodes might still run a different version. To see how many nodes
+	// run this version, see NodeSummary .
+	//
+	// This member is required.
+	ExtensionVersion *string
+
+	// The status of the extension can be one of the following values:
+	//
+	// Creating SageMaker HyperPod is installing the extension on the cluster's nodes.
+	//
+	// Active The extension runs its current version and configuration on all of the
+	// cluster's nodes.
+	//
+	// Updating SageMaker HyperPod is applying a configuration change or version
+	// update to the cluster's nodes.
+	//
+	// Degraded The extension runs its current version and configuration on some of
+	// the cluster's nodes but not all of them. Or, at least one node recently reported
+	// that the extension is unhealthy.
+	//
+	// CreateFailed SageMaker HyperPod couldn't install the extension on any of the
+	// cluster's nodes.
+	//
+	// UpdateFailed SageMaker HyperPod couldn't apply the update on any of the
+	// cluster's nodes.
+	//
+	// Deleting SageMaker HyperPod is removing the extension from the cluster's nodes.
+	//
+	// DeleteFailed SageMaker HyperPod couldn't remove the extension from any of the
+	// cluster's nodes.
+	//
+	// This member is required.
+	Status ExtensionStatus
+
+	// The configuration of the extension, as a JSON object serialized as a string.
+	// The configuration includes the default value of every setting that you didn't
+	// specify.
+	ConfigurationValues *string
+
+	// The time when the extension was created.
+	CreationTime *time.Time
+
+	// The time when the extension was last updated.
+	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExtensionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtensionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtensionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ExtensionDetails_ClusterArn, *v.ClusterArn)
+	}
+	if v.ConfigurationValues != nil {
+		s.WriteString(schemas.ExtensionDetails_ConfigurationValues, *v.ConfigurationValues)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ExtensionDetails_CreationTime, *v.CreationTime)
+	}
+	if v.ExtensionArn != nil {
+		s.WriteString(schemas.ExtensionDetails_ExtensionArn, *v.ExtensionArn)
+	}
+	if v.ExtensionName != nil {
+		s.WriteString(schemas.ExtensionDetails_ExtensionName, *v.ExtensionName)
+	}
+	if v.ExtensionVersion != nil {
+		s.WriteString(schemas.ExtensionDetails_ExtensionVersion, *v.ExtensionVersion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ExtensionDetails_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ExtensionDetails_Status, string(v.Status))
+	}
+}
+func (v *ExtensionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtensionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtensionDetails_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.ExtensionDetails_ClusterArn, v.ClusterArn)
+		case schemas.ExtensionDetails_ConfigurationValues:
+			v.ConfigurationValues = new(string)
+			return d.ReadString(schemas.ExtensionDetails_ConfigurationValues, v.ConfigurationValues)
+		case schemas.ExtensionDetails_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ExtensionDetails_CreationTime, v.CreationTime)
+		case schemas.ExtensionDetails_ExtensionArn:
+			v.ExtensionArn = new(string)
+			return d.ReadString(schemas.ExtensionDetails_ExtensionArn, v.ExtensionArn)
+		case schemas.ExtensionDetails_ExtensionName:
+			v.ExtensionName = new(string)
+			return d.ReadString(schemas.ExtensionDetails_ExtensionName, v.ExtensionName)
+		case schemas.ExtensionDetails_ExtensionVersion:
+			v.ExtensionVersion = new(string)
+			return d.ReadString(schemas.ExtensionDetails_ExtensionVersion, v.ExtensionVersion)
+		case schemas.ExtensionDetails_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ExtensionDetails_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ExtensionDetails_Status:
+			var ev string
+			if err := d.ReadString(schemas.ExtensionDetails_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ExtensionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A summary of an extension's installation across the nodes of a SageMaker
+// HyperPod cluster.
+type ExtensionNodeSummary struct {
+
+	// The number of nodes that are running the extension's current version and
+	// configuration. While SageMaker HyperPod creates or updates the extension,
+	// ActiveCount is lower than TotalCount .
+	//
+	// This member is required.
+	ActiveCount *int32
+
+	// The number of nodes in your cluster that the extension targets. SageMaker
+	// HyperPod targets every running node in your cluster, including nodes that you
+	// add after you create the extension.
+	//
+	// This member is required.
+	TotalCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExtensionNodeSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtensionNodeSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtensionNodeSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveCount != nil {
+		s.WriteInt32(schemas.ExtensionNodeSummary_ActiveCount, *v.ActiveCount)
+	}
+	if v.TotalCount != nil {
+		s.WriteInt32(schemas.ExtensionNodeSummary_TotalCount, *v.TotalCount)
+	}
+}
+func (v *ExtensionNodeSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtensionNodeSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtensionNodeSummary_ActiveCount:
+			v.ActiveCount = new(int32)
+			return d.ReadInt32(schemas.ExtensionNodeSummary_ActiveCount, v.ActiveCount)
+		case schemas.ExtensionNodeSummary_TotalCount:
+			v.TotalCount = new(int32)
+			return d.ReadInt32(schemas.ExtensionNodeSummary_TotalCount, v.TotalCount)
+		}
+		return nil
+	})
+}
+
+// A summary of an extension installed on a SageMaker HyperPod cluster.
+type ExtensionSummary struct {
+
+	// The Amazon Resource Name (ARN) of the extension.
+	//
+	// This member is required.
+	ExtensionArn *string
+
+	// The name of the extension.
+	//
+	// This member is required.
+	ExtensionName *string
+
+	// The version of the extension.
+	//
+	// This member is required.
+	ExtensionVersion *string
+
+	// The status of the extension. For the meaning of each status, see
+	// ExtensionDetails .
+	//
+	// This member is required.
+	Status ExtensionStatus
+
+	// The time when the extension was created.
+	CreationTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExtensionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtensionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtensionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ExtensionSummary_CreationTime, *v.CreationTime)
+	}
+	if v.ExtensionArn != nil {
+		s.WriteString(schemas.ExtensionSummary_ExtensionArn, *v.ExtensionArn)
+	}
+	if v.ExtensionName != nil {
+		s.WriteString(schemas.ExtensionSummary_ExtensionName, *v.ExtensionName)
+	}
+	if v.ExtensionVersion != nil {
+		s.WriteString(schemas.ExtensionSummary_ExtensionVersion, *v.ExtensionVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ExtensionSummary_Status, string(v.Status))
+	}
+}
+func (v *ExtensionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtensionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtensionSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ExtensionSummary_CreationTime, v.CreationTime)
+		case schemas.ExtensionSummary_ExtensionArn:
+			v.ExtensionArn = new(string)
+			return d.ReadString(schemas.ExtensionSummary_ExtensionArn, v.ExtensionArn)
+		case schemas.ExtensionSummary_ExtensionName:
+			v.ExtensionName = new(string)
+			return d.ReadString(schemas.ExtensionSummary_ExtensionName, v.ExtensionName)
+		case schemas.ExtensionSummary_ExtensionVersion:
+			v.ExtensionVersion = new(string)
+			return d.ReadString(schemas.ExtensionSummary_ExtensionVersion, v.ExtensionVersion)
+		case schemas.ExtensionSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.ExtensionSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ExtensionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The container for the metadata for Fail step.
 type FailStepMetadata struct {
 
@@ -23345,6 +23651,48 @@ func (v *HubContentInfo) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.SupportStatus = HubContentSupportStatus(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// The hub and the hub content that a HubContent step imported.
+type HubContentStepMetadata struct {
+
+	// The Amazon Resource Name (ARN) of the hub that the step imported the content
+	// into.
+	HubArn *string
+
+	// The Amazon Resource Name (ARN) of the hub content that was imported by this
+	// step execution.
+	HubContentArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *HubContentStepMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HubContentStepMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HubContentStepMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubArn != nil {
+		s.WriteString(schemas.HubContentStepMetadata_HubArn, *v.HubArn)
+	}
+	if v.HubContentArn != nil {
+		s.WriteString(schemas.HubContentStepMetadata_HubContentArn, *v.HubContentArn)
+	}
+}
+func (v *HubContentStepMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HubContentStepMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HubContentStepMetadata_HubArn:
+			v.HubArn = new(string)
+			return d.ReadString(schemas.HubContentStepMetadata_HubArn, v.HubArn)
+		case schemas.HubContentStepMetadata_HubContentArn:
+			v.HubContentArn = new(string)
+			return d.ReadString(schemas.HubContentStepMetadata_HubContentArn, v.HubContentArn)
 		}
 		return nil
 	})
@@ -42508,6 +42856,9 @@ type PipelineExecutionStepMetadata struct {
 	// The metadata for the ForEach step execution.
 	ForEach *ForEachStepMetadata
 
+	// The metadata for the HubContent step execution.
+	HubContent *HubContentStepMetadata
+
 	//  The metadata of the inference component used in pipeline execution step.
 	InferenceComponent *InferenceComponentMetadata
 
@@ -42657,6 +43008,11 @@ func (v *PipelineExecutionStepMetadata) SerializeMembers(s smithy.ShapeSerialize
 		v.ForEach.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.HubContent != nil {
+		s.WriteStruct(schemas.PipelineExecutionStepMetadata_HubContent)
+		v.HubContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.InferenceComponent != nil {
 		s.WriteStruct(schemas.PipelineExecutionStepMetadata_InferenceComponent)
 		v.InferenceComponent.SerializeMembers(s)
@@ -42764,6 +43120,9 @@ func (v *PipelineExecutionStepMetadata) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.PipelineExecutionStepMetadata_ForEach:
 			v.ForEach = &ForEachStepMetadata{}
 			return v.ForEach.Deserialize(d)
+		case schemas.PipelineExecutionStepMetadata_HubContent:
+			v.HubContent = &HubContentStepMetadata{}
+			return v.HubContent.Deserialize(d)
 		case schemas.PipelineExecutionStepMetadata_InferenceComponent:
 			v.InferenceComponent = &InferenceComponentMetadata{}
 			return v.InferenceComponent.Deserialize(d)
@@ -42821,6 +43180,9 @@ type PipelineExecutionSummary struct {
 	// The status of the pipeline execution.
 	PipelineExecutionStatus PipelineExecutionStatus
 
+	// The aliases currently assigned to the pipeline version that the execution ran.
+	PipelineVersionAliases []string
+
 	// The start time of the pipeline execution.
 	StartTime *time.Time
 
@@ -42849,6 +43211,9 @@ func (v *PipelineExecutionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PipelineExecutionStatus != "" {
 		s.WriteString(schemas.PipelineExecutionSummary_PipelineExecutionStatus, string(v.PipelineExecutionStatus))
 	}
+	if v.PipelineVersionAliases != nil {
+		serializePipelineVersionAliasList(s, schemas.PipelineExecutionSummary_PipelineVersionAliases, v.PipelineVersionAliases)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.PipelineExecutionSummary_StartTime, *v.StartTime)
 	}
@@ -42875,6 +43240,8 @@ func (v *PipelineExecutionSummary) Deserialize(d smithy.ShapeDeserializer) error
 			}
 			v.PipelineExecutionStatus = PipelineExecutionStatus(ev)
 			return nil
+		case schemas.PipelineExecutionSummary_PipelineVersionAliases:
+			return deserializePipelineVersionAliasList(d, schemas.PipelineExecutionSummary_PipelineVersionAliases, &v.PipelineVersionAliases)
 		case schemas.PipelineExecutionSummary_StartTime:
 			v.StartTime = new(time.Time)
 			return d.ReadTime(schemas.PipelineExecutionSummary_StartTime, v.StartTime)
@@ -43047,6 +43414,9 @@ type PipelineVersion struct {
 	// The Amazon Resource Name (ARN) of the pipeline.
 	PipelineArn *string
 
+	// The aliases assigned to the pipeline version.
+	PipelineVersionAliases []string
+
 	// The description of the pipeline version.
 	PipelineVersionDescription *string
 
@@ -43094,6 +43464,9 @@ func (v *PipelineVersion) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PipelineArn != nil {
 		s.WriteString(schemas.PipelineVersion_PipelineArn, *v.PipelineArn)
 	}
+	if v.PipelineVersionAliases != nil {
+		serializePipelineVersionAliasList(s, schemas.PipelineVersion_PipelineVersionAliases, v.PipelineVersionAliases)
+	}
 	if v.PipelineVersionDescription != nil {
 		s.WriteString(schemas.PipelineVersion_PipelineVersionDescription, *v.PipelineVersionDescription)
 	}
@@ -43135,6 +43508,8 @@ func (v *PipelineVersion) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PipelineVersion_PipelineArn:
 			v.PipelineArn = new(string)
 			return d.ReadString(schemas.PipelineVersion_PipelineArn, v.PipelineArn)
+		case schemas.PipelineVersion_PipelineVersionAliases:
+			return deserializePipelineVersionAliasList(d, schemas.PipelineVersion_PipelineVersionAliases, &v.PipelineVersionAliases)
 		case schemas.PipelineVersion_PipelineVersionDescription:
 			v.PipelineVersionDescription = new(string)
 			return d.ReadString(schemas.PipelineVersion_PipelineVersionDescription, v.PipelineVersionDescription)
@@ -43161,6 +43536,9 @@ type PipelineVersionSummary struct {
 
 	// The Amazon Resource Name (ARN) of the pipeline.
 	PipelineArn *string
+
+	// The aliases assigned to the pipeline version.
+	PipelineVersionAliases []string
 
 	// The description of the pipeline version.
 	PipelineVersionDescription *string
@@ -43190,6 +43568,9 @@ func (v *PipelineVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PipelineArn != nil {
 		s.WriteString(schemas.PipelineVersionSummary_PipelineArn, *v.PipelineArn)
 	}
+	if v.PipelineVersionAliases != nil {
+		serializePipelineVersionAliasList(s, schemas.PipelineVersionSummary_PipelineVersionAliases, v.PipelineVersionAliases)
+	}
 	if v.PipelineVersionDescription != nil {
 		s.WriteString(schemas.PipelineVersionSummary_PipelineVersionDescription, *v.PipelineVersionDescription)
 	}
@@ -43212,6 +43593,8 @@ func (v *PipelineVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PipelineVersionSummary_PipelineArn:
 			v.PipelineArn = new(string)
 			return d.ReadString(schemas.PipelineVersionSummary_PipelineArn, v.PipelineArn)
+		case schemas.PipelineVersionSummary_PipelineVersionAliases:
+			return deserializePipelineVersionAliasList(d, schemas.PipelineVersionSummary_PipelineVersionAliases, &v.PipelineVersionAliases)
 		case schemas.PipelineVersionSummary_PipelineVersionDescription:
 			v.PipelineVersionDescription = new(string)
 			return d.ReadString(schemas.PipelineVersionSummary_PipelineVersionDescription, v.PipelineVersionDescription)

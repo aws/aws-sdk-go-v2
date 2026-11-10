@@ -61,6 +61,10 @@ type GetDataQualityResultV2Output struct {
 	// analyzer.
 	AnalyzerResults []types.DataQualityAnalyzerResult
 
+	// The name of the data quality evaluation configuration that started the
+	// evaluation run, returned when EvaluationRunMode is EVALUATION_CONFIG .
+	DataQualityEvaluationConfig *string
+
 	// The table associated with the data quality result, if any.
 	DataSource *types.DataSource
 
@@ -76,6 +80,12 @@ type GetDataQualityResultV2Output struct {
 	// The evaluation context for the data quality result. This value identifies a
 	// specific data quality result, or a series of related results, within a run.
 	EvaluationContext *string
+
+	// How the evaluation run that produced the result started: ON_DEMAND for a run
+	// started by StartDataQualityRulesetEvaluationRun , or EVALUATION_CONFIG for a
+	// run started by a data quality evaluation configuration. Not returned for results
+	// that no evaluation run produced, such as results from any ETL job.
+	EvaluationRunMode types.DataQualityEvaluationRunMode
 
 	// The date and time when this data quality run completed.
 	ExecutionCompletedOn *time.Time
@@ -130,6 +140,9 @@ func (v *GetDataQualityResultV2Output) SerializeMembers(s smithy.ShapeSerializer
 	if v.AnalyzerResults != nil {
 		serializeDataQualityAnalyzerResults(s, schemas.GetDataQualityResultV2Response_AnalyzerResults, v.AnalyzerResults)
 	}
+	if v.DataQualityEvaluationConfig != nil {
+		s.WriteString(schemas.GetDataQualityResultV2Response_DataQualityEvaluationConfig, *v.DataQualityEvaluationConfig)
+	}
 	if v.DataSource != nil {
 		s.WriteStruct(schemas.GetDataQualityResultV2Response_DataSource)
 		v.DataSource.SerializeMembers(s)
@@ -143,6 +156,9 @@ func (v *GetDataQualityResultV2Output) SerializeMembers(s smithy.ShapeSerializer
 	}
 	if v.EvaluationContext != nil {
 		s.WriteString(schemas.GetDataQualityResultV2Response_EvaluationContext, *v.EvaluationContext)
+	}
+	if v.EvaluationRunMode != "" {
+		s.WriteString(schemas.GetDataQualityResultV2Response_EvaluationRunMode, string(v.EvaluationRunMode))
 	}
 	if v.ExecutionCompletedOn != nil {
 		s.WriteTime(schemas.GetDataQualityResultV2Response_ExecutionCompletedOn, *v.ExecutionCompletedOn)
@@ -183,6 +199,9 @@ func (v *GetDataQualityResultV2Output) Deserialize(d smithy.ShapeDeserializer) e
 			return v.AggregatedMetrics.Deserialize(d)
 		case schemas.GetDataQualityResultV2Response_AnalyzerResults:
 			return deserializeDataQualityAnalyzerResults(d, schemas.GetDataQualityResultV2Response_AnalyzerResults, &v.AnalyzerResults)
+		case schemas.GetDataQualityResultV2Response_DataQualityEvaluationConfig:
+			v.DataQualityEvaluationConfig = new(string)
+			return d.ReadString(schemas.GetDataQualityResultV2Response_DataQualityEvaluationConfig, v.DataQualityEvaluationConfig)
 		case schemas.GetDataQualityResultV2Response_DataSource:
 			v.DataSource = &types.DataSource{}
 			return v.DataSource.Deserialize(d)
@@ -193,6 +212,13 @@ func (v *GetDataQualityResultV2Output) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.GetDataQualityResultV2Response_EvaluationContext:
 			v.EvaluationContext = new(string)
 			return d.ReadString(schemas.GetDataQualityResultV2Response_EvaluationContext, v.EvaluationContext)
+		case schemas.GetDataQualityResultV2Response_EvaluationRunMode:
+			var ev string
+			if err := d.ReadString(schemas.GetDataQualityResultV2Response_EvaluationRunMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationRunMode = types.DataQualityEvaluationRunMode(ev)
+			return nil
 		case schemas.GetDataQualityResultV2Response_ExecutionCompletedOn:
 			v.ExecutionCompletedOn = new(time.Time)
 			return d.ReadTime(schemas.GetDataQualityResultV2Response_ExecutionCompletedOn, v.ExecutionCompletedOn)

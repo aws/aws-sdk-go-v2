@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -270,6 +272,108 @@ type ModifyReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyReplicationGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyReplicationGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyReplicationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyImmediately != nil {
+		s.WriteBool(schemas.ModifyReplicationGroupMessage_ApplyImmediately, *v.ApplyImmediately)
+	}
+	if v.AuthToken != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_AuthToken, *v.AuthToken)
+	}
+	if v.AuthTokenUpdateStrategy != "" {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_AuthTokenUpdateStrategy, string(v.AuthTokenUpdateStrategy))
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.ModifyReplicationGroupMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.AutomaticFailoverEnabled != nil {
+		s.WriteBool(schemas.ModifyReplicationGroupMessage_AutomaticFailoverEnabled, *v.AutomaticFailoverEnabled)
+	}
+	if v.CacheNodeType != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_CacheNodeType, *v.CacheNodeType)
+	}
+	if v.CacheParameterGroupName != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_CacheParameterGroupName, *v.CacheParameterGroupName)
+	}
+	if v.CacheSecurityGroupNames != nil {
+		serializeCacheSecurityGroupNameList(s, schemas.ModifyReplicationGroupMessage_CacheSecurityGroupNames, v.CacheSecurityGroupNames)
+	}
+	if v.ClusterMode != "" {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_ClusterMode, string(v.ClusterMode))
+	}
+	if v.Durability != "" {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_Durability, string(v.Durability))
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.IpDiscovery != "" {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_IpDiscovery, string(v.IpDiscovery))
+	}
+	if v.LogDeliveryConfigurations != nil {
+		serializeLogDeliveryConfigurationRequestList(s, schemas.ModifyReplicationGroupMessage_LogDeliveryConfigurations, v.LogDeliveryConfigurations)
+	}
+	if v.MultiAZEnabled != nil {
+		s.WriteBool(schemas.ModifyReplicationGroupMessage_MultiAZEnabled, *v.MultiAZEnabled)
+	}
+	if v.NodeGroupId != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_NodeGroupId, *v.NodeGroupId)
+	}
+	if v.NotificationTopicArn != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_NotificationTopicArn, *v.NotificationTopicArn)
+	}
+	if v.NotificationTopicStatus != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_NotificationTopicStatus, *v.NotificationTopicStatus)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.PrimaryClusterId != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_PrimaryClusterId, *v.PrimaryClusterId)
+	}
+	if v.RemoveUserGroups != nil {
+		s.WriteBool(schemas.ModifyReplicationGroupMessage_RemoveUserGroups, *v.RemoveUserGroups)
+	}
+	if v.ReplicationGroupDescription != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_ReplicationGroupDescription, *v.ReplicationGroupDescription)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdsList(s, schemas.ModifyReplicationGroupMessage_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SnapshotRetentionLimit != nil {
+		s.WriteInt32(schemas.ModifyReplicationGroupMessage_SnapshotRetentionLimit, *v.SnapshotRetentionLimit)
+	}
+	if v.SnapshotWindow != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_SnapshotWindow, *v.SnapshotWindow)
+	}
+	if v.SnapshottingClusterId != nil {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_SnapshottingClusterId, *v.SnapshottingClusterId)
+	}
+	if v.TransitEncryptionEnabled != nil {
+		s.WriteBool(schemas.ModifyReplicationGroupMessage_TransitEncryptionEnabled, *v.TransitEncryptionEnabled)
+	}
+	if v.TransitEncryptionMode != "" {
+		s.WriteString(schemas.ModifyReplicationGroupMessage_TransitEncryptionMode, string(v.TransitEncryptionMode))
+	}
+	if v.UserGroupIdsToAdd != nil {
+		serializeUserGroupIdList(s, schemas.ModifyReplicationGroupMessage_UserGroupIdsToAdd, v.UserGroupIdsToAdd)
+	}
+	if v.UserGroupIdsToRemove != nil {
+		serializeUserGroupIdList(s, schemas.ModifyReplicationGroupMessage_UserGroupIdsToRemove, v.UserGroupIdsToRemove)
+	}
+}
+
 type ModifyReplicationGroupOutput struct {
 
 	// Contains all of the attributes of a specific Valkey or Redis OSS replication
@@ -282,13 +386,34 @@ type ModifyReplicationGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyReplicationGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyReplicationGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyReplicationGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationGroup != nil {
+		s.WriteStruct(schemas.ModifyReplicationGroupResult_ReplicationGroup)
+		v.ReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyReplicationGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyReplicationGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyReplicationGroupResult_ReplicationGroup:
+			v.ReplicationGroup = &types.ReplicationGroup{}
+			return v.ReplicationGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyReplicationGroup, schemas.ModifyReplicationGroupMessage, schemas.ModifyReplicationGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyReplicationGroup, schemas.ModifyReplicationGroupMessage, schemas.ModifyReplicationGroupResult), output: &ModifyReplicationGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

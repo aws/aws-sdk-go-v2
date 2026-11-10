@@ -1937,6 +1937,16 @@ func TestCheckResponseSnapshot_DescribePlatformVersion(t *testing.T) {
 					ImageId:            ptr.String("__ImageId__"),
 				},
 			},
+			DefaultAmiList: []types.DefaultAmi{
+				{
+					Architecture: types.AmiArchitecture("x86_64"),
+					ImageId:      ptr.String("__ImageId__"),
+				},
+				{
+					Architecture: types.AmiArchitecture("x86_64"),
+					ImageId:      ptr.String("__ImageId__"),
+				},
+			},
 			SupportedTierList: []string{
 				"__Member__",
 				"__Member__",

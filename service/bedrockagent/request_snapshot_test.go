@@ -4510,6 +4510,18 @@ func TestCheckRequestSnapshot_UpdateKnowledgeBase(t *testing.T) {
 				IndexName:       ptr.String("__IndexName__"),
 			},
 		},
+		MetadataConfigurations: []types.MetadataConfiguration{
+			{
+				Name:          ptr.String("__Name__"),
+				Type:          types.FieldType("STRING"),
+				Searchability: types.SearchableStatus("ENABLED"),
+			},
+			{
+				Name:          ptr.String("__Name__"),
+				Type:          types.FieldType("STRING"),
+				Searchability: types.SearchableStatus("ENABLED"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9116,6 +9128,18 @@ func TestUpdateRequestSnapshot_UpdateKnowledgeBase(t *testing.T) {
 				VectorBucketArn: ptr.String("__VectorBucketArn__"),
 				IndexArn:        ptr.String("__IndexArn__"),
 				IndexName:       ptr.String("__IndexName__"),
+			},
+		},
+		MetadataConfigurations: []types.MetadataConfiguration{
+			{
+				Name:          ptr.String("__Name__"),
+				Type:          types.FieldType("STRING"),
+				Searchability: types.SearchableStatus("ENABLED"),
+			},
+			{
+				Name:          ptr.String("__Name__"),
+				Type:          types.FieldType("STRING"),
+				Searchability: types.SearchableStatus("ENABLED"),
 			},
 		},
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeOrganizationsAccessResponse><DescribeOrganizationsAccessResult><Status>ENABLED</Status></DescribeOrganizationsAccessResult></DescribeOrganizationsAccessResponse>

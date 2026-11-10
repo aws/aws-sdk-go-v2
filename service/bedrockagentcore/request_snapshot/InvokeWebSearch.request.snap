@@ -1,0 +1,5 @@
+POST /web-search/__WebSearchId__/invoke
+
+Content-Type: application/json
+
+{"filters":{"domainFilter":{"exclude":["__Member__","__Member__"],"include":["__Member__","__Member__"]},"publishedDateFilter":{"publishedAfter":"2000-01-01T00:00:00Z","publishedBefore":"2000-01-01T00:00:00Z"}},"maxResults":1,"searchQuery":"__SearchQuery__"}

@@ -8,9 +8,11 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_BatchCreateRelatedItem.go",
         "api_op_BatchGetCaseRule.go",
         "api_op_BatchGetField.go",
         "api_op_BatchPutFieldOptions.go",
+        "api_op_BatchUpdateCase.go",
         "api_op_CreateCase.go",
         "api_op_CreateCaseRule.go",
         "api_op_CreateDomain.go",

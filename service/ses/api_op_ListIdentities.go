@@ -5,7 +5,9 @@ package ses
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type ListIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityType != "" {
+		s.WriteString(schemas.ListIdentitiesRequest_IdentityType, string(v.IdentityType))
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListIdentitiesRequest_MaxItems, *v.MaxItems)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentitiesRequest_NextToken, *v.NextToken)
+	}
+}
+
 // A list of all identities that you have attempted to verify under your Amazon
 // Web Services account, regardless of verification status.
 type ListIdentitiesOutput struct {
@@ -73,13 +93,37 @@ type ListIdentitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identities != nil {
+		serializeIdentityList(s, schemas.ListIdentitiesResponse_Identities, v.Identities)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentitiesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdentitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdentitiesResponse_Identities:
+			return deserializeIdentityList(d, schemas.ListIdentitiesResponse_Identities, &v.Identities)
+		case schemas.ListIdentitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdentitiesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentities, schemas.ListIdentitiesRequest, schemas.ListIdentitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentities, schemas.ListIdentitiesRequest, schemas.ListIdentitiesResponse), output: &ListIdentitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

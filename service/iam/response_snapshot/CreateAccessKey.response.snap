@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateAccessKeyResponse><CreateAccessKeyResult><AccessKey><AccessKeyId>__AccessKeyId__</AccessKeyId><CreateDate>2000-01-01T00:00:00Z</CreateDate><SecretAccessKey>__SecretAccessKey__</SecretAccessKey><Status>Active</Status><UserName>__UserName__</UserName></AccessKey></CreateAccessKeyResult></CreateAccessKeyResponse>

@@ -569,7 +569,7 @@ tasks.register("generate-smithy-build") {
             //addAll(w18_restJson1)
             //addAll(w19_restJson1)
 
-            addAll(w20_awsQuery)
+            //addAll(w20_awsQuery)
             addAll(w21_ec2Query)
 
             addAll(w22_restXml)

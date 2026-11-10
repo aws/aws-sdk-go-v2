@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -133,6 +135,43 @@ type CreateStackInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStackInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStackInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStackInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accounts != nil {
+		serializeAccountList(s, schemas.CreateStackInstancesInput_Accounts, v.Accounts)
+	}
+	if v.CallAs != "" {
+		s.WriteString(schemas.CreateStackInstancesInput_CallAs, string(v.CallAs))
+	}
+	if v.DeploymentTargets != nil {
+		s.WriteStruct(schemas.CreateStackInstancesInput_DeploymentTargets)
+		v.DeploymentTargets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.CreateStackInstancesInput_OperationId, *v.OperationId)
+	}
+	if v.OperationPreferences != nil {
+		s.WriteStruct(schemas.CreateStackInstancesInput_OperationPreferences)
+		v.OperationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParameterOverrides != nil {
+		serializeParameters(s, schemas.CreateStackInstancesInput_ParameterOverrides, v.ParameterOverrides)
+	}
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.CreateStackInstancesInput_Regions, v.Regions)
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.CreateStackInstancesInput_StackSetName, *v.StackSetName)
+	}
+}
+
 type CreateStackInstancesOutput struct {
 
 	// The unique identifier for this StackSet operation.
@@ -144,13 +183,32 @@ type CreateStackInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStackInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStackInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStackInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.CreateStackInstancesOutput_OperationId, *v.OperationId)
+	}
+}
+func (v *CreateStackInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStackInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStackInstancesOutput_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.CreateStackInstancesOutput_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStackInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateStackInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStackInstances, schemas.CreateStackInstancesInput, schemas.CreateStackInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateStackInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStackInstances, schemas.CreateStackInstancesInput, schemas.CreateStackInstancesOutput), output: &CreateStackInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

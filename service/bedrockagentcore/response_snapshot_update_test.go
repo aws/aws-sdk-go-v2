@@ -3001,6 +3001,43 @@ func TestUpdateResponseSnapshot_InvokeBrowser(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_InvokeWebSearch(t *testing.T) {
+	want := &InvokeWebSearchOutput{
+		Results: []types.WebSearchResult{
+			{
+				Title:       ptr.String("__Title__"),
+				Url:         ptr.String("__Url__"),
+				Text:        ptr.String("__Text__"),
+				PublishedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Title:       ptr.String("__Title__"),
+				Url:         ptr.String("__Url__"),
+				Text:        ptr.String("__Text__"),
+				PublishedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentCore)
+	opSchema := smithy.NewOperationSchema(schemas.InvokeWebSearch, schemas.InvokeWebSearchOutput, schemas.InvokeWebSearchOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("InvokeWebSearch.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListABTests(t *testing.T) {
 	want := &ListABTestsOutput{
 		AbTests: []types.ABTestSummary{
@@ -4545,6 +4582,32 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceQuotaExceededException.error", 402, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
+	want := &types.ServiceUnavailableException{
+		Message:           ptr.String("__Message__"),
+		RetryAfterSeconds: ptr.Int32(1),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentCore)
+	opSchema := smithy.NewOperationSchema(schemas.InvokeWebSearch, schemas.ServiceUnavailableException, schemas.ServiceUnavailableException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ServiceUnavailableException.error", 503, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -104,3 +104,25 @@ func ExampleDirectQueryDataSourceType_outputUsage() {
 var _ *types.CloudWatchDirectQueryDataSource
 var _ *types.PrometheusDirectQueryDataSource
 var _ *types.SecurityLakeDirectQueryDataSource
+
+func ExampleRetentionOptions_outputUsage() {
+	var union types.RetentionOptions
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RetentionOptionsMemberRetentionAction:
+		_ = v.Value // Value is types.RetentionAction
+
+	case *types.RetentionOptionsMemberRetentionInHours:
+		_ = v.Value // Value is int32
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.RetentionAction
+var _ *int32

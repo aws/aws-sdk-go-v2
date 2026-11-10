@@ -468,8 +468,9 @@ func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 				Description: ptr.String("__Description__"),
 			},
 		},
-		CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -649,24 +650,26 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 	want := &ListApplicationsOutput{
 		Applications: []types.ApplicationSummary{
 			{
-				Arn:              ptr.String("__Arn__"),
-				Id:               ptr.String("__Id__"),
-				Name:             ptr.String("__Name__"),
-				Namespace:        ptr.String("__Namespace__"),
-				CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				IsService:        true,
-				ApplicationType:  types.ApplicationType("STANDARD"),
+				Arn:                ptr.String("__Arn__"),
+				Id:                 ptr.String("__Id__"),
+				Name:               ptr.String("__Name__"),
+				Namespace:          ptr.String("__Namespace__"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				IsService:          true,
+				ApplicationType:    types.ApplicationType("STANDARD"),
 			},
 			{
-				Arn:              ptr.String("__Arn__"),
-				Id:               ptr.String("__Id__"),
-				Name:             ptr.String("__Name__"),
-				Namespace:        ptr.String("__Namespace__"),
-				CreatedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				IsService:        true,
-				ApplicationType:  types.ApplicationType("STANDARD"),
+				Arn:                ptr.String("__Arn__"),
+				Id:                 ptr.String("__Id__"),
+				Name:               ptr.String("__Name__"),
+				Namespace:          ptr.String("__Namespace__"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				IsService:          true,
+				ApplicationType:    types.ApplicationType("STANDARD"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1233,67 +1236,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
-		Arn:         ptr.String("__Arn__"),
-		Name:        ptr.String("__Name__"),
-		Description: ptr.String("__Description__"),
-		ApplicationSourceConfig: &types.ApplicationSourceConfig{
-			ExternalUrlConfig: &types.ExternalUrlConfig{
-				AccessUrl: ptr.String("__AccessUrl__"),
-				ApprovedOrigins: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		Subscriptions: []types.Subscription{
-			{
-				Event:       ptr.String("__Event__"),
-				Description: ptr.String("__Description__"),
-			},
-			{
-				Event:       ptr.String("__Event__"),
-				Description: ptr.String("__Description__"),
-			},
-		},
-		Publications: []types.Publication{
-			{
-				Event:       ptr.String("__Event__"),
-				Schema:      ptr.String("__Schema__"),
-				Description: ptr.String("__Description__"),
-			},
-			{
-				Event:       ptr.String("__Event__"),
-				Schema:      ptr.String("__Schema__"),
-				Description: ptr.String("__Description__"),
-			},
-		},
-		Permissions: []string{
-			"__Member__",
-			"__Member__",
-		},
-		IsService:             ptr.Bool(true),
-		InitializationTimeout: ptr.Int32(1),
-		ApplicationConfig: &types.ApplicationConfig{
-			ContactHandling: &types.ContactHandling{
-				Scope: types.ContactHandlingScope("CROSS_CONTACTS"),
-			},
-		},
-		IframeConfig: &types.IframeConfig{
-			Allow: []string{
-				"__Member__",
-				"__Member__",
-			},
-			Sandbox: []string{
-				"__Member__",
-				"__Member__",
-			},
-		},
-		ApplicationType: types.ApplicationType("STANDARD"),
-		AuthConfig: &types.AuthConfig{
-			AuthType:                     types.AuthType("API_KEY"),
-			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
-			AudienceOverride:             ptr.String("__AudienceOverride__"),
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
 		},
 	})
 	if opErr == nil {

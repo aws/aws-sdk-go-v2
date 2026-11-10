@@ -264,7 +264,8 @@ func TestCheckRequestSnapshot_CreateTrustAnchor(t *testing.T) {
 				Value: "__SourceDataMemberX509CertificateData__",
 			},
 		},
-		Enabled: ptr.Bool(true),
+		Enabled:                ptr.Bool(true),
+		CrlDpRevocationEnabled: ptr.Bool(true),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -1135,6 +1136,7 @@ func TestCheckRequestSnapshot_UpdateTrustAnchor(t *testing.T) {
 				Value: "__SourceDataMemberX509CertificateData__",
 			},
 		},
+		CrlDpRevocationEnabled: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1217,7 +1219,8 @@ func TestUpdateRequestSnapshot_CreateTrustAnchor(t *testing.T) {
 				Value: "__SourceDataMemberX509CertificateData__",
 			},
 		},
-		Enabled: ptr.Bool(true),
+		Enabled:                ptr.Bool(true),
+		CrlDpRevocationEnabled: ptr.Bool(true),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -2088,6 +2091,7 @@ func TestUpdateRequestSnapshot_UpdateTrustAnchor(t *testing.T) {
 				Value: "__SourceDataMemberX509CertificateData__",
 			},
 		},
+		CrlDpRevocationEnabled: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

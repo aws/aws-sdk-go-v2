@@ -5,7 +5,9 @@ package docdb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type DescribeEventSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventSubscriptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventSubscriptionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventSubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeEventSubscriptionsMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeEventSubscriptionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeEventSubscriptionsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.SubscriptionName != nil {
+		s.WriteString(schemas.DescribeEventSubscriptionsMessage_SubscriptionName, *v.SubscriptionName)
+	}
+}
+
 // Represents the output of DescribeEventSubscriptions.
 type DescribeEventSubscriptionsOutput struct {
 
@@ -73,13 +96,37 @@ type DescribeEventSubscriptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventSubscriptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventSubscriptionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventSubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventSubscriptionsList != nil {
+		serializeEventSubscriptionsList(s, schemas.EventSubscriptionsMessage_EventSubscriptionsList, v.EventSubscriptionsList)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.EventSubscriptionsMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeEventSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventSubscriptionsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventSubscriptionsMessage_EventSubscriptionsList:
+			return deserializeEventSubscriptionsList(d, schemas.EventSubscriptionsMessage_EventSubscriptionsList, &v.EventSubscriptionsList)
+		case schemas.EventSubscriptionsMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.EventSubscriptionsMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEventSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEventSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventSubscriptions, schemas.DescribeEventSubscriptionsMessage, schemas.EventSubscriptionsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeEventSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventSubscriptions, schemas.DescribeEventSubscriptionsMessage, schemas.EventSubscriptionsMessage), output: &DescribeEventSubscriptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

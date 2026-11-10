@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type DescribeTableRestoreStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTableRestoreStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTableRestoreStatusMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTableRestoreStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeTableRestoreStatusMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeTableRestoreStatusMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeTableRestoreStatusMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.TableRestoreRequestId != nil {
+		s.WriteString(schemas.DescribeTableRestoreStatusMessage_TableRestoreRequestId, *v.TableRestoreRequestId)
+	}
+}
+
 type DescribeTableRestoreStatusOutput struct {
 
 	// A pagination token that can be used in a subsequent DescribeTableRestoreStatus request.
@@ -67,13 +90,37 @@ type DescribeTableRestoreStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTableRestoreStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableRestoreStatusMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTableRestoreStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.TableRestoreStatusMessage_Marker, *v.Marker)
+	}
+	if v.TableRestoreStatusDetails != nil {
+		serializeTableRestoreStatusList(s, schemas.TableRestoreStatusMessage_TableRestoreStatusDetails, v.TableRestoreStatusDetails)
+	}
+}
+func (v *DescribeTableRestoreStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableRestoreStatusMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableRestoreStatusMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.TableRestoreStatusMessage_Marker, v.Marker)
+		case schemas.TableRestoreStatusMessage_TableRestoreStatusDetails:
+			return deserializeTableRestoreStatusList(d, schemas.TableRestoreStatusMessage_TableRestoreStatusDetails, &v.TableRestoreStatusDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTableRestoreStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTableRestoreStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTableRestoreStatus, schemas.DescribeTableRestoreStatusMessage, schemas.TableRestoreStatusMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeTableRestoreStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTableRestoreStatus, schemas.DescribeTableRestoreStatusMessage, schemas.TableRestoreStatusMessage), output: &DescribeTableRestoreStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

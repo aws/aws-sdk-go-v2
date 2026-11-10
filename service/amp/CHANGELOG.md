@@ -1,3 +1,16 @@
+# v1.55.3 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.55.2 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.55.1 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.0 (2026-10-30)
 
 * **Feature**: Managed Prometheus collectors now support Amazon MSK consumer-group metrics for Amazon Managed Service for Prometheus and CloudWatch.

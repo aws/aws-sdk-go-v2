@@ -95,6 +95,10 @@ type CreateWorkflowInput struct {
 	// the service evolves.
 	EngineVersion types.EngineVersion
 
+	// The environment variables to set for tasks in the workflow. If you don't
+	// specify this parameter, the workflow has no environment variables.
+	Environment *types.Environment
+
 	// The configuration for workflow logging. Specifies the CloudWatch log group
 	// where workflow execution logs are stored. Amazon Managed Workflows for Apache
 	// Airflow Serverless automatically exports worker logs and task-level information
@@ -150,6 +154,11 @@ func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.EngineVersion != 0 {
 		s.WriteInt32(schemas.CreateWorkflowRequest_EngineVersion, int32(v.EngineVersion))
+	}
+	if v.Environment != nil {
+		s.WriteStruct(schemas.CreateWorkflowRequest_Environment)
+		v.Environment.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.LoggingConfiguration != nil {
 		s.WriteStruct(schemas.CreateWorkflowRequest_LoggingConfiguration)

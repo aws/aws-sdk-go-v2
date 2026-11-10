@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type GetRoleTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRoleTemplateVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRoleTemplateVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRoleTemplateVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinorVersion != nil {
+		s.WriteInt32(schemas.GetRoleTemplateVersionRequest_MinorVersion, *v.MinorVersion)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.GetRoleTemplateVersionRequest_TemplateArn, *v.TemplateArn)
+	}
+}
+
 type GetRoleTemplateVersionOutput struct {
 
 	// A structure that contains details about the requested role template version.
@@ -65,13 +82,34 @@ type GetRoleTemplateVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRoleTemplateVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRoleTemplateVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRoleTemplateVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleTemplateVersion != nil {
+		s.WriteStruct(schemas.GetRoleTemplateVersionResponse_RoleTemplateVersion)
+		v.RoleTemplateVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRoleTemplateVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRoleTemplateVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRoleTemplateVersionResponse_RoleTemplateVersion:
+			v.RoleTemplateVersion = &types.RoleTemplateVersion{}
+			return v.RoleTemplateVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRoleTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetRoleTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoleTemplateVersion, schemas.GetRoleTemplateVersionRequest, schemas.GetRoleTemplateVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetRoleTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoleTemplateVersion, schemas.GetRoleTemplateVersionRequest, schemas.GetRoleTemplateVersionResponse), output: &GetRoleTemplateVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

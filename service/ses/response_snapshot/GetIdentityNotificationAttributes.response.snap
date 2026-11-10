@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetIdentityNotificationAttributesResponse><GetIdentityNotificationAttributesResult><NotificationAttributes><entry><key>key0</key><value><BounceTopic>__BounceTopic__</BounceTopic><ComplaintTopic>__ComplaintTopic__</ComplaintTopic><DeliveryTopic>__DeliveryTopic__</DeliveryTopic><ForwardingEnabled>true</ForwardingEnabled><HeadersInBounceNotificationsEnabled>true</HeadersInBounceNotificationsEnabled><HeadersInComplaintNotificationsEnabled>true</HeadersInComplaintNotificationsEnabled><HeadersInDeliveryNotificationsEnabled>true</HeadersInDeliveryNotificationsEnabled></value></entry></NotificationAttributes></GetIdentityNotificationAttributesResult></GetIdentityNotificationAttributesResponse>

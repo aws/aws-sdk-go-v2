@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,20 @@ type CreateReceiptFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReceiptFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReceiptFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReceiptFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.CreateReceiptFilterRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // An empty element returned on a successful request.
 type CreateReceiptFilterOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -53,13 +69,26 @@ type CreateReceiptFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReceiptFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReceiptFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReceiptFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateReceiptFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReceiptFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReceiptFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateReceiptFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReceiptFilter, schemas.CreateReceiptFilterRequest, schemas.CreateReceiptFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateReceiptFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReceiptFilter, schemas.CreateReceiptFilterRequest, schemas.CreateReceiptFilterResponse), output: &CreateReceiptFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -131,6 +133,70 @@ type PutLifecycleHookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLifecycleHookInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLifecycleHookType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLifecycleHookInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.PutLifecycleHookType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.DefaultResult != nil {
+		s.WriteString(schemas.PutLifecycleHookType_DefaultResult, *v.DefaultResult)
+	}
+	if v.HeartbeatTimeout != nil {
+		s.WriteInt32(schemas.PutLifecycleHookType_HeartbeatTimeout, *v.HeartbeatTimeout)
+	}
+	if v.LifecycleHookName != nil {
+		s.WriteString(schemas.PutLifecycleHookType_LifecycleHookName, *v.LifecycleHookName)
+	}
+	if v.LifecycleTransition != nil {
+		s.WriteString(schemas.PutLifecycleHookType_LifecycleTransition, *v.LifecycleTransition)
+	}
+	if v.NotificationMetadata != nil {
+		s.WriteString(schemas.PutLifecycleHookType_NotificationMetadata, *v.NotificationMetadata)
+	}
+	if v.NotificationTargetARN != nil {
+		s.WriteString(schemas.PutLifecycleHookType_NotificationTargetARN, *v.NotificationTargetARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.PutLifecycleHookType_RoleARN, *v.RoleARN)
+	}
+}
+func (v *PutLifecycleHookInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutLifecycleHookType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutLifecycleHookType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.PutLifecycleHookType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.PutLifecycleHookType_DefaultResult:
+			v.DefaultResult = new(string)
+			return d.ReadString(schemas.PutLifecycleHookType_DefaultResult, v.DefaultResult)
+		case schemas.PutLifecycleHookType_HeartbeatTimeout:
+			v.HeartbeatTimeout = new(int32)
+			return d.ReadInt32(schemas.PutLifecycleHookType_HeartbeatTimeout, v.HeartbeatTimeout)
+		case schemas.PutLifecycleHookType_LifecycleHookName:
+			v.LifecycleHookName = new(string)
+			return d.ReadString(schemas.PutLifecycleHookType_LifecycleHookName, v.LifecycleHookName)
+		case schemas.PutLifecycleHookType_LifecycleTransition:
+			v.LifecycleTransition = new(string)
+			return d.ReadString(schemas.PutLifecycleHookType_LifecycleTransition, v.LifecycleTransition)
+		case schemas.PutLifecycleHookType_NotificationMetadata:
+			v.NotificationMetadata = new(string)
+			return d.ReadString(schemas.PutLifecycleHookType_NotificationMetadata, v.NotificationMetadata)
+		case schemas.PutLifecycleHookType_NotificationTargetARN:
+			v.NotificationTargetARN = new(string)
+			return d.ReadString(schemas.PutLifecycleHookType_NotificationTargetARN, v.NotificationTargetARN)
+		case schemas.PutLifecycleHookType_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.PutLifecycleHookType_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 type PutLifecycleHookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -138,13 +204,26 @@ type PutLifecycleHookOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLifecycleHookOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLifecycleHookAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLifecycleHookOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutLifecycleHookOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutLifecycleHookAnswer, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutLifecycleHookMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutLifecycleHook{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLifecycleHook, schemas.PutLifecycleHookType, schemas.PutLifecycleHookAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPutLifecycleHook{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLifecycleHook, schemas.PutLifecycleHookType, schemas.PutLifecycleHookAnswer), output: &PutLifecycleHookOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

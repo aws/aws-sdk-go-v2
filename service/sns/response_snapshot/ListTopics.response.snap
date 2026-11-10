@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListTopicsResponse><ListTopicsResult><NextToken>__NextToken__</NextToken><Topics><member><TopicArn>__TopicArn__</TopicArn></member><member><TopicArn>__TopicArn__</TopicArn></member></Topics></ListTopicsResult></ListTopicsResponse>

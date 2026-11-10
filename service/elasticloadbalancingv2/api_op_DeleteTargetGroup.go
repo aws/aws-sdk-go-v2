@@ -4,6 +4,8 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteTargetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTargetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTargetGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTargetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetGroupArn != nil {
+		s.WriteString(schemas.DeleteTargetGroupInput_TargetGroupArn, *v.TargetGroupArn)
+	}
+}
+
 type DeleteTargetGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DeleteTargetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTargetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTargetGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTargetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTargetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTargetGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteTargetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTargetGroup, schemas.DeleteTargetGroupInput, schemas.DeleteTargetGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteTargetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTargetGroup, schemas.DeleteTargetGroupInput, schemas.DeleteTargetGroupOutput), output: &DeleteTargetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

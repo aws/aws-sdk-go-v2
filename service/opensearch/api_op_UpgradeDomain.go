@@ -48,6 +48,10 @@ type UpgradeDomainInput struct {
 	// that it continues to work with Elasticsearch OSS clients and plugins.
 	AdvancedOptions map[string]string
 
+	// Overrides the deployment strategy for this upgrade. To run a cloned blue/green
+	// upgrade, set DeploymentStrategy to ClonedBlueGreen .
+	DeploymentStrategyOptions *types.DeploymentStrategyOverrideOptions
+
 	// When true, indicates that an upgrade eligibility check needs to be performed.
 	// Does not actually perform the upgrade.
 	PerformCheckOnly *bool
@@ -64,6 +68,11 @@ func (v *UpgradeDomainInput) Serialize(s smithy.ShapeSerializer) {
 func (v *UpgradeDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdvancedOptions != nil {
 		serializeAdvancedOptions(s, schemas.UpgradeDomainRequest_AdvancedOptions, v.AdvancedOptions)
+	}
+	if v.DeploymentStrategyOptions != nil {
+		s.WriteStruct(schemas.UpgradeDomainRequest_DeploymentStrategyOptions)
+		v.DeploymentStrategyOptions.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.UpgradeDomainRequest_DomainName, *v.DomainName)
@@ -84,6 +93,9 @@ type UpgradeDomainOutput struct {
 
 	// Container for information about a configuration change happening on a domain.
 	ChangeProgressDetails *types.ChangeProgressDetails
+
+	// The deployment strategy override used for the upgrade.
+	DeploymentStrategyOptions *types.DeploymentStrategyOverrideOptions
 
 	// The name of the domain that was upgraded.
 	DomainName *string
@@ -118,6 +130,11 @@ func (v *UpgradeDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ChangeProgressDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.DeploymentStrategyOptions != nil {
+		s.WriteStruct(schemas.UpgradeDomainResponse_DeploymentStrategyOptions)
+		v.DeploymentStrategyOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.UpgradeDomainResponse_DomainName, *v.DomainName)
 	}
@@ -139,6 +156,9 @@ func (v *UpgradeDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UpgradeDomainResponse_ChangeProgressDetails:
 			v.ChangeProgressDetails = &types.ChangeProgressDetails{}
 			return v.ChangeProgressDetails.Deserialize(d)
+		case schemas.UpgradeDomainResponse_DeploymentStrategyOptions:
+			v.DeploymentStrategyOptions = &types.DeploymentStrategyOverrideOptions{}
+			return v.DeploymentStrategyOptions.Deserialize(d)
 		case schemas.UpgradeDomainResponse_DomainName:
 			v.DomainName = new(string)
 			return d.ReadString(schemas.UpgradeDomainResponse_DomainName, v.DomainName)

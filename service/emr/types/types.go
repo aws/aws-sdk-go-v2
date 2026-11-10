@@ -7703,6 +7703,10 @@ type Step struct {
 	// this parameter set to TERMINATE_CLUSTER , the cluster does not terminate.
 	ActionOnFailure ActionOnFailure
 
+	// Additional information about the step, including the YARN application IDs
+	// associated with the step and the resource manager that processed it.
+	AdditionalInfo *StepAdditionalInfo
+
 	// The Hadoop job configuration of the cluster step.
 	Config *HadoopStepConfig
 
@@ -7744,6 +7748,11 @@ func (v *Step) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionOnFailure != "" {
 		s.WriteString(schemas.Step_ActionOnFailure, string(v.ActionOnFailure))
 	}
+	if v.AdditionalInfo != nil {
+		s.WriteStruct(schemas.Step_AdditionalInfo)
+		v.AdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Config != nil {
 		s.WriteStruct(schemas.Step_Config)
 		v.Config.SerializeMembers(s)
@@ -7780,6 +7789,9 @@ func (v *Step) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ActionOnFailure = ActionOnFailure(ev)
 			return nil
+		case schemas.Step_AdditionalInfo:
+			v.AdditionalInfo = &StepAdditionalInfo{}
+			return v.AdditionalInfo.Deserialize(d)
 		case schemas.Step_Config:
 			v.Config = &HadoopStepConfig{}
 			return v.Config.Deserialize(d)
@@ -7801,6 +7813,46 @@ func (v *Step) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Step_Status:
 			v.Status = &StepStatus{}
 			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Additional information about a step's execution, available after the step has
+// started running.
+type StepAdditionalInfo struct {
+
+	// The address of the YARN resource manager that processed the step.
+	ResourceManager *string
+
+	// The YARN application IDs associated with the step.
+	ResourceManagerApplicationIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *StepAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StepAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StepAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceManager != nil {
+		s.WriteString(schemas.StepAdditionalInfo_ResourceManager, *v.ResourceManager)
+	}
+	if v.ResourceManagerApplicationIds != nil {
+		serializeStringList(s, schemas.StepAdditionalInfo_ResourceManagerApplicationIds, v.ResourceManagerApplicationIds)
+	}
+}
+func (v *StepAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StepAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StepAdditionalInfo_ResourceManager:
+			v.ResourceManager = new(string)
+			return d.ReadString(schemas.StepAdditionalInfo_ResourceManager, v.ResourceManager)
+		case schemas.StepAdditionalInfo_ResourceManagerApplicationIds:
+			return deserializeStringList(d, schemas.StepAdditionalInfo_ResourceManagerApplicationIds, &v.ResourceManagerApplicationIds)
 		}
 		return nil
 	})
@@ -8179,6 +8231,10 @@ type StepSummary struct {
 	// available for backward compatibility.
 	ActionOnFailure ActionOnFailure
 
+	// Additional information about the step, including the YARN application IDs
+	// associated with the step and the resource manager that processed it.
+	AdditionalInfo *StepAdditionalInfo
+
 	// The Hadoop job configuration of the cluster step.
 	Config *HadoopStepConfig
 
@@ -8210,6 +8266,11 @@ func (v *StepSummary) Serialize(s smithy.ShapeSerializer) {
 func (v *StepSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionOnFailure != "" {
 		s.WriteString(schemas.StepSummary_ActionOnFailure, string(v.ActionOnFailure))
+	}
+	if v.AdditionalInfo != nil {
+		s.WriteStruct(schemas.StepSummary_AdditionalInfo)
+		v.AdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Config != nil {
 		s.WriteStruct(schemas.StepSummary_Config)
@@ -8244,6 +8305,9 @@ func (v *StepSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ActionOnFailure = ActionOnFailure(ev)
 			return nil
+		case schemas.StepSummary_AdditionalInfo:
+			v.AdditionalInfo = &StepAdditionalInfo{}
+			return v.AdditionalInfo.Deserialize(d)
 		case schemas.StepSummary_Config:
 			v.Config = &HadoopStepConfig{}
 			return v.Config.Deserialize(d)

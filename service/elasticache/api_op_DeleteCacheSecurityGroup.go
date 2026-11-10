@@ -4,6 +4,8 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteCacheSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCacheSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCacheSecurityGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCacheSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheSecurityGroupName != nil {
+		s.WriteString(schemas.DeleteCacheSecurityGroupMessage_CacheSecurityGroupName, *v.CacheSecurityGroupName)
+	}
+}
+
 type DeleteCacheSecurityGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DeleteCacheSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCacheSecurityGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCacheSecurityGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCacheSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCacheSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteCacheSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCacheSecurityGroup, schemas.DeleteCacheSecurityGroupMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteCacheSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCacheSecurityGroup, schemas.DeleteCacheSecurityGroupMessage, nil), output: &DeleteCacheSecurityGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

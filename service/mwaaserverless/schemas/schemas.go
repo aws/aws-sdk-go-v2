@@ -181,6 +181,30 @@ var _EngineVersion = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeIntEnum, 1)
 var _EngineVersion_ONE *smithy.Schema
 
+var Environment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaaserverless",
+	Name:      "Environment",
+}, smithy.ShapeTypeStructure, 1)
+var Environment_Variables *smithy.Schema
+
+var _EnvironmentVariableKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaaserverless",
+	Name:      "EnvironmentVariableKey",
+}, smithy.ShapeTypeString, 0)
+
+var _EnvironmentVariablesMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaaserverless",
+	Name:      "EnvironmentVariablesMap",
+}, smithy.ShapeTypeMap, 2)
+var _EnvironmentVariablesMap_key *smithy.Schema
+
+var _EnvironmentVariablesMap_value *smithy.Schema
+
+var _EnvironmentVariableValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaaserverless",
+	Name:      "EnvironmentVariableValue",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "ErrorMessage",
@@ -644,7 +668,7 @@ var WorkflowVersionSummary_TriggerMode *smithy.Schema
 var CreateWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "CreateWorkflowRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var CreateWorkflowRequest_Name *smithy.Schema
 
 var CreateWorkflowRequest_ClientToken *smithy.Schema
@@ -664,6 +688,8 @@ var CreateWorkflowRequest_LoggingConfiguration *smithy.Schema
 var CreateWorkflowRequest_EngineVersion *smithy.Schema
 
 var CreateWorkflowRequest_NetworkConfiguration *smithy.Schema
+
+var CreateWorkflowRequest_Environment *smithy.Schema
 
 var CreateWorkflowRequest_Tags *smithy.Schema
 
@@ -758,7 +784,7 @@ var GetWorkflowRequest_WorkflowVersion *smithy.Schema
 var GetWorkflowResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "GetWorkflowResponse",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 19)
 var GetWorkflowResponse_WorkflowArn *smithy.Schema
 
 var GetWorkflowResponse_WorkflowVersion *smithy.Schema
@@ -790,6 +816,8 @@ var GetWorkflowResponse_ScheduleConfiguration *smithy.Schema
 var GetWorkflowResponse_RoleArn *smithy.Schema
 
 var GetWorkflowResponse_NetworkConfiguration *smithy.Schema
+
+var GetWorkflowResponse_Environment *smithy.Schema
 
 var GetWorkflowResponse_TriggerMode *smithy.Schema
 
@@ -976,7 +1004,7 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "UpdateWorkflowRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var UpdateWorkflowRequest_WorkflowArn *smithy.Schema
 
 var UpdateWorkflowRequest_DefinitionS3Location *smithy.Schema
@@ -992,6 +1020,8 @@ var UpdateWorkflowRequest_LoggingConfiguration *smithy.Schema
 var UpdateWorkflowRequest_EngineVersion *smithy.Schema
 
 var UpdateWorkflowRequest_NetworkConfiguration *smithy.Schema
+
+var UpdateWorkflowRequest_Environment *smithy.Schema
 
 var UpdateWorkflowRequest_TriggerMode *smithy.Schema
 
@@ -1041,6 +1071,12 @@ func init() {
 	EncryptionConfiguration_KmsKeyId = EncryptionConfiguration.AddMember("KmsKeyId", smithyprelude.String)
 
 	_EngineVersion_ONE = _EngineVersion.AddMember("ONE", smithyprelude.Unit)
+
+	_EnvironmentVariablesMap_key = _EnvironmentVariablesMap.AddMember("key", _EnvironmentVariableKey)
+
+	_EnvironmentVariablesMap_value = _EnvironmentVariablesMap.AddMember("value", _EnvironmentVariableValue)
+
+	Environment_Variables = Environment.AddMember("Variables", _EnvironmentVariablesMap)
 
 	_GenericMap_key = _GenericMap.AddMember("key", _GenericString)
 
@@ -1290,6 +1326,8 @@ func init() {
 
 	CreateWorkflowRequest_NetworkConfiguration = CreateWorkflowRequest.AddMember("NetworkConfiguration", NetworkConfiguration)
 
+	CreateWorkflowRequest_Environment = CreateWorkflowRequest.AddMember("Environment", Environment)
+
 	CreateWorkflowRequest_Tags = CreateWorkflowRequest.AddMember("Tags", _Tags)
 
 	CreateWorkflowRequest_TriggerMode = CreateWorkflowRequest.AddMember("TriggerMode", _GenericString)
@@ -1387,6 +1425,8 @@ func init() {
 	GetWorkflowResponse_RoleArn = GetWorkflowResponse.AddMember("RoleArn", _RoleARN)
 
 	GetWorkflowResponse_NetworkConfiguration = GetWorkflowResponse.AddMember("NetworkConfiguration", NetworkConfiguration)
+
+	GetWorkflowResponse_Environment = GetWorkflowResponse.AddMember("Environment", Environment)
 
 	GetWorkflowResponse_TriggerMode = GetWorkflowResponse.AddMember("TriggerMode", _GenericString)
 
@@ -1503,6 +1543,8 @@ func init() {
 	UpdateWorkflowRequest_EngineVersion = UpdateWorkflowRequest.AddMember("EngineVersion", _EngineVersion)
 
 	UpdateWorkflowRequest_NetworkConfiguration = UpdateWorkflowRequest.AddMember("NetworkConfiguration", NetworkConfiguration)
+
+	UpdateWorkflowRequest_Environment = UpdateWorkflowRequest.AddMember("Environment", Environment)
 
 	UpdateWorkflowRequest_TriggerMode = UpdateWorkflowRequest.AddMember("TriggerMode", _GenericString)
 

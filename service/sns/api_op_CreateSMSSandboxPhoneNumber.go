@@ -4,7 +4,9 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type CreateSMSSandboxPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSMSSandboxPhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSMSSandboxPhoneNumberInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSMSSandboxPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CreateSMSSandboxPhoneNumberInput_LanguageCode, string(v.LanguageCode))
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.CreateSMSSandboxPhoneNumberInput_PhoneNumber, *v.PhoneNumber)
+	}
+}
+
 type CreateSMSSandboxPhoneNumberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +75,26 @@ type CreateSMSSandboxPhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSMSSandboxPhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSMSSandboxPhoneNumberResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSMSSandboxPhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateSMSSandboxPhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSMSSandboxPhoneNumberResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSMSSandboxPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateSMSSandboxPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSMSSandboxPhoneNumber, schemas.CreateSMSSandboxPhoneNumberInput, schemas.CreateSMSSandboxPhoneNumberResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateSMSSandboxPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSMSSandboxPhoneNumber, schemas.CreateSMSSandboxPhoneNumberInput, schemas.CreateSMSSandboxPhoneNumberResult), output: &CreateSMSSandboxPhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

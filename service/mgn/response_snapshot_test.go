@@ -774,6 +774,7 @@ func TestCheckResponseSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.CreateNetworkMigrationDefinition(context.Background(), &CreateNetworkMigrationDefinitionInput{
+		ClientToken: ptr.String("__ClientToken__"),
 		Name:        ptr.String("__Name__"),
 		Description: ptr.String("__Description__"),
 		SourceConfigurations: []types.SourceConfiguration{

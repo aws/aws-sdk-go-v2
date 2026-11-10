@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DeregisterNamespaceResponse><DeregisterNamespaceResult><Status>Registering</Status></DeregisterNamespaceResult></DeregisterNamespaceResponse>

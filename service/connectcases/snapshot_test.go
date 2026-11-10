@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_BatchCreateRelatedItem(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchCreateRelatedItem(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchCreateRelatedItem")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetCaseRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetCaseRule(context.Background(), nil, func(o *Options) {
@@ -91,6 +103,18 @@ func TestCheckSnapshot_BatchPutFieldOptions(t *testing.T) {
 	_, err := svc.BatchPutFieldOptions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "BatchPutFieldOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchUpdateCase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateCase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchUpdateCase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -577,6 +601,18 @@ func TestCheckSnapshot_UpdateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_BatchCreateRelatedItem(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchCreateRelatedItem(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchCreateRelatedItem")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchGetCaseRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetCaseRule(context.Background(), nil, func(o *Options) {
@@ -606,6 +642,18 @@ func TestUpdateSnapshot_BatchPutFieldOptions(t *testing.T) {
 	_, err := svc.BatchPutFieldOptions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchPutFieldOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchUpdateCase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateCase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchUpdateCase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

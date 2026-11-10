@@ -62,6 +62,11 @@ type StartQueryExecutionInput struct {
 	// the workgroup containing EngineConfiguration should have the following values:
 	// The name of the Classifications should be athena-query-engine-properties , with
 	// the only allowed properties as max-dpu-count and min-dpu-count .
+	//
+	// Note: When using StartQueryExecution, only the Classifications field applies.
+	// Do not specify the other fields (AdditionalConfigs, CoordinatorDpuSize,
+	// DefaultExecutorDpuSize, MaxConcurrentDpus, and SparkProperties), as these are
+	// used only with StartSession to configure Apache Spark-based sessions.
 	EngineConfiguration *types.EngineConfiguration
 
 	// A list of values for the parameters in a query. The values are applied

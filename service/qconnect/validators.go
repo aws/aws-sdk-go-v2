@@ -1370,6 +1370,46 @@ func (m *validateOpQueryAssistant) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterAssistantReplicaKey struct {
+}
+
+func (*validateOpRegisterAssistantReplicaKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterAssistantReplicaKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterAssistantReplicaKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterAssistantReplicaKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRegisterKnowledgeBaseReplicaKey struct {
+}
+
+func (*validateOpRegisterKnowledgeBaseReplicaKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterKnowledgeBaseReplicaKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterKnowledgeBaseReplicaKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterKnowledgeBaseReplicaKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRemoveAssistantAIAgent struct {
 }
 
@@ -2120,6 +2160,14 @@ func addOpPutFeedbackValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpQueryAssistantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpQueryAssistant{}, middleware.After)
+}
+
+func addOpRegisterAssistantReplicaKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterAssistantReplicaKey{}, middleware.After)
+}
+
+func addOpRegisterKnowledgeBaseReplicaKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterKnowledgeBaseReplicaKey{}, middleware.After)
 }
 
 func addOpRemoveAssistantAIAgentValidationMiddleware(stack *middleware.Stack) error {
@@ -3805,6 +3853,38 @@ func validateQuickResponseSearchExpression(v *types.QuickResponseSearchExpressio
 	}
 }
 
+func validateReplicaKmsKey(v *types.ReplicaKmsKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicaKmsKey"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReplicaKmsKeyList(v []types.ReplicaKmsKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicaKmsKeyList"}
+	for i := range v {
+		if err := validateReplicaKmsKey(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRetrievalConfiguration(v *types.RetrievalConfiguration) error {
 	if v == nil {
 		return nil
@@ -4005,6 +4085,23 @@ func validateSemanticChunkingConfiguration(v *types.SemanticChunkingConfiguratio
 	}
 	if v.BreakpointPercentileThreshold == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BreakpointPercentileThreshold"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServerSideEncryptionConfiguration(v *types.ServerSideEncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServerSideEncryptionConfiguration"}
+	if v.ReplicaKmsKeys != nil {
+		if err := validateReplicaKmsKeyList(v.ReplicaKmsKeys); err != nil {
+			invalidParams.AddNested("ReplicaKmsKeys", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4581,6 +4678,11 @@ func validateOpCreateAssistantInput(v *CreateAssistantInput) error {
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
+	if v.ServerSideEncryptionConfiguration != nil {
+		if err := validateServerSideEncryptionConfiguration(v.ServerSideEncryptionConfiguration); err != nil {
+			invalidParams.AddNested("ServerSideEncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4652,6 +4754,11 @@ func validateOpCreateKnowledgeBaseInput(v *CreateKnowledgeBaseInput) error {
 	if v.VectorIngestionConfiguration != nil {
 		if err := validateVectorIngestionConfiguration(v.VectorIngestionConfiguration); err != nil {
 			invalidParams.AddNested("VectorIngestionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServerSideEncryptionConfiguration != nil {
+		if err := validateServerSideEncryptionConfiguration(v.ServerSideEncryptionConfiguration); err != nil {
+			invalidParams.AddNested("ServerSideEncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5694,6 +5801,50 @@ func validateOpQueryAssistantInput(v *QueryAssistantInput) error {
 	if v.QueryInputData != nil {
 		if err := validateQueryInputData(v.QueryInputData); err != nil {
 			invalidParams.AddNested("QueryInputData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterAssistantReplicaKeyInput(v *RegisterAssistantReplicaKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterAssistantReplicaKeyInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.ReplicaKmsKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicaKmsKey"))
+	} else if v.ReplicaKmsKey != nil {
+		if err := validateReplicaKmsKey(v.ReplicaKmsKey); err != nil {
+			invalidParams.AddNested("ReplicaKmsKey", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterKnowledgeBaseReplicaKeyInput(v *RegisterKnowledgeBaseReplicaKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterKnowledgeBaseReplicaKeyInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.ReplicaKmsKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicaKmsKey"))
+	} else if v.ReplicaKmsKey != nil {
+		if err := validateReplicaKmsKey(v.ReplicaKmsKey); err != nil {
+			invalidParams.AddNested("ReplicaKmsKey", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

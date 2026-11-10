@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,24 @@ type ListAccessKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListAccessKeysRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListAccessKeysRequest_MaxItems, *v.MaxItems)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.ListAccessKeysRequest_UserName, *v.UserName)
+	}
+}
+
 // Contains the response to a successful [ListAccessKeys] request.
 //
 // [ListAccessKeys]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAccessKeys.html
@@ -100,13 +120,42 @@ type ListAccessKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKeyMetadata != nil {
+		serializeaccessKeyMetadataListType(s, schemas.ListAccessKeysResponse_AccessKeyMetadata, v.AccessKeyMetadata)
+	}
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListAccessKeysResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListAccessKeysResponse_Marker, *v.Marker)
+	}
+}
+func (v *ListAccessKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccessKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccessKeysResponse_AccessKeyMetadata:
+			return deserializeaccessKeyMetadataListType(d, schemas.ListAccessKeysResponse_AccessKeyMetadata, &v.AccessKeyMetadata)
+		case schemas.ListAccessKeysResponse_IsTruncated:
+			return d.ReadBool(schemas.ListAccessKeysResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListAccessKeysResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListAccessKeysResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccessKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListAccessKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessKeys, schemas.ListAccessKeysRequest, schemas.ListAccessKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListAccessKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessKeys, schemas.ListAccessKeysRequest, schemas.ListAccessKeysResponse), output: &ListAccessKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

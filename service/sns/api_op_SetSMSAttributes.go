@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -118,6 +120,18 @@ type SetSMSAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetSMSAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetSMSAttributesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetSMSAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeMapStringToString(s, schemas.SetSMSAttributesInput_attributes, v.Attributes)
+	}
+}
+
 // The response for the SetSMSAttributes action.
 type SetSMSAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -126,13 +140,26 @@ type SetSMSAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetSMSAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetSMSAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetSMSAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetSMSAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetSMSAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetSMSAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetSMSAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetSMSAttributes, schemas.SetSMSAttributesInput, schemas.SetSMSAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetSMSAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetSMSAttributes, schemas.SetSMSAttributesInput, schemas.SetSMSAttributesResponse), output: &SetSMSAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

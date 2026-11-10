@@ -13,8 +13,8 @@
 //
 // [Apache Parquet]: https://parquet.apache.org/docs/
 // [Apache Iceberg]: https://iceberg.apache.org/docs/latest/
-// [Amazon Web Services Glue Data Catalog]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/glue/latest/dg/catalog-and-crawler.html
-// [Amazon Redshift]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/redshift/
-// [Amazon Athena]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/athena/
+// [Amazon Web Services Glue Data Catalog]: https://docs.aws.amazon.com/glue/latest/dg/catalog-and-crawler.html
+// [Amazon Redshift]: https://docs.aws.amazon.com/redshift/
+// [Amazon Athena]: https://docs.aws.amazon.com/athena/
 // [Amazon S3 table buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets.html
 package s3tables

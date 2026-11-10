@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListClusterExtensions
+
+{"Extensions":[{"CreationTime":946684800,"ExtensionArn":"__ExtensionArn__","ExtensionName":"__ExtensionName__","ExtensionVersion":"__ExtensionVersion__","Status":"Creating"},{"CreationTime":946684800,"ExtensionArn":"__ExtensionArn__","ExtensionName":"__ExtensionName__","ExtensionVersion":"__ExtensionVersion__","Status":"Creating"}],"NextToken":"__NextToken__"}

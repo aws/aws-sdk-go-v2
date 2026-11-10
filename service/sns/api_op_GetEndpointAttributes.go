@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type GetEndpointAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEndpointAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEndpointAttributesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEndpointAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.GetEndpointAttributesInput_EndpointArn, *v.EndpointArn)
+	}
+}
+
 // Response from GetEndpointAttributes of the EndpointArn .
 type GetEndpointAttributesOutput struct {
 
@@ -64,13 +78,31 @@ type GetEndpointAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEndpointAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEndpointAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEndpointAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeMapStringToString(s, schemas.GetEndpointAttributesResponse_Attributes, v.Attributes)
+	}
+}
+func (v *GetEndpointAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEndpointAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEndpointAttributesResponse_Attributes:
+			return deserializeMapStringToString(d, schemas.GetEndpointAttributesResponse_Attributes, &v.Attributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEndpointAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetEndpointAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEndpointAttributes, schemas.GetEndpointAttributesInput, schemas.GetEndpointAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetEndpointAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEndpointAttributes, schemas.GetEndpointAttributesInput, schemas.GetEndpointAttributesResponse), output: &GetEndpointAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

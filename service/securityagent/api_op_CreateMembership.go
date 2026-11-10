@@ -10,8 +10,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a new membership, granting a user access to an agent space within an
-// application.
+// Creates a new membership, granting a user or group access to an agent space
+// within an application.
 func (c *Client) CreateMembership(ctx context.Context, params *CreateMembershipInput, optFns ...func(*Options)) (*CreateMembershipOutput, error) {
 	if params == nil {
 		params = &CreateMembershipInput{}
@@ -40,7 +40,8 @@ type CreateMembershipInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The type of member. Currently, only USER is supported.
+	// The type of member. Use USER for an individual user or GROUP for an IAM
+	// Identity Center group. All members of a group have access to the agent space.
 	//
 	// This member is required.
 	MemberType types.MembershipType

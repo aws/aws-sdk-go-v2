@@ -144,6 +144,14 @@ func serializeEksContainerEnvironmentVariables(s smithy.ShapeSerializer, schema 
 	s.CloseList()
 }
 
+func serializeEksContainerLinuxCapabilityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeEksContainerOverrideList(s smithy.ShapeSerializer, schema *smithy.Schema, v []EksContainerOverride) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1057,6 +1065,27 @@ func deserializeEksContainerEnvironmentVariables(d smithy.ShapeDeserializer, s *
 
 		vv = EksContainerEnvironmentVariable{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEksContainerLinuxCapabilityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

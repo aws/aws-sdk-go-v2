@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,18 @@ type DeleteUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserName != nil {
+		s.WriteString(schemas.DeleteUserRequest_UserName, *v.UserName)
+	}
+}
+
 type DeleteUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,13 +93,26 @@ type DeleteUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUser, schemas.DeleteUserRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUser, schemas.DeleteUserRequest, nil), output: &DeleteUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

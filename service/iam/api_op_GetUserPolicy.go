@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,21 @@ type GetUserPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyName != nil {
+		s.WriteString(schemas.GetUserPolicyRequest_PolicyName, *v.PolicyName)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.GetUserPolicyRequest_UserName, *v.UserName)
+	}
+}
+
 // Contains the response to a successful [GetUserPolicy] request.
 //
 // [GetUserPolicy]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUserPolicy.html
@@ -98,13 +115,44 @@ type GetUserPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.GetUserPolicyResponse_PolicyDocument, *v.PolicyDocument)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.GetUserPolicyResponse_PolicyName, *v.PolicyName)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.GetUserPolicyResponse_UserName, *v.UserName)
+	}
+}
+func (v *GetUserPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserPolicyResponse_PolicyDocument:
+			v.PolicyDocument = new(string)
+			return d.ReadString(schemas.GetUserPolicyResponse_PolicyDocument, v.PolicyDocument)
+		case schemas.GetUserPolicyResponse_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.GetUserPolicyResponse_PolicyName, v.PolicyName)
+		case schemas.GetUserPolicyResponse_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.GetUserPolicyResponse_UserName, v.UserName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUserPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetUserPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserPolicy, schemas.GetUserPolicyRequest, schemas.GetUserPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetUserPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserPolicy, schemas.GetUserPolicyRequest, schemas.GetUserPolicyResponse), output: &GetUserPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

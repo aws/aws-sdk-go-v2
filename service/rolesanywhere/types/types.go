@@ -1008,6 +1008,10 @@ type TrustAnchorDetail struct {
 	// The ISO-8601 timestamp when the trust anchor was created.
 	CreatedAt *time.Time
 
+	// Specifies whether the trust anchor checks certificate revocation status against
+	// CRL distribution points.
+	CrlDpRevocationEnabled *bool
+
 	// Indicates whether the trust anchor is enabled.
 	Enabled *bool
 
@@ -1042,6 +1046,9 @@ func (v *TrustAnchorDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.TrustAnchorDetail_createdAt, *v.CreatedAt)
 	}
+	if v.CrlDpRevocationEnabled != nil {
+		s.WriteBool(schemas.TrustAnchorDetail_crlDpRevocationEnabled, *v.CrlDpRevocationEnabled)
+	}
 	if v.Enabled != nil {
 		s.WriteBool(schemas.TrustAnchorDetail_enabled, *v.Enabled)
 	}
@@ -1072,6 +1079,9 @@ func (v *TrustAnchorDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TrustAnchorDetail_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.TrustAnchorDetail_createdAt, v.CreatedAt)
+		case schemas.TrustAnchorDetail_crlDpRevocationEnabled:
+			v.CrlDpRevocationEnabled = new(bool)
+			return d.ReadBool(schemas.TrustAnchorDetail_crlDpRevocationEnabled, v.CrlDpRevocationEnabled)
 		case schemas.TrustAnchorDetail_enabled:
 			v.Enabled = new(bool)
 			return d.ReadBool(schemas.TrustAnchorDetail_enabled, v.Enabled)

@@ -1856,6 +1856,18 @@ func TestCheckResponseSnapshot_CreateKnowledgeBase(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			MetadataConfigurations: []types.MetadataConfiguration{
+				{
+					Name:          ptr.String("__Name__"),
+					Type:          types.FieldType("STRING"),
+					Searchability: types.SearchableStatus("ENABLED"),
+				},
+				{
+					Name:          ptr.String("__Name__"),
+					Type:          types.FieldType("STRING"),
+					Searchability: types.SearchableStatus("ENABLED"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateKnowledgeBase.response")
@@ -4504,6 +4516,18 @@ func TestCheckResponseSnapshot_GetKnowledgeBase(t *testing.T) {
 			FailureReasons: []string{
 				"__Member__",
 				"__Member__",
+			},
+			MetadataConfigurations: []types.MetadataConfiguration{
+				{
+					Name:          ptr.String("__Name__"),
+					Type:          types.FieldType("STRING"),
+					Searchability: types.SearchableStatus("ENABLED"),
+				},
+				{
+					Name:          ptr.String("__Name__"),
+					Type:          types.FieldType("STRING"),
+					Searchability: types.SearchableStatus("ENABLED"),
+				},
 			},
 		},
 	}
@@ -7803,6 +7827,18 @@ func TestCheckResponseSnapshot_UpdateKnowledgeBase(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			MetadataConfigurations: []types.MetadataConfiguration{
+				{
+					Name:          ptr.String("__Name__"),
+					Type:          types.FieldType("STRING"),
+					Searchability: types.SearchableStatus("ENABLED"),
+				},
+				{
+					Name:          ptr.String("__Name__"),
+					Type:          types.FieldType("STRING"),
+					Searchability: types.SearchableStatus("ENABLED"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateKnowledgeBase.response")
@@ -8106,6 +8142,18 @@ func TestCheckResponseSnapshot_UpdateKnowledgeBase(t *testing.T) {
 				VectorBucketArn: ptr.String("__VectorBucketArn__"),
 				IndexArn:        ptr.String("__IndexArn__"),
 				IndexName:       ptr.String("__IndexName__"),
+			},
+		},
+		MetadataConfigurations: []types.MetadataConfiguration{
+			{
+				Name:          ptr.String("__Name__"),
+				Type:          types.FieldType("STRING"),
+				Searchability: types.SearchableStatus("ENABLED"),
+			},
+			{
+				Name:          ptr.String("__Name__"),
+				Type:          types.FieldType("STRING"),
+				Searchability: types.SearchableStatus("ENABLED"),
 			},
 		},
 	})

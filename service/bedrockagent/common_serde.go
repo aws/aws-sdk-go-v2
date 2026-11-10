@@ -1460,6 +1460,16 @@ func serializeMetadataAttributes(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.CloseList()
 }
 
+func serializeMetadataConfigurations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MetadataConfiguration) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializePatternObjectFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PatternObjectFilter) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -2555,6 +2565,28 @@ func deserializeMetadataAttributes(d smithy.ShapeDeserializer, s *smithy.Schema,
 		}
 
 		vv = types.MetadataAttribute{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMetadataConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MetadataConfiguration) error {
+	*v = make([]types.MetadataConfiguration, 0)
+	var vv types.MetadataConfiguration
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MetadataConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.MetadataConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

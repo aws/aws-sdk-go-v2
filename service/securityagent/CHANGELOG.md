@@ -1,3 +1,17 @@
+# v1.28.1 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.28.0 (2026-11-05)
+
+* **Feature**: Adds support for IAM Identity Center groups as Agent Space members. CreateMembership, DeleteMembership, and ListMemberships now accept the GROUP member type. ListMemberships can filter by USER, GROUP, or ALL, and returns group display name and description.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.27.2 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.1 (2026-10-30)
 
 * **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.

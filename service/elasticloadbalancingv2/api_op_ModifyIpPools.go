@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,26 @@ type ModifyIpPoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyIpPoolsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyIpPoolsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyIpPoolsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpamPools != nil {
+		s.WriteStruct(schemas.ModifyIpPoolsInput_IpamPools)
+		v.IpamPools.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LoadBalancerArn != nil {
+		s.WriteString(schemas.ModifyIpPoolsInput_LoadBalancerArn, *v.LoadBalancerArn)
+	}
+	if v.RemoveIpamPools != nil {
+		serializeRemoveIpamPools(s, schemas.ModifyIpPoolsInput_RemoveIpamPools, v.RemoveIpamPools)
+	}
+}
+
 type ModifyIpPoolsOutput struct {
 
 	// The IPAM pool ID.
@@ -51,13 +73,34 @@ type ModifyIpPoolsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyIpPoolsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyIpPoolsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyIpPoolsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpamPools != nil {
+		s.WriteStruct(schemas.ModifyIpPoolsOutput_IpamPools)
+		v.IpamPools.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyIpPoolsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyIpPoolsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyIpPoolsOutput_IpamPools:
+			v.IpamPools = &types.IpamPools{}
+			return v.IpamPools.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyIpPoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyIpPools{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyIpPools, schemas.ModifyIpPoolsInput, schemas.ModifyIpPoolsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyIpPools{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyIpPools, schemas.ModifyIpPoolsInput, schemas.ModifyIpPoolsOutput), output: &ModifyIpPoolsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

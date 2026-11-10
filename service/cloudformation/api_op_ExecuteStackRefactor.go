@@ -4,6 +4,8 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type ExecuteStackRefactorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteStackRefactorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteStackRefactorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteStackRefactorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackRefactorId != nil {
+		s.WriteString(schemas.ExecuteStackRefactorInput_StackRefactorId, *v.StackRefactorId)
+	}
+}
+
 type ExecuteStackRefactorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type ExecuteStackRefactorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteStackRefactorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteStackRefactorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ExecuteStackRefactorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteStackRefactorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpExecuteStackRefactor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteStackRefactor, schemas.ExecuteStackRefactorInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpExecuteStackRefactor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteStackRefactor, schemas.ExecuteStackRefactorInput, nil), output: &ExecuteStackRefactorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

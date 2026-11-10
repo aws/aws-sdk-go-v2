@@ -4,6 +4,8 @@ package neptune
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type RemoveRoleFromDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveRoleFromDBClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveRoleFromDBClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveRoleFromDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.RemoveRoleFromDBClusterMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.FeatureName != nil {
+		s.WriteString(schemas.RemoveRoleFromDBClusterMessage_FeatureName, *v.FeatureName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.RemoveRoleFromDBClusterMessage_RoleArn, *v.RoleArn)
+	}
+}
+
 type RemoveRoleFromDBClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type RemoveRoleFromDBClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveRoleFromDBClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveRoleFromDBClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveRoleFromDBClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveRoleFromDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveRoleFromDBCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveRoleFromDBCluster, schemas.RemoveRoleFromDBClusterMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRemoveRoleFromDBCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveRoleFromDBCluster, schemas.RemoveRoleFromDBClusterMessage, nil), output: &RemoveRoleFromDBClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

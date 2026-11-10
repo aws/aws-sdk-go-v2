@@ -162,6 +162,7 @@ func TestUpdateResponseSnapshot_AssumeRoleForPodIdentity(t *testing.T) {
 			AccessKeyId:     ptr.String("__AccessKeyId__"),
 			Expiration:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
+		WorkloadIdentityProviderArn: ptr.String("__WorkloadIdentityProviderArn__"),
 	}
 	proto := restjson1.New(schemas.EKSAuthFrontend)
 	opSchema := smithy.NewOperationSchema(schemas.AssumeRoleForPodIdentity, schemas.AssumeRoleForPodIdentityResponse, schemas.AssumeRoleForPodIdentityResponse)

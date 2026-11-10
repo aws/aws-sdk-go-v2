@@ -7546,6 +7546,14 @@ type KnowledgeBase struct {
 	// A list of reasons that the API operation on the knowledge base failed.
 	FailureReasons []string
 
+	// The custom metadata field configurations of the knowledge base. Each
+	// configuration specifies whether its field is searchable ( ENABLED or DISABLED ).
+	//
+	// If the update fails, the knowledge base status becomes UPDATE_UNSUCCESSFUL , the
+	// field configurations revert to their previous values, and failureReasons
+	// describes the cause. You can retry the update from UPDATE_UNSUCCESSFUL .
+	MetadataConfigurations []MetadataConfiguration
+
 	// Contains details about the storage configuration of the knowledge base.
 	StorageConfiguration *StorageConfiguration
 
@@ -7578,6 +7586,9 @@ func (v *KnowledgeBase) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.KnowledgeBase_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.MetadataConfigurations != nil {
+		serializeMetadataConfigurations(s, schemas.KnowledgeBase_metadataConfigurations, v.MetadataConfigurations)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.KnowledgeBase_name, *v.Name)
@@ -7617,6 +7628,8 @@ func (v *KnowledgeBase) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.KnowledgeBase_knowledgeBaseId:
 			v.KnowledgeBaseId = new(string)
 			return d.ReadString(schemas.KnowledgeBase_knowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.KnowledgeBase_metadataConfigurations:
+			return deserializeMetadataConfigurations(d, schemas.KnowledgeBase_metadataConfigurations, &v.MetadataConfigurations)
 		case schemas.KnowledgeBase_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.KnowledgeBase_name, v.Name)
@@ -9010,6 +9023,75 @@ func (v *MetadataAttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.Type = MetadataValueType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains the configuration of a single custom metadata field in a knowledge
+// base, including its name, data type, and whether the field is searchable.
+type MetadataConfiguration struct {
+
+	// The name of the custom metadata field.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies whether the custom metadata field is searchable. Valid values:
+	//
+	//   - ENABLED – The field is searchable.
+	//
+	//   - DISABLED – The field is not searchable.
+	//
+	// This member is required.
+	Searchability SearchableStatus
+
+	// The data type of the custom metadata field. Valid values are STRING and
+	// STRING_LIST .
+	//
+	// This member is required.
+	Type FieldType
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetadataConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetadataConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetadataConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.MetadataConfiguration_name, *v.Name)
+	}
+	if v.Searchability != "" {
+		s.WriteString(schemas.MetadataConfiguration_searchability, string(v.Searchability))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.MetadataConfiguration_type, string(v.Type))
+	}
+}
+func (v *MetadataConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetadataConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetadataConfiguration_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MetadataConfiguration_name, v.Name)
+		case schemas.MetadataConfiguration_searchability:
+			var ev string
+			if err := d.ReadString(schemas.MetadataConfiguration_searchability, &ev); err != nil {
+				return err
+			}
+			v.Searchability = SearchableStatus(ev)
+			return nil
+		case schemas.MetadataConfiguration_type:
+			var ev string
+			if err := d.ReadString(schemas.MetadataConfiguration_type, &ev); err != nil {
+				return err
+			}
+			v.Type = FieldType(ev)
 			return nil
 		}
 		return nil

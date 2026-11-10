@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteAuthenticationProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAuthenticationProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAuthenticationProfileMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAuthenticationProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationProfileName != nil {
+		s.WriteString(schemas.DeleteAuthenticationProfileMessage_AuthenticationProfileName, *v.AuthenticationProfileName)
+	}
+}
+
 type DeleteAuthenticationProfileOutput struct {
 
 	// The name of the authentication profile that was deleted.
@@ -44,13 +58,32 @@ type DeleteAuthenticationProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAuthenticationProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAuthenticationProfileResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAuthenticationProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationProfileName != nil {
+		s.WriteString(schemas.DeleteAuthenticationProfileResult_AuthenticationProfileName, *v.AuthenticationProfileName)
+	}
+}
+func (v *DeleteAuthenticationProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAuthenticationProfileResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAuthenticationProfileResult_AuthenticationProfileName:
+			v.AuthenticationProfileName = new(string)
+			return d.ReadString(schemas.DeleteAuthenticationProfileResult_AuthenticationProfileName, v.AuthenticationProfileName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAuthenticationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteAuthenticationProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAuthenticationProfile, schemas.DeleteAuthenticationProfileMessage, schemas.DeleteAuthenticationProfileResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteAuthenticationProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAuthenticationProfile, schemas.DeleteAuthenticationProfileMessage, schemas.DeleteAuthenticationProfileResult), output: &DeleteAuthenticationProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

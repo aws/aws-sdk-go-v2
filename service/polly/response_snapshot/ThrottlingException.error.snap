@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"ThrottlingException","message":"__Message__","throttlingReasons":[{"reason":"__Reason__","resource":"__Resource__"},{"reason":"__Reason__","resource":"__Resource__"}]}

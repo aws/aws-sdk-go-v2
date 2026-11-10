@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type CreateHsmClientCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHsmClientCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHsmClientCertificateMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHsmClientCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HsmClientCertificateIdentifier != nil {
+		s.WriteString(schemas.CreateHsmClientCertificateMessage_HsmClientCertificateIdentifier, *v.HsmClientCertificateIdentifier)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateHsmClientCertificateMessage_Tags, v.Tags)
+	}
+}
+
 type CreateHsmClientCertificateOutput struct {
 
 	// Returns information about an HSM client certificate. The certificate is stored
@@ -61,13 +78,34 @@ type CreateHsmClientCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHsmClientCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHsmClientCertificateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHsmClientCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HsmClientCertificate != nil {
+		s.WriteStruct(schemas.CreateHsmClientCertificateResult_HsmClientCertificate)
+		v.HsmClientCertificate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateHsmClientCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHsmClientCertificateResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHsmClientCertificateResult_HsmClientCertificate:
+			v.HsmClientCertificate = &types.HsmClientCertificate{}
+			return v.HsmClientCertificate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHsmClientCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateHsmClientCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHsmClientCertificate, schemas.CreateHsmClientCertificateMessage, schemas.CreateHsmClientCertificateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateHsmClientCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHsmClientCertificate, schemas.CreateHsmClientCertificateMessage, schemas.CreateHsmClientCertificateResult), output: &CreateHsmClientCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

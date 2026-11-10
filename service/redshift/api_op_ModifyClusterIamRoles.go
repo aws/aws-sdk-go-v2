@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type ModifyClusterIamRolesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterIamRolesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterIamRolesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterIamRolesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddIamRoles != nil {
+		serializeIamRoleArnList(s, schemas.ModifyClusterIamRolesMessage_AddIamRoles, v.AddIamRoles)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ModifyClusterIamRolesMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.DefaultIamRoleArn != nil {
+		s.WriteString(schemas.ModifyClusterIamRolesMessage_DefaultIamRoleArn, *v.DefaultIamRoleArn)
+	}
+	if v.RemoveIamRoles != nil {
+		serializeIamRoleArnList(s, schemas.ModifyClusterIamRolesMessage_RemoveIamRoles, v.RemoveIamRoles)
+	}
+}
+
 type ModifyClusterIamRolesOutput struct {
 
 	// Describes a cluster.
@@ -63,13 +86,34 @@ type ModifyClusterIamRolesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterIamRolesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterIamRolesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterIamRolesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.ModifyClusterIamRolesResult_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyClusterIamRolesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyClusterIamRolesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyClusterIamRolesResult_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyClusterIamRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyClusterIamRoles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyClusterIamRoles, schemas.ModifyClusterIamRolesMessage, schemas.ModifyClusterIamRolesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyClusterIamRoles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyClusterIamRoles, schemas.ModifyClusterIamRolesMessage, schemas.ModifyClusterIamRolesResult), output: &ModifyClusterIamRolesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

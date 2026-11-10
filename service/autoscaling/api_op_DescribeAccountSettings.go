@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,40 @@ type DescribeAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountSettingsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeAccountSettingsType_MaxRecords, *v.MaxRecords)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeAccountSettingsType_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAccountSettingsType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAccountSettingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountSettingsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountSettingsType_MaxRecords:
+			v.MaxRecords = new(int32)
+			return d.ReadInt32(schemas.DescribeAccountSettingsType_MaxRecords, v.MaxRecords)
+		case schemas.DescribeAccountSettingsType_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeAccountSettingsType_Name, v.Name)
+		case schemas.DescribeAccountSettingsType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAccountSettingsType_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type DescribeAccountSettingsOutput struct {
 
 	//  A string that indicates that the response contains more items than can be
@@ -63,13 +99,37 @@ type DescribeAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountSettingsAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAccountSettingsAnswer_NextToken, *v.NextToken)
+	}
+	if v.Settings != nil {
+		serializeAccountSettings(s, schemas.DescribeAccountSettingsAnswer_Settings, v.Settings)
+	}
+}
+func (v *DescribeAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountSettingsAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountSettingsAnswer_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAccountSettingsAnswer_NextToken, v.NextToken)
+		case schemas.DescribeAccountSettingsAnswer_Settings:
+			return deserializeAccountSettings(d, schemas.DescribeAccountSettingsAnswer_Settings, &v.Settings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountSettings, schemas.DescribeAccountSettingsType, schemas.DescribeAccountSettingsAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountSettings, schemas.DescribeAccountSettingsType, schemas.DescribeAccountSettingsAnswer), output: &DescribeAccountSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

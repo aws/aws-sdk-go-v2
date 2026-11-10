@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateStorageLocationResponse><CreateStorageLocationResult><S3Bucket>__S3Bucket__</S3Bucket></CreateStorageLocationResult></CreateStorageLocationResponse>

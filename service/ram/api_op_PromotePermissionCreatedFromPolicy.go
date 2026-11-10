@@ -110,7 +110,10 @@ type PromotePermissionCreatedFromPolicyOutput struct {
 	// also have the same values that you used in the first call.
 	ClientToken *string
 
-	// Information about an RAM permission.
+	// The details of the promoted customer managed permission, including its [Amazon Resource Name (ARN)],
+	// version, and status.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Permission *types.ResourceSharePermissionSummary
 
 	// Metadata pertaining to the operation's result.

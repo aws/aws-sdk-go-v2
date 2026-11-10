@@ -2463,6 +2463,47 @@ func TestCheckRequestSnapshot_CreateCluster(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateClusterExtension(t *testing.T) {
+	input := &CreateClusterExtensionInput{
+		ClusterArn:          ptr.String("__ClusterArn__"),
+		ExtensionName:       ptr.String("__ExtensionName__"),
+		ExtensionVersion:    ptr.String("__ExtensionVersion__"),
+		ConfigurationValues: ptr.String("__ConfigurationValues__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateClusterExtension(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateClusterExtension"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateClusterSchedulerConfig(t *testing.T) {
 	input := &CreateClusterSchedulerConfigInput{
 		Name:       ptr.String("__Name__"),
@@ -8478,6 +8519,10 @@ func TestCheckRequestSnapshot_CreatePipeline(t *testing.T) {
 		ParallelismConfiguration: &types.ParallelismConfiguration{
 			MaxParallelExecutionSteps: ptr.Int32(1),
 		},
+		PipelineVersionAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -10518,6 +10563,34 @@ func TestCheckRequestSnapshot_DeleteCluster(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteClusterExtension(t *testing.T) {
+	input := &DeleteClusterExtensionInput{
+		ClusterArn:   ptr.String("__ClusterArn__"),
+		ExtensionArn: ptr.String("__ExtensionArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteClusterExtension(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteClusterExtension"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteClusterSchedulerConfig(t *testing.T) {
 	input := &DeleteClusterSchedulerConfigInput{
 		ClusterSchedulerConfigId: ptr.String("__ClusterSchedulerConfigId__"),
@@ -12329,6 +12402,34 @@ func TestCheckRequestSnapshot_DescribeClusterEvent(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeClusterExtension(t *testing.T) {
+	input := &DescribeClusterExtensionInput{
+		ClusterArn:   ptr.String("__ClusterArn__"),
+		ExtensionArn: ptr.String("__ExtensionArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeClusterExtension(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeClusterExtension"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeClusterNode(t *testing.T) {
 	input := &DescribeClusterNodeInput{
 		ClusterName:   ptr.String("__ClusterName__"),
@@ -13594,8 +13695,9 @@ func TestCheckRequestSnapshot_DescribePartnerApp(t *testing.T) {
 
 func TestCheckRequestSnapshot_DescribePipeline(t *testing.T) {
 	input := &DescribePipelineInput{
-		PipelineName:      ptr.String("__PipelineName__"),
-		PipelineVersionId: ptr.Int64(1),
+		PipelineName:         ptr.String("__PipelineName__"),
+		PipelineVersionId:    ptr.Int64(1),
+		PipelineVersionAlias: ptr.String("__PipelineVersionAlias__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -14905,6 +15007,37 @@ func TestCheckRequestSnapshot_ListClusterEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterEvents"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListClusterExtensions(t *testing.T) {
+	input := &ListClusterExtensionsInput{
+		ClusterArn:         ptr.String("__ClusterArn__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListClusterExtensions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterExtensions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -16782,13 +16915,14 @@ func TestCheckRequestSnapshot_ListPartnerApps(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListPipelineExecutions(t *testing.T) {
 	input := &ListPipelineExecutionsInput{
-		PipelineName:  ptr.String("__PipelineName__"),
-		CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		SortBy:        types.SortPipelineExecutionsBy("CreationTime"),
-		SortOrder:     types.SortOrder("Ascending"),
-		NextToken:     ptr.String("__NextToken__"),
-		MaxResults:    ptr.Int32(1),
+		PipelineName:         ptr.String("__PipelineName__"),
+		CreatedAfter:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBefore:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SortBy:               types.SortPipelineExecutionsBy("CreationTime"),
+		SortOrder:            types.SortOrder("Ascending"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+		PipelineVersionAlias: ptr.String("__PipelineVersionAlias__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -16881,6 +17015,7 @@ func TestCheckRequestSnapshot_ListPipelines(t *testing.T) {
 		SortOrder:          types.SortOrder("Ascending"),
 		NextToken:          ptr.String("__NextToken__"),
 		MaxResults:         ptr.Int32(1),
+		ManagedBy:          types.PipelineManagedBy("AWS"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -18179,6 +18314,8 @@ func TestCheckRequestSnapshot_StartPipelineExecution(t *testing.T) {
 		},
 		PipelineVersionId:    ptr.Int64(1),
 		MlflowExperimentName: ptr.String("__MlflowExperimentName__"),
+		PipelineVersionAlias: ptr.String("__PipelineVersionAlias__"),
+		RoleArn:              ptr.String("__RoleArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -19426,6 +19563,37 @@ func TestCheckRequestSnapshot_UpdateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateClusterExtension(t *testing.T) {
+	input := &UpdateClusterExtensionInput{
+		ClusterArn:          ptr.String("__ClusterArn__"),
+		ExtensionArn:        ptr.String("__ExtensionArn__"),
+		ExtensionVersion:    ptr.String("__ExtensionVersion__"),
+		ConfigurationValues: ptr.String("__ConfigurationValues__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateClusterExtension(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateClusterExtension"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -22095,6 +22263,10 @@ func TestCheckRequestSnapshot_UpdatePipeline(t *testing.T) {
 		ParallelismConfiguration: &types.ParallelismConfiguration{
 			MaxParallelExecutionSteps: ptr.Int32(1),
 		},
+		PipelineVersionAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -22157,6 +22329,16 @@ func TestCheckRequestSnapshot_UpdatePipelineVersion(t *testing.T) {
 		PipelineVersionId:          ptr.Int64(1),
 		PipelineVersionDisplayName: ptr.String("__PipelineVersionDisplayName__"),
 		PipelineVersionDescription: ptr.String("__PipelineVersionDescription__"),
+		PipelineVersionAliasOperations: &types.AliasOperations{
+			Add: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Remove: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -25246,6 +25428,47 @@ func TestUpdateRequestSnapshot_CreateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateClusterExtension(t *testing.T) {
+	input := &CreateClusterExtensionInput{
+		ClusterArn:          ptr.String("__ClusterArn__"),
+		ExtensionName:       ptr.String("__ExtensionName__"),
+		ExtensionVersion:    ptr.String("__ExtensionVersion__"),
+		ConfigurationValues: ptr.String("__ConfigurationValues__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateClusterExtension(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateClusterExtension"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -31265,6 +31488,10 @@ func TestUpdateRequestSnapshot_CreatePipeline(t *testing.T) {
 		ParallelismConfiguration: &types.ParallelismConfiguration{
 			MaxParallelExecutionSteps: ptr.Int32(1),
 		},
+		PipelineVersionAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -33305,6 +33532,34 @@ func TestUpdateRequestSnapshot_DeleteCluster(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteClusterExtension(t *testing.T) {
+	input := &DeleteClusterExtensionInput{
+		ClusterArn:   ptr.String("__ClusterArn__"),
+		ExtensionArn: ptr.String("__ExtensionArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteClusterExtension(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteClusterExtension"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteClusterSchedulerConfig(t *testing.T) {
 	input := &DeleteClusterSchedulerConfigInput{
 		ClusterSchedulerConfigId: ptr.String("__ClusterSchedulerConfigId__"),
@@ -35116,6 +35371,34 @@ func TestUpdateRequestSnapshot_DescribeClusterEvent(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeClusterExtension(t *testing.T) {
+	input := &DescribeClusterExtensionInput{
+		ClusterArn:   ptr.String("__ClusterArn__"),
+		ExtensionArn: ptr.String("__ExtensionArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeClusterExtension(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeClusterExtension"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeClusterNode(t *testing.T) {
 	input := &DescribeClusterNodeInput{
 		ClusterName:   ptr.String("__ClusterName__"),
@@ -36381,8 +36664,9 @@ func TestUpdateRequestSnapshot_DescribePartnerApp(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DescribePipeline(t *testing.T) {
 	input := &DescribePipelineInput{
-		PipelineName:      ptr.String("__PipelineName__"),
-		PipelineVersionId: ptr.Int64(1),
+		PipelineName:         ptr.String("__PipelineName__"),
+		PipelineVersionId:    ptr.Int64(1),
+		PipelineVersionAlias: ptr.String("__PipelineVersionAlias__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -37692,6 +37976,37 @@ func TestUpdateRequestSnapshot_ListClusterEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterEvents"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListClusterExtensions(t *testing.T) {
+	input := &ListClusterExtensionsInput{
+		ClusterArn:         ptr.String("__ClusterArn__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListClusterExtensions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterExtensions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -39569,13 +39884,14 @@ func TestUpdateRequestSnapshot_ListPartnerApps(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListPipelineExecutions(t *testing.T) {
 	input := &ListPipelineExecutionsInput{
-		PipelineName:  ptr.String("__PipelineName__"),
-		CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		SortBy:        types.SortPipelineExecutionsBy("CreationTime"),
-		SortOrder:     types.SortOrder("Ascending"),
-		NextToken:     ptr.String("__NextToken__"),
-		MaxResults:    ptr.Int32(1),
+		PipelineName:         ptr.String("__PipelineName__"),
+		CreatedAfter:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBefore:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SortBy:               types.SortPipelineExecutionsBy("CreationTime"),
+		SortOrder:            types.SortOrder("Ascending"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+		PipelineVersionAlias: ptr.String("__PipelineVersionAlias__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -39668,6 +39984,7 @@ func TestUpdateRequestSnapshot_ListPipelines(t *testing.T) {
 		SortOrder:          types.SortOrder("Ascending"),
 		NextToken:          ptr.String("__NextToken__"),
 		MaxResults:         ptr.Int32(1),
+		ManagedBy:          types.PipelineManagedBy("AWS"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -40966,6 +41283,8 @@ func TestUpdateRequestSnapshot_StartPipelineExecution(t *testing.T) {
 		},
 		PipelineVersionId:    ptr.Int64(1),
 		MlflowExperimentName: ptr.String("__MlflowExperimentName__"),
+		PipelineVersionAlias: ptr.String("__PipelineVersionAlias__"),
+		RoleArn:              ptr.String("__RoleArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -42213,6 +42532,37 @@ func TestUpdateRequestSnapshot_UpdateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateClusterExtension(t *testing.T) {
+	input := &UpdateClusterExtensionInput{
+		ClusterArn:          ptr.String("__ClusterArn__"),
+		ExtensionArn:        ptr.String("__ExtensionArn__"),
+		ExtensionVersion:    ptr.String("__ExtensionVersion__"),
+		ConfigurationValues: ptr.String("__ConfigurationValues__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateClusterExtension(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateClusterExtension"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -44882,6 +45232,10 @@ func TestUpdateRequestSnapshot_UpdatePipeline(t *testing.T) {
 		ParallelismConfiguration: &types.ParallelismConfiguration{
 			MaxParallelExecutionSteps: ptr.Int32(1),
 		},
+		PipelineVersionAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -44944,6 +45298,16 @@ func TestUpdateRequestSnapshot_UpdatePipelineVersion(t *testing.T) {
 		PipelineVersionId:          ptr.Int64(1),
 		PipelineVersionDisplayName: ptr.String("__PipelineVersionDisplayName__"),
 		PipelineVersionDescription: ptr.String("__PipelineVersionDescription__"),
+		PipelineVersionAliasOperations: &types.AliasOperations{
+			Add: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Remove: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

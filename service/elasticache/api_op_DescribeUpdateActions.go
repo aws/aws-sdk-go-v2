@@ -5,7 +5,9 @@ package elasticache
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,47 @@ type DescribeUpdateActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUpdateActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUpdateActionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUpdateActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheClusterIds != nil {
+		serializeCacheClusterIdList(s, schemas.DescribeUpdateActionsMessage_CacheClusterIds, v.CacheClusterIds)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.DescribeUpdateActionsMessage_Engine, *v.Engine)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeUpdateActionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeUpdateActionsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ReplicationGroupIds != nil {
+		serializeReplicationGroupIdList(s, schemas.DescribeUpdateActionsMessage_ReplicationGroupIds, v.ReplicationGroupIds)
+	}
+	if v.ServiceUpdateName != nil {
+		s.WriteString(schemas.DescribeUpdateActionsMessage_ServiceUpdateName, *v.ServiceUpdateName)
+	}
+	if v.ServiceUpdateStatus != nil {
+		serializeServiceUpdateStatusList(s, schemas.DescribeUpdateActionsMessage_ServiceUpdateStatus, v.ServiceUpdateStatus)
+	}
+	if v.ServiceUpdateTimeRange != nil {
+		s.WriteStruct(schemas.DescribeUpdateActionsMessage_ServiceUpdateTimeRange)
+		v.ServiceUpdateTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ShowNodeLevelUpdateStatus != nil {
+		s.WriteBool(schemas.DescribeUpdateActionsMessage_ShowNodeLevelUpdateStatus, *v.ShowNodeLevelUpdateStatus)
+	}
+	if v.UpdateActionStatus != nil {
+		serializeUpdateActionStatusList(s, schemas.DescribeUpdateActionsMessage_UpdateActionStatus, v.UpdateActionStatus)
+	}
+}
+
 type DescribeUpdateActionsOutput struct {
 
 	// An optional marker returned from a prior request. Use this marker for
@@ -82,13 +125,37 @@ type DescribeUpdateActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUpdateActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateActionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUpdateActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.UpdateActionsMessage_Marker, *v.Marker)
+	}
+	if v.UpdateActions != nil {
+		serializeUpdateActionList(s, schemas.UpdateActionsMessage_UpdateActions, v.UpdateActions)
+	}
+}
+func (v *DescribeUpdateActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateActionsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateActionsMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.UpdateActionsMessage_Marker, v.Marker)
+		case schemas.UpdateActionsMessage_UpdateActions:
+			return deserializeUpdateActionList(d, schemas.UpdateActionsMessage_UpdateActions, &v.UpdateActions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUpdateActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeUpdateActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUpdateActions, schemas.DescribeUpdateActionsMessage, schemas.UpdateActionsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeUpdateActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUpdateActions, schemas.DescribeUpdateActionsMessage, schemas.UpdateActionsMessage), output: &DescribeUpdateActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

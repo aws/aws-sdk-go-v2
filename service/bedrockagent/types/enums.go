@@ -624,6 +624,25 @@ func (EnrichmentStrategyMethod) Values() []EnrichmentStrategyMethod {
 	}
 }
 
+type FieldType string
+
+// Enum values for FieldType
+const (
+	FieldTypeString     FieldType = "STRING"
+	FieldTypeStringList FieldType = "STRING_LIST"
+)
+
+// Values returns all known values for FieldType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FieldType) Values() []FieldType {
+	return []FieldType{
+		"STRING",
+		"STRING_LIST",
+	}
+}
+
 type FlowConnectionType string
 
 // Enum values for FlowConnectionType
@@ -1582,6 +1601,25 @@ const (
 func (SalesforceAuthType) Values() []SalesforceAuthType {
 	return []SalesforceAuthType{
 		"OAUTH2_CLIENT_CREDENTIALS",
+	}
+}
+
+type SearchableStatus string
+
+// Enum values for SearchableStatus
+const (
+	SearchableStatusEnabled  SearchableStatus = "ENABLED"
+	SearchableStatusDisabled SearchableStatus = "DISABLED"
+)
+
+// Values returns all known values for SearchableStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchableStatus) Values() []SearchableStatus {
+	return []SearchableStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

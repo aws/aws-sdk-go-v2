@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type SetReceiptRulePositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetReceiptRulePositionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetReceiptRulePositionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetReceiptRulePositionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.After != nil {
+		s.WriteString(schemas.SetReceiptRulePositionRequest_After, *v.After)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.SetReceiptRulePositionRequest_RuleName, *v.RuleName)
+	}
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.SetReceiptRulePositionRequest_RuleSetName, *v.RuleSetName)
+	}
+}
+
 // An empty element returned on a successful request.
 type SetReceiptRulePositionOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -60,13 +80,26 @@ type SetReceiptRulePositionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetReceiptRulePositionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetReceiptRulePositionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetReceiptRulePositionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetReceiptRulePositionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetReceiptRulePositionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetReceiptRulePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetReceiptRulePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetReceiptRulePosition, schemas.SetReceiptRulePositionRequest, schemas.SetReceiptRulePositionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetReceiptRulePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetReceiptRulePosition, schemas.SetReceiptRulePositionRequest, schemas.SetReceiptRulePositionResponse), output: &SetReceiptRulePositionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

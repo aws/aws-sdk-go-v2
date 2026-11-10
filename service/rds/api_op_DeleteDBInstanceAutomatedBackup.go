@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteDBInstanceAutomatedBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBInstanceAutomatedBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDBInstanceAutomatedBackupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBInstanceAutomatedBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceAutomatedBackupsArn != nil {
+		s.WriteString(schemas.DeleteDBInstanceAutomatedBackupMessage_DBInstanceAutomatedBackupsArn, *v.DBInstanceAutomatedBackupsArn)
+	}
+	if v.DbiResourceId != nil {
+		s.WriteString(schemas.DeleteDBInstanceAutomatedBackupMessage_DbiResourceId, *v.DbiResourceId)
+	}
+}
+
 type DeleteDBInstanceAutomatedBackupOutput struct {
 
 	// An automated backup of a DB instance. It consists of system backups,
@@ -54,13 +71,34 @@ type DeleteDBInstanceAutomatedBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBInstanceAutomatedBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDBInstanceAutomatedBackupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBInstanceAutomatedBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceAutomatedBackup != nil {
+		s.WriteStruct(schemas.DeleteDBInstanceAutomatedBackupResult_DBInstanceAutomatedBackup)
+		v.DBInstanceAutomatedBackup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDBInstanceAutomatedBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDBInstanceAutomatedBackupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDBInstanceAutomatedBackupResult_DBInstanceAutomatedBackup:
+			v.DBInstanceAutomatedBackup = &types.DBInstanceAutomatedBackup{}
+			return v.DBInstanceAutomatedBackup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDBInstanceAutomatedBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBInstanceAutomatedBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBInstanceAutomatedBackup, schemas.DeleteDBInstanceAutomatedBackupMessage, schemas.DeleteDBInstanceAutomatedBackupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteDBInstanceAutomatedBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBInstanceAutomatedBackup, schemas.DeleteDBInstanceAutomatedBackupMessage, schemas.DeleteDBInstanceAutomatedBackupResult), output: &DeleteDBInstanceAutomatedBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

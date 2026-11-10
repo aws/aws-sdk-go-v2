@@ -1,0 +1,4 @@
+400
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>CopyToRegionDisabledFault</Code><message>__Message__</message></Error></ErrorResponse>

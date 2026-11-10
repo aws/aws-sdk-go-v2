@@ -141,6 +141,28 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_CompleteTableMigration(t *testing.T) {
+	want := &CompleteTableMigrationOutput{}
+	proto := restjson1.New(schemas.S3TableBuckets)
+	opSchema := smithy.NewOperationSchema(schemas.CompleteTableMigration, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CompleteTableMigration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateNamespace(t *testing.T) {
 	want := &CreateNamespaceOutput{
 		TableBucketARN: ptr.String("__TableBucketARN__"),
@@ -829,6 +851,106 @@ func TestUpdateResponseSnapshot_GetTableMetadataLocation(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetTableMigration(t *testing.T) {
+	want := &GetTableMigrationOutput{
+		MigrationId:         ptr.String("__MigrationId__"),
+		TableBucketARN:      ptr.String("__TableBucketARN__"),
+		Namespace:           ptr.String("__Namespace__"),
+		TableARN:            ptr.String("__TableARN__"),
+		Name:                ptr.String("__Name__"),
+		Type:                types.MigrationType("start"),
+		State:               types.MigrationState("new"),
+		RoleARN:             ptr.String("__RoleARN__"),
+		ReviewMigrationPlan: ptr.Bool(true),
+		HasValidPlan:        ptr.Bool(true),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StateUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason: &types.MigrationFailureReason{
+			Code:   types.MigrationFailureCode("rolePermissions"),
+			Detail: ptr.String("__Detail__"),
+		},
+		PlanningStats: &types.PlanningStats{
+			ObjectsScanned: ptr.Int64(1),
+			ObjectsPlanned: ptr.Int64(1),
+			PartitionCount: ptr.Int64(1),
+		},
+		MigrationStats: &types.MigrationStats{
+			ObjectsMigrated:         ptr.Int64(1),
+			ObjectsFailedMigration:  ptr.Int64(1),
+			ObjectsPendingMigration: ptr.Int64(1),
+		},
+		SourceType: types.MigrationSourceType("glueTable"),
+		Source: &types.SourceConfigurationMemberGlueTable{
+			Value: types.GlueTableSource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TableName:    ptr.String("__TableName__"),
+			},
+		},
+		DataMigration: &types.DataMigrationOverview{
+			MaintenanceSettings: &types.MaintenanceSettings{
+				IcebergCompaction: &types.MigrationCompactionSettings{
+					TargetFileSizeMB: ptr.Int32(1),
+					Strategy:         types.IcebergCompactionStrategy("auto"),
+				},
+				IcebergSnapshotManagement: &types.MigrationSnapshotManagementSettings{
+					MinSnapshotsToKeep:  ptr.Int32(1),
+					MaxSnapshotAgeHours: ptr.Int32(1),
+				},
+			},
+			MigrationPolicies: &types.MigrationPolicies{
+				UnmatchedSourceFieldsPolicy: types.UnmatchedSourceFieldsPolicy("fail"),
+				IncompatibleValuesPolicy:    types.IncompatibleValuesPolicy("fail"),
+			},
+		},
+		MigrationOutput: &types.MigrationOutputOverview{
+			Bucket: ptr.String("__Bucket__"),
+			TableCompatibilityReport: &types.ReportOverview{
+				Prefix:            ptr.String("__Prefix__"),
+				Key:               ptr.String("__Key__"),
+				ChecksumCRC64NVME: ptr.String("__ChecksumCRC64NVME__"),
+				InvalidFindings: map[string]int64{
+					"key0": 1,
+				},
+			},
+			ObjectCompatibilityReport: &types.ReportOverview{
+				Prefix:            ptr.String("__Prefix__"),
+				Key:               ptr.String("__Key__"),
+				ChecksumCRC64NVME: ptr.String("__ChecksumCRC64NVME__"),
+				InvalidFindings: map[string]int64{
+					"key0": 1,
+				},
+			},
+			ObjectMigrationReport: &types.ReportOverview{
+				Prefix:            ptr.String("__Prefix__"),
+				Key:               ptr.String("__Key__"),
+				ChecksumCRC64NVME: ptr.String("__ChecksumCRC64NVME__"),
+				InvalidFindings: map[string]int64{
+					"key0": 1,
+				},
+			},
+		},
+	}
+	proto := restjson1.New(schemas.S3TableBuckets)
+	opSchema := smithy.NewOperationSchema(schemas.GetTableMigration, schemas.GetTableMigrationResponse, schemas.GetTableMigrationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetTableMigration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetTablePolicy(t *testing.T) {
 	want := &GetTablePolicyOutput{
 		ResourcePolicy: ptr.String("__ResourcePolicy__"),
@@ -1120,6 +1242,56 @@ func TestUpdateResponseSnapshot_ListTableBuckets(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListTableBuckets.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListTableMigrations(t *testing.T) {
+	want := &ListTableMigrationsOutput{
+		Migrations: []types.MigrationSummary{
+			{
+				MigrationId:    ptr.String("__MigrationId__"),
+				TableBucketARN: ptr.String("__TableBucketARN__"),
+				Namespace:      ptr.String("__Namespace__"),
+				TableARN:       ptr.String("__TableARN__"),
+				Name:           ptr.String("__Name__"),
+				Type:           types.MigrationType("start"),
+				State:          types.MigrationState("new"),
+				HasValidPlan:   ptr.Bool(true),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StateUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				MigrationId:    ptr.String("__MigrationId__"),
+				TableBucketARN: ptr.String("__TableBucketARN__"),
+				Namespace:      ptr.String("__Namespace__"),
+				TableARN:       ptr.String("__TableARN__"),
+				Name:           ptr.String("__Name__"),
+				Type:           types.MigrationType("start"),
+				State:          types.MigrationState("new"),
+				HasValidPlan:   ptr.Bool(true),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StateUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.S3TableBuckets)
+	opSchema := smithy.NewOperationSchema(schemas.ListTableMigrations, schemas.ListTableMigrationsResponse, schemas.ListTableMigrationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListTableMigrations.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1452,6 +1624,56 @@ func TestUpdateResponseSnapshot_RenameTable(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_StartTableMigration(t *testing.T) {
+	want := &StartTableMigrationOutput{
+		MigrationId: ptr.String("__MigrationId__"),
+		State:       types.MigrationState("new"),
+	}
+	proto := restjson1.New(schemas.S3TableBuckets)
+	opSchema := smithy.NewOperationSchema(schemas.StartTableMigration, schemas.StartTableMigrationResponse, schemas.StartTableMigrationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartTableMigration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_SyncTableMigration(t *testing.T) {
+	want := &SyncTableMigrationOutput{
+		MigrationId: ptr.String("__MigrationId__"),
+		State:       types.MigrationState("new"),
+	}
+	proto := restjson1.New(schemas.S3TableBuckets)
+	opSchema := smithy.NewOperationSchema(schemas.SyncTableMigration, schemas.SyncTableMigrationResponse, schemas.SyncTableMigrationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("SyncTableMigration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	proto := restjson1.New(schemas.S3TableBuckets)
@@ -1527,12 +1749,38 @@ func TestUpdateResponseSnapshot_UpdateTableMetadataLocation(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateTableMigration(t *testing.T) {
+	want := &UpdateTableMigrationOutput{
+		MigrationId: ptr.String("__MigrationId__"),
+		State:       types.MigrationState("new"),
+		TableARN:    ptr.String("__TableARN__"),
+	}
+	proto := restjson1.New(schemas.S3TableBuckets)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateTableMigration, schemas.UpdateTableMigrationResponse, schemas.UpdateTableMigrationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateTableMigration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.S3TableBuckets)
-	opSchema := smithy.NewOperationSchema(schemas.DeleteTableBucketReplication, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	opSchema := smithy.NewOperationSchema(schemas.CompleteTableMigration, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1557,7 +1805,7 @@ func TestUpdateResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.S3TableBuckets)
-	opSchema := smithy.NewOperationSchema(schemas.CreateNamespace, schemas.BadRequestException, schemas.BadRequestException)
+	opSchema := smithy.NewOperationSchema(schemas.CompleteTableMigration, schemas.BadRequestException, schemas.BadRequestException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1582,7 +1830,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.S3TableBuckets)
-	opSchema := smithy.NewOperationSchema(schemas.CreateNamespace, schemas.ConflictException, schemas.ConflictException)
+	opSchema := smithy.NewOperationSchema(schemas.CompleteTableMigration, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1607,7 +1855,7 @@ func TestUpdateResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.S3TableBuckets)
-	opSchema := smithy.NewOperationSchema(schemas.CreateNamespace, schemas.ForbiddenException, schemas.ForbiddenException)
+	opSchema := smithy.NewOperationSchema(schemas.CompleteTableMigration, schemas.ForbiddenException, schemas.ForbiddenException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1632,7 +1880,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerErrorException(t *testing.T)
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.S3TableBuckets)
-	opSchema := smithy.NewOperationSchema(schemas.CreateNamespace, schemas.InternalServerErrorException, schemas.InternalServerErrorException)
+	opSchema := smithy.NewOperationSchema(schemas.CompleteTableMigration, schemas.InternalServerErrorException, schemas.InternalServerErrorException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1682,7 +1930,7 @@ func TestUpdateResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.S3TableBuckets)
-	opSchema := smithy.NewOperationSchema(schemas.CreateNamespace, schemas.NotFoundException, schemas.NotFoundException)
+	opSchema := smithy.NewOperationSchema(schemas.CompleteTableMigration, schemas.NotFoundException, schemas.NotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1707,7 +1955,7 @@ func TestUpdateResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.S3TableBuckets)
-	opSchema := smithy.NewOperationSchema(schemas.CreateNamespace, schemas.TooManyRequestsException, schemas.TooManyRequestsException)
+	opSchema := smithy.NewOperationSchema(schemas.CompleteTableMigration, schemas.TooManyRequestsException, schemas.TooManyRequestsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

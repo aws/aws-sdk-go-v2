@@ -12,6 +12,10 @@ import (
 )
 
 // Updates a retraining scheduler.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) UpdateRetrainingScheduler(ctx context.Context, params *UpdateRetrainingSchedulerInput, optFns ...func(*Options)) (*UpdateRetrainingSchedulerOutput, error) {
 	if params == nil {
 		params = &UpdateRetrainingSchedulerInput{}

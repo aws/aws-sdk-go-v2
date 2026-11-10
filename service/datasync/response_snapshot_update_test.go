@@ -590,8 +590,15 @@ func TestUpdateResponseSnapshot_DescribeLocationAzureBlob(t *testing.T) {
 		LocationArn:        ptr.String("__LocationArn__"),
 		LocationUri:        ptr.String("__LocationUri__"),
 		AuthenticationType: types.AzureBlobAuthenticationType("SAS"),
-		BlobType:           types.AzureBlobType("BLOCK"),
-		AccessTier:         types.AzureAccessTier("HOT"),
+		FederatedIdentity: &types.AzureFederatedIdentityConfig{
+			AwsIamRole: ptr.String("__AwsIamRole__"),
+			AzureOidc: &types.AzureOidcConfig{
+				TenantId: ptr.String("__TenantId__"),
+				ClientId: ptr.String("__ClientId__"),
+			},
+		},
+		BlobType:   types.AzureBlobType("BLOCK"),
+		AccessTier: types.AzureAccessTier("HOT"),
 		AgentArns: []string{
 			"__Member__",
 			"__Member__",
@@ -950,9 +957,20 @@ func TestUpdateResponseSnapshot_DescribeLocationNfs(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DescribeLocationObjectStorage(t *testing.T) {
 	want := &DescribeLocationObjectStorageOutput{
-		LocationArn:    ptr.String("__LocationArn__"),
-		LocationUri:    ptr.String("__LocationUri__"),
-		AccessKey:      ptr.String("__AccessKey__"),
+		LocationArn: ptr.String("__LocationArn__"),
+		LocationUri: ptr.String("__LocationUri__"),
+		AccessKey:   ptr.String("__AccessKey__"),
+		FederatedIdentity: &types.ObjectStorageFederatedIdentityConfig{
+			AwsIamRole: ptr.String("__AwsIamRole__"),
+			ExternalIdentity: &types.ObjectStorageExternalIdentityConfig{
+				GoogleOidc: &types.GoogleOidcConfig{
+					ProjectName:          ptr.String("__ProjectName__"),
+					ProjectNumber:        ptr.String("__ProjectNumber__"),
+					IdentityPoolName:     ptr.String("__IdentityPoolName__"),
+					IdentityProviderName: ptr.String("__IdentityProviderName__"),
+				},
+			},
+		},
 		ServerPort:     ptr.Int32(1),
 		ServerProtocol: types.ObjectStorageServerProtocol("HTTPS"),
 		AgentArns: []string{

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<UpdateGeneratedTemplateResponse><UpdateGeneratedTemplateResult><GeneratedTemplateId>__GeneratedTemplateId__</GeneratedTemplateId></UpdateGeneratedTemplateResult></UpdateGeneratedTemplateResponse>

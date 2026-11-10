@@ -5,7 +5,9 @@ package elasticache
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,36 @@ type DescribeSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSnapshotsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheClusterId != nil {
+		s.WriteString(schemas.DescribeSnapshotsMessage_CacheClusterId, *v.CacheClusterId)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeSnapshotsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeSnapshotsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.DescribeSnapshotsMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+	if v.ShowNodeGroupConfig != nil {
+		s.WriteBool(schemas.DescribeSnapshotsMessage_ShowNodeGroupConfig, *v.ShowNodeGroupConfig)
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.DescribeSnapshotsMessage_SnapshotName, *v.SnapshotName)
+	}
+	if v.SnapshotSource != nil {
+		s.WriteString(schemas.DescribeSnapshotsMessage_SnapshotSource, *v.SnapshotSource)
+	}
+}
+
 // Represents the output of a DescribeSnapshots operation.
 type DescribeSnapshotsOutput struct {
 
@@ -92,13 +124,37 @@ type DescribeSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSnapshotsListMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeSnapshotsListMessage_Marker, *v.Marker)
+	}
+	if v.Snapshots != nil {
+		serializeSnapshotList(s, schemas.DescribeSnapshotsListMessage_Snapshots, v.Snapshots)
+	}
+}
+func (v *DescribeSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSnapshotsListMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSnapshotsListMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeSnapshotsListMessage_Marker, v.Marker)
+		case schemas.DescribeSnapshotsListMessage_Snapshots:
+			return deserializeSnapshotList(d, schemas.DescribeSnapshotsListMessage_Snapshots, &v.Snapshots)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSnapshots, schemas.DescribeSnapshotsMessage, schemas.DescribeSnapshotsListMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSnapshots, schemas.DescribeSnapshotsMessage, schemas.DescribeSnapshotsListMessage), output: &DescribeSnapshotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,15 @@ type GetSMSSandboxAccountStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSMSSandboxAccountStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSMSSandboxAccountStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSMSSandboxAccountStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetSMSSandboxAccountStatusOutput struct {
 
 	// Indicates whether the calling Amazon Web Services account is in the SMS sandbox.
@@ -52,13 +63,29 @@ type GetSMSSandboxAccountStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSMSSandboxAccountStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSMSSandboxAccountStatusResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSMSSandboxAccountStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.GetSMSSandboxAccountStatusResult_IsInSandbox, v.IsInSandbox)
+}
+func (v *GetSMSSandboxAccountStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSMSSandboxAccountStatusResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSMSSandboxAccountStatusResult_IsInSandbox:
+			return d.ReadBool(schemas.GetSMSSandboxAccountStatusResult_IsInSandbox, &v.IsInSandbox)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSMSSandboxAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetSMSSandboxAccountStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSMSSandboxAccountStatus, schemas.GetSMSSandboxAccountStatusInput, schemas.GetSMSSandboxAccountStatusResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetSMSSandboxAccountStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSMSSandboxAccountStatus, schemas.GetSMSSandboxAccountStatusInput, schemas.GetSMSSandboxAccountStatusResult), output: &GetSMSSandboxAccountStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

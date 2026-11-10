@@ -4,7 +4,9 @@ package elasticloadbalancing
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type DescribeLoadBalancerPolicyTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLoadBalancerPolicyTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLoadBalancerPolicyTypesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLoadBalancerPolicyTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyTypeNames != nil {
+		serializePolicyTypeNames(s, schemas.DescribeLoadBalancerPolicyTypesInput_PolicyTypeNames, v.PolicyTypeNames)
+	}
+}
+
 // Contains the output of DescribeLoadBalancerPolicyTypes.
 type DescribeLoadBalancerPolicyTypesOutput struct {
 
@@ -55,13 +69,31 @@ type DescribeLoadBalancerPolicyTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLoadBalancerPolicyTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLoadBalancerPolicyTypesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLoadBalancerPolicyTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyTypeDescriptions != nil {
+		serializePolicyTypeDescriptions(s, schemas.DescribeLoadBalancerPolicyTypesOutput_PolicyTypeDescriptions, v.PolicyTypeDescriptions)
+	}
+}
+func (v *DescribeLoadBalancerPolicyTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLoadBalancerPolicyTypesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLoadBalancerPolicyTypesOutput_PolicyTypeDescriptions:
+			return deserializePolicyTypeDescriptions(d, schemas.DescribeLoadBalancerPolicyTypesOutput_PolicyTypeDescriptions, &v.PolicyTypeDescriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLoadBalancerPolicyTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeLoadBalancerPolicyTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoadBalancerPolicyTypes, schemas.DescribeLoadBalancerPolicyTypesInput, schemas.DescribeLoadBalancerPolicyTypesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeLoadBalancerPolicyTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoadBalancerPolicyTypes, schemas.DescribeLoadBalancerPolicyTypesInput, schemas.DescribeLoadBalancerPolicyTypesOutput), output: &DescribeLoadBalancerPolicyTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

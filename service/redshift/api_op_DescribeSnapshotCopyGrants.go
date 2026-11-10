@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,30 @@ type DescribeSnapshotCopyGrantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSnapshotCopyGrantsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSnapshotCopyGrantsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSnapshotCopyGrantsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeSnapshotCopyGrantsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeSnapshotCopyGrantsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.SnapshotCopyGrantName != nil {
+		s.WriteString(schemas.DescribeSnapshotCopyGrantsMessage_SnapshotCopyGrantName, *v.SnapshotCopyGrantName)
+	}
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.DescribeSnapshotCopyGrantsMessage_TagKeys, v.TagKeys)
+	}
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.DescribeSnapshotCopyGrantsMessage_TagValues, v.TagValues)
+	}
+}
+
 type DescribeSnapshotCopyGrantsOutput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
@@ -97,13 +123,37 @@ type DescribeSnapshotCopyGrantsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSnapshotCopyGrantsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotCopyGrantMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSnapshotCopyGrantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.SnapshotCopyGrantMessage_Marker, *v.Marker)
+	}
+	if v.SnapshotCopyGrants != nil {
+		serializeSnapshotCopyGrantList(s, schemas.SnapshotCopyGrantMessage_SnapshotCopyGrants, v.SnapshotCopyGrants)
+	}
+}
+func (v *DescribeSnapshotCopyGrantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotCopyGrantMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotCopyGrantMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.SnapshotCopyGrantMessage_Marker, v.Marker)
+		case schemas.SnapshotCopyGrantMessage_SnapshotCopyGrants:
+			return deserializeSnapshotCopyGrantList(d, schemas.SnapshotCopyGrantMessage_SnapshotCopyGrants, &v.SnapshotCopyGrants)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSnapshotCopyGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeSnapshotCopyGrants{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSnapshotCopyGrants, schemas.DescribeSnapshotCopyGrantsMessage, schemas.SnapshotCopyGrantMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeSnapshotCopyGrants{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSnapshotCopyGrants, schemas.DescribeSnapshotCopyGrantsMessage, schemas.SnapshotCopyGrantMessage), output: &DescribeSnapshotCopyGrantsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

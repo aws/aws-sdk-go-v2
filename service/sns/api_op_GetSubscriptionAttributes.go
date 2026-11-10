@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetSubscriptionAttributesInput struct {
 	SubscriptionArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSubscriptionAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSubscriptionAttributesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSubscriptionAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriptionArn != nil {
+		s.WriteString(schemas.GetSubscriptionAttributesInput_SubscriptionArn, *v.SubscriptionArn)
+	}
 }
 
 // Response for GetSubscriptionAttributes action.
@@ -105,13 +119,31 @@ type GetSubscriptionAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSubscriptionAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSubscriptionAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSubscriptionAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeSubscriptionAttributesMap(s, schemas.GetSubscriptionAttributesResponse_Attributes, v.Attributes)
+	}
+}
+func (v *GetSubscriptionAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSubscriptionAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSubscriptionAttributesResponse_Attributes:
+			return deserializeSubscriptionAttributesMap(d, schemas.GetSubscriptionAttributesResponse_Attributes, &v.Attributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSubscriptionAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetSubscriptionAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscriptionAttributes, schemas.GetSubscriptionAttributesInput, schemas.GetSubscriptionAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetSubscriptionAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscriptionAttributes, schemas.GetSubscriptionAttributesInput, schemas.GetSubscriptionAttributesResponse), output: &GetSubscriptionAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

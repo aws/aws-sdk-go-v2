@@ -90,6 +90,13 @@ func (o *OutputStreamOutput) GetInitialReply() <-chan OutputStreamInitialReply {
 	return o.initialReply
 }
 
+func (v *OutputStreamInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationOutputStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OutputStream, nil, schemas.OutputStreamOutput)}, middleware.After); err != nil {
 		return err

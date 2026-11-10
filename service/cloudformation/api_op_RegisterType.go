@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -135,6 +137,35 @@ type RegisterTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.RegisterTypeInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.RegisterTypeInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.LoggingConfig != nil {
+		s.WriteStruct(schemas.RegisterTypeInput_LoggingConfig)
+		v.LoggingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaHandlerPackage != nil {
+		s.WriteString(schemas.RegisterTypeInput_SchemaHandlerPackage, *v.SchemaHandlerPackage)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.RegisterTypeInput_Type, string(v.Type))
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.RegisterTypeInput_TypeName, *v.TypeName)
+	}
+}
+
 type RegisterTypeOutput struct {
 
 	// The identifier for this registration request.
@@ -149,13 +180,32 @@ type RegisterTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistrationToken != nil {
+		s.WriteString(schemas.RegisterTypeOutput_RegistrationToken, *v.RegistrationToken)
+	}
+}
+func (v *RegisterTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterTypeOutput_RegistrationToken:
+			v.RegistrationToken = new(string)
+			return d.ReadString(schemas.RegisterTypeOutput_RegistrationToken, v.RegistrationToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRegisterType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterType, schemas.RegisterTypeInput, schemas.RegisterTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRegisterType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterType, schemas.RegisterTypeInput, schemas.RegisterTypeOutput), output: &RegisterTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,3 +1,17 @@
+# v1.70.0 (2026-11-06)
+
+* **Feature**: Add support for configuring searchability for metadata fields via UpdateKnowledgeBase request for Managed Knowledge Base. Once a field is marked as searchable it can be queried via query text and is factored into Managed Knowledge Base's ranking algorithm.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.69.5 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.69.4 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.69.3 (2026-10-30)
 
 * **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.

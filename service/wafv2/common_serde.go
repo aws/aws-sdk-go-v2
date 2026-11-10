@@ -81,6 +81,36 @@ func serializeConditions(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 	s.CloseList()
 }
 
+func serializeConnectedAccountConfigs(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ConnectedAccountConfig) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeConnectedAccountPaymentNetworks(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ConnectedAccountChainConfig) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeConnectedAccountPrices(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ConnectedAccountPrice) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeCookieNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -797,6 +827,72 @@ func deserializeConditions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 		}
 
 		vv = types.Condition{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeConnectedAccountConfigs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ConnectedAccountConfig) error {
+	*v = make([]types.ConnectedAccountConfig, 0)
+	var vv types.ConnectedAccountConfig
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ConnectedAccountConfig
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ConnectedAccountConfig{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeConnectedAccountPaymentNetworks(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ConnectedAccountChainConfig) error {
+	*v = make([]types.ConnectedAccountChainConfig, 0)
+	var vv types.ConnectedAccountChainConfig
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ConnectedAccountChainConfig
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ConnectedAccountChainConfig{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeConnectedAccountPrices(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ConnectedAccountPrice) error {
+	*v = make([]types.ConnectedAccountPrice, 0)
+	var vv types.ConnectedAccountPrice
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ConnectedAccountPrice
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ConnectedAccountPrice{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

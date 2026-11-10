@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetServerCertificateResponse><GetServerCertificateResult><ServerCertificate><CertificateBody>__CertificateBody__</CertificateBody><CertificateChain>__CertificateChain__</CertificateChain><ServerCertificateMetadata><Arn>__Arn__</Arn><Expiration>2000-01-01T00:00:00Z</Expiration><Path>__Path__</Path><ServerCertificateId>__ServerCertificateId__</ServerCertificateId><ServerCertificateName>__ServerCertificateName__</ServerCertificateName><UploadDate>2000-01-01T00:00:00Z</UploadDate></ServerCertificateMetadata><Tags><member><Key>__Key__</Key><Value>__Value__</Value></member><member><Key>__Key__</Key><Value>__Value__</Value></member></Tags></ServerCertificate></GetServerCertificateResult></GetServerCertificateResponse>

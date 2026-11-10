@@ -4,7 +4,9 @@ package docdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGlobalClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGlobalClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGlobalClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalClusterIdentifier != nil {
+		s.WriteString(schemas.DeleteGlobalClusterMessage_GlobalClusterIdentifier, *v.GlobalClusterIdentifier)
+	}
+}
+
 type DeleteGlobalClusterOutput struct {
 
 	// A data type representing an Amazon DocumentDB global cluster.
@@ -49,13 +63,34 @@ type DeleteGlobalClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGlobalClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGlobalClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGlobalClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalCluster != nil {
+		s.WriteStruct(schemas.DeleteGlobalClusterResult_GlobalCluster)
+		v.GlobalCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteGlobalClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGlobalClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGlobalClusterResult_GlobalCluster:
+			v.GlobalCluster = &types.GlobalCluster{}
+			return v.GlobalCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteGlobalCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlobalCluster, schemas.DeleteGlobalClusterMessage, schemas.DeleteGlobalClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteGlobalCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlobalCluster, schemas.DeleteGlobalClusterMessage, schemas.DeleteGlobalClusterResult), output: &DeleteGlobalClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

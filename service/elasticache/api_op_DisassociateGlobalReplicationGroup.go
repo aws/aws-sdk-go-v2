@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DisassociateGlobalReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateGlobalReplicationGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateGlobalReplicationGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateGlobalReplicationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalReplicationGroupId != nil {
+		s.WriteString(schemas.DisassociateGlobalReplicationGroupMessage_GlobalReplicationGroupId, *v.GlobalReplicationGroupId)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.DisassociateGlobalReplicationGroupMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+	if v.ReplicationGroupRegion != nil {
+		s.WriteString(schemas.DisassociateGlobalReplicationGroupMessage_ReplicationGroupRegion, *v.ReplicationGroupRegion)
+	}
+}
+
 type DisassociateGlobalReplicationGroupOutput struct {
 
 	// Consists of a primary cluster that accepts writes and an associated secondary
@@ -64,13 +84,34 @@ type DisassociateGlobalReplicationGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateGlobalReplicationGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateGlobalReplicationGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateGlobalReplicationGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalReplicationGroup != nil {
+		s.WriteStruct(schemas.DisassociateGlobalReplicationGroupResult_GlobalReplicationGroup)
+		v.GlobalReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateGlobalReplicationGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateGlobalReplicationGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateGlobalReplicationGroupResult_GlobalReplicationGroup:
+			v.GlobalReplicationGroup = &types.GlobalReplicationGroup{}
+			return v.GlobalReplicationGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisassociateGlobalReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateGlobalReplicationGroup, schemas.DisassociateGlobalReplicationGroupMessage, schemas.DisassociateGlobalReplicationGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDisassociateGlobalReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateGlobalReplicationGroup, schemas.DisassociateGlobalReplicationGroupMessage, schemas.DisassociateGlobalReplicationGroupResult), output: &DisassociateGlobalReplicationGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

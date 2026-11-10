@@ -1,0 +1,4 @@
+500
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>PolicyEvaluation</Code><message>__Message__</message></Error></ErrorResponse>

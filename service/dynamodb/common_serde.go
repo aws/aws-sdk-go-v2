@@ -155,6 +155,36 @@ func serializeBinarySetAttributeValue(s smithy.ShapeSerializer, schema *smithy.S
 	s.CloseList()
 }
 
+func serializeBulkOperationsSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BulkOperationSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBulkOperationTableDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BulkOperationTableDetail) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBulkOperationUsageMultiple(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BulkOperationUsage) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeCancellationReasonList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CancellationReason) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -432,6 +462,14 @@ func serializeNonKeyAttributeNameList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeNumberSetAttributeValue(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeOutputTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OutputTypeEnum) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -880,6 +918,72 @@ func deserializeBinarySetAttributeValue(d smithy.ShapeDeserializer, s *smithy.Sc
 		}
 
 		if err := d.ReadBlob(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBulkOperationsSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BulkOperationSummary) error {
+	*v = make([]types.BulkOperationSummary, 0)
+	var vv types.BulkOperationSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BulkOperationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.BulkOperationSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBulkOperationTableDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BulkOperationTableDetail) error {
+	*v = make([]types.BulkOperationTableDetail, 0)
+	var vv types.BulkOperationTableDetail
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BulkOperationTableDetail
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.BulkOperationTableDetail{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBulkOperationUsageMultiple(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BulkOperationUsage) error {
+	*v = make([]types.BulkOperationUsage, 0)
+	var vv types.BulkOperationUsage
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BulkOperationUsage
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.BulkOperationUsage{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 
@@ -1538,6 +1642,27 @@ func deserializeNumberSetAttributeValue(d smithy.ShapeDeserializer, s *smithy.Sc
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOutputTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OutputTypeEnum) error {
+	*v = make([]types.OutputTypeEnum, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OutputTypeEnum
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.OutputTypeEnum(vv))
 		return nil
 	})
 }
@@ -2408,7 +2533,29 @@ func serializePutItemInputAttributeMap(s smithy.ShapeSerializer, schema *smithy.
 	s.CloseMap()
 }
 
+func serializeSecondaryIndexesBulkBytesMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.BulkOperationBytes) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteStruct(schema.MapValue())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseMap()
+}
+
 func serializeSecondaryIndexesCapacityMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.Capacity) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteStruct(schema.MapValue())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseMap()
+}
+
+func serializeVectorIndexesBulkVectorBytesMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.BulkOperationVectorBytes) {
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -2753,6 +2900,28 @@ func deserializePutItemInputAttributeMap(d smithy.ShapeDeserializer, s *smithy.S
 	})
 }
 
+func deserializeSecondaryIndexesBulkBytesMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.BulkOperationBytes) error {
+	*v = make(map[string]types.BulkOperationBytes)
+	var vv types.BulkOperationBytes
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BulkOperationBytes
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = types.BulkOperationBytes{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
 func deserializeSecondaryIndexesCapacityMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.Capacity) error {
 	*v = make(map[string]types.Capacity)
 	var vv types.Capacity
@@ -2766,6 +2935,28 @@ func deserializeSecondaryIndexesCapacityMap(d smithy.ShapeDeserializer, s *smith
 		}
 
 		vv = types.Capacity{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeVectorIndexesBulkVectorBytesMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.BulkOperationVectorBytes) error {
+	*v = make(map[string]types.BulkOperationVectorBytes)
+	var vv types.BulkOperationVectorBytes
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BulkOperationVectorBytes
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = types.BulkOperationVectorBytes{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

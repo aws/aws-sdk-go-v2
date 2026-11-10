@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeCertificatesResponse><DescribeCertificatesResult><Certificates><Certificate><CertificateArn>__CertificateArn__</CertificateArn><CertificateIdentifier>__CertificateIdentifier__</CertificateIdentifier><CertificateType>__CertificateType__</CertificateType><Thumbprint>__Thumbprint__</Thumbprint><ValidFrom>2000-01-01T00:00:00Z</ValidFrom><ValidTill>2000-01-01T00:00:00Z</ValidTill></Certificate><Certificate><CertificateArn>__CertificateArn__</CertificateArn><CertificateIdentifier>__CertificateIdentifier__</CertificateIdentifier><CertificateType>__CertificateType__</CertificateType><Thumbprint>__Thumbprint__</Thumbprint><ValidFrom>2000-01-01T00:00:00Z</ValidFrom><ValidTill>2000-01-01T00:00:00Z</ValidTill></Certificate></Certificates><Marker>__Marker__</Marker></DescribeCertificatesResult></DescribeCertificatesResponse>

@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -287,6 +289,79 @@ type UpdateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStackInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capabilities != nil {
+		serializeCapabilities(s, schemas.UpdateStackInput_Capabilities, v.Capabilities)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateStackInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DeploymentConfig != nil {
+		s.WriteStruct(schemas.UpdateStackInput_DeploymentConfig)
+		v.DeploymentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisableRollback != nil {
+		s.WriteBool(schemas.UpdateStackInput_DisableRollback, *v.DisableRollback)
+	}
+	if v.DisableValidation != nil {
+		s.WriteBool(schemas.UpdateStackInput_DisableValidation, *v.DisableValidation)
+	}
+	if v.NotificationARNs != nil {
+		serializeNotificationARNs(s, schemas.UpdateStackInput_NotificationARNs, v.NotificationARNs)
+	}
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.UpdateStackInput_Parameters, v.Parameters)
+	}
+	if v.ResourceTypes != nil {
+		serializeResourceTypes(s, schemas.UpdateStackInput_ResourceTypes, v.ResourceTypes)
+	}
+	if v.RetainExceptOnCreate != nil {
+		s.WriteBool(schemas.UpdateStackInput_RetainExceptOnCreate, *v.RetainExceptOnCreate)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.UpdateStackInput_RoleARN, *v.RoleARN)
+	}
+	if v.RollbackConfiguration != nil {
+		s.WriteStruct(schemas.UpdateStackInput_RollbackConfiguration)
+		v.RollbackConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.UpdateStackInput_StackName, *v.StackName)
+	}
+	if v.StackPolicyBody != nil {
+		s.WriteString(schemas.UpdateStackInput_StackPolicyBody, *v.StackPolicyBody)
+	}
+	if v.StackPolicyDuringUpdateBody != nil {
+		s.WriteString(schemas.UpdateStackInput_StackPolicyDuringUpdateBody, *v.StackPolicyDuringUpdateBody)
+	}
+	if v.StackPolicyDuringUpdateURL != nil {
+		s.WriteString(schemas.UpdateStackInput_StackPolicyDuringUpdateURL, *v.StackPolicyDuringUpdateURL)
+	}
+	if v.StackPolicyURL != nil {
+		s.WriteString(schemas.UpdateStackInput_StackPolicyURL, *v.StackPolicyURL)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdateStackInput_Tags, v.Tags)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.UpdateStackInput_TemplateBody, *v.TemplateBody)
+	}
+	if v.TemplateURL != nil {
+		s.WriteString(schemas.UpdateStackInput_TemplateURL, *v.TemplateURL)
+	}
+	if v.UsePreviousTemplate != nil {
+		s.WriteBool(schemas.UpdateStackInput_UsePreviousTemplate, *v.UsePreviousTemplate)
+	}
+}
+
 // The output for an UpdateStack action.
 type UpdateStackOutput struct {
 
@@ -303,13 +378,38 @@ type UpdateStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStackOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.UpdateStackOutput_OperationId, *v.OperationId)
+	}
+	if v.StackId != nil {
+		s.WriteString(schemas.UpdateStackOutput_StackId, *v.StackId)
+	}
+}
+func (v *UpdateStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStackOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStackOutput_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.UpdateStackOutput_OperationId, v.OperationId)
+		case schemas.UpdateStackOutput_StackId:
+			v.StackId = new(string)
+			return d.ReadString(schemas.UpdateStackOutput_StackId, v.StackId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStack, schemas.UpdateStackInput, schemas.UpdateStackOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStack, schemas.UpdateStackInput, schemas.UpdateStackOutput), output: &UpdateStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

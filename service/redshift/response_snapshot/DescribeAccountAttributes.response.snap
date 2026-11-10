@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeAccountAttributesResponse><DescribeAccountAttributesResult><AccountAttributes><AccountAttribute><AttributeName>__AttributeName__</AttributeName><AttributeValues><AttributeValueTarget><AttributeValue>__AttributeValue__</AttributeValue></AttributeValueTarget><AttributeValueTarget><AttributeValue>__AttributeValue__</AttributeValue></AttributeValueTarget></AttributeValues></AccountAttribute><AccountAttribute><AttributeName>__AttributeName__</AttributeName><AttributeValues><AttributeValueTarget><AttributeValue>__AttributeValue__</AttributeValue></AttributeValueTarget><AttributeValueTarget><AttributeValue>__AttributeValue__</AttributeValue></AttributeValueTarget></AttributeValues></AccountAttribute></AccountAttributes></DescribeAccountAttributesResult></DescribeAccountAttributesResponse>

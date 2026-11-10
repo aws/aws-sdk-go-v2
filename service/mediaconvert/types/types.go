@@ -3332,6 +3332,12 @@ func (v *BurninDestinationSettings) Deserialize(d smithy.ShapeDeserializer) erro
 // each output that has captions, include one instance of CaptionDescriptions.
 type CaptionDescription struct {
 
+	// Specifies the audio selector or audio selector group that MediaConvert uses to
+	// generate Smart subtitles. The audio selector you choose must exist in all inputs
+	// for the job. If MediaConvert can't detect speech in the audio, it can't generate
+	// subtitles. Required when source is SMART_SUBTITLE; not allowed otherwise.
+	AudioSourceNames []string
+
 	// Specifies which "Caption Selector":#inputs-caption_selector to use from each
 	// input when generating captions. The name should be of the format "Caption
 	// Selector ", which denotes that the Nth Caption Selector will be used from each
@@ -3370,6 +3376,13 @@ type CaptionDescription struct {
 	// setting.
 	LanguageDescription *string
 
+	// Specify the source of the captions for this caption description. Choose
+	// Captions input source (INPUT_CAPTION_SELECTOR) to use a caption selector from
+	// your input. Choose Smart subtitling (SMART_SUBTITLE) to have MediaConvert and
+	// Elemental Inference generate subtitles automatically from an audio source that
+	// you specify.
+	Source CaptionSource
+
 	noSmithyDocumentSerde
 }
 
@@ -3380,6 +3393,9 @@ func (v *CaptionDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CaptionDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioSourceNames != nil {
+		serialize__listOf__stringMin1(s, schemas.CaptionDescription_AudioSourceNames, v.AudioSourceNames)
+	}
 	if v.CaptionSelectorName != nil {
 		s.WriteString(schemas.CaptionDescription_CaptionSelectorName, *v.CaptionSelectorName)
 	}
@@ -3397,10 +3413,15 @@ func (v *CaptionDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LanguageDescription != nil {
 		s.WriteString(schemas.CaptionDescription_LanguageDescription, *v.LanguageDescription)
 	}
+	if v.Source != "" {
+		s.WriteString(schemas.CaptionDescription_Source, string(v.Source))
+	}
 }
 func (v *CaptionDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CaptionDescription, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CaptionDescription_AudioSourceNames:
+			return deserialize__listOf__stringMin1(d, schemas.CaptionDescription_AudioSourceNames, &v.AudioSourceNames)
 		case schemas.CaptionDescription_CaptionSelectorName:
 			v.CaptionSelectorName = new(string)
 			return d.ReadString(schemas.CaptionDescription_CaptionSelectorName, v.CaptionSelectorName)
@@ -3420,6 +3441,13 @@ func (v *CaptionDescription) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CaptionDescription_LanguageDescription:
 			v.LanguageDescription = new(string)
 			return d.ReadString(schemas.CaptionDescription_LanguageDescription, v.LanguageDescription)
+		case schemas.CaptionDescription_Source:
+			var ev string
+			if err := d.ReadString(schemas.CaptionDescription_Source, &ev); err != nil {
+				return err
+			}
+			v.Source = CaptionSource(ev)
+			return nil
 		}
 		return nil
 	})
@@ -8532,7 +8560,7 @@ type ElementalInferenceConfiguration struct {
 	// A list of Elemental Inference features used in this job.
 	Features []ElementalInferenceFeature
 
-	// A list of Elemental Inference feeds used by this job.
+	// A list of Elemental Inference feeds created during this job.
 	Feeds []ElementalInferenceFeed
 
 	noSmithyDocumentSerde
@@ -8564,10 +8592,10 @@ func (v *ElementalInferenceConfiguration) Deserialize(d smithy.ShapeDeserializer
 	})
 }
 
-// Elemental Inference Feed.
+// An AWS Elemental Inference Feed.
 type ElementalInferenceFeed struct {
 
-	// Feed ARN.
+	// The ARN of an AWS Elemental Inference Feed.
 	Arn *string
 
 	// Elemental Inference Feed management state.
@@ -8603,6 +8631,72 @@ func (v *ElementalInferenceFeed) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.FeedManagementState = ElementalInferenceFeedManagementState(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// The source of your Elemental Inference Feed configuration.
+type ElementalInferenceFeedConfigurationSource struct {
+
+	// The ARN of an Elemental Inference Feed.
+	FeedArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ElementalInferenceFeedConfigurationSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElementalInferenceFeedConfigurationSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElementalInferenceFeedConfigurationSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeedArn != nil {
+		s.WriteString(schemas.ElementalInferenceFeedConfigurationSource_FeedArn, *v.FeedArn)
+	}
+}
+func (v *ElementalInferenceFeedConfigurationSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElementalInferenceFeedConfigurationSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElementalInferenceFeedConfigurationSource_FeedArn:
+			v.FeedArn = new(string)
+			return d.ReadString(schemas.ElementalInferenceFeedConfigurationSource_FeedArn, v.FeedArn)
+		}
+		return nil
+	})
+}
+
+// The Elemental Inference settings used in this job.
+type ElementalInferenceSettings struct {
+
+	// Optional. The source of your Elemental Inference Feed configuration.
+	// MediaConvert will reference this configuration source when you specify job
+	// settings which use Elemental Inference.
+	FeedConfigurationSource *ElementalInferenceFeedConfigurationSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *ElementalInferenceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElementalInferenceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElementalInferenceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeedConfigurationSource != nil {
+		s.WriteStruct(schemas.ElementalInferenceSettings_FeedConfigurationSource)
+		v.FeedConfigurationSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ElementalInferenceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElementalInferenceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElementalInferenceSettings_FeedConfigurationSource:
+			v.FeedConfigurationSource = &ElementalInferenceFeedConfigurationSource{}
+			return v.FeedConfigurationSource.Deserialize(d)
 		}
 		return nil
 	})
@@ -14328,6 +14422,9 @@ type Job struct {
 	// The Elemental Inference configuration used in this job.
 	ElementalInferenceConfiguration *ElementalInferenceConfiguration
 
+	// The Elemental Inference settings used in this job.
+	ElementalInferenceSettings *ElementalInferenceSettings
+
 	// Error code for the job
 	ErrorCode *int32
 
@@ -14465,6 +14562,11 @@ func (v *Job) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ElementalInferenceConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.ElementalInferenceSettings != nil {
+		s.WriteStruct(schemas.Job_ElementalInferenceSettings)
+		v.ElementalInferenceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ErrorCode != nil {
 		s.WriteInt32(schemas.Job_ErrorCode, *v.ErrorCode)
 	}
@@ -14583,6 +14685,9 @@ func (v *Job) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Job_ElementalInferenceConfiguration:
 			v.ElementalInferenceConfiguration = &ElementalInferenceConfiguration{}
 			return v.ElementalInferenceConfiguration.Deserialize(d)
+		case schemas.Job_ElementalInferenceSettings:
+			v.ElementalInferenceSettings = &ElementalInferenceSettings{}
+			return v.ElementalInferenceSettings.Deserialize(d)
 		case schemas.Job_ErrorCode:
 			v.ErrorCode = new(int32)
 			return d.ReadInt32(schemas.Job_ErrorCode, v.ErrorCode)
@@ -15070,6 +15175,9 @@ type JobTemplate struct {
 	// An optional description you create for each job template.
 	Description *string
 
+	// The Elemental Inference settings used in this job.
+	ElementalInferenceSettings *ElementalInferenceSettings
+
 	// Optional list of hop destinations.
 	HopDestinations []HopDestination
 
@@ -15120,6 +15228,11 @@ func (v *JobTemplate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.JobTemplate_Description, *v.Description)
 	}
+	if v.ElementalInferenceSettings != nil {
+		s.WriteStruct(schemas.JobTemplate_ElementalInferenceSettings)
+		v.ElementalInferenceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.HopDestinations != nil {
 		serialize__listOfHopDestination(s, schemas.JobTemplate_HopDestinations, v.HopDestinations)
 	}
@@ -15165,6 +15278,9 @@ func (v *JobTemplate) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.JobTemplate_Description:
 			v.Description = new(string)
 			return d.ReadString(schemas.JobTemplate_Description, v.Description)
+		case schemas.JobTemplate_ElementalInferenceSettings:
+			v.ElementalInferenceSettings = &ElementalInferenceSettings{}
+			return v.ElementalInferenceSettings.Deserialize(d)
 		case schemas.JobTemplate_HopDestinations:
 			return deserialize__listOfHopDestination(d, schemas.JobTemplate_HopDestinations, &v.HopDestinations)
 		case schemas.JobTemplate_LastUpdated:

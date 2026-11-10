@@ -12,7 +12,8 @@ import (
 )
 
 // Creates a new user-defined designation with a Cedar permit policy. The
-// designation defines a named role that can be assigned to project members.
+// designation defines a named role that can be assigned to project members through
+// CreateProjectMembership or granted through AddPolicyGrant .
 func (c *Client) CreateDesignation(ctx context.Context, params *CreateDesignationInput, optFns ...func(*Options)) (*CreateDesignationOutput, error) {
 	if params == nil {
 		params = &CreateDesignationInput{}
@@ -41,14 +42,15 @@ type CreateDesignationInput struct {
 	// This member is required.
 	Name *string
 
-	// The Cedar permit policy that defines what actions holders of this designation
+	// The Cedar permit policy that defines the actions holders of this designation
 	// are allowed to perform.
 	//
 	// This member is required.
 	Policy *string
 
-	// Whether deletion protection is enabled for this designation. Defaults to true
-	// when omitted.
+	// Specifies whether deletion protection is enabled for this designation. Defaults
+	// to true when omitted. When enabled, DeleteDesignation is rejected until
+	// protection is disabled through UpdateDesignation .
 	DeletionProtection *bool
 
 	// A human-readable description of the designation and its intended use.
@@ -90,15 +92,18 @@ type CreateDesignationOutput struct {
 	// This member is required.
 	CreatedBy *string
 
-	// Whether deletion protection is enabled for this designation. When true,
-	// DeleteDesignation is rejected until protection is disabled via
-	// UpdateDesignation.
+	// Specifies whether deletion protection is enabled for this designation. When true
+	// , DeleteDesignation is rejected until protection is disabled through
+	// UpdateDesignation .
 	//
 	// This member is required.
 	DeletionProtection *bool
 
-	// The classification of this designation. MANAGED designations are system-defined
-	// and cannot be modified or deleted.
+	// The classification of this designation. Valid values:
+	//
+	//   - MANAGED — System-defined designations that cannot be modified or deleted.
+	//
+	//   - USER_CREATED — Designations created through CreateDesignation .
 	//
 	// This member is required.
 	DesignationType types.DesignationType
@@ -119,7 +124,7 @@ type CreateDesignationOutput struct {
 	// This member is required.
 	Name *string
 
-	// The Cedar permit policy that governs what actions holders of this designation
+	// The Cedar permit policy that governs the actions holders of this designation
 	// are allowed to perform.
 	//
 	// This member is required.

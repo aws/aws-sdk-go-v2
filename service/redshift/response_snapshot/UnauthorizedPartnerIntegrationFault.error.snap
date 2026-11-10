@@ -1,0 +1,4 @@
+401
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>UnauthorizedPartnerIntegration</Code><message>__Message__</message></Error></ErrorResponse>

@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ModifyListenerAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyListenerAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyListenerAttributesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyListenerAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeListenerAttributes(s, schemas.ModifyListenerAttributesInput_Attributes, v.Attributes)
+	}
+	if v.ListenerArn != nil {
+		s.WriteString(schemas.ModifyListenerAttributesInput_ListenerArn, *v.ListenerArn)
+	}
+}
+
 type ModifyListenerAttributesOutput struct {
 
 	// Information about the listener attributes.
@@ -50,13 +67,31 @@ type ModifyListenerAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyListenerAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyListenerAttributesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyListenerAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeListenerAttributes(s, schemas.ModifyListenerAttributesOutput_Attributes, v.Attributes)
+	}
+}
+func (v *ModifyListenerAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyListenerAttributesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyListenerAttributesOutput_Attributes:
+			return deserializeListenerAttributes(d, schemas.ModifyListenerAttributesOutput_Attributes, &v.Attributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyListenerAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyListenerAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyListenerAttributes, schemas.ModifyListenerAttributesInput, schemas.ModifyListenerAttributesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyListenerAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyListenerAttributes, schemas.ModifyListenerAttributesInput, schemas.ModifyListenerAttributesOutput), output: &ModifyListenerAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

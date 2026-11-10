@@ -3850,6 +3850,16 @@ func TestUpdateResponseSnapshot_DescribeContact(t *testing.T) {
 				Arn:  ptr.String("__Arn__"),
 				Name: ptr.String("__Name__"),
 			},
+			Cases: []types.CaseEntry{
+				{
+					CaseId:              ptr.String("__CaseId__"),
+					CaseReferenceNumber: ptr.String("__CaseReferenceNumber__"),
+				},
+				{
+					CaseId:              ptr.String("__CaseId__"),
+					CaseReferenceNumber: ptr.String("__CaseReferenceNumber__"),
+				},
+			},
 			ContactDetails: &types.ContactDetails{
 				Name:        ptr.String("__Name__"),
 				Description: ptr.String("__Description__"),
@@ -6558,7 +6568,8 @@ func TestUpdateResponseSnapshot_DescribeRule(t *testing.T) {
 							TargetSlaMinutes: ptr.Int64(1),
 						},
 					},
-					EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 					SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 						EvaluationFormId: ptr.String("__EvaluationFormId__"),
 					},
@@ -6709,7 +6720,8 @@ func TestUpdateResponseSnapshot_DescribeRule(t *testing.T) {
 							TargetSlaMinutes: ptr.Int64(1),
 						},
 					},
-					EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 					SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 						EvaluationFormId: ptr.String("__EvaluationFormId__"),
 					},

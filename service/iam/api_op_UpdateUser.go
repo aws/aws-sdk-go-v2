@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,24 @@ type UpdateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NewPath != nil {
+		s.WriteString(schemas.UpdateUserRequest_NewPath, *v.NewPath)
+	}
+	if v.NewUserName != nil {
+		s.WriteString(schemas.UpdateUserRequest_NewUserName, *v.NewUserName)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.UpdateUserRequest_UserName, *v.UserName)
+	}
+}
+
 type UpdateUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,13 +99,26 @@ type UpdateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserRequest, nil), output: &UpdateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

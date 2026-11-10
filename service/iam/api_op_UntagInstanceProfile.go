@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type UntagInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagInstanceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagInstanceProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagInstanceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceProfileName != nil {
+		s.WriteString(schemas.UntagInstanceProfileRequest_InstanceProfileName, *v.InstanceProfileName)
+	}
+	if v.TagKeys != nil {
+		serializetagKeyListType(s, schemas.UntagInstanceProfileRequest_TagKeys, v.TagKeys)
+	}
+}
+
 type UntagInstanceProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +72,26 @@ type UntagInstanceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagInstanceProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagInstanceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UntagInstanceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUntagInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUntagInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagInstanceProfile, schemas.UntagInstanceProfileRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUntagInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagInstanceProfile, schemas.UntagInstanceProfileRequest, nil), output: &UntagInstanceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

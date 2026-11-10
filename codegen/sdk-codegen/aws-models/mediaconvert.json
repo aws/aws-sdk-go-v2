@@ -3804,6 +3804,13 @@
         "com.amazonaws.mediaconvert#CaptionDescription": {
             "type": "structure",
             "members": {
+                "AudioSourceNames": {
+                    "target": "com.amazonaws.mediaconvert#__listOf__stringMin1",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the audio selector or audio selector group that MediaConvert uses to generate Smart subtitles. The audio selector you choose must exist in all inputs for the job. If MediaConvert can't detect speech in the audio, it can't generate subtitles. Required when source is SMART_SUBTITLE; not allowed otherwise.",
+                        "smithy.api#jsonName": "audioSourceNames"
+                    }
+                },
                 "CaptionSelectorName": {
                     "target": "com.amazonaws.mediaconvert#__stringMin1",
                     "traits": {
@@ -3837,6 +3844,13 @@
                     "traits": {
                         "smithy.api#documentation": "Specify a label for this set of output captions. For example, \"English\", \"Director commentary\", or \"track_2\". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer's player device. For outputs in other output groups, the service ignores this setting.",
                         "smithy.api#jsonName": "languageDescription"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.mediaconvert#CaptionSource",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the source of the captions for this caption description. Choose Captions input source (INPUT_CAPTION_SELECTOR) to use a caption selector from your input. Choose Smart subtitling (SMART_SUBTITLE) to have MediaConvert and Elemental Inference generate subtitles automatically from an audio source that you specify.",
+                        "smithy.api#jsonName": "source"
                     }
                 }
             },
@@ -4065,6 +4079,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "Use captions selectors to specify the captions data from your input that you use in your outputs. You can use up to 100 captions selectors per input."
+            }
+        },
+        "com.amazonaws.mediaconvert#CaptionSource": {
+            "type": "enum",
+            "members": {
+                "INPUT_CAPTION_SELECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INPUT_CAPTION_SELECTOR"
+                    }
+                },
+                "SMART_SUBTITLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMART_SUBTITLE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify the source of the captions for this caption description. Choose Captions input source (INPUT_CAPTION_SELECTOR) to use a caption selector from your input. Choose Smart subtitling (SMART_SUBTITLE) to have MediaConvert and Elemental Inference generate subtitles automatically from an audio source that you specify."
             }
         },
         "com.amazonaws.mediaconvert#CaptionSourceByteRateLimit": {
@@ -6662,6 +6696,13 @@
                         "smithy.api#jsonName": "clientRequestToken"
                     }
                 },
+                "ElementalInferenceSettings": {
+                    "target": "com.amazonaws.mediaconvert#ElementalInferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "The Elemental Inference settings used in this job.",
+                        "smithy.api#jsonName": "elementalInferenceSettings"
+                    }
+                },
                 "HopDestinations": {
                     "target": "com.amazonaws.mediaconvert#__listOfHopDestination",
                     "traits": {
@@ -6825,6 +6866,13 @@
                     "traits": {
                         "smithy.api#documentation": "Optional. A description of the job template you are creating.",
                         "smithy.api#jsonName": "description"
+                    }
+                },
+                "ElementalInferenceSettings": {
+                    "target": "com.amazonaws.mediaconvert#ElementalInferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "The Elemental Inference settings used in this job.",
+                        "smithy.api#jsonName": "elementalInferenceSettings"
                     }
                 },
                 "HopDestinations": {
@@ -10407,7 +10455,7 @@
                 "Feeds": {
                     "target": "com.amazonaws.mediaconvert#__listOfElementalInferenceFeed",
                     "traits": {
-                        "smithy.api#documentation": "A list of Elemental Inference feeds used by this job.",
+                        "smithy.api#documentation": "A list of Elemental Inference feeds created during this job.",
                         "smithy.api#jsonName": "feeds"
                     }
                 }
@@ -10424,6 +10472,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SMART_CROP"
                     }
+                },
+                "SMART_SUBTITLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMART_SUBTITLE"
+                    }
                 }
             },
             "traits": {
@@ -10436,7 +10490,7 @@
                 "Arn": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
-                        "smithy.api#documentation": "Feed ARN.",
+                        "smithy.api#documentation": "The ARN of an AWS Elemental Inference Feed.",
                         "smithy.api#jsonName": "arn"
                     }
                 },
@@ -10449,7 +10503,22 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Elemental Inference Feed."
+                "smithy.api#documentation": "An AWS Elemental Inference Feed."
+            }
+        },
+        "com.amazonaws.mediaconvert#ElementalInferenceFeedConfigurationSource": {
+            "type": "structure",
+            "members": {
+                "FeedArn": {
+                    "target": "com.amazonaws.mediaconvert#__stringPatternArnAwsElementalInferenceFeedAZ0919",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of an Elemental Inference Feed.",
+                        "smithy.api#jsonName": "feedArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The source of your Elemental Inference Feed configuration."
             }
         },
         "com.amazonaws.mediaconvert#ElementalInferenceFeedManagementState": {
@@ -10482,6 +10551,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "Elemental Inference Feed management state."
+            }
+        },
+        "com.amazonaws.mediaconvert#ElementalInferenceSettings": {
+            "type": "structure",
+            "members": {
+                "FeedConfigurationSource": {
+                    "target": "com.amazonaws.mediaconvert#ElementalInferenceFeedConfigurationSource",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. The source of your Elemental Inference Feed configuration. MediaConvert will reference this configuration source when you specify job settings which use Elemental Inference.",
+                        "smithy.api#jsonName": "feedConfigurationSource"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The Elemental Inference settings used in this job."
             }
         },
         "com.amazonaws.mediaconvert#EmbeddedConvert608To708": {
@@ -16456,6 +16540,13 @@
                         "smithy.api#jsonName": "elementalInferenceConfiguration"
                     }
                 },
+                "ElementalInferenceSettings": {
+                    "target": "com.amazonaws.mediaconvert#ElementalInferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "The Elemental Inference settings used in this job.",
+                        "smithy.api#jsonName": "elementalInferenceSettings"
+                    }
+                },
                 "ErrorCode": {
                     "target": "com.amazonaws.mediaconvert#__integer",
                     "traits": {
@@ -16744,7 +16835,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -16892,6 +16983,13 @@
                         "smithy.api#jsonName": "description"
                     }
                 },
+                "ElementalInferenceSettings": {
+                    "target": "com.amazonaws.mediaconvert#ElementalInferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "The Elemental Inference settings used in this job.",
+                        "smithy.api#jsonName": "elementalInferenceSettings"
+                    }
+                },
                 "HopDestinations": {
                     "target": "com.amazonaws.mediaconvert#__listOfHopDestination",
                     "traits": {
@@ -17024,7 +17122,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -27962,6 +28060,13 @@
                         "smithy.api#jsonName": "description"
                     }
                 },
+                "ElementalInferenceSettings": {
+                    "target": "com.amazonaws.mediaconvert#ElementalInferenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "The Elemental Inference settings used in this job.",
+                        "smithy.api#jsonName": "elementalInferenceSettings"
+                    }
+                },
                 "HopDestinations": {
                     "target": "com.amazonaws.mediaconvert#__listOfHopDestination",
                     "traits": {
@@ -32763,6 +32868,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:aws[a-z0-9-]*:events:[a-z0-9-]+:[0-9]{12}:connection/[a-zA-Z0-9-]+/[a-f0-9-]{36}$"
+            }
+        },
+        "com.amazonaws.mediaconvert#__stringPatternArnAwsElementalInferenceFeedAZ0919": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws:elemental-inference:.*:feed/[a-z0-9]{19}$"
             }
         },
         "com.amazonaws.mediaconvert#__stringPatternArnAwsUsGovAcm": {

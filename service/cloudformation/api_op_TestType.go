@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -98,6 +100,30 @@ type TestTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.TestTypeInput_Arn, *v.Arn)
+	}
+	if v.LogDeliveryBucket != nil {
+		s.WriteString(schemas.TestTypeInput_LogDeliveryBucket, *v.LogDeliveryBucket)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.TestTypeInput_Type, string(v.Type))
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.TestTypeInput_TypeName, *v.TypeName)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.TestTypeInput_VersionId, *v.VersionId)
+	}
+}
+
 type TestTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the extension.
@@ -109,13 +135,32 @@ type TestTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TypeVersionArn != nil {
+		s.WriteString(schemas.TestTypeOutput_TypeVersionArn, *v.TypeVersionArn)
+	}
+}
+func (v *TestTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestTypeOutput_TypeVersionArn:
+			v.TypeVersionArn = new(string)
+			return d.ReadString(schemas.TestTypeOutput_TypeVersionArn, v.TypeVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpTestType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestType, schemas.TestTypeInput, schemas.TestTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpTestType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestType, schemas.TestTypeInput, schemas.TestTypeOutput), output: &TestTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

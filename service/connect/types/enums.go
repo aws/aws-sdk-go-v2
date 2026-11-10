@@ -31,6 +31,7 @@ const (
 	ActionTypeUpdateCase               ActionType = "UPDATE_CASE"
 	ActionTypeAssignSla                ActionType = "ASSIGN_SLA"
 	ActionTypeEndAssociatedTasks       ActionType = "END_ASSOCIATED_TASKS"
+	ActionTypeEndAssociatedEmails      ActionType = "END_ASSOCIATED_EMAILS"
 	ActionTypeSubmitAutoEvaluation     ActionType = "SUBMIT_AUTO_EVALUATION"
 	ActionTypeExtractInformation       ActionType = "EXTRACT_INFORMATION"
 	ActionTypeSendInAppNotification    ActionType = "SEND_IN_APP_NOTIFICATION"
@@ -50,6 +51,7 @@ func (ActionType) Values() []ActionType {
 		"UPDATE_CASE",
 		"ASSIGN_SLA",
 		"END_ASSOCIATED_TASKS",
+		"END_ASSOCIATED_EMAILS",
 		"SUBMIT_AUTO_EVALUATION",
 		"EXTRACT_INFORMATION",
 		"SEND_IN_APP_NOTIFICATION",

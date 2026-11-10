@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<SetTypeConfigurationResponse><SetTypeConfigurationResult><ConfigurationArn>__ConfigurationArn__</ConfigurationArn></SetTypeConfigurationResult></SetTypeConfigurationResponse>

@@ -10,6 +10,10 @@ import (
 )
 
 // Sets the active model version for a given machine learning model.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) UpdateActiveModelVersion(ctx context.Context, params *UpdateActiveModelVersionInput, optFns ...func(*Options)) (*UpdateActiveModelVersionOutput, error) {
 	if params == nil {
 		params = &UpdateActiveModelVersionInput{}

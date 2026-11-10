@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeEventsResponse><DescribeEventsResult><Events><member><ApplicationName>__ApplicationName__</ApplicationName><EnvironmentName>__EnvironmentName__</EnvironmentName><EventDate>2000-01-01T00:00:00Z</EventDate><Message>__Message__</Message><PlatformArn>__PlatformArn__</PlatformArn><RequestId>__RequestId__</RequestId><Severity>TRACE</Severity><TemplateName>__TemplateName__</TemplateName><VersionLabel>__VersionLabel__</VersionLabel></member><member><ApplicationName>__ApplicationName__</ApplicationName><EnvironmentName>__EnvironmentName__</EnvironmentName><EventDate>2000-01-01T00:00:00Z</EventDate><Message>__Message__</Message><PlatformArn>__PlatformArn__</PlatformArn><RequestId>__RequestId__</RequestId><Severity>TRACE</Severity><TemplateName>__TemplateName__</TemplateName><VersionLabel>__VersionLabel__</VersionLabel></member></Events><NextToken>__NextToken__</NextToken></DescribeEventsResult></DescribeEventsResponse>

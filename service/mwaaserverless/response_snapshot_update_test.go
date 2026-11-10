@@ -284,6 +284,11 @@ func TestUpdateResponseSnapshot_GetWorkflow(t *testing.T) {
 				"__Member__",
 			},
 		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		TriggerMode:        ptr.String("__TriggerMode__"),
 		WorkflowDefinition: ptr.String("__WorkflowDefinition__"),
 	}

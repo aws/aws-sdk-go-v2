@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.ListDataQualityEvaluationConfigs
+
+{"DataQualityEvaluationConfigs":[{"CreatedOn":946684800,"DataSource":{"GlueTables":{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","TableNamePattern":"__TableNamePattern__"}},"EvaluationRunMode":"ON_DEMAND","LastModifiedOn":946684800,"Level":"CATALOG","ManagedRulesetName":"SIMPLE","Name":"__Name__","PauseRuns":true,"RulesetName":"__RulesetName__"},{"CreatedOn":946684800,"DataSource":{"GlueTables":{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","TableNamePattern":"__TableNamePattern__"}},"EvaluationRunMode":"ON_DEMAND","LastModifiedOn":946684800,"Level":"CATALOG","ManagedRulesetName":"SIMPLE","Name":"__Name__","PauseRuns":true,"RulesetName":"__RulesetName__"}],"NextToken":"__NextToken__"}

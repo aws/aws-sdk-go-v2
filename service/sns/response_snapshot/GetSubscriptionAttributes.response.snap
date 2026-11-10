@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetSubscriptionAttributesResponse><GetSubscriptionAttributesResult><Attributes><entry><key>key0</key><value>__Value__</value></entry></Attributes></GetSubscriptionAttributesResult></GetSubscriptionAttributesResponse>

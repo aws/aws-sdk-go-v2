@@ -88,6 +88,9 @@ type GetApplicationOutput struct {
 	// Deprecated: IsService has been deprecated in favor of ApplicationType
 	IsService bool
 
+	// The Amazon Web Services Region where the application was last modified.
+	LastModifiedRegion *string
+
 	// The last modified time of the Application.
 	LastModifiedTime *time.Time
 
@@ -168,6 +171,9 @@ func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsService != false {
 		s.WriteBool(schemas.GetApplicationResponse_IsService, v.IsService)
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.GetApplicationResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.GetApplicationResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
@@ -229,6 +235,9 @@ func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadInt32(schemas.GetApplicationResponse_InitializationTimeout, v.InitializationTimeout)
 		case schemas.GetApplicationResponse_IsService:
 			return d.ReadBool(schemas.GetApplicationResponse_IsService, &v.IsService)
+		case schemas.GetApplicationResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_LastModifiedRegion, v.LastModifiedRegion)
 		case schemas.GetApplicationResponse_LastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.GetApplicationResponse_LastModifiedTime, v.LastModifiedTime)

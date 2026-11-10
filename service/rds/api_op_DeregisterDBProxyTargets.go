@@ -4,6 +4,8 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type DeregisterDBProxyTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterDBProxyTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterDBProxyTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterDBProxyTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterIdentifiers != nil {
+		serializeStringList(s, schemas.DeregisterDBProxyTargetsRequest_DBClusterIdentifiers, v.DBClusterIdentifiers)
+	}
+	if v.DBInstanceIdentifiers != nil {
+		serializeStringList(s, schemas.DeregisterDBProxyTargetsRequest_DBInstanceIdentifiers, v.DBInstanceIdentifiers)
+	}
+	if v.DBProxyName != nil {
+		s.WriteString(schemas.DeregisterDBProxyTargetsRequest_DBProxyName, *v.DBProxyName)
+	}
+	if v.TargetGroupName != nil {
+		s.WriteString(schemas.DeregisterDBProxyTargetsRequest_TargetGroupName, *v.TargetGroupName)
+	}
+}
+
 type DeregisterDBProxyTargetsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +73,26 @@ type DeregisterDBProxyTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterDBProxyTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterDBProxyTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterDBProxyTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterDBProxyTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterDBProxyTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterDBProxyTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeregisterDBProxyTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterDBProxyTargets, schemas.DeregisterDBProxyTargetsRequest, schemas.DeregisterDBProxyTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeregisterDBProxyTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterDBProxyTargets, schemas.DeregisterDBProxyTargetsRequest, schemas.DeregisterDBProxyTargetsResponse), output: &DeregisterDBProxyTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1191,6 +1191,16 @@ func serializeCalculationComponentList(s smithy.ShapeSerializer, schema *smithy.
 	s.CloseList()
 }
 
+func serializeCaseEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []CaseEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeCategoriesAttributeOrConditionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CategoriesAttributeAndCondition) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -5051,6 +5061,28 @@ func deserializeCalculationComponentList(d smithy.ShapeDeserializer, s *smithy.S
 		}
 
 		vv = CalculationComponent{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCaseEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CaseEntry) error {
+	*v = make([]CaseEntry, 0)
+	var vv CaseEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero CaseEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = CaseEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

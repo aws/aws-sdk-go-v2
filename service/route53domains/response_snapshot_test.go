@@ -1217,6 +1217,33 @@ func TestCheckResponseSnapshot_ResendOperationAuthorization(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_RestoreDomain(t *testing.T) {
+	want := &RestoreDomainOutput{
+		OperationId: ptr.String("__OperationId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RestoreDomain.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RestoreDomain(context.Background(), &RestoreDomainInput{
+		DomainName: ptr.String("__DomainName__"),
+		Consent: &types.Consent{
+			MaxPrice: 1.0,
+			Currency: ptr.String("__Currency__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RestoreDomain.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_RetrieveDomainAuthCode(t *testing.T) {
 	want := &RetrieveDomainAuthCodeOutput{
 		AuthCode: ptr.String("__AuthCode__"),

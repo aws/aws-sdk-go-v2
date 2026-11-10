@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,33 @@ type ListStackSetOperationResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStackSetOperationResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStackSetOperationResultsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStackSetOperationResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallAs != "" {
+		s.WriteString(schemas.ListStackSetOperationResultsInput_CallAs, string(v.CallAs))
+	}
+	if v.Filters != nil {
+		serializeOperationResultFilters(s, schemas.ListStackSetOperationResultsInput_Filters, v.Filters)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStackSetOperationResultsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStackSetOperationResultsInput_NextToken, *v.NextToken)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.ListStackSetOperationResultsInput_OperationId, *v.OperationId)
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.ListStackSetOperationResultsInput_StackSetName, *v.StackSetName)
+	}
+}
+
 type ListStackSetOperationResultsOutput struct {
 
 	// If the request doesn't return all results, NextToken is set to a token. To
@@ -95,13 +124,37 @@ type ListStackSetOperationResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStackSetOperationResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStackSetOperationResultsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStackSetOperationResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStackSetOperationResultsOutput_NextToken, *v.NextToken)
+	}
+	if v.Summaries != nil {
+		serializeStackSetOperationResultSummaries(s, schemas.ListStackSetOperationResultsOutput_Summaries, v.Summaries)
+	}
+}
+func (v *ListStackSetOperationResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStackSetOperationResultsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStackSetOperationResultsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStackSetOperationResultsOutput_NextToken, v.NextToken)
+		case schemas.ListStackSetOperationResultsOutput_Summaries:
+			return deserializeStackSetOperationResultSummaries(d, schemas.ListStackSetOperationResultsOutput_Summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStackSetOperationResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListStackSetOperationResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStackSetOperationResults, schemas.ListStackSetOperationResultsInput, schemas.ListStackSetOperationResultsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListStackSetOperationResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStackSetOperationResults, schemas.ListStackSetOperationResultsInput, schemas.ListStackSetOperationResultsOutput), output: &ListStackSetOperationResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

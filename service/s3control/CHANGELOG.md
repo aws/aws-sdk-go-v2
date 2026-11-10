@@ -1,3 +1,20 @@
+# v1.80.0 (2026-11-09)
+
+* **Feature**: Adds support for cross-account access grants with InstanceScope parameter for GetDataAccess and ListCallerAccessGrants operations in S3 Access Grants.
+
+# v1.79.9 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.79.8 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.79.7 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.79.6 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

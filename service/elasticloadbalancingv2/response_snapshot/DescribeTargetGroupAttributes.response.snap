@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeTargetGroupAttributesResponse><DescribeTargetGroupAttributesResult><Attributes><member><Key>__Key__</Key><Value>__Value__</Value></member><member><Key>__Key__</Key><Value>__Value__</Value></member></Attributes></DescribeTargetGroupAttributesResult></DescribeTargetGroupAttributesResponse>

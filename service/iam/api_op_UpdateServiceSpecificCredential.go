@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,24 @@ type UpdateServiceSpecificCredentialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceSpecificCredentialInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceSpecificCredentialRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceSpecificCredentialInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceSpecificCredentialId != nil {
+		s.WriteString(schemas.UpdateServiceSpecificCredentialRequest_ServiceSpecificCredentialId, *v.ServiceSpecificCredentialId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateServiceSpecificCredentialRequest_Status, string(v.Status))
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.UpdateServiceSpecificCredentialRequest_UserName, *v.UserName)
+	}
+}
+
 type UpdateServiceSpecificCredentialOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,13 +85,26 @@ type UpdateServiceSpecificCredentialOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceSpecificCredentialOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceSpecificCredentialOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateServiceSpecificCredentialOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateServiceSpecificCredential{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSpecificCredential, schemas.UpdateServiceSpecificCredentialRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateServiceSpecificCredential{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSpecificCredential, schemas.UpdateServiceSpecificCredentialRequest, nil), output: &UpdateServiceSpecificCredentialOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateClusterExtension
+
+{"ClientToken":"__ClientToken__","ClusterArn":"__ClusterArn__","ConfigurationValues":"__ConfigurationValues__","ExtensionName":"__ExtensionName__","ExtensionVersion":"__ExtensionVersion__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

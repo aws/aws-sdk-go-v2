@@ -88,6 +88,9 @@ type GetWorkflowOutput struct {
 	// engine that this workflow uses.
 	EngineVersion types.EngineVersion
 
+	// The environment variables that tasks in the workflow use during execution.
+	Environment *types.Environment
+
 	// The logging configuration for the workflow.
 	LoggingConfiguration *types.LoggingConfiguration
 
@@ -161,6 +164,11 @@ func (v *GetWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EngineVersion != 0 {
 		s.WriteInt32(schemas.GetWorkflowResponse_EngineVersion, int32(v.EngineVersion))
 	}
+	if v.Environment != nil {
+		s.WriteStruct(schemas.GetWorkflowResponse_Environment)
+		v.Environment.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LoggingConfiguration != nil {
 		s.WriteStruct(schemas.GetWorkflowResponse_LoggingConfiguration)
 		v.LoggingConfiguration.SerializeMembers(s)
@@ -228,6 +236,9 @@ func (v *GetWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.EngineVersion = types.EngineVersion(ev)
 			return nil
+		case schemas.GetWorkflowResponse_Environment:
+			v.Environment = &types.Environment{}
+			return v.Environment.Deserialize(d)
 		case schemas.GetWorkflowResponse_LoggingConfiguration:
 			v.LoggingConfiguration = &types.LoggingConfiguration{}
 			return v.LoggingConfiguration.Deserialize(d)

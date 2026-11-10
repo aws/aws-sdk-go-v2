@@ -5,7 +5,9 @@ package sns
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type ListPlatformApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlatformApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlatformApplicationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlatformApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlatformApplicationsInput_NextToken, *v.NextToken)
+	}
+}
+
 // Response for ListPlatformApplications action.
 type ListPlatformApplicationsOutput struct {
 
@@ -62,13 +76,37 @@ type ListPlatformApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlatformApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlatformApplicationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlatformApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlatformApplicationsResponse_NextToken, *v.NextToken)
+	}
+	if v.PlatformApplications != nil {
+		serializeListOfPlatformApplications(s, schemas.ListPlatformApplicationsResponse_PlatformApplications, v.PlatformApplications)
+	}
+}
+func (v *ListPlatformApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlatformApplicationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlatformApplicationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlatformApplicationsResponse_NextToken, v.NextToken)
+		case schemas.ListPlatformApplicationsResponse_PlatformApplications:
+			return deserializeListOfPlatformApplications(d, schemas.ListPlatformApplicationsResponse_PlatformApplications, &v.PlatformApplications)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlatformApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListPlatformApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlatformApplications, schemas.ListPlatformApplicationsInput, schemas.ListPlatformApplicationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListPlatformApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlatformApplications, schemas.ListPlatformApplicationsInput, schemas.ListPlatformApplicationsResponse), output: &ListPlatformApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

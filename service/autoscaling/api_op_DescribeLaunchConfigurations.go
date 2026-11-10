@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,39 @@ type DescribeLaunchConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLaunchConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchConfigurationNamesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLaunchConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LaunchConfigurationNames != nil {
+		serializeLaunchConfigurationNames(s, schemas.LaunchConfigurationNamesType_LaunchConfigurationNames, v.LaunchConfigurationNames)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.LaunchConfigurationNamesType_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.LaunchConfigurationNamesType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeLaunchConfigurationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LaunchConfigurationNamesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LaunchConfigurationNamesType_LaunchConfigurationNames:
+			return deserializeLaunchConfigurationNames(d, schemas.LaunchConfigurationNamesType_LaunchConfigurationNames, &v.LaunchConfigurationNames)
+		case schemas.LaunchConfigurationNamesType_MaxRecords:
+			v.MaxRecords = new(int32)
+			return d.ReadInt32(schemas.LaunchConfigurationNamesType_MaxRecords, v.MaxRecords)
+		case schemas.LaunchConfigurationNamesType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.LaunchConfigurationNamesType_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type DescribeLaunchConfigurationsOutput struct {
 
 	// The launch configurations.
@@ -63,13 +98,37 @@ type DescribeLaunchConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLaunchConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchConfigurationsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLaunchConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LaunchConfigurations != nil {
+		serializeLaunchConfigurations(s, schemas.LaunchConfigurationsType_LaunchConfigurations, v.LaunchConfigurations)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.LaunchConfigurationsType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeLaunchConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LaunchConfigurationsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LaunchConfigurationsType_LaunchConfigurations:
+			return deserializeLaunchConfigurations(d, schemas.LaunchConfigurationsType_LaunchConfigurations, &v.LaunchConfigurations)
+		case schemas.LaunchConfigurationsType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.LaunchConfigurationsType_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLaunchConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeLaunchConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLaunchConfigurations, schemas.LaunchConfigurationNamesType, schemas.LaunchConfigurationsType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeLaunchConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLaunchConfigurations, schemas.LaunchConfigurationNamesType, schemas.LaunchConfigurationsType), output: &DescribeLaunchConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

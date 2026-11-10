@@ -106,7 +106,7 @@ type GetCaseOutput struct {
 	// results to return.
 	NextToken *string
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 

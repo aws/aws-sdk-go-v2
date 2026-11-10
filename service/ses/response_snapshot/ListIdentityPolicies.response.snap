@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListIdentityPoliciesResponse><ListIdentityPoliciesResult><PolicyNames><member>__Member__</member><member>__Member__</member></PolicyNames></ListIdentityPoliciesResult></ListIdentityPoliciesResponse>

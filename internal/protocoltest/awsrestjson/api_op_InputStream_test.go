@@ -36,11 +36,13 @@ func TestEventStream_InputStream_BooleanHeaderInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
-		BooleanHeader: ptr.Bool(true),
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
+			BooleanHeader: ptr.Bool(true),
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -93,11 +95,13 @@ func TestEventStream_InputStream_ByteHeaderInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
-		ByteHeader: ptr.Int8(1),
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
+			ByteHeader: ptr.Int8(1),
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -150,11 +154,13 @@ func TestEventStream_InputStream_ShortHeaderInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
-		ShortHeader: ptr.Int16(2),
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
+			ShortHeader: ptr.Int16(2),
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -207,11 +213,13 @@ func TestEventStream_InputStream_IntegerHeaderInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
-		IntHeader: ptr.Int32(3),
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
+			IntHeader: ptr.Int32(3),
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -264,11 +272,13 @@ func TestEventStream_InputStream_LongHeaderInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
-		LongHeader: ptr.Int64(4294967294),
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
+			LongHeader: ptr.Int64(4294967294),
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -321,11 +331,13 @@ func TestEventStream_InputStream_BlobHeaderInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
-		BlobHeader: []byte("foo"),
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
+			BlobHeader: []byte("foo"),
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -378,11 +390,13 @@ func TestEventStream_InputStream_StringHeaderInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
-		StringHeader: ptr.String("foo"),
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
+			StringHeader: ptr.String("foo"),
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -435,11 +449,13 @@ func TestEventStream_InputStream_TimestampHeaderInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
-		TimestampHeader: ptr.Time(func() time.Time { t, _ := time.Parse(time.RFC3339, "2024-10-31T14:15:14Z"); return t }()),
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
+			TimestampHeader: ptr.Time(func() time.Time { t, _ := time.Parse(time.RFC3339, "2024-10-31T14:15:14Z"); return t }()),
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -492,13 +508,15 @@ func TestEventStream_InputStream_MultipleHeaderInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
-		BooleanHeader: ptr.Bool(true),
-		StringHeader:  ptr.String("foo"),
-		BlobHeader:    []byte("bar"),
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberHeaders{Value: types.HeadersEvent{
+			BooleanHeader: ptr.Bool(true),
+			StringHeader:  ptr.String("foo"),
+			BlobHeader:    []byte("bar"),
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -551,11 +569,13 @@ func TestEventStream_InputStream_StringPayloadInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberStringPayload{Value: types.StringPayloadEvent{
-		Payload: ptr.String("foo"),
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberStringPayload{Value: types.StringPayloadEvent{
+			Payload: ptr.String("foo"),
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -608,11 +628,13 @@ func TestEventStream_InputStream_BlobPayloadInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberBlobPayload{Value: types.BlobPayloadEvent{
-		Payload: []byte("bar"),
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberBlobPayload{Value: types.BlobPayloadEvent{
+			Payload: []byte("bar"),
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -665,13 +687,15 @@ func TestEventStream_InputStream_StructurePayloadInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberStructurePayload{Value: types.StructurePayloadEvent{
-		Payload: &types.PayloadStructure{
-			StructureMember: ptr.String("foo"),
-		},
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberStructurePayload{Value: types.StructurePayloadEvent{
+			Payload: &types.PayloadStructure{
+				StructureMember: ptr.String("foo"),
+			},
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -724,11 +748,13 @@ func TestEventStream_InputStream_UnionPayloadInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberUnionPayload{Value: types.UnionPayloadEvent{
-		Payload: &types.PayloadUnionMemberUnionMember{Value: "bar"},
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberUnionPayload{Value: types.UnionPayloadEvent{
+			Payload: &types.PayloadUnionMemberUnionMember{Value: "bar"},
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -781,14 +807,16 @@ func TestEventStream_InputStream_HeadersAndExplicitPayloadInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberHeadersAndExplicitPayload{Value: types.HeadersAndExplicitPayloadEvent{
-		Header: ptr.String("foo"),
-		Payload: &types.PayloadStructure{
-			StructureMember: ptr.String("bar"),
-		},
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberHeadersAndExplicitPayload{Value: types.HeadersAndExplicitPayloadEvent{
+			Header: ptr.String("foo"),
+			Payload: &types.PayloadStructure{
+				StructureMember: ptr.String("bar"),
+			},
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()
@@ -841,12 +869,14 @@ func TestEventStream_InputStream_HeadersAndImplicitPayloadInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	sendEvent := &types.EventStreamMemberHeadersAndImplicitPayload{Value: types.HeadersAndImplicitPayloadEvent{
-		Header:  ptr.String("foo"),
-		Payload: ptr.String("bar"),
-	}}
-	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
-		t.Fatalf("failed to send event: %v", err)
+	{
+		sendEvent := &types.EventStreamMemberHeadersAndImplicitPayload{Value: types.HeadersAndImplicitPayloadEvent{
+			Header:  ptr.String("foo"),
+			Payload: ptr.String("bar"),
+		}}
+		if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+			t.Fatalf("failed to send event: %v", err)
+		}
 	}
 	mock.CloseResponse()
 	resp.GetStream().Close()

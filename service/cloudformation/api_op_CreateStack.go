@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -276,6 +278,79 @@ type CreateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStackInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capabilities != nil {
+		serializeCapabilities(s, schemas.CreateStackInput_Capabilities, v.Capabilities)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateStackInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DeploymentConfig != nil {
+		s.WriteStruct(schemas.CreateStackInput_DeploymentConfig)
+		v.DeploymentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisableRollback != nil {
+		s.WriteBool(schemas.CreateStackInput_DisableRollback, *v.DisableRollback)
+	}
+	if v.DisableValidation != nil {
+		s.WriteBool(schemas.CreateStackInput_DisableValidation, *v.DisableValidation)
+	}
+	if v.EnableTerminationProtection != nil {
+		s.WriteBool(schemas.CreateStackInput_EnableTerminationProtection, *v.EnableTerminationProtection)
+	}
+	if v.NotificationARNs != nil {
+		serializeNotificationARNs(s, schemas.CreateStackInput_NotificationARNs, v.NotificationARNs)
+	}
+	if v.OnFailure != "" {
+		s.WriteString(schemas.CreateStackInput_OnFailure, string(v.OnFailure))
+	}
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.CreateStackInput_Parameters, v.Parameters)
+	}
+	if v.ResourceTypes != nil {
+		serializeResourceTypes(s, schemas.CreateStackInput_ResourceTypes, v.ResourceTypes)
+	}
+	if v.RetainExceptOnCreate != nil {
+		s.WriteBool(schemas.CreateStackInput_RetainExceptOnCreate, *v.RetainExceptOnCreate)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.CreateStackInput_RoleARN, *v.RoleARN)
+	}
+	if v.RollbackConfiguration != nil {
+		s.WriteStruct(schemas.CreateStackInput_RollbackConfiguration)
+		v.RollbackConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.CreateStackInput_StackName, *v.StackName)
+	}
+	if v.StackPolicyBody != nil {
+		s.WriteString(schemas.CreateStackInput_StackPolicyBody, *v.StackPolicyBody)
+	}
+	if v.StackPolicyURL != nil {
+		s.WriteString(schemas.CreateStackInput_StackPolicyURL, *v.StackPolicyURL)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateStackInput_Tags, v.Tags)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.CreateStackInput_TemplateBody, *v.TemplateBody)
+	}
+	if v.TemplateURL != nil {
+		s.WriteString(schemas.CreateStackInput_TemplateURL, *v.TemplateURL)
+	}
+	if v.TimeoutInMinutes != nil {
+		s.WriteInt32(schemas.CreateStackInput_TimeoutInMinutes, *v.TimeoutInMinutes)
+	}
+}
+
 // The output for a CreateStack action.
 type CreateStackOutput struct {
 
@@ -292,13 +367,38 @@ type CreateStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStackOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.CreateStackOutput_OperationId, *v.OperationId)
+	}
+	if v.StackId != nil {
+		s.WriteString(schemas.CreateStackOutput_StackId, *v.StackId)
+	}
+}
+func (v *CreateStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStackOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStackOutput_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.CreateStackOutput_OperationId, v.OperationId)
+		case schemas.CreateStackOutput_StackId:
+			v.StackId = new(string)
+			return d.ReadString(schemas.CreateStackOutput_StackId, v.StackId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStack, schemas.CreateStackInput, schemas.CreateStackOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStack, schemas.CreateStackInput, schemas.CreateStackOutput), output: &CreateStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

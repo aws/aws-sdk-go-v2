@@ -115,6 +115,13 @@ func (o *UpdateProfileWithAgentOutput) GetInitialReply() <-chan UpdateProfileWit
 	return o.initialReply
 }
 
+func (v *UpdateProfileWithAgentInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProfileWithAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProfileWithAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfileWithAgent, schemas.UpdateProfileWithAgentRequest, schemas.UpdateProfileWithAgentResponse)}, middleware.After); err != nil {
 		return err

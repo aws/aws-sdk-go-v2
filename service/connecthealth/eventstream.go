@@ -3,6 +3,7 @@
 package connecthealth
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
@@ -11,6 +12,7 @@ import (
 	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"io"
 	"sync"
 )
 
@@ -135,9 +137,10 @@ func (r *medicalScribeOutputStreamReader) Closed() <-chan struct{} {
 }
 
 type deserializeOpEventStreamStartMedicalScribeListeningSession struct {
-	asyncResult    chan deserializeResult
-	options        *Options
-	existingResult *StartMedicalScribeListeningSessionOutput
+	asyncResult     chan deserializeResult
+	options         *Options
+	existingResult  *StartMedicalScribeListeningSessionOutput
+	initialResponse *initialResponseReader
 }
 
 func (*deserializeOpEventStreamStartMedicalScribeListeningSession) ID() string {
@@ -170,6 +173,17 @@ func (m *deserializeOpEventStreamStartMedicalScribeListeningSession) HandleDeser
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+	if m.options.Protocol.HasInitialEventMessage() {
+		opInput, ok := getOperationInput(ctx).(smithy.Serializable)
+		if !ok {
+			return out, md, fmt.Errorf("operation input is not serializable")
+		}
+		var initial bytes.Buffer
+		if err = m.options.Protocol.SerializeInitialRequest(schemas.StartMedicalScribeListeningSessionInput, opInput, &initial); err != nil {
+			return out, md, fmt.Errorf("serialize initial request: %w", err)
+		}
+		inputStreamWriter = newInitialRequestWriter(inputStreamWriter, initial.Bytes())
+	}
 	eventWriter := &medicalScribeInputStreamWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.MedicalScribeInputStream, inputStreamWriter),
 	}
@@ -184,8 +198,15 @@ func (m *deserializeOpEventStreamStartMedicalScribeListeningSession) HandleDeser
 
 		asyncResult = make(chan deserializeResult, 1)
 		asyncReader := newAsyncEventStreamReader(asyncResult)
+		var eventStreamBody io.ReadCloser = asyncReader.pipeReader
+		if m.options.Protocol.HasInitialEventMessage() {
+			m.initialResponse = newInitialResponseReader(eventStreamBody, &StartMedicalScribeListeningSessionInitialReply{}, func(r io.Reader, out smithy.Deserializable) error {
+				return m.options.Protocol.DeserializeInitialResponse(schemas.StartMedicalScribeListeningSessionOutput, r, out)
+			})
+			eventStreamBody = m.initialResponse
+		}
 		eventReader := newMedicalScribeOutputStreamReader(
-			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.MedicalScribeOutputStream, TypeRegistry, asyncReader.pipeReader),
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.MedicalScribeOutputStream, TypeRegistry, eventStreamBody),
 		)
 
 		output.eventStream = NewStartMedicalScribeListeningSessionEventStream(func(stream *StartMedicalScribeListeningSessionEventStream) {
@@ -228,6 +249,15 @@ func (m *deserializeOpEventStreamStartMedicalScribeListeningSession) HandleDeser
 	}
 
 	asyncResult <- deserializeResult{reader: resp.Body}
+	if m.options.Protocol.HasInitialEventMessage() {
+		ir, irErr := m.initialResponse.wait(ctx)
+		if irErr != nil {
+			_ = resp.Body.Close()
+			middleware.AddEventStreamOutputToMetadata(&md, output)
+			return out, md, fmt.Errorf("deserialize initial response: %w", irErr)
+		}
+		out.Result = ir
+	}
 	middleware.AddEventStreamOutputToMetadata(&md, output)
 	return out, md, nil
 }

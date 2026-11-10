@@ -1,3 +1,17 @@
+# v1.108.0 (2026-11-06)
+
+* **Feature**: Smart subtitling uses AWS Elemental Inference to generate captions from your content's audio, in embedded, burn-in, DVB-Sub, IMSC, SMI, SRT, teletext, TTML, or WebVTT outputs. Also fixes HEVC passthrough writing an incomplete codecs string to DASH and HLS manifests.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.107.5 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.107.4 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.107.3 (2026-10-30)
 
 * **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.

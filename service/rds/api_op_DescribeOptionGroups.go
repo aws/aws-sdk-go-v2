@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,33 @@ type DescribeOptionGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOptionGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOptionGroupsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOptionGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngineName != nil {
+		s.WriteString(schemas.DescribeOptionGroupsMessage_EngineName, *v.EngineName)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeOptionGroupsMessage_Filters, v.Filters)
+	}
+	if v.MajorEngineVersion != nil {
+		s.WriteString(schemas.DescribeOptionGroupsMessage_MajorEngineVersion, *v.MajorEngineVersion)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeOptionGroupsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeOptionGroupsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.OptionGroupName != nil {
+		s.WriteString(schemas.DescribeOptionGroupsMessage_OptionGroupName, *v.OptionGroupName)
+	}
+}
+
 // List of option groups.
 type DescribeOptionGroupsOutput struct {
 
@@ -106,13 +135,37 @@ type DescribeOptionGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOptionGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OptionGroups)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOptionGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.OptionGroups_Marker, *v.Marker)
+	}
+	if v.OptionGroupsList != nil {
+		serializeOptionGroupsList(s, schemas.OptionGroups_OptionGroupsList, v.OptionGroupsList)
+	}
+}
+func (v *DescribeOptionGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OptionGroups, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OptionGroups_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.OptionGroups_Marker, v.Marker)
+		case schemas.OptionGroups_OptionGroupsList:
+			return deserializeOptionGroupsList(d, schemas.OptionGroups_OptionGroupsList, &v.OptionGroupsList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOptionGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeOptionGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOptionGroups, schemas.DescribeOptionGroupsMessage, schemas.OptionGroups)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeOptionGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOptionGroups, schemas.DescribeOptionGroupsMessage, schemas.OptionGroups), output: &DescribeOptionGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

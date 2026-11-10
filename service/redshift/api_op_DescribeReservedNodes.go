@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type DescribeReservedNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedNodesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReservedNodesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReservedNodesMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ReservedNodeId != nil {
+		s.WriteString(schemas.DescribeReservedNodesMessage_ReservedNodeId, *v.ReservedNodeId)
+	}
+}
+
 type DescribeReservedNodesOutput struct {
 
 	// A value that indicates the starting point for the next set of response records
@@ -68,13 +88,37 @@ type DescribeReservedNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservedNodesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ReservedNodesMessage_Marker, *v.Marker)
+	}
+	if v.ReservedNodes != nil {
+		serializeReservedNodeList(s, schemas.ReservedNodesMessage_ReservedNodes, v.ReservedNodes)
+	}
+}
+func (v *DescribeReservedNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservedNodesMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservedNodesMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ReservedNodesMessage_Marker, v.Marker)
+		case schemas.ReservedNodesMessage_ReservedNodes:
+			return deserializeReservedNodeList(d, schemas.ReservedNodesMessage_ReservedNodes, &v.ReservedNodes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReservedNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeReservedNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedNodes, schemas.DescribeReservedNodesMessage, schemas.ReservedNodesMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeReservedNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedNodes, schemas.DescribeReservedNodesMessage, schemas.ReservedNodesMessage), output: &DescribeReservedNodesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

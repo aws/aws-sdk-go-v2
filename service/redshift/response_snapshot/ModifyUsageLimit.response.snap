@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyUsageLimitResponse><ModifyUsageLimitResult><Amount>1</Amount><BreachAction>log</BreachAction><ClusterIdentifier>__ClusterIdentifier__</ClusterIdentifier><FeatureType>spectrum</FeatureType><LimitType>time</LimitType><Period>daily</Period><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags><UsageLimitId>__UsageLimitId__</UsageLimitId></ModifyUsageLimitResult></ModifyUsageLimitResponse>

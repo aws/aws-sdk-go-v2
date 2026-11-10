@@ -1,3 +1,16 @@
+# v1.59.3 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.59.2 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.59.1 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.59.0 (2026-10-30)
 
 * **Feature**: Adds the outputUriPrefixMode parameter to StartRun and GetRun. You can now write run outputs directly under outputUri, without the prefixes the service adds by default. When you opt in, outputs overwrite existing objects at the same keys.

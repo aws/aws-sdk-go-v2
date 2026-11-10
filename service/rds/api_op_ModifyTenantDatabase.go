@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -157,6 +159,36 @@ type ModifyTenantDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyTenantDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyTenantDatabaseMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyTenantDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.ModifyTenantDatabaseMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.ManageMasterUserPassword != nil {
+		s.WriteBool(schemas.ModifyTenantDatabaseMessage_ManageMasterUserPassword, *v.ManageMasterUserPassword)
+	}
+	if v.MasterUserPassword != nil {
+		s.WriteString(schemas.ModifyTenantDatabaseMessage_MasterUserPassword, *v.MasterUserPassword)
+	}
+	if v.MasterUserSecretKmsKeyId != nil {
+		s.WriteString(schemas.ModifyTenantDatabaseMessage_MasterUserSecretKmsKeyId, *v.MasterUserSecretKmsKeyId)
+	}
+	if v.NewTenantDBName != nil {
+		s.WriteString(schemas.ModifyTenantDatabaseMessage_NewTenantDBName, *v.NewTenantDBName)
+	}
+	if v.RotateMasterUserPassword != nil {
+		s.WriteBool(schemas.ModifyTenantDatabaseMessage_RotateMasterUserPassword, *v.RotateMasterUserPassword)
+	}
+	if v.TenantDBName != nil {
+		s.WriteString(schemas.ModifyTenantDatabaseMessage_TenantDBName, *v.TenantDBName)
+	}
+}
+
 type ModifyTenantDatabaseOutput struct {
 
 	// A tenant database in the DB instance. This data type is an element in the
@@ -169,13 +201,34 @@ type ModifyTenantDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyTenantDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyTenantDatabaseResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyTenantDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TenantDatabase != nil {
+		s.WriteStruct(schemas.ModifyTenantDatabaseResult_TenantDatabase)
+		v.TenantDatabase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyTenantDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyTenantDatabaseResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyTenantDatabaseResult_TenantDatabase:
+			v.TenantDatabase = &types.TenantDatabase{}
+			return v.TenantDatabase.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyTenantDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyTenantDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyTenantDatabase, schemas.ModifyTenantDatabaseMessage, schemas.ModifyTenantDatabaseResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyTenantDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyTenantDatabase, schemas.ModifyTenantDatabaseMessage, schemas.ModifyTenantDatabaseResult), output: &ModifyTenantDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -13,6 +13,10 @@ import (
 
 // Provides a list of all data ingestion jobs, including dataset name and ARN, S3
 // location of the input data, status, and so on.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListDataIngestionJobs(ctx context.Context, params *ListDataIngestionJobsInput, optFns ...func(*Options)) (*ListDataIngestionJobsOutput, error) {
 	if params == nil {
 		params = &ListDataIngestionJobsInput{}

@@ -1290,6 +1290,46 @@ func (m *validateOpGetSecurityControlDefinition) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSoftwareResourcesV2 struct {
+}
+
+func (*validateOpGetSoftwareResourcesV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSoftwareResourcesV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSoftwareResourcesV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSoftwareResourcesV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSoftwareStatisticsV2 struct {
+}
+
+func (*validateOpGetSoftwareStatisticsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSoftwareStatisticsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSoftwareStatisticsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSoftwareStatisticsV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpInviteMembers struct {
 }
 
@@ -1984,6 +2024,14 @@ func addOpGetResourcesTrendsV2ValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpGetSecurityControlDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSecurityControlDefinition{}, middleware.After)
+}
+
+func addOpGetSoftwareResourcesV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSoftwareResourcesV2{}, middleware.After)
+}
+
+func addOpGetSoftwareStatisticsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSoftwareStatisticsV2{}, middleware.After)
 }
 
 func addOpInviteMembersValidationMiddleware(stack *middleware.Stack) error {
@@ -3088,6 +3136,38 @@ func validateServiceNowProviderConfiguration(v *types.ServiceNowProviderConfigur
 	}
 	if v.SecretArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSoftwareGroupByRule(v *types.SoftwareGroupByRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SoftwareGroupByRule"}
+	if len(v.GroupByField) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupByField"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSoftwareGroupByRules(v []types.SoftwareGroupByRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SoftwareGroupByRules"}
+	for i := range v {
+		if err := validateSoftwareGroupByRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4408,6 +4488,43 @@ func validateOpGetSecurityControlDefinitionInput(v *GetSecurityControlDefinition
 	invalidParams := smithy.InvalidParamsError{Context: "GetSecurityControlDefinitionInput"}
 	if v.SecurityControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityControlId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSoftwareResourcesV2Input(v *GetSoftwareResourcesV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSoftwareResourcesV2Input"}
+	if v.PackageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
+	}
+	if v.PackageType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSoftwareStatisticsV2Input(v *GetSoftwareStatisticsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSoftwareStatisticsV2Input"}
+	if v.GroupByRules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupByRules"))
+	} else if v.GroupByRules != nil {
+		if err := validateSoftwareGroupByRules(v.GroupByRules); err != nil {
+			invalidParams.AddNested("GroupByRules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

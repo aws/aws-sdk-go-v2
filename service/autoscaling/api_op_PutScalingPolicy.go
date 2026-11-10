@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -191,6 +193,109 @@ type PutScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutScalingPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutScalingPolicyType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutScalingPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjustmentType != nil {
+		s.WriteString(schemas.PutScalingPolicyType_AdjustmentType, *v.AdjustmentType)
+	}
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.PutScalingPolicyType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.Cooldown != nil {
+		s.WriteInt32(schemas.PutScalingPolicyType_Cooldown, *v.Cooldown)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.PutScalingPolicyType_Enabled, *v.Enabled)
+	}
+	if v.EstimatedInstanceWarmup != nil {
+		s.WriteInt32(schemas.PutScalingPolicyType_EstimatedInstanceWarmup, *v.EstimatedInstanceWarmup)
+	}
+	if v.MetricAggregationType != nil {
+		s.WriteString(schemas.PutScalingPolicyType_MetricAggregationType, *v.MetricAggregationType)
+	}
+	if v.MinAdjustmentMagnitude != nil {
+		s.WriteInt32(schemas.PutScalingPolicyType_MinAdjustmentMagnitude, *v.MinAdjustmentMagnitude)
+	}
+	if v.MinAdjustmentStep != nil {
+		s.WriteInt32(schemas.PutScalingPolicyType_MinAdjustmentStep, *v.MinAdjustmentStep)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.PutScalingPolicyType_PolicyName, *v.PolicyName)
+	}
+	if v.PolicyType != nil {
+		s.WriteString(schemas.PutScalingPolicyType_PolicyType, *v.PolicyType)
+	}
+	if v.PredictiveScalingConfiguration != nil {
+		s.WriteStruct(schemas.PutScalingPolicyType_PredictiveScalingConfiguration)
+		v.PredictiveScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScalingAdjustment != nil {
+		s.WriteInt32(schemas.PutScalingPolicyType_ScalingAdjustment, *v.ScalingAdjustment)
+	}
+	if v.StepAdjustments != nil {
+		serializeStepAdjustments(s, schemas.PutScalingPolicyType_StepAdjustments, v.StepAdjustments)
+	}
+	if v.TargetTrackingConfiguration != nil {
+		s.WriteStruct(schemas.PutScalingPolicyType_TargetTrackingConfiguration)
+		v.TargetTrackingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutScalingPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutScalingPolicyType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutScalingPolicyType_AdjustmentType:
+			v.AdjustmentType = new(string)
+			return d.ReadString(schemas.PutScalingPolicyType_AdjustmentType, v.AdjustmentType)
+		case schemas.PutScalingPolicyType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.PutScalingPolicyType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.PutScalingPolicyType_Cooldown:
+			v.Cooldown = new(int32)
+			return d.ReadInt32(schemas.PutScalingPolicyType_Cooldown, v.Cooldown)
+		case schemas.PutScalingPolicyType_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.PutScalingPolicyType_Enabled, v.Enabled)
+		case schemas.PutScalingPolicyType_EstimatedInstanceWarmup:
+			v.EstimatedInstanceWarmup = new(int32)
+			return d.ReadInt32(schemas.PutScalingPolicyType_EstimatedInstanceWarmup, v.EstimatedInstanceWarmup)
+		case schemas.PutScalingPolicyType_MetricAggregationType:
+			v.MetricAggregationType = new(string)
+			return d.ReadString(schemas.PutScalingPolicyType_MetricAggregationType, v.MetricAggregationType)
+		case schemas.PutScalingPolicyType_MinAdjustmentMagnitude:
+			v.MinAdjustmentMagnitude = new(int32)
+			return d.ReadInt32(schemas.PutScalingPolicyType_MinAdjustmentMagnitude, v.MinAdjustmentMagnitude)
+		case schemas.PutScalingPolicyType_MinAdjustmentStep:
+			v.MinAdjustmentStep = new(int32)
+			return d.ReadInt32(schemas.PutScalingPolicyType_MinAdjustmentStep, v.MinAdjustmentStep)
+		case schemas.PutScalingPolicyType_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.PutScalingPolicyType_PolicyName, v.PolicyName)
+		case schemas.PutScalingPolicyType_PolicyType:
+			v.PolicyType = new(string)
+			return d.ReadString(schemas.PutScalingPolicyType_PolicyType, v.PolicyType)
+		case schemas.PutScalingPolicyType_PredictiveScalingConfiguration:
+			v.PredictiveScalingConfiguration = &types.PredictiveScalingConfiguration{}
+			return v.PredictiveScalingConfiguration.Deserialize(d)
+		case schemas.PutScalingPolicyType_ScalingAdjustment:
+			v.ScalingAdjustment = new(int32)
+			return d.ReadInt32(schemas.PutScalingPolicyType_ScalingAdjustment, v.ScalingAdjustment)
+		case schemas.PutScalingPolicyType_StepAdjustments:
+			return deserializeStepAdjustments(d, schemas.PutScalingPolicyType_StepAdjustments, &v.StepAdjustments)
+		case schemas.PutScalingPolicyType_TargetTrackingConfiguration:
+			v.TargetTrackingConfiguration = &types.TargetTrackingConfiguration{}
+			return v.TargetTrackingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains the output of PutScalingPolicy.
 type PutScalingPolicyOutput struct {
 
@@ -206,13 +311,37 @@ type PutScalingPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutScalingPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyARNType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutScalingPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alarms != nil {
+		serializeAlarms(s, schemas.PolicyARNType_Alarms, v.Alarms)
+	}
+	if v.PolicyARN != nil {
+		s.WriteString(schemas.PolicyARNType_PolicyARN, *v.PolicyARN)
+	}
+}
+func (v *PutScalingPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyARNType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyARNType_Alarms:
+			return deserializeAlarms(d, schemas.PolicyARNType_Alarms, &v.Alarms)
+		case schemas.PolicyARNType_PolicyARN:
+			v.PolicyARN = new(string)
+			return d.ReadString(schemas.PolicyARNType_PolicyARN, v.PolicyARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutScalingPolicy, schemas.PutScalingPolicyType, schemas.PolicyARNType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPutScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutScalingPolicy, schemas.PutScalingPolicyType, schemas.PolicyARNType), output: &PutScalingPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

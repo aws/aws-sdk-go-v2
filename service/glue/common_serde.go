@@ -819,6 +819,24 @@ func serializeDataQualityAnalyzerResults(s smithy.ShapeSerializer, schema *smith
 	s.CloseList()
 }
 
+func serializeDataQualityEvaluationConfigList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataQualityEvaluationConfigListDetails) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeDataQualityEvaluationConfigTriggers(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataQualityEvaluationConfigTrigger) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeDataQualityObservations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataQualityObservation) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -3953,6 +3971,49 @@ func deserializeDataQualityAnalyzerResults(d smithy.ShapeDeserializer, s *smithy
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDataQualityEvaluationConfigList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DataQualityEvaluationConfigListDetails) error {
+	*v = make([]types.DataQualityEvaluationConfigListDetails, 0)
+	var vv types.DataQualityEvaluationConfigListDetails
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DataQualityEvaluationConfigListDetails
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.DataQualityEvaluationConfigListDetails{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDataQualityEvaluationConfigTriggers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DataQualityEvaluationConfigTrigger) error {
+	*v = make([]types.DataQualityEvaluationConfigTrigger, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DataQualityEvaluationConfigTrigger
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.DataQualityEvaluationConfigTrigger(vv))
 		return nil
 	})
 }

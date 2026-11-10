@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ListStacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStacksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStacksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStacksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStacksInput_NextToken, *v.NextToken)
+	}
+	if v.StackStatusFilter != nil {
+		serializeStackStatusFilter(s, schemas.ListStacksInput_StackStatusFilter, v.StackStatusFilter)
+	}
+}
+
 // The output for ListStacks action.
 type ListStacksOutput struct {
 
@@ -61,13 +78,37 @@ type ListStacksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStacksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStacksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStacksOutput_NextToken, *v.NextToken)
+	}
+	if v.StackSummaries != nil {
+		serializeStackSummaries(s, schemas.ListStacksOutput_StackSummaries, v.StackSummaries)
+	}
+}
+func (v *ListStacksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStacksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStacksOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStacksOutput_NextToken, v.NextToken)
+		case schemas.ListStacksOutput_StackSummaries:
+			return deserializeStackSummaries(d, schemas.ListStacksOutput_StackSummaries, &v.StackSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListStacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStacks, schemas.ListStacksInput, schemas.ListStacksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListStacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStacks, schemas.ListStacksInput, schemas.ListStacksOutput), output: &ListStacksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

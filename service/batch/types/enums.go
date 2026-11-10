@@ -302,6 +302,27 @@ func (EksAccessEntryStatus) Values() []EksAccessEntryStatus {
 	}
 }
 
+type EksSeccompProfileType string
+
+// Enum values for EksSeccompProfileType
+const (
+	EksSeccompProfileTypeRuntimeDefault EksSeccompProfileType = "RuntimeDefault"
+	EksSeccompProfileTypeLocalhost      EksSeccompProfileType = "Localhost"
+	EksSeccompProfileTypeUnconfined     EksSeccompProfileType = "Unconfined"
+)
+
+// Values returns all known values for EksSeccompProfileType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EksSeccompProfileType) Values() []EksSeccompProfileType {
+	return []EksSeccompProfileType{
+		"RuntimeDefault",
+		"Localhost",
+		"Unconfined",
+	}
+}
+
 type FirelensConfigurationType string
 
 // Enum values for FirelensConfigurationType

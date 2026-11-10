@@ -93,6 +93,16 @@ func (o *OutputStreamWithInitialResponseOutput) GetInitialReply() <-chan OutputS
 	return o.initialReply
 }
 
+func (v *OutputStreamWithInitialResponseInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputStreamWithInitialResponseOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputStreamWithInitialResponseOutput_initialResponseMember:
+			v.InitialResponseMember = new(string)
+			return d.ReadString(schemas.OutputStreamWithInitialResponseOutput_initialResponseMember, v.InitialResponseMember)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationOutputStreamWithInitialResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OutputStreamWithInitialResponse, nil, schemas.OutputStreamWithInitialResponseOutput)}, middleware.After); err != nil {
 		return err

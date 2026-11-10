@@ -5,7 +5,9 @@ package elasticache
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -173,6 +175,39 @@ type DescribeReservedCacheNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedCacheNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedCacheNodesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedCacheNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheNodeType != nil {
+		s.WriteString(schemas.DescribeReservedCacheNodesMessage_CacheNodeType, *v.CacheNodeType)
+	}
+	if v.Duration != nil {
+		s.WriteString(schemas.DescribeReservedCacheNodesMessage_Duration, *v.Duration)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReservedCacheNodesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReservedCacheNodesMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.OfferingType != nil {
+		s.WriteString(schemas.DescribeReservedCacheNodesMessage_OfferingType, *v.OfferingType)
+	}
+	if v.ProductDescription != nil {
+		s.WriteString(schemas.DescribeReservedCacheNodesMessage_ProductDescription, *v.ProductDescription)
+	}
+	if v.ReservedCacheNodeId != nil {
+		s.WriteString(schemas.DescribeReservedCacheNodesMessage_ReservedCacheNodeId, *v.ReservedCacheNodeId)
+	}
+	if v.ReservedCacheNodesOfferingId != nil {
+		s.WriteString(schemas.DescribeReservedCacheNodesMessage_ReservedCacheNodesOfferingId, *v.ReservedCacheNodesOfferingId)
+	}
+}
+
 // Represents the output of a DescribeReservedCacheNodes operation.
 type DescribeReservedCacheNodesOutput struct {
 
@@ -189,13 +224,37 @@ type DescribeReservedCacheNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedCacheNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservedCacheNodeMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedCacheNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ReservedCacheNodeMessage_Marker, *v.Marker)
+	}
+	if v.ReservedCacheNodes != nil {
+		serializeReservedCacheNodeList(s, schemas.ReservedCacheNodeMessage_ReservedCacheNodes, v.ReservedCacheNodes)
+	}
+}
+func (v *DescribeReservedCacheNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservedCacheNodeMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservedCacheNodeMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ReservedCacheNodeMessage_Marker, v.Marker)
+		case schemas.ReservedCacheNodeMessage_ReservedCacheNodes:
+			return deserializeReservedCacheNodeList(d, schemas.ReservedCacheNodeMessage_ReservedCacheNodes, &v.ReservedCacheNodes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReservedCacheNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeReservedCacheNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedCacheNodes, schemas.DescribeReservedCacheNodesMessage, schemas.ReservedCacheNodeMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeReservedCacheNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedCacheNodes, schemas.DescribeReservedCacheNodesMessage, schemas.ReservedCacheNodeMessage), output: &DescribeReservedCacheNodesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

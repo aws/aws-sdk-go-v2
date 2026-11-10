@@ -19,6 +19,11 @@ import (
 //
 // To get information about more than one parameter at a time, use the GetParameters operation.
 //
+// This operation is authorized against the ssm:GetParameter action. Denying that
+// action alone doesn't restrict GetParameters, GetParameterHistory, or GetParametersByPath, each of which is authorized against its
+// own action. For more information, see [How Parameter Store authorizes parameter retrieval]in the Amazon Web Services Systems
+// Manager User Guide.
+//
 // Parameter Store throughput defines the number of API transactions per second
 // (TPS) that Systems Manager can process. This applies to GetParameter ,
 // GetParameters , and PutParameter API calls for your Amazon Web Services account
@@ -34,6 +39,7 @@ import (
 // ThrottlingException: Rate exceeded errors, enable higher throughput. For more
 // information, see [Changing Parameter Store throughput].
 //
+// [How Parameter Store authorizes parameter retrieval]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html
 // [Changing Parameter Store throughput]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html
 func (c *Client) GetParameter(ctx context.Context, params *GetParameterInput, optFns ...func(*Options)) (*GetParameterOutput, error) {
 	if params == nil {

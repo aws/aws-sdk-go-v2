@@ -52,6 +52,12 @@ type ListPermissionsInput struct {
 	// previous call's NextToken response to request the next page of results.
 	NextToken *string
 
+	// Specifies that you want to filter the results to include only permissions with
+	// the specified status. For example, use ATTACHABLE to list only permissions that
+	// can be associated with resource shares, or DEPRECATED to list only deprecated
+	// permissions.
+	PermissionStatus types.PermissionStatus
+
 	// Specifies that you want to list only permissions of this type:
 	//
 	//   - AWS – returns only Amazon Web Services managed permissions.
@@ -63,6 +69,14 @@ type ListPermissionsInput struct {
 	//
 	// If you don't specify this parameter, the default is All .
 	PermissionType types.PermissionTypeFilter
+
+	// Specifies that you want to list only permissions owned by a specific entity:
+	//
+	//   - SELF – returns only permissions owned by the calling account.
+	//
+	//   - OTHER-ACCOUNTS – returns only permissions shared with the calling account by
+	//   other accounts.
+	ResourceOwner types.ResourceOwner
 
 	// Specifies that you want to list only those permissions that apply to the
 	// specified resource type. This parameter is not case sensitive.
@@ -87,8 +101,14 @@ func (v *ListPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPermissionsRequest_nextToken, *v.NextToken)
 	}
+	if v.PermissionStatus != "" {
+		s.WriteString(schemas.ListPermissionsRequest_permissionStatus, string(v.PermissionStatus))
+	}
 	if v.PermissionType != "" {
 		s.WriteString(schemas.ListPermissionsRequest_permissionType, string(v.PermissionType))
+	}
+	if v.ResourceOwner != "" {
+		s.WriteString(schemas.ListPermissionsRequest_resourceOwner, string(v.ResourceOwner))
 	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.ListPermissionsRequest_resourceType, *v.ResourceType)

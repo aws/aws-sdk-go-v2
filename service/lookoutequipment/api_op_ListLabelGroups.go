@@ -11,7 +11,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns a list of the label groups.
+//	Returns a list of the label groups.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListLabelGroups(ctx context.Context, params *ListLabelGroupsInput, optFns ...func(*Options)) (*ListLabelGroupsOutput, error) {
 	if params == nil {
 		params = &ListLabelGroupsInput{}

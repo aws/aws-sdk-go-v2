@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,30 @@ type ListHookResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHookResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHookResultsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHookResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHookResultsInput_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListHookResultsInput_Status, string(v.Status))
+	}
+	if v.TargetId != nil {
+		s.WriteString(schemas.ListHookResultsInput_TargetId, *v.TargetId)
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.ListHookResultsInput_TargetType, string(v.TargetType))
+	}
+	if v.TypeArn != nil {
+		s.WriteString(schemas.ListHookResultsInput_TypeArn, *v.TypeArn)
+	}
+}
+
 type ListHookResultsOutput struct {
 
 	// A list of HookResultSummary structures that provides the status and Hook status
@@ -103,13 +129,53 @@ type ListHookResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHookResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHookResultsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHookResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HookResults != nil {
+		serializeHookResultSummaries(s, schemas.ListHookResultsOutput_HookResults, v.HookResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHookResultsOutput_NextToken, *v.NextToken)
+	}
+	if v.TargetId != nil {
+		s.WriteString(schemas.ListHookResultsOutput_TargetId, *v.TargetId)
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.ListHookResultsOutput_TargetType, string(v.TargetType))
+	}
+}
+func (v *ListHookResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHookResultsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHookResultsOutput_HookResults:
+			return deserializeHookResultSummaries(d, schemas.ListHookResultsOutput_HookResults, &v.HookResults)
+		case schemas.ListHookResultsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHookResultsOutput_NextToken, v.NextToken)
+		case schemas.ListHookResultsOutput_TargetId:
+			v.TargetId = new(string)
+			return d.ReadString(schemas.ListHookResultsOutput_TargetId, v.TargetId)
+		case schemas.ListHookResultsOutput_TargetType:
+			var ev string
+			if err := d.ReadString(schemas.ListHookResultsOutput_TargetType, &ev); err != nil {
+				return err
+			}
+			v.TargetType = types.ListHookResultsTargetType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHookResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListHookResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHookResults, schemas.ListHookResultsInput, schemas.ListHookResultsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListHookResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHookResults, schemas.ListHookResultsInput, schemas.ListHookResultsOutput), output: &ListHookResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

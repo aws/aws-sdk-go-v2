@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ResetClusterParameterGroupResponse><ResetClusterParameterGroupResult><ParameterGroupName>__ParameterGroupName__</ParameterGroupName><ParameterGroupStatus>__ParameterGroupStatus__</ParameterGroupStatus></ResetClusterParameterGroupResult></ResetClusterParameterGroupResponse>

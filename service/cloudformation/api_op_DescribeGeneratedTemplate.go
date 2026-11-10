@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type DescribeGeneratedTemplateInput struct {
 	GeneratedTemplateName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeGeneratedTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGeneratedTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGeneratedTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GeneratedTemplateName != nil {
+		s.WriteString(schemas.DescribeGeneratedTemplateInput_GeneratedTemplateName, *v.GeneratedTemplateName)
+	}
 }
 
 type DescribeGeneratedTemplateOutput struct {
@@ -104,13 +118,99 @@ type DescribeGeneratedTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGeneratedTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGeneratedTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGeneratedTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeGeneratedTemplateOutput_CreationTime, *v.CreationTime)
+	}
+	if v.GeneratedTemplateId != nil {
+		s.WriteString(schemas.DescribeGeneratedTemplateOutput_GeneratedTemplateId, *v.GeneratedTemplateId)
+	}
+	if v.GeneratedTemplateName != nil {
+		s.WriteString(schemas.DescribeGeneratedTemplateOutput_GeneratedTemplateName, *v.GeneratedTemplateName)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.DescribeGeneratedTemplateOutput_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Progress != nil {
+		s.WriteStruct(schemas.DescribeGeneratedTemplateOutput_Progress)
+		v.Progress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resources != nil {
+		serializeResourceDetails(s, schemas.DescribeGeneratedTemplateOutput_Resources, v.Resources)
+	}
+	if v.StackId != nil {
+		s.WriteString(schemas.DescribeGeneratedTemplateOutput_StackId, *v.StackId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeGeneratedTemplateOutput_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DescribeGeneratedTemplateOutput_StatusReason, *v.StatusReason)
+	}
+	if v.TemplateConfiguration != nil {
+		s.WriteStruct(schemas.DescribeGeneratedTemplateOutput_TemplateConfiguration)
+		v.TemplateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TotalWarnings != nil {
+		s.WriteInt32(schemas.DescribeGeneratedTemplateOutput_TotalWarnings, *v.TotalWarnings)
+	}
+}
+func (v *DescribeGeneratedTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGeneratedTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGeneratedTemplateOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeGeneratedTemplateOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeGeneratedTemplateOutput_GeneratedTemplateId:
+			v.GeneratedTemplateId = new(string)
+			return d.ReadString(schemas.DescribeGeneratedTemplateOutput_GeneratedTemplateId, v.GeneratedTemplateId)
+		case schemas.DescribeGeneratedTemplateOutput_GeneratedTemplateName:
+			v.GeneratedTemplateName = new(string)
+			return d.ReadString(schemas.DescribeGeneratedTemplateOutput_GeneratedTemplateName, v.GeneratedTemplateName)
+		case schemas.DescribeGeneratedTemplateOutput_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeGeneratedTemplateOutput_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.DescribeGeneratedTemplateOutput_Progress:
+			v.Progress = &types.TemplateProgress{}
+			return v.Progress.Deserialize(d)
+		case schemas.DescribeGeneratedTemplateOutput_Resources:
+			return deserializeResourceDetails(d, schemas.DescribeGeneratedTemplateOutput_Resources, &v.Resources)
+		case schemas.DescribeGeneratedTemplateOutput_StackId:
+			v.StackId = new(string)
+			return d.ReadString(schemas.DescribeGeneratedTemplateOutput_StackId, v.StackId)
+		case schemas.DescribeGeneratedTemplateOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeGeneratedTemplateOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GeneratedTemplateStatus(ev)
+			return nil
+		case schemas.DescribeGeneratedTemplateOutput_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DescribeGeneratedTemplateOutput_StatusReason, v.StatusReason)
+		case schemas.DescribeGeneratedTemplateOutput_TemplateConfiguration:
+			v.TemplateConfiguration = &types.TemplateConfiguration{}
+			return v.TemplateConfiguration.Deserialize(d)
+		case schemas.DescribeGeneratedTemplateOutput_TotalWarnings:
+			v.TotalWarnings = new(int32)
+			return d.ReadInt32(schemas.DescribeGeneratedTemplateOutput_TotalWarnings, v.TotalWarnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGeneratedTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeGeneratedTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGeneratedTemplate, schemas.DescribeGeneratedTemplateInput, schemas.DescribeGeneratedTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeGeneratedTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGeneratedTemplate, schemas.DescribeGeneratedTemplateInput, schemas.DescribeGeneratedTemplateOutput), output: &DescribeGeneratedTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

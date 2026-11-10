@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -98,6 +100,39 @@ type ListStackInstanceResourceDriftsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStackInstanceResourceDriftsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStackInstanceResourceDriftsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStackInstanceResourceDriftsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallAs != "" {
+		s.WriteString(schemas.ListStackInstanceResourceDriftsInput_CallAs, string(v.CallAs))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStackInstanceResourceDriftsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStackInstanceResourceDriftsInput_NextToken, *v.NextToken)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.ListStackInstanceResourceDriftsInput_OperationId, *v.OperationId)
+	}
+	if v.StackInstanceAccount != nil {
+		s.WriteString(schemas.ListStackInstanceResourceDriftsInput_StackInstanceAccount, *v.StackInstanceAccount)
+	}
+	if v.StackInstanceRegion != nil {
+		s.WriteString(schemas.ListStackInstanceResourceDriftsInput_StackInstanceRegion, *v.StackInstanceRegion)
+	}
+	if v.StackInstanceResourceDriftStatuses != nil {
+		serializeStackResourceDriftStatusFilters(s, schemas.ListStackInstanceResourceDriftsInput_StackInstanceResourceDriftStatuses, v.StackInstanceResourceDriftStatuses)
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.ListStackInstanceResourceDriftsInput_StackSetName, *v.StackSetName)
+	}
+}
+
 type ListStackInstanceResourceDriftsOutput struct {
 
 	// If the previous paginated request didn't return all of the remaining results,
@@ -117,13 +152,37 @@ type ListStackInstanceResourceDriftsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStackInstanceResourceDriftsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStackInstanceResourceDriftsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStackInstanceResourceDriftsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStackInstanceResourceDriftsOutput_NextToken, *v.NextToken)
+	}
+	if v.Summaries != nil {
+		serializeStackInstanceResourceDriftsSummaries(s, schemas.ListStackInstanceResourceDriftsOutput_Summaries, v.Summaries)
+	}
+}
+func (v *ListStackInstanceResourceDriftsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStackInstanceResourceDriftsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStackInstanceResourceDriftsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStackInstanceResourceDriftsOutput_NextToken, v.NextToken)
+		case schemas.ListStackInstanceResourceDriftsOutput_Summaries:
+			return deserializeStackInstanceResourceDriftsSummaries(d, schemas.ListStackInstanceResourceDriftsOutput_Summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStackInstanceResourceDriftsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListStackInstanceResourceDrifts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStackInstanceResourceDrifts, schemas.ListStackInstanceResourceDriftsInput, schemas.ListStackInstanceResourceDriftsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListStackInstanceResourceDrifts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStackInstanceResourceDrifts, schemas.ListStackInstanceResourceDriftsInput, schemas.ListStackInstanceResourceDriftsOutput), output: &ListStackInstanceResourceDriftsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

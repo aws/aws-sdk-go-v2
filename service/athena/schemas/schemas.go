@@ -58,6 +58,11 @@ var CreatePresignedNotebookUrl = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreatePresignedNotebookUrl",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateSystemTableConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "CreateSystemTableConfiguration",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateWorkGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "CreateWorkGroup",
@@ -86,6 +91,11 @@ var DeleteNotebook = smithy.NewSchema(smithy.ShapeID{
 var DeletePreparedStatement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "DeletePreparedStatement",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteSystemTableConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "DeleteSystemTableConfiguration",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteWorkGroup = smithy.NewSchema(smithy.ShapeID{
@@ -183,6 +193,11 @@ var GetSessionStatus = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetSessionStatus",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetSystemTableConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "GetSystemTableConfiguration",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetTableMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "GetTableMetadata",
@@ -261,6 +276,11 @@ var ListQueryExecutions = smithy.NewSchema(smithy.ShapeID{
 var ListSessions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "ListSessions",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListSystemTableStatuses = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "ListSystemTableStatuses",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListTableMetadata = smithy.NewSchema(smithy.ShapeID{
@@ -351,6 +371,11 @@ var UpdateNotebookMetadata = smithy.NewSchema(smithy.ShapeID{
 var UpdatePreparedStatement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "UpdatePreparedStatement",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateSystemTableConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "UpdateSystemTableConfiguration",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdateWorkGroup = smithy.NewSchema(smithy.ShapeID{
@@ -1096,6 +1121,11 @@ var _KmsKey = smithy.NewSchema(smithy.ShapeID{
 	Name:      "KmsKey",
 }, smithy.ShapeTypeString, 0)
 
+var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "KmsKeyArn",
+}, smithy.ShapeTypeString, 0)
+
 var _LogGroupName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "LogGroupName",
@@ -1235,6 +1265,11 @@ var _MaxQueryResults = smithy.NewSchema(smithy.ShapeID{
 var _MaxSessionsCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "MaxSessionsCount",
+}, smithy.ShapeTypeInteger, 0)
+
+var _MaxSystemTableStatusesCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "MaxSystemTableStatusesCount",
 }, smithy.ShapeTypeInteger, 0)
 
 var _MaxTableMetadataCount = smithy.NewSchema(smithy.ShapeID{
@@ -1888,6 +1923,32 @@ var _SupportedDPUSizeList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _SupportedDPUSizeList_member *smithy.Schema
 
+var SystemTableName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "SystemTableName",
+}, smithy.ShapeTypeEnum, 1)
+var SystemTableName_ALL *smithy.Schema
+
+var SystemTableStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "SystemTableStatus",
+}, smithy.ShapeTypeStructure, 2)
+var SystemTableStatus_TableName *smithy.Schema
+
+var SystemTableStatus_Enabled *smithy.Schema
+
+var _SystemTableStatusList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "SystemTableStatusList",
+}, smithy.ShapeTypeList, 1)
+var _SystemTableStatusList_member *smithy.Schema
+
+var SystemTableType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "SystemTableType",
+}, smithy.ShapeTypeEnum, 1)
+var SystemTableType_QUERY_EXECUTIONS *smithy.Schema
+
 var TableMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "TableMetadata",
@@ -2048,7 +2109,7 @@ var WorkGroup_IdentityCenterApplicationArn *smithy.Schema
 var WorkGroupConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "WorkGroupConfiguration",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var WorkGroupConfiguration_ResultConfiguration *smithy.Schema
 
 var WorkGroupConfiguration_ManagedQueryResultsConfiguration *smithy.Schema
@@ -2078,6 +2139,8 @@ var WorkGroupConfiguration_EnableMinimumEncryptionConfiguration *smithy.Schema
 var WorkGroupConfiguration_IdentityCenterConfiguration *smithy.Schema
 
 var WorkGroupConfiguration_QueryResultsS3AccessGrantsConfiguration *smithy.Schema
+
+var WorkGroupConfiguration_SystemTableStatuses *smithy.Schema
 
 var WorkGroupConfigurationUpdates = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
@@ -2322,6 +2385,30 @@ var CreatePresignedNotebookUrlResponse_AuthToken *smithy.Schema
 
 var CreatePresignedNotebookUrlResponse_AuthTokenExpirationTime *smithy.Schema
 
+var CreateSystemTableConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "CreateSystemTableConfigurationInput",
+}, smithy.ShapeTypeStructure, 4)
+var CreateSystemTableConfigurationInput_ClientRequestToken *smithy.Schema
+
+var CreateSystemTableConfigurationInput_TableName *smithy.Schema
+
+var CreateSystemTableConfigurationInput_KmsKeyArn *smithy.Schema
+
+var CreateSystemTableConfigurationInput_Tags *smithy.Schema
+
+var CreateSystemTableConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "CreateSystemTableConfigurationOutput",
+}, smithy.ShapeTypeStructure, 4)
+var CreateSystemTableConfigurationOutput_TableName *smithy.Schema
+
+var CreateSystemTableConfigurationOutput_KmsKeyArn *smithy.Schema
+
+var CreateSystemTableConfigurationOutput_CreatedAt *smithy.Schema
+
+var CreateSystemTableConfigurationOutput_LastModifiedAt *smithy.Schema
+
 var CreateWorkGroupInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "CreateWorkGroupInput",
@@ -2397,6 +2484,17 @@ var DeletePreparedStatementInput_WorkGroup *smithy.Schema
 var DeletePreparedStatementOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "DeletePreparedStatementOutput",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteSystemTableConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "DeleteSystemTableConfigurationInput",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteSystemTableConfigurationInput_TableName *smithy.Schema
+
+var DeleteSystemTableConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "DeleteSystemTableConfigurationOutput",
 }, smithy.ShapeTypeStructure, 0)
 
 var DeleteWorkGroupInput = smithy.NewSchema(smithy.ShapeID{
@@ -2685,6 +2783,24 @@ var GetSessionStatusResponse = smithy.NewSchema(smithy.ShapeID{
 var GetSessionStatusResponse_SessionId *smithy.Schema
 
 var GetSessionStatusResponse_Status *smithy.Schema
+
+var GetSystemTableConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "GetSystemTableConfigurationInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetSystemTableConfigurationInput_TableName *smithy.Schema
+
+var GetSystemTableConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "GetSystemTableConfigurationOutput",
+}, smithy.ShapeTypeStructure, 4)
+var GetSystemTableConfigurationOutput_TableName *smithy.Schema
+
+var GetSystemTableConfigurationOutput_KmsKeyArn *smithy.Schema
+
+var GetSystemTableConfigurationOutput_CreatedAt *smithy.Schema
+
+var GetSystemTableConfigurationOutput_LastModifiedAt *smithy.Schema
 
 var GetTableMetadataInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
@@ -2977,6 +3093,22 @@ var ListSessionsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListSessionsResponse_NextToken *smithy.Schema
 
 var ListSessionsResponse_Sessions *smithy.Schema
+
+var ListSystemTableStatusesInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "ListSystemTableStatusesInput",
+}, smithy.ShapeTypeStructure, 2)
+var ListSystemTableStatusesInput_NextToken *smithy.Schema
+
+var ListSystemTableStatusesInput_MaxResults *smithy.Schema
+
+var ListSystemTableStatusesOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "ListSystemTableStatusesOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListSystemTableStatusesOutput_Items *smithy.Schema
+
+var ListSystemTableStatusesOutput_NextToken *smithy.Schema
 
 var ListTableMetadataInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
@@ -3287,6 +3419,26 @@ var UpdatePreparedStatementOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "UpdatePreparedStatementOutput",
 }, smithy.ShapeTypeStructure, 0)
+
+var UpdateSystemTableConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "UpdateSystemTableConfigurationInput",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateSystemTableConfigurationInput_TableName *smithy.Schema
+
+var UpdateSystemTableConfigurationInput_KmsKeyArn *smithy.Schema
+
+var UpdateSystemTableConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "UpdateSystemTableConfigurationOutput",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateSystemTableConfigurationOutput_TableName *smithy.Schema
+
+var UpdateSystemTableConfigurationOutput_KmsKeyArn *smithy.Schema
+
+var UpdateSystemTableConfigurationOutput_CreatedAt *smithy.Schema
+
+var UpdateSystemTableConfigurationOutput_LastModifiedAt *smithy.Schema
 
 var UpdateWorkGroupInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
@@ -4006,6 +4158,16 @@ func init() {
 
 	SessionStatistics_DpuExecutionInMillis = SessionStatistics.AddMember("DpuExecutionInMillis", _Long)
 
+	SystemTableName_ALL = SystemTableName.AddMember("ALL", smithyprelude.Unit)
+
+	SystemTableType_QUERY_EXECUTIONS = SystemTableType.AddMember("QUERY_EXECUTIONS", smithyprelude.Unit)
+
+	SystemTableStatus_TableName = SystemTableStatus.AddMember("TableName", SystemTableType)
+
+	SystemTableStatus_Enabled = SystemTableStatus.AddMember("Enabled", _BoxedBoolean)
+
+	_SystemTableStatusList_member = _SystemTableStatusList.AddMember("member", SystemTableStatus)
+
 	TableMetadata_Name = TableMetadata.AddMember("Name", _NameString)
 
 	TableMetadata_CreateTime = TableMetadata.AddMember("CreateTime", _Timestamp)
@@ -4093,6 +4255,8 @@ func init() {
 	WorkGroupConfiguration_IdentityCenterConfiguration = WorkGroupConfiguration.AddMember("IdentityCenterConfiguration", IdentityCenterConfiguration)
 
 	WorkGroupConfiguration_QueryResultsS3AccessGrantsConfiguration = WorkGroupConfiguration.AddMember("QueryResultsS3AccessGrantsConfiguration", QueryResultsS3AccessGrantsConfiguration)
+
+	WorkGroupConfiguration_SystemTableStatuses = WorkGroupConfiguration.AddMember("SystemTableStatuses", _SystemTableStatusList)
 
 	WorkGroup_Name = WorkGroup.AddMember("Name", _WorkGroupName)
 
@@ -4230,6 +4394,22 @@ func init() {
 
 	CreatePresignedNotebookUrlResponse_AuthTokenExpirationTime = CreatePresignedNotebookUrlResponse.AddMember("AuthTokenExpirationTime", _Long)
 
+	CreateSystemTableConfigurationInput_ClientRequestToken = CreateSystemTableConfigurationInput.AddMember("ClientRequestToken", _IdempotencyToken)
+
+	CreateSystemTableConfigurationInput_TableName = CreateSystemTableConfigurationInput.AddMember("TableName", SystemTableName)
+
+	CreateSystemTableConfigurationInput_KmsKeyArn = CreateSystemTableConfigurationInput.AddMember("KmsKeyArn", _KmsKeyArn)
+
+	CreateSystemTableConfigurationInput_Tags = CreateSystemTableConfigurationInput.AddMember("Tags", _TagList)
+
+	CreateSystemTableConfigurationOutput_TableName = CreateSystemTableConfigurationOutput.AddMember("TableName", SystemTableName)
+
+	CreateSystemTableConfigurationOutput_KmsKeyArn = CreateSystemTableConfigurationOutput.AddMember("KmsKeyArn", _KmsKeyArn)
+
+	CreateSystemTableConfigurationOutput_CreatedAt = CreateSystemTableConfigurationOutput.AddMember("CreatedAt", _Timestamp)
+
+	CreateSystemTableConfigurationOutput_LastModifiedAt = CreateSystemTableConfigurationOutput.AddMember("LastModifiedAt", _Timestamp)
+
 	CreateWorkGroupInput_Name = CreateWorkGroupInput.AddMember("Name", _WorkGroupName)
 
 	CreateWorkGroupInput_Configuration = CreateWorkGroupInput.AddMember("Configuration", WorkGroupConfiguration)
@@ -4253,6 +4433,8 @@ func init() {
 	DeletePreparedStatementInput_StatementName = DeletePreparedStatementInput.AddMember("StatementName", _StatementName)
 
 	DeletePreparedStatementInput_WorkGroup = DeletePreparedStatementInput.AddMember("WorkGroup", _WorkGroupName)
+
+	DeleteSystemTableConfigurationInput_TableName = DeleteSystemTableConfigurationInput.AddMember("TableName", SystemTableName)
 
 	DeleteWorkGroupInput_WorkGroup = DeleteWorkGroupInput.AddMember("WorkGroup", _WorkGroupName)
 
@@ -4387,6 +4569,16 @@ func init() {
 	GetSessionStatusResponse_SessionId = GetSessionStatusResponse.AddMember("SessionId", _SessionId)
 
 	GetSessionStatusResponse_Status = GetSessionStatusResponse.AddMember("Status", SessionStatus)
+
+	GetSystemTableConfigurationInput_TableName = GetSystemTableConfigurationInput.AddMember("TableName", SystemTableName)
+
+	GetSystemTableConfigurationOutput_TableName = GetSystemTableConfigurationOutput.AddMember("TableName", SystemTableName)
+
+	GetSystemTableConfigurationOutput_KmsKeyArn = GetSystemTableConfigurationOutput.AddMember("KmsKeyArn", _KmsKeyArn)
+
+	GetSystemTableConfigurationOutput_CreatedAt = GetSystemTableConfigurationOutput.AddMember("CreatedAt", _Timestamp)
+
+	GetSystemTableConfigurationOutput_LastModifiedAt = GetSystemTableConfigurationOutput.AddMember("LastModifiedAt", _Timestamp)
 
 	GetTableMetadataInput_CatalogName = GetTableMetadataInput.AddMember("CatalogName", _CatalogNameString)
 
@@ -4552,6 +4744,14 @@ func init() {
 
 	ListSessionsResponse_Sessions = ListSessionsResponse.AddMember("Sessions", _SessionsList)
 
+	ListSystemTableStatusesInput_NextToken = ListSystemTableStatusesInput.AddMember("NextToken", _Token)
+
+	ListSystemTableStatusesInput_MaxResults = ListSystemTableStatusesInput.AddMember("MaxResults", _MaxSystemTableStatusesCount)
+
+	ListSystemTableStatusesOutput_Items = ListSystemTableStatusesOutput.AddMember("Items", _SystemTableStatusList)
+
+	ListSystemTableStatusesOutput_NextToken = ListSystemTableStatusesOutput.AddMember("NextToken", _Token)
+
 	ListTableMetadataInput_CatalogName = ListTableMetadataInput.AddMember("CatalogName", _CatalogNameString)
 
 	ListTableMetadataInput_DatabaseName = ListTableMetadataInput.AddMember("DatabaseName", _NameString)
@@ -4707,6 +4907,18 @@ func init() {
 	UpdatePreparedStatementInput_QueryStatement = UpdatePreparedStatementInput.AddMember("QueryStatement", _QueryString)
 
 	UpdatePreparedStatementInput_Description = UpdatePreparedStatementInput.AddMember("Description", _DescriptionString)
+
+	UpdateSystemTableConfigurationInput_TableName = UpdateSystemTableConfigurationInput.AddMember("TableName", SystemTableName)
+
+	UpdateSystemTableConfigurationInput_KmsKeyArn = UpdateSystemTableConfigurationInput.AddMember("KmsKeyArn", _KmsKeyArn)
+
+	UpdateSystemTableConfigurationOutput_TableName = UpdateSystemTableConfigurationOutput.AddMember("TableName", SystemTableName)
+
+	UpdateSystemTableConfigurationOutput_KmsKeyArn = UpdateSystemTableConfigurationOutput.AddMember("KmsKeyArn", _KmsKeyArn)
+
+	UpdateSystemTableConfigurationOutput_CreatedAt = UpdateSystemTableConfigurationOutput.AddMember("CreatedAt", _Timestamp)
+
+	UpdateSystemTableConfigurationOutput_LastModifiedAt = UpdateSystemTableConfigurationOutput.AddMember("LastModifiedAt", _Timestamp)
 
 	UpdateWorkGroupInput_WorkGroup = UpdateWorkGroupInput.AddMember("WorkGroup", _WorkGroupName)
 

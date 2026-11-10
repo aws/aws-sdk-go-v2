@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListAttachedUserPoliciesResponse><ListAttachedUserPoliciesResult><AttachedPolicies><member><PolicyArn>__PolicyArn__</PolicyArn><PolicyName>__PolicyName__</PolicyName></member><member><PolicyArn>__PolicyArn__</PolicyArn><PolicyName>__PolicyName__</PolicyName></member></AttachedPolicies><IsTruncated>true</IsTruncated><Marker>__Marker__</Marker></ListAttachedUserPoliciesResult></ListAttachedUserPoliciesResponse>

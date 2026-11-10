@@ -10,6 +10,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connectcontactlens/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -210,6 +211,59 @@ func TestCheckRequestSnapshot_ListRealtimeContactAnalysisSegments(t *testing.T) 
 		ContactId:  ptr.String("__ContactId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:         ptr.String("__TagKey__"),
+					TagValue:       ptr.String("__TagValue__"),
+					ComparisonType: types.TagComparisonType("EQUALS"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -239,6 +293,59 @@ func TestUpdateRequestSnapshot_ListRealtimeContactAnalysisSegments(t *testing.T)
 		ContactId:  ptr.String("__ContactId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+							{
+								TagKey:         ptr.String("__TagKey__"),
+								TagValue:       ptr.String("__TagValue__"),
+								ComparisonType: types.TagComparisonType("EQUALS"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+						{
+							TagKey:         ptr.String("__TagKey__"),
+							TagValue:       ptr.String("__TagValue__"),
+							ComparisonType: types.TagComparisonType("EQUALS"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:         ptr.String("__TagKey__"),
+					TagValue:       ptr.String("__TagValue__"),
+					ComparisonType: types.TagComparisonType("EQUALS"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

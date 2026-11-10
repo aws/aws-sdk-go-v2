@@ -65,7 +65,8 @@ type DescribeLocationAzureBlobOutput struct {
 	AgentArns []string
 
 	// The authentication method DataSync uses to access your Azure Blob Storage.
-	// DataSync can access blob storage using a shared access signature (SAS).
+	// DataSync can access blob storage using a shared access signature (SAS) or an
+	// OpenID Connect (OIDC) token.
 	AuthenticationType types.AzureBlobAuthenticationType
 
 	// The type of blob that you want your objects or files to be when transferring
@@ -88,6 +89,10 @@ type DescribeLocationAzureBlobOutput struct {
 	// with a customer-managed Identity and Access Management (IAM) role that provides
 	// access to the secret.
 	CustomSecretConfig *types.CustomSecretConfig
+
+	// The federated identity configuration that DataSync uses to access your Azure
+	// Blob Storage using an OpenID Connect (OIDC) token.
+	FederatedIdentity *types.AzureFederatedIdentityConfig
 
 	// The ARN of your Azure Blob Storage transfer location.
 	LocationArn *string
@@ -139,6 +144,11 @@ func (v *DescribeLocationAzureBlobOutput) SerializeMembers(s smithy.ShapeSeriali
 		v.CustomSecretConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.FederatedIdentity != nil {
+		s.WriteStruct(schemas.DescribeLocationAzureBlobResponse_FederatedIdentity)
+		v.FederatedIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LocationArn != nil {
 		s.WriteString(schemas.DescribeLocationAzureBlobResponse_LocationArn, *v.LocationArn)
 	}
@@ -186,6 +196,9 @@ func (v *DescribeLocationAzureBlobOutput) Deserialize(d smithy.ShapeDeserializer
 		case schemas.DescribeLocationAzureBlobResponse_CustomSecretConfig:
 			v.CustomSecretConfig = &types.CustomSecretConfig{}
 			return v.CustomSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationAzureBlobResponse_FederatedIdentity:
+			v.FederatedIdentity = &types.AzureFederatedIdentityConfig{}
+			return v.FederatedIdentity.Deserialize(d)
 		case schemas.DescribeLocationAzureBlobResponse_LocationArn:
 			v.LocationArn = new(string)
 			return d.ReadString(schemas.DescribeLocationAzureBlobResponse_LocationArn, v.LocationArn)

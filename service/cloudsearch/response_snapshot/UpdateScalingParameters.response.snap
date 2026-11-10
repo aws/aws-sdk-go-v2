@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<UpdateScalingParametersResponse><UpdateScalingParametersResult><ScalingParameters><Options><DesiredInstanceType>search.m1.small</DesiredInstanceType><DesiredPartitionCount>1</DesiredPartitionCount><DesiredReplicationCount>1</DesiredReplicationCount></Options><Status><CreationDate>2000-01-01T00:00:00Z</CreationDate><PendingDeletion>true</PendingDeletion><State>RequiresIndexDocuments</State><UpdateDate>2000-01-01T00:00:00Z</UpdateDate><UpdateVersion>1</UpdateVersion></Status></ScalingParameters></UpdateScalingParametersResult></UpdateScalingParametersResponse>

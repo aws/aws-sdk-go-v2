@@ -590,6 +590,14 @@ func TestCheckRequestSnapshot_CreateAssistant(t *testing.T) {
 		},
 		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 			KmsKeyId: ptr.String("__KmsKeyId__"),
+			ReplicaKmsKeys: []types.ReplicaKmsKey{
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -779,6 +787,14 @@ func TestCheckRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
 		},
 		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 			KmsKeyId: ptr.String("__KmsKeyId__"),
+			ReplicaKmsKeys: []types.ReplicaKmsKey{
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+			},
 		},
 		Description: ptr.String("__Description__"),
 		Tags: map[string]string{
@@ -2688,6 +2704,68 @@ func TestCheckRequestSnapshot_QueryAssistant(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_RegisterAssistantReplicaKey(t *testing.T) {
+	input := &RegisterAssistantReplicaKeyInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		ReplicaKmsKey: &types.ReplicaKmsKey{
+			Arn: ptr.String("__Arn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RegisterAssistantReplicaKey(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RegisterAssistantReplicaKey"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_RegisterKnowledgeBaseReplicaKey(t *testing.T) {
+	input := &RegisterKnowledgeBaseReplicaKeyInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ReplicaKmsKey: &types.ReplicaKmsKey{
+			Arn: ptr.String("__Arn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RegisterKnowledgeBaseReplicaKey(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RegisterKnowledgeBaseReplicaKey"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_RemoveAssistantAIAgent(t *testing.T) {
 	input := &RemoveAssistantAIAgentInput{
 		AssistantId:         ptr.String("__AssistantId__"),
@@ -4414,6 +4492,14 @@ func TestUpdateRequestSnapshot_CreateAssistant(t *testing.T) {
 		},
 		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 			KmsKeyId: ptr.String("__KmsKeyId__"),
+			ReplicaKmsKeys: []types.ReplicaKmsKey{
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -4603,6 +4689,14 @@ func TestUpdateRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
 		},
 		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 			KmsKeyId: ptr.String("__KmsKeyId__"),
+			ReplicaKmsKeys: []types.ReplicaKmsKey{
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+				},
+			},
 		},
 		Description: ptr.String("__Description__"),
 		Tags: map[string]string{
@@ -6508,6 +6602,68 @@ func TestUpdateRequestSnapshot_QueryAssistant(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "QueryAssistant"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_RegisterAssistantReplicaKey(t *testing.T) {
+	input := &RegisterAssistantReplicaKeyInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		ReplicaKmsKey: &types.ReplicaKmsKey{
+			Arn: ptr.String("__Arn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RegisterAssistantReplicaKey(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RegisterAssistantReplicaKey"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_RegisterKnowledgeBaseReplicaKey(t *testing.T) {
+	input := &RegisterKnowledgeBaseReplicaKeyInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ReplicaKmsKey: &types.ReplicaKmsKey{
+			Arn: ptr.String("__Arn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RegisterKnowledgeBaseReplicaKey(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RegisterKnowledgeBaseReplicaKey"); err != nil {
 		t.Fatal(err)
 	}
 }

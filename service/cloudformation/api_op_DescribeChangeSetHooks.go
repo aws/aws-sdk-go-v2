@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type DescribeChangeSetHooksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChangeSetHooksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChangeSetHooksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChangeSetHooksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.DescribeChangeSetHooksInput_ChangeSetName, *v.ChangeSetName)
+	}
+	if v.LogicalResourceId != nil {
+		s.WriteString(schemas.DescribeChangeSetHooksInput_LogicalResourceId, *v.LogicalResourceId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeChangeSetHooksInput_NextToken, *v.NextToken)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DescribeChangeSetHooksInput_StackName, *v.StackName)
+	}
+}
+
 type DescribeChangeSetHooksOutput struct {
 
 	// The change set identifier (stack ID).
@@ -76,13 +99,71 @@ type DescribeChangeSetHooksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChangeSetHooksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChangeSetHooksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChangeSetHooksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.DescribeChangeSetHooksOutput_ChangeSetId, *v.ChangeSetId)
+	}
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.DescribeChangeSetHooksOutput_ChangeSetName, *v.ChangeSetName)
+	}
+	if v.Hooks != nil {
+		serializeChangeSetHooks(s, schemas.DescribeChangeSetHooksOutput_Hooks, v.Hooks)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeChangeSetHooksOutput_NextToken, *v.NextToken)
+	}
+	if v.StackId != nil {
+		s.WriteString(schemas.DescribeChangeSetHooksOutput_StackId, *v.StackId)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DescribeChangeSetHooksOutput_StackName, *v.StackName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeChangeSetHooksOutput_Status, string(v.Status))
+	}
+}
+func (v *DescribeChangeSetHooksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeChangeSetHooksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeChangeSetHooksOutput_ChangeSetId:
+			v.ChangeSetId = new(string)
+			return d.ReadString(schemas.DescribeChangeSetHooksOutput_ChangeSetId, v.ChangeSetId)
+		case schemas.DescribeChangeSetHooksOutput_ChangeSetName:
+			v.ChangeSetName = new(string)
+			return d.ReadString(schemas.DescribeChangeSetHooksOutput_ChangeSetName, v.ChangeSetName)
+		case schemas.DescribeChangeSetHooksOutput_Hooks:
+			return deserializeChangeSetHooks(d, schemas.DescribeChangeSetHooksOutput_Hooks, &v.Hooks)
+		case schemas.DescribeChangeSetHooksOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeChangeSetHooksOutput_NextToken, v.NextToken)
+		case schemas.DescribeChangeSetHooksOutput_StackId:
+			v.StackId = new(string)
+			return d.ReadString(schemas.DescribeChangeSetHooksOutput_StackId, v.StackId)
+		case schemas.DescribeChangeSetHooksOutput_StackName:
+			v.StackName = new(string)
+			return d.ReadString(schemas.DescribeChangeSetHooksOutput_StackName, v.StackName)
+		case schemas.DescribeChangeSetHooksOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeChangeSetHooksOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ChangeSetHooksStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeChangeSetHooksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeChangeSetHooks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChangeSetHooks, schemas.DescribeChangeSetHooksInput, schemas.DescribeChangeSetHooksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeChangeSetHooks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChangeSetHooks, schemas.DescribeChangeSetHooksInput, schemas.DescribeChangeSetHooksOutput), output: &DescribeChangeSetHooksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -40,6 +40,10 @@ type UpdateTrustAnchorInput struct {
 	// This member is required.
 	TrustAnchorId *string
 
+	// Specifies whether the trust anchor checks certificate revocation status against
+	// CRL distribution points.
+	CrlDpRevocationEnabled *bool
+
 	// The name of the trust anchor.
 	Name *string
 
@@ -56,6 +60,9 @@ func (v *UpdateTrustAnchorInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTrustAnchorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrlDpRevocationEnabled != nil {
+		s.WriteBool(schemas.UpdateTrustAnchorRequest_crlDpRevocationEnabled, *v.CrlDpRevocationEnabled)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateTrustAnchorRequest_name, *v.Name)
 	}
@@ -71,6 +78,9 @@ func (v *UpdateTrustAnchorInput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *UpdateTrustAnchorInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateTrustAnchorRequest, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UpdateTrustAnchorRequest_crlDpRevocationEnabled:
+			v.CrlDpRevocationEnabled = new(bool)
+			return d.ReadBool(schemas.UpdateTrustAnchorRequest_crlDpRevocationEnabled, v.CrlDpRevocationEnabled)
 		case schemas.UpdateTrustAnchorRequest_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.UpdateTrustAnchorRequest_name, v.Name)

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ApplyEnvironmentManagedActionResponse><ApplyEnvironmentManagedActionResult><ActionDescription>__ActionDescription__</ActionDescription><ActionId>__ActionId__</ActionId><ActionType>InstanceRefresh</ActionType><Status>__Status__</Status></ApplyEnvironmentManagedActionResult></ApplyEnvironmentManagedActionResponse>

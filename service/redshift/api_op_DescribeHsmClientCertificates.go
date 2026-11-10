@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,30 @@ type DescribeHsmClientCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHsmClientCertificatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHsmClientCertificatesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHsmClientCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HsmClientCertificateIdentifier != nil {
+		s.WriteString(schemas.DescribeHsmClientCertificatesMessage_HsmClientCertificateIdentifier, *v.HsmClientCertificateIdentifier)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeHsmClientCertificatesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeHsmClientCertificatesMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.DescribeHsmClientCertificatesMessage_TagKeys, v.TagKeys)
+	}
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.DescribeHsmClientCertificatesMessage_TagValues, v.TagValues)
+	}
+}
+
 type DescribeHsmClientCertificatesOutput struct {
 
 	// A list of the identifiers for one or more HSM client certificates used by
@@ -100,13 +126,37 @@ type DescribeHsmClientCertificatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHsmClientCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HsmClientCertificateMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHsmClientCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HsmClientCertificates != nil {
+		serializeHsmClientCertificateList(s, schemas.HsmClientCertificateMessage_HsmClientCertificates, v.HsmClientCertificates)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.HsmClientCertificateMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeHsmClientCertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HsmClientCertificateMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HsmClientCertificateMessage_HsmClientCertificates:
+			return deserializeHsmClientCertificateList(d, schemas.HsmClientCertificateMessage_HsmClientCertificates, &v.HsmClientCertificates)
+		case schemas.HsmClientCertificateMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.HsmClientCertificateMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHsmClientCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeHsmClientCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHsmClientCertificates, schemas.DescribeHsmClientCertificatesMessage, schemas.HsmClientCertificateMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeHsmClientCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHsmClientCertificates, schemas.DescribeHsmClientCertificatesMessage, schemas.HsmClientCertificateMessage), output: &DescribeHsmClientCertificatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

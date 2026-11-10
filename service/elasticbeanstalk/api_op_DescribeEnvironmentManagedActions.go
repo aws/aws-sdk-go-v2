@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type DescribeEnvironmentManagedActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentManagedActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentManagedActionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentManagedActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DescribeEnvironmentManagedActionsRequest_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.DescribeEnvironmentManagedActionsRequest_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeEnvironmentManagedActionsRequest_Status, string(v.Status))
+	}
+}
+
 // The result message containing a list of managed actions.
 type DescribeEnvironmentManagedActionsOutput struct {
 
@@ -67,13 +87,31 @@ type DescribeEnvironmentManagedActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentManagedActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentManagedActionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentManagedActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedActions != nil {
+		serializeManagedActions(s, schemas.DescribeEnvironmentManagedActionsResult_ManagedActions, v.ManagedActions)
+	}
+}
+func (v *DescribeEnvironmentManagedActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEnvironmentManagedActionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEnvironmentManagedActionsResult_ManagedActions:
+			return deserializeManagedActions(d, schemas.DescribeEnvironmentManagedActionsResult_ManagedActions, &v.ManagedActions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEnvironmentManagedActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEnvironmentManagedActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironmentManagedActions, schemas.DescribeEnvironmentManagedActionsRequest, schemas.DescribeEnvironmentManagedActionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeEnvironmentManagedActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironmentManagedActions, schemas.DescribeEnvironmentManagedActionsRequest, schemas.DescribeEnvironmentManagedActionsResult), output: &DescribeEnvironmentManagedActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

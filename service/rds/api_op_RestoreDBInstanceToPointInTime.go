@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -697,6 +699,174 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreDBInstanceToPointInTimeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreDBInstanceToPointInTimeMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreDBInstanceToPointInTimeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalStorageVolumes != nil {
+		serializeAdditionalStorageVolumesList(s, schemas.RestoreDBInstanceToPointInTimeMessage_AdditionalStorageVolumes, v.AdditionalStorageVolumes)
+	}
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceToPointInTimeMessage_AllocatedStorage, *v.AllocatedStorage)
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.RestoreDBInstanceToPointInTimeMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.BackupRetentionPeriod != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceToPointInTimeMessage_BackupRetentionPeriod, *v.BackupRetentionPeriod)
+	}
+	if v.BackupTarget != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_BackupTarget, *v.BackupTarget)
+	}
+	if v.CACertificateIdentifier != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_CACertificateIdentifier, *v.CACertificateIdentifier)
+	}
+	if v.CopyTagsToSnapshot != nil {
+		s.WriteBool(schemas.RestoreDBInstanceToPointInTimeMessage_CopyTagsToSnapshot, *v.CopyTagsToSnapshot)
+	}
+	if v.CustomIamInstanceProfile != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_CustomIamInstanceProfile, *v.CustomIamInstanceProfile)
+	}
+	if v.DBCapacityReservationIdentifier != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_DBCapacityReservationIdentifier, *v.DBCapacityReservationIdentifier)
+	}
+	if v.DBInstanceClass != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_DBInstanceClass, *v.DBInstanceClass)
+	}
+	if v.DBName != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_DBName, *v.DBName)
+	}
+	if v.DBParameterGroupName != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_DBParameterGroupName, *v.DBParameterGroupName)
+	}
+	if v.DBSubnetGroupName != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
+	}
+	if v.DedicatedLogVolume != nil {
+		s.WriteBool(schemas.RestoreDBInstanceToPointInTimeMessage_DedicatedLogVolume, *v.DedicatedLogVolume)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.RestoreDBInstanceToPointInTimeMessage_DeletionProtection, *v.DeletionProtection)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_Domain, *v.Domain)
+	}
+	if v.DomainAuthSecretArn != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_DomainAuthSecretArn, *v.DomainAuthSecretArn)
+	}
+	if v.DomainDnsIps != nil {
+		serializeStringList(s, schemas.RestoreDBInstanceToPointInTimeMessage_DomainDnsIps, v.DomainDnsIps)
+	}
+	if v.DomainFqdn != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_DomainFqdn, *v.DomainFqdn)
+	}
+	if v.DomainIAMRoleName != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_DomainIAMRoleName, *v.DomainIAMRoleName)
+	}
+	if v.DomainOu != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_DomainOu, *v.DomainOu)
+	}
+	if v.EnableCloudwatchLogsExports != nil {
+		serializeLogTypeList(s, schemas.RestoreDBInstanceToPointInTimeMessage_EnableCloudwatchLogsExports, v.EnableCloudwatchLogsExports)
+	}
+	if v.EnableCustomerOwnedIp != nil {
+		s.WriteBool(schemas.RestoreDBInstanceToPointInTimeMessage_EnableCustomerOwnedIp, *v.EnableCustomerOwnedIp)
+	}
+	if v.EnableIAMDatabaseAuthentication != nil {
+		s.WriteBool(schemas.RestoreDBInstanceToPointInTimeMessage_EnableIAMDatabaseAuthentication, *v.EnableIAMDatabaseAuthentication)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_Engine, *v.Engine)
+	}
+	if v.EngineLifecycleSupport != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_EngineLifecycleSupport, *v.EngineLifecycleSupport)
+	}
+	if v.Iops != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceToPointInTimeMessage_Iops, *v.Iops)
+	}
+	if v.LicenseModel != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_LicenseModel, *v.LicenseModel)
+	}
+	if v.ManageMasterUserPassword != nil {
+		s.WriteBool(schemas.RestoreDBInstanceToPointInTimeMessage_ManageMasterUserPassword, *v.ManageMasterUserPassword)
+	}
+	if v.MasterUserSecretKmsKeyId != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_MasterUserSecretKmsKeyId, *v.MasterUserSecretKmsKeyId)
+	}
+	if v.MaxAllocatedStorage != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceToPointInTimeMessage_MaxAllocatedStorage, *v.MaxAllocatedStorage)
+	}
+	if v.MultiAZ != nil {
+		s.WriteBool(schemas.RestoreDBInstanceToPointInTimeMessage_MultiAZ, *v.MultiAZ)
+	}
+	if v.NetworkType != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_NetworkType, *v.NetworkType)
+	}
+	if v.OptionGroupName != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_OptionGroupName, *v.OptionGroupName)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceToPointInTimeMessage_Port, *v.Port)
+	}
+	if v.PreferredBackupWindow != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_PreferredBackupWindow, *v.PreferredBackupWindow)
+	}
+	if v.ProcessorFeatures != nil {
+		serializeProcessorFeatureList(s, schemas.RestoreDBInstanceToPointInTimeMessage_ProcessorFeatures, v.ProcessorFeatures)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.RestoreDBInstanceToPointInTimeMessage_PubliclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.RestoreTime != nil {
+		s.WriteTime(schemas.RestoreDBInstanceToPointInTimeMessage_RestoreTime, *v.RestoreTime)
+	}
+	if v.SourceDBInstanceAutomatedBackupsArn != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_SourceDBInstanceAutomatedBackupsArn, *v.SourceDBInstanceAutomatedBackupsArn)
+	}
+	if v.SourceDBInstanceIdentifier != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_SourceDBInstanceIdentifier, *v.SourceDBInstanceIdentifier)
+	}
+	if v.SourceDbiResourceId != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_SourceDbiResourceId, *v.SourceDbiResourceId)
+	}
+	if v.StorageThroughput != nil {
+		s.WriteInt32(schemas.RestoreDBInstanceToPointInTimeMessage_StorageThroughput, *v.StorageThroughput)
+	}
+	if v.StorageType != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_StorageType, *v.StorageType)
+	}
+	if v.TagSpecifications != nil {
+		serializeTagSpecificationList(s, schemas.RestoreDBInstanceToPointInTimeMessage_TagSpecifications, v.TagSpecifications)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RestoreDBInstanceToPointInTimeMessage_Tags, v.Tags)
+	}
+	if v.TargetDBInstanceIdentifier != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_TargetDBInstanceIdentifier, *v.TargetDBInstanceIdentifier)
+	}
+	if v.TdeCredentialArn != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_TdeCredentialArn, *v.TdeCredentialArn)
+	}
+	if v.TdeCredentialPassword != nil {
+		s.WriteString(schemas.RestoreDBInstanceToPointInTimeMessage_TdeCredentialPassword, *v.TdeCredentialPassword)
+	}
+	if v.UseDefaultProcessorFeatures != nil {
+		s.WriteBool(schemas.RestoreDBInstanceToPointInTimeMessage_UseDefaultProcessorFeatures, *v.UseDefaultProcessorFeatures)
+	}
+	if v.UseLatestRestorableTime != nil {
+		s.WriteBool(schemas.RestoreDBInstanceToPointInTimeMessage_UseLatestRestorableTime, *v.UseLatestRestorableTime)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.RestoreDBInstanceToPointInTimeMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+}
+
 type RestoreDBInstanceToPointInTimeOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance.
@@ -714,13 +884,34 @@ type RestoreDBInstanceToPointInTimeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreDBInstanceToPointInTimeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreDBInstanceToPointInTimeResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreDBInstanceToPointInTimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstance != nil {
+		s.WriteStruct(schemas.RestoreDBInstanceToPointInTimeResult_DBInstance)
+		v.DBInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RestoreDBInstanceToPointInTimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreDBInstanceToPointInTimeResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreDBInstanceToPointInTimeResult_DBInstance:
+			v.DBInstance = &types.DBInstance{}
+			return v.DBInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreDBInstanceToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBInstanceToPointInTime{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBInstanceToPointInTime, schemas.RestoreDBInstanceToPointInTimeMessage, schemas.RestoreDBInstanceToPointInTimeResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRestoreDBInstanceToPointInTime{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBInstanceToPointInTime, schemas.RestoreDBInstanceToPointInTimeMessage, schemas.RestoreDBInstanceToPointInTimeResult), output: &RestoreDBInstanceToPointInTimeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -9,7 +9,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes a label.
+//	Deletes a label.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) DeleteLabel(ctx context.Context, params *DeleteLabelInput, optFns ...func(*Options)) (*DeleteLabelOutput, error) {
 	if params == nil {
 		params = &DeleteLabelInput{}

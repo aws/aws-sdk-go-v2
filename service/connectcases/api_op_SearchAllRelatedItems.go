@@ -39,12 +39,12 @@ import (
 //   - This API searches across related items content, not case fields. Use the [SearchCases]
 //     API to search within case field values.
 //
-// Endpoints: See [Amazon Connect endpoints and quotas].
+// Endpoints: See [Connect Customer endpoints and quotas].
 //
 // [GetCase]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetCase.html
 // [SearchCases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchCases.html
-// [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 // [SearchRelatedItems]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchRelatedItems.html
+// [Connect Customer endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 func (c *Client) SearchAllRelatedItems(ctx context.Context, params *SearchAllRelatedItemsInput, optFns ...func(*Options)) (*SearchAllRelatedItemsOutput, error) {
 	if params == nil {
 		params = &SearchAllRelatedItemsInput{}

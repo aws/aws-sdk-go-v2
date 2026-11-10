@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteClusterSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterSubnetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterSubnetGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterSubnetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSubnetGroupName != nil {
+		s.WriteString(schemas.DeleteClusterSubnetGroupMessage_ClusterSubnetGroupName, *v.ClusterSubnetGroupName)
+	}
+}
+
 type DeleteClusterSubnetGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteClusterSubnetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterSubnetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterSubnetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteClusterSubnetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteClusterSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteClusterSubnetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteClusterSubnetGroup, schemas.DeleteClusterSubnetGroupMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteClusterSubnetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteClusterSubnetGroup, schemas.DeleteClusterSubnetGroupMessage, nil), output: &DeleteClusterSubnetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

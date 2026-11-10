@@ -282,6 +282,16 @@ func serializeSupportedDPUSizeList(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func serializeSystemTableStatusList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SystemTableStatus) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeTableMetadataList(s smithy.ShapeSerializer, schema *smithy.Schema, v []TableMetadata) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -981,6 +991,28 @@ func deserializeSupportedDPUSizeList(d smithy.ShapeDeserializer, s *smithy.Schem
 		}
 
 		if err := d.ReadInt32(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSystemTableStatusList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SystemTableStatus) error {
+	*v = make([]SystemTableStatus, 0)
+	var vv SystemTableStatus
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SystemTableStatus
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = SystemTableStatus{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

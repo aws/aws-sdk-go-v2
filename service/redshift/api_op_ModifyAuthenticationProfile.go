@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ModifyAuthenticationProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyAuthenticationProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyAuthenticationProfileMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyAuthenticationProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationProfileContent != nil {
+		s.WriteString(schemas.ModifyAuthenticationProfileMessage_AuthenticationProfileContent, *v.AuthenticationProfileContent)
+	}
+	if v.AuthenticationProfileName != nil {
+		s.WriteString(schemas.ModifyAuthenticationProfileMessage_AuthenticationProfileName, *v.AuthenticationProfileName)
+	}
+}
+
 type ModifyAuthenticationProfileOutput struct {
 
 	// The updated content of the authentication profile in JSON format.
@@ -53,13 +70,38 @@ type ModifyAuthenticationProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyAuthenticationProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyAuthenticationProfileResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyAuthenticationProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationProfileContent != nil {
+		s.WriteString(schemas.ModifyAuthenticationProfileResult_AuthenticationProfileContent, *v.AuthenticationProfileContent)
+	}
+	if v.AuthenticationProfileName != nil {
+		s.WriteString(schemas.ModifyAuthenticationProfileResult_AuthenticationProfileName, *v.AuthenticationProfileName)
+	}
+}
+func (v *ModifyAuthenticationProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyAuthenticationProfileResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyAuthenticationProfileResult_AuthenticationProfileContent:
+			v.AuthenticationProfileContent = new(string)
+			return d.ReadString(schemas.ModifyAuthenticationProfileResult_AuthenticationProfileContent, v.AuthenticationProfileContent)
+		case schemas.ModifyAuthenticationProfileResult_AuthenticationProfileName:
+			v.AuthenticationProfileName = new(string)
+			return d.ReadString(schemas.ModifyAuthenticationProfileResult_AuthenticationProfileName, v.AuthenticationProfileName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyAuthenticationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyAuthenticationProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyAuthenticationProfile, schemas.ModifyAuthenticationProfileMessage, schemas.ModifyAuthenticationProfileResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyAuthenticationProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyAuthenticationProfile, schemas.ModifyAuthenticationProfileMessage, schemas.ModifyAuthenticationProfileResult), output: &ModifyAuthenticationProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -538,6 +538,7 @@ func TestCheckRequestSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) {
 
 func TestCheckRequestSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 	input := &CreateNetworkMigrationDefinitionInput{
+		ClientToken: ptr.String("__ClientToken__"),
 		Name:        ptr.String("__Name__"),
 		Description: ptr.String("__Description__"),
 		SourceConfigurations: []types.SourceConfiguration{
@@ -4021,6 +4022,7 @@ func TestUpdateRequestSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) {
 
 func TestUpdateRequestSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 	input := &CreateNetworkMigrationDefinitionInput{
+		ClientToken: ptr.String("__ClientToken__"),
 		Name:        ptr.String("__Name__"),
 		Description: ptr.String("__Description__"),
 		SourceConfigurations: []types.SourceConfiguration{

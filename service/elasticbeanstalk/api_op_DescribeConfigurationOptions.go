@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,33 @@ type DescribeConfigurationOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationOptionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DescribeConfigurationOptionsMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.DescribeConfigurationOptionsMessage_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.Options != nil {
+		serializeOptionsSpecifierList(s, schemas.DescribeConfigurationOptionsMessage_Options, v.Options)
+	}
+	if v.PlatformArn != nil {
+		s.WriteString(schemas.DescribeConfigurationOptionsMessage_PlatformArn, *v.PlatformArn)
+	}
+	if v.SolutionStackName != nil {
+		s.WriteString(schemas.DescribeConfigurationOptionsMessage_SolutionStackName, *v.SolutionStackName)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DescribeConfigurationOptionsMessage_TemplateName, *v.TemplateName)
+	}
+}
+
 // Describes the settings for a specified configuration set.
 type DescribeConfigurationOptionsOutput struct {
 
@@ -89,13 +118,43 @@ type DescribeConfigurationOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationOptionsDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Options != nil {
+		serializeConfigurationOptionDescriptionsList(s, schemas.ConfigurationOptionsDescription_Options, v.Options)
+	}
+	if v.PlatformArn != nil {
+		s.WriteString(schemas.ConfigurationOptionsDescription_PlatformArn, *v.PlatformArn)
+	}
+	if v.SolutionStackName != nil {
+		s.WriteString(schemas.ConfigurationOptionsDescription_SolutionStackName, *v.SolutionStackName)
+	}
+}
+func (v *DescribeConfigurationOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationOptionsDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationOptionsDescription_Options:
+			return deserializeConfigurationOptionDescriptionsList(d, schemas.ConfigurationOptionsDescription_Options, &v.Options)
+		case schemas.ConfigurationOptionsDescription_PlatformArn:
+			v.PlatformArn = new(string)
+			return d.ReadString(schemas.ConfigurationOptionsDescription_PlatformArn, v.PlatformArn)
+		case schemas.ConfigurationOptionsDescription_SolutionStackName:
+			v.SolutionStackName = new(string)
+			return d.ReadString(schemas.ConfigurationOptionsDescription_SolutionStackName, v.SolutionStackName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigurationOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeConfigurationOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationOptions, schemas.DescribeConfigurationOptionsMessage, schemas.ConfigurationOptionsDescription)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeConfigurationOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationOptions, schemas.DescribeConfigurationOptionsMessage, schemas.ConfigurationOptionsDescription), output: &DescribeConfigurationOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

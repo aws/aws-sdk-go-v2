@@ -4,7 +4,9 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -219,6 +221,27 @@ type CreateTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTopicInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTopicInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTopicInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeTopicAttributesMap(s, schemas.CreateTopicInput_Attributes, v.Attributes)
+	}
+	if v.DataProtectionPolicy != nil {
+		s.WriteString(schemas.CreateTopicInput_DataProtectionPolicy, *v.DataProtectionPolicy)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTopicInput_Name, *v.Name)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTopicInput_Tags, v.Tags)
+	}
+}
+
 // Response from CreateTopic action.
 type CreateTopicOutput struct {
 
@@ -231,13 +254,32 @@ type CreateTopicOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTopicOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTopicResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTopicOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TopicArn != nil {
+		s.WriteString(schemas.CreateTopicResponse_TopicArn, *v.TopicArn)
+	}
+}
+func (v *CreateTopicOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTopicResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTopicResponse_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.CreateTopicResponse_TopicArn, v.TopicArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTopic, schemas.CreateTopicInput, schemas.CreateTopicResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTopic, schemas.CreateTopicInput, schemas.CreateTopicResponse), output: &CreateTopicOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

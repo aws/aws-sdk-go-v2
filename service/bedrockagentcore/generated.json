@@ -49,6 +49,7 @@
         "api_op_InvokeBrowser.go",
         "api_op_InvokeCodeInterpreter.go",
         "api_op_InvokeHarness.go",
+        "api_op_InvokeWebSearch.go",
         "api_op_ListABTests.go",
         "api_op_ListActors.go",
         "api_op_ListBatchEvaluations.go",

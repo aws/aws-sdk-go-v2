@@ -2690,6 +2690,26 @@ func (m *validateOpDescribeRefreshSchedule) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeResourcePermissions struct {
+}
+
+func (*validateOpDescribeResourcePermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeResourcePermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeResourcePermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeResourcePermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeRoleCustomPermission struct {
 }
 
@@ -5550,6 +5570,26 @@ func (m *validateOpUpdateRefreshSchedule) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateResourcePermissions struct {
+}
+
+func (*validateOpUpdateResourcePermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateResourcePermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateResourcePermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateResourcePermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRoleCustomPermission struct {
 }
 
@@ -6506,6 +6546,10 @@ func addOpDescribeRefreshScheduleValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDescribeRefreshSchedule{}, middleware.After)
 }
 
+func addOpDescribeResourcePermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeResourcePermissions{}, middleware.After)
+}
+
 func addOpDescribeRoleCustomPermissionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRoleCustomPermission{}, middleware.After)
 }
@@ -7076,6 +7120,10 @@ func addOpUpdateQuickSightQSearchConfigurationValidationMiddleware(stack *middle
 
 func addOpUpdateRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRefreshSchedule{}, middleware.After)
+}
+
+func addOpUpdateResourcePermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateResourcePermissions{}, middleware.After)
 }
 
 func addOpUpdateRoleCustomPermissionValidationMiddleware(stack *middleware.Stack) error {
@@ -30018,6 +30066,21 @@ func validateOpDescribeRefreshScheduleInput(v *DescribeRefreshScheduleInput) err
 	}
 }
 
+func validateOpDescribeResourcePermissionsInput(v *DescribeResourcePermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeResourcePermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeRoleCustomPermissionInput(v *DescribeRoleCustomPermissionInput) error {
 	if v == nil {
 		return nil
@@ -32983,6 +33046,27 @@ func validateOpUpdateRefreshScheduleInput(v *UpdateRefreshScheduleInput) error {
 		if err := validateRefreshSchedule(v.Schedule); err != nil {
 			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateResourcePermissionsInput(v *UpdateResourcePermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourcePermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if len(v.RoleType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleType"))
+	}
+	if v.CustomerManagedRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomerManagedRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

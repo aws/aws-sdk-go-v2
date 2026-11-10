@@ -8,6 +8,13 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
+var BatchCreateRelatedItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchCreateRelatedItem",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/cases:batchCreateRelatedItem",
+	Code: 200})
+
 var BatchGetCaseRule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "BatchGetCaseRule",
@@ -27,6 +34,13 @@ var BatchPutFieldOptions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "BatchPutFieldOptions",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/domains/{domainId}/fields/{fieldId}/options",
+	Code: 200})
+
+var BatchUpdateCase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchUpdateCase",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/cases:batchUpdateCase",
 	Code: 200})
 
 var CreateCase = smithy.NewSchema(smithy.ShapeID{
@@ -421,6 +435,50 @@ var BasicLayout_topPanel *smithy.Schema
 
 var BasicLayout_moreInfo *smithy.Schema
 
+var BatchCreateRelatedItemErrorEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchCreateRelatedItemErrorEntry",
+}, smithy.ShapeTypeStructure, 3)
+var BatchCreateRelatedItemErrorEntry_caseIdentifier *smithy.Schema
+
+var BatchCreateRelatedItemErrorEntry_errorCode *smithy.Schema
+
+var BatchCreateRelatedItemErrorEntry_errorMessage *smithy.Schema
+
+var _BatchCreateRelatedItemErrorEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchCreateRelatedItemErrorEntryList",
+}, smithy.ShapeTypeList, 1)
+var _BatchCreateRelatedItemErrorEntryList_member *smithy.Schema
+
+var BatchCreateRelatedItemIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchCreateRelatedItemIdentifier",
+}, smithy.ShapeTypeStructure, 1)
+var BatchCreateRelatedItemIdentifier_caseIdentifier *smithy.Schema
+
+var _BatchCreateRelatedItemIdentifierList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchCreateRelatedItemIdentifierList",
+}, smithy.ShapeTypeList, 1)
+var _BatchCreateRelatedItemIdentifierList_member *smithy.Schema
+
+var BatchCreateRelatedItemSuccessEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchCreateRelatedItemSuccessEntry",
+}, smithy.ShapeTypeStructure, 3)
+var BatchCreateRelatedItemSuccessEntry_caseIdentifier *smithy.Schema
+
+var BatchCreateRelatedItemSuccessEntry_relatedItemId *smithy.Schema
+
+var BatchCreateRelatedItemSuccessEntry_relatedItemArn *smithy.Schema
+
+var _BatchCreateRelatedItemSuccessEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchCreateRelatedItemSuccessEntryList",
+}, smithy.ShapeTypeList, 1)
+var _BatchCreateRelatedItemSuccessEntryList_member *smithy.Schema
+
 var _BatchGetCaseRuleErrorList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "BatchGetCaseRuleErrorList",
@@ -456,6 +514,46 @@ var _BatchGetFieldList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "BatchGetFieldList",
 }, smithy.ShapeTypeList, 1)
 var _BatchGetFieldList_member *smithy.Schema
+
+var BatchUpdateCaseErrorEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchUpdateCaseErrorEntry",
+}, smithy.ShapeTypeStructure, 3)
+var BatchUpdateCaseErrorEntry_caseIdentifier *smithy.Schema
+
+var BatchUpdateCaseErrorEntry_errorCode *smithy.Schema
+
+var BatchUpdateCaseErrorEntry_errorMessage *smithy.Schema
+
+var _BatchUpdateCaseErrorEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchUpdateCaseErrorEntryList",
+}, smithy.ShapeTypeList, 1)
+var _BatchUpdateCaseErrorEntryList_member *smithy.Schema
+
+var BatchUpdateCaseIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchUpdateCaseIdentifier",
+}, smithy.ShapeTypeStructure, 1)
+var BatchUpdateCaseIdentifier_caseIdentifier *smithy.Schema
+
+var _BatchUpdateCaseIdentifierList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchUpdateCaseIdentifierList",
+}, smithy.ShapeTypeList, 1)
+var _BatchUpdateCaseIdentifierList_member *smithy.Schema
+
+var BatchUpdateCaseSuccessEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchUpdateCaseSuccessEntry",
+}, smithy.ShapeTypeStructure, 1)
+var BatchUpdateCaseSuccessEntry_caseIdentifier *smithy.Schema
+
+var _BatchUpdateCaseSuccessEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchUpdateCaseSuccessEntryList",
+}, smithy.ShapeTypeList, 1)
+var _BatchUpdateCaseSuccessEntryList_member *smithy.Schema
 
 var BooleanCondition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -520,6 +618,24 @@ var _CaseId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "CaseId",
 }, smithy.ShapeTypeString, 0)
+
+var CaseIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "CaseIdentifier",
+}, smithy.ShapeTypeStructure, 3)
+var CaseIdentifier_caseId *smithy.Schema
+
+var CaseIdentifier_referenceNumber *smithy.Schema
+
+var CaseIdentifier_referenceId *smithy.Schema
+
+var CaseIdentifierUnion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "CaseIdentifierUnion",
+}, smithy.ShapeTypeUnion, 2)
+var CaseIdentifierUnion_caseId *smithy.Schema
+
+var CaseIdentifierUnion_referenceId *smithy.Schema
 
 var _CaseRuleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -593,6 +709,11 @@ var _CaseRuleSummaryList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _CaseRuleSummaryList_member *smithy.Schema
 
+var _CaseStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "CaseStatus",
+}, smithy.ShapeTypeString, 0)
+
 var CaseSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "CaseSummary",
@@ -606,6 +727,11 @@ var _CaseSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CaseSummaryList",
 }, smithy.ShapeTypeList, 1)
 var _CaseSummaryList_member *smithy.Schema
+
+var _CaseTitle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "CaseTitle",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var _Channel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -729,6 +855,11 @@ var _CustomEntity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "CustomEntity",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _CustomerProfileArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "CustomerProfileArn",
+}, smithy.ShapeTypeString, 0)
 
 var CustomFieldsFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -900,6 +1031,14 @@ var _FieldIdentifierList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _FieldIdentifierList_member *smithy.Schema
 
+var FieldIdentifierUnion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "FieldIdentifierUnion",
+}, smithy.ShapeTypeUnion, 2)
+var FieldIdentifierUnion_id *smithy.Schema
+
+var FieldIdentifierUnion_name *smithy.Schema
+
 var FieldItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "FieldItem",
@@ -1008,6 +1147,20 @@ var FieldValue = smithy.NewSchema(smithy.ShapeID{
 var FieldValue_id *smithy.Schema
 
 var FieldValue_value *smithy.Schema
+
+var FieldValueInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "FieldValueInput",
+}, smithy.ShapeTypeStructure, 2)
+var FieldValueInput_fieldIdentifier *smithy.Schema
+
+var FieldValueInput_value *smithy.Schema
+
+var _FieldValueInputList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "FieldValueInputList",
+}, smithy.ShapeTypeList, 1)
+var _FieldValueInputList_member *smithy.Schema
 
 var _FieldValueList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -1240,6 +1393,16 @@ var _ParentChildFieldOptionValueList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ParentChildFieldOptionValueList",
 }, smithy.ShapeTypeList, 1)
 var _ParentChildFieldOptionValueList_member *smithy.Schema
+
+var _ReferenceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "ReferenceId",
+}, smithy.ShapeTypeString, 0)
+
+var _ReferenceNumber = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "ReferenceNumber",
+}, smithy.ShapeTypeString, 0)
 
 var _RelatedItemArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -1740,6 +1903,28 @@ var _ValuesList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ValuesList_member *smithy.Schema
 
+var BatchCreateRelatedItemRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchCreateRelatedItemRequest",
+}, smithy.ShapeTypeStructure, 5)
+var BatchCreateRelatedItemRequest_domainId *smithy.Schema
+
+var BatchCreateRelatedItemRequest_content *smithy.Schema
+
+var BatchCreateRelatedItemRequest_cases *smithy.Schema
+
+var BatchCreateRelatedItemRequest_performedBy *smithy.Schema
+
+var BatchCreateRelatedItemRequest_clientToken *smithy.Schema
+
+var BatchCreateRelatedItemResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchCreateRelatedItemResponse",
+}, smithy.ShapeTypeStructure, 2)
+var BatchCreateRelatedItemResponse_successfulItems *smithy.Schema
+
+var BatchCreateRelatedItemResponse_failedItems *smithy.Schema
+
 var BatchGetCaseRuleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "BatchGetCaseRuleRequest",
@@ -1789,6 +1974,34 @@ var BatchPutFieldOptionsResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "BatchPutFieldOptionsResponse",
 }, smithy.ShapeTypeStructure, 1)
 var BatchPutFieldOptionsResponse_errors *smithy.Schema
+
+var BatchUpdateCaseRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchUpdateCaseRequest",
+}, smithy.ShapeTypeStructure, 8)
+var BatchUpdateCaseRequest_domainId *smithy.Schema
+
+var BatchUpdateCaseRequest_cases *smithy.Schema
+
+var BatchUpdateCaseRequest_fields *smithy.Schema
+
+var BatchUpdateCaseRequest_performedBy *smithy.Schema
+
+var BatchUpdateCaseRequest_title *smithy.Schema
+
+var BatchUpdateCaseRequest_status *smithy.Schema
+
+var BatchUpdateCaseRequest_customerId *smithy.Schema
+
+var BatchUpdateCaseRequest_clientToken *smithy.Schema
+
+var BatchUpdateCaseResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "BatchUpdateCaseResponse",
+}, smithy.ShapeTypeStructure, 2)
+var BatchUpdateCaseResponse_successfulCases *smithy.Schema
+
+var BatchUpdateCaseResponse_failedCases *smithy.Schema
 
 var CreateCaseRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -2616,6 +2829,36 @@ func init() {
 
 	BasicLayout_moreInfo = BasicLayout.AddMember("moreInfo", LayoutSections)
 
+	CaseIdentifier_caseId = CaseIdentifier.AddMember("caseId", _CaseId)
+
+	CaseIdentifier_referenceNumber = CaseIdentifier.AddMember("referenceNumber", _ReferenceNumber)
+
+	CaseIdentifier_referenceId = CaseIdentifier.AddMember("referenceId", _ReferenceId)
+
+	BatchCreateRelatedItemErrorEntry_caseIdentifier = BatchCreateRelatedItemErrorEntry.AddMember("caseIdentifier", CaseIdentifier)
+
+	BatchCreateRelatedItemErrorEntry_errorCode = BatchCreateRelatedItemErrorEntry.AddMember("errorCode", smithyprelude.String)
+
+	BatchCreateRelatedItemErrorEntry_errorMessage = BatchCreateRelatedItemErrorEntry.AddMember("errorMessage", smithyprelude.String)
+
+	_BatchCreateRelatedItemErrorEntryList_member = _BatchCreateRelatedItemErrorEntryList.AddMember("member", BatchCreateRelatedItemErrorEntry)
+
+	CaseIdentifierUnion_caseId = CaseIdentifierUnion.AddMember("caseId", _CaseId)
+
+	CaseIdentifierUnion_referenceId = CaseIdentifierUnion.AddMember("referenceId", _ReferenceId)
+
+	BatchCreateRelatedItemIdentifier_caseIdentifier = BatchCreateRelatedItemIdentifier.AddMember("caseIdentifier", CaseIdentifierUnion)
+
+	_BatchCreateRelatedItemIdentifierList_member = _BatchCreateRelatedItemIdentifierList.AddMember("member", BatchCreateRelatedItemIdentifier)
+
+	BatchCreateRelatedItemSuccessEntry_caseIdentifier = BatchCreateRelatedItemSuccessEntry.AddMember("caseIdentifier", CaseIdentifier)
+
+	BatchCreateRelatedItemSuccessEntry_relatedItemId = BatchCreateRelatedItemSuccessEntry.AddMember("relatedItemId", _RelatedItemId)
+
+	BatchCreateRelatedItemSuccessEntry_relatedItemArn = BatchCreateRelatedItemSuccessEntry.AddMember("relatedItemArn", _RelatedItemArn)
+
+	_BatchCreateRelatedItemSuccessEntryList_member = _BatchCreateRelatedItemSuccessEntryList.AddMember("member", BatchCreateRelatedItemSuccessEntry)
+
 	CaseRuleError_id = CaseRuleError.AddMember("id", _CaseRuleId)
 
 	CaseRuleError_errorCode = CaseRuleError.AddMember("errorCode", smithyprelude.String)
@@ -2745,6 +2988,22 @@ func init() {
 	GetFieldResponse_attributes = GetFieldResponse.AddMember("attributes", FieldAttributes)
 
 	_BatchGetFieldList_member = _BatchGetFieldList.AddMember("member", GetFieldResponse)
+
+	BatchUpdateCaseErrorEntry_caseIdentifier = BatchUpdateCaseErrorEntry.AddMember("caseIdentifier", CaseIdentifier)
+
+	BatchUpdateCaseErrorEntry_errorCode = BatchUpdateCaseErrorEntry.AddMember("errorCode", smithyprelude.String)
+
+	BatchUpdateCaseErrorEntry_errorMessage = BatchUpdateCaseErrorEntry.AddMember("errorMessage", smithyprelude.String)
+
+	_BatchUpdateCaseErrorEntryList_member = _BatchUpdateCaseErrorEntryList.AddMember("member", BatchUpdateCaseErrorEntry)
+
+	BatchUpdateCaseIdentifier_caseIdentifier = BatchUpdateCaseIdentifier.AddMember("caseIdentifier", CaseIdentifierUnion)
+
+	_BatchUpdateCaseIdentifierList_member = _BatchUpdateCaseIdentifierList.AddMember("member", BatchUpdateCaseIdentifier)
+
+	BatchUpdateCaseSuccessEntry_caseIdentifier = BatchUpdateCaseSuccessEntry.AddMember("caseIdentifier", CaseIdentifier)
+
+	_BatchUpdateCaseSuccessEntryList_member = _BatchUpdateCaseSuccessEntryList.AddMember("member", BatchUpdateCaseSuccessEntry)
 
 	_FieldIdentifierList_member = _FieldIdentifierList.AddMember("member", FieldIdentifier)
 
@@ -2884,6 +3143,10 @@ func init() {
 
 	EventBridgeConfiguration_includedData = EventBridgeConfiguration.AddMember("includedData", EventIncludedData)
 
+	FieldIdentifierUnion_id = FieldIdentifierUnion.AddMember("id", _FieldId)
+
+	FieldIdentifierUnion_name = FieldIdentifierUnion.AddMember("name", _FieldName)
+
 	FieldOption_name = FieldOption.AddMember("name", _FieldOptionName)
 
 	FieldOption_value = FieldOption.AddMember("value", _FieldOptionValue)
@@ -2913,6 +3176,12 @@ func init() {
 	FieldSummary_attributes = FieldSummary.AddMember("attributes", FieldAttributes)
 
 	_FieldSummaryList_member = _FieldSummaryList.AddMember("member", FieldSummary)
+
+	FieldValueInput_fieldIdentifier = FieldValueInput.AddMember("fieldIdentifier", FieldIdentifierUnion)
+
+	FieldValueInput_value = FieldValueInput.AddMember("value", FieldValueUnion)
+
+	_FieldValueInputList_member = _FieldValueInputList.AddMember("member", FieldValueInput)
 
 	FileContent_fileArn = FileContent.AddMember("fileArn", _FileArn)
 
@@ -3112,6 +3381,20 @@ func init() {
 
 	_ValuesList_member = _ValuesList.AddMember("member", _Value)
 
+	BatchCreateRelatedItemRequest_domainId = BatchCreateRelatedItemRequest.AddMember("domainId", _DomainId)
+
+	BatchCreateRelatedItemRequest_content = BatchCreateRelatedItemRequest.AddMember("content", RelatedItemInputContent)
+
+	BatchCreateRelatedItemRequest_cases = BatchCreateRelatedItemRequest.AddMember("cases", _BatchCreateRelatedItemIdentifierList)
+
+	BatchCreateRelatedItemRequest_performedBy = BatchCreateRelatedItemRequest.AddMember("performedBy", UserUnion)
+
+	BatchCreateRelatedItemRequest_clientToken = BatchCreateRelatedItemRequest.AddMember("clientToken", smithyprelude.String)
+
+	BatchCreateRelatedItemResponse_successfulItems = BatchCreateRelatedItemResponse.AddMember("successfulItems", _BatchCreateRelatedItemSuccessEntryList)
+
+	BatchCreateRelatedItemResponse_failedItems = BatchCreateRelatedItemResponse.AddMember("failedItems", _BatchCreateRelatedItemErrorEntryList)
+
 	BatchGetCaseRuleRequest_domainId = BatchGetCaseRuleRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
 
 	BatchGetCaseRuleRequest_caseRules = BatchGetCaseRuleRequest.AddMember("caseRules", _CaseRuleIdentifierList)
@@ -3137,6 +3420,26 @@ func init() {
 	BatchPutFieldOptionsRequest_options = BatchPutFieldOptionsRequest.AddMember("options", _FieldOptionsList)
 
 	BatchPutFieldOptionsResponse_errors = BatchPutFieldOptionsResponse.AddMember("errors", _FieldOptionErrorList)
+
+	BatchUpdateCaseRequest_domainId = BatchUpdateCaseRequest.AddMember("domainId", _DomainId)
+
+	BatchUpdateCaseRequest_cases = BatchUpdateCaseRequest.AddMember("cases", _BatchUpdateCaseIdentifierList)
+
+	BatchUpdateCaseRequest_fields = BatchUpdateCaseRequest.AddMember("fields", _FieldValueInputList)
+
+	BatchUpdateCaseRequest_performedBy = BatchUpdateCaseRequest.AddMember("performedBy", UserUnion)
+
+	BatchUpdateCaseRequest_title = BatchUpdateCaseRequest.AddMember("title", _CaseTitle)
+
+	BatchUpdateCaseRequest_status = BatchUpdateCaseRequest.AddMember("status", _CaseStatus)
+
+	BatchUpdateCaseRequest_customerId = BatchUpdateCaseRequest.AddMember("customerId", _CustomerProfileArn)
+
+	BatchUpdateCaseRequest_clientToken = BatchUpdateCaseRequest.AddMember("clientToken", smithyprelude.String)
+
+	BatchUpdateCaseResponse_successfulCases = BatchUpdateCaseResponse.AddMember("successfulCases", _BatchUpdateCaseSuccessEntryList)
+
+	BatchUpdateCaseResponse_failedCases = BatchUpdateCaseResponse.AddMember("failedCases", _BatchUpdateCaseErrorEntryList)
 
 	CreateCaseRequest_domainId = CreateCaseRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
 

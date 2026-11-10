@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<TestTypeResponse><TestTypeResult><TypeVersionArn>__TypeVersionArn__</TypeVersionArn></TestTypeResult></TestTypeResponse>

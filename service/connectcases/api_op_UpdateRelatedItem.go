@@ -18,7 +18,7 @@ import (
 //
 //   - Custom - Update the fields of a custom related item. You can add, modify,
 //     and remove fields from a custom related item. There's a quota for the number of
-//     fields allowed in a Custom type related item. See [Amazon Connect Cases quotas].
+//     fields allowed in a Custom type related item. See [Connect Customer Cases quotas].
 //
 // Important things to know
 //
@@ -26,18 +26,18 @@ import (
 //     associated values should be included in the request. Fields not included as part
 //     of this request will be removed.
 //
-//   - If you provide a value for performedBy.userArn you must also have [DescribeUser]
+//   - If you provide a value for performedBy.userArn , you must also have [DescribeUser]
 //     permission on the ARN of the user that you provide.
 //
 // [System case fields]
 //   - cannot be used in a custom related item.
 //
-// Endpoints: See [Amazon Connect endpoints and quotas].
+// Endpoints: See [Connect Customer endpoints and quotas].
 //
 // [DescribeUser]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
-// [Amazon Connect Cases quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas
+// [Connect Customer Cases quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas
 // [System case fields]: https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html#system-case-fields
-// [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+// [Connect Customer endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 func (c *Client) UpdateRelatedItem(ctx context.Context, params *UpdateRelatedItemInput, optFns ...func(*Options)) (*UpdateRelatedItemOutput, error) {
 	if params == nil {
 		params = &UpdateRelatedItemInput{}
@@ -138,7 +138,7 @@ type UpdateRelatedItemOutput struct {
 	// Represents the last user that updated the related item.
 	LastUpdatedUser types.UserUnion
 
-	// A map of of key-value pairs that represent tags on a resource. Tags are used to
+	// A map of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
 	Tags map[string]*string
 

@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,30 @@ type SetSubnetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetSubnetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetSubnetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetSubnetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnablePrefixForIpv6SourceNat != "" {
+		s.WriteString(schemas.SetSubnetsInput_EnablePrefixForIpv6SourceNat, string(v.EnablePrefixForIpv6SourceNat))
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.SetSubnetsInput_IpAddressType, string(v.IpAddressType))
+	}
+	if v.LoadBalancerArn != nil {
+		s.WriteString(schemas.SetSubnetsInput_LoadBalancerArn, *v.LoadBalancerArn)
+	}
+	if v.SubnetMappings != nil {
+		serializeSubnetMappings(s, schemas.SetSubnetsInput_SubnetMappings, v.SubnetMappings)
+	}
+	if v.Subnets != nil {
+		serializeSubnets(s, schemas.SetSubnetsInput_Subnets, v.Subnets)
+	}
+}
+
 type SetSubnetsOutput struct {
 
 	// Information about the subnets.
@@ -110,13 +136,51 @@ type SetSubnetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetSubnetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetSubnetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetSubnetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZones(s, schemas.SetSubnetsOutput_AvailabilityZones, v.AvailabilityZones)
+	}
+	if v.EnablePrefixForIpv6SourceNat != "" {
+		s.WriteString(schemas.SetSubnetsOutput_EnablePrefixForIpv6SourceNat, string(v.EnablePrefixForIpv6SourceNat))
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.SetSubnetsOutput_IpAddressType, string(v.IpAddressType))
+	}
+}
+func (v *SetSubnetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetSubnetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetSubnetsOutput_AvailabilityZones:
+			return deserializeAvailabilityZones(d, schemas.SetSubnetsOutput_AvailabilityZones, &v.AvailabilityZones)
+		case schemas.SetSubnetsOutput_EnablePrefixForIpv6SourceNat:
+			var ev string
+			if err := d.ReadString(schemas.SetSubnetsOutput_EnablePrefixForIpv6SourceNat, &ev); err != nil {
+				return err
+			}
+			v.EnablePrefixForIpv6SourceNat = types.EnablePrefixForIpv6SourceNatEnum(ev)
+			return nil
+		case schemas.SetSubnetsOutput_IpAddressType:
+			var ev string
+			if err := d.ReadString(schemas.SetSubnetsOutput_IpAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = types.IpAddressType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetSubnets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetSubnets, schemas.SetSubnetsInput, schemas.SetSubnetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetSubnets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetSubnets, schemas.SetSubnetsInput, schemas.SetSubnetsOutput), output: &SetSubnetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

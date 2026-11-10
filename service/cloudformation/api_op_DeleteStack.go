@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,35 @@ type DeleteStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStackInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteStackInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DeletionMode != "" {
+		s.WriteString(schemas.DeleteStackInput_DeletionMode, string(v.DeletionMode))
+	}
+	if v.DeploymentConfig != nil {
+		s.WriteStruct(schemas.DeleteStackInput_DeploymentConfig)
+		v.DeploymentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetainResources != nil {
+		serializeRetainResources(s, schemas.DeleteStackInput_RetainResources, v.RetainResources)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.DeleteStackInput_RoleARN, *v.RoleARN)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DeleteStackInput_StackName, *v.StackName)
+	}
+}
+
 type DeleteStackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -97,13 +128,26 @@ type DeleteStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStack, schemas.DeleteStackInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStack, schemas.DeleteStackInput, nil), output: &DeleteStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

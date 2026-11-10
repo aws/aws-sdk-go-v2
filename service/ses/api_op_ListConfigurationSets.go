@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type ListConfigurationSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListConfigurationSetsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationSetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // A list of configuration sets associated with your Amazon Web Services account.
 // Configuration sets enable you to publish email sending events. For information
 // about using configuration sets, see the [Amazon SES Developer Guide].
@@ -72,13 +89,37 @@ type ListConfigurationSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSets != nil {
+		serializeConfigurationSets(s, schemas.ListConfigurationSetsResponse_ConfigurationSets, v.ConfigurationSets)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationSetsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConfigurationSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigurationSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigurationSetsResponse_ConfigurationSets:
+			return deserializeConfigurationSets(d, schemas.ListConfigurationSetsResponse_ConfigurationSets, &v.ConfigurationSets)
+		case schemas.ListConfigurationSetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigurationSetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListConfigurationSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationSets, schemas.ListConfigurationSetsRequest, schemas.ListConfigurationSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListConfigurationSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationSets, schemas.ListConfigurationSetsRequest, schemas.ListConfigurationSetsResponse), output: &ListConfigurationSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

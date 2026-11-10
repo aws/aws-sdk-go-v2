@@ -16052,7 +16052,7 @@
                 "target": "com.amazonaws.s3control#GetDataAccessResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a temporary access credential from S3 Access Grants to the grantee or client application. The <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_Credentials.html\">temporary credential</a> is an Amazon Web Services STS token that grants them access to the S3 data. </p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:GetDataAccess</code> permission to use this operation. </p>\n            </dd>\n            <dt>Additional Permissions</dt>\n            <dd>\n               <p>The IAM role that S3 Access Grants assumes must have the following permissions specified in the trust policy when registering the location: <code>sts:AssumeRole</code>, for directory users or groups <code>sts:SetContext</code>, and for IAM users or roles <code>sts:SetSourceIdentity</code>. </p>\n            </dd>\n         </dl>",
+                "smithy.api#documentation": "<p>Returns a temporary access credential from S3 Access Grants to the grantee or client application. The <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_Credentials.html\">temporary credential</a> is an Amazon Web Services STS token that grants them access to the S3 data. By default, S3 Access Grants searches for a matching grant in the instance of the Amazon Web Services account ID in the request. To also search instances shared with the caller through Amazon Web Services Resource Access Manager (RAM), set the <code>InstanceScope</code> parameter to <code>ALL</code>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:GetDataAccess</code> permission to use this operation. </p>\n            </dd>\n            <dt>Additional Permissions</dt>\n            <dd>\n               <p>The IAM role that S3 Access Grants assumes must have the following permissions specified in the trust policy when registering the location: <code>sts:AssumeRole</code>, for directory users or groups <code>sts:SetContext</code>, and for IAM users or roles <code>sts:SetSourceIdentity</code>. </p>\n            </dd>\n         </dl>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -16127,6 +16127,13 @@
                         "smithy.api#documentation": "<p>The context to identify the job or query associated with the credential request. This information will be displayed in CloudTrail log in your account.</p>",
                         "smithy.api#httpQuery": "auditContext"
                     }
+                },
+                "InstanceScope": {
+                    "target": "com.amazonaws.s3control#InstanceScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of S3 Access Grants instances to search for a grant matching the requested S3 URI path.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SELF</code> – Searches only the instance of the Amazon Web Services account ID in the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL</code> – Searches the instance of the Amazon Web Services account ID in the request and all instances shared with the caller's account through Amazon Web Services Resource Access Manager (RAM).</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "instanceScope"
+                    }
                 }
             },
             "traits": {
@@ -16152,6 +16159,12 @@
                     "target": "com.amazonaws.s3control#Grantee",
                     "traits": {
                         "smithy.api#documentation": "<p>The user, group, or role that was granted access to the S3 location scope. For directory identities, this API also returns the grants of the IAM role used for the identity-aware request. For more information on identity-aware sessions, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_sts-setcontext.html\">Granting permissions to use identity-aware console sessions</a>.\n      </p>"
+                    }
+                },
+                "MatchedInstanceArn": {
+                    "target": "com.amazonaws.s3control#AccessGrantsInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 Access Grants instance containing the grant that matched the requested S3 URI path.</p>"
                     }
                 }
             },
@@ -16904,6 +16917,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A container for what Amazon S3 Storage Lens configuration includes.</p>"
+            }
+        },
+        "com.amazonaws.s3control#InstanceScope": {
+            "type": "enum",
+            "members": {
+                "SELF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELF"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
             }
         },
         "com.amazonaws.s3control#InternalServiceException": {
@@ -18745,7 +18775,7 @@
                 "target": "com.amazonaws.s3control#ListCallerAccessGrantsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use this API to list the access grants that grant the caller access to Amazon S3 data through S3 Access Grants. The caller (grantee) can be an Identity and Access Management (IAM) identity or Amazon Web Services Identity Center corporate directory identity. You must pass the Amazon Web Services account of the S3 data owner (grantor) in the request. You can, optionally, narrow the results by <code>GrantScope</code>, using a fragment of the data's S3 path, and S3 Access Grants will return only the grants with a path that contains the path fragment. You can also pass the <code>AllowedByApplication</code> filter in the request, which returns only the grants authorized for applications, whether the application is the caller's Identity Center application or any other application (<code>ALL</code>). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-list-grants.html\">List the caller's access grants</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:ListCallerAccessGrants</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+                "smithy.api#documentation": "<p>Use this API to list the access grants that grant the caller access to Amazon S3 data through S3 Access Grants. The caller (grantee) can be an Identity and Access Management (IAM) identity or Amazon Web Services Identity Center corporate directory identity. You must pass the Amazon Web Services account of the S3 data owner (grantor) in the request. By default, S3 Access Grants returns grants from the instance of the Amazon Web Services account ID in the request. To return grants from all instances shared with the caller's account through Amazon Web Services Resource Access Manager (RAM), set the <code>InstanceScope</code> parameter to <code>ALL</code>. You can, optionally, narrow the results by <code>GrantScope</code>, using a fragment of the data's S3 path, and S3 Access Grants will return only the grants with a path that contains the path fragment. You can also pass the <code>AllowedByApplication</code> filter in the request, which returns only the grants authorized for applications, whether the application is the caller's Identity Center application or any other application (<code>ALL</code>). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-list-grants.html\">List the caller's access grants</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3:ListCallerAccessGrants</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -18788,10 +18818,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance. If the grant includes an application ARN, the grantee can only access the S3 data through this application. </p>"
                     }
+                },
+                "AccessGrantsInstanceArn": {
+                    "target": "com.amazonaws.s3control#AccessGrantsInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 Access Grants instance in which the grant was created.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Part of <code>ListCallerAccessGrantsResult</code>. Each entry includes the\n         permission level (READ, WRITE, or READWRITE) and the grant scope of the access grant. If the grant also includes an application ARN, the grantee can only access the S3 data through this application.</p>"
+                "smithy.api#documentation": "<p>Part of <code>ListCallerAccessGrantsResult</code>. Each entry includes the\n         permission level (READ, WRITE, or READWRITE) and the grant scope of the access grant. Each entry also includes the ARN of the S3 Access Grants instance in which the grant was created. If the grant also includes an application ARN, the grantee can only access the S3 data through this application.</p>"
             }
         },
         "com.amazonaws.s3control#ListCallerAccessGrantsRequest": {
@@ -18837,6 +18873,13 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If this optional parameter is passed in the request, a filter is applied to the results. The results will include only the access grants for the caller's Identity Center application or for any other applications (<code>ALL</code>).</p>",
                         "smithy.api#httpQuery": "allowedByApplication"
+                    }
+                },
+                "InstanceScope": {
+                    "target": "com.amazonaws.s3control#InstanceScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of S3 Access Grants instances to list grants from.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SELF</code> – Lists grants from the instance of the Amazon Web Services account ID in the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL</code> – Lists grants from the instance of the Amazon Web Services account ID in the request and all instances shared with the caller's account through Amazon Web Services Resource Access Manager (RAM).</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "instanceScope"
                     }
                 }
             },

@@ -547,15 +547,31 @@ func TestUpdateResponseSnapshot_ListManagedMicrovmImageVersions(t *testing.T) {
 				ImageArn:     ptr.String("__ImageArn__"),
 				ImageVersion: ptr.String("__ImageVersion__"),
 				Status:       types.ManagedMicrovmImageVersionStatus("AVAILABLE"),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SupportedCpuConfigurations: []types.CpuConfiguration{
+					{
+						Architecture: types.Architecture("ARM_64"),
+					},
+					{
+						Architecture: types.Architecture("ARM_64"),
+					},
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				ImageArn:     ptr.String("__ImageArn__"),
 				ImageVersion: ptr.String("__ImageVersion__"),
 				Status:       types.ManagedMicrovmImageVersionStatus("AVAILABLE"),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SupportedCpuConfigurations: []types.CpuConfiguration{
+					{
+						Architecture: types.Architecture("ARM_64"),
+					},
+					{
+						Architecture: types.Architecture("ARM_64"),
+					},
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 	}

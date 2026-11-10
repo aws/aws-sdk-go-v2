@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type DeleteDBShardGroupInput struct {
 	DBShardGroupIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteDBShardGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDBShardGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBShardGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBShardGroupIdentifier != nil {
+		s.WriteString(schemas.DeleteDBShardGroupMessage_DBShardGroupIdentifier, *v.DBShardGroupIdentifier)
+	}
 }
 
 // Contains the details for an Amazon RDS DB shard group.
@@ -107,13 +121,91 @@ type DeleteDBShardGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBShardGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBShardGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBShardGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeRedundancy != nil {
+		s.WriteInt32(schemas.DBShardGroup_ComputeRedundancy, *v.ComputeRedundancy)
+	}
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.DBShardGroup_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.DBShardGroupArn != nil {
+		s.WriteString(schemas.DBShardGroup_DBShardGroupArn, *v.DBShardGroupArn)
+	}
+	if v.DBShardGroupIdentifier != nil {
+		s.WriteString(schemas.DBShardGroup_DBShardGroupIdentifier, *v.DBShardGroupIdentifier)
+	}
+	if v.DBShardGroupResourceId != nil {
+		s.WriteString(schemas.DBShardGroup_DBShardGroupResourceId, *v.DBShardGroupResourceId)
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.DBShardGroup_Endpoint, *v.Endpoint)
+	}
+	if v.MaxACU != nil {
+		s.WriteFloat64(schemas.DBShardGroup_MaxACU, *v.MaxACU)
+	}
+	if v.MinACU != nil {
+		s.WriteFloat64(schemas.DBShardGroup_MinACU, *v.MinACU)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.DBShardGroup_PubliclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DBShardGroup_Status, *v.Status)
+	}
+	if v.TagList != nil {
+		serializeTagList(s, schemas.DBShardGroup_TagList, v.TagList)
+	}
+}
+func (v *DeleteDBShardGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBShardGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBShardGroup_ComputeRedundancy:
+			v.ComputeRedundancy = new(int32)
+			return d.ReadInt32(schemas.DBShardGroup_ComputeRedundancy, v.ComputeRedundancy)
+		case schemas.DBShardGroup_DBClusterIdentifier:
+			v.DBClusterIdentifier = new(string)
+			return d.ReadString(schemas.DBShardGroup_DBClusterIdentifier, v.DBClusterIdentifier)
+		case schemas.DBShardGroup_DBShardGroupArn:
+			v.DBShardGroupArn = new(string)
+			return d.ReadString(schemas.DBShardGroup_DBShardGroupArn, v.DBShardGroupArn)
+		case schemas.DBShardGroup_DBShardGroupIdentifier:
+			v.DBShardGroupIdentifier = new(string)
+			return d.ReadString(schemas.DBShardGroup_DBShardGroupIdentifier, v.DBShardGroupIdentifier)
+		case schemas.DBShardGroup_DBShardGroupResourceId:
+			v.DBShardGroupResourceId = new(string)
+			return d.ReadString(schemas.DBShardGroup_DBShardGroupResourceId, v.DBShardGroupResourceId)
+		case schemas.DBShardGroup_Endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.DBShardGroup_Endpoint, v.Endpoint)
+		case schemas.DBShardGroup_MaxACU:
+			v.MaxACU = new(float64)
+			return d.ReadFloat64(schemas.DBShardGroup_MaxACU, v.MaxACU)
+		case schemas.DBShardGroup_MinACU:
+			v.MinACU = new(float64)
+			return d.ReadFloat64(schemas.DBShardGroup_MinACU, v.MinACU)
+		case schemas.DBShardGroup_PubliclyAccessible:
+			v.PubliclyAccessible = new(bool)
+			return d.ReadBool(schemas.DBShardGroup_PubliclyAccessible, v.PubliclyAccessible)
+		case schemas.DBShardGroup_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DBShardGroup_Status, v.Status)
+		case schemas.DBShardGroup_TagList:
+			return deserializeTagList(d, schemas.DBShardGroup_TagList, &v.TagList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDBShardGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBShardGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBShardGroup, schemas.DeleteDBShardGroupMessage, schemas.DBShardGroup)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteDBShardGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBShardGroup, schemas.DeleteDBShardGroupMessage, schemas.DBShardGroup), output: &DeleteDBShardGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

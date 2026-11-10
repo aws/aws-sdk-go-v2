@@ -2089,6 +2089,14 @@ func serializeContentBlockList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeDomainList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeDomainPatterns(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -2847,6 +2855,16 @@ func serializeVariantResultList(s smithy.ShapeSerializer, schema *smithy.Schema,
 	s.CloseList()
 }
 
+func serializeWebSearchResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.WebSearchResult) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeWwwAuthenticateHeaderList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -3132,6 +3150,27 @@ func deserializeContentBlockList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 
 		vv = types.ContentBlock{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDomainList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 
@@ -4926,6 +4965,28 @@ func deserializeVariantResultList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 		}
 
 		vv = types.VariantResult{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeWebSearchResultList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.WebSearchResult) error {
+	*v = make([]types.WebSearchResult, 0)
+	var vv types.WebSearchResult
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.WebSearchResult
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.WebSearchResult{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

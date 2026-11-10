@@ -31,6 +31,7 @@ const (
 	PermissionStatusUnattachable PermissionStatus = "UNATTACHABLE"
 	PermissionStatusDeleting     PermissionStatus = "DELETING"
 	PermissionStatusDeleted      PermissionStatus = "DELETED"
+	PermissionStatusDeprecated   PermissionStatus = "DEPRECATED"
 )
 
 // Values returns all known values for PermissionStatus. Note that this can be
@@ -43,6 +44,27 @@ func (PermissionStatus) Values() []PermissionStatus {
 		"UNATTACHABLE",
 		"DELETING",
 		"DELETED",
+		"DEPRECATED",
+	}
+}
+
+type PermissionTemplateParameterType string
+
+// Enum values for PermissionTemplateParameterType
+const (
+	PermissionTemplateParameterTypeString     PermissionTemplateParameterType = "STRING"
+	PermissionTemplateParameterTypeStringList PermissionTemplateParameterType = "STRING_LIST"
+)
+
+// Values returns all known values for PermissionTemplateParameterType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PermissionTemplateParameterType) Values() []PermissionTemplateParameterType {
+	return []PermissionTemplateParameterType{
+		"STRING",
+		"STRING_LIST",
 	}
 }
 
@@ -313,5 +335,24 @@ func (ResourceStatus) Values() []ResourceStatus {
 		"LIMIT_EXCEEDED",
 		"UNAVAILABLE",
 		"PENDING",
+	}
+}
+
+type UpdatePermissionStatus string
+
+// Enum values for UpdatePermissionStatus
+const (
+	UpdatePermissionStatusAttachable UpdatePermissionStatus = "ATTACHABLE"
+	UpdatePermissionStatusDeprecated UpdatePermissionStatus = "DEPRECATED"
+)
+
+// Values returns all known values for UpdatePermissionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdatePermissionStatus) Values() []UpdatePermissionStatus {
+	return []UpdatePermissionStatus{
+		"ATTACHABLE",
+		"DEPRECATED",
 	}
 }

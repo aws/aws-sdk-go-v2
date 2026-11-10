@@ -1349,6 +1349,473 @@ func (v *BillingModeSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains the bulk put bytes used during a bulk operation.
+type BulkOperationBytes struct {
+
+	// The number of bulk put bytes.
+	BulkPutBytes *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *BulkOperationBytes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BulkOperationBytes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BulkOperationBytes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BulkPutBytes != nil {
+		s.WriteInt64(schemas.BulkOperationBytes_BulkPutBytes, *v.BulkPutBytes)
+	}
+}
+func (v *BulkOperationBytes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BulkOperationBytes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BulkOperationBytes_BulkPutBytes:
+			v.BulkPutBytes = new(int64)
+			return d.ReadInt64(schemas.BulkOperationBytes_BulkPutBytes, v.BulkPutBytes)
+		}
+		return nil
+	})
+}
+
+// Contains detailed information about a bulk operation.
+type BulkOperationDescription struct {
+
+	// The Amazon Resource Name (ARN) of the bulk operation.
+	BulkOperationArn *string
+
+	// The current status of the bulk operation can be one of the following values:
+	//
+	// IN_PROGRESS DynamoDB is processing the input.
+	//
+	// COMPLETED The bulk operation finished without parsing or validation errors.
+	// Condition-check failures do not cause the operation to complete with errors.
+	//
+	// COMPLETED_WITH_ERRORS The bulk operation finished, but DynamoDB couldn't
+	// process at least one input item because of a parsing or validation error. When
+	// you enable ERROR output, DynamoDB writes the details to the configured Amazon
+	// S3 output location.
+	//
+	// CANCELLING DynamoDB accepted a cancellation request and is stopping the
+	// operation.
+	//
+	// CANCELLED DynamoDB stopped the operation after a cancellation request.
+	//
+	// FAILED The bulk operation failed. DynamoDB might write some items before the
+	// operation reaches this status. See [FailureCode]and [FailureMessage] for details.
+	//
+	// [FailureCode]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BulkOperationDescription.html#DDB-Type-BulkOperationDescription-FailureCode
+	// [FailureMessage]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BulkOperationDescription.html#DDB-Type-BulkOperationDescription-FailureMessage
+	BulkOperationStatus BulkOperationStatus
+
+	// Usage information for the table and its indexes.
+	BulkOperationUsage []BulkOperationUsage
+
+	// The idempotency token associated with the start request.
+	ClientToken *string
+
+	// The time when the operation reached a terminal status. DynamoDB omits this
+	// value while the operation remains in progress.
+	EndTime *time.Time
+
+	// The number of processed input items that failed because of parsing or
+	// validation errors. This count is included in ProcessedItemCount .
+	// Condition-check failures do not increase this count.
+	FailedItemCount int64
+
+	// A code that identifies why the bulk operation failed or was cancelled. DynamoDB
+	// returns this value only when BulkOperationStatus is FAILED or CANCELLED .
+	FailureCode *string
+
+	// A message that describes why the bulk operation failed or was cancelled.
+	// DynamoDB returns this value only when BulkOperationStatus is FAILED or CANCELLED
+	// .
+	FailureMessage *string
+
+	// The Amazon S3 input configuration associated with the bulk operation.
+	InputS3Configuration *InputS3Configuration
+
+	// The maximum write request unit rate configured for the bulk operation.
+	MaxWriteRequestUnits *int64
+
+	// The Amazon S3 output configuration associated with the bulk operation.
+	OutputS3Configuration *OutputS3Configuration
+
+	// The performance tier selected for the bulk operation. Valid values are STANDARD
+	// and ACCELERATED . If the start request omitted this value, DynamoDB uses
+	// STANDARD .
+	PerformanceTier BulkOperationPerformanceTier
+
+	// The number of bytes that DynamoDB has read from the Amazon S3 input objects.
+	ProcessedInputBytes *int64
+
+	// The number of input items that DynamoDB has processed. This count includes
+	// successful writes, parsing or validation failures, and condition-check failures.
+	ProcessedItemCount int64
+
+	// The time when DynamoDB accepted the start request.
+	StartTime *time.Time
+
+	// A list containing identifying information for the table targeted by the bulk
+	// operation.
+	TableDetails []BulkOperationTableDetail
+
+	// The total size, in bytes, of the Amazon S3 input objects. DynamoDB omits this
+	// value until the initial input-size calculation completes.
+	TotalInputBytes *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *BulkOperationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BulkOperationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BulkOperationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BulkOperationArn != nil {
+		s.WriteString(schemas.BulkOperationDescription_BulkOperationArn, *v.BulkOperationArn)
+	}
+	if v.BulkOperationStatus != "" {
+		s.WriteString(schemas.BulkOperationDescription_BulkOperationStatus, string(v.BulkOperationStatus))
+	}
+	if v.BulkOperationUsage != nil {
+		serializeBulkOperationUsageMultiple(s, schemas.BulkOperationDescription_BulkOperationUsage, v.BulkOperationUsage)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BulkOperationDescription_ClientToken, *v.ClientToken)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.BulkOperationDescription_EndTime, *v.EndTime)
+	}
+	if v.FailedItemCount != 0 {
+		s.WriteInt64(schemas.BulkOperationDescription_FailedItemCount, v.FailedItemCount)
+	}
+	if v.FailureCode != nil {
+		s.WriteString(schemas.BulkOperationDescription_FailureCode, *v.FailureCode)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.BulkOperationDescription_FailureMessage, *v.FailureMessage)
+	}
+	if v.InputS3Configuration != nil {
+		s.WriteStruct(schemas.BulkOperationDescription_InputS3Configuration)
+		v.InputS3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxWriteRequestUnits != nil {
+		s.WriteInt64(schemas.BulkOperationDescription_MaxWriteRequestUnits, *v.MaxWriteRequestUnits)
+	}
+	if v.OutputS3Configuration != nil {
+		s.WriteStruct(schemas.BulkOperationDescription_OutputS3Configuration)
+		v.OutputS3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerformanceTier != "" {
+		s.WriteString(schemas.BulkOperationDescription_PerformanceTier, string(v.PerformanceTier))
+	}
+	if v.ProcessedInputBytes != nil {
+		s.WriteInt64(schemas.BulkOperationDescription_ProcessedInputBytes, *v.ProcessedInputBytes)
+	}
+	if v.ProcessedItemCount != 0 {
+		s.WriteInt64(schemas.BulkOperationDescription_ProcessedItemCount, v.ProcessedItemCount)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.BulkOperationDescription_StartTime, *v.StartTime)
+	}
+	if v.TableDetails != nil {
+		serializeBulkOperationTableDetails(s, schemas.BulkOperationDescription_TableDetails, v.TableDetails)
+	}
+	if v.TotalInputBytes != nil {
+		s.WriteInt64(schemas.BulkOperationDescription_TotalInputBytes, *v.TotalInputBytes)
+	}
+}
+func (v *BulkOperationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BulkOperationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BulkOperationDescription_BulkOperationArn:
+			v.BulkOperationArn = new(string)
+			return d.ReadString(schemas.BulkOperationDescription_BulkOperationArn, v.BulkOperationArn)
+		case schemas.BulkOperationDescription_BulkOperationStatus:
+			var ev string
+			if err := d.ReadString(schemas.BulkOperationDescription_BulkOperationStatus, &ev); err != nil {
+				return err
+			}
+			v.BulkOperationStatus = BulkOperationStatus(ev)
+			return nil
+		case schemas.BulkOperationDescription_BulkOperationUsage:
+			return deserializeBulkOperationUsageMultiple(d, schemas.BulkOperationDescription_BulkOperationUsage, &v.BulkOperationUsage)
+		case schemas.BulkOperationDescription_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.BulkOperationDescription_ClientToken, v.ClientToken)
+		case schemas.BulkOperationDescription_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.BulkOperationDescription_EndTime, v.EndTime)
+		case schemas.BulkOperationDescription_FailedItemCount:
+			return d.ReadInt64(schemas.BulkOperationDescription_FailedItemCount, &v.FailedItemCount)
+		case schemas.BulkOperationDescription_FailureCode:
+			v.FailureCode = new(string)
+			return d.ReadString(schemas.BulkOperationDescription_FailureCode, v.FailureCode)
+		case schemas.BulkOperationDescription_FailureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.BulkOperationDescription_FailureMessage, v.FailureMessage)
+		case schemas.BulkOperationDescription_InputS3Configuration:
+			v.InputS3Configuration = &InputS3Configuration{}
+			return v.InputS3Configuration.Deserialize(d)
+		case schemas.BulkOperationDescription_MaxWriteRequestUnits:
+			v.MaxWriteRequestUnits = new(int64)
+			return d.ReadInt64(schemas.BulkOperationDescription_MaxWriteRequestUnits, v.MaxWriteRequestUnits)
+		case schemas.BulkOperationDescription_OutputS3Configuration:
+			v.OutputS3Configuration = &OutputS3Configuration{}
+			return v.OutputS3Configuration.Deserialize(d)
+		case schemas.BulkOperationDescription_PerformanceTier:
+			var ev string
+			if err := d.ReadString(schemas.BulkOperationDescription_PerformanceTier, &ev); err != nil {
+				return err
+			}
+			v.PerformanceTier = BulkOperationPerformanceTier(ev)
+			return nil
+		case schemas.BulkOperationDescription_ProcessedInputBytes:
+			v.ProcessedInputBytes = new(int64)
+			return d.ReadInt64(schemas.BulkOperationDescription_ProcessedInputBytes, v.ProcessedInputBytes)
+		case schemas.BulkOperationDescription_ProcessedItemCount:
+			return d.ReadInt64(schemas.BulkOperationDescription_ProcessedItemCount, &v.ProcessedItemCount)
+		case schemas.BulkOperationDescription_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.BulkOperationDescription_StartTime, v.StartTime)
+		case schemas.BulkOperationDescription_TableDetails:
+			return deserializeBulkOperationTableDetails(d, schemas.BulkOperationDescription_TableDetails, &v.TableDetails)
+		case schemas.BulkOperationDescription_TotalInputBytes:
+			v.TotalInputBytes = new(int64)
+			return d.ReadInt64(schemas.BulkOperationDescription_TotalInputBytes, v.TotalInputBytes)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about a bulk operation.
+type BulkOperationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the bulk operation.
+	//
+	// This member is required.
+	BulkOperationArn *string
+
+	// The current status of the bulk operation.
+	//
+	// This member is required.
+	BulkOperationStatus BulkOperationStatus
+
+	// The time when DynamoDB accepted the start request.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The time when the operation reached a terminal status. DynamoDB omits this
+	// value while the operation remains in progress.
+	EndTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *BulkOperationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BulkOperationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BulkOperationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BulkOperationArn != nil {
+		s.WriteString(schemas.BulkOperationSummary_BulkOperationArn, *v.BulkOperationArn)
+	}
+	if v.BulkOperationStatus != "" {
+		s.WriteString(schemas.BulkOperationSummary_BulkOperationStatus, string(v.BulkOperationStatus))
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.BulkOperationSummary_EndTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.BulkOperationSummary_StartTime, *v.StartTime)
+	}
+}
+func (v *BulkOperationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BulkOperationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BulkOperationSummary_BulkOperationArn:
+			v.BulkOperationArn = new(string)
+			return d.ReadString(schemas.BulkOperationSummary_BulkOperationArn, v.BulkOperationArn)
+		case schemas.BulkOperationSummary_BulkOperationStatus:
+			var ev string
+			if err := d.ReadString(schemas.BulkOperationSummary_BulkOperationStatus, &ev); err != nil {
+				return err
+			}
+			v.BulkOperationStatus = BulkOperationStatus(ev)
+			return nil
+		case schemas.BulkOperationSummary_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.BulkOperationSummary_EndTime, v.EndTime)
+		case schemas.BulkOperationSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.BulkOperationSummary_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
+// Contains identifying information for a table associated with a bulk operation.
+type BulkOperationTableDetail struct {
+
+	// The unique identifier of the table associated with the bulk operation.
+	TableId *string
+
+	// The name or ARN of the table associated with the bulk operation.
+	TableName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BulkOperationTableDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BulkOperationTableDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BulkOperationTableDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableId != nil {
+		s.WriteString(schemas.BulkOperationTableDetail_TableId, *v.TableId)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.BulkOperationTableDetail_TableName, *v.TableName)
+	}
+}
+func (v *BulkOperationTableDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BulkOperationTableDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BulkOperationTableDetail_TableId:
+			v.TableId = new(string)
+			return d.ReadString(schemas.BulkOperationTableDetail_TableId, v.TableId)
+		case schemas.BulkOperationTableDetail_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.BulkOperationTableDetail_TableName, v.TableName)
+		}
+		return nil
+	})
+}
+
+// Contains the bytes used during a bulk operation, including a breakdown for the
+// table and its indexes.
+type BulkOperationUsage struct {
+
+	// The total number of bulk put bytes used by the operation. This value excludes
+	// bulk put vector bytes.
+	BulkPutBytes *int64
+
+	// The bulk put bytes used on each global secondary index affected by the
+	// operation, keyed by index name.
+	GlobalSecondaryIndexes map[string]BulkOperationBytes
+
+	// The bulk put bytes used on each local secondary index affected by the
+	// operation, keyed by index name.
+	LocalSecondaryIndexes map[string]BulkOperationBytes
+
+	// The number of bulk put bytes for the table, excluding its indexes.
+	Table *BulkOperationBytes
+
+	// The name or ARN of the table associated with the reported usage.
+	TableName *string
+
+	// The bulk put vector bytes used on each vector index affected by the operation,
+	// keyed by index name.
+	VectorIndexes map[string]BulkOperationVectorBytes
+
+	noSmithyDocumentSerde
+}
+
+func (v *BulkOperationUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BulkOperationUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BulkOperationUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BulkPutBytes != nil {
+		s.WriteInt64(schemas.BulkOperationUsage_BulkPutBytes, *v.BulkPutBytes)
+	}
+	if v.GlobalSecondaryIndexes != nil {
+		serializeSecondaryIndexesBulkBytesMap(s, schemas.BulkOperationUsage_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	}
+	if v.LocalSecondaryIndexes != nil {
+		serializeSecondaryIndexesBulkBytesMap(s, schemas.BulkOperationUsage_LocalSecondaryIndexes, v.LocalSecondaryIndexes)
+	}
+	if v.Table != nil {
+		s.WriteStruct(schemas.BulkOperationUsage_Table)
+		v.Table.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.BulkOperationUsage_TableName, *v.TableName)
+	}
+	if v.VectorIndexes != nil {
+		serializeVectorIndexesBulkVectorBytesMap(s, schemas.BulkOperationUsage_VectorIndexes, v.VectorIndexes)
+	}
+}
+func (v *BulkOperationUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BulkOperationUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BulkOperationUsage_BulkPutBytes:
+			v.BulkPutBytes = new(int64)
+			return d.ReadInt64(schemas.BulkOperationUsage_BulkPutBytes, v.BulkPutBytes)
+		case schemas.BulkOperationUsage_GlobalSecondaryIndexes:
+			return deserializeSecondaryIndexesBulkBytesMap(d, schemas.BulkOperationUsage_GlobalSecondaryIndexes, &v.GlobalSecondaryIndexes)
+		case schemas.BulkOperationUsage_LocalSecondaryIndexes:
+			return deserializeSecondaryIndexesBulkBytesMap(d, schemas.BulkOperationUsage_LocalSecondaryIndexes, &v.LocalSecondaryIndexes)
+		case schemas.BulkOperationUsage_Table:
+			v.Table = &BulkOperationBytes{}
+			return v.Table.Deserialize(d)
+		case schemas.BulkOperationUsage_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.BulkOperationUsage_TableName, v.TableName)
+		case schemas.BulkOperationUsage_VectorIndexes:
+			return deserializeVectorIndexesBulkVectorBytesMap(d, schemas.BulkOperationUsage_VectorIndexes, &v.VectorIndexes)
+		}
+		return nil
+	})
+}
+
+// Contains the bulk put vector bytes used by a vector index during a bulk
+// operation.
+type BulkOperationVectorBytes struct {
+
+	// The number of bulk put vector bytes used on the vector index.
+	BulkPutVectorBytes *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *BulkOperationVectorBytes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BulkOperationVectorBytes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BulkOperationVectorBytes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BulkPutVectorBytes != nil {
+		s.WriteInt64(schemas.BulkOperationVectorBytes_BulkPutVectorBytes, *v.BulkPutVectorBytes)
+	}
+}
+func (v *BulkOperationVectorBytes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BulkOperationVectorBytes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BulkOperationVectorBytes_BulkPutVectorBytes:
+			v.BulkPutVectorBytes = new(int64)
+			return d.ReadInt64(schemas.BulkOperationVectorBytes_BulkPutVectorBytes, v.BulkPutVectorBytes)
+		}
+		return nil
+	})
+}
+
 // An ordered list of errors for each item in the request which caused the
 // transaction to get cancelled. The values of the list are ordered according to
 // the ordering of the TransactWriteItems request parameter. If no error occurred
@@ -4825,6 +5292,93 @@ func (v *InputFormatOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains the Amazon S3 location and format settings for bulk operation input.
+// The S3Bucket and InputFormat fields are required.
+type InputS3Configuration struct {
+
+	// The format of the input objects. DYNAMODB_JSON uses JSON Lines, with one JSON
+	// record per line. ION uses a sequence of Ion structs.
+	//
+	// This member is required.
+	InputFormat BulkOperationInputFormat
+
+	// The name of the Amazon S3 bucket that contains the input objects.
+	//
+	// This member is required.
+	S3Bucket *string
+
+	// The compression type of the input objects. Valid values are GZIP , ZSTD , and
+	// NONE . If you don't specify a value, DynamoDB uses NONE .
+	InputCompressionType InputCompressionType
+
+	// The Amazon Web Services account ID of the input bucket owner. If you omit this
+	// value, DynamoDB uses the Amazon Web Services account ID of the requester.
+	//
+	// S3BucketOwner is required when the bucket is owned by another Amazon Web
+	// Services account.
+	S3BucketOwner *string
+
+	// An optional key prefix that limits the input to matching objects in the Amazon
+	// S3 bucket.
+	S3KeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InputS3Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputS3Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputS3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputCompressionType != "" {
+		s.WriteString(schemas.InputS3Configuration_InputCompressionType, string(v.InputCompressionType))
+	}
+	if v.InputFormat != "" {
+		s.WriteString(schemas.InputS3Configuration_InputFormat, string(v.InputFormat))
+	}
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.InputS3Configuration_S3Bucket, *v.S3Bucket)
+	}
+	if v.S3BucketOwner != nil {
+		s.WriteString(schemas.InputS3Configuration_S3BucketOwner, *v.S3BucketOwner)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.InputS3Configuration_S3KeyPrefix, *v.S3KeyPrefix)
+	}
+}
+func (v *InputS3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputS3Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputS3Configuration_InputCompressionType:
+			var ev string
+			if err := d.ReadString(schemas.InputS3Configuration_InputCompressionType, &ev); err != nil {
+				return err
+			}
+			v.InputCompressionType = InputCompressionType(ev)
+			return nil
+		case schemas.InputS3Configuration_InputFormat:
+			var ev string
+			if err := d.ReadString(schemas.InputS3Configuration_InputFormat, &ev); err != nil {
+				return err
+			}
+			v.InputFormat = BulkOperationInputFormat(ev)
+			return nil
+		case schemas.InputS3Configuration_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.InputS3Configuration_S3Bucket, v.S3Bucket)
+		case schemas.InputS3Configuration_S3BucketOwner:
+			v.S3BucketOwner = new(string)
+			return d.ReadString(schemas.InputS3Configuration_S3BucketOwner, v.S3BucketOwner)
+		case schemas.InputS3Configuration_S3KeyPrefix:
+			v.S3KeyPrefix = new(string)
+			return d.ReadString(schemas.InputS3Configuration_S3KeyPrefix, v.S3KeyPrefix)
+		}
+		return nil
+	})
+}
+
 // Information about item collections, if any, that were affected by the
 // operation. ItemCollectionMetrics is only returned if the request asked for it.
 // If the table does not have any local secondary indexes, this information is not
@@ -5481,6 +6035,105 @@ func (v *OnDemandThroughputOverride) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.OnDemandThroughputOverride_MaxReadRequestUnits:
 			v.MaxReadRequestUnits = new(int64)
 			return d.ReadInt64(schemas.OnDemandThroughputOverride_MaxReadRequestUnits, v.MaxReadRequestUnits)
+		}
+		return nil
+	})
+}
+
+// Contains the Amazon S3 location, encryption settings, and output types for a
+// bulk operation. The S3Bucket and OutputType fields are required.
+type OutputS3Configuration struct {
+
+	// The following values describe the types of output that DynamoDB writes for
+	// individual input items. Include one or both values.
+	//
+	// ERROR Reports input records or input objects that DynamoDB couldn't process.
+	// This includes malformed input and item validation failures, such as a missing or
+	// incorrectly typed primary key attribute or an item that exceeds a DynamoDB
+	// limit.
+	//
+	// CONDITION_CHECK_FAILURE Reports the attempted item and, when present, the
+	// existing item for a write whose condition expression evaluates to false.
+	//
+	// This member is required.
+	OutputType []OutputTypeEnum
+
+	// The name of the Amazon S3 bucket where DynamoDB writes output records.
+	S3Bucket *string
+
+	// The Amazon Web Services account ID of the output bucket owner. If you omit this
+	// value, DynamoDB uses the Amazon Web Services account ID of the requester.
+	//
+	// S3BucketOwner is required when the bucket is owned by another Amazon Web
+	// Services account.
+	S3BucketOwner *string
+
+	// An optional key prefix under which DynamoDB writes the output records.
+	S3KeyPrefix *string
+
+	// The server-side encryption algorithm for the output objects. Valid values are
+	// AES256 and KMS . If you don't specify a value, Amazon S3 applies the destination
+	// bucket's default encryption settings.
+	S3SseAlgorithm S3SseAlgorithm
+
+	// The identifier of the KMS key that encrypts the output objects. Specify this
+	// value when S3SseAlgorithm is KMS . Don't specify it when the algorithm is AES256
+	// .
+	S3SseKmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OutputS3Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputS3Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputS3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputType != nil {
+		serializeOutputTypeList(s, schemas.OutputS3Configuration_OutputType, v.OutputType)
+	}
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.OutputS3Configuration_S3Bucket, *v.S3Bucket)
+	}
+	if v.S3BucketOwner != nil {
+		s.WriteString(schemas.OutputS3Configuration_S3BucketOwner, *v.S3BucketOwner)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.OutputS3Configuration_S3KeyPrefix, *v.S3KeyPrefix)
+	}
+	if v.S3SseAlgorithm != "" {
+		s.WriteString(schemas.OutputS3Configuration_S3SseAlgorithm, string(v.S3SseAlgorithm))
+	}
+	if v.S3SseKmsKeyId != nil {
+		s.WriteString(schemas.OutputS3Configuration_S3SseKmsKeyId, *v.S3SseKmsKeyId)
+	}
+}
+func (v *OutputS3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputS3Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputS3Configuration_OutputType:
+			return deserializeOutputTypeList(d, schemas.OutputS3Configuration_OutputType, &v.OutputType)
+		case schemas.OutputS3Configuration_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.OutputS3Configuration_S3Bucket, v.S3Bucket)
+		case schemas.OutputS3Configuration_S3BucketOwner:
+			v.S3BucketOwner = new(string)
+			return d.ReadString(schemas.OutputS3Configuration_S3BucketOwner, v.S3BucketOwner)
+		case schemas.OutputS3Configuration_S3KeyPrefix:
+			v.S3KeyPrefix = new(string)
+			return d.ReadString(schemas.OutputS3Configuration_S3KeyPrefix, v.S3KeyPrefix)
+		case schemas.OutputS3Configuration_S3SseAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.OutputS3Configuration_S3SseAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.S3SseAlgorithm = S3SseAlgorithm(ev)
+			return nil
+		case schemas.OutputS3Configuration_S3SseKmsKeyId:
+			v.S3SseKmsKeyId = new(string)
+			return d.ReadString(schemas.OutputS3Configuration_S3SseKmsKeyId, v.S3SseKmsKeyId)
 		}
 		return nil
 	})

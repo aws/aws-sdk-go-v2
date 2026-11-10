@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListGeneratedTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGeneratedTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGeneratedTemplatesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGeneratedTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGeneratedTemplatesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGeneratedTemplatesInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListGeneratedTemplatesOutput struct {
 
 	// If the request doesn't return all the remaining results, NextToken is set to a
@@ -57,13 +74,37 @@ type ListGeneratedTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGeneratedTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGeneratedTemplatesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGeneratedTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGeneratedTemplatesOutput_NextToken, *v.NextToken)
+	}
+	if v.Summaries != nil {
+		serializeTemplateSummaries(s, schemas.ListGeneratedTemplatesOutput_Summaries, v.Summaries)
+	}
+}
+func (v *ListGeneratedTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGeneratedTemplatesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGeneratedTemplatesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGeneratedTemplatesOutput_NextToken, v.NextToken)
+		case schemas.ListGeneratedTemplatesOutput_Summaries:
+			return deserializeTemplateSummaries(d, schemas.ListGeneratedTemplatesOutput_Summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGeneratedTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListGeneratedTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGeneratedTemplates, schemas.ListGeneratedTemplatesInput, schemas.ListGeneratedTemplatesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListGeneratedTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGeneratedTemplates, schemas.ListGeneratedTemplatesInput, schemas.ListGeneratedTemplatesOutput), output: &ListGeneratedTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

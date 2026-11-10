@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type DescribeClusterDbRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterDbRevisionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterDbRevisionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterDbRevisionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeClusterDbRevisionsMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeClusterDbRevisionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeClusterDbRevisionsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeClusterDbRevisionsOutput struct {
 
 	// A list of revisions.
@@ -74,13 +94,37 @@ type DescribeClusterDbRevisionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterDbRevisionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterDbRevisionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterDbRevisionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterDbRevisions != nil {
+		serializeClusterDbRevisionsList(s, schemas.ClusterDbRevisionsMessage_ClusterDbRevisions, v.ClusterDbRevisions)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ClusterDbRevisionsMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeClusterDbRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterDbRevisionsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterDbRevisionsMessage_ClusterDbRevisions:
+			return deserializeClusterDbRevisionsList(d, schemas.ClusterDbRevisionsMessage_ClusterDbRevisions, &v.ClusterDbRevisions)
+		case schemas.ClusterDbRevisionsMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ClusterDbRevisionsMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterDbRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeClusterDbRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterDbRevisions, schemas.DescribeClusterDbRevisionsMessage, schemas.ClusterDbRevisionsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeClusterDbRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterDbRevisions, schemas.DescribeClusterDbRevisionsMessage, schemas.ClusterDbRevisionsMessage), output: &DescribeClusterDbRevisionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

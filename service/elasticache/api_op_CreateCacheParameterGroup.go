@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,27 @@ type CreateCacheParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCacheParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCacheParameterGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCacheParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheParameterGroupFamily != nil {
+		s.WriteString(schemas.CreateCacheParameterGroupMessage_CacheParameterGroupFamily, *v.CacheParameterGroupFamily)
+	}
+	if v.CacheParameterGroupName != nil {
+		s.WriteString(schemas.CreateCacheParameterGroupMessage_CacheParameterGroupName, *v.CacheParameterGroupName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCacheParameterGroupMessage_Description, *v.Description)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCacheParameterGroupMessage_Tags, v.Tags)
+	}
+}
+
 type CreateCacheParameterGroupOutput struct {
 
 	// Represents the output of a CreateCacheParameterGroup operation.
@@ -82,13 +105,34 @@ type CreateCacheParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCacheParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCacheParameterGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCacheParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheParameterGroup != nil {
+		s.WriteStruct(schemas.CreateCacheParameterGroupResult_CacheParameterGroup)
+		v.CacheParameterGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCacheParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCacheParameterGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCacheParameterGroupResult_CacheParameterGroup:
+			v.CacheParameterGroup = &types.CacheParameterGroup{}
+			return v.CacheParameterGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCacheParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateCacheParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCacheParameterGroup, schemas.CreateCacheParameterGroupMessage, schemas.CreateCacheParameterGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateCacheParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCacheParameterGroup, schemas.CreateCacheParameterGroupMessage, schemas.CreateCacheParameterGroupResult), output: &CreateCacheParameterGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

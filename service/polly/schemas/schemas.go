@@ -50,6 +50,13 @@ var ListSpeechSynthesisTasks = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/synthesisTasks",
 	Code: 200})
 
+var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "ListTagsForResource",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/listTagsForResource",
+	Code: 200})
+
 var PutLexicon = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "PutLexicon",
@@ -78,6 +85,20 @@ var SynthesizeSpeech = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/speech",
 	Code: 200})
 
+var TagResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "TagResource",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/tagResource",
+	Code: 200})
+
+var UntagResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "UntagResource",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/untagResource",
+	Code: 200})
+
 var _Parrot_v1 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "Parrot_v1",
@@ -88,6 +109,11 @@ var Parrot_v1 = smithy.NewServiceSchema(_Parrot_v1, "2016-06-10")
 var _Alphabet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "Alphabet",
+}, smithy.ShapeTypeString, 0)
+
+var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "AmazonResourceName",
 }, smithy.ShapeTypeString, 0)
 
 var _AudioChunk = smithy.NewSchema(smithy.ShapeID{
@@ -166,6 +192,11 @@ var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ErrorMessage",
 }, smithy.ShapeTypeString, 0)
 
+var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "ExceptionMessage",
+}, smithy.ShapeTypeString, 0)
+
 var FlushStreamConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "FlushStreamConfiguration",
@@ -238,6 +269,13 @@ var InvalidSsmlException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 400})
 var InvalidSsmlException_message *smithy.Schema
+
+var InvalidTagParameterException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "InvalidTagParameterException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
+var InvalidTagParameterException_message *smithy.Schema
 
 var InvalidTaskIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
@@ -512,6 +550,28 @@ var _RequestCharacters = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RequestCharacters",
 }, smithy.ShapeTypeInteger, 0)
 
+var _ResourceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "ResourceId",
+}, smithy.ShapeTypeString, 0)
+
+var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "ResourceNotFoundException",
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
+var ResourceNotFoundException_message *smithy.Schema
+
+var ResourceNotFoundException_resourceId *smithy.Schema
+
+var ResourceNotFoundException_resourceType *smithy.Schema
+
+var ResourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "ResourceType",
+}, smithy.ShapeTypeEnum, 1)
+var ResourceType_LEXICON *smithy.Schema
+
 var _SampleRate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "SampleRate",
@@ -653,6 +713,30 @@ var _SynthesisTasks = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _SynthesisTasks_member *smithy.Schema
 
+var _TagKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "TagKey",
+}, smithy.ShapeTypeString, 0)
+
+var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "TagKeyList",
+}, smithy.ShapeTypeList, 1)
+var _TagKeyList_member *smithy.Schema
+
+var _TagMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "TagMap",
+}, smithy.ShapeTypeMap, 2)
+var _TagMap_key *smithy.Schema
+
+var _TagMap_value *smithy.Schema
+
+var _TagValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "TagValue",
+}, smithy.ShapeTypeString, 0)
+
 var _TaskId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "TaskId",
@@ -729,6 +813,13 @@ var _ThrottlingReasonList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ThrottlingReasonList",
 }, smithy.ShapeTypeList, 1)
 var _ThrottlingReasonList_member *smithy.Schema
+
+var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "TooManyTagsException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
+var TooManyTagsException_message *smithy.Schema
 
 var UnsupportedPlsAlphabetException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
@@ -1145,13 +1236,27 @@ var ListSpeechSynthesisTasksOutput_NextToken *smithy.Schema
 
 var ListSpeechSynthesisTasksOutput_SynthesisTasks *smithy.Schema
 
+var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "ListTagsForResourceInput",
+}, smithy.ShapeTypeStructure, 1)
+var ListTagsForResourceInput_ResourceArn *smithy.Schema
+
+var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "ListTagsForResourceOutput",
+}, smithy.ShapeTypeStructure, 1)
+var ListTagsForResourceOutput_Tags *smithy.Schema
+
 var PutLexiconInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "PutLexiconInput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var PutLexiconInput_Name *smithy.Schema
 
 var PutLexiconInput_Content *smithy.Schema
+
+var PutLexiconInput_Tags *smithy.Schema
 
 var PutLexiconOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
@@ -1248,6 +1353,32 @@ var SynthesizeSpeechOutput_ContentType *smithy.Schema
 
 var SynthesizeSpeechOutput_RequestCharacters *smithy.Schema
 
+var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "TagResourceInput",
+}, smithy.ShapeTypeStructure, 2)
+var TagResourceInput_ResourceArn *smithy.Schema
+
+var TagResourceInput_Tags *smithy.Schema
+
+var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "TagResourceOutput",
+}, smithy.ShapeTypeStructure, 0)
+
+var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "UntagResourceInput",
+}, smithy.ShapeTypeStructure, 2)
+var UntagResourceInput_ResourceArn *smithy.Schema
+
+var UntagResourceInput_TagKeys *smithy.Schema
+
+var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "UntagResourceOutput",
+}, smithy.ShapeTypeStructure, 0)
+
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
@@ -1284,6 +1415,8 @@ func init() {
 	InvalidSnsTopicArnException_message = InvalidSnsTopicArnException.AddMember("message", _ErrorMessage)
 
 	InvalidSsmlException_message = InvalidSsmlException.AddMember("message", _ErrorMessage)
+
+	InvalidTagParameterException_message = InvalidTagParameterException.AddMember("message", _ExceptionMessage)
 
 	InvalidTaskIdException_message = InvalidTaskIdException.AddMember("message", _ErrorMessage)
 
@@ -1426,6 +1559,14 @@ func init() {
 	QuotaCode_INPUT_STREAM_INBOUND_EVENT_TIMEOUT = QuotaCode.AddMember("INPUT_STREAM_INBOUND_EVENT_TIMEOUT", smithyprelude.Unit)
 
 	QuotaCode_INPUT_STREAM_TIMEOUT = QuotaCode.AddMember("INPUT_STREAM_TIMEOUT", smithyprelude.Unit)
+
+	ResourceType_LEXICON = ResourceType.AddMember("LEXICON", smithyprelude.Unit)
+
+	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
+
+	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _ResourceId)
+
+	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", ResourceType)
 
 	ServiceCode_POLLY = ServiceCode.AddMember("POLLY", smithyprelude.Unit)
 
@@ -1781,7 +1922,15 @@ func init() {
 
 	_SynthesisTasks_member = _SynthesisTasks.AddMember("member", SynthesisTask)
 
+	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
+
+	_TagMap_key = _TagMap.AddMember("key", _TagKey)
+
+	_TagMap_value = _TagMap.AddMember("value", _TagValue)
+
 	TextLengthExceededException_message = TextLengthExceededException.AddMember("message", _ErrorMessage)
+
+	TooManyTagsException_message = TooManyTagsException.AddMember("message", _ExceptionMessage)
 
 	UnsupportedPlsAlphabetException_message = UnsupportedPlsAlphabetException.AddMember("message", _ErrorMessage)
 
@@ -1843,9 +1992,15 @@ func init() {
 
 	ListSpeechSynthesisTasksOutput_SynthesisTasks = ListSpeechSynthesisTasksOutput.AddMember("SynthesisTasks", _SynthesisTasks)
 
+	ListTagsForResourceInput_ResourceArn = ListTagsForResourceInput.AddMember("ResourceArn", _AmazonResourceName, &smithytraits.HTTPQuery{Name: "arn"})
+
+	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _TagMap)
+
 	PutLexiconInput_Name = PutLexiconInput.AddMember("Name", _LexiconName, &smithytraits.HTTPLabel{})
 
 	PutLexiconInput_Content = PutLexiconInput.AddMember("Content", _LexiconContent)
+
+	PutLexiconInput_Tags = PutLexiconInput.AddMember("Tags", _TagMap)
 
 	StartSpeechSynthesisStreamInput_Engine = StartSpeechSynthesisStreamInput.AddMember("Engine", Engine, &smithytraits.HTTPHeader{Name: "x-amzn-Engine"})
 
@@ -1912,5 +2067,13 @@ func init() {
 	SynthesizeSpeechOutput_ContentType = SynthesizeSpeechOutput.AddMember("ContentType", _ContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
 
 	SynthesizeSpeechOutput_RequestCharacters = SynthesizeSpeechOutput.AddMember("RequestCharacters", _RequestCharacters, &smithytraits.HTTPHeader{Name: "x-amzn-RequestCharacters"})
+
+	TagResourceInput_ResourceArn = TagResourceInput.AddMember("ResourceArn", _AmazonResourceName)
+
+	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagMap)
+
+	UntagResourceInput_ResourceArn = UntagResourceInput.AddMember("ResourceArn", _AmazonResourceName)
+
+	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeyList)
 
 }

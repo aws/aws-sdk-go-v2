@@ -5,7 +5,9 @@ package elasticbeanstalk
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,24 @@ type ListPlatformBranchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlatformBranchesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlatformBranchesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlatformBranchesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		serializeSearchFilters(s, schemas.ListPlatformBranchesRequest_Filters, v.Filters)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.ListPlatformBranchesRequest_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlatformBranchesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPlatformBranchesOutput struct {
 
 	// In a paginated request, if this value isn't null , it's the token that you can
@@ -107,13 +127,37 @@ type ListPlatformBranchesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlatformBranchesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlatformBranchesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlatformBranchesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlatformBranchesResult_NextToken, *v.NextToken)
+	}
+	if v.PlatformBranchSummaryList != nil {
+		serializePlatformBranchSummaryList(s, schemas.ListPlatformBranchesResult_PlatformBranchSummaryList, v.PlatformBranchSummaryList)
+	}
+}
+func (v *ListPlatformBranchesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlatformBranchesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlatformBranchesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlatformBranchesResult_NextToken, v.NextToken)
+		case schemas.ListPlatformBranchesResult_PlatformBranchSummaryList:
+			return deserializePlatformBranchSummaryList(d, schemas.ListPlatformBranchesResult_PlatformBranchSummaryList, &v.PlatformBranchSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlatformBranchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListPlatformBranches{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlatformBranches, schemas.ListPlatformBranchesRequest, schemas.ListPlatformBranchesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListPlatformBranches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlatformBranches, schemas.ListPlatformBranchesRequest, schemas.ListPlatformBranchesResult), output: &ListPlatformBranchesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

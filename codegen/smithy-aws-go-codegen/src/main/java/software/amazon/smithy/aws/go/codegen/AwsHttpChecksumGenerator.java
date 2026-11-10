@@ -419,7 +419,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                         trait.getRequestAlgorithmMember().get()));
             }
 
-            String memberName = memberShape.get().getMemberName();
+            String memberName = symbolProvider.toMemberName(memberShape.get());
             String funcName = getRequestAlgorithmAccessorFuncName(operationSymbol.getName());
             writer.writeDocs(
                     String.format("%s gets the request checksum algorithm value provided as input.", funcName));
@@ -439,7 +439,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                         trait.getRequestValidationModeMember().get()));
             }
 
-            String memberName = memberShape.get().getMemberName();
+            String memberName = symbolProvider.toMemberName(memberShape.get());
             String funcName = getRequestValidationModeAccessorFuncName(operationSymbol.getName());
             writer.writeDocs(
                     String.format("%s gets the request checksum validation mode provided as input.", funcName));

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeDBLogFilesResponse><DescribeDBLogFilesResult><DescribeDBLogFiles><DescribeDBLogFilesDetails><LastWritten>1</LastWritten><LogFileName>__LogFileName__</LogFileName><Size>1</Size></DescribeDBLogFilesDetails><DescribeDBLogFilesDetails><LastWritten>1</LastWritten><LogFileName>__LogFileName__</LogFileName><Size>1</Size></DescribeDBLogFilesDetails></DescribeDBLogFiles><Marker>__Marker__</Marker></DescribeDBLogFilesResult></DescribeDBLogFilesResponse>

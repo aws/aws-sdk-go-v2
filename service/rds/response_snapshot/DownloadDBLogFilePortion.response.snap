@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DownloadDBLogFilePortionResponse><DownloadDBLogFilePortionResult><AdditionalDataPending>true</AdditionalDataPending><LogFileData>__LogFileData__</LogFileData><Marker>__Marker__</Marker></DownloadDBLogFilePortionResult></DownloadDBLogFilePortionResponse>

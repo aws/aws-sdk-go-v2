@@ -17,7 +17,10 @@ import (
 
 // Returns a temporary access credential from S3 Access Grants to the grantee or
 // client application. The [temporary credential]is an Amazon Web Services STS token that grants them
-// access to the S3 data.
+// access to the S3 data. By default, S3 Access Grants searches for a matching
+// grant in the instance of the Amazon Web Services account ID in the request. To
+// also search instances shared with the caller through Amazon Web Services
+// Resource Access Manager (RAM), set the InstanceScope parameter to ALL .
 //
 // Permissions You must have the s3:GetDataAccess permission to use this
 // operation.
@@ -80,6 +83,17 @@ type GetDataAccessInput struct {
 	// maximum, the operation fails.
 	DurationSeconds *int32
 
+	// The scope of S3 Access Grants instances to search for a grant matching the
+	// requested S3 URI path.
+	//
+	//   - SELF – Searches only the instance of the Amazon Web Services account ID in
+	//   the request.
+	//
+	//   - ALL – Searches the instance of the Amazon Web Services account ID in the
+	//   request and all instances shared with the caller's account through Amazon Web
+	//   Services Resource Access Manager (RAM).
+	InstanceScope types.InstanceScope
+
 	// The scope of the temporary access credential that S3 Access Grants vends to the
 	// grantee or client application.
 	//
@@ -121,6 +135,10 @@ type GetDataAccessOutput struct {
 	// The S3 URI path of the data to which you are being granted temporary access
 	// credentials.
 	MatchedGrantTarget *string
+
+	// The Amazon Resource Name (ARN) of the S3 Access Grants instance containing the
+	// grant that matched the requested S3 URI path.
+	MatchedInstanceArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

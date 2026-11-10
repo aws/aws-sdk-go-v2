@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type DeleteConfigurationSetTrackingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfigurationSetTrackingOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfigurationSetTrackingOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfigurationSetTrackingOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.DeleteConfigurationSetTrackingOptionsRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+}
+
 // An empty element returned on a successful request.
 type DeleteConfigurationSetTrackingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -54,13 +68,26 @@ type DeleteConfigurationSetTrackingOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfigurationSetTrackingOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfigurationSetTrackingOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfigurationSetTrackingOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConfigurationSetTrackingOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConfigurationSetTrackingOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConfigurationSetTrackingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteConfigurationSetTrackingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfigurationSetTrackingOptions, schemas.DeleteConfigurationSetTrackingOptionsRequest, schemas.DeleteConfigurationSetTrackingOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteConfigurationSetTrackingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfigurationSetTrackingOptions, schemas.DeleteConfigurationSetTrackingOptionsRequest, schemas.DeleteConfigurationSetTrackingOptionsResponse), output: &DeleteConfigurationSetTrackingOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

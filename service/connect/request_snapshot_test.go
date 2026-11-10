@@ -3529,7 +3529,8 @@ func TestCheckRequestSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -3680,7 +3681,8 @@ func TestCheckRequestSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -17652,7 +17654,8 @@ func TestCheckRequestSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -17803,7 +17806,8 @@ func TestCheckRequestSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -22204,7 +22208,8 @@ func TestUpdateRequestSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -22355,7 +22360,8 @@ func TestUpdateRequestSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -36327,7 +36333,8 @@ func TestUpdateRequestSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -36478,7 +36485,8 @@ func TestUpdateRequestSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},

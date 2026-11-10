@@ -2,4 +2,4 @@ POST /realtime-contact-analysis/analysis-segments
 
 Content-Type: application/json
 
-{"ContactId":"__ContactId__","InstanceId":"__InstanceId__","MaxResults":1,"NextToken":"__NextToken__"}
+{"ContactId":"__ContactId__","InstanceId":"__InstanceId__","ListFilter":{"CategoriesAttributeFilter":{"AndCondition":{"TagConditions":[{"ComparisonType":"EQUALS","TagKey":"__TagKey__","TagValue":"__TagValue__"},{"ComparisonType":"EQUALS","TagKey":"__TagKey__","TagValue":"__TagValue__"}]},"OrConditions":[{"TagConditions":[{"ComparisonType":"EQUALS","TagKey":"__TagKey__","TagValue":"__TagValue__"},{"ComparisonType":"EQUALS","TagKey":"__TagKey__","TagValue":"__TagValue__"}]},{"TagConditions":[{"ComparisonType":"EQUALS","TagKey":"__TagKey__","TagValue":"__TagValue__"},{"ComparisonType":"EQUALS","TagKey":"__TagKey__","TagValue":"__TagValue__"}]}],"TagCondition":{"ComparisonType":"EQUALS","TagKey":"__TagKey__","TagValue":"__TagValue__"}}},"MaxResults":1,"NextToken":"__NextToken__"}

@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,22 @@ type GetSendStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSendStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSendStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetSendStatisticsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // Represents a list of data points. This list contains aggregated data from the
 // previous two weeks of your sending activity with Amazon SES.
 type GetSendStatisticsOutput struct {
@@ -46,13 +64,31 @@ type GetSendStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSendStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSendStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSendStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SendDataPoints != nil {
+		serializeSendDataPointList(s, schemas.GetSendStatisticsResponse_SendDataPoints, v.SendDataPoints)
+	}
+}
+func (v *GetSendStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSendStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSendStatisticsResponse_SendDataPoints:
+			return deserializeSendDataPointList(d, schemas.GetSendStatisticsResponse_SendDataPoints, &v.SendDataPoints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSendStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetSendStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSendStatistics, nil, schemas.GetSendStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetSendStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSendStatistics, nil, schemas.GetSendStatisticsResponse), output: &GetSendStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,21 @@ type PublishBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishBatchInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PublishBatchRequestEntries != nil {
+		serializePublishBatchRequestEntryList(s, schemas.PublishBatchInput_PublishBatchRequestEntries, v.PublishBatchRequestEntries)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.PublishBatchInput_TopicArn, *v.TopicArn)
+	}
+}
+
 type PublishBatchOutput struct {
 
 	// A list of failed PublishBatch responses.
@@ -95,13 +112,36 @@ type PublishBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishBatchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Failed != nil {
+		serializeBatchResultErrorEntryList(s, schemas.PublishBatchResponse_Failed, v.Failed)
+	}
+	if v.Successful != nil {
+		serializePublishBatchResultEntryList(s, schemas.PublishBatchResponse_Successful, v.Successful)
+	}
+}
+func (v *PublishBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublishBatchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublishBatchResponse_Failed:
+			return deserializeBatchResultErrorEntryList(d, schemas.PublishBatchResponse_Failed, &v.Failed)
+		case schemas.PublishBatchResponse_Successful:
+			return deserializePublishBatchResultEntryList(d, schemas.PublishBatchResponse_Successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPublishBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPublishBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishBatch, schemas.PublishBatchInput, schemas.PublishBatchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPublishBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishBatch, schemas.PublishBatchInput, schemas.PublishBatchResponse), output: &PublishBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

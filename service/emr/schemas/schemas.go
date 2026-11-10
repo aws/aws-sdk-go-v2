@@ -2643,7 +2643,7 @@ var Statistic_MAXIMUM *smithy.Schema
 var Step = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emr",
 	Name:      "Step",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var Step_Id *smithy.Schema
 
 var Step_Name *smithy.Schema
@@ -2659,6 +2659,16 @@ var Step_ExecutionRoleArn *smithy.Schema
 var Step_LogUri *smithy.Schema
 
 var Step_EncryptionKeyArn *smithy.Schema
+
+var Step_AdditionalInfo *smithy.Schema
+
+var StepAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.emr",
+	Name:      "StepAdditionalInfo",
+}, smithy.ShapeTypeStructure, 2)
+var StepAdditionalInfo_ResourceManagerApplicationIds *smithy.Schema
+
+var StepAdditionalInfo_ResourceManager *smithy.Schema
 
 var StepCancellationOption = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emr",
@@ -2802,7 +2812,7 @@ var StepStatus_Timeline *smithy.Schema
 var StepSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emr",
 	Name:      "StepSummary",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var StepSummary_Id *smithy.Schema
 
 var StepSummary_Name *smithy.Schema
@@ -2816,6 +2826,8 @@ var StepSummary_Status *smithy.Schema
 var StepSummary_LogUri *smithy.Schema
 
 var StepSummary_EncryptionKeyArn *smithy.Schema
+
+var StepSummary_AdditionalInfo *smithy.Schema
 
 var _StepSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emr",
@@ -5777,6 +5789,10 @@ func init() {
 
 	StepStatus_Timeline = StepStatus.AddMember("Timeline", StepTimeline)
 
+	StepAdditionalInfo_ResourceManagerApplicationIds = StepAdditionalInfo.AddMember("ResourceManagerApplicationIds", _StringList)
+
+	StepAdditionalInfo_ResourceManager = StepAdditionalInfo.AddMember("ResourceManager", _String)
+
 	Step_Id = Step.AddMember("Id", _StepId)
 
 	Step_Name = Step.AddMember("Name", _String)
@@ -5792,6 +5808,8 @@ func init() {
 	Step_LogUri = Step.AddMember("LogUri", _String)
 
 	Step_EncryptionKeyArn = Step.AddMember("EncryptionKeyArn", _String)
+
+	Step_AdditionalInfo = Step.AddMember("AdditionalInfo", StepAdditionalInfo)
 
 	StepCancellationOption_SEND_INTERRUPT = StepCancellationOption.AddMember("SEND_INTERRUPT", smithyprelude.Unit)
 
@@ -5816,6 +5834,8 @@ func init() {
 	StepSummary_LogUri = StepSummary.AddMember("LogUri", _String)
 
 	StepSummary_EncryptionKeyArn = StepSummary.AddMember("EncryptionKeyArn", _String)
+
+	StepSummary_AdditionalInfo = StepSummary.AddMember("AdditionalInfo", StepAdditionalInfo)
 
 	_StepSummaryList_member = _StepSummaryList.AddMember("member", StepSummary)
 

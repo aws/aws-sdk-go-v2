@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetDelegatedAccessTokenResponse><GetDelegatedAccessTokenResult><AssumedPrincipal>__AssumedPrincipal__</AssumedPrincipal><Credentials><AccessKeyId>__AccessKeyId__</AccessKeyId><Expiration>2000-01-01T00:00:00Z</Expiration><SecretAccessKey>__SecretAccessKey__</SecretAccessKey><SessionToken>__SessionToken__</SessionToken></Credentials><PackedPolicySize>1</PackedPolicySize></GetDelegatedAccessTokenResult></GetDelegatedAccessTokenResponse>

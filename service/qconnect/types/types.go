@@ -361,6 +361,12 @@ type AIAgentData struct {
 	// The description of the AI Agent.
 	Description *string
 
+	// The Amazon Web Services Region where the AI Agent was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the AI Agent was last modified.
+	LastModifiedTime *time.Time
+
 	// The time the AI Agent was last modified.
 	ModifiedTime *time.Time
 
@@ -402,6 +408,12 @@ func (v *AIAgentData) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.AIAgentData_description, *v.Description)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AIAgentData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AIAgentData_lastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.ModifiedTime != nil {
 		s.WriteTime(schemas.AIAgentData_modifiedTime, *v.ModifiedTime)
@@ -445,6 +457,12 @@ func (v *AIAgentData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AIAgentData_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.AIAgentData_description, v.Description)
+		case schemas.AIAgentData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AIAgentData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AIAgentData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AIAgentData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AIAgentData_modifiedTime:
 			v.ModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.AIAgentData_modifiedTime, v.ModifiedTime)
@@ -531,6 +549,12 @@ type AIAgentSummary struct {
 	// The description of the AI Agent.
 	Description *string
 
+	// The Amazon Web Services Region where the AI Agent was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the AI Agent was last modified.
+	LastModifiedTime *time.Time
+
 	// The time the AI Agent was last modified.
 	ModifiedTime *time.Time
 
@@ -571,6 +595,12 @@ func (v *AIAgentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.AIAgentSummary_description, *v.Description)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AIAgentSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AIAgentSummary_lastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.ModifiedTime != nil {
 		s.WriteTime(schemas.AIAgentSummary_modifiedTime, *v.ModifiedTime)
@@ -614,6 +644,12 @@ func (v *AIAgentSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AIAgentSummary_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.AIAgentSummary_description, v.Description)
+		case schemas.AIAgentSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AIAgentSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AIAgentSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AIAgentSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AIAgentSummary_modifiedTime:
 			v.ModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.AIAgentSummary_modifiedTime, v.ModifiedTime)
@@ -851,6 +887,12 @@ type AIGuardrailData struct {
 	// A description of the AI Guardrail.
 	Description *string
 
+	// The Amazon Web Services Region where the AI Guardrail was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the AI Guardrail was last modified.
+	LastModifiedTime *time.Time
+
 	// The time the AI Guardrail was last modified.
 	ModifiedTime *time.Time
 
@@ -910,6 +952,12 @@ func (v *AIGuardrailData) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.AIGuardrailData_description, *v.Description)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AIGuardrailData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AIGuardrailData_lastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.ModifiedTime != nil {
 		s.WriteTime(schemas.AIGuardrailData_modifiedTime, *v.ModifiedTime)
@@ -972,6 +1020,12 @@ func (v *AIGuardrailData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AIGuardrailData_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.AIGuardrailData_description, v.Description)
+		case schemas.AIGuardrailData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AIGuardrailData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AIGuardrailData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AIGuardrailData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AIGuardrailData_modifiedTime:
 			v.ModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.AIGuardrailData_modifiedTime, v.ModifiedTime)
@@ -1084,6 +1138,12 @@ type AIGuardrailSummary struct {
 	// A description of the AI Guardrail.
 	Description *string
 
+	// The Amazon Web Services Region where the AI Guardrail was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the AI Guardrail was last modified.
+	LastModifiedTime *time.Time
+
 	// The time the AI Guardrail was last modified.
 	ModifiedTime *time.Time
 
@@ -1117,6 +1177,12 @@ func (v *AIGuardrailSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.AIGuardrailSummary_description, *v.Description)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AIGuardrailSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AIGuardrailSummary_lastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.ModifiedTime != nil {
 		s.WriteTime(schemas.AIGuardrailSummary_modifiedTime, *v.ModifiedTime)
@@ -1152,6 +1218,12 @@ func (v *AIGuardrailSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AIGuardrailSummary_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.AIGuardrailSummary_description, v.Description)
+		case schemas.AIGuardrailSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AIGuardrailSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AIGuardrailSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AIGuardrailSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AIGuardrailSummary_modifiedTime:
 			v.ModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.AIGuardrailSummary_modifiedTime, v.ModifiedTime)
@@ -1391,6 +1463,12 @@ type AIPromptData struct {
 	// The configuration for inference parameters when using the AI Prompt.
 	InferenceConfiguration *AIPromptInferenceConfiguration
 
+	// The Amazon Web Services Region where the AI Prompt was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the AI Prompt was last modified.
+	LastModifiedTime *time.Time
+
 	// The time the AI Prompt was last modified.
 	ModifiedTime *time.Time
 
@@ -1437,6 +1515,12 @@ func (v *AIPromptData) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteStruct(schemas.AIPromptData_inferenceConfiguration)
 		v.InferenceConfiguration.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AIPromptData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AIPromptData_lastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.ModelId != nil {
 		s.WriteString(schemas.AIPromptData_modelId, *v.ModelId)
@@ -1497,6 +1581,12 @@ func (v *AIPromptData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AIPromptData_inferenceConfiguration:
 			v.InferenceConfiguration = &AIPromptInferenceConfiguration{}
 			return v.InferenceConfiguration.Deserialize(d)
+		case schemas.AIPromptData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AIPromptData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AIPromptData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AIPromptData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AIPromptData_modelId:
 			v.ModelId = new(string)
 			return d.ReadString(schemas.AIPromptData_modelId, v.ModelId)
@@ -1666,6 +1756,12 @@ type AIPromptSummary struct {
 	// The description of the AI Prompt.
 	Description *string
 
+	// The Amazon Web Services Region where the AI Prompt was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the AI Prompt was last modified.
+	LastModifiedTime *time.Time
+
 	// The time the AI Prompt was last modified.
 	ModifiedTime *time.Time
 
@@ -1707,6 +1803,12 @@ func (v *AIPromptSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.AIPromptSummary_description, *v.Description)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AIPromptSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AIPromptSummary_lastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.ModelId != nil {
 		s.WriteString(schemas.AIPromptSummary_modelId, *v.ModelId)
@@ -1761,6 +1863,12 @@ func (v *AIPromptSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AIPromptSummary_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.AIPromptSummary_description, v.Description)
+		case schemas.AIPromptSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AIPromptSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AIPromptSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AIPromptSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AIPromptSummary_modelId:
 			v.ModelId = new(string)
 			return d.ReadString(schemas.AIPromptSummary_modelId, v.ModelId)
@@ -2173,6 +2281,13 @@ type AssistantAssociationData struct {
 	// This member is required.
 	AssociationType AssociationType
 
+	// The Amazon Web Services Region where the assistant association was last
+	// modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the assistant association was last modified.
+	LastModifiedTime *time.Time
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -2204,6 +2319,12 @@ func (v *AssistantAssociationData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssociationType != "" {
 		s.WriteString(schemas.AssistantAssociationData_associationType, string(v.AssociationType))
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AssistantAssociationData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AssistantAssociationData_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.Tags != nil {
 		serializeTags(s, schemas.AssistantAssociationData_tags, v.Tags)
 	}
@@ -2232,6 +2353,12 @@ func (v *AssistantAssociationData) Deserialize(d smithy.ShapeDeserializer) error
 			}
 			v.AssociationType = AssociationType(ev)
 			return nil
+		case schemas.AssistantAssociationData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AssistantAssociationData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AssistantAssociationData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AssistantAssociationData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AssistantAssociationData_tags:
 			return deserializeTags(d, schemas.AssistantAssociationData_tags, &v.Tags)
 		}
@@ -2364,6 +2491,13 @@ type AssistantAssociationSummary struct {
 	// This member is required.
 	AssociationType AssociationType
 
+	// The Amazon Web Services Region where the assistant association was last
+	// modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the assistant association was last modified.
+	LastModifiedTime *time.Time
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -2395,6 +2529,12 @@ func (v *AssistantAssociationSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AssociationType != "" {
 		s.WriteString(schemas.AssistantAssociationSummary_associationType, string(v.AssociationType))
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AssistantAssociationSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AssistantAssociationSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.Tags != nil {
 		serializeTags(s, schemas.AssistantAssociationSummary_tags, v.Tags)
 	}
@@ -2423,6 +2563,12 @@ func (v *AssistantAssociationSummary) Deserialize(d smithy.ShapeDeserializer) er
 			}
 			v.AssociationType = AssociationType(ev)
 			return nil
+		case schemas.AssistantAssociationSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AssistantAssociationSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AssistantAssociationSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AssistantAssociationSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AssistantAssociationSummary_tags:
 			return deserializeTags(d, schemas.AssistantAssociationSummary_tags, &v.Tags)
 		}
@@ -2497,6 +2643,18 @@ type AssistantData struct {
 	// version) that is set on the Amazon Q in Connect Assistant.
 	AiAgentConfiguration map[string]AIAgentConfigurationData
 
+	// Whether Amazon Connect Global Resiliency replicates the Connect instance this
+	// assistant is associated with, and so whether resources created under this
+	// assistant must satisfy the replication group's model parity constraint. Answered
+	// from the ACGR side per request rather than stored, so it reflects the customer's
+	// replication state now.
+	//
+	// Absent means "not applicable or not known" - never read an absent field as
+	// DISABLED. It is absent on the operations that return an assistant which is not
+	// yet associated with a Connect instance, because replication cannot be
+	// established until it is.
+	AssistantGlobalResiliencyStatus AssistantGlobalResiliencyStatus
+
 	// The configuration information for the Amazon Q in Connect assistant capability.
 	CapabilityConfiguration *AssistantCapabilityConfiguration
 
@@ -2505,6 +2663,12 @@ type AssistantData struct {
 
 	// The configuration information for the Amazon Q in Connect assistant integration.
 	IntegrationConfiguration *AssistantIntegrationConfiguration
+
+	// The Amazon Web Services Region where the assistant was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the assistant was last modified.
+	LastModifiedTime *time.Time
 
 	// The list of orchestrator configurations for the assistant.
 	OrchestratorConfigurationList []OrchestratorConfigurationEntry
@@ -2542,6 +2706,9 @@ func (v *AssistantData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssistantArn != nil {
 		s.WriteString(schemas.AssistantData_assistantArn, *v.AssistantArn)
 	}
+	if v.AssistantGlobalResiliencyStatus != "" {
+		s.WriteString(schemas.AssistantData_assistantGlobalResiliencyStatus, string(v.AssistantGlobalResiliencyStatus))
+	}
 	if v.AssistantId != nil {
 		s.WriteString(schemas.AssistantData_assistantId, *v.AssistantId)
 	}
@@ -2557,6 +2724,12 @@ func (v *AssistantData) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteStruct(schemas.AssistantData_integrationConfiguration)
 		v.IntegrationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AssistantData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AssistantData_lastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.AssistantData_name, *v.Name)
@@ -2587,6 +2760,13 @@ func (v *AssistantData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AssistantData_assistantArn:
 			v.AssistantArn = new(string)
 			return d.ReadString(schemas.AssistantData_assistantArn, v.AssistantArn)
+		case schemas.AssistantData_assistantGlobalResiliencyStatus:
+			var ev string
+			if err := d.ReadString(schemas.AssistantData_assistantGlobalResiliencyStatus, &ev); err != nil {
+				return err
+			}
+			v.AssistantGlobalResiliencyStatus = AssistantGlobalResiliencyStatus(ev)
+			return nil
 		case schemas.AssistantData_assistantId:
 			v.AssistantId = new(string)
 			return d.ReadString(schemas.AssistantData_assistantId, v.AssistantId)
@@ -2599,6 +2779,12 @@ func (v *AssistantData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AssistantData_integrationConfiguration:
 			v.IntegrationConfiguration = &AssistantIntegrationConfiguration{}
 			return v.IntegrationConfiguration.Deserialize(d)
+		case schemas.AssistantData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AssistantData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AssistantData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AssistantData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AssistantData_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.AssistantData_name, v.Name)
@@ -2701,6 +2887,12 @@ type AssistantSummary struct {
 	// The configuration information for the Amazon Q in Connect assistant integration.
 	IntegrationConfiguration *AssistantIntegrationConfiguration
 
+	// The Amazon Web Services Region where the assistant was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the assistant was last modified.
+	LastModifiedTime *time.Time
+
 	// The list of orchestrator configurations for the assistant.
 	OrchestratorConfigurationList []OrchestratorConfigurationEntry
 
@@ -2753,6 +2945,12 @@ func (v *AssistantSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IntegrationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AssistantSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AssistantSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.AssistantSummary_name, *v.Name)
 	}
@@ -2794,6 +2992,12 @@ func (v *AssistantSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AssistantSummary_integrationConfiguration:
 			v.IntegrationConfiguration = &AssistantIntegrationConfiguration{}
 			return v.IntegrationConfiguration.Deserialize(d)
+		case schemas.AssistantSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AssistantSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AssistantSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AssistantSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AssistantSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.AssistantSummary_name, v.Name)
@@ -3674,6 +3878,16 @@ type ContentData struct {
 	// This member is required.
 	UrlExpiry *time.Time
 
+	// The Base64-encoded SHA-256 hash of the content file. Amazon Connect Global
+	// Resiliency returns this field only for replicated content.
+	FileHash *string
+
+	// The Amazon Web Services Region where the content was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the content was last modified.
+	LastModifiedTime *time.Time
+
 	// The URI of the content.
 	LinkOutUri *string
 
@@ -3699,11 +3913,20 @@ func (v *ContentData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContentType != nil {
 		s.WriteString(schemas.ContentData_contentType, *v.ContentType)
 	}
+	if v.FileHash != nil {
+		s.WriteString(schemas.ContentData_fileHash, *v.FileHash)
+	}
 	if v.KnowledgeBaseArn != nil {
 		s.WriteString(schemas.ContentData_knowledgeBaseArn, *v.KnowledgeBaseArn)
 	}
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.ContentData_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ContentData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ContentData_lastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.LinkOutUri != nil {
 		s.WriteString(schemas.ContentData_linkOutUri, *v.LinkOutUri)
@@ -3745,12 +3968,21 @@ func (v *ContentData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ContentData_contentType:
 			v.ContentType = new(string)
 			return d.ReadString(schemas.ContentData_contentType, v.ContentType)
+		case schemas.ContentData_fileHash:
+			v.FileHash = new(string)
+			return d.ReadString(schemas.ContentData_fileHash, v.FileHash)
 		case schemas.ContentData_knowledgeBaseArn:
 			v.KnowledgeBaseArn = new(string)
 			return d.ReadString(schemas.ContentData_knowledgeBaseArn, v.KnowledgeBaseArn)
 		case schemas.ContentData_knowledgeBaseId:
 			v.KnowledgeBaseId = new(string)
 			return d.ReadString(schemas.ContentData_knowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.ContentData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ContentData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ContentData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ContentData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.ContentData_linkOutUri:
 			v.LinkOutUri = new(string)
 			return d.ReadString(schemas.ContentData_linkOutUri, v.LinkOutUri)
@@ -3997,6 +4229,16 @@ type ContentSummary struct {
 	// This member is required.
 	Title *string
 
+	// The Base64-encoded SHA-256 hash of the content file. Amazon Connect Global
+	// Resiliency returns this field only for replicated content.
+	FileHash *string
+
+	// The Amazon Web Services Region where the content was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the content was last modified.
+	LastModifiedTime *time.Time
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -4019,11 +4261,20 @@ func (v *ContentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContentType != nil {
 		s.WriteString(schemas.ContentSummary_contentType, *v.ContentType)
 	}
+	if v.FileHash != nil {
+		s.WriteString(schemas.ContentSummary_fileHash, *v.FileHash)
+	}
 	if v.KnowledgeBaseArn != nil {
 		s.WriteString(schemas.ContentSummary_knowledgeBaseArn, *v.KnowledgeBaseArn)
 	}
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.ContentSummary_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ContentSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ContentSummary_lastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.Metadata != nil {
 		serializeContentMetadata(s, schemas.ContentSummary_metadata, v.Metadata)
@@ -4056,12 +4307,21 @@ func (v *ContentSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ContentSummary_contentType:
 			v.ContentType = new(string)
 			return d.ReadString(schemas.ContentSummary_contentType, v.ContentType)
+		case schemas.ContentSummary_fileHash:
+			v.FileHash = new(string)
+			return d.ReadString(schemas.ContentSummary_fileHash, v.FileHash)
 		case schemas.ContentSummary_knowledgeBaseArn:
 			v.KnowledgeBaseArn = new(string)
 			return d.ReadString(schemas.ContentSummary_knowledgeBaseArn, v.KnowledgeBaseArn)
 		case schemas.ContentSummary_knowledgeBaseId:
 			v.KnowledgeBaseId = new(string)
 			return d.ReadString(schemas.ContentSummary_knowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.ContentSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ContentSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ContentSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ContentSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.ContentSummary_metadata:
 			return deserializeContentMetadata(d, schemas.ContentSummary_metadata, &v.Metadata)
 		case schemas.ContentSummary_name:
@@ -7765,6 +8025,12 @@ type KnowledgeBaseData struct {
 	// knowledge base. If no content exists in a knowledge base, this value is unset.
 	LastContentModificationTime *time.Time
 
+	// The Amazon Web Services Region where the knowledge base was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the knowledge base was last modified.
+	LastModifiedTime *time.Time
+
 	// Information about how to render the content.
 	RenderingConfiguration *RenderingConfiguration
 
@@ -7819,6 +8085,12 @@ func (v *KnowledgeBaseData) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.LastContentModificationTime != nil {
 		s.WriteTime(schemas.KnowledgeBaseData_lastContentModificationTime, *v.LastContentModificationTime)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.KnowledgeBaseData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.KnowledgeBaseData_lastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.KnowledgeBaseData_name, *v.Name)
@@ -7879,6 +8151,12 @@ func (v *KnowledgeBaseData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.KnowledgeBaseData_lastContentModificationTime:
 			v.LastContentModificationTime = new(time.Time)
 			return d.ReadTime(schemas.KnowledgeBaseData_lastContentModificationTime, v.LastContentModificationTime)
+		case schemas.KnowledgeBaseData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.KnowledgeBaseData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.KnowledgeBaseData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.KnowledgeBaseData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.KnowledgeBaseData_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.KnowledgeBaseData_name, v.Name)
@@ -7938,6 +8216,12 @@ type KnowledgeBaseSummary struct {
 	// The description of the knowledge base.
 	Description *string
 
+	// The Amazon Web Services Region where the knowledge base was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the knowledge base was last modified.
+	LastModifiedTime *time.Time
+
 	// Information about how to render the content.
 	RenderingConfiguration *RenderingConfiguration
 
@@ -7983,6 +8267,12 @@ func (v *KnowledgeBaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.KnowledgeBaseType != "" {
 		s.WriteString(schemas.KnowledgeBaseSummary_knowledgeBaseType, string(v.KnowledgeBaseType))
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.KnowledgeBaseSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.KnowledgeBaseSummary_lastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.KnowledgeBaseSummary_name, *v.Name)
@@ -8031,6 +8321,12 @@ func (v *KnowledgeBaseSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.KnowledgeBaseType = KnowledgeBaseType(ev)
 			return nil
+		case schemas.KnowledgeBaseSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.KnowledgeBaseSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.KnowledgeBaseSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.KnowledgeBaseSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.KnowledgeBaseSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.KnowledgeBaseSummary_name, v.Name)
@@ -9736,6 +10032,11 @@ type ModelSummary struct {
 	// for use.
 	EndOfLifeTimestamp *time.Time
 
+	// Whether this model is published in every Region of the caller's Amazon Connect
+	// Global Resiliency replication group, and so can be referenced by an AI Prompt
+	// that replicates. Present only for callers to which global resiliency applies.
+	GlobalResiliencyStatus GlobalResiliencyStatus
+
 	// The timestamp when the model lifecycle will transition from ACTIVE to LEGACY .
 	LegacyTimestamp *time.Time
 
@@ -9767,6 +10068,9 @@ func (v *ModelSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.EndOfLifeTimestamp != nil {
 		s.WriteTime(schemas.ModelSummary_endOfLifeTimestamp, *v.EndOfLifeTimestamp)
+	}
+	if v.GlobalResiliencyStatus != "" {
+		s.WriteString(schemas.ModelSummary_globalResiliencyStatus, string(v.GlobalResiliencyStatus))
 	}
 	if v.LegacyTimestamp != nil {
 		s.WriteTime(schemas.ModelSummary_legacyTimestamp, *v.LegacyTimestamp)
@@ -9800,6 +10104,13 @@ func (v *ModelSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ModelSummary_endOfLifeTimestamp:
 			v.EndOfLifeTimestamp = new(time.Time)
 			return d.ReadTime(schemas.ModelSummary_endOfLifeTimestamp, v.EndOfLifeTimestamp)
+		case schemas.ModelSummary_globalResiliencyStatus:
+			var ev string
+			if err := d.ReadString(schemas.ModelSummary_globalResiliencyStatus, &ev); err != nil {
+				return err
+			}
+			v.GlobalResiliencyStatus = GlobalResiliencyStatus(ev)
+			return nil
 		case schemas.ModelSummary_legacyTimestamp:
 			v.LegacyTimestamp = new(time.Time)
 			return d.ReadTime(schemas.ModelSummary_legacyTimestamp, v.LegacyTimestamp)
@@ -11293,6 +11604,9 @@ type QuickResponseData struct {
 	// data.
 	LastModifiedBy *string
 
+	// The Amazon Web Services Region where the quick response was last modified.
+	LastModifiedRegion *string
+
 	// The shortcut key of the quick response. The value should be unique across the
 	// knowledge base.
 	ShortcutKey *string
@@ -11346,6 +11660,9 @@ func (v *QuickResponseData) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.LastModifiedBy != nil {
 		s.WriteString(schemas.QuickResponseData_lastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.QuickResponseData_lastModifiedRegion, *v.LastModifiedRegion)
 	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.QuickResponseData_lastModifiedTime, *v.LastModifiedTime)
@@ -11404,6 +11721,9 @@ func (v *QuickResponseData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.QuickResponseData_lastModifiedBy:
 			v.LastModifiedBy = new(string)
 			return d.ReadString(schemas.QuickResponseData_lastModifiedBy, v.LastModifiedBy)
+		case schemas.QuickResponseData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.QuickResponseData_lastModifiedRegion, v.LastModifiedRegion)
 		case schemas.QuickResponseData_lastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.QuickResponseData_lastModifiedTime, v.LastModifiedTime)
@@ -11853,6 +12173,9 @@ type QuickResponseSearchResultData struct {
 	// search result data.
 	LastModifiedBy *string
 
+	// The Amazon Web Services Region where the quick response was last modified.
+	LastModifiedRegion *string
+
 	// The shortcut key of the quick response. The value should be unique across the
 	// knowledge base.
 	ShortcutKey *string
@@ -11912,6 +12235,9 @@ func (v *QuickResponseSearchResultData) SerializeMembers(s smithy.ShapeSerialize
 	}
 	if v.LastModifiedBy != nil {
 		s.WriteString(schemas.QuickResponseSearchResultData_lastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.QuickResponseSearchResultData_lastModifiedRegion, *v.LastModifiedRegion)
 	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.QuickResponseSearchResultData_lastModifiedTime, *v.LastModifiedTime)
@@ -11974,6 +12300,9 @@ func (v *QuickResponseSearchResultData) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.QuickResponseSearchResultData_lastModifiedBy:
 			v.LastModifiedBy = new(string)
 			return d.ReadString(schemas.QuickResponseSearchResultData_lastModifiedBy, v.LastModifiedBy)
+		case schemas.QuickResponseSearchResultData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.QuickResponseSearchResultData_lastModifiedRegion, v.LastModifiedRegion)
 		case schemas.QuickResponseSearchResultData_lastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.QuickResponseSearchResultData_lastModifiedTime, v.LastModifiedTime)
@@ -12071,6 +12400,9 @@ type QuickResponseSummary struct {
 	// data.
 	LastModifiedBy *string
 
+	// The Amazon Web Services Region where the quick response was last modified.
+	LastModifiedRegion *string
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -12107,6 +12439,9 @@ func (v *QuickResponseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.LastModifiedBy != nil {
 		s.WriteString(schemas.QuickResponseSummary_lastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.QuickResponseSummary_lastModifiedRegion, *v.LastModifiedRegion)
 	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.QuickResponseSummary_lastModifiedTime, *v.LastModifiedTime)
@@ -12153,6 +12488,9 @@ func (v *QuickResponseSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.QuickResponseSummary_lastModifiedBy:
 			v.LastModifiedBy = new(string)
 			return d.ReadString(schemas.QuickResponseSummary_lastModifiedBy, v.LastModifiedBy)
+		case schemas.QuickResponseSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.QuickResponseSummary_lastModifiedRegion, v.LastModifiedRegion)
 		case schemas.QuickResponseSummary_lastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.QuickResponseSummary_lastModifiedTime, v.LastModifiedTime)
@@ -12469,6 +12807,40 @@ func (v *RenderingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RenderingConfiguration_templateUri:
 			v.TemplateUri = new(string)
 			return d.ReadString(schemas.RenderingConfiguration_templateUri, v.TemplateUri)
+		}
+		return nil
+	})
+}
+
+// Contains information about the KMS key used to encrypt data in a replica Amazon
+// Web Services Region, including its Amazon Resource Name (ARN).
+type ReplicaKmsKey struct {
+
+	// The Amazon Resource Name (ARN) of the KMS key in the replica Region.
+	//
+	// This member is required.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ReplicaKmsKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicaKmsKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicaKmsKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ReplicaKmsKey_arn, *v.Arn)
+	}
+}
+func (v *ReplicaKmsKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicaKmsKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicaKmsKey_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ReplicaKmsKey_arn, v.Arn)
 		}
 		return nil
 	})
@@ -13302,6 +13674,11 @@ type ServerSideEncryptionConfiguration struct {
 	// [Enable Amazon Q in Connect for your instance]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html
 	KmsKeyId *string
 
+	// The list of KMS keys used to encrypt data for this resource's replicas in other
+	// Amazon Web Services Regions. Each entry corresponds to a Region where a replica
+	// is configured.
+	ReplicaKmsKeys []ReplicaKmsKey
+
 	noSmithyDocumentSerde
 }
 
@@ -13315,6 +13692,9 @@ func (v *ServerSideEncryptionConfiguration) SerializeMembers(s smithy.ShapeSeria
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.ServerSideEncryptionConfiguration_kmsKeyId, *v.KmsKeyId)
 	}
+	if v.ReplicaKmsKeys != nil {
+		serializeReplicaKmsKeyList(s, schemas.ServerSideEncryptionConfiguration_replicaKmsKeys, v.ReplicaKmsKeys)
+	}
 }
 func (v *ServerSideEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServerSideEncryptionConfiguration, func(s *smithy.Schema) error {
@@ -13322,6 +13702,8 @@ func (v *ServerSideEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializ
 		case schemas.ServerSideEncryptionConfiguration_kmsKeyId:
 			v.KmsKeyId = new(string)
 			return d.ReadString(schemas.ServerSideEncryptionConfiguration_kmsKeyId, v.KmsKeyId)
+		case schemas.ServerSideEncryptionConfiguration_replicaKmsKeys:
+			return deserializeReplicaKmsKeyList(d, schemas.ServerSideEncryptionConfiguration_replicaKmsKeys, &v.ReplicaKmsKeys)
 		}
 		return nil
 	})

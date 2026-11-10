@@ -500,10 +500,10 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 						SchemeID: "sigv4",
 						SignerProperties: func() smithy.Properties {
 							var sp smithy.Properties
-							smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 							smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 							smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+							smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 							return sp
 						}(),
 					},

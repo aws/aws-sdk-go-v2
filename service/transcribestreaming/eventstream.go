@@ -439,6 +439,7 @@ func (m *deserializeOpEventStreamStartCallAnalyticsStreamTranscription) HandleDe
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+
 	eventWriter := &audioStreamWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.AudioStream, inputStreamWriter),
 	}
@@ -526,6 +527,7 @@ func (m *deserializeOpEventStreamStartMedicalScribeStream) HandleDeserialize(
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+
 	eventWriter := &medicalScribeInputStreamWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.MedicalScribeInputStream, inputStreamWriter),
 	}
@@ -613,6 +615,7 @@ func (m *deserializeOpEventStreamStartMedicalStreamTranscription) HandleDeserial
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+
 	eventWriter := &audioStreamWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.AudioStream, inputStreamWriter),
 	}
@@ -700,6 +703,7 @@ func (m *deserializeOpEventStreamStartStreamTranscription) HandleDeserialize(
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+
 	eventWriter := &audioStreamWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.AudioStream, inputStreamWriter),
 	}

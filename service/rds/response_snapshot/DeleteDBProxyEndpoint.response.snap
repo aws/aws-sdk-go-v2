@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DeleteDBProxyEndpointResponse><DeleteDBProxyEndpointResult><DBProxyEndpoint><CreatedDate>2000-01-01T00:00:00Z</CreatedDate><DBProxyEndpointArn>__DBProxyEndpointArn__</DBProxyEndpointArn><DBProxyEndpointName>__DBProxyEndpointName__</DBProxyEndpointName><DBProxyName>__DBProxyName__</DBProxyName><Endpoint>__Endpoint__</Endpoint><EndpointNetworkType>IPV4</EndpointNetworkType><IsDefault>true</IsDefault><Status>available</Status><TargetRole>READ_WRITE</TargetRole><VpcId>__VpcId__</VpcId><VpcSecurityGroupIds><member>__Member__</member><member>__Member__</member></VpcSecurityGroupIds><VpcSubnetIds><member>__Member__</member><member>__Member__</member></VpcSubnetIds></DBProxyEndpoint></DeleteDBProxyEndpointResult></DeleteDBProxyEndpointResponse>

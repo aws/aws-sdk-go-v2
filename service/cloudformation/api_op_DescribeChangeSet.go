@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -55,6 +56,27 @@ type DescribeChangeSetInput struct {
 	StackName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeChangeSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChangeSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChangeSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.DescribeChangeSetInput_ChangeSetName, *v.ChangeSetName)
+	}
+	if v.IncludePropertyValues != nil {
+		s.WriteBool(schemas.DescribeChangeSetInput_IncludePropertyValues, *v.IncludePropertyValues)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeChangeSetInput_NextToken, *v.NextToken)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DescribeChangeSetInput_StackName, *v.StackName)
+	}
 }
 
 // The output for the DescribeChangeSet action.
@@ -187,13 +209,189 @@ type DescribeChangeSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChangeSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capabilities != nil {
+		serializeCapabilities(s, schemas.DescribeChangeSetOutput_Capabilities, v.Capabilities)
+	}
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.DescribeChangeSetOutput_ChangeSetId, *v.ChangeSetId)
+	}
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.DescribeChangeSetOutput_ChangeSetName, *v.ChangeSetName)
+	}
+	if v.Changes != nil {
+		serializeChanges(s, schemas.DescribeChangeSetOutput_Changes, v.Changes)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeChangeSetOutput_CreationTime, *v.CreationTime)
+	}
+	if v.DeploymentConfig != nil {
+		s.WriteStruct(schemas.DescribeChangeSetOutput_DeploymentConfig)
+		v.DeploymentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentMode != "" {
+		s.WriteString(schemas.DescribeChangeSetOutput_DeploymentMode, string(v.DeploymentMode))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeChangeSetOutput_Description, *v.Description)
+	}
+	if v.ExecutionStatus != "" {
+		s.WriteString(schemas.DescribeChangeSetOutput_ExecutionStatus, string(v.ExecutionStatus))
+	}
+	if v.ImportExistingResources != nil {
+		s.WriteBool(schemas.DescribeChangeSetOutput_ImportExistingResources, *v.ImportExistingResources)
+	}
+	if v.IncludeNestedStacks != nil {
+		s.WriteBool(schemas.DescribeChangeSetOutput_IncludeNestedStacks, *v.IncludeNestedStacks)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeChangeSetOutput_NextToken, *v.NextToken)
+	}
+	if v.NotificationARNs != nil {
+		serializeNotificationARNs(s, schemas.DescribeChangeSetOutput_NotificationARNs, v.NotificationARNs)
+	}
+	if v.OnStackFailure != "" {
+		s.WriteString(schemas.DescribeChangeSetOutput_OnStackFailure, string(v.OnStackFailure))
+	}
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.DescribeChangeSetOutput_Parameters, v.Parameters)
+	}
+	if v.ParentChangeSetId != nil {
+		s.WriteString(schemas.DescribeChangeSetOutput_ParentChangeSetId, *v.ParentChangeSetId)
+	}
+	if v.RollbackConfiguration != nil {
+		s.WriteStruct(schemas.DescribeChangeSetOutput_RollbackConfiguration)
+		v.RollbackConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RootChangeSetId != nil {
+		s.WriteString(schemas.DescribeChangeSetOutput_RootChangeSetId, *v.RootChangeSetId)
+	}
+	if v.StackDriftStatus != "" {
+		s.WriteString(schemas.DescribeChangeSetOutput_StackDriftStatus, string(v.StackDriftStatus))
+	}
+	if v.StackId != nil {
+		s.WriteString(schemas.DescribeChangeSetOutput_StackId, *v.StackId)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DescribeChangeSetOutput_StackName, *v.StackName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeChangeSetOutput_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DescribeChangeSetOutput_StatusReason, *v.StatusReason)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeChangeSetOutput_Tags, v.Tags)
+	}
+}
+func (v *DescribeChangeSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeChangeSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeChangeSetOutput_Capabilities:
+			return deserializeCapabilities(d, schemas.DescribeChangeSetOutput_Capabilities, &v.Capabilities)
+		case schemas.DescribeChangeSetOutput_ChangeSetId:
+			v.ChangeSetId = new(string)
+			return d.ReadString(schemas.DescribeChangeSetOutput_ChangeSetId, v.ChangeSetId)
+		case schemas.DescribeChangeSetOutput_ChangeSetName:
+			v.ChangeSetName = new(string)
+			return d.ReadString(schemas.DescribeChangeSetOutput_ChangeSetName, v.ChangeSetName)
+		case schemas.DescribeChangeSetOutput_Changes:
+			return deserializeChanges(d, schemas.DescribeChangeSetOutput_Changes, &v.Changes)
+		case schemas.DescribeChangeSetOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeChangeSetOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeChangeSetOutput_DeploymentConfig:
+			v.DeploymentConfig = &types.DeploymentConfig{}
+			return v.DeploymentConfig.Deserialize(d)
+		case schemas.DescribeChangeSetOutput_DeploymentMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeChangeSetOutput_DeploymentMode, &ev); err != nil {
+				return err
+			}
+			v.DeploymentMode = types.DeploymentMode(ev)
+			return nil
+		case schemas.DescribeChangeSetOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeChangeSetOutput_Description, v.Description)
+		case schemas.DescribeChangeSetOutput_ExecutionStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeChangeSetOutput_ExecutionStatus, &ev); err != nil {
+				return err
+			}
+			v.ExecutionStatus = types.ExecutionStatus(ev)
+			return nil
+		case schemas.DescribeChangeSetOutput_ImportExistingResources:
+			v.ImportExistingResources = new(bool)
+			return d.ReadBool(schemas.DescribeChangeSetOutput_ImportExistingResources, v.ImportExistingResources)
+		case schemas.DescribeChangeSetOutput_IncludeNestedStacks:
+			v.IncludeNestedStacks = new(bool)
+			return d.ReadBool(schemas.DescribeChangeSetOutput_IncludeNestedStacks, v.IncludeNestedStacks)
+		case schemas.DescribeChangeSetOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeChangeSetOutput_NextToken, v.NextToken)
+		case schemas.DescribeChangeSetOutput_NotificationARNs:
+			return deserializeNotificationARNs(d, schemas.DescribeChangeSetOutput_NotificationARNs, &v.NotificationARNs)
+		case schemas.DescribeChangeSetOutput_OnStackFailure:
+			var ev string
+			if err := d.ReadString(schemas.DescribeChangeSetOutput_OnStackFailure, &ev); err != nil {
+				return err
+			}
+			v.OnStackFailure = types.OnStackFailure(ev)
+			return nil
+		case schemas.DescribeChangeSetOutput_Parameters:
+			return deserializeParameters(d, schemas.DescribeChangeSetOutput_Parameters, &v.Parameters)
+		case schemas.DescribeChangeSetOutput_ParentChangeSetId:
+			v.ParentChangeSetId = new(string)
+			return d.ReadString(schemas.DescribeChangeSetOutput_ParentChangeSetId, v.ParentChangeSetId)
+		case schemas.DescribeChangeSetOutput_RollbackConfiguration:
+			v.RollbackConfiguration = &types.RollbackConfiguration{}
+			return v.RollbackConfiguration.Deserialize(d)
+		case schemas.DescribeChangeSetOutput_RootChangeSetId:
+			v.RootChangeSetId = new(string)
+			return d.ReadString(schemas.DescribeChangeSetOutput_RootChangeSetId, v.RootChangeSetId)
+		case schemas.DescribeChangeSetOutput_StackDriftStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeChangeSetOutput_StackDriftStatus, &ev); err != nil {
+				return err
+			}
+			v.StackDriftStatus = types.StackDriftStatus(ev)
+			return nil
+		case schemas.DescribeChangeSetOutput_StackId:
+			v.StackId = new(string)
+			return d.ReadString(schemas.DescribeChangeSetOutput_StackId, v.StackId)
+		case schemas.DescribeChangeSetOutput_StackName:
+			v.StackName = new(string)
+			return d.ReadString(schemas.DescribeChangeSetOutput_StackName, v.StackName)
+		case schemas.DescribeChangeSetOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeChangeSetOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ChangeSetStatus(ev)
+			return nil
+		case schemas.DescribeChangeSetOutput_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DescribeChangeSetOutput_StatusReason, v.StatusReason)
+		case schemas.DescribeChangeSetOutput_Tags:
+			return deserializeTags(d, schemas.DescribeChangeSetOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChangeSet, schemas.DescribeChangeSetInput, schemas.DescribeChangeSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChangeSet, schemas.DescribeChangeSetInput, schemas.DescribeChangeSetOutput), output: &DescribeChangeSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

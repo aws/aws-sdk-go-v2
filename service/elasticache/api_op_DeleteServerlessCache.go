@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type DeleteServerlessCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServerlessCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServerlessCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServerlessCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FinalSnapshotName != nil {
+		s.WriteString(schemas.DeleteServerlessCacheRequest_FinalSnapshotName, *v.FinalSnapshotName)
+	}
+	if v.ServerlessCacheName != nil {
+		s.WriteString(schemas.DeleteServerlessCacheRequest_ServerlessCacheName, *v.ServerlessCacheName)
+	}
+}
+
 type DeleteServerlessCacheOutput struct {
 
 	// Provides the details of the specified serverless cache that is about to be
@@ -55,13 +72,34 @@ type DeleteServerlessCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServerlessCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServerlessCacheResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServerlessCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerlessCache != nil {
+		s.WriteStruct(schemas.DeleteServerlessCacheResponse_ServerlessCache)
+		v.ServerlessCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteServerlessCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServerlessCacheResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServerlessCacheResponse_ServerlessCache:
+			v.ServerlessCache = &types.ServerlessCache{}
+			return v.ServerlessCache.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServerlessCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteServerlessCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServerlessCache, schemas.DeleteServerlessCacheRequest, schemas.DeleteServerlessCacheResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteServerlessCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServerlessCache, schemas.DeleteServerlessCacheRequest, schemas.DeleteServerlessCacheResponse), output: &DeleteServerlessCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

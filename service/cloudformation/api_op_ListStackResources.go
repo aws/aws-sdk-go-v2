@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,21 @@ type ListStackResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStackResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStackResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStackResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStackResourcesInput_NextToken, *v.NextToken)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.ListStackResourcesInput_StackName, *v.StackName)
+	}
+}
+
 // The output for a ListStackResources action.
 type ListStackResourcesOutput struct {
 
@@ -65,13 +82,37 @@ type ListStackResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStackResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStackResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStackResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStackResourcesOutput_NextToken, *v.NextToken)
+	}
+	if v.StackResourceSummaries != nil {
+		serializeStackResourceSummaries(s, schemas.ListStackResourcesOutput_StackResourceSummaries, v.StackResourceSummaries)
+	}
+}
+func (v *ListStackResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStackResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStackResourcesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStackResourcesOutput_NextToken, v.NextToken)
+		case schemas.ListStackResourcesOutput_StackResourceSummaries:
+			return deserializeStackResourceSummaries(d, schemas.ListStackResourcesOutput_StackResourceSummaries, &v.StackResourceSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStackResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListStackResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStackResources, schemas.ListStackResourcesInput, schemas.ListStackResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListStackResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStackResources, schemas.ListStackResourcesInput, schemas.ListStackResourcesOutput), output: &ListStackResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -219,6 +219,8 @@ const (
 	InstanceTypeI4iMetal     InstanceType = "i4i.metal"
 	InstanceTypeI7iMetal24xl InstanceType = "i7i.metal-24xl"
 	InstanceTypeI7iMetal48xl InstanceType = "i7i.metal-48xl"
+	InstanceTypeR7iMetal24xl InstanceType = "r7i.metal-24xl"
+	InstanceTypeR7iMetal48xl InstanceType = "r7i.metal-48xl"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -230,6 +232,8 @@ func (InstanceType) Values() []InstanceType {
 		"i4i.metal",
 		"i7i.metal-24xl",
 		"i7i.metal-48xl",
+		"r7i.metal-24xl",
+		"r7i.metal-48xl",
 	}
 }
 

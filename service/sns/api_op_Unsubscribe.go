@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type UnsubscribeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnsubscribeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsubscribeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsubscribeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriptionArn != nil {
+		s.WriteString(schemas.UnsubscribeInput_SubscriptionArn, *v.SubscriptionArn)
+	}
+}
+
 type UnsubscribeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +63,26 @@ type UnsubscribeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnsubscribeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsubscribeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UnsubscribeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnsubscribeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUnsubscribe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Unsubscribe, schemas.UnsubscribeInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUnsubscribe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Unsubscribe, schemas.UnsubscribeInput, nil), output: &UnsubscribeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

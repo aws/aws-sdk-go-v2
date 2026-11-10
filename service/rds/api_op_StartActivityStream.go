@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,30 @@ type StartActivityStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartActivityStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartActivityStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartActivityStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyImmediately != nil {
+		s.WriteBool(schemas.StartActivityStreamRequest_ApplyImmediately, *v.ApplyImmediately)
+	}
+	if v.EngineNativeAuditFieldsIncluded != nil {
+		s.WriteBool(schemas.StartActivityStreamRequest_EngineNativeAuditFieldsIncluded, *v.EngineNativeAuditFieldsIncluded)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.StartActivityStreamRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.StartActivityStreamRequest_Mode, string(v.Mode))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.StartActivityStreamRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type StartActivityStreamOutput struct {
 
 	// Indicates whether or not the database activity stream will start as soon as
@@ -93,13 +119,70 @@ type StartActivityStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartActivityStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartActivityStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartActivityStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyImmediately != nil {
+		s.WriteBool(schemas.StartActivityStreamResponse_ApplyImmediately, *v.ApplyImmediately)
+	}
+	if v.EngineNativeAuditFieldsIncluded != nil {
+		s.WriteBool(schemas.StartActivityStreamResponse_EngineNativeAuditFieldsIncluded, *v.EngineNativeAuditFieldsIncluded)
+	}
+	if v.KinesisStreamName != nil {
+		s.WriteString(schemas.StartActivityStreamResponse_KinesisStreamName, *v.KinesisStreamName)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.StartActivityStreamResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.StartActivityStreamResponse_Mode, string(v.Mode))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartActivityStreamResponse_Status, string(v.Status))
+	}
+}
+func (v *StartActivityStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartActivityStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartActivityStreamResponse_ApplyImmediately:
+			v.ApplyImmediately = new(bool)
+			return d.ReadBool(schemas.StartActivityStreamResponse_ApplyImmediately, v.ApplyImmediately)
+		case schemas.StartActivityStreamResponse_EngineNativeAuditFieldsIncluded:
+			v.EngineNativeAuditFieldsIncluded = new(bool)
+			return d.ReadBool(schemas.StartActivityStreamResponse_EngineNativeAuditFieldsIncluded, v.EngineNativeAuditFieldsIncluded)
+		case schemas.StartActivityStreamResponse_KinesisStreamName:
+			v.KinesisStreamName = new(string)
+			return d.ReadString(schemas.StartActivityStreamResponse_KinesisStreamName, v.KinesisStreamName)
+		case schemas.StartActivityStreamResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.StartActivityStreamResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.StartActivityStreamResponse_Mode:
+			var ev string
+			if err := d.ReadString(schemas.StartActivityStreamResponse_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = types.ActivityStreamMode(ev)
+			return nil
+		case schemas.StartActivityStreamResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartActivityStreamResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ActivityStreamStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartActivityStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartActivityStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartActivityStream, schemas.StartActivityStreamRequest, schemas.StartActivityStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStartActivityStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartActivityStream, schemas.StartActivityStreamRequest, schemas.StartActivityStreamResponse), output: &StartActivityStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

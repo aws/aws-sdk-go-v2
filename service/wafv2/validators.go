@@ -1782,6 +1782,119 @@ func validateConditions(v []types.Condition) error {
 	}
 }
 
+func validateConnectedAccountChainConfig(v *types.ConnectedAccountChainConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectedAccountChainConfig"}
+	if len(v.Chain) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Chain"))
+	}
+	if v.Prices == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Prices"))
+	} else if v.Prices != nil {
+		if err := validateConnectedAccountPrices(v.Prices); err != nil {
+			invalidParams.AddNested("Prices", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectedAccountConfig(v *types.ConnectedAccountConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectedAccountConfig"}
+	if v.ConnectedAccountArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectedAccountArn"))
+	}
+	if v.PaymentNetworks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentNetworks"))
+	} else if v.PaymentNetworks != nil {
+		if err := validateConnectedAccountPaymentNetworks(v.PaymentNetworks); err != nil {
+			invalidParams.AddNested("PaymentNetworks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectedAccountConfigs(v []types.ConnectedAccountConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectedAccountConfigs"}
+	for i := range v {
+		if err := validateConnectedAccountConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectedAccountPaymentNetworks(v []types.ConnectedAccountChainConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectedAccountPaymentNetworks"}
+	for i := range v {
+		if err := validateConnectedAccountChainConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectedAccountPrice(v *types.ConnectedAccountPrice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectedAccountPrice"}
+	if v.Amount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Amount"))
+	}
+	if len(v.Currency) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Currency"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectedAccountPrices(v []types.ConnectedAccountPrice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectedAccountPrices"}
+	for i := range v {
+		if err := validateConnectedAccountPrice(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCookies(v *types.Cookies) error {
 	if v == nil {
 		return nil
@@ -2580,6 +2693,11 @@ func validateMonetizationConfig(v *types.MonetizationConfig) error {
 	if v.CryptoConfig != nil {
 		if err := validateCryptoConfig(v.CryptoConfig); err != nil {
 			invalidParams.AddNested("CryptoConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConnectedAccountConfigs != nil {
+		if err := validateConnectedAccountConfigs(v.ConnectedAccountConfigs); err != nil {
+			invalidParams.AddNested("ConnectedAccountConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

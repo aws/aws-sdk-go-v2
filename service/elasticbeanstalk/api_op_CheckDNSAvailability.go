@@ -4,6 +4,8 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type CheckDNSAvailabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckDNSAvailabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckDNSAvailabilityMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckDNSAvailabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CNAMEPrefix != nil {
+		s.WriteString(schemas.CheckDNSAvailabilityMessage_CNAMEPrefix, *v.CNAMEPrefix)
+	}
+}
+
 // Indicates if the specified CNAME is available.
 type CheckDNSAvailabilityOutput struct {
 
@@ -53,13 +67,38 @@ type CheckDNSAvailabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckDNSAvailabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckDNSAvailabilityResultMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckDNSAvailabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Available != nil {
+		s.WriteBool(schemas.CheckDNSAvailabilityResultMessage_Available, *v.Available)
+	}
+	if v.FullyQualifiedCNAME != nil {
+		s.WriteString(schemas.CheckDNSAvailabilityResultMessage_FullyQualifiedCNAME, *v.FullyQualifiedCNAME)
+	}
+}
+func (v *CheckDNSAvailabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckDNSAvailabilityResultMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckDNSAvailabilityResultMessage_Available:
+			v.Available = new(bool)
+			return d.ReadBool(schemas.CheckDNSAvailabilityResultMessage_Available, v.Available)
+		case schemas.CheckDNSAvailabilityResultMessage_FullyQualifiedCNAME:
+			v.FullyQualifiedCNAME = new(string)
+			return d.ReadString(schemas.CheckDNSAvailabilityResultMessage_FullyQualifiedCNAME, v.FullyQualifiedCNAME)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckDNSAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCheckDNSAvailability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckDNSAvailability, schemas.CheckDNSAvailabilityMessage, schemas.CheckDNSAvailabilityResultMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCheckDNSAvailability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckDNSAvailability, schemas.CheckDNSAvailabilityMessage, schemas.CheckDNSAvailabilityResultMessage), output: &CheckDNSAvailabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

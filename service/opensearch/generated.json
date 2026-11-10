@@ -101,6 +101,7 @@
         "api_op_StartServiceSoftwareUpdate.go",
         "api_op_SwitchoverReplication.go",
         "api_op_UpdateApplication.go",
+        "api_op_UpdateClone.go",
         "api_op_UpdateDataSource.go",
         "api_op_UpdateDirectQueryDataSource.go",
         "api_op_UpdateDomainConfig.go",

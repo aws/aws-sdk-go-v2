@@ -189,6 +189,13 @@ func TestCheckResponseSnapshot_CreateLocationAzureBlob(t *testing.T) {
 		SasConfiguration: &types.AzureBlobSasConfiguration{
 			Token: ptr.String("__Token__"),
 		},
+		FederatedIdentity: &types.AzureFederatedIdentityConfig{
+			AwsIamRole: ptr.String("__AwsIamRole__"),
+			AzureOidc: &types.AzureOidcConfig{
+				TenantId: ptr.String("__TenantId__"),
+				ClientId: ptr.String("__ClientId__"),
+			},
+		},
 		BlobType:     types.AzureBlobType("BLOCK"),
 		AccessTier:   types.AzureAccessTier("HOT"),
 		Subdirectory: ptr.String("__Subdirectory__"),
@@ -612,6 +619,17 @@ func TestCheckResponseSnapshot_CreateLocationObjectStorage(t *testing.T) {
 		BucketName:     ptr.String("__BucketName__"),
 		AccessKey:      ptr.String("__AccessKey__"),
 		SecretKey:      ptr.String("__SecretKey__"),
+		FederatedIdentity: &types.ObjectStorageFederatedIdentityConfig{
+			AwsIamRole: ptr.String("__AwsIamRole__"),
+			ExternalIdentity: &types.ObjectStorageExternalIdentityConfig{
+				GoogleOidc: &types.GoogleOidcConfig{
+					ProjectName:          ptr.String("__ProjectName__"),
+					ProjectNumber:        ptr.String("__ProjectNumber__"),
+					IdentityPoolName:     ptr.String("__IdentityPoolName__"),
+					IdentityProviderName: ptr.String("__IdentityProviderName__"),
+				},
+			},
+		},
 		AgentArns: []string{
 			"__Member__",
 			"__Member__",
@@ -974,8 +992,15 @@ func TestCheckResponseSnapshot_DescribeLocationAzureBlob(t *testing.T) {
 		LocationArn:        ptr.String("__LocationArn__"),
 		LocationUri:        ptr.String("__LocationUri__"),
 		AuthenticationType: types.AzureBlobAuthenticationType("SAS"),
-		BlobType:           types.AzureBlobType("BLOCK"),
-		AccessTier:         types.AzureAccessTier("HOT"),
+		FederatedIdentity: &types.AzureFederatedIdentityConfig{
+			AwsIamRole: ptr.String("__AwsIamRole__"),
+			AzureOidc: &types.AzureOidcConfig{
+				TenantId: ptr.String("__TenantId__"),
+				ClientId: ptr.String("__ClientId__"),
+			},
+		},
+		BlobType:   types.AzureBlobType("BLOCK"),
+		AccessTier: types.AzureAccessTier("HOT"),
 		AgentArns: []string{
 			"__Member__",
 			"__Member__",
@@ -1326,9 +1351,20 @@ func TestCheckResponseSnapshot_DescribeLocationNfs(t *testing.T) {
 
 func TestCheckResponseSnapshot_DescribeLocationObjectStorage(t *testing.T) {
 	want := &DescribeLocationObjectStorageOutput{
-		LocationArn:    ptr.String("__LocationArn__"),
-		LocationUri:    ptr.String("__LocationUri__"),
-		AccessKey:      ptr.String("__AccessKey__"),
+		LocationArn: ptr.String("__LocationArn__"),
+		LocationUri: ptr.String("__LocationUri__"),
+		AccessKey:   ptr.String("__AccessKey__"),
+		FederatedIdentity: &types.ObjectStorageFederatedIdentityConfig{
+			AwsIamRole: ptr.String("__AwsIamRole__"),
+			ExternalIdentity: &types.ObjectStorageExternalIdentityConfig{
+				GoogleOidc: &types.GoogleOidcConfig{
+					ProjectName:          ptr.String("__ProjectName__"),
+					ProjectNumber:        ptr.String("__ProjectNumber__"),
+					IdentityPoolName:     ptr.String("__IdentityPoolName__"),
+					IdentityProviderName: ptr.String("__IdentityProviderName__"),
+				},
+			},
+		},
 		ServerPort:     ptr.Int32(1),
 		ServerProtocol: types.ObjectStorageServerProtocol("HTTPS"),
 		AgentArns: []string{
@@ -2163,6 +2199,13 @@ func TestCheckResponseSnapshot_UpdateLocationAzureBlob(t *testing.T) {
 		SasConfiguration: &types.AzureBlobSasConfiguration{
 			Token: ptr.String("__Token__"),
 		},
+		FederatedIdentity: &types.AzureFederatedIdentityConfig{
+			AwsIamRole: ptr.String("__AwsIamRole__"),
+			AzureOidc: &types.AzureOidcConfig{
+				TenantId: ptr.String("__TenantId__"),
+				ClientId: ptr.String("__ClientId__"),
+			},
+		},
 		BlobType:   types.AzureBlobType("BLOCK"),
 		AccessTier: types.AzureAccessTier("HOT"),
 		AgentArns: []string{
@@ -2465,6 +2508,17 @@ func TestCheckResponseSnapshot_UpdateLocationObjectStorage(t *testing.T) {
 		ServerHostname: ptr.String("__ServerHostname__"),
 		AccessKey:      ptr.String("__AccessKey__"),
 		SecretKey:      ptr.String("__SecretKey__"),
+		FederatedIdentity: &types.ObjectStorageFederatedIdentityConfig{
+			AwsIamRole: ptr.String("__AwsIamRole__"),
+			ExternalIdentity: &types.ObjectStorageExternalIdentityConfig{
+				GoogleOidc: &types.GoogleOidcConfig{
+					ProjectName:          ptr.String("__ProjectName__"),
+					ProjectNumber:        ptr.String("__ProjectNumber__"),
+					IdentityPoolName:     ptr.String("__IdentityPoolName__"),
+					IdentityProviderName: ptr.String("__IdentityProviderName__"),
+				},
+			},
+		},
 		AgentArns: []string{
 			"__Member__",
 			"__Member__",

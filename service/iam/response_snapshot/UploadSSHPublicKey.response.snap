@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<UploadSSHPublicKeyResponse><UploadSSHPublicKeyResult><SSHPublicKey><Fingerprint>__Fingerprint__</Fingerprint><SSHPublicKeyBody>__SSHPublicKeyBody__</SSHPublicKeyBody><SSHPublicKeyId>__SSHPublicKeyId__</SSHPublicKeyId><Status>Active</Status><UploadDate>2000-01-01T00:00:00Z</UploadDate><UserName>__UserName__</UserName></SSHPublicKey></UploadSSHPublicKeyResult></UploadSSHPublicKeyResponse>

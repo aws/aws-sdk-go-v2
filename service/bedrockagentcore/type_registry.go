@@ -87,6 +87,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.ServiceQuotaExceededException,
 			New:    func() any { return &types.ServiceQuotaExceededException{} },
 		},
+		"com.amazonaws.bedrockagentcore#ServiceUnavailableException": {
+			Schema: schemas.ServiceUnavailableException,
+			New:    func() any { return &types.ServiceUnavailableException{} },
+		},
 		"com.amazonaws.bedrockagentcore#SubscriptionRequiredException": {
 			Schema: schemas.SubscriptionRequiredException,
 			New:    func() any { return &types.SubscriptionRequiredException{} },

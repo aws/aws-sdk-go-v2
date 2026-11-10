@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyDBClusterSnapshotAttributeResponse><ModifyDBClusterSnapshotAttributeResult><DBClusterSnapshotAttributesResult><DBClusterSnapshotAttributes><DBClusterSnapshotAttribute><AttributeName>__AttributeName__</AttributeName><AttributeValues><AttributeValue>__Member__</AttributeValue><AttributeValue>__Member__</AttributeValue></AttributeValues></DBClusterSnapshotAttribute><DBClusterSnapshotAttribute><AttributeName>__AttributeName__</AttributeName><AttributeValues><AttributeValue>__Member__</AttributeValue><AttributeValue>__Member__</AttributeValue></AttributeValues></DBClusterSnapshotAttribute></DBClusterSnapshotAttributes><DBClusterSnapshotIdentifier>__DBClusterSnapshotIdentifier__</DBClusterSnapshotIdentifier></DBClusterSnapshotAttributesResult></ModifyDBClusterSnapshotAttributeResult></ModifyDBClusterSnapshotAttributeResponse>

@@ -49,6 +49,15 @@ type UpdatePipelineInput struct {
 	// The display name of the pipeline.
 	PipelineDisplayName *string
 
+	// The aliases to assign to the new pipeline version that this update creates. You
+	// can specify aliases only when the update changes the pipeline definition. To
+	// change the aliases of an existing version, use UpdatePipelineVersion .
+	//
+	// An alias must be unique within the pipeline. To move an alias from an existing
+	// version to the new version, first remove the alias from the existing version
+	// with UpdatePipelineVersion .
+	PipelineVersionAliases []string
+
 	// The Amazon Resource Name (ARN) that the pipeline uses to execute.
 	RoleArn *string
 
@@ -83,6 +92,9 @@ func (v *UpdatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.PipelineName != nil {
 		s.WriteString(schemas.UpdatePipelineRequest_PipelineName, *v.PipelineName)
+	}
+	if v.PipelineVersionAliases != nil {
+		serializePipelineVersionAliasList(s, schemas.UpdatePipelineRequest_PipelineVersionAliases, v.PipelineVersionAliases)
 	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdatePipelineRequest_RoleArn, *v.RoleArn)

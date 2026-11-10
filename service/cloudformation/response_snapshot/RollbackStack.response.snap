@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<RollbackStackResponse><RollbackStackResult><OperationId>__OperationId__</OperationId><StackId>__StackId__</StackId></RollbackStackResult></RollbackStackResponse>

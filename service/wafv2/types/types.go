@@ -1793,6 +1793,179 @@ func (v *Condition) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A per-network configuration for a connected account, specifying the blockchain
+// network and the price per request. Unlike PaymentNetwork , you do not provide a
+// wallet address; the receiving address is managed for the connected account.
+type ConnectedAccountChainConfig struct {
+
+	// The blockchain network for receiving payments through the connected account.
+	// Test networks are not supported for connected accounts.
+	//
+	// Valid values:
+	//
+	//   - BASE - Base mainnet.
+	//
+	//   - SOLANA - Solana mainnet.
+	//
+	// This member is required.
+	Chain ConnectedAccountChain
+
+	// The price configuration for this network. Currently supports a single price
+	// entry in USDC.
+	//
+	// This member is required.
+	Prices []ConnectedAccountPrice
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConnectedAccountChainConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectedAccountChainConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectedAccountChainConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Chain != "" {
+		s.WriteString(schemas.ConnectedAccountChainConfig_Chain, string(v.Chain))
+	}
+	if v.Prices != nil {
+		serializeConnectedAccountPrices(s, schemas.ConnectedAccountChainConfig_Prices, v.Prices)
+	}
+}
+func (v *ConnectedAccountChainConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectedAccountChainConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectedAccountChainConfig_Chain:
+			var ev string
+			if err := d.ReadString(schemas.ConnectedAccountChainConfig_Chain, &ev); err != nil {
+				return err
+			}
+			v.Chain = ConnectedAccountChain(ev)
+			return nil
+		case schemas.ConnectedAccountChainConfig_Prices:
+			return deserializeConnectedAccountPrices(d, schemas.ConnectedAccountChainConfig_Prices, &v.Prices)
+		}
+		return nil
+	})
+}
+
+// A connected account configuration for AI bot monetization. Specifies the
+// connected account that payments settle to and the per-network pricing.
+// Settlement through a connected account is an alternative to the self-managed
+// wallets in CryptoConfig ; wallet addresses are managed for the connected account
+// rather than configured by you. If the referenced connected account is not active
+// or not enabled for crypto settlement, the CreateWebACL , UpdateWebACL ,
+// CreateRuleGroup , or UpdateRuleGroup request that includes it is rejected.
+// Specifically, a request that references the account is rejected with
+// WAFInvalidOperationException if the account or its crypto settlement capability
+// isn't active, WAFNonexistentItemException if the ARN no longer exists,
+// AccessDeniedException if you don't have payments:GetConnectedAccount , or
+// WAFInvalidParameterException if the ARN is invalid or the partition is
+// unsupported. Connected accounts are available only in the commercial Amazon Web
+// Services partition.
+type ConnectedAccountConfig struct {
+
+	// The Amazon Resource Name (ARN) of the connected account that payments settle
+	// to. You obtain this ARN from Payment preferences > Connected accounts in the
+	// Amazon Web Services Billing and Cost Management console. For more information,
+	// see [Managing connected accounts]. The connected account must be active and enabled for crypto settlement;
+	// otherwise the request is rejected. To use a connected account, you must have the
+	// payments:GetConnectedAccount permission on this ARN.
+	//
+	// [Managing connected accounts]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-connected-accounts.html
+	//
+	// This member is required.
+	ConnectedAccountArn *string
+
+	// The per-network configurations for the connected account. You can specify 1 to
+	// 2 networks. Each entry specifies a blockchain network and the price for each
+	// request.
+	//
+	// This member is required.
+	PaymentNetworks []ConnectedAccountChainConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConnectedAccountConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectedAccountConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectedAccountConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectedAccountArn != nil {
+		s.WriteString(schemas.ConnectedAccountConfig_ConnectedAccountArn, *v.ConnectedAccountArn)
+	}
+	if v.PaymentNetworks != nil {
+		serializeConnectedAccountPaymentNetworks(s, schemas.ConnectedAccountConfig_PaymentNetworks, v.PaymentNetworks)
+	}
+}
+func (v *ConnectedAccountConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectedAccountConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectedAccountConfig_ConnectedAccountArn:
+			v.ConnectedAccountArn = new(string)
+			return d.ReadString(schemas.ConnectedAccountConfig_ConnectedAccountArn, v.ConnectedAccountArn)
+		case schemas.ConnectedAccountConfig_PaymentNetworks:
+			return deserializeConnectedAccountPaymentNetworks(d, schemas.ConnectedAccountConfig_PaymentNetworks, &v.PaymentNetworks)
+		}
+		return nil
+	})
+}
+
+// The price per request for a connected account payment network, specifying the
+// amount and cryptocurrency.
+type ConnectedAccountPrice struct {
+
+	// The price per request as a decimal string in the specified currency. Valid
+	// values range from 0.01 to 999999.99 USDC, with up to two decimal places.
+	// Sub-cent amounts are not supported.
+	//
+	// This member is required.
+	Amount *string
+
+	// The cryptocurrency for payment. Currently only USDC is supported.
+	//
+	// This member is required.
+	Currency CryptoCurrency
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConnectedAccountPrice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectedAccountPrice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectedAccountPrice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.ConnectedAccountPrice_Amount, *v.Amount)
+	}
+	if v.Currency != "" {
+		s.WriteString(schemas.ConnectedAccountPrice_Currency, string(v.Currency))
+	}
+}
+func (v *ConnectedAccountPrice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectedAccountPrice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectedAccountPrice_Amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.ConnectedAccountPrice_Amount, v.Amount)
+		case schemas.ConnectedAccountPrice_Currency:
+			var ev string
+			if err := d.ReadString(schemas.ConnectedAccountPrice_Currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = CryptoCurrency(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The filter to use to identify the subset of cookies to inspect in a web
 // request.
 //
@@ -5942,19 +6115,37 @@ func (v *MobileSdkRelease) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // The monetization configuration for a web ACL or rule group. Specifies the
-// cryptocurrency payment networks and currency mode for AI bot monetization. You
-// must provide this configuration when any rule in the web ACL or rule group uses
-// the Monetize action.
+// payment settlement options (self-managed crypto wallets in CryptoConfig , a
+// connected account in ConnectedAccountConfigs , or both) and the currency mode
+// for artificial intelligence (AI) bot monetization. You must provide this
+// configuration when any rule in the web ACL or rule group uses the Monetize
+// action.
 type MonetizationConfig struct {
+
+	// The connected account configurations for settling AI bot payments through a
+	// connected account with a supported third-party payment provider (Stripe), as an
+	// alternative to the self-managed wallets in CryptoConfig . You can provide
+	// CryptoConfig , ConnectedAccountConfigs , or both; however, a given blockchain
+	// network (chain) can be used by only one of them. Currently supports exactly one
+	// connected account.
+	ConnectedAccountConfigs []ConnectedAccountConfig
 
 	// The cryptocurrency payment configuration, including the blockchain networks and
 	// wallet addresses where you receive payments.
 	CryptoConfig *CryptoConfig
 
-	// Specifies whether the configuration uses real or test currency. Set to REAL to
-	// settle payments in USDC on production blockchain networks (Base, Solana). Set to
-	// TEST to settle on testnet networks (Base Sepolia, Solana Devnet) with tokens
-	// that have no monetary value. If not specified, defaults to REAL .
+	// Specifies whether the configuration uses real or test currency. If not
+	// specified, defaults to REAL . Connected account configurations support
+	// production settlement only; TEST is not supported when ConnectedAccountConfigs
+	// is present.
+	//
+	// Valid values:
+	//
+	//   - REAL - Settle payments in USDC on production blockchain networks (Base,
+	//   Solana).
+	//
+	//   - TEST - Settle on testnet networks (Base Sepolia, Solana Devnet) with tokens
+	//   that have no monetary value.
 	CurrencyMode CurrencyMode
 
 	noSmithyDocumentSerde
@@ -5967,6 +6158,9 @@ func (v *MonetizationConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MonetizationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectedAccountConfigs != nil {
+		serializeConnectedAccountConfigs(s, schemas.MonetizationConfig_ConnectedAccountConfigs, v.ConnectedAccountConfigs)
+	}
 	if v.CryptoConfig != nil {
 		s.WriteStruct(schemas.MonetizationConfig_CryptoConfig)
 		v.CryptoConfig.SerializeMembers(s)
@@ -5979,6 +6173,8 @@ func (v *MonetizationConfig) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *MonetizationConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MonetizationConfig, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MonetizationConfig_ConnectedAccountConfigs:
+			return deserializeConnectedAccountConfigs(d, schemas.MonetizationConfig_ConnectedAccountConfigs, &v.ConnectedAccountConfigs)
 		case schemas.MonetizationConfig_CryptoConfig:
 			v.CryptoConfig = &CryptoConfig{}
 			return v.CryptoConfig.Deserialize(d)
@@ -11474,8 +11670,8 @@ type WebACL struct {
 	ManagedByFirewallManager bool
 
 	// The monetization configuration for the web ACL. Required when any rule in the
-	// web ACL uses the Monetize action. Specifies the cryptocurrency payment networks
-	// and currency mode for AI bot monetization.
+	// web ACL uses the Monetize action. Specifies the payment settlement options and
+	// currency mode for AI bot monetization.
 	MonetizationConfig *MonetizationConfig
 
 	// Configures the level of DDoS protection that applies to web ACLs associated

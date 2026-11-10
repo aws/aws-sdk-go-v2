@@ -1220,6 +1220,9 @@ type ChangeProgressStatusDetails struct {
 	// configuration change.
 	ChangeProgressStages []ChangeProgressStage
 
+	// Details about a cloned blue/green upgrade, when the change is one.
+	ClonedBlueGreenUpgradeDetails *ClonedBlueGreenUpgradeDetails
+
 	// The list of properties involved in the domain configuration change that are
 	// completed.
 	CompletedProperties []string
@@ -1263,6 +1266,11 @@ func (v *ChangeProgressStatusDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ChangeProgressStages != nil {
 		serializeChangeProgressStageList(s, schemas.ChangeProgressStatusDetails_ChangeProgressStages, v.ChangeProgressStages)
 	}
+	if v.ClonedBlueGreenUpgradeDetails != nil {
+		s.WriteStruct(schemas.ChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails)
+		v.ClonedBlueGreenUpgradeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CompletedProperties != nil {
 		serializeStringList(s, schemas.ChangeProgressStatusDetails_CompletedProperties, v.CompletedProperties)
 	}
@@ -1296,6 +1304,9 @@ func (v *ChangeProgressStatusDetails) Deserialize(d smithy.ShapeDeserializer) er
 			return d.ReadString(schemas.ChangeProgressStatusDetails_ChangeId, v.ChangeId)
 		case schemas.ChangeProgressStatusDetails_ChangeProgressStages:
 			return deserializeChangeProgressStageList(d, schemas.ChangeProgressStatusDetails_ChangeProgressStages, &v.ChangeProgressStages)
+		case schemas.ChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails:
+			v.ClonedBlueGreenUpgradeDetails = &ClonedBlueGreenUpgradeDetails{}
+			return v.ClonedBlueGreenUpgradeDetails.Deserialize(d)
 		case schemas.ChangeProgressStatusDetails_CompletedProperties:
 			return deserializeStringList(d, schemas.ChangeProgressStatusDetails_CompletedProperties, &v.CompletedProperties)
 		case schemas.ChangeProgressStatusDetails_ConfigChangeStatus:
@@ -1329,6 +1340,136 @@ func (v *ChangeProgressStatusDetails) Deserialize(d smithy.ShapeDeserializer) er
 			return nil
 		case schemas.ChangeProgressStatusDetails_TotalNumberOfStages:
 			return d.ReadInt32(schemas.ChangeProgressStatusDetails_TotalNumberOfStages, &v.TotalNumberOfStages)
+		}
+		return nil
+	})
+}
+
+// Options for a cloned blue/green upgrade.
+type ClonedBlueGreenOptions struct {
+
+	// How long to keep the cluster that you cut over from after cutover completes.
+	// When you start the upgrade, only RetentionInHours is accepted.
+	RetentionOptions RetentionOptions
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClonedBlueGreenOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClonedBlueGreenOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClonedBlueGreenOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionOptions != nil {
+		serializeRetentionOptions(s, schemas.ClonedBlueGreenOptions_RetentionOptions, v.RetentionOptions)
+	}
+}
+func (v *ClonedBlueGreenOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClonedBlueGreenOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClonedBlueGreenOptions_RetentionOptions:
+			return deserializeRetentionOptions(d, schemas.ClonedBlueGreenOptions_RetentionOptions, &v.RetentionOptions)
+		}
+		return nil
+	})
+}
+
+// An action that the service takes automatically at a scheduled time during a
+// cloned blue/green upgrade.
+type ClonedBlueGreenScheduledAction struct {
+
+	// The action that the service takes.
+	Action ClonedBlueGreenScheduledActionType
+
+	// The time at which the service takes the action.
+	ScheduledTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClonedBlueGreenScheduledAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClonedBlueGreenScheduledAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClonedBlueGreenScheduledAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ClonedBlueGreenScheduledAction_Action, string(v.Action))
+	}
+	if v.ScheduledTime != nil {
+		s.WriteTime(schemas.ClonedBlueGreenScheduledAction_ScheduledTime, *v.ScheduledTime)
+	}
+}
+func (v *ClonedBlueGreenScheduledAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClonedBlueGreenScheduledAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClonedBlueGreenScheduledAction_Action:
+			var ev string
+			if err := d.ReadString(schemas.ClonedBlueGreenScheduledAction_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ClonedBlueGreenScheduledActionType(ev)
+			return nil
+		case schemas.ClonedBlueGreenScheduledAction_ScheduledTime:
+			v.ScheduledTime = new(time.Time)
+			return d.ReadTime(schemas.ClonedBlueGreenScheduledAction_ScheduledTime, v.ScheduledTime)
+		}
+		return nil
+	})
+}
+
+// The state of a cloned blue/green upgrade. Members that don't apply are omitted.
+type ClonedBlueGreenUpgradeDetails struct {
+
+	// The retention period, in hours, for the cluster that you cut over from.
+	RetentionInHours *int32
+
+	// The action that the service takes automatically if you don't act before the
+	// scheduled time.
+	ScheduledAction *ClonedBlueGreenScheduledAction
+
+	// The current split of search traffic between the primary and cloned clusters.
+	TrafficSplit *TrafficPercents
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClonedBlueGreenUpgradeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClonedBlueGreenUpgradeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClonedBlueGreenUpgradeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionInHours != nil {
+		s.WriteInt32(schemas.ClonedBlueGreenUpgradeDetails_RetentionInHours, *v.RetentionInHours)
+	}
+	if v.ScheduledAction != nil {
+		s.WriteStruct(schemas.ClonedBlueGreenUpgradeDetails_ScheduledAction)
+		v.ScheduledAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrafficSplit != nil {
+		s.WriteStruct(schemas.ClonedBlueGreenUpgradeDetails_TrafficSplit)
+		v.TrafficSplit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ClonedBlueGreenUpgradeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClonedBlueGreenUpgradeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClonedBlueGreenUpgradeDetails_RetentionInHours:
+			v.RetentionInHours = new(int32)
+			return d.ReadInt32(schemas.ClonedBlueGreenUpgradeDetails_RetentionInHours, v.RetentionInHours)
+		case schemas.ClonedBlueGreenUpgradeDetails_ScheduledAction:
+			v.ScheduledAction = &ClonedBlueGreenScheduledAction{}
+			return v.ScheduledAction.Deserialize(d)
+		case schemas.ClonedBlueGreenUpgradeDetails_TrafficSplit:
+			v.TrafficSplit = &TrafficPercents{}
+			return v.TrafficSplit.Deserialize(d)
 		}
 		return nil
 	})
@@ -1517,6 +1658,96 @@ func (v *CompatibleVersionsMap) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The cutover target and status for a cloned blue/green upgrade.
+type CutoverOptions struct {
+
+	// The status of the cutover.
+	//
+	// This member is required.
+	Status CutoverStatus
+
+	// The cluster that the domain is cutting over to.
+	//
+	// This member is required.
+	Target CutoverTarget
+
+	noSmithyDocumentSerde
+}
+
+func (v *CutoverOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CutoverOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CutoverOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.CutoverOptions_Status, string(v.Status))
+	}
+	if v.Target != "" {
+		s.WriteString(schemas.CutoverOptions_Target, string(v.Target))
+	}
+}
+func (v *CutoverOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CutoverOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CutoverOptions_Status:
+			var ev string
+			if err := d.ReadString(schemas.CutoverOptions_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CutoverStatus(ev)
+			return nil
+		case schemas.CutoverOptions_Target:
+			var ev string
+			if err := d.ReadString(schemas.CutoverOptions_Target, &ev); err != nil {
+				return err
+			}
+			v.Target = CutoverTarget(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The cutover to perform for a cloned blue/green upgrade.
+type CutoverRequestOptions struct {
+
+	// The cluster to cut over to. ClonedCluster makes the cloned cluster serve the
+	// domain. PrimaryCluster keeps the primary cluster and ends the upgrade.
+	//
+	// This member is required.
+	Target CutoverTarget
+
+	noSmithyDocumentSerde
+}
+
+func (v *CutoverRequestOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CutoverRequestOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CutoverRequestOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Target != "" {
+		s.WriteString(schemas.CutoverRequestOptions_Target, string(v.Target))
+	}
+}
+func (v *CutoverRequestOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CutoverRequestOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CutoverRequestOptions_Target:
+			var ev string
+			if err := d.ReadString(schemas.CutoverRequestOptions_Target, &ev); err != nil {
+				return err
+			}
+			v.Target = CutoverTarget(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies the deployment strategy options for the domain.
 type DeploymentStrategyOptions struct {
 
@@ -1600,6 +1831,58 @@ func (v *DeploymentStrategyOptionsStatus) Deserialize(d smithy.ShapeDeserializer
 		case schemas.DeploymentStrategyOptionsStatus_Status:
 			v.Status = &OptionStatus{}
 			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Overrides the deployment strategy for a single operation, such as a version
+// upgrade.
+type DeploymentStrategyOverrideOptions struct {
+
+	// The deployment strategy to use for this operation. The only valid value is
+	// ClonedBlueGreen , which creates a cloned cluster on the target version next to
+	// the primary cluster so that you can validate it and shift traffic to it before
+	// you cut over.
+	//
+	// This member is required.
+	DeploymentStrategy DeploymentStrategyOverride
+
+	// Options that apply when DeploymentStrategy is ClonedBlueGreen .
+	ClonedBlueGreenOptions *ClonedBlueGreenOptions
+
+	noSmithyDocumentSerde
+}
+
+func (v *DeploymentStrategyOverrideOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentStrategyOverrideOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentStrategyOverrideOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClonedBlueGreenOptions != nil {
+		s.WriteStruct(schemas.DeploymentStrategyOverrideOptions_ClonedBlueGreenOptions)
+		v.ClonedBlueGreenOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentStrategy != "" {
+		s.WriteString(schemas.DeploymentStrategyOverrideOptions_DeploymentStrategy, string(v.DeploymentStrategy))
+	}
+}
+func (v *DeploymentStrategyOverrideOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentStrategyOverrideOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentStrategyOverrideOptions_ClonedBlueGreenOptions:
+			v.ClonedBlueGreenOptions = &ClonedBlueGreenOptions{}
+			return v.ClonedBlueGreenOptions.Deserialize(d)
+		case schemas.DeploymentStrategyOverrideOptions_DeploymentStrategy:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentStrategyOverrideOptions_DeploymentStrategy, &ev); err != nil {
+				return err
+			}
+			v.DeploymentStrategy = DeploymentStrategyOverride(ev)
+			return nil
 		}
 		return nil
 	})
@@ -4517,6 +4800,55 @@ func (v *ReservedElasticsearchInstanceOffering) Deserialize(d smithy.ShapeDeseri
 	})
 }
 
+// Controls how long the cluster that you cut over from is kept after cutover
+// completes. Specify exactly one of RetentionInHours or RetentionAction .
+//
+// The following types satisfy this interface:
+//
+//	RetentionOptionsMemberRetentionAction
+//	RetentionOptionsMemberRetentionInHours
+type RetentionOptions interface {
+	isRetentionOptions()
+}
+
+// Ends the retention period now. Valid only after cutover completes.
+type RetentionOptionsMemberRetentionAction struct {
+	Value RetentionAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RetentionOptionsMemberRetentionAction) isRetentionOptions() {}
+func (v *RetentionOptionsMemberRetentionAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.RetentionOptions_RetentionAction, string(v.Value))
+}
+func (v *RetentionOptionsMemberRetentionAction) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.RetentionOptions_RetentionAction, &s); err != nil {
+		return err
+	}
+	v.Value = RetentionAction(s)
+	return nil
+}
+
+// The number of hours to keep the cluster that you cut over from. The retention
+// period starts when cutover completes. The minimum is 1 hour. In an UpdateClone
+// response after cutover completes, this value is the number of hours remaining in
+// the retention period, rounded up.
+type RetentionOptionsMemberRetentionInHours struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*RetentionOptionsMemberRetentionInHours) isRetentionOptions() {}
+func (v *RetentionOptionsMemberRetentionInHours) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.RetentionOptions_RetentionInHours, v.Value)
+}
+func (v *RetentionOptionsMemberRetentionInHours) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt32(schemas.RetentionOptions_RetentionInHours, &v.Value)
+}
+
 // Specifies the SAML Identity Provider's information.
 type SAMLIdp struct {
 
@@ -5134,6 +5466,153 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The split of search traffic between the primary and cloned clusters.
+type TrafficPercents struct {
+
+	// The percentage of search traffic sent to the cloned cluster.
+	//
+	// This member is required.
+	CloneReadTrafficPercent int32
+
+	// The percentage of search traffic sent to the primary cluster.
+	//
+	// This member is required.
+	PrimaryReadTrafficPercent int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrafficPercents) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrafficPercents)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrafficPercents) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.TrafficPercents_CloneReadTrafficPercent, v.CloneReadTrafficPercent)
+	s.WriteInt32(schemas.TrafficPercents_PrimaryReadTrafficPercent, v.PrimaryReadTrafficPercent)
+}
+func (v *TrafficPercents) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrafficPercents, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrafficPercents_CloneReadTrafficPercent:
+			return d.ReadInt32(schemas.TrafficPercents_CloneReadTrafficPercent, &v.CloneReadTrafficPercent)
+		case schemas.TrafficPercents_PrimaryReadTrafficPercent:
+			return d.ReadInt32(schemas.TrafficPercents_PrimaryReadTrafficPercent, &v.PrimaryReadTrafficPercent)
+		}
+		return nil
+	})
+}
+
+// The traffic split and status for a cloned blue/green upgrade.
+type TrafficSplitOptions struct {
+
+	// The traffic split currently in effect.
+	//
+	// This member is required.
+	Current *TrafficPercents
+
+	// The status of the traffic shift.
+	//
+	// This member is required.
+	Status TrafficSplitStatus
+
+	// The requested traffic split.
+	//
+	// This member is required.
+	Target *TrafficPercents
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrafficSplitOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrafficSplitOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrafficSplitOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Current != nil {
+		s.WriteStruct(schemas.TrafficSplitOptions_Current)
+		v.Current.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TrafficSplitOptions_Status, string(v.Status))
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.TrafficSplitOptions_Target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TrafficSplitOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrafficSplitOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrafficSplitOptions_Current:
+			v.Current = &TrafficPercents{}
+			return v.Current.Deserialize(d)
+		case schemas.TrafficSplitOptions_Status:
+			var ev string
+			if err := d.ReadString(schemas.TrafficSplitOptions_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = TrafficSplitStatus(ev)
+			return nil
+		case schemas.TrafficSplitOptions_Target:
+			v.Target = &TrafficPercents{}
+			return v.Target.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The traffic shift to perform for a cloned blue/green upgrade.
+type TrafficSplitRequestOptions struct {
+
+	// The percentage of search traffic, from 0 to 100, to send to the cloned cluster.
+	// The rest goes to the primary cluster.
+	//
+	// This member is required.
+	CloneReadTrafficPercent int32
+
+	// The traffic shifting strategy. The only valid value is ShiftReadTrafficPercent .
+	//
+	// This member is required.
+	Strategy TrafficStrategy
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrafficSplitRequestOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrafficSplitRequestOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrafficSplitRequestOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.TrafficSplitRequestOptions_CloneReadTrafficPercent, v.CloneReadTrafficPercent)
+	if v.Strategy != "" {
+		s.WriteString(schemas.TrafficSplitRequestOptions_Strategy, string(v.Strategy))
+	}
+}
+func (v *TrafficSplitRequestOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrafficSplitRequestOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrafficSplitRequestOptions_CloneReadTrafficPercent:
+			return d.ReadInt32(schemas.TrafficSplitRequestOptions_CloneReadTrafficPercent, &v.CloneReadTrafficPercent)
+		case schemas.TrafficSplitRequestOptions_Strategy:
+			var ev string
+			if err := d.ReadString(schemas.TrafficSplitRequestOptions_Strategy, &ev); err != nil {
+				return err
+			}
+			v.Strategy = TrafficStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // History of the last 10 Upgrades and Upgrade Eligibility Checks.
 type UpgradeHistory struct {
 
@@ -5714,3 +6193,14 @@ func (v *ZoneAwarenessConfig) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isRetentionOptions() {}

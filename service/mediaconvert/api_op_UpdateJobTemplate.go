@@ -45,6 +45,9 @@ type UpdateJobTemplateInput struct {
 	// The new description for the job template, if you are changing it.
 	Description *string
 
+	// The Elemental Inference settings used in this job.
+	ElementalInferenceSettings *types.ElementalInferenceSettings
+
 	// Optional list of hop destinations.
 	HopDestinations []types.HopDestination
 
@@ -87,6 +90,11 @@ func (v *UpdateJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateJobTemplateRequest_Description, *v.Description)
+	}
+	if v.ElementalInferenceSettings != nil {
+		s.WriteStruct(schemas.UpdateJobTemplateRequest_ElementalInferenceSettings)
+		v.ElementalInferenceSettings.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.HopDestinations != nil {
 		serialize__listOfHopDestination(s, schemas.UpdateJobTemplateRequest_HopDestinations, v.HopDestinations)

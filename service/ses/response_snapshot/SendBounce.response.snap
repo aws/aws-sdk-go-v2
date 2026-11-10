@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<SendBounceResponse><SendBounceResult><MessageId>__MessageId__</MessageId></SendBounceResult></SendBounceResponse>

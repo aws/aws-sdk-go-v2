@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreatePolicyVersionResponse><CreatePolicyVersionResult><PolicyVersion><CreateDate>2000-01-01T00:00:00Z</CreateDate><Document>__Document__</Document><IsDefaultVersion>true</IsDefaultVersion><VersionId>__VersionId__</VersionId></PolicyVersion></CreatePolicyVersionResult></CreatePolicyVersionResponse>

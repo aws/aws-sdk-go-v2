@@ -7512,6 +7512,9 @@ type ExportJobSummary struct {
 	// The timestamp when the job completed, or null if the job is still running.
 	CompletedAt *time.Time
 
+	// The name of the dataset export job.
+	JobName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -7530,6 +7533,9 @@ func (v *ExportJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.JobId != nil {
 		s.WriteString(schemas.ExportJobSummary_jobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.ExportJobSummary_jobName, *v.JobName)
 	}
 	if v.StartedAt != nil {
 		s.WriteTime(schemas.ExportJobSummary_startedAt, *v.StartedAt)
@@ -7550,6 +7556,9 @@ func (v *ExportJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ExportJobSummary_jobId:
 			v.JobId = new(string)
 			return d.ReadString(schemas.ExportJobSummary_jobId, v.JobId)
+		case schemas.ExportJobSummary_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.ExportJobSummary_jobName, v.JobName)
 		case schemas.ExportJobSummary_startedAt:
 			v.StartedAt = new(time.Time)
 			return d.ReadTime(schemas.ExportJobSummary_startedAt, v.StartedAt)

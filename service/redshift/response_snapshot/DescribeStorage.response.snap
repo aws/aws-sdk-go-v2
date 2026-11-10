@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeStorageResponse><DescribeStorageResult><TotalBackupSizeInMegaBytes>1</TotalBackupSizeInMegaBytes><TotalProvisionedStorageInMegaBytes>1</TotalProvisionedStorageInMegaBytes></DescribeStorageResult></DescribeStorageResponse>

@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type StopActivityStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopActivityStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopActivityStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopActivityStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyImmediately != nil {
+		s.WriteBool(schemas.StopActivityStreamRequest_ApplyImmediately, *v.ApplyImmediately)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.StopActivityStreamRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type StopActivityStreamOutput struct {
 
 	// The name of the Amazon Kinesis data stream used for the database activity
@@ -69,13 +86,48 @@ type StopActivityStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopActivityStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopActivityStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopActivityStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KinesisStreamName != nil {
+		s.WriteString(schemas.StopActivityStreamResponse_KinesisStreamName, *v.KinesisStreamName)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.StopActivityStreamResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StopActivityStreamResponse_Status, string(v.Status))
+	}
+}
+func (v *StopActivityStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopActivityStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopActivityStreamResponse_KinesisStreamName:
+			v.KinesisStreamName = new(string)
+			return d.ReadString(schemas.StopActivityStreamResponse_KinesisStreamName, v.KinesisStreamName)
+		case schemas.StopActivityStreamResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.StopActivityStreamResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.StopActivityStreamResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StopActivityStreamResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ActivityStreamStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopActivityStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpStopActivityStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopActivityStream, schemas.StopActivityStreamRequest, schemas.StopActivityStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStopActivityStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopActivityStream, schemas.StopActivityStreamRequest, schemas.StopActivityStreamResponse), output: &StopActivityStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

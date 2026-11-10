@@ -41,7 +41,7 @@ type RunMicrovmInput struct {
 	// the request.
 	ClientToken *string
 
-	// The list of egress network connectors to configure for the MicroVM.
+	// The list of egress network connectors available to the MicroVM at runtime.
 	EgressNetworkConnectors []string
 
 	// The ARN of the IAM role to be assumed by the MicroVM during execution.
@@ -152,7 +152,7 @@ type RunMicrovmOutput struct {
 	// This member is required.
 	State types.MicrovmState
 
-	// The list of egress network connectors configured for the MicroVM.
+	// The list of egress network connectors available to the MicroVM at runtime.
 	EgressNetworkConnectors []string
 
 	// The ARN of the IAM execution role assumed by the MicroVM.

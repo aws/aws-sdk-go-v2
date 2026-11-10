@@ -2898,7 +2898,7 @@ var ActionSummary_ActionType *smithy.Schema
 var ActionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ActionType",
-}, smithy.ShapeTypeEnum, 11)
+}, smithy.ShapeTypeEnum, 12)
 var ActionType_CREATE_TASK *smithy.Schema
 
 var ActionType_ASSIGN_CONTACT_CATEGORY *smithy.Schema
@@ -2914,6 +2914,8 @@ var ActionType_UPDATE_CASE *smithy.Schema
 var ActionType_ASSIGN_SLA *smithy.Schema
 
 var ActionType_END_ASSOCIATED_TASKS *smithy.Schema
+
+var ActionType_END_ASSOCIATED_EMAILS *smithy.Schema
 
 var ActionType_SUBMIT_AUTO_EVALUATION *smithy.Schema
 
@@ -4335,6 +4337,30 @@ var _CampaignId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CampaignId",
 }, smithy.ShapeTypeString, 0)
 
+var _CaseEntries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CaseEntries",
+}, smithy.ShapeTypeList, 1)
+var _CaseEntries_member *smithy.Schema
+
+var CaseEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CaseEntry",
+}, smithy.ShapeTypeStructure, 2)
+var CaseEntry_CaseId *smithy.Schema
+
+var CaseEntry_CaseReferenceNumber *smithy.Schema
+
+var _CaseId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CaseId",
+}, smithy.ShapeTypeString, 0)
+
+var _CaseReferenceNumber = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CaseReferenceNumber",
+}, smithy.ShapeTypeString, 0)
+
 var CaseSlaConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "CaseSlaConfiguration",
@@ -4667,7 +4693,7 @@ var _ConnectionTypeList_member *smithy.Schema
 var Contact = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "Contact",
-}, smithy.ShapeTypeStructure, 48)
+}, smithy.ShapeTypeStructure, 49)
 var Contact_Arn *smithy.Schema
 
 var Contact_Id *smithy.Schema
@@ -4753,6 +4779,8 @@ var Contact_DisconnectReason *smithy.Schema
 var Contact_ContactEvaluations *smithy.Schema
 
 var Contact_TaskTemplateInfo *smithy.Schema
+
+var Contact_Cases *smithy.Schema
 
 var Contact_ContactDetails *smithy.Schema
 
@@ -6787,6 +6815,11 @@ var EncryptionType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "EncryptionType",
 }, smithy.ShapeTypeEnum, 1)
 var EncryptionType_KMS *smithy.Schema
+
+var EndAssociatedEmailsActionDefinition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EndAssociatedEmailsActionDefinition",
+}, smithy.ShapeTypeStructure, 0)
 
 var EndAssociatedTasksActionDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -14275,7 +14308,7 @@ var Rule_Tags *smithy.Schema
 var RuleAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "RuleAction",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var RuleAction_ActionType *smithy.Schema
 
 var RuleAction_TaskAction *smithy.Schema
@@ -14293,6 +14326,8 @@ var RuleAction_UpdateCaseAction *smithy.Schema
 var RuleAction_AssignSlaAction *smithy.Schema
 
 var RuleAction_EndAssociatedTasksAction *smithy.Schema
+
+var RuleAction_EndAssociatedEmailsAction *smithy.Schema
 
 var RuleAction_SubmitAutoEvaluationAction *smithy.Schema
 
@@ -25086,6 +25121,8 @@ func init() {
 
 	ActionType_END_ASSOCIATED_TASKS = ActionType.AddMember("END_ASSOCIATED_TASKS", smithyprelude.Unit)
 
+	ActionType_END_ASSOCIATED_EMAILS = ActionType.AddMember("END_ASSOCIATED_EMAILS", smithyprelude.Unit)
+
 	ActionType_SUBMIT_AUTO_EVALUATION = ActionType.AddMember("SUBMIT_AUTO_EVALUATION", smithyprelude.Unit)
 
 	ActionType_EXTRACT_INFORMATION = ActionType.AddMember("EXTRACT_INFORMATION", smithyprelude.Unit)
@@ -26690,6 +26727,12 @@ func init() {
 
 	Campaign_CampaignId = Campaign.AddMember("CampaignId", _CampaignId)
 
+	CaseEntry_CaseId = CaseEntry.AddMember("CaseId", _CaseId)
+
+	CaseEntry_CaseReferenceNumber = CaseEntry.AddMember("CaseReferenceNumber", _CaseReferenceNumber)
+
+	_CaseEntries_member = _CaseEntries.AddMember("member", CaseEntry)
+
 	CategoriesAttributeAndCondition_TagConditions = CategoriesAttributeAndCondition.AddMember("TagConditions", _TagAndConditionList)
 
 	_CategoriesAttributeOrConditionList_member = _CategoriesAttributeOrConditionList.AddMember("member", CategoriesAttributeAndCondition)
@@ -27223,6 +27266,8 @@ func init() {
 	Contact_ContactEvaluations = Contact.AddMember("ContactEvaluations", _ContactEvaluations)
 
 	Contact_TaskTemplateInfo = Contact.AddMember("TaskTemplateInfo", TaskTemplateInfoV2)
+
+	Contact_Cases = Contact.AddMember("Cases", _CaseEntries)
 
 	Contact_ContactDetails = Contact.AddMember("ContactDetails", ContactDetails)
 
@@ -31341,6 +31386,8 @@ func init() {
 	RuleAction_AssignSlaAction = RuleAction.AddMember("AssignSlaAction", AssignSlaActionDefinition)
 
 	RuleAction_EndAssociatedTasksAction = RuleAction.AddMember("EndAssociatedTasksAction", EndAssociatedTasksActionDefinition)
+
+	RuleAction_EndAssociatedEmailsAction = RuleAction.AddMember("EndAssociatedEmailsAction", EndAssociatedEmailsActionDefinition)
 
 	RuleAction_SubmitAutoEvaluationAction = RuleAction.AddMember("SubmitAutoEvaluationAction", SubmitAutoEvaluationActionDefinition)
 

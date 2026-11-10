@@ -102,6 +102,61 @@ func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// The request has failed due to a temporary failure of the service.
+type ServiceUnavailableException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	RetryAfterSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceUnavailableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceUnavailableException_message, *v.Message)
+	}
+	if v.RetryAfterSeconds != nil {
+		s.WriteInt32(schemas.ServiceUnavailableException_retryAfterSeconds, *v.RetryAfterSeconds)
+	}
+}
+func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUnavailableException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_message, v.Message)
+		case schemas.ServiceUnavailableException_retryAfterSeconds:
+			v.RetryAfterSeconds = new(int32)
+			return d.ReadInt32(schemas.ServiceUnavailableException_retryAfterSeconds, v.RetryAfterSeconds)
+		}
+		return nil
+	})
+}
+
 // Too many tags.
 type TooManyTagsException struct {
 	Message *string

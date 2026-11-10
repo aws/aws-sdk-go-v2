@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type GetIdentityMailFromDomainAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityMailFromDomainAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityMailFromDomainAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityMailFromDomainAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identities != nil {
+		serializeIdentityList(s, schemas.GetIdentityMailFromDomainAttributesRequest_Identities, v.Identities)
+	}
+}
+
 // Represents the custom MAIL FROM attributes for a list of identities.
 type GetIdentityMailFromDomainAttributesOutput struct {
 
@@ -57,13 +71,31 @@ type GetIdentityMailFromDomainAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityMailFromDomainAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityMailFromDomainAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityMailFromDomainAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MailFromDomainAttributes != nil {
+		serializeMailFromDomainAttributes(s, schemas.GetIdentityMailFromDomainAttributesResponse_MailFromDomainAttributes, v.MailFromDomainAttributes)
+	}
+}
+func (v *GetIdentityMailFromDomainAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdentityMailFromDomainAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdentityMailFromDomainAttributesResponse_MailFromDomainAttributes:
+			return deserializeMailFromDomainAttributes(d, schemas.GetIdentityMailFromDomainAttributesResponse_MailFromDomainAttributes, &v.MailFromDomainAttributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdentityMailFromDomainAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetIdentityMailFromDomainAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityMailFromDomainAttributes, schemas.GetIdentityMailFromDomainAttributesRequest, schemas.GetIdentityMailFromDomainAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetIdentityMailFromDomainAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityMailFromDomainAttributes, schemas.GetIdentityMailFromDomainAttributesRequest, schemas.GetIdentityMailFromDomainAttributesResponse), output: &GetIdentityMailFromDomainAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

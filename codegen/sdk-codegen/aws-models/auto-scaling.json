@@ -1071,6 +1071,12 @@
                         "smithy.api#documentation": "<p>\n            Specifies whether to include information about Amazon EC2 instances in the response. When set to <code>true</code> (default), the response includes instance details.\n        </p>"
                     }
                 },
+                "IncludeManagedResources": {
+                    "target": "com.amazonaws.autoscaling#IncludeManagedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies whether to include managed Auto Scaling groups in the response. When set to <code>true</code> (default), the response includes managed Auto Scaling groups.\n        </p>"
+                    }
+                },
                 "NextToken": {
                     "target": "com.amazonaws.autoscaling#XmlString",
                     "traits": {
@@ -1080,7 +1086,7 @@
                 "MaxRecords": {
                     "target": "com.amazonaws.autoscaling#MaxRecords",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n                <code>50</code> and the maximum value is <code>100</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n                <code>50</code> and the maximum value is <code>100</code>.</p>\n         <p>A response can contain fewer items than the value specified by <code>MaxRecords</code>, even when more items are available. To retrieve the additional items, use the <code>NextToken</code> value in a subsequent call rather than relying on the number of items in the response.</p>"
                     }
                 },
                 "Filters": {
@@ -4810,10 +4816,16 @@
                         "smithy.api#documentation": "<p>The IDs of the instances. If you omit this property, all Auto Scaling instances are described.\n            If you specify an ID that does not exist, it is ignored with no error.</p>\n         <p>Array Members: Maximum number of 50 items.</p>"
                     }
                 },
+                "IncludeManagedResources": {
+                    "target": "com.amazonaws.autoscaling#IncludeManagedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies whether to include managed Auto Scaling instances in the response. When set to <code>true</code> (default), the response includes managed Auto Scaling instances.\n        </p>"
+                    }
+                },
                 "MaxRecords": {
                     "target": "com.amazonaws.autoscaling#MaxRecords",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n                <code>50</code> and the maximum value is <code>50</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n                <code>50</code> and the maximum value is <code>50</code>.</p>\n         <p>A response can contain fewer items than the value specified by <code>MaxRecords</code>, even when more items are available. To retrieve the additional items, use the <code>NextToken</code> value in a subsequent call rather than relying on the number of items in the response.</p>"
                     }
                 },
                 "NextToken": {
@@ -5439,6 +5451,12 @@
                         "smithy.api#documentation": "<p>The name of the Auto Scaling group.</p>"
                     }
                 },
+                "IncludeManagedResources": {
+                    "target": "com.amazonaws.autoscaling#IncludeManagedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies whether to include notification configurations for managed Auto Scaling groups in the response. When set to <code>true</code> (default), the response includes notification configurations for managed Auto Scaling groups.\n        </p>"
+                    }
+                },
                 "NextToken": {
                     "target": "com.amazonaws.autoscaling#XmlString",
                     "traits": {
@@ -5448,7 +5466,7 @@
                 "MaxRecords": {
                     "target": "com.amazonaws.autoscaling#MaxRecords",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n                <code>50</code> and the maximum value is <code>100</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n                <code>50</code> and the maximum value is <code>100</code>.</p>\n         <p>A response can contain fewer items than the value specified by <code>MaxRecords</code>, even when more items are available. To retrieve the additional items, use the <code>NextToken</code> value in a subsequent call rather than relying on the number of items in the response.</p>"
                     }
                 }
             }
@@ -5534,6 +5552,12 @@
                         "smithy.api#documentation": "<p>One or more policy types. The valid values are <code>SimpleScaling</code>,\n                <code>StepScaling</code>, <code>TargetTrackingScaling</code>, and\n                <code>PredictiveScaling</code>.</p>"
                     }
                 },
+                "IncludeManagedResources": {
+                    "target": "com.amazonaws.autoscaling#IncludeManagedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies whether to include scaling policies for managed Auto Scaling groups in the response. When set to <code>true</code> (default), the response includes scaling policies for managed Auto Scaling groups.\n        </p>"
+                    }
+                },
                 "NextToken": {
                     "target": "com.amazonaws.autoscaling#XmlString",
                     "traits": {
@@ -5543,7 +5567,7 @@
                 "MaxRecords": {
                     "target": "com.amazonaws.autoscaling#MaxRecords",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to be returned with each call. The default value is\n                <code>50</code> and the maximum value is <code>100</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to be returned with each call. The default value is\n                <code>50</code> and the maximum value is <code>100</code>.</p>\n         <p>A response can contain fewer items than the value specified by <code>MaxRecords</code>, even when more items are available. To retrieve the additional items, use the <code>NextToken</code> value in a subsequent call rather than relying on the number of items in the response.</p>"
                     }
                 }
             }
@@ -5620,10 +5644,16 @@
                         "smithy.api#documentation": "<p>Indicates whether to include scaling activity from deleted Auto Scaling groups.</p>"
                     }
                 },
+                "IncludeManagedResources": {
+                    "target": "com.amazonaws.autoscaling#IncludeManagedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies whether to include scaling activities for managed Auto Scaling groups in the response. When set to <code>true</code> (default), the response includes scaling activities for managed Auto Scaling groups.\n        </p>"
+                    }
+                },
                 "MaxRecords": {
                     "target": "com.amazonaws.autoscaling#MaxRecords",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n                <code>100</code> and the maximum value is <code>100</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n                <code>100</code> and the maximum value is <code>100</code>.</p>\n         <p>A response can contain fewer items than the value specified by <code>MaxRecords</code>, even when more items are available. To retrieve the additional items, use the <code>NextToken</code> value in a subsequent call rather than relying on the number of items in the response.</p>"
                     }
                 },
                 "NextToken": {
@@ -5781,6 +5811,12 @@
                         "smithy.api#documentation": "<p>The latest scheduled start time to return. If scheduled action names are provided,\n            this property is ignored.</p>"
                     }
                 },
+                "IncludeManagedResources": {
+                    "target": "com.amazonaws.autoscaling#IncludeManagedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies whether to include scheduled actions for managed Auto Scaling groups in the response. When set to <code>true</code> (default), the response includes scheduled actions for managed Auto Scaling groups.\n        </p>"
+                    }
+                },
                 "NextToken": {
                     "target": "com.amazonaws.autoscaling#XmlString",
                     "traits": {
@@ -5790,7 +5826,7 @@
                 "MaxRecords": {
                     "target": "com.amazonaws.autoscaling#MaxRecords",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n                <code>50</code> and the maximum value is <code>100</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n                <code>50</code> and the maximum value is <code>100</code>.</p>\n         <p>A response can contain fewer items than the value specified by <code>MaxRecords</code>, even when more items are available. To retrieve the additional items, use the <code>NextToken</code> value in a subsequent call rather than relying on the number of items in the response.</p>"
                     }
                 }
             }
@@ -5864,6 +5900,12 @@
                         "smithy.api#documentation": "<p>One or more filters to scope the tags to return. The maximum number of filters per\n            filter type (for example, <code>auto-scaling-group</code>) is 1000.</p>"
                     }
                 },
+                "IncludeManagedResources": {
+                    "target": "com.amazonaws.autoscaling#IncludeManagedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies whether to include tags for managed Auto Scaling groups in the response. When set to <code>true</code> (default), the response includes tags for managed Auto Scaling groups.\n        </p>"
+                    }
+                },
                 "NextToken": {
                     "target": "com.amazonaws.autoscaling#XmlString",
                     "traits": {
@@ -5873,7 +5915,7 @@
                 "MaxRecords": {
                     "target": "com.amazonaws.autoscaling#MaxRecords",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n                <code>50</code> and the maximum value is <code>100</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return with this call. The default value is\n                <code>50</code> and the maximum value is <code>100</code>.</p>\n         <p>A response can contain fewer items than the value specified by <code>MaxRecords</code>, even when more items are available. To retrieve the additional items, use the <code>NextToken</code> value in a subsequent call rather than relying on the number of items in the response.</p>"
                     }
                 }
             }
@@ -7039,6 +7081,9 @@
             "type": "boolean"
         },
         "com.amazonaws.autoscaling#IncludeInstances": {
+            "type": "boolean"
+        },
+        "com.amazonaws.autoscaling#IncludeManagedResources": {
             "type": "boolean"
         },
         "com.amazonaws.autoscaling#Instance": {
@@ -8720,7 +8765,7 @@
                 "State": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>One of the following load balancer states:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Adding</code> - The Auto Scaling instances are being registered with the load\n                    balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Added</code> - All Auto Scaling instances are registered with the load\n                    balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InService</code> - At least one Auto Scaling instance passed an <code>ELB</code>\n                    health check.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Removing</code> - The Auto Scaling instances are being deregistered from the\n                    load balancer. If connection draining is enabled, Elastic Load Balancing waits for in-flight\n                    requests to complete before deregistering the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Removed</code> - All Auto Scaling instances are deregistered from the load\n                    balancer.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>One of the following load balancer states:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Adding</code> - The Auto Scaling instances are being registered with the load\n                    balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Added</code> - All Auto Scaling instances are registered with the load\n                    balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InService</code> - At least one Auto Scaling instance passed an\n                    <code>ELB</code> health check. Note that the load balancer enters this\n                    state immediately if you attach it in the\n                    <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html\">CreateAutoScalingGroup</a>\n                    API call.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Removing</code> - The Auto Scaling instances are being deregistered from the\n                    load balancer. If connection draining is enabled, Elastic Load Balancing waits for in-flight\n                    requests to complete before deregistering the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Removed</code> - All Auto Scaling instances are deregistered from the load\n                    balancer.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -8746,7 +8791,7 @@
                 "State": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the target group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Adding</code> - The Auto Scaling instances are being registered with the target\n                    group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Added</code> - All Auto Scaling instances are registered with the target\n                    group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InService</code> - At least one Auto Scaling instance passed an <code>ELB</code>\n                    health check.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Removing</code> - The Auto Scaling instances are being deregistered from the\n                    target group. If connection draining is enabled, Elastic Load Balancing waits for in-flight\n                    requests to complete before deregistering the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Removed</code> - All Auto Scaling instances are deregistered from the target\n                    group.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The state of the target group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Adding</code> - The Auto Scaling instances are being registered with the target\n                    group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Added</code> - All Auto Scaling instances are registered with the target\n                    group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InService</code> - At least one Auto Scaling instance passed an\n                    <code>ELB</code> health check. Note that the target group enters this\n                    state immediately if you attach it in the\n                    <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html\">CreateAutoScalingGroup</a>\n                    API call.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Removing</code> - The Auto Scaling instances are being deregistered from the\n                    target group. If connection draining is enabled, Elastic Load Balancing waits for in-flight\n                    requests to complete before deregistering the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Removed</code> - All Auto Scaling instances are deregistered from the target\n                    group.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

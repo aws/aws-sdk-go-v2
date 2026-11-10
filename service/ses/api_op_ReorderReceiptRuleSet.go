@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type ReorderReceiptRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReorderReceiptRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReorderReceiptRuleSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReorderReceiptRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleNames != nil {
+		serializeReceiptRuleNamesList(s, schemas.ReorderReceiptRuleSetRequest_RuleNames, v.RuleNames)
+	}
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.ReorderReceiptRuleSetRequest_RuleSetName, *v.RuleSetName)
+	}
+}
+
 // An empty element returned on a successful request.
 type ReorderReceiptRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -60,13 +77,26 @@ type ReorderReceiptRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReorderReceiptRuleSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReorderReceiptRuleSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReorderReceiptRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ReorderReceiptRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReorderReceiptRuleSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReorderReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpReorderReceiptRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReorderReceiptRuleSet, schemas.ReorderReceiptRuleSetRequest, schemas.ReorderReceiptRuleSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpReorderReceiptRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReorderReceiptRuleSet, schemas.ReorderReceiptRuleSetRequest, schemas.ReorderReceiptRuleSetResponse), output: &ReorderReceiptRuleSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

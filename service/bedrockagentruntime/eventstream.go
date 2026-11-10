@@ -7,9 +7,11 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"io"
 	"sync"
 )
 
@@ -472,9 +474,10 @@ func (r *retrieveAndGenerateStreamResponseOutputReader) Closed() <-chan struct{}
 }
 
 type deserializeOpEventStreamAgenticRetrieveStream struct {
-	asyncResult    chan deserializeResult
-	options        *Options
-	existingResult *AgenticRetrieveStreamOutput
+	asyncResult     chan deserializeResult
+	options         *Options
+	existingResult  *AgenticRetrieveStreamOutput
+	initialResponse *initialResponseReader
 }
 
 func (*deserializeOpEventStreamAgenticRetrieveStream) ID() string {
@@ -500,8 +503,15 @@ func (m *deserializeOpEventStreamAgenticRetrieveStream) HandleDeserialize(
 
 		asyncResult = make(chan deserializeResult, 1)
 		asyncReader := newAsyncEventStreamReader(asyncResult)
+		var eventStreamBody io.ReadCloser = asyncReader.pipeReader
+		if m.options.Protocol.HasInitialEventMessage() {
+			m.initialResponse = newInitialResponseReader(eventStreamBody, &AgenticRetrieveStreamInitialReply{}, func(r io.Reader, out smithy.Deserializable) error {
+				return m.options.Protocol.DeserializeInitialResponse(schemas.AgenticRetrieveStreamResponse, r, out)
+			})
+			eventStreamBody = m.initialResponse
+		}
 		eventReader := newAgenticRetrieveStreamResponseOutputReader(
-			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.AgenticRetrieveStreamResponseOutput, TypeRegistry, asyncReader.pipeReader),
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.AgenticRetrieveStreamResponseOutput, TypeRegistry, eventStreamBody),
 		)
 
 		output.eventStream = NewAgenticRetrieveStreamEventStream(func(stream *AgenticRetrieveStreamEventStream) {
@@ -544,6 +554,15 @@ func (m *deserializeOpEventStreamAgenticRetrieveStream) HandleDeserialize(
 	}
 
 	asyncResult <- deserializeResult{reader: resp.Body}
+	if m.options.Protocol.HasInitialEventMessage() {
+		ir, irErr := m.initialResponse.wait(ctx)
+		if irErr != nil {
+			_ = resp.Body.Close()
+			middleware.AddEventStreamOutputToMetadata(&md, output)
+			return out, md, fmt.Errorf("deserialize initial response: %w", irErr)
+		}
+		out.Result = ir
+	}
 	middleware.AddEventStreamOutputToMetadata(&md, output)
 	return out, md, nil
 }

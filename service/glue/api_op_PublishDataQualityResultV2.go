@@ -88,6 +88,7 @@ type PublishDataQualityResultV2Input struct {
 	// The tags for the result.
 	Tags map[string]string
 
+	//
 	Telemetry *types.DataQualityTelemetry
 
 	noSmithyDocumentSerde

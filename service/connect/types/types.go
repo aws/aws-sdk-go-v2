@@ -3859,6 +3859,47 @@ func (v *Campaign) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Information about a case associated with a contact.
+type CaseEntry struct {
+
+	// Unique identifier of the case in UUID format.
+	CaseId *string
+
+	// A friendly number for the case. Reference numbers are not guaranteed to be
+	// unique.
+	CaseReferenceNumber *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CaseEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaseEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaseEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.CaseEntry_CaseId, *v.CaseId)
+	}
+	if v.CaseReferenceNumber != nil {
+		s.WriteString(schemas.CaseEntry_CaseReferenceNumber, *v.CaseReferenceNumber)
+	}
+}
+func (v *CaseEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaseEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaseEntry_CaseId:
+			v.CaseId = new(string)
+			return d.ReadString(schemas.CaseEntry_CaseId, v.CaseId)
+		case schemas.CaseEntry_CaseReferenceNumber:
+			v.CaseReferenceNumber = new(string)
+			return d.ReadString(schemas.CaseEntry_CaseReferenceNumber, v.CaseReferenceNumber)
+		}
+		return nil
+	})
+}
+
 // The SLA configuration for Case SlaAssignmentType.
 type CaseSlaConfiguration struct {
 
@@ -4762,6 +4803,10 @@ type Contact struct {
 	// Information associated with a campaign.
 	Campaign *Campaign
 
+	// A list of cases associated with the contact. This field is populated when one
+	// or more cases have been linked to the contact.
+	Cases []CaseEntry
+
 	// How the contact reached your contact center.
 	Channel Channel
 
@@ -4963,6 +5008,9 @@ func (v *Contact) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Campaign.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Cases != nil {
+		serializeCaseEntries(s, schemas.Contact_Cases, v.Cases)
+	}
 	if v.Channel != "" {
 		s.WriteString(schemas.Contact_Channel, string(v.Channel))
 	}
@@ -5142,6 +5190,8 @@ func (v *Contact) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Contact_Campaign:
 			v.Campaign = &Campaign{}
 			return v.Campaign.Deserialize(d)
+		case schemas.Contact_Cases:
+			return deserializeCaseEntries(d, schemas.Contact_Cases, &v.Cases)
 		case schemas.Contact_Channel:
 			var ev string
 			if err := d.ReadString(schemas.Contact_Channel, &ev); err != nil {
@@ -10716,6 +10766,27 @@ func (v *EncryptionConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EncryptionConfig_KeyId:
 			v.KeyId = new(string)
 			return d.ReadString(schemas.EncryptionConfig_KeyId, v.KeyId)
+		}
+		return nil
+	})
+}
+
+// End associated emails related to a case.
+type EndAssociatedEmailsActionDefinition struct {
+	noSmithyDocumentSerde
+}
+
+func (v *EndAssociatedEmailsActionDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndAssociatedEmailsActionDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndAssociatedEmailsActionDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EndAssociatedEmailsActionDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndAssociatedEmailsActionDefinition, func(s *smithy.Schema) error {
+		switch s {
 		}
 		return nil
 	})
@@ -29302,6 +29373,11 @@ type RuleAction struct {
 	// OnPostChatAnalysisAvailable .
 	CreateCaseAction *CreateCaseActionDefinition
 
+	// Information about the end associated emails action.
+	//
+	// Supported only for TriggerEventSource values: OnCaseUpdate .
+	EndAssociatedEmailsAction *EndAssociatedEmailsActionDefinition
+
 	// Information about the end associated tasks action.
 	//
 	// Supported only for TriggerEventSource values: OnCaseUpdate .
@@ -29375,6 +29451,11 @@ func (v *RuleAction) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CreateCaseAction.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.EndAssociatedEmailsAction != nil {
+		s.WriteStruct(schemas.RuleAction_EndAssociatedEmailsAction)
+		v.EndAssociatedEmailsAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.EndAssociatedTasksAction != nil {
 		s.WriteStruct(schemas.RuleAction_EndAssociatedTasksAction)
 		v.EndAssociatedTasksAction.SerializeMembers(s)
@@ -29435,6 +29516,9 @@ func (v *RuleAction) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RuleAction_CreateCaseAction:
 			v.CreateCaseAction = &CreateCaseActionDefinition{}
 			return v.CreateCaseAction.Deserialize(d)
+		case schemas.RuleAction_EndAssociatedEmailsAction:
+			v.EndAssociatedEmailsAction = &EndAssociatedEmailsActionDefinition{}
+			return v.EndAssociatedEmailsAction.Deserialize(d)
 		case schemas.RuleAction_EndAssociatedTasksAction:
 			v.EndAssociatedTasksAction = &EndAssociatedTasksActionDefinition{}
 			return v.EndAssociatedTasksAction.Deserialize(d)

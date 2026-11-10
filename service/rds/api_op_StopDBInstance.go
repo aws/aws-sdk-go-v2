@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,24 @@ type StopDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDBInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDBInstanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDBInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.StopDBInstanceMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.DBSnapshotIdentifier != nil {
+		s.WriteString(schemas.StopDBInstanceMessage_DBSnapshotIdentifier, *v.DBSnapshotIdentifier)
+	}
+	if v.DetachFromDBCapacityReservation != nil {
+		s.WriteBool(schemas.StopDBInstanceMessage_DetachFromDBCapacityReservation, *v.DetachFromDBCapacityReservation)
+	}
+}
+
 type StopDBInstanceOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance.
@@ -89,13 +109,34 @@ type StopDBInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDBInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDBInstanceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDBInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstance != nil {
+		s.WriteStruct(schemas.StopDBInstanceResult_DBInstance)
+		v.DBInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopDBInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopDBInstanceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopDBInstanceResult_DBInstance:
+			v.DBInstance = &types.DBInstance{}
+			return v.DBInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpStopDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDBInstance, schemas.StopDBInstanceMessage, schemas.StopDBInstanceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStopDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDBInstance, schemas.StopDBInstanceMessage, schemas.StopDBInstanceResult), output: &StopDBInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

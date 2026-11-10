@@ -193,6 +193,7 @@ func (m *deserializeOpEventStreamStartConversation) HandleDeserialize(
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+
 	eventWriter := &startConversationRequestEventStreamWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.StartConversationRequestEventStream, inputStreamWriter),
 	}

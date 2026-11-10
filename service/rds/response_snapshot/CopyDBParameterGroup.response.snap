@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CopyDBParameterGroupResponse><CopyDBParameterGroupResult><DBParameterGroup><DBParameterGroupArn>__DBParameterGroupArn__</DBParameterGroupArn><DBParameterGroupFamily>__DBParameterGroupFamily__</DBParameterGroupFamily><DBParameterGroupName>__DBParameterGroupName__</DBParameterGroupName><Description>__Description__</Description></DBParameterGroup></CopyDBParameterGroupResult></CopyDBParameterGroupResponse>

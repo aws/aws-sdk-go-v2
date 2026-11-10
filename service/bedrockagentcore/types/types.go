@@ -3120,6 +3120,45 @@ func (v *Descriptors) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The domains to include in or exclude from the results. A root domain also
+// matches its subdomains. For example, example.com also matches docs.example.com .
+type DomainFilter struct {
+
+	// The domains to never return results from.
+	Exclude []string
+
+	// The domains to return results from. Results from other domains are not returned.
+	Include []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DomainFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Exclude != nil {
+		serializeDomainList(s, schemas.DomainFilter_exclude, v.Exclude)
+	}
+	if v.Include != nil {
+		serializeDomainList(s, schemas.DomainFilter_include, v.Include)
+	}
+}
+func (v *DomainFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainFilter_exclude:
+			return deserializeDomainList(d, schemas.DomainFilter_exclude, &v.Exclude)
+		case schemas.DomainFilter_include:
+			return deserializeDomainList(d, schemas.DomainFilter_include, &v.Include)
+		}
+		return nil
+	})
+}
+
 // The configuration for mounting an Amazon Elastic File System (Amazon EFS)
 // access point that you own into a session.
 type EfsConfiguration struct {
@@ -11250,6 +11289,50 @@ func (v *ProxyCredentialsMemberBasicAuth) Deserialize(d smithy.ShapeDeserializer
 	return v.Value.Deserialize(d)
 }
 
+// A publication time range for the results. Both bounds are optional, and both
+// are inclusive. If publishedAfter is later than publishedBefore , the request
+// fails with a ValidationException .
+type PublishedDateFilter struct {
+
+	// The earliest publication time of the results, inclusive.
+	PublishedAfter *time.Time
+
+	// The latest publication time of the results, inclusive. A date without a time,
+	// such as one passed to the AWS CLI, means midnight UTC. To include a whole day,
+	// use the last second of that day, for example 2026-01-31T23:59:59Z .
+	PublishedBefore *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *PublishedDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishedDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishedDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PublishedAfter != nil {
+		s.WriteTime(schemas.PublishedDateFilter_publishedAfter, *v.PublishedAfter)
+	}
+	if v.PublishedBefore != nil {
+		s.WriteTime(schemas.PublishedDateFilter_publishedBefore, *v.PublishedBefore)
+	}
+}
+func (v *PublishedDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublishedDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublishedDateFilter_publishedAfter:
+			v.PublishedAfter = new(time.Time)
+			return d.ReadTime(schemas.PublishedDateFilter_publishedAfter, v.PublishedAfter)
+		case schemas.PublishedDateFilter_publishedBefore:
+			v.PublishedBefore = new(time.Time)
+			return d.ReadTime(schemas.PublishedDateFilter_publishedBefore, v.PublishedBefore)
+		}
+		return nil
+	})
+}
+
 // The configuration for a recommendation, varying by recommendation type.
 //
 // The following types satisfy this interface:
@@ -14610,6 +14693,111 @@ func (v *ViewPort) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ViewPort_width:
 			v.Width = new(int32)
 			return d.ReadInt32(schemas.ViewPort_width, v.Width)
+		}
+		return nil
+	})
+}
+
+// The filters to apply to a web search.
+type WebSearchFilters struct {
+
+	// The domains to include in or exclude from the results.
+	DomainFilter *DomainFilter
+
+	// The publication time range of the results.
+	PublishedDateFilter *PublishedDateFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *WebSearchFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebSearchFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebSearchFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainFilter != nil {
+		s.WriteStruct(schemas.WebSearchFilters_domainFilter)
+		v.DomainFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PublishedDateFilter != nil {
+		s.WriteStruct(schemas.WebSearchFilters_publishedDateFilter)
+		v.PublishedDateFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WebSearchFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebSearchFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebSearchFilters_domainFilter:
+			v.DomainFilter = &DomainFilter{}
+			return v.DomainFilter.Deserialize(d)
+		case schemas.WebSearchFilters_publishedDateFilter:
+			v.PublishedDateFilter = &PublishedDateFilter{}
+			return v.PublishedDateFilter.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A web search result.
+type WebSearchResult struct {
+
+	// A text extract from the page.
+	//
+	// This member is required.
+	Text *string
+
+	// The time the page was published. This field is absent when the publication time
+	// is not known.
+	PublishedAt *time.Time
+
+	// The title of the page.
+	Title *string
+
+	// The URL of the page.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *WebSearchResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebSearchResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebSearchResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PublishedAt != nil {
+		s.WriteTime(schemas.WebSearchResult_publishedAt, *v.PublishedAt)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.WebSearchResult_text, *v.Text)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.WebSearchResult_title, *v.Title)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.WebSearchResult_url, *v.Url)
+	}
+}
+func (v *WebSearchResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebSearchResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebSearchResult_publishedAt:
+			v.PublishedAt = new(time.Time)
+			return d.ReadTime(schemas.WebSearchResult_publishedAt, v.PublishedAt)
+		case schemas.WebSearchResult_text:
+			v.Text = new(string)
+			return d.ReadString(schemas.WebSearchResult_text, v.Text)
+		case schemas.WebSearchResult_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.WebSearchResult_title, v.Title)
+		case schemas.WebSearchResult_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.WebSearchResult_url, v.Url)
 		}
 		return nil
 	})

@@ -106,6 +106,33 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_CreateBearerToken(t *testing.T) {
+	want := &CreateBearerTokenOutput{
+		AccessToken: ptr.String("__AccessToken__"),
+		TokenType:   ptr.String("__TokenType__"),
+		ExpiresIn:   ptr.Int32(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateBearerToken.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateBearerToken(context.Background(), &CreateBearerTokenInput{
+		GrantType:       ptr.String("__GrantType__"),
+		Resource:        ptr.String("__Resource__"),
+		DurationSeconds: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateBearerToken.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateOAuth2Token(t *testing.T) {
 	want := &CreateOAuth2TokenOutput{
 		TokenOutput: &types.CreateOAuth2TokenResponseBody{
@@ -511,15 +538,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{
-		TokenInput: &types.CreateOAuth2TokenRequestBody{
-			ClientId:     ptr.String("__ClientId__"),
-			GrantType:    ptr.String("__GrantType__"),
-			Code:         ptr.String("__Code__"),
-			RedirectUri:  ptr.String("__RedirectUri__"),
-			CodeVerifier: ptr.String("__CodeVerifier__"),
-			RefreshToken: ptr.String("__RefreshToken__"),
-		},
+	_, opErr := svc.CreateBearerToken(context.Background(), &CreateBearerTokenInput{
+		GrantType:       ptr.String("__GrantType__"),
+		Resource:        ptr.String("__Resource__"),
+		DurationSeconds: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -574,15 +596,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{
-		TokenInput: &types.CreateOAuth2TokenRequestBody{
-			ClientId:     ptr.String("__ClientId__"),
-			GrantType:    ptr.String("__GrantType__"),
-			Code:         ptr.String("__Code__"),
-			RedirectUri:  ptr.String("__RedirectUri__"),
-			CodeVerifier: ptr.String("__CodeVerifier__"),
-			RefreshToken: ptr.String("__RefreshToken__"),
-		},
+	_, opErr := svc.CreateBearerToken(context.Background(), &CreateBearerTokenInput{
+		GrantType:       ptr.String("__GrantType__"),
+		Resource:        ptr.String("__Resource__"),
+		DurationSeconds: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -768,15 +785,10 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{
-		TokenInput: &types.CreateOAuth2TokenRequestBody{
-			ClientId:     ptr.String("__ClientId__"),
-			GrantType:    ptr.String("__GrantType__"),
-			Code:         ptr.String("__Code__"),
-			RedirectUri:  ptr.String("__RedirectUri__"),
-			CodeVerifier: ptr.String("__CodeVerifier__"),
-			RefreshToken: ptr.String("__RefreshToken__"),
-		},
+	_, opErr := svc.CreateBearerToken(context.Background(), &CreateBearerTokenInput{
+		GrantType:       ptr.String("__GrantType__"),
+		Resource:        ptr.String("__Resource__"),
+		DurationSeconds: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -803,15 +815,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOAuth2Token(context.Background(), &CreateOAuth2TokenInput{
-		TokenInput: &types.CreateOAuth2TokenRequestBody{
-			ClientId:     ptr.String("__ClientId__"),
-			GrantType:    ptr.String("__GrantType__"),
-			Code:         ptr.String("__Code__"),
-			RedirectUri:  ptr.String("__RedirectUri__"),
-			CodeVerifier: ptr.String("__CodeVerifier__"),
-			RefreshToken: ptr.String("__RefreshToken__"),
-		},
+	_, opErr := svc.CreateBearerToken(context.Background(), &CreateBearerTokenInput{
+		GrantType:       ptr.String("__GrantType__"),
+		Resource:        ptr.String("__Resource__"),
+		DurationSeconds: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateOpenIDConnectProviderResponse><CreateOpenIDConnectProviderResult><OpenIDConnectProviderArn>__OpenIDConnectProviderArn__</OpenIDConnectProviderArn><Tags><member><Key>__Key__</Key><Value>__Value__</Value></member><member><Key>__Key__</Key><Value>__Value__</Value></member></Tags></CreateOpenIDConnectProviderResult></CreateOpenIDConnectProviderResponse>

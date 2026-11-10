@@ -4,6 +4,8 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -31,6 +33,22 @@ type CreateStorageLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStorageLocationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStorageLocationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateStorageLocationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // Results of a CreateStorageLocationResult call.
 type CreateStorageLocationOutput struct {
 
@@ -43,13 +61,32 @@ type CreateStorageLocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStorageLocationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStorageLocationResultMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStorageLocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.CreateStorageLocationResultMessage_S3Bucket, *v.S3Bucket)
+	}
+}
+func (v *CreateStorageLocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStorageLocationResultMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStorageLocationResultMessage_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.CreateStorageLocationResultMessage_S3Bucket, v.S3Bucket)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStorageLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateStorageLocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStorageLocation, nil, schemas.CreateStorageLocationResultMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateStorageLocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStorageLocation, nil, schemas.CreateStorageLocationResultMessage), output: &CreateStorageLocationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

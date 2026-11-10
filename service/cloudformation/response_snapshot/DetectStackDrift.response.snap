@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DetectStackDriftResponse><DetectStackDriftResult><StackDriftDetectionId>__StackDriftDetectionId__</StackDriftDetectionId></DetectStackDriftResult></DetectStackDriftResponse>

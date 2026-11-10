@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -155,6 +157,33 @@ type UploadServerCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadServerCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadServerCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadServerCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateBody != nil {
+		s.WriteString(schemas.UploadServerCertificateRequest_CertificateBody, *v.CertificateBody)
+	}
+	if v.CertificateChain != nil {
+		s.WriteString(schemas.UploadServerCertificateRequest_CertificateChain, *v.CertificateChain)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.UploadServerCertificateRequest_Path, *v.Path)
+	}
+	if v.PrivateKey != nil {
+		s.WriteString(schemas.UploadServerCertificateRequest_PrivateKey, *v.PrivateKey)
+	}
+	if v.ServerCertificateName != nil {
+		s.WriteString(schemas.UploadServerCertificateRequest_ServerCertificateName, *v.ServerCertificateName)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.UploadServerCertificateRequest_Tags, v.Tags)
+	}
+}
+
 // Contains the response to a successful [UploadServerCertificate] request.
 //
 // [UploadServerCertificate]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UploadServerCertificate.html
@@ -177,13 +206,39 @@ type UploadServerCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadServerCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadServerCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadServerCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerCertificateMetadata != nil {
+		s.WriteStruct(schemas.UploadServerCertificateResponse_ServerCertificateMetadata)
+		v.ServerCertificateMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.UploadServerCertificateResponse_Tags, v.Tags)
+	}
+}
+func (v *UploadServerCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UploadServerCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UploadServerCertificateResponse_ServerCertificateMetadata:
+			v.ServerCertificateMetadata = &types.ServerCertificateMetadata{}
+			return v.ServerCertificateMetadata.Deserialize(d)
+		case schemas.UploadServerCertificateResponse_Tags:
+			return deserializetagListType(d, schemas.UploadServerCertificateResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUploadServerCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUploadServerCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadServerCertificate, schemas.UploadServerCertificateRequest, schemas.UploadServerCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUploadServerCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadServerCertificate, schemas.UploadServerCertificateRequest, schemas.UploadServerCertificateResponse), output: &UploadServerCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

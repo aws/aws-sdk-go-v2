@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type DeleteConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfigurationSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfigurationSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfigurationSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.DeleteConfigurationSetRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+}
+
 // An empty element returned on a successful request.
 type DeleteConfigurationSetOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -51,13 +65,26 @@ type DeleteConfigurationSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfigurationSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfigurationSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfigurationSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConfigurationSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConfigurationSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteConfigurationSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfigurationSet, schemas.DeleteConfigurationSetRequest, schemas.DeleteConfigurationSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteConfigurationSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfigurationSet, schemas.DeleteConfigurationSetRequest, schemas.DeleteConfigurationSetResponse), output: &DeleteConfigurationSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

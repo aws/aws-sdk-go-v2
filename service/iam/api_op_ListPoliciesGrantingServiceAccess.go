@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,24 @@ type ListPoliciesGrantingServiceAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPoliciesGrantingServiceAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPoliciesGrantingServiceAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPoliciesGrantingServiceAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListPoliciesGrantingServiceAccessRequest_Arn, *v.Arn)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListPoliciesGrantingServiceAccessRequest_Marker, *v.Marker)
+	}
+	if v.ServiceNamespaces != nil {
+		serializeserviceNamespaceListType(s, schemas.ListPoliciesGrantingServiceAccessRequest_ServiceNamespaces, v.ServiceNamespaces)
+	}
+}
+
 type ListPoliciesGrantingServiceAccessOutput struct {
 
 	// A ListPoliciesGrantingServiceAccess object that contains details about the
@@ -115,13 +135,42 @@ type ListPoliciesGrantingServiceAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPoliciesGrantingServiceAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPoliciesGrantingServiceAccessResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPoliciesGrantingServiceAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListPoliciesGrantingServiceAccessResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListPoliciesGrantingServiceAccessResponse_Marker, *v.Marker)
+	}
+	if v.PoliciesGrantingServiceAccess != nil {
+		serializelistPolicyGrantingServiceAccessResponseListType(s, schemas.ListPoliciesGrantingServiceAccessResponse_PoliciesGrantingServiceAccess, v.PoliciesGrantingServiceAccess)
+	}
+}
+func (v *ListPoliciesGrantingServiceAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPoliciesGrantingServiceAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPoliciesGrantingServiceAccessResponse_IsTruncated:
+			return d.ReadBool(schemas.ListPoliciesGrantingServiceAccessResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListPoliciesGrantingServiceAccessResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListPoliciesGrantingServiceAccessResponse_Marker, v.Marker)
+		case schemas.ListPoliciesGrantingServiceAccessResponse_PoliciesGrantingServiceAccess:
+			return deserializelistPolicyGrantingServiceAccessResponseListType(d, schemas.ListPoliciesGrantingServiceAccessResponse_PoliciesGrantingServiceAccess, &v.PoliciesGrantingServiceAccess)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPoliciesGrantingServiceAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListPoliciesGrantingServiceAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPoliciesGrantingServiceAccess, schemas.ListPoliciesGrantingServiceAccessRequest, schemas.ListPoliciesGrantingServiceAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListPoliciesGrantingServiceAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPoliciesGrantingServiceAccess, schemas.ListPoliciesGrantingServiceAccessRequest, schemas.ListPoliciesGrantingServiceAccessResponse), output: &ListPoliciesGrantingServiceAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

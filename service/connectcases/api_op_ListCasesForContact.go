@@ -29,7 +29,7 @@ func (c *Client) ListCasesForContact(ctx context.Context, params *ListCasesForCo
 
 type ListCasesForContactInput struct {
 
-	// A unique identifier of a contact in Amazon Connect.
+	// A unique identifier of a contact in Connect Customer.
 	//
 	// This member is required.
 	ContactArn *string

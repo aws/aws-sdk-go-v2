@@ -209,6 +209,34 @@ func (o *InvokeAgentRuntimeCommandOutput) GetInitialReply() <-chan InvokeAgentRu
 	return o.initialReply
 }
 
+func (v *InvokeAgentRuntimeCommandInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeAgentRuntimeCommandResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeAgentRuntimeCommandResponse_baggage:
+			v.Baggage = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeCommandResponse_baggage, v.Baggage)
+		case schemas.InvokeAgentRuntimeCommandResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeCommandResponse_contentType, v.ContentType)
+		case schemas.InvokeAgentRuntimeCommandResponse_runtimeSessionId:
+			v.RuntimeSessionId = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeCommandResponse_runtimeSessionId, v.RuntimeSessionId)
+		case schemas.InvokeAgentRuntimeCommandResponse_statusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.InvokeAgentRuntimeCommandResponse_statusCode, v.StatusCode)
+		case schemas.InvokeAgentRuntimeCommandResponse_traceId:
+			v.TraceId = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeCommandResponse_traceId, v.TraceId)
+		case schemas.InvokeAgentRuntimeCommandResponse_traceParent:
+			v.TraceParent = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeCommandResponse_traceParent, v.TraceParent)
+		case schemas.InvokeAgentRuntimeCommandResponse_traceState:
+			v.TraceState = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeCommandResponse_traceState, v.TraceState)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeAgentRuntimeCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAgentRuntimeCommand, schemas.InvokeAgentRuntimeCommandRequest, schemas.InvokeAgentRuntimeCommandResponse)}, middleware.After); err != nil {
 		return err

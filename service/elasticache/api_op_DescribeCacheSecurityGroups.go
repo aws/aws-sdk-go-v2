@@ -5,7 +5,9 @@ package elasticache
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type DescribeCacheSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCacheSecurityGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCacheSecurityGroupsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCacheSecurityGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheSecurityGroupName != nil {
+		s.WriteString(schemas.DescribeCacheSecurityGroupsMessage_CacheSecurityGroupName, *v.CacheSecurityGroupName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeCacheSecurityGroupsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeCacheSecurityGroupsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 // Represents the output of a DescribeCacheSecurityGroups operation.
 type DescribeCacheSecurityGroupsOutput struct {
 
@@ -67,13 +87,37 @@ type DescribeCacheSecurityGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCacheSecurityGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CacheSecurityGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCacheSecurityGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheSecurityGroups != nil {
+		serializeCacheSecurityGroups(s, schemas.CacheSecurityGroupMessage_CacheSecurityGroups, v.CacheSecurityGroups)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.CacheSecurityGroupMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeCacheSecurityGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CacheSecurityGroupMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CacheSecurityGroupMessage_CacheSecurityGroups:
+			return deserializeCacheSecurityGroups(d, schemas.CacheSecurityGroupMessage_CacheSecurityGroups, &v.CacheSecurityGroups)
+		case schemas.CacheSecurityGroupMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.CacheSecurityGroupMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCacheSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeCacheSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCacheSecurityGroups, schemas.DescribeCacheSecurityGroupsMessage, schemas.CacheSecurityGroupMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeCacheSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCacheSecurityGroups, schemas.DescribeCacheSecurityGroupsMessage, schemas.CacheSecurityGroupMessage), output: &DescribeCacheSecurityGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

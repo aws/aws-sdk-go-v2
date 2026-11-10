@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,34 @@ type CancelInstanceRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelInstanceRefreshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelInstanceRefreshType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelInstanceRefreshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.CancelInstanceRefreshType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.WaitForTransitioningInstances != nil {
+		s.WriteBool(schemas.CancelInstanceRefreshType_WaitForTransitioningInstances, *v.WaitForTransitioningInstances)
+	}
+}
+func (v *CancelInstanceRefreshInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelInstanceRefreshType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelInstanceRefreshType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.CancelInstanceRefreshType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.CancelInstanceRefreshType_WaitForTransitioningInstances:
+			v.WaitForTransitioningInstances = new(bool)
+			return d.ReadBool(schemas.CancelInstanceRefreshType_WaitForTransitioningInstances, v.WaitForTransitioningInstances)
+		}
+		return nil
+	})
+}
+
 type CancelInstanceRefreshOutput struct {
 
 	// The instance refresh ID associated with the request. This is the unique ID
@@ -64,13 +94,32 @@ type CancelInstanceRefreshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelInstanceRefreshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelInstanceRefreshAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelInstanceRefreshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceRefreshId != nil {
+		s.WriteString(schemas.CancelInstanceRefreshAnswer_InstanceRefreshId, *v.InstanceRefreshId)
+	}
+}
+func (v *CancelInstanceRefreshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelInstanceRefreshAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelInstanceRefreshAnswer_InstanceRefreshId:
+			v.InstanceRefreshId = new(string)
+			return d.ReadString(schemas.CancelInstanceRefreshAnswer_InstanceRefreshId, v.InstanceRefreshId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelInstanceRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCancelInstanceRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelInstanceRefresh, schemas.CancelInstanceRefreshType, schemas.CancelInstanceRefreshAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCancelInstanceRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelInstanceRefresh, schemas.CancelInstanceRefreshType, schemas.CancelInstanceRefreshAnswer), output: &CancelInstanceRefreshOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

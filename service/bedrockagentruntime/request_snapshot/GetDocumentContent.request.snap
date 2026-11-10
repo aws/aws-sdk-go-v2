@@ -2,4 +2,4 @@ POST /knowledgebases/__KnowledgeBaseId__/datasources/__DataSourceId__/documents/
 
 Content-Type: application/json
 
-{"outputFormat":"RAW","userContext":{"userId":"__UserId__"}}
+{"mediaId":"__MediaId__","outputFormat":"RAW","userContext":{"userId":"__UserId__"}}

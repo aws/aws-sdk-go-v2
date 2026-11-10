@@ -593,8 +593,36 @@ func TestCheckRequestSnapshot_CopyDBSnapshot(t *testing.T) {
 		SnapshotTarget:               ptr.String("__SnapshotTarget__"),
 		CopyOptionGroup:              ptr.Bool(true),
 		SnapshotAvailabilityZone:     ptr.String("__SnapshotAvailabilityZone__"),
-		SourceRegion:                 ptr.String("__SourceRegion__"),
-		destinationRegion:            ptr.String("__destinationRegion__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		SourceRegion:      ptr.String("__SourceRegion__"),
+		destinationRegion: ptr.String("__destinationRegion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8164,8 +8192,36 @@ func TestUpdateRequestSnapshot_CopyDBSnapshot(t *testing.T) {
 		SnapshotTarget:               ptr.String("__SnapshotTarget__"),
 		CopyOptionGroup:              ptr.Bool(true),
 		SnapshotAvailabilityZone:     ptr.String("__SnapshotAvailabilityZone__"),
-		SourceRegion:                 ptr.String("__SourceRegion__"),
-		destinationRegion:            ptr.String("__destinationRegion__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		SourceRegion:      ptr.String("__SourceRegion__"),
+		destinationRegion: ptr.String("__destinationRegion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

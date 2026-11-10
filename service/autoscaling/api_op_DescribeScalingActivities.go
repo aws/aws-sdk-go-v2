@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,8 +87,18 @@ type DescribeScalingActivitiesInput struct {
 	// Indicates whether to include scaling activity from deleted Auto Scaling groups.
 	IncludeDeletedGroups *bool
 
+	//  Specifies whether to include scaling activities for managed Auto Scaling
+	// groups in the response. When set to true (default), the response includes
+	// scaling activities for managed Auto Scaling groups.
+	IncludeManagedResources *bool
+
 	// The maximum number of items to return with this call. The default value is 100
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -94,6 +106,62 @@ type DescribeScalingActivitiesInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeScalingActivitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScalingActivitiesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScalingActivitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityIds != nil {
+		serializeActivityIds(s, schemas.DescribeScalingActivitiesType_ActivityIds, v.ActivityIds)
+	}
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DescribeScalingActivitiesType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.Filters != nil {
+		serializeFilters(s, schemas.DescribeScalingActivitiesType_Filters, v.Filters)
+	}
+	if v.IncludeDeletedGroups != nil {
+		s.WriteBool(schemas.DescribeScalingActivitiesType_IncludeDeletedGroups, *v.IncludeDeletedGroups)
+	}
+	if v.IncludeManagedResources != nil {
+		s.WriteBool(schemas.DescribeScalingActivitiesType_IncludeManagedResources, *v.IncludeManagedResources)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeScalingActivitiesType_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScalingActivitiesType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeScalingActivitiesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeScalingActivitiesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeScalingActivitiesType_ActivityIds:
+			return deserializeActivityIds(d, schemas.DescribeScalingActivitiesType_ActivityIds, &v.ActivityIds)
+		case schemas.DescribeScalingActivitiesType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DescribeScalingActivitiesType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DescribeScalingActivitiesType_Filters:
+			return deserializeFilters(d, schemas.DescribeScalingActivitiesType_Filters, &v.Filters)
+		case schemas.DescribeScalingActivitiesType_IncludeDeletedGroups:
+			v.IncludeDeletedGroups = new(bool)
+			return d.ReadBool(schemas.DescribeScalingActivitiesType_IncludeDeletedGroups, v.IncludeDeletedGroups)
+		case schemas.DescribeScalingActivitiesType_IncludeManagedResources:
+			v.IncludeManagedResources = new(bool)
+			return d.ReadBool(schemas.DescribeScalingActivitiesType_IncludeManagedResources, v.IncludeManagedResources)
+		case schemas.DescribeScalingActivitiesType_MaxRecords:
+			v.MaxRecords = new(int32)
+			return d.ReadInt32(schemas.DescribeScalingActivitiesType_MaxRecords, v.MaxRecords)
+		case schemas.DescribeScalingActivitiesType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeScalingActivitiesType_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 type DescribeScalingActivitiesOutput struct {
@@ -116,13 +184,37 @@ type DescribeScalingActivitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScalingActivitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivitiesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScalingActivitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activities != nil {
+		serializeActivities(s, schemas.ActivitiesType_Activities, v.Activities)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ActivitiesType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeScalingActivitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivitiesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivitiesType_Activities:
+			return deserializeActivities(d, schemas.ActivitiesType_Activities, &v.Activities)
+		case schemas.ActivitiesType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ActivitiesType_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScalingActivitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeScalingActivities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScalingActivities, schemas.DescribeScalingActivitiesType, schemas.ActivitiesType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeScalingActivities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScalingActivities, schemas.DescribeScalingActivitiesType, schemas.ActivitiesType), output: &DescribeScalingActivitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -161,6 +253,11 @@ func (c *Client) addOperationDescribeScalingActivitiesMiddlewares(stack *middlew
 type DescribeScalingActivitiesPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 100
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

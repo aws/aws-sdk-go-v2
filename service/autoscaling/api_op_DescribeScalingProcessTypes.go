@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -31,6 +33,22 @@ type DescribeScalingProcessTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScalingProcessTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScalingProcessTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeScalingProcessTypesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeScalingProcessTypesOutput struct {
 
 	// The names of the process types.
@@ -42,13 +60,31 @@ type DescribeScalingProcessTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScalingProcessTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProcessesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScalingProcessTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Processes != nil {
+		serializeProcesses(s, schemas.ProcessesType_Processes, v.Processes)
+	}
+}
+func (v *DescribeScalingProcessTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProcessesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProcessesType_Processes:
+			return deserializeProcesses(d, schemas.ProcessesType_Processes, &v.Processes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScalingProcessTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeScalingProcessTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScalingProcessTypes, nil, schemas.ProcessesType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeScalingProcessTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScalingProcessTypes, nil, schemas.ProcessesType), output: &DescribeScalingProcessTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

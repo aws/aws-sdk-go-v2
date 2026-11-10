@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCompleteTableMigration struct {
+}
+
+func (*validateOpCompleteTableMigration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCompleteTableMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CompleteTableMigrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCompleteTableMigrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateNamespace struct {
 }
 
@@ -890,6 +910,46 @@ func (m *validateOpRenameTable) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartTableMigration struct {
+}
+
+func (*validateOpStartTableMigration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTableMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTableMigrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTableMigrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSyncTableMigration struct {
+}
+
+func (*validateOpSyncTableMigration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSyncTableMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SyncTableMigrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSyncTableMigrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -948,6 +1008,30 @@ func (m *validateOpUpdateTableMetadataLocation) HandleInitialize(ctx context.Con
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateTableMigration struct {
+}
+
+func (*validateOpUpdateTableMigration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTableMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTableMigrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTableMigrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpCompleteTableMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCompleteTableMigration{}, middleware.After)
 }
 
 func addOpCreateNamespaceValidationMiddleware(stack *middleware.Stack) error {
@@ -1126,6 +1210,14 @@ func addOpRenameTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRenameTable{}, middleware.After)
 }
 
+func addOpStartTableMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTableMigration{}, middleware.After)
+}
+
+func addOpSyncTableMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSyncTableMigration{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -1138,6 +1230,51 @@ func addOpUpdateTableMetadataLocationValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpUpdateTableMetadataLocation{}, middleware.After)
 }
 
+func addOpUpdateTableMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTableMigration{}, middleware.After)
+}
+
+func validateDestinationTable(v *types.DestinationTable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationTable"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StorageClassConfiguration != nil {
+		if err := validateStorageClassConfiguration(v.StorageClassConfiguration); err != nil {
+			invalidParams.AddNested("StorageClassConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Schema != nil {
+		if err := validateIcebergSchemaV2(v.Schema); err != nil {
+			invalidParams.AddNested("Schema", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IcebergSortOrder != nil {
+		if err := validateIcebergSortOrder(v.IcebergSortOrder); err != nil {
+			invalidParams.AddNested("IcebergSortOrder", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
 	if v == nil {
 		return nil
@@ -1145,6 +1282,27 @@ func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfiguration"}
 	if len(v.SseAlgorithm) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SseAlgorithm"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlueTableSource(v *types.GlueTableSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlueTableSource"}
+	if v.CatalogId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CatalogId"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1346,6 +1504,21 @@ func validateIcebergSortOrder(v *types.IcebergSortOrder) error {
 	}
 }
 
+func validateMigrationOutputConfiguration(v *types.MigrationOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MigrationOutputConfiguration"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateReplicationDestination(v *types.ReplicationDestination) error {
 	if v == nil {
 		return nil
@@ -1446,6 +1619,25 @@ func validateSchemaV2FieldList(v []types.SchemaV2Field) error {
 		if err := validateSchemaV2Field(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceConfiguration(v types.SourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceConfiguration"}
+	switch uv := v.(type) {
+	case *types.SourceConfigurationMemberGlueTable:
+		if err := validateGlueTableSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[glueTable]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1596,6 +1788,21 @@ func validateTableReplicationRules(v []types.TableReplicationRule) error {
 		if err := validateTableReplicationRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCompleteTableMigrationInput(v *CompleteTableMigrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompleteTableMigrationInput"}
+	if v.TableARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2425,6 +2632,70 @@ func validateOpRenameTableInput(v *RenameTableInput) error {
 	}
 }
 
+func validateOpStartTableMigrationInput(v *StartTableMigrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTableMigrationInput"}
+	if v.RoleARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleARN"))
+	}
+	if v.DestinationTable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationTable"))
+	} else if v.DestinationTable != nil {
+		if err := validateDestinationTable(v.DestinationTable); err != nil {
+			invalidParams.AddNested("DestinationTable", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.SourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateSourceConfiguration(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MigrationOutput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationOutput"))
+	} else if v.MigrationOutput != nil {
+		if err := validateMigrationOutputConfiguration(v.MigrationOutput); err != nil {
+			invalidParams.AddNested("MigrationOutput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSyncTableMigrationInput(v *SyncTableMigrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SyncTableMigrationInput"}
+	if v.RoleARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleARN"))
+	}
+	if v.TableARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableARN"))
+	}
+	if v.MigrationOutput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationOutput"))
+	} else if v.MigrationOutput != nil {
+		if err := validateMigrationOutputConfiguration(v.MigrationOutput); err != nil {
+			invalidParams.AddNested("MigrationOutput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -2480,6 +2751,21 @@ func validateOpUpdateTableMetadataLocationInput(v *UpdateTableMetadataLocationIn
 	}
 	if v.MetadataLocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetadataLocation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTableMigrationInput(v *UpdateTableMigrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTableMigrationInput"}
+	if len(v.RequestedState) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestedState"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

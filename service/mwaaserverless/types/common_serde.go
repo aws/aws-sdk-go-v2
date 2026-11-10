@@ -338,6 +338,15 @@ func deserializeWorkflowVersionSummaries(d smithy.ShapeDeserializer, s *smithy.S
 	})
 }
 
+func serializeEnvironmentVariablesMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func serializeGenericMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -363,6 +372,27 @@ func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string
 		s.WriteString(schema.MapValue(), string(vv))
 	}
 	s.CloseMap()
+}
+
+func deserializeEnvironmentVariablesMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
 }
 
 func deserializeGenericMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {

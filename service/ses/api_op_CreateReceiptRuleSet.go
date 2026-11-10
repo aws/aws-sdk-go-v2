@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,18 @@ type CreateReceiptRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReceiptRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReceiptRuleSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReceiptRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.CreateReceiptRuleSetRequest_RuleSetName, *v.RuleSetName)
+	}
+}
+
 // An empty element returned on a successful request.
 type CreateReceiptRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -59,13 +73,26 @@ type CreateReceiptRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReceiptRuleSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReceiptRuleSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReceiptRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateReceiptRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReceiptRuleSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateReceiptRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReceiptRuleSet, schemas.CreateReceiptRuleSetRequest, schemas.CreateReceiptRuleSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateReceiptRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReceiptRuleSet, schemas.CreateReceiptRuleSetRequest, schemas.CreateReceiptRuleSetResponse), output: &CreateReceiptRuleSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

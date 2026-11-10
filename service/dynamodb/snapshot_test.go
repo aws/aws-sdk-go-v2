@@ -98,6 +98,18 @@ func TestCheckSnapshot_BatchWriteItem(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelBulkOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelBulkOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelBulkOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateBackup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBackup(context.Background(), nil, func(o *Options) {
@@ -187,6 +199,18 @@ func TestCheckSnapshot_DescribeBackup(t *testing.T) {
 	_, err := svc.DescribeBackup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeBackup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeBulkOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeBulkOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeBulkOperation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -446,6 +470,18 @@ func TestCheckSnapshot_ListBackups(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListBulkOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBulkOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListBulkOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListContributorInsights(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListContributorInsights(context.Background(), nil, func(o *Options) {
@@ -595,6 +631,18 @@ func TestCheckSnapshot_SearchVectors(t *testing.T) {
 	_, err := svc.SearchVectors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchVectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartBulkPutItems(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartBulkPutItems(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartBulkPutItems")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -793,6 +841,18 @@ func TestUpdateSnapshot_BatchWriteItem(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CancelBulkOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelBulkOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelBulkOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateBackup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBackup(context.Background(), nil, func(o *Options) {
@@ -882,6 +942,18 @@ func TestUpdateSnapshot_DescribeBackup(t *testing.T) {
 	_, err := svc.DescribeBackup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeBackup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeBulkOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeBulkOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeBulkOperation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1141,6 +1213,18 @@ func TestUpdateSnapshot_ListBackups(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListBulkOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBulkOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListBulkOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListContributorInsights(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListContributorInsights(context.Background(), nil, func(o *Options) {
@@ -1290,6 +1374,18 @@ func TestUpdateSnapshot_SearchVectors(t *testing.T) {
 	_, err := svc.SearchVectors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchVectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartBulkPutItems(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartBulkPutItems(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartBulkPutItems")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

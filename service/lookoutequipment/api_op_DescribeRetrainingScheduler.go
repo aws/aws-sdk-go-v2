@@ -13,6 +13,10 @@ import (
 
 // Provides a description of the retraining scheduler, including information such
 // as the model name and retraining parameters.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) DescribeRetrainingScheduler(ctx context.Context, params *DescribeRetrainingSchedulerInput, optFns ...func(*Options)) (*DescribeRetrainingSchedulerOutput, error) {
 	if params == nil {
 		params = &DescribeRetrainingSchedulerInput{}

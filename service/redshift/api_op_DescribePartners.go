@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type DescribePartnersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePartnersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePartnersInputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePartnersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribePartnersInputMessage_AccountId, *v.AccountId)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DescribePartnersInputMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.DescribePartnersInputMessage_DatabaseName, *v.DatabaseName)
+	}
+	if v.PartnerName != nil {
+		s.WriteString(schemas.DescribePartnersInputMessage_PartnerName, *v.PartnerName)
+	}
+}
+
 type DescribePartnersOutput struct {
 
 	// A list of partner integrations.
@@ -59,13 +82,31 @@ type DescribePartnersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePartnersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePartnersOutputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePartnersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PartnerIntegrationInfoList != nil {
+		serializePartnerIntegrationInfoList(s, schemas.DescribePartnersOutputMessage_PartnerIntegrationInfoList, v.PartnerIntegrationInfoList)
+	}
+}
+func (v *DescribePartnersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePartnersOutputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePartnersOutputMessage_PartnerIntegrationInfoList:
+			return deserializePartnerIntegrationInfoList(d, schemas.DescribePartnersOutputMessage_PartnerIntegrationInfoList, &v.PartnerIntegrationInfoList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePartnersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribePartners{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePartners, schemas.DescribePartnersInputMessage, schemas.DescribePartnersOutputMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribePartners{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePartners, schemas.DescribePartnersInputMessage, schemas.DescribePartnersOutputMessage), output: &DescribePartnersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

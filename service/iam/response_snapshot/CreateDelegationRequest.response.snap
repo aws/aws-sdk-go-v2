@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateDelegationRequestResponse><CreateDelegationRequestResult><ConsoleDeepLink>__ConsoleDeepLink__</ConsoleDeepLink><DelegationRequestId>__DelegationRequestId__</DelegationRequestId></CreateDelegationRequestResult></CreateDelegationRequestResponse>

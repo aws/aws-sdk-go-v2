@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CustomerManagedRoleArn":"__CustomerManagedRoleArn__","RequestId":"__RequestId__","RoleType":"QUICKSIGHT_MANAGED","Status":200}

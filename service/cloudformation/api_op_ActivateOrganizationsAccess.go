@@ -4,6 +4,8 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ type ActivateOrganizationsAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivateOrganizationsAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivateOrganizationsAccessInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivateOrganizationsAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type ActivateOrganizationsAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -36,13 +47,26 @@ type ActivateOrganizationsAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivateOrganizationsAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivateOrganizationsAccessOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivateOrganizationsAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ActivateOrganizationsAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivateOrganizationsAccessOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationActivateOrganizationsAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpActivateOrganizationsAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ActivateOrganizationsAccess, schemas.ActivateOrganizationsAccessInput, schemas.ActivateOrganizationsAccessOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpActivateOrganizationsAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ActivateOrganizationsAccess, schemas.ActivateOrganizationsAccessInput, schemas.ActivateOrganizationsAccessOutput), output: &ActivateOrganizationsAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

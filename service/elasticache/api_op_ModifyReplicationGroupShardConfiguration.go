@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,33 @@ type ModifyReplicationGroupShardConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyReplicationGroupShardConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyReplicationGroupShardConfigurationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyReplicationGroupShardConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyImmediately != nil {
+		s.WriteBool(schemas.ModifyReplicationGroupShardConfigurationMessage_ApplyImmediately, *v.ApplyImmediately)
+	}
+	if v.NodeGroupCount != nil {
+		s.WriteInt32(schemas.ModifyReplicationGroupShardConfigurationMessage_NodeGroupCount, *v.NodeGroupCount)
+	}
+	if v.NodeGroupsToRemove != nil {
+		serializeNodeGroupsToRemoveList(s, schemas.ModifyReplicationGroupShardConfigurationMessage_NodeGroupsToRemove, v.NodeGroupsToRemove)
+	}
+	if v.NodeGroupsToRetain != nil {
+		serializeNodeGroupsToRetainList(s, schemas.ModifyReplicationGroupShardConfigurationMessage_NodeGroupsToRetain, v.NodeGroupsToRetain)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.ModifyReplicationGroupShardConfigurationMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+	if v.ReshardingConfiguration != nil {
+		serializeReshardingConfigurationList(s, schemas.ModifyReplicationGroupShardConfigurationMessage_ReshardingConfiguration, v.ReshardingConfiguration)
+	}
+}
+
 type ModifyReplicationGroupShardConfigurationOutput struct {
 
 	// Contains all of the attributes of a specific Valkey or Redis OSS replication
@@ -89,13 +118,34 @@ type ModifyReplicationGroupShardConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyReplicationGroupShardConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyReplicationGroupShardConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyReplicationGroupShardConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationGroup != nil {
+		s.WriteStruct(schemas.ModifyReplicationGroupShardConfigurationResult_ReplicationGroup)
+		v.ReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyReplicationGroupShardConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyReplicationGroupShardConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyReplicationGroupShardConfigurationResult_ReplicationGroup:
+			v.ReplicationGroup = &types.ReplicationGroup{}
+			return v.ReplicationGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyReplicationGroupShardConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyReplicationGroupShardConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyReplicationGroupShardConfiguration, schemas.ModifyReplicationGroupShardConfigurationMessage, schemas.ModifyReplicationGroupShardConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyReplicationGroupShardConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyReplicationGroupShardConfiguration, schemas.ModifyReplicationGroupShardConfigurationMessage, schemas.ModifyReplicationGroupShardConfigurationResult), output: &ModifyReplicationGroupShardConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1178,6 +1178,18 @@ func TestCheckSnapshot_UpdateApplication(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateClone(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateClone(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateClone")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDataSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDataSource(context.Background(), nil, func(o *Options) {
@@ -2394,6 +2406,18 @@ func TestUpdateSnapshot_UpdateApplication(t *testing.T) {
 	_, err := svc.UpdateApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateClone(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateClone(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateClone")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

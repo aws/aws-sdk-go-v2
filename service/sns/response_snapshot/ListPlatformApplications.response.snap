@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListPlatformApplicationsResponse><ListPlatformApplicationsResult><NextToken>__NextToken__</NextToken><PlatformApplications><member><Attributes><entry><key>key0</key><value>__Value__</value></entry></Attributes><PlatformApplicationArn>__PlatformApplicationArn__</PlatformApplicationArn></member><member><Attributes><entry><key>key0</key><value>__Value__</value></entry></Attributes><PlatformApplicationArn>__PlatformApplicationArn__</PlatformApplicationArn></member></PlatformApplications></ListPlatformApplicationsResult></ListPlatformApplicationsResponse>

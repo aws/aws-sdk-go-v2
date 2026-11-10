@@ -2407,6 +2407,84 @@ func (SeverityRating) Values() []SeverityRating {
 	}
 }
 
+type SoftwareGroupByField string
+
+// Enum values for SoftwareGroupByField
+const (
+	SoftwareGroupByFieldAccountId              SoftwareGroupByField = "AccountId"
+	SoftwareGroupByFieldPackageName            SoftwareGroupByField = "PackageName"
+	SoftwareGroupByFieldPackageVersion         SoftwareGroupByField = "PackageVersion"
+	SoftwareGroupByFieldPackageType            SoftwareGroupByField = "PackageType"
+	SoftwareGroupByFieldRegion                 SoftwareGroupByField = "Region"
+	SoftwareGroupByFieldResourceRegion         SoftwareGroupByField = "ResourceRegion"
+	SoftwareGroupByFieldResourceType           SoftwareGroupByField = "ResourceType"
+	SoftwareGroupByFieldResourceId             SoftwareGroupByField = "ResourceId"
+	SoftwareGroupByFieldResourceProvider       SoftwareGroupByField = "ResourceProvider"
+	SoftwareGroupByFieldResourceOwnerAccountId SoftwareGroupByField = "ResourceOwnerAccountId"
+	SoftwareGroupByFieldResourceOwnerOrgId     SoftwareGroupByField = "ResourceOwnerOrgId"
+	SoftwareGroupByFieldResourceCloudPartition SoftwareGroupByField = "ResourceCloudPartition"
+)
+
+// Values returns all known values for SoftwareGroupByField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SoftwareGroupByField) Values() []SoftwareGroupByField {
+	return []SoftwareGroupByField{
+		"AccountId",
+		"PackageName",
+		"PackageVersion",
+		"PackageType",
+		"Region",
+		"ResourceRegion",
+		"ResourceType",
+		"ResourceId",
+		"ResourceProvider",
+		"ResourceOwnerAccountId",
+		"ResourceOwnerOrgId",
+		"ResourceCloudPartition",
+	}
+}
+
+type SoftwareStringField string
+
+// Enum values for SoftwareStringField
+const (
+	SoftwareStringFieldAccountId              SoftwareStringField = "AccountId"
+	SoftwareStringFieldPackageName            SoftwareStringField = "PackageName"
+	SoftwareStringFieldPackageVersion         SoftwareStringField = "PackageVersion"
+	SoftwareStringFieldPackageType            SoftwareStringField = "PackageType"
+	SoftwareStringFieldRegion                 SoftwareStringField = "Region"
+	SoftwareStringFieldResourceRegion         SoftwareStringField = "ResourceRegion"
+	SoftwareStringFieldResourceType           SoftwareStringField = "ResourceType"
+	SoftwareStringFieldResourceId             SoftwareStringField = "ResourceId"
+	SoftwareStringFieldResourceProvider       SoftwareStringField = "ResourceProvider"
+	SoftwareStringFieldResourceOwnerAccountId SoftwareStringField = "ResourceOwnerAccountId"
+	SoftwareStringFieldResourceOwnerOrgId     SoftwareStringField = "ResourceOwnerOrgId"
+	SoftwareStringFieldResourceCloudPartition SoftwareStringField = "ResourceCloudPartition"
+)
+
+// Values returns all known values for SoftwareStringField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SoftwareStringField) Values() []SoftwareStringField {
+	return []SoftwareStringField{
+		"AccountId",
+		"PackageName",
+		"PackageVersion",
+		"PackageType",
+		"Region",
+		"ResourceRegion",
+		"ResourceType",
+		"ResourceId",
+		"ResourceProvider",
+		"ResourceOwnerAccountId",
+		"ResourceOwnerOrgId",
+		"ResourceCloudPartition",
+	}
+}
+
 type SortOrder string
 
 // Enum values for SortOrder

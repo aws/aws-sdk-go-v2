@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -22,6 +24,34 @@ type AcceleratorCountRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceleratorCountRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceleratorCountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceleratorCountRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max != nil {
+		s.WriteInt32(schemas.AcceleratorCountRequest_Max, *v.Max)
+	}
+	if v.Min != nil {
+		s.WriteInt32(schemas.AcceleratorCountRequest_Min, *v.Min)
+	}
+}
+func (v *AcceleratorCountRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceleratorCountRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceleratorCountRequest_Max:
+			v.Max = new(int32)
+			return d.ReadInt32(schemas.AcceleratorCountRequest_Max, v.Max)
+		case schemas.AcceleratorCountRequest_Min:
+			v.Min = new(int32)
+			return d.ReadInt32(schemas.AcceleratorCountRequest_Min, v.Min)
+		}
+		return nil
+	})
+}
+
 // Specifies the minimum and maximum for the AcceleratorTotalMemoryMiB object when
 // you specify [InstanceRequirements]for an Auto Scaling group.
 //
@@ -35,6 +65,34 @@ type AcceleratorTotalMemoryMiBRequest struct {
 	Min *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AcceleratorTotalMemoryMiBRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceleratorTotalMemoryMiBRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceleratorTotalMemoryMiBRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max != nil {
+		s.WriteInt32(schemas.AcceleratorTotalMemoryMiBRequest_Max, *v.Max)
+	}
+	if v.Min != nil {
+		s.WriteInt32(schemas.AcceleratorTotalMemoryMiBRequest_Min, *v.Min)
+	}
+}
+func (v *AcceleratorTotalMemoryMiBRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceleratorTotalMemoryMiBRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceleratorTotalMemoryMiBRequest_Max:
+			v.Max = new(int32)
+			return d.ReadInt32(schemas.AcceleratorTotalMemoryMiBRequest_Max, v.Max)
+		case schemas.AcceleratorTotalMemoryMiBRequest_Min:
+			v.Min = new(int32)
+			return d.ReadInt32(schemas.AcceleratorTotalMemoryMiBRequest_Min, v.Min)
+		}
+		return nil
+	})
 }
 
 //	Describes an account setting for Amazon EC2 Auto Scaling. Account settings
@@ -75,6 +133,58 @@ type AccountSetting struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccountSetting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountSetting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountSetting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.AccountSetting_DefaultValue, *v.DefaultValue)
+	}
+	if v.EnforcedValue != nil {
+		s.WriteString(schemas.AccountSetting_EnforcedValue, *v.EnforcedValue)
+	}
+	if v.EnforcementDate != nil {
+		s.WriteTime(schemas.AccountSetting_EnforcementDate, *v.EnforcementDate)
+	}
+	if v.EnforcementType != nil {
+		s.WriteString(schemas.AccountSetting_EnforcementType, *v.EnforcementType)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AccountSetting_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.AccountSetting_Value, *v.Value)
+	}
+}
+func (v *AccountSetting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountSetting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountSetting_DefaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.AccountSetting_DefaultValue, v.DefaultValue)
+		case schemas.AccountSetting_EnforcedValue:
+			v.EnforcedValue = new(string)
+			return d.ReadString(schemas.AccountSetting_EnforcedValue, v.EnforcedValue)
+		case schemas.AccountSetting_EnforcementDate:
+			v.EnforcementDate = new(time.Time)
+			return d.ReadTime(schemas.AccountSetting_EnforcementDate, v.EnforcementDate)
+		case schemas.AccountSetting_EnforcementType:
+			v.EnforcementType = new(string)
+			return d.ReadString(schemas.AccountSetting_EnforcementType, v.EnforcementType)
+		case schemas.AccountSetting_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AccountSetting_Name, v.Name)
+		case schemas.AccountSetting_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.AccountSetting_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes scaling activity, which is a long-running process that represents a
@@ -131,6 +241,98 @@ type Activity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Activity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Activity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Activity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityId != nil {
+		s.WriteString(schemas.Activity_ActivityId, *v.ActivityId)
+	}
+	if v.AutoScalingGroupARN != nil {
+		s.WriteString(schemas.Activity_AutoScalingGroupARN, *v.AutoScalingGroupARN)
+	}
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.Activity_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.AutoScalingGroupState != nil {
+		s.WriteString(schemas.Activity_AutoScalingGroupState, *v.AutoScalingGroupState)
+	}
+	if v.Cause != nil {
+		s.WriteString(schemas.Activity_Cause, *v.Cause)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Activity_Description, *v.Description)
+	}
+	if v.Details != nil {
+		s.WriteString(schemas.Activity_Details, *v.Details)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Activity_EndTime, *v.EndTime)
+	}
+	if v.Progress != nil {
+		s.WriteInt32(schemas.Activity_Progress, *v.Progress)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Activity_StartTime, *v.StartTime)
+	}
+	if v.StatusCode != "" {
+		s.WriteString(schemas.Activity_StatusCode, string(v.StatusCode))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.Activity_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *Activity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Activity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Activity_ActivityId:
+			v.ActivityId = new(string)
+			return d.ReadString(schemas.Activity_ActivityId, v.ActivityId)
+		case schemas.Activity_AutoScalingGroupARN:
+			v.AutoScalingGroupARN = new(string)
+			return d.ReadString(schemas.Activity_AutoScalingGroupARN, v.AutoScalingGroupARN)
+		case schemas.Activity_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.Activity_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.Activity_AutoScalingGroupState:
+			v.AutoScalingGroupState = new(string)
+			return d.ReadString(schemas.Activity_AutoScalingGroupState, v.AutoScalingGroupState)
+		case schemas.Activity_Cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.Activity_Cause, v.Cause)
+		case schemas.Activity_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Activity_Description, v.Description)
+		case schemas.Activity_Details:
+			v.Details = new(string)
+			return d.ReadString(schemas.Activity_Details, v.Details)
+		case schemas.Activity_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Activity_EndTime, v.EndTime)
+		case schemas.Activity_Progress:
+			v.Progress = new(int32)
+			return d.ReadInt32(schemas.Activity_Progress, v.Progress)
+		case schemas.Activity_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Activity_StartTime, v.StartTime)
+		case schemas.Activity_StatusCode:
+			var ev string
+			if err := d.ReadString(schemas.Activity_StatusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = ScalingActivityStatusCode(ev)
+			return nil
+		case schemas.Activity_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.Activity_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // Describes a policy adjustment type.
 type AdjustmentType struct {
 
@@ -139,6 +341,28 @@ type AdjustmentType struct {
 	AdjustmentType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AdjustmentType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdjustmentType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdjustmentType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjustmentType != nil {
+		s.WriteString(schemas.AdjustmentType_AdjustmentType, *v.AdjustmentType)
+	}
+}
+func (v *AdjustmentType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdjustmentType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdjustmentType_AdjustmentType:
+			v.AdjustmentType = new(string)
+			return d.ReadString(schemas.AdjustmentType_AdjustmentType, v.AdjustmentType)
+		}
+		return nil
+	})
 }
 
 // Describes an alarm.
@@ -153,6 +377,34 @@ type Alarm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Alarm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Alarm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Alarm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmARN != nil {
+		s.WriteString(schemas.Alarm_AlarmARN, *v.AlarmARN)
+	}
+	if v.AlarmName != nil {
+		s.WriteString(schemas.Alarm_AlarmName, *v.AlarmName)
+	}
+}
+func (v *Alarm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Alarm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Alarm_AlarmARN:
+			v.AlarmARN = new(string)
+			return d.ReadString(schemas.Alarm_AlarmARN, v.AlarmARN)
+		case schemas.Alarm_AlarmName:
+			v.AlarmName = new(string)
+			return d.ReadString(schemas.Alarm_AlarmName, v.AlarmName)
+		}
+		return nil
+	})
+}
+
 // Specifies the CloudWatch alarm specification to use in an instance refresh.
 type AlarmSpecification struct {
 
@@ -161,6 +413,27 @@ type AlarmSpecification struct {
 	Alarms []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AlarmSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlarmSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlarmSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alarms != nil {
+		serializeAlarmList(s, schemas.AlarmSpecification_Alarms, v.Alarms)
+	}
+}
+func (v *AlarmSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlarmSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlarmSpecification_Alarms:
+			return deserializeAlarmList(d, schemas.AlarmSpecification_Alarms, &v.Alarms)
+		}
+		return nil
+	})
 }
 
 // Describes an Auto Scaling group.
@@ -329,6 +602,286 @@ type AutoScalingGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoScalingGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupARN != nil {
+		s.WriteString(schemas.AutoScalingGroup_AutoScalingGroupARN, *v.AutoScalingGroupARN)
+	}
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.AutoScalingGroup_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.AvailabilityZoneDistribution != nil {
+		s.WriteStruct(schemas.AutoScalingGroup_AvailabilityZoneDistribution)
+		v.AvailabilityZoneDistribution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AvailabilityZoneIds != nil {
+		serializeAvailabilityZoneIds(s, schemas.AutoScalingGroup_AvailabilityZoneIds, v.AvailabilityZoneIds)
+	}
+	if v.AvailabilityZoneImpairmentPolicy != nil {
+		s.WriteStruct(schemas.AutoScalingGroup_AvailabilityZoneImpairmentPolicy)
+		v.AvailabilityZoneImpairmentPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZones(s, schemas.AutoScalingGroup_AvailabilityZones, v.AvailabilityZones)
+	}
+	if v.CapacityRebalance != nil {
+		s.WriteBool(schemas.AutoScalingGroup_CapacityRebalance, *v.CapacityRebalance)
+	}
+	if v.CapacityReservationSpecification != nil {
+		s.WriteStruct(schemas.AutoScalingGroup_CapacityReservationSpecification)
+		v.CapacityReservationSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Context != nil {
+		s.WriteString(schemas.AutoScalingGroup_Context, *v.Context)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.AutoScalingGroup_CreatedTime, *v.CreatedTime)
+	}
+	if v.DefaultCooldown != nil {
+		s.WriteInt32(schemas.AutoScalingGroup_DefaultCooldown, *v.DefaultCooldown)
+	}
+	if v.DefaultInstanceWarmup != nil {
+		s.WriteInt32(schemas.AutoScalingGroup_DefaultInstanceWarmup, *v.DefaultInstanceWarmup)
+	}
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.AutoScalingGroup_DeletionProtection, string(v.DeletionProtection))
+	}
+	if v.DesiredCapacity != nil {
+		s.WriteInt32(schemas.AutoScalingGroup_DesiredCapacity, *v.DesiredCapacity)
+	}
+	if v.DesiredCapacityType != nil {
+		s.WriteString(schemas.AutoScalingGroup_DesiredCapacityType, *v.DesiredCapacityType)
+	}
+	if v.EnabledMetrics != nil {
+		serializeEnabledMetrics(s, schemas.AutoScalingGroup_EnabledMetrics, v.EnabledMetrics)
+	}
+	if v.HealthCheckGracePeriod != nil {
+		s.WriteInt32(schemas.AutoScalingGroup_HealthCheckGracePeriod, *v.HealthCheckGracePeriod)
+	}
+	if v.HealthCheckType != nil {
+		s.WriteString(schemas.AutoScalingGroup_HealthCheckType, *v.HealthCheckType)
+	}
+	if v.InstanceLifecyclePolicy != nil {
+		s.WriteStruct(schemas.AutoScalingGroup_InstanceLifecyclePolicy)
+		v.InstanceLifecyclePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceMaintenancePolicy != nil {
+		s.WriteStruct(schemas.AutoScalingGroup_InstanceMaintenancePolicy)
+		v.InstanceMaintenancePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Instances != nil {
+		serializeInstances(s, schemas.AutoScalingGroup_Instances, v.Instances)
+	}
+	if v.LaunchConfigurationName != nil {
+		s.WriteString(schemas.AutoScalingGroup_LaunchConfigurationName, *v.LaunchConfigurationName)
+	}
+	if v.LaunchTemplate != nil {
+		s.WriteStruct(schemas.AutoScalingGroup_LaunchTemplate)
+		v.LaunchTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LoadBalancerNames != nil {
+		serializeLoadBalancerNames(s, schemas.AutoScalingGroup_LoadBalancerNames, v.LoadBalancerNames)
+	}
+	if v.MaxInstanceLifetime != nil {
+		s.WriteInt32(schemas.AutoScalingGroup_MaxInstanceLifetime, *v.MaxInstanceLifetime)
+	}
+	if v.MaxSize != nil {
+		s.WriteInt32(schemas.AutoScalingGroup_MaxSize, *v.MaxSize)
+	}
+	if v.MinSize != nil {
+		s.WriteInt32(schemas.AutoScalingGroup_MinSize, *v.MinSize)
+	}
+	if v.MixedInstancesPolicy != nil {
+		s.WriteStruct(schemas.AutoScalingGroup_MixedInstancesPolicy)
+		v.MixedInstancesPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NewInstancesProtectedFromScaleIn != nil {
+		s.WriteBool(schemas.AutoScalingGroup_NewInstancesProtectedFromScaleIn, *v.NewInstancesProtectedFromScaleIn)
+	}
+	if v.Operator != nil {
+		s.WriteStruct(schemas.AutoScalingGroup_Operator)
+		v.Operator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlacementGroup != nil {
+		s.WriteString(schemas.AutoScalingGroup_PlacementGroup, *v.PlacementGroup)
+	}
+	if v.PredictedCapacity != nil {
+		s.WriteInt32(schemas.AutoScalingGroup_PredictedCapacity, *v.PredictedCapacity)
+	}
+	if v.ServiceLinkedRoleARN != nil {
+		s.WriteString(schemas.AutoScalingGroup_ServiceLinkedRoleARN, *v.ServiceLinkedRoleARN)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.AutoScalingGroup_Status, *v.Status)
+	}
+	if v.SuspendedProcesses != nil {
+		serializeSuspendedProcesses(s, schemas.AutoScalingGroup_SuspendedProcesses, v.SuspendedProcesses)
+	}
+	if v.Tags != nil {
+		serializeTagDescriptionList(s, schemas.AutoScalingGroup_Tags, v.Tags)
+	}
+	if v.TargetGroupARNs != nil {
+		serializeTargetGroupARNs(s, schemas.AutoScalingGroup_TargetGroupARNs, v.TargetGroupARNs)
+	}
+	if v.TerminationPolicies != nil {
+		serializeTerminationPolicies(s, schemas.AutoScalingGroup_TerminationPolicies, v.TerminationPolicies)
+	}
+	if v.TrafficSources != nil {
+		serializeTrafficSources(s, schemas.AutoScalingGroup_TrafficSources, v.TrafficSources)
+	}
+	if v.VPCZoneIdentifier != nil {
+		s.WriteString(schemas.AutoScalingGroup_VPCZoneIdentifier, *v.VPCZoneIdentifier)
+	}
+	if v.WarmPoolConfiguration != nil {
+		s.WriteStruct(schemas.AutoScalingGroup_WarmPoolConfiguration)
+		v.WarmPoolConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WarmPoolSize != nil {
+		s.WriteInt32(schemas.AutoScalingGroup_WarmPoolSize, *v.WarmPoolSize)
+	}
+}
+func (v *AutoScalingGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingGroup_AutoScalingGroupARN:
+			v.AutoScalingGroupARN = new(string)
+			return d.ReadString(schemas.AutoScalingGroup_AutoScalingGroupARN, v.AutoScalingGroupARN)
+		case schemas.AutoScalingGroup_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.AutoScalingGroup_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.AutoScalingGroup_AvailabilityZoneDistribution:
+			v.AvailabilityZoneDistribution = &AvailabilityZoneDistribution{}
+			return v.AvailabilityZoneDistribution.Deserialize(d)
+		case schemas.AutoScalingGroup_AvailabilityZoneIds:
+			return deserializeAvailabilityZoneIds(d, schemas.AutoScalingGroup_AvailabilityZoneIds, &v.AvailabilityZoneIds)
+		case schemas.AutoScalingGroup_AvailabilityZoneImpairmentPolicy:
+			v.AvailabilityZoneImpairmentPolicy = &AvailabilityZoneImpairmentPolicy{}
+			return v.AvailabilityZoneImpairmentPolicy.Deserialize(d)
+		case schemas.AutoScalingGroup_AvailabilityZones:
+			return deserializeAvailabilityZones(d, schemas.AutoScalingGroup_AvailabilityZones, &v.AvailabilityZones)
+		case schemas.AutoScalingGroup_CapacityRebalance:
+			v.CapacityRebalance = new(bool)
+			return d.ReadBool(schemas.AutoScalingGroup_CapacityRebalance, v.CapacityRebalance)
+		case schemas.AutoScalingGroup_CapacityReservationSpecification:
+			v.CapacityReservationSpecification = &CapacityReservationSpecification{}
+			return v.CapacityReservationSpecification.Deserialize(d)
+		case schemas.AutoScalingGroup_Context:
+			v.Context = new(string)
+			return d.ReadString(schemas.AutoScalingGroup_Context, v.Context)
+		case schemas.AutoScalingGroup_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.AutoScalingGroup_CreatedTime, v.CreatedTime)
+		case schemas.AutoScalingGroup_DefaultCooldown:
+			v.DefaultCooldown = new(int32)
+			return d.ReadInt32(schemas.AutoScalingGroup_DefaultCooldown, v.DefaultCooldown)
+		case schemas.AutoScalingGroup_DefaultInstanceWarmup:
+			v.DefaultInstanceWarmup = new(int32)
+			return d.ReadInt32(schemas.AutoScalingGroup_DefaultInstanceWarmup, v.DefaultInstanceWarmup)
+		case schemas.AutoScalingGroup_DeletionProtection:
+			var ev string
+			if err := d.ReadString(schemas.AutoScalingGroup_DeletionProtection, &ev); err != nil {
+				return err
+			}
+			v.DeletionProtection = DeletionProtection(ev)
+			return nil
+		case schemas.AutoScalingGroup_DesiredCapacity:
+			v.DesiredCapacity = new(int32)
+			return d.ReadInt32(schemas.AutoScalingGroup_DesiredCapacity, v.DesiredCapacity)
+		case schemas.AutoScalingGroup_DesiredCapacityType:
+			v.DesiredCapacityType = new(string)
+			return d.ReadString(schemas.AutoScalingGroup_DesiredCapacityType, v.DesiredCapacityType)
+		case schemas.AutoScalingGroup_EnabledMetrics:
+			return deserializeEnabledMetrics(d, schemas.AutoScalingGroup_EnabledMetrics, &v.EnabledMetrics)
+		case schemas.AutoScalingGroup_HealthCheckGracePeriod:
+			v.HealthCheckGracePeriod = new(int32)
+			return d.ReadInt32(schemas.AutoScalingGroup_HealthCheckGracePeriod, v.HealthCheckGracePeriod)
+		case schemas.AutoScalingGroup_HealthCheckType:
+			v.HealthCheckType = new(string)
+			return d.ReadString(schemas.AutoScalingGroup_HealthCheckType, v.HealthCheckType)
+		case schemas.AutoScalingGroup_InstanceLifecyclePolicy:
+			v.InstanceLifecyclePolicy = &InstanceLifecyclePolicy{}
+			return v.InstanceLifecyclePolicy.Deserialize(d)
+		case schemas.AutoScalingGroup_InstanceMaintenancePolicy:
+			v.InstanceMaintenancePolicy = &InstanceMaintenancePolicy{}
+			return v.InstanceMaintenancePolicy.Deserialize(d)
+		case schemas.AutoScalingGroup_Instances:
+			return deserializeInstances(d, schemas.AutoScalingGroup_Instances, &v.Instances)
+		case schemas.AutoScalingGroup_LaunchConfigurationName:
+			v.LaunchConfigurationName = new(string)
+			return d.ReadString(schemas.AutoScalingGroup_LaunchConfigurationName, v.LaunchConfigurationName)
+		case schemas.AutoScalingGroup_LaunchTemplate:
+			v.LaunchTemplate = &LaunchTemplateSpecification{}
+			return v.LaunchTemplate.Deserialize(d)
+		case schemas.AutoScalingGroup_LoadBalancerNames:
+			return deserializeLoadBalancerNames(d, schemas.AutoScalingGroup_LoadBalancerNames, &v.LoadBalancerNames)
+		case schemas.AutoScalingGroup_MaxInstanceLifetime:
+			v.MaxInstanceLifetime = new(int32)
+			return d.ReadInt32(schemas.AutoScalingGroup_MaxInstanceLifetime, v.MaxInstanceLifetime)
+		case schemas.AutoScalingGroup_MaxSize:
+			v.MaxSize = new(int32)
+			return d.ReadInt32(schemas.AutoScalingGroup_MaxSize, v.MaxSize)
+		case schemas.AutoScalingGroup_MinSize:
+			v.MinSize = new(int32)
+			return d.ReadInt32(schemas.AutoScalingGroup_MinSize, v.MinSize)
+		case schemas.AutoScalingGroup_MixedInstancesPolicy:
+			v.MixedInstancesPolicy = &MixedInstancesPolicy{}
+			return v.MixedInstancesPolicy.Deserialize(d)
+		case schemas.AutoScalingGroup_NewInstancesProtectedFromScaleIn:
+			v.NewInstancesProtectedFromScaleIn = new(bool)
+			return d.ReadBool(schemas.AutoScalingGroup_NewInstancesProtectedFromScaleIn, v.NewInstancesProtectedFromScaleIn)
+		case schemas.AutoScalingGroup_Operator:
+			v.Operator = &Operator{}
+			return v.Operator.Deserialize(d)
+		case schemas.AutoScalingGroup_PlacementGroup:
+			v.PlacementGroup = new(string)
+			return d.ReadString(schemas.AutoScalingGroup_PlacementGroup, v.PlacementGroup)
+		case schemas.AutoScalingGroup_PredictedCapacity:
+			v.PredictedCapacity = new(int32)
+			return d.ReadInt32(schemas.AutoScalingGroup_PredictedCapacity, v.PredictedCapacity)
+		case schemas.AutoScalingGroup_ServiceLinkedRoleARN:
+			v.ServiceLinkedRoleARN = new(string)
+			return d.ReadString(schemas.AutoScalingGroup_ServiceLinkedRoleARN, v.ServiceLinkedRoleARN)
+		case schemas.AutoScalingGroup_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.AutoScalingGroup_Status, v.Status)
+		case schemas.AutoScalingGroup_SuspendedProcesses:
+			return deserializeSuspendedProcesses(d, schemas.AutoScalingGroup_SuspendedProcesses, &v.SuspendedProcesses)
+		case schemas.AutoScalingGroup_Tags:
+			return deserializeTagDescriptionList(d, schemas.AutoScalingGroup_Tags, &v.Tags)
+		case schemas.AutoScalingGroup_TargetGroupARNs:
+			return deserializeTargetGroupARNs(d, schemas.AutoScalingGroup_TargetGroupARNs, &v.TargetGroupARNs)
+		case schemas.AutoScalingGroup_TerminationPolicies:
+			return deserializeTerminationPolicies(d, schemas.AutoScalingGroup_TerminationPolicies, &v.TerminationPolicies)
+		case schemas.AutoScalingGroup_TrafficSources:
+			return deserializeTrafficSources(d, schemas.AutoScalingGroup_TrafficSources, &v.TrafficSources)
+		case schemas.AutoScalingGroup_VPCZoneIdentifier:
+			v.VPCZoneIdentifier = new(string)
+			return d.ReadString(schemas.AutoScalingGroup_VPCZoneIdentifier, v.VPCZoneIdentifier)
+		case schemas.AutoScalingGroup_WarmPoolConfiguration:
+			v.WarmPoolConfiguration = &WarmPoolConfiguration{}
+			return v.WarmPoolConfiguration.Deserialize(d)
+		case schemas.AutoScalingGroup_WarmPoolSize:
+			v.WarmPoolSize = new(int32)
+			return d.ReadInt32(schemas.AutoScalingGroup_WarmPoolSize, v.WarmPoolSize)
+		}
+		return nil
+	})
+}
+
 // Describes an EC2 instance associated with an Auto Scaling group.
 type AutoScalingInstanceDetails struct {
 
@@ -419,6 +972,96 @@ type AutoScalingInstanceDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoScalingInstanceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingInstanceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingInstanceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.AutoScalingInstanceDetails_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.AutoScalingInstanceDetails_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.AutoScalingInstanceDetails_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.HealthStatus != nil {
+		s.WriteString(schemas.AutoScalingInstanceDetails_HealthStatus, *v.HealthStatus)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.AutoScalingInstanceDetails_ImageId, *v.ImageId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AutoScalingInstanceDetails_InstanceId, *v.InstanceId)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.AutoScalingInstanceDetails_InstanceType, *v.InstanceType)
+	}
+	if v.LaunchConfigurationName != nil {
+		s.WriteString(schemas.AutoScalingInstanceDetails_LaunchConfigurationName, *v.LaunchConfigurationName)
+	}
+	if v.LaunchTemplate != nil {
+		s.WriteStruct(schemas.AutoScalingInstanceDetails_LaunchTemplate)
+		v.LaunchTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LifecycleState != nil {
+		s.WriteString(schemas.AutoScalingInstanceDetails_LifecycleState, *v.LifecycleState)
+	}
+	if v.ProtectedFromScaleIn != nil {
+		s.WriteBool(schemas.AutoScalingInstanceDetails_ProtectedFromScaleIn, *v.ProtectedFromScaleIn)
+	}
+	if v.WeightedCapacity != nil {
+		s.WriteString(schemas.AutoScalingInstanceDetails_WeightedCapacity, *v.WeightedCapacity)
+	}
+}
+func (v *AutoScalingInstanceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingInstanceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingInstanceDetails_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.AutoScalingInstanceDetails_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.AutoScalingInstanceDetails_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.AutoScalingInstanceDetails_AvailabilityZone, v.AvailabilityZone)
+		case schemas.AutoScalingInstanceDetails_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.AutoScalingInstanceDetails_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.AutoScalingInstanceDetails_HealthStatus:
+			v.HealthStatus = new(string)
+			return d.ReadString(schemas.AutoScalingInstanceDetails_HealthStatus, v.HealthStatus)
+		case schemas.AutoScalingInstanceDetails_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.AutoScalingInstanceDetails_ImageId, v.ImageId)
+		case schemas.AutoScalingInstanceDetails_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.AutoScalingInstanceDetails_InstanceId, v.InstanceId)
+		case schemas.AutoScalingInstanceDetails_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.AutoScalingInstanceDetails_InstanceType, v.InstanceType)
+		case schemas.AutoScalingInstanceDetails_LaunchConfigurationName:
+			v.LaunchConfigurationName = new(string)
+			return d.ReadString(schemas.AutoScalingInstanceDetails_LaunchConfigurationName, v.LaunchConfigurationName)
+		case schemas.AutoScalingInstanceDetails_LaunchTemplate:
+			v.LaunchTemplate = &LaunchTemplateSpecification{}
+			return v.LaunchTemplate.Deserialize(d)
+		case schemas.AutoScalingInstanceDetails_LifecycleState:
+			v.LifecycleState = new(string)
+			return d.ReadString(schemas.AutoScalingInstanceDetails_LifecycleState, v.LifecycleState)
+		case schemas.AutoScalingInstanceDetails_ProtectedFromScaleIn:
+			v.ProtectedFromScaleIn = new(bool)
+			return d.ReadBool(schemas.AutoScalingInstanceDetails_ProtectedFromScaleIn, v.ProtectedFromScaleIn)
+		case schemas.AutoScalingInstanceDetails_WeightedCapacity:
+			v.WeightedCapacity = new(string)
+			return d.ReadString(schemas.AutoScalingInstanceDetails_WeightedCapacity, v.WeightedCapacity)
+		}
+		return nil
+	})
+}
+
 // Describes an Availability Zone distribution.
 type AvailabilityZoneDistribution struct {
 
@@ -440,6 +1083,32 @@ type AvailabilityZoneDistribution struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AvailabilityZoneDistribution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvailabilityZoneDistribution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvailabilityZoneDistribution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityDistributionStrategy != "" {
+		s.WriteString(schemas.AvailabilityZoneDistribution_CapacityDistributionStrategy, string(v.CapacityDistributionStrategy))
+	}
+}
+func (v *AvailabilityZoneDistribution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvailabilityZoneDistribution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvailabilityZoneDistribution_CapacityDistributionStrategy:
+			var ev string
+			if err := d.ReadString(schemas.AvailabilityZoneDistribution_CapacityDistributionStrategy, &ev); err != nil {
+				return err
+			}
+			v.CapacityDistributionStrategy = CapacityDistributionStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes an Availability Zone impairment policy.
 type AvailabilityZoneImpairmentPolicy struct {
 
@@ -459,6 +1128,38 @@ type AvailabilityZoneImpairmentPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AvailabilityZoneImpairmentPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvailabilityZoneImpairmentPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvailabilityZoneImpairmentPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImpairedZoneHealthCheckBehavior != "" {
+		s.WriteString(schemas.AvailabilityZoneImpairmentPolicy_ImpairedZoneHealthCheckBehavior, string(v.ImpairedZoneHealthCheckBehavior))
+	}
+	if v.ZonalShiftEnabled != nil {
+		s.WriteBool(schemas.AvailabilityZoneImpairmentPolicy_ZonalShiftEnabled, *v.ZonalShiftEnabled)
+	}
+}
+func (v *AvailabilityZoneImpairmentPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvailabilityZoneImpairmentPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvailabilityZoneImpairmentPolicy_ImpairedZoneHealthCheckBehavior:
+			var ev string
+			if err := d.ReadString(schemas.AvailabilityZoneImpairmentPolicy_ImpairedZoneHealthCheckBehavior, &ev); err != nil {
+				return err
+			}
+			v.ImpairedZoneHealthCheckBehavior = ImpairedZoneHealthCheckBehavior(ev)
+			return nil
+		case schemas.AvailabilityZoneImpairmentPolicy_ZonalShiftEnabled:
+			v.ZonalShiftEnabled = new(bool)
+			return d.ReadBool(schemas.AvailabilityZoneImpairmentPolicy_ZonalShiftEnabled, v.ZonalShiftEnabled)
+		}
+		return nil
+	})
+}
+
 // Specifies the minimum and maximum for the BaselineEbsBandwidthMbps object when
 // you specify [InstanceRequirements]for an Auto Scaling group.
 //
@@ -472,6 +1173,34 @@ type BaselineEbsBandwidthMbpsRequest struct {
 	Min *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *BaselineEbsBandwidthMbpsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BaselineEbsBandwidthMbpsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BaselineEbsBandwidthMbpsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max != nil {
+		s.WriteInt32(schemas.BaselineEbsBandwidthMbpsRequest_Max, *v.Max)
+	}
+	if v.Min != nil {
+		s.WriteInt32(schemas.BaselineEbsBandwidthMbpsRequest_Min, *v.Min)
+	}
+}
+func (v *BaselineEbsBandwidthMbpsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BaselineEbsBandwidthMbpsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BaselineEbsBandwidthMbpsRequest_Max:
+			v.Max = new(int32)
+			return d.ReadInt32(schemas.BaselineEbsBandwidthMbpsRequest_Max, v.Max)
+		case schemas.BaselineEbsBandwidthMbpsRequest_Min:
+			v.Min = new(int32)
+			return d.ReadInt32(schemas.BaselineEbsBandwidthMbpsRequest_Min, v.Min)
+		}
+		return nil
+	})
 }
 
 //	The baseline performance to consider, using an instance family as a baseline
@@ -491,6 +1220,30 @@ type BaselinePerformanceFactorsRequest struct {
 	Cpu *CpuPerformanceFactorRequest
 
 	noSmithyDocumentSerde
+}
+
+func (v *BaselinePerformanceFactorsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BaselinePerformanceFactorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BaselinePerformanceFactorsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cpu != nil {
+		s.WriteStruct(schemas.BaselinePerformanceFactorsRequest_Cpu)
+		v.Cpu.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BaselinePerformanceFactorsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BaselinePerformanceFactorsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BaselinePerformanceFactorsRequest_Cpu:
+			v.Cpu = &CpuPerformanceFactorRequest{}
+			return v.Cpu.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes a block device mapping.
@@ -526,6 +1279,48 @@ type BlockDeviceMapping struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BlockDeviceMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlockDeviceMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlockDeviceMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceName != nil {
+		s.WriteString(schemas.BlockDeviceMapping_DeviceName, *v.DeviceName)
+	}
+	if v.Ebs != nil {
+		s.WriteStruct(schemas.BlockDeviceMapping_Ebs)
+		v.Ebs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NoDevice != nil {
+		s.WriteBool(schemas.BlockDeviceMapping_NoDevice, *v.NoDevice)
+	}
+	if v.VirtualName != nil {
+		s.WriteString(schemas.BlockDeviceMapping_VirtualName, *v.VirtualName)
+	}
+}
+func (v *BlockDeviceMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlockDeviceMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BlockDeviceMapping_DeviceName:
+			v.DeviceName = new(string)
+			return d.ReadString(schemas.BlockDeviceMapping_DeviceName, v.DeviceName)
+		case schemas.BlockDeviceMapping_Ebs:
+			v.Ebs = &Ebs{}
+			return v.Ebs.Deserialize(d)
+		case schemas.BlockDeviceMapping_NoDevice:
+			v.NoDevice = new(bool)
+			return d.ReadBool(schemas.BlockDeviceMapping_NoDevice, v.NoDevice)
+		case schemas.BlockDeviceMapping_VirtualName:
+			v.VirtualName = new(string)
+			return d.ReadString(schemas.BlockDeviceMapping_VirtualName, v.VirtualName)
+		}
+		return nil
+	})
+}
+
 // A GetPredictiveScalingForecast call returns the capacity forecast for a
 // predictive scaling policy. This structure includes the data points for that
 // capacity forecast, along with the timestamps of those data points.
@@ -542,6 +1337,32 @@ type CapacityForecast struct {
 	Values []float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *CapacityForecast) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityForecast)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityForecast) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Timestamps != nil {
+		serializePredictiveScalingForecastTimestamps(s, schemas.CapacityForecast_Timestamps, v.Timestamps)
+	}
+	if v.Values != nil {
+		serializePredictiveScalingForecastValues(s, schemas.CapacityForecast_Values, v.Values)
+	}
+}
+func (v *CapacityForecast) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityForecast, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityForecast_Timestamps:
+			return deserializePredictiveScalingForecastTimestamps(d, schemas.CapacityForecast_Timestamps, &v.Timestamps)
+		case schemas.CapacityForecast_Values:
+			return deserializePredictiveScalingForecastValues(d, schemas.CapacityForecast_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 //	Describes the Capacity Reservation preference and targeting options. If you
@@ -574,6 +1395,40 @@ type CapacityReservationSpecification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CapacityReservationSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityReservationSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityReservationSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityReservationPreference != "" {
+		s.WriteString(schemas.CapacityReservationSpecification_CapacityReservationPreference, string(v.CapacityReservationPreference))
+	}
+	if v.CapacityReservationTarget != nil {
+		s.WriteStruct(schemas.CapacityReservationSpecification_CapacityReservationTarget)
+		v.CapacityReservationTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CapacityReservationSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityReservationSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityReservationSpecification_CapacityReservationPreference:
+			var ev string
+			if err := d.ReadString(schemas.CapacityReservationSpecification_CapacityReservationPreference, &ev); err != nil {
+				return err
+			}
+			v.CapacityReservationPreference = CapacityReservationPreference(ev)
+			return nil
+		case schemas.CapacityReservationSpecification_CapacityReservationTarget:
+			v.CapacityReservationTarget = &CapacityReservationTarget{}
+			return v.CapacityReservationTarget.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	The target for the Capacity Reservation. Specify Capacity Reservations IDs or
 //
 // Capacity Reservation resource group ARNs.
@@ -586,6 +1441,32 @@ type CapacityReservationTarget struct {
 	CapacityReservationResourceGroupArns []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CapacityReservationTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityReservationTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityReservationTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityReservationIds != nil {
+		serializeCapacityReservationIds(s, schemas.CapacityReservationTarget_CapacityReservationIds, v.CapacityReservationIds)
+	}
+	if v.CapacityReservationResourceGroupArns != nil {
+		serializeCapacityReservationResourceGroupArns(s, schemas.CapacityReservationTarget_CapacityReservationResourceGroupArns, v.CapacityReservationResourceGroupArns)
+	}
+}
+func (v *CapacityReservationTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityReservationTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityReservationTarget_CapacityReservationIds:
+			return deserializeCapacityReservationIds(d, schemas.CapacityReservationTarget_CapacityReservationIds, &v.CapacityReservationIds)
+		case schemas.CapacityReservationTarget_CapacityReservationResourceGroupArns:
+			return deserializeCapacityReservationResourceGroupArns(d, schemas.CapacityReservationTarget_CapacityReservationResourceGroupArns, &v.CapacityReservationResourceGroupArns)
+		}
+		return nil
+	})
 }
 
 //	The CPU performance to consider, using an instance family as the baseline
@@ -602,6 +1483,27 @@ type CpuPerformanceFactorRequest struct {
 	References []PerformanceFactorReferenceRequest
 
 	noSmithyDocumentSerde
+}
+
+func (v *CpuPerformanceFactorRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CpuPerformanceFactorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CpuPerformanceFactorRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.References != nil {
+		serializePerformanceFactorReferenceSetRequest(s, schemas.CpuPerformanceFactorRequest_References, v.References)
+	}
+}
+func (v *CpuPerformanceFactorRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CpuPerformanceFactorRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CpuPerformanceFactorRequest_References:
+			return deserializePerformanceFactorReferenceSetRequest(d, schemas.CpuPerformanceFactorRequest_References, &v.References)
+		}
+		return nil
+	})
 }
 
 // Represents a CloudWatch metric of your choosing for a target tracking scaling
@@ -669,6 +1571,66 @@ type CustomizedMetricSpecification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomizedMetricSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomizedMetricSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomizedMetricSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dimensions != nil {
+		serializeMetricDimensions(s, schemas.CustomizedMetricSpecification_Dimensions, v.Dimensions)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.CustomizedMetricSpecification_MetricName, *v.MetricName)
+	}
+	if v.Metrics != nil {
+		serializeTargetTrackingMetricDataQueries(s, schemas.CustomizedMetricSpecification_Metrics, v.Metrics)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.CustomizedMetricSpecification_Namespace, *v.Namespace)
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.CustomizedMetricSpecification_Period, *v.Period)
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.CustomizedMetricSpecification_Statistic, string(v.Statistic))
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.CustomizedMetricSpecification_Unit, *v.Unit)
+	}
+}
+func (v *CustomizedMetricSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomizedMetricSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomizedMetricSpecification_Dimensions:
+			return deserializeMetricDimensions(d, schemas.CustomizedMetricSpecification_Dimensions, &v.Dimensions)
+		case schemas.CustomizedMetricSpecification_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.CustomizedMetricSpecification_MetricName, v.MetricName)
+		case schemas.CustomizedMetricSpecification_Metrics:
+			return deserializeTargetTrackingMetricDataQueries(d, schemas.CustomizedMetricSpecification_Metrics, &v.Metrics)
+		case schemas.CustomizedMetricSpecification_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.CustomizedMetricSpecification_Namespace, v.Namespace)
+		case schemas.CustomizedMetricSpecification_Period:
+			v.Period = new(int32)
+			return d.ReadInt32(schemas.CustomizedMetricSpecification_Period, v.Period)
+		case schemas.CustomizedMetricSpecification_Statistic:
+			var ev string
+			if err := d.ReadString(schemas.CustomizedMetricSpecification_Statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = MetricStatistic(ev)
+			return nil
+		case schemas.CustomizedMetricSpecification_Unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.CustomizedMetricSpecification_Unit, v.Unit)
+		}
+		return nil
+	})
+}
+
 // Describes the desired configuration for an instance refresh.
 //
 // If you specify a desired configuration, you must specify either a LaunchTemplate
@@ -697,6 +1659,38 @@ type DesiredConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DesiredConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DesiredConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DesiredConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LaunchTemplate != nil {
+		s.WriteStruct(schemas.DesiredConfiguration_LaunchTemplate)
+		v.LaunchTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MixedInstancesPolicy != nil {
+		s.WriteStruct(schemas.DesiredConfiguration_MixedInstancesPolicy)
+		v.MixedInstancesPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DesiredConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DesiredConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DesiredConfiguration_LaunchTemplate:
+			v.LaunchTemplate = &LaunchTemplateSpecification{}
+			return v.LaunchTemplate.Deserialize(d)
+		case schemas.DesiredConfiguration_MixedInstancesPolicy:
+			v.MixedInstancesPolicy = &MixedInstancesPolicy{}
+			return v.MixedInstancesPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Use this structure to specify the capacity types that Amazon EC2 Auto Scaling
 // prioritizes when it launches instances.
 type DistributionSegment struct {
@@ -719,6 +1713,27 @@ type DistributionSegment struct {
 	TargetCapacityTypes []TargetCapacityType
 
 	noSmithyDocumentSerde
+}
+
+func (v *DistributionSegment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DistributionSegment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DistributionSegment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetCapacityTypes != nil {
+		serializeTargetCapacityTypes(s, schemas.DistributionSegment_TargetCapacityTypes, v.TargetCapacityTypes)
+	}
+}
+func (v *DistributionSegment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DistributionSegment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DistributionSegment_TargetCapacityTypes:
+			return deserializeTargetCapacityTypes(d, schemas.DistributionSegment_TargetCapacityTypes, &v.TargetCapacityTypes)
+		}
+		return nil
+	})
 }
 
 // Describes information used to set up an Amazon EBS volume specified in a block
@@ -803,6 +1818,64 @@ type Ebs struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Ebs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Ebs)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Ebs) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteOnTermination != nil {
+		s.WriteBool(schemas.Ebs_DeleteOnTermination, *v.DeleteOnTermination)
+	}
+	if v.Encrypted != nil {
+		s.WriteBool(schemas.Ebs_Encrypted, *v.Encrypted)
+	}
+	if v.Iops != nil {
+		s.WriteInt32(schemas.Ebs_Iops, *v.Iops)
+	}
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.Ebs_SnapshotId, *v.SnapshotId)
+	}
+	if v.Throughput != nil {
+		s.WriteInt32(schemas.Ebs_Throughput, *v.Throughput)
+	}
+	if v.VolumeSize != nil {
+		s.WriteInt32(schemas.Ebs_VolumeSize, *v.VolumeSize)
+	}
+	if v.VolumeType != nil {
+		s.WriteString(schemas.Ebs_VolumeType, *v.VolumeType)
+	}
+}
+func (v *Ebs) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Ebs, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Ebs_DeleteOnTermination:
+			v.DeleteOnTermination = new(bool)
+			return d.ReadBool(schemas.Ebs_DeleteOnTermination, v.DeleteOnTermination)
+		case schemas.Ebs_Encrypted:
+			v.Encrypted = new(bool)
+			return d.ReadBool(schemas.Ebs_Encrypted, v.Encrypted)
+		case schemas.Ebs_Iops:
+			v.Iops = new(int32)
+			return d.ReadInt32(schemas.Ebs_Iops, v.Iops)
+		case schemas.Ebs_SnapshotId:
+			v.SnapshotId = new(string)
+			return d.ReadString(schemas.Ebs_SnapshotId, v.SnapshotId)
+		case schemas.Ebs_Throughput:
+			v.Throughput = new(int32)
+			return d.ReadInt32(schemas.Ebs_Throughput, v.Throughput)
+		case schemas.Ebs_VolumeSize:
+			v.VolumeSize = new(int32)
+			return d.ReadInt32(schemas.Ebs_VolumeSize, v.VolumeSize)
+		case schemas.Ebs_VolumeType:
+			v.VolumeType = new(string)
+			return d.ReadString(schemas.Ebs_VolumeType, v.VolumeType)
+		}
+		return nil
+	})
+}
+
 // Describes an enabled Auto Scaling group metric.
 type EnabledMetric struct {
 
@@ -859,6 +1932,34 @@ type EnabledMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnabledMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Granularity != nil {
+		s.WriteString(schemas.EnabledMetric_Granularity, *v.Granularity)
+	}
+	if v.Metric != nil {
+		s.WriteString(schemas.EnabledMetric_Metric, *v.Metric)
+	}
+}
+func (v *EnabledMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledMetric_Granularity:
+			v.Granularity = new(string)
+			return d.ReadString(schemas.EnabledMetric_Granularity, v.Granularity)
+		case schemas.EnabledMetric_Metric:
+			v.Metric = new(string)
+			return d.ReadString(schemas.EnabledMetric_Metric, v.Metric)
+		}
+		return nil
+	})
+}
+
 // Describes a scheduled action that could not be created, updated, or deleted.
 type FailedScheduledUpdateGroupActionRequest struct {
 
@@ -874,6 +1975,40 @@ type FailedScheduledUpdateGroupActionRequest struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FailedScheduledUpdateGroupActionRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailedScheduledUpdateGroupActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailedScheduledUpdateGroupActionRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.FailedScheduledUpdateGroupActionRequest_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.FailedScheduledUpdateGroupActionRequest_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ScheduledActionName != nil {
+		s.WriteString(schemas.FailedScheduledUpdateGroupActionRequest_ScheduledActionName, *v.ScheduledActionName)
+	}
+}
+func (v *FailedScheduledUpdateGroupActionRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailedScheduledUpdateGroupActionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailedScheduledUpdateGroupActionRequest_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.FailedScheduledUpdateGroupActionRequest_ErrorCode, v.ErrorCode)
+		case schemas.FailedScheduledUpdateGroupActionRequest_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.FailedScheduledUpdateGroupActionRequest_ErrorMessage, v.ErrorMessage)
+		case schemas.FailedScheduledUpdateGroupActionRequest_ScheduledActionName:
+			v.ScheduledActionName = new(string)
+			return d.ReadString(schemas.FailedScheduledUpdateGroupActionRequest_ScheduledActionName, v.ScheduledActionName)
+		}
+		return nil
+	})
 }
 
 // Describes a filter that is used to return a more specific list of results from
@@ -975,6 +2110,33 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Filter_Name, *v.Name)
+	}
+	if v.Values != nil {
+		serializeValues(s, schemas.Filter_Values, v.Values)
+	}
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Filter_Name, v.Name)
+		case schemas.Filter_Values:
+			return deserializeValues(d, schemas.Filter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Describes an EC2 instance.
 type Instance struct {
 
@@ -1049,6 +2211,94 @@ type Instance struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Instance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Instance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.Instance_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.Instance_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.HealthStatus != nil {
+		s.WriteString(schemas.Instance_HealthStatus, *v.HealthStatus)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.Instance_ImageId, *v.ImageId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.Instance_InstanceId, *v.InstanceId)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.Instance_InstanceType, *v.InstanceType)
+	}
+	if v.LaunchConfigurationName != nil {
+		s.WriteString(schemas.Instance_LaunchConfigurationName, *v.LaunchConfigurationName)
+	}
+	if v.LaunchTemplate != nil {
+		s.WriteStruct(schemas.Instance_LaunchTemplate)
+		v.LaunchTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LifecycleState != "" {
+		s.WriteString(schemas.Instance_LifecycleState, string(v.LifecycleState))
+	}
+	if v.ProtectedFromScaleIn != nil {
+		s.WriteBool(schemas.Instance_ProtectedFromScaleIn, *v.ProtectedFromScaleIn)
+	}
+	if v.WeightedCapacity != nil {
+		s.WriteString(schemas.Instance_WeightedCapacity, *v.WeightedCapacity)
+	}
+}
+func (v *Instance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Instance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Instance_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.Instance_AvailabilityZone, v.AvailabilityZone)
+		case schemas.Instance_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.Instance_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.Instance_HealthStatus:
+			v.HealthStatus = new(string)
+			return d.ReadString(schemas.Instance_HealthStatus, v.HealthStatus)
+		case schemas.Instance_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.Instance_ImageId, v.ImageId)
+		case schemas.Instance_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.Instance_InstanceId, v.InstanceId)
+		case schemas.Instance_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.Instance_InstanceType, v.InstanceType)
+		case schemas.Instance_LaunchConfigurationName:
+			v.LaunchConfigurationName = new(string)
+			return d.ReadString(schemas.Instance_LaunchConfigurationName, v.LaunchConfigurationName)
+		case schemas.Instance_LaunchTemplate:
+			v.LaunchTemplate = &LaunchTemplateSpecification{}
+			return v.LaunchTemplate.Deserialize(d)
+		case schemas.Instance_LifecycleState:
+			var ev string
+			if err := d.ReadString(schemas.Instance_LifecycleState, &ev); err != nil {
+				return err
+			}
+			v.LifecycleState = LifecycleState(ev)
+			return nil
+		case schemas.Instance_ProtectedFromScaleIn:
+			v.ProtectedFromScaleIn = new(bool)
+			return d.ReadBool(schemas.Instance_ProtectedFromScaleIn, v.ProtectedFromScaleIn)
+		case schemas.Instance_WeightedCapacity:
+			v.WeightedCapacity = new(string)
+			return d.ReadString(schemas.Instance_WeightedCapacity, v.WeightedCapacity)
+		}
+		return nil
+	})
+}
+
 //	Contains details about a collection of instances launched in the Auto Scaling
 //
 // group.
@@ -1075,6 +2325,57 @@ type InstanceCollection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceCollection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceCollection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceCollection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.InstanceCollection_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.InstanceCollection_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.InstanceIds != nil {
+		serializeInstanceIds(s, schemas.InstanceCollection_InstanceIds, v.InstanceIds)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.InstanceCollection_InstanceType, *v.InstanceType)
+	}
+	if v.MarketType != nil {
+		s.WriteString(schemas.InstanceCollection_MarketType, *v.MarketType)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.InstanceCollection_SubnetId, *v.SubnetId)
+	}
+}
+func (v *InstanceCollection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceCollection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceCollection_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.InstanceCollection_AvailabilityZone, v.AvailabilityZone)
+		case schemas.InstanceCollection_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.InstanceCollection_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.InstanceCollection_InstanceIds:
+			return deserializeInstanceIds(d, schemas.InstanceCollection_InstanceIds, &v.InstanceIds)
+		case schemas.InstanceCollection_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.InstanceCollection_InstanceType, v.InstanceType)
+		case schemas.InstanceCollection_MarketType:
+			v.MarketType = new(string)
+			return d.ReadString(schemas.InstanceCollection_MarketType, v.MarketType)
+		case schemas.InstanceCollection_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.InstanceCollection_SubnetId, v.SubnetId)
+		}
+		return nil
+	})
+}
+
 //	The instance lifecycle policy for the Auto Scaling group. This policy controls
 //
 // instance behavior when an instance transitions through its lifecycle states.
@@ -1093,6 +2394,30 @@ type InstanceLifecyclePolicy struct {
 	RetentionTriggers *RetentionTriggers
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceLifecyclePolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceLifecyclePolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceLifecyclePolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionTriggers != nil {
+		s.WriteStruct(schemas.InstanceLifecyclePolicy_RetentionTriggers)
+		v.RetentionTriggers.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceLifecyclePolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceLifecyclePolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceLifecyclePolicy_RetentionTriggers:
+			v.RetentionTriggers = &RetentionTriggers{}
+			return v.RetentionTriggers.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes an instance maintenance policy.
@@ -1121,6 +2446,34 @@ type InstanceMaintenancePolicy struct {
 	MinHealthyPercentage *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceMaintenancePolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceMaintenancePolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceMaintenancePolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxHealthyPercentage != nil {
+		s.WriteInt32(schemas.InstanceMaintenancePolicy_MaxHealthyPercentage, *v.MaxHealthyPercentage)
+	}
+	if v.MinHealthyPercentage != nil {
+		s.WriteInt32(schemas.InstanceMaintenancePolicy_MinHealthyPercentage, *v.MinHealthyPercentage)
+	}
+}
+func (v *InstanceMaintenancePolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceMaintenancePolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceMaintenancePolicy_MaxHealthyPercentage:
+			v.MaxHealthyPercentage = new(int32)
+			return d.ReadInt32(schemas.InstanceMaintenancePolicy_MaxHealthyPercentage, v.MaxHealthyPercentage)
+		case schemas.InstanceMaintenancePolicy_MinHealthyPercentage:
+			v.MinHealthyPercentage = new(int32)
+			return d.ReadInt32(schemas.InstanceMaintenancePolicy_MinHealthyPercentage, v.MinHealthyPercentage)
+		}
+		return nil
+	})
 }
 
 // The metadata options for the instances. For more information, see [Configure the instance metadata options] in the
@@ -1160,6 +2513,48 @@ type InstanceMetadataOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceMetadataOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceMetadataOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceMetadataOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpEndpoint != "" {
+		s.WriteString(schemas.InstanceMetadataOptions_HttpEndpoint, string(v.HttpEndpoint))
+	}
+	if v.HttpPutResponseHopLimit != nil {
+		s.WriteInt32(schemas.InstanceMetadataOptions_HttpPutResponseHopLimit, *v.HttpPutResponseHopLimit)
+	}
+	if v.HttpTokens != "" {
+		s.WriteString(schemas.InstanceMetadataOptions_HttpTokens, string(v.HttpTokens))
+	}
+}
+func (v *InstanceMetadataOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceMetadataOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceMetadataOptions_HttpEndpoint:
+			var ev string
+			if err := d.ReadString(schemas.InstanceMetadataOptions_HttpEndpoint, &ev); err != nil {
+				return err
+			}
+			v.HttpEndpoint = InstanceMetadataEndpointState(ev)
+			return nil
+		case schemas.InstanceMetadataOptions_HttpPutResponseHopLimit:
+			v.HttpPutResponseHopLimit = new(int32)
+			return d.ReadInt32(schemas.InstanceMetadataOptions_HttpPutResponseHopLimit, v.HttpPutResponseHopLimit)
+		case schemas.InstanceMetadataOptions_HttpTokens:
+			var ev string
+			if err := d.ReadString(schemas.InstanceMetadataOptions_HttpTokens, &ev); err != nil {
+				return err
+			}
+			v.HttpTokens = InstanceMetadataHttpTokensState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes whether detailed monitoring is enabled for the Auto Scaling instances.
 type InstanceMonitoring struct {
 
@@ -1167,6 +2562,28 @@ type InstanceMonitoring struct {
 	Enabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceMonitoring) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceMonitoring)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceMonitoring) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.InstanceMonitoring_Enabled, *v.Enabled)
+	}
+}
+func (v *InstanceMonitoring) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceMonitoring, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceMonitoring_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.InstanceMonitoring_Enabled, v.Enabled)
+		}
+		return nil
+	})
 }
 
 // Describes an instance refresh for an Auto Scaling group.
@@ -1255,6 +2672,116 @@ type InstanceRefresh struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceRefresh) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceRefresh)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceRefresh) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.InstanceRefresh_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.DesiredConfiguration != nil {
+		s.WriteStruct(schemas.InstanceRefresh_DesiredConfiguration)
+		v.DesiredConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.InstanceRefresh_EndTime, *v.EndTime)
+	}
+	if v.InstanceRefreshId != nil {
+		s.WriteString(schemas.InstanceRefresh_InstanceRefreshId, *v.InstanceRefreshId)
+	}
+	if v.InstancesToUpdate != nil {
+		s.WriteInt32(schemas.InstanceRefresh_InstancesToUpdate, *v.InstancesToUpdate)
+	}
+	if v.PercentageComplete != nil {
+		s.WriteInt32(schemas.InstanceRefresh_PercentageComplete, *v.PercentageComplete)
+	}
+	if v.Preferences != nil {
+		s.WriteStruct(schemas.InstanceRefresh_Preferences)
+		v.Preferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProgressDetails != nil {
+		s.WriteStruct(schemas.InstanceRefresh_ProgressDetails)
+		v.ProgressDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RollbackDetails != nil {
+		s.WriteStruct(schemas.InstanceRefresh_RollbackDetails)
+		v.RollbackDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.InstanceRefresh_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.InstanceRefresh_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.InstanceRefresh_StatusReason, *v.StatusReason)
+	}
+	if v.Strategy != "" {
+		s.WriteString(schemas.InstanceRefresh_Strategy, string(v.Strategy))
+	}
+}
+func (v *InstanceRefresh) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceRefresh, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceRefresh_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.InstanceRefresh_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.InstanceRefresh_DesiredConfiguration:
+			v.DesiredConfiguration = &DesiredConfiguration{}
+			return v.DesiredConfiguration.Deserialize(d)
+		case schemas.InstanceRefresh_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceRefresh_EndTime, v.EndTime)
+		case schemas.InstanceRefresh_InstanceRefreshId:
+			v.InstanceRefreshId = new(string)
+			return d.ReadString(schemas.InstanceRefresh_InstanceRefreshId, v.InstanceRefreshId)
+		case schemas.InstanceRefresh_InstancesToUpdate:
+			v.InstancesToUpdate = new(int32)
+			return d.ReadInt32(schemas.InstanceRefresh_InstancesToUpdate, v.InstancesToUpdate)
+		case schemas.InstanceRefresh_PercentageComplete:
+			v.PercentageComplete = new(int32)
+			return d.ReadInt32(schemas.InstanceRefresh_PercentageComplete, v.PercentageComplete)
+		case schemas.InstanceRefresh_Preferences:
+			v.Preferences = &RefreshPreferences{}
+			return v.Preferences.Deserialize(d)
+		case schemas.InstanceRefresh_ProgressDetails:
+			v.ProgressDetails = &InstanceRefreshProgressDetails{}
+			return v.ProgressDetails.Deserialize(d)
+		case schemas.InstanceRefresh_RollbackDetails:
+			v.RollbackDetails = &RollbackDetails{}
+			return v.RollbackDetails.Deserialize(d)
+		case schemas.InstanceRefresh_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceRefresh_StartTime, v.StartTime)
+		case schemas.InstanceRefresh_Status:
+			var ev string
+			if err := d.ReadString(schemas.InstanceRefresh_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = InstanceRefreshStatus(ev)
+			return nil
+		case schemas.InstanceRefresh_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.InstanceRefresh_StatusReason, v.StatusReason)
+		case schemas.InstanceRefresh_Strategy:
+			var ev string
+			if err := d.ReadString(schemas.InstanceRefresh_Strategy, &ev); err != nil {
+				return err
+			}
+			v.Strategy = RefreshStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Reports progress on replacing instances that are in the Auto Scaling group.
 type InstanceRefreshLivePoolProgress struct {
 
@@ -1271,6 +2798,34 @@ type InstanceRefreshLivePoolProgress struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceRefreshLivePoolProgress) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceRefreshLivePoolProgress)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceRefreshLivePoolProgress) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstancesToUpdate != nil {
+		s.WriteInt32(schemas.InstanceRefreshLivePoolProgress_InstancesToUpdate, *v.InstancesToUpdate)
+	}
+	if v.PercentageComplete != nil {
+		s.WriteInt32(schemas.InstanceRefreshLivePoolProgress_PercentageComplete, *v.PercentageComplete)
+	}
+}
+func (v *InstanceRefreshLivePoolProgress) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceRefreshLivePoolProgress, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceRefreshLivePoolProgress_InstancesToUpdate:
+			v.InstancesToUpdate = new(int32)
+			return d.ReadInt32(schemas.InstanceRefreshLivePoolProgress_InstancesToUpdate, v.InstancesToUpdate)
+		case schemas.InstanceRefreshLivePoolProgress_PercentageComplete:
+			v.PercentageComplete = new(int32)
+			return d.ReadInt32(schemas.InstanceRefreshLivePoolProgress_PercentageComplete, v.PercentageComplete)
+		}
+		return nil
+	})
+}
+
 // Reports progress on replacing instances in an Auto Scaling group that has a
 // warm pool. This includes separate details for instances in the warm pool and
 // instances in the Auto Scaling group (the live pool).
@@ -1283,6 +2838,38 @@ type InstanceRefreshProgressDetails struct {
 	WarmPoolProgress *InstanceRefreshWarmPoolProgress
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceRefreshProgressDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceRefreshProgressDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceRefreshProgressDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LivePoolProgress != nil {
+		s.WriteStruct(schemas.InstanceRefreshProgressDetails_LivePoolProgress)
+		v.LivePoolProgress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WarmPoolProgress != nil {
+		s.WriteStruct(schemas.InstanceRefreshProgressDetails_WarmPoolProgress)
+		v.WarmPoolProgress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceRefreshProgressDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceRefreshProgressDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceRefreshProgressDetails_LivePoolProgress:
+			v.LivePoolProgress = &InstanceRefreshLivePoolProgress{}
+			return v.LivePoolProgress.Deserialize(d)
+		case schemas.InstanceRefreshProgressDetails_WarmPoolProgress:
+			v.WarmPoolProgress = &InstanceRefreshWarmPoolProgress{}
+			return v.WarmPoolProgress.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Reports progress on replacing instances that are in the warm pool.
@@ -1299,6 +2886,34 @@ type InstanceRefreshWarmPoolProgress struct {
 	PercentageComplete *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceRefreshWarmPoolProgress) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceRefreshWarmPoolProgress)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceRefreshWarmPoolProgress) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstancesToUpdate != nil {
+		s.WriteInt32(schemas.InstanceRefreshWarmPoolProgress_InstancesToUpdate, *v.InstancesToUpdate)
+	}
+	if v.PercentageComplete != nil {
+		s.WriteInt32(schemas.InstanceRefreshWarmPoolProgress_PercentageComplete, *v.PercentageComplete)
+	}
+}
+func (v *InstanceRefreshWarmPoolProgress) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceRefreshWarmPoolProgress, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceRefreshWarmPoolProgress_InstancesToUpdate:
+			v.InstancesToUpdate = new(int32)
+			return d.ReadInt32(schemas.InstanceRefreshWarmPoolProgress_InstancesToUpdate, v.InstancesToUpdate)
+		case schemas.InstanceRefreshWarmPoolProgress_PercentageComplete:
+			v.PercentageComplete = new(int32)
+			return d.ReadInt32(schemas.InstanceRefreshWarmPoolProgress_PercentageComplete, v.PercentageComplete)
+		}
+		return nil
+	})
 }
 
 // The attributes for the instance types for a mixed instances policy. Amazon EC2
@@ -1608,6 +3223,196 @@ type InstanceRequirements struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceRequirements) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceRequirements)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceRequirements) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorCount != nil {
+		s.WriteStruct(schemas.InstanceRequirements_AcceleratorCount)
+		v.AcceleratorCount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AcceleratorManufacturers != nil {
+		serializeAcceleratorManufacturers(s, schemas.InstanceRequirements_AcceleratorManufacturers, v.AcceleratorManufacturers)
+	}
+	if v.AcceleratorNames != nil {
+		serializeAcceleratorNames(s, schemas.InstanceRequirements_AcceleratorNames, v.AcceleratorNames)
+	}
+	if v.AcceleratorTotalMemoryMiB != nil {
+		s.WriteStruct(schemas.InstanceRequirements_AcceleratorTotalMemoryMiB)
+		v.AcceleratorTotalMemoryMiB.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AcceleratorTypes != nil {
+		serializeAcceleratorTypes(s, schemas.InstanceRequirements_AcceleratorTypes, v.AcceleratorTypes)
+	}
+	if v.AllowedInstanceTypes != nil {
+		serializeAllowedInstanceTypes(s, schemas.InstanceRequirements_AllowedInstanceTypes, v.AllowedInstanceTypes)
+	}
+	if v.BareMetal != "" {
+		s.WriteString(schemas.InstanceRequirements_BareMetal, string(v.BareMetal))
+	}
+	if v.BaselineEbsBandwidthMbps != nil {
+		s.WriteStruct(schemas.InstanceRequirements_BaselineEbsBandwidthMbps)
+		v.BaselineEbsBandwidthMbps.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BaselinePerformanceFactors != nil {
+		s.WriteStruct(schemas.InstanceRequirements_BaselinePerformanceFactors)
+		v.BaselinePerformanceFactors.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BurstablePerformance != "" {
+		s.WriteString(schemas.InstanceRequirements_BurstablePerformance, string(v.BurstablePerformance))
+	}
+	if v.CpuManufacturers != nil {
+		serializeCpuManufacturers(s, schemas.InstanceRequirements_CpuManufacturers, v.CpuManufacturers)
+	}
+	if v.ExcludedInstanceTypes != nil {
+		serializeExcludedInstanceTypes(s, schemas.InstanceRequirements_ExcludedInstanceTypes, v.ExcludedInstanceTypes)
+	}
+	if v.InstanceGenerations != nil {
+		serializeInstanceGenerations(s, schemas.InstanceRequirements_InstanceGenerations, v.InstanceGenerations)
+	}
+	if v.LocalStorage != "" {
+		s.WriteString(schemas.InstanceRequirements_LocalStorage, string(v.LocalStorage))
+	}
+	if v.LocalStorageTypes != nil {
+		serializeLocalStorageTypes(s, schemas.InstanceRequirements_LocalStorageTypes, v.LocalStorageTypes)
+	}
+	if v.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice != nil {
+		s.WriteInt32(schemas.InstanceRequirements_MaxSpotPriceAsPercentageOfOptimalOnDemandPrice, *v.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice)
+	}
+	if v.MemoryGiBPerVCpu != nil {
+		s.WriteStruct(schemas.InstanceRequirements_MemoryGiBPerVCpu)
+		v.MemoryGiBPerVCpu.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MemoryMiB != nil {
+		s.WriteStruct(schemas.InstanceRequirements_MemoryMiB)
+		v.MemoryMiB.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkBandwidthGbps != nil {
+		s.WriteStruct(schemas.InstanceRequirements_NetworkBandwidthGbps)
+		v.NetworkBandwidthGbps.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkInterfaceCount != nil {
+		s.WriteStruct(schemas.InstanceRequirements_NetworkInterfaceCount)
+		v.NetworkInterfaceCount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnDemandMaxPricePercentageOverLowestPrice != nil {
+		s.WriteInt32(schemas.InstanceRequirements_OnDemandMaxPricePercentageOverLowestPrice, *v.OnDemandMaxPricePercentageOverLowestPrice)
+	}
+	if v.RequireHibernateSupport != nil {
+		s.WriteBool(schemas.InstanceRequirements_RequireHibernateSupport, *v.RequireHibernateSupport)
+	}
+	if v.SpotMaxPricePercentageOverLowestPrice != nil {
+		s.WriteInt32(schemas.InstanceRequirements_SpotMaxPricePercentageOverLowestPrice, *v.SpotMaxPricePercentageOverLowestPrice)
+	}
+	if v.TotalLocalStorageGB != nil {
+		s.WriteStruct(schemas.InstanceRequirements_TotalLocalStorageGB)
+		v.TotalLocalStorageGB.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VCpuCount != nil {
+		s.WriteStruct(schemas.InstanceRequirements_VCpuCount)
+		v.VCpuCount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceRequirements) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceRequirements, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceRequirements_AcceleratorCount:
+			v.AcceleratorCount = &AcceleratorCountRequest{}
+			return v.AcceleratorCount.Deserialize(d)
+		case schemas.InstanceRequirements_AcceleratorManufacturers:
+			return deserializeAcceleratorManufacturers(d, schemas.InstanceRequirements_AcceleratorManufacturers, &v.AcceleratorManufacturers)
+		case schemas.InstanceRequirements_AcceleratorNames:
+			return deserializeAcceleratorNames(d, schemas.InstanceRequirements_AcceleratorNames, &v.AcceleratorNames)
+		case schemas.InstanceRequirements_AcceleratorTotalMemoryMiB:
+			v.AcceleratorTotalMemoryMiB = &AcceleratorTotalMemoryMiBRequest{}
+			return v.AcceleratorTotalMemoryMiB.Deserialize(d)
+		case schemas.InstanceRequirements_AcceleratorTypes:
+			return deserializeAcceleratorTypes(d, schemas.InstanceRequirements_AcceleratorTypes, &v.AcceleratorTypes)
+		case schemas.InstanceRequirements_AllowedInstanceTypes:
+			return deserializeAllowedInstanceTypes(d, schemas.InstanceRequirements_AllowedInstanceTypes, &v.AllowedInstanceTypes)
+		case schemas.InstanceRequirements_BareMetal:
+			var ev string
+			if err := d.ReadString(schemas.InstanceRequirements_BareMetal, &ev); err != nil {
+				return err
+			}
+			v.BareMetal = BareMetal(ev)
+			return nil
+		case schemas.InstanceRequirements_BaselineEbsBandwidthMbps:
+			v.BaselineEbsBandwidthMbps = &BaselineEbsBandwidthMbpsRequest{}
+			return v.BaselineEbsBandwidthMbps.Deserialize(d)
+		case schemas.InstanceRequirements_BaselinePerformanceFactors:
+			v.BaselinePerformanceFactors = &BaselinePerformanceFactorsRequest{}
+			return v.BaselinePerformanceFactors.Deserialize(d)
+		case schemas.InstanceRequirements_BurstablePerformance:
+			var ev string
+			if err := d.ReadString(schemas.InstanceRequirements_BurstablePerformance, &ev); err != nil {
+				return err
+			}
+			v.BurstablePerformance = BurstablePerformance(ev)
+			return nil
+		case schemas.InstanceRequirements_CpuManufacturers:
+			return deserializeCpuManufacturers(d, schemas.InstanceRequirements_CpuManufacturers, &v.CpuManufacturers)
+		case schemas.InstanceRequirements_ExcludedInstanceTypes:
+			return deserializeExcludedInstanceTypes(d, schemas.InstanceRequirements_ExcludedInstanceTypes, &v.ExcludedInstanceTypes)
+		case schemas.InstanceRequirements_InstanceGenerations:
+			return deserializeInstanceGenerations(d, schemas.InstanceRequirements_InstanceGenerations, &v.InstanceGenerations)
+		case schemas.InstanceRequirements_LocalStorage:
+			var ev string
+			if err := d.ReadString(schemas.InstanceRequirements_LocalStorage, &ev); err != nil {
+				return err
+			}
+			v.LocalStorage = LocalStorage(ev)
+			return nil
+		case schemas.InstanceRequirements_LocalStorageTypes:
+			return deserializeLocalStorageTypes(d, schemas.InstanceRequirements_LocalStorageTypes, &v.LocalStorageTypes)
+		case schemas.InstanceRequirements_MaxSpotPriceAsPercentageOfOptimalOnDemandPrice:
+			v.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice = new(int32)
+			return d.ReadInt32(schemas.InstanceRequirements_MaxSpotPriceAsPercentageOfOptimalOnDemandPrice, v.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice)
+		case schemas.InstanceRequirements_MemoryGiBPerVCpu:
+			v.MemoryGiBPerVCpu = &MemoryGiBPerVCpuRequest{}
+			return v.MemoryGiBPerVCpu.Deserialize(d)
+		case schemas.InstanceRequirements_MemoryMiB:
+			v.MemoryMiB = &MemoryMiBRequest{}
+			return v.MemoryMiB.Deserialize(d)
+		case schemas.InstanceRequirements_NetworkBandwidthGbps:
+			v.NetworkBandwidthGbps = &NetworkBandwidthGbpsRequest{}
+			return v.NetworkBandwidthGbps.Deserialize(d)
+		case schemas.InstanceRequirements_NetworkInterfaceCount:
+			v.NetworkInterfaceCount = &NetworkInterfaceCountRequest{}
+			return v.NetworkInterfaceCount.Deserialize(d)
+		case schemas.InstanceRequirements_OnDemandMaxPricePercentageOverLowestPrice:
+			v.OnDemandMaxPricePercentageOverLowestPrice = new(int32)
+			return d.ReadInt32(schemas.InstanceRequirements_OnDemandMaxPricePercentageOverLowestPrice, v.OnDemandMaxPricePercentageOverLowestPrice)
+		case schemas.InstanceRequirements_RequireHibernateSupport:
+			v.RequireHibernateSupport = new(bool)
+			return d.ReadBool(schemas.InstanceRequirements_RequireHibernateSupport, v.RequireHibernateSupport)
+		case schemas.InstanceRequirements_SpotMaxPricePercentageOverLowestPrice:
+			v.SpotMaxPricePercentageOverLowestPrice = new(int32)
+			return d.ReadInt32(schemas.InstanceRequirements_SpotMaxPricePercentageOverLowestPrice, v.SpotMaxPricePercentageOverLowestPrice)
+		case schemas.InstanceRequirements_TotalLocalStorageGB:
+			v.TotalLocalStorageGB = &TotalLocalStorageGBRequest{}
+			return v.TotalLocalStorageGB.Deserialize(d)
+		case schemas.InstanceRequirements_VCpuCount:
+			v.VCpuCount = &VCpuCountRequest{}
+			return v.VCpuCount.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes an instance reuse policy for a warm pool.
 //
 // For more information, see [Warm pools for Amazon EC2 Auto Scaling] in the Amazon EC2 Auto Scaling User Guide.
@@ -1620,6 +3425,28 @@ type InstanceReusePolicy struct {
 	ReuseOnScaleIn *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceReusePolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceReusePolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceReusePolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReuseOnScaleIn != nil {
+		s.WriteBool(schemas.InstanceReusePolicy_ReuseOnScaleIn, *v.ReuseOnScaleIn)
+	}
+}
+func (v *InstanceReusePolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceReusePolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceReusePolicy_ReuseOnScaleIn:
+			v.ReuseOnScaleIn = new(bool)
+			return d.ReadBool(schemas.InstanceReusePolicy_ReuseOnScaleIn, v.ReuseOnScaleIn)
+		}
+		return nil
+	})
 }
 
 // Use this structure to specify how a mixed instances policy distributes capacity
@@ -1735,6 +3562,63 @@ type InstancesDistribution struct {
 	SpotMaxPrice *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstancesDistribution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstancesDistribution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstancesDistribution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DistributionSegments != nil {
+		serializeDistributionSegments(s, schemas.InstancesDistribution_DistributionSegments, v.DistributionSegments)
+	}
+	if v.OnDemandAllocationStrategy != nil {
+		s.WriteString(schemas.InstancesDistribution_OnDemandAllocationStrategy, *v.OnDemandAllocationStrategy)
+	}
+	if v.OnDemandBaseCapacity != nil {
+		s.WriteInt32(schemas.InstancesDistribution_OnDemandBaseCapacity, *v.OnDemandBaseCapacity)
+	}
+	if v.OnDemandPercentageAboveBaseCapacity != nil {
+		s.WriteInt32(schemas.InstancesDistribution_OnDemandPercentageAboveBaseCapacity, *v.OnDemandPercentageAboveBaseCapacity)
+	}
+	if v.SpotAllocationStrategy != nil {
+		s.WriteString(schemas.InstancesDistribution_SpotAllocationStrategy, *v.SpotAllocationStrategy)
+	}
+	if v.SpotInstancePools != nil {
+		s.WriteInt32(schemas.InstancesDistribution_SpotInstancePools, *v.SpotInstancePools)
+	}
+	if v.SpotMaxPrice != nil {
+		s.WriteString(schemas.InstancesDistribution_SpotMaxPrice, *v.SpotMaxPrice)
+	}
+}
+func (v *InstancesDistribution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstancesDistribution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstancesDistribution_DistributionSegments:
+			return deserializeDistributionSegments(d, schemas.InstancesDistribution_DistributionSegments, &v.DistributionSegments)
+		case schemas.InstancesDistribution_OnDemandAllocationStrategy:
+			v.OnDemandAllocationStrategy = new(string)
+			return d.ReadString(schemas.InstancesDistribution_OnDemandAllocationStrategy, v.OnDemandAllocationStrategy)
+		case schemas.InstancesDistribution_OnDemandBaseCapacity:
+			v.OnDemandBaseCapacity = new(int32)
+			return d.ReadInt32(schemas.InstancesDistribution_OnDemandBaseCapacity, v.OnDemandBaseCapacity)
+		case schemas.InstancesDistribution_OnDemandPercentageAboveBaseCapacity:
+			v.OnDemandPercentageAboveBaseCapacity = new(int32)
+			return d.ReadInt32(schemas.InstancesDistribution_OnDemandPercentageAboveBaseCapacity, v.OnDemandPercentageAboveBaseCapacity)
+		case schemas.InstancesDistribution_SpotAllocationStrategy:
+			v.SpotAllocationStrategy = new(string)
+			return d.ReadString(schemas.InstancesDistribution_SpotAllocationStrategy, v.SpotAllocationStrategy)
+		case schemas.InstancesDistribution_SpotInstancePools:
+			v.SpotInstancePools = new(int32)
+			return d.ReadInt32(schemas.InstancesDistribution_SpotInstancePools, v.SpotInstancePools)
+		case schemas.InstancesDistribution_SpotMaxPrice:
+			v.SpotMaxPrice = new(string)
+			return d.ReadString(schemas.InstancesDistribution_SpotMaxPrice, v.SpotMaxPrice)
+		}
+		return nil
+	})
 }
 
 // Describes a launch configuration.
@@ -1866,6 +3750,143 @@ type LaunchConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LaunchConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LaunchConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatePublicIpAddress != nil {
+		s.WriteBool(schemas.LaunchConfiguration_AssociatePublicIpAddress, *v.AssociatePublicIpAddress)
+	}
+	if v.BlockDeviceMappings != nil {
+		serializeBlockDeviceMappings(s, schemas.LaunchConfiguration_BlockDeviceMappings, v.BlockDeviceMappings)
+	}
+	if v.ClassicLinkVPCId != nil {
+		s.WriteString(schemas.LaunchConfiguration_ClassicLinkVPCId, *v.ClassicLinkVPCId)
+	}
+	if v.ClassicLinkVPCSecurityGroups != nil {
+		serializeClassicLinkVPCSecurityGroups(s, schemas.LaunchConfiguration_ClassicLinkVPCSecurityGroups, v.ClassicLinkVPCSecurityGroups)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.LaunchConfiguration_CreatedTime, *v.CreatedTime)
+	}
+	if v.EbsOptimized != nil {
+		s.WriteBool(schemas.LaunchConfiguration_EbsOptimized, *v.EbsOptimized)
+	}
+	if v.IamInstanceProfile != nil {
+		s.WriteString(schemas.LaunchConfiguration_IamInstanceProfile, *v.IamInstanceProfile)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.LaunchConfiguration_ImageId, *v.ImageId)
+	}
+	if v.InstanceMonitoring != nil {
+		s.WriteStruct(schemas.LaunchConfiguration_InstanceMonitoring)
+		v.InstanceMonitoring.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.LaunchConfiguration_InstanceType, *v.InstanceType)
+	}
+	if v.KernelId != nil {
+		s.WriteString(schemas.LaunchConfiguration_KernelId, *v.KernelId)
+	}
+	if v.KeyName != nil {
+		s.WriteString(schemas.LaunchConfiguration_KeyName, *v.KeyName)
+	}
+	if v.LaunchConfigurationARN != nil {
+		s.WriteString(schemas.LaunchConfiguration_LaunchConfigurationARN, *v.LaunchConfigurationARN)
+	}
+	if v.LaunchConfigurationName != nil {
+		s.WriteString(schemas.LaunchConfiguration_LaunchConfigurationName, *v.LaunchConfigurationName)
+	}
+	if v.MetadataOptions != nil {
+		s.WriteStruct(schemas.LaunchConfiguration_MetadataOptions)
+		v.MetadataOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlacementTenancy != nil {
+		s.WriteString(schemas.LaunchConfiguration_PlacementTenancy, *v.PlacementTenancy)
+	}
+	if v.RamdiskId != nil {
+		s.WriteString(schemas.LaunchConfiguration_RamdiskId, *v.RamdiskId)
+	}
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.LaunchConfiguration_SecurityGroups, v.SecurityGroups)
+	}
+	if v.SpotPrice != nil {
+		s.WriteString(schemas.LaunchConfiguration_SpotPrice, *v.SpotPrice)
+	}
+	if v.UserData != nil {
+		s.WriteString(schemas.LaunchConfiguration_UserData, *v.UserData)
+	}
+}
+func (v *LaunchConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LaunchConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LaunchConfiguration_AssociatePublicIpAddress:
+			v.AssociatePublicIpAddress = new(bool)
+			return d.ReadBool(schemas.LaunchConfiguration_AssociatePublicIpAddress, v.AssociatePublicIpAddress)
+		case schemas.LaunchConfiguration_BlockDeviceMappings:
+			return deserializeBlockDeviceMappings(d, schemas.LaunchConfiguration_BlockDeviceMappings, &v.BlockDeviceMappings)
+		case schemas.LaunchConfiguration_ClassicLinkVPCId:
+			v.ClassicLinkVPCId = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_ClassicLinkVPCId, v.ClassicLinkVPCId)
+		case schemas.LaunchConfiguration_ClassicLinkVPCSecurityGroups:
+			return deserializeClassicLinkVPCSecurityGroups(d, schemas.LaunchConfiguration_ClassicLinkVPCSecurityGroups, &v.ClassicLinkVPCSecurityGroups)
+		case schemas.LaunchConfiguration_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.LaunchConfiguration_CreatedTime, v.CreatedTime)
+		case schemas.LaunchConfiguration_EbsOptimized:
+			v.EbsOptimized = new(bool)
+			return d.ReadBool(schemas.LaunchConfiguration_EbsOptimized, v.EbsOptimized)
+		case schemas.LaunchConfiguration_IamInstanceProfile:
+			v.IamInstanceProfile = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_IamInstanceProfile, v.IamInstanceProfile)
+		case schemas.LaunchConfiguration_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_ImageId, v.ImageId)
+		case schemas.LaunchConfiguration_InstanceMonitoring:
+			v.InstanceMonitoring = &InstanceMonitoring{}
+			return v.InstanceMonitoring.Deserialize(d)
+		case schemas.LaunchConfiguration_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_InstanceType, v.InstanceType)
+		case schemas.LaunchConfiguration_KernelId:
+			v.KernelId = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_KernelId, v.KernelId)
+		case schemas.LaunchConfiguration_KeyName:
+			v.KeyName = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_KeyName, v.KeyName)
+		case schemas.LaunchConfiguration_LaunchConfigurationARN:
+			v.LaunchConfigurationARN = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_LaunchConfigurationARN, v.LaunchConfigurationARN)
+		case schemas.LaunchConfiguration_LaunchConfigurationName:
+			v.LaunchConfigurationName = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_LaunchConfigurationName, v.LaunchConfigurationName)
+		case schemas.LaunchConfiguration_MetadataOptions:
+			v.MetadataOptions = &InstanceMetadataOptions{}
+			return v.MetadataOptions.Deserialize(d)
+		case schemas.LaunchConfiguration_PlacementTenancy:
+			v.PlacementTenancy = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_PlacementTenancy, v.PlacementTenancy)
+		case schemas.LaunchConfiguration_RamdiskId:
+			v.RamdiskId = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_RamdiskId, v.RamdiskId)
+		case schemas.LaunchConfiguration_SecurityGroups:
+			return deserializeSecurityGroups(d, schemas.LaunchConfiguration_SecurityGroups, &v.SecurityGroups)
+		case schemas.LaunchConfiguration_SpotPrice:
+			v.SpotPrice = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_SpotPrice, v.SpotPrice)
+		case schemas.LaunchConfiguration_UserData:
+			v.UserData = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_UserData, v.UserData)
+		}
+		return nil
+	})
+}
+
 // Contains details about errors encountered during instance launch attempts.
 type LaunchInstancesError struct {
 
@@ -1895,6 +3916,64 @@ type LaunchInstancesError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LaunchInstancesError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchInstancesError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LaunchInstancesError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.LaunchInstancesError_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.LaunchInstancesError_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.LaunchInstancesError_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.LaunchInstancesError_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.LaunchInstancesError_InstanceType, *v.InstanceType)
+	}
+	if v.MarketType != nil {
+		s.WriteString(schemas.LaunchInstancesError_MarketType, *v.MarketType)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.LaunchInstancesError_SubnetId, *v.SubnetId)
+	}
+}
+func (v *LaunchInstancesError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LaunchInstancesError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LaunchInstancesError_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.LaunchInstancesError_AvailabilityZone, v.AvailabilityZone)
+		case schemas.LaunchInstancesError_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.LaunchInstancesError_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.LaunchInstancesError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.LaunchInstancesError_ErrorCode, v.ErrorCode)
+		case schemas.LaunchInstancesError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.LaunchInstancesError_ErrorMessage, v.ErrorMessage)
+		case schemas.LaunchInstancesError_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.LaunchInstancesError_InstanceType, v.InstanceType)
+		case schemas.LaunchInstancesError_MarketType:
+			v.MarketType = new(string)
+			return d.ReadString(schemas.LaunchInstancesError_MarketType, v.MarketType)
+		case schemas.LaunchInstancesError_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.LaunchInstancesError_SubnetId, v.SubnetId)
+		}
+		return nil
+	})
+}
+
 // Use this structure to specify the launch templates and instance types
 // (overrides) for a mixed instances policy.
 type LaunchTemplate struct {
@@ -1907,6 +3986,35 @@ type LaunchTemplate struct {
 	Overrides []LaunchTemplateOverrides
 
 	noSmithyDocumentSerde
+}
+
+func (v *LaunchTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LaunchTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LaunchTemplateSpecification != nil {
+		s.WriteStruct(schemas.LaunchTemplate_LaunchTemplateSpecification)
+		v.LaunchTemplateSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Overrides != nil {
+		serializeOverrides(s, schemas.LaunchTemplate_Overrides, v.Overrides)
+	}
+}
+func (v *LaunchTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LaunchTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LaunchTemplate_LaunchTemplateSpecification:
+			v.LaunchTemplateSpecification = &LaunchTemplateSpecification{}
+			return v.LaunchTemplateSpecification.Deserialize(d)
+		case schemas.LaunchTemplate_Overrides:
+			return deserializeOverrides(d, schemas.LaunchTemplate_Overrides, &v.Overrides)
+		}
+		return nil
+	})
 }
 
 // Use this structure to let Amazon EC2 Auto Scaling do the following when the
@@ -2004,6 +4112,56 @@ type LaunchTemplateOverrides struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LaunchTemplateOverrides) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchTemplateOverrides)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LaunchTemplateOverrides) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageId != nil {
+		s.WriteString(schemas.LaunchTemplateOverrides_ImageId, *v.ImageId)
+	}
+	if v.InstanceRequirements != nil {
+		s.WriteStruct(schemas.LaunchTemplateOverrides_InstanceRequirements)
+		v.InstanceRequirements.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.LaunchTemplateOverrides_InstanceType, *v.InstanceType)
+	}
+	if v.LaunchTemplateSpecification != nil {
+		s.WriteStruct(schemas.LaunchTemplateOverrides_LaunchTemplateSpecification)
+		v.LaunchTemplateSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WeightedCapacity != nil {
+		s.WriteString(schemas.LaunchTemplateOverrides_WeightedCapacity, *v.WeightedCapacity)
+	}
+}
+func (v *LaunchTemplateOverrides) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LaunchTemplateOverrides, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LaunchTemplateOverrides_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.LaunchTemplateOverrides_ImageId, v.ImageId)
+		case schemas.LaunchTemplateOverrides_InstanceRequirements:
+			v.InstanceRequirements = &InstanceRequirements{}
+			return v.InstanceRequirements.Deserialize(d)
+		case schemas.LaunchTemplateOverrides_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.LaunchTemplateOverrides_InstanceType, v.InstanceType)
+		case schemas.LaunchTemplateOverrides_LaunchTemplateSpecification:
+			v.LaunchTemplateSpecification = &LaunchTemplateSpecification{}
+			return v.LaunchTemplateSpecification.Deserialize(d)
+		case schemas.LaunchTemplateOverrides_WeightedCapacity:
+			v.WeightedCapacity = new(string)
+			return d.ReadString(schemas.LaunchTemplateOverrides_WeightedCapacity, v.WeightedCapacity)
+		}
+		return nil
+	})
+}
+
 // Describes the launch template and the version of the launch template that
 // Amazon EC2 Auto Scaling uses to launch Amazon EC2 instances. For more
 // information about launch templates, see [Launch templates]in the Amazon EC2 Auto Scaling User
@@ -2042,6 +4200,40 @@ type LaunchTemplateSpecification struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LaunchTemplateSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchTemplateSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LaunchTemplateSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LaunchTemplateId != nil {
+		s.WriteString(schemas.LaunchTemplateSpecification_LaunchTemplateId, *v.LaunchTemplateId)
+	}
+	if v.LaunchTemplateName != nil {
+		s.WriteString(schemas.LaunchTemplateSpecification_LaunchTemplateName, *v.LaunchTemplateName)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.LaunchTemplateSpecification_Version, *v.Version)
+	}
+}
+func (v *LaunchTemplateSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LaunchTemplateSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LaunchTemplateSpecification_LaunchTemplateId:
+			v.LaunchTemplateId = new(string)
+			return d.ReadString(schemas.LaunchTemplateSpecification_LaunchTemplateId, v.LaunchTemplateId)
+		case schemas.LaunchTemplateSpecification_LaunchTemplateName:
+			v.LaunchTemplateName = new(string)
+			return d.ReadString(schemas.LaunchTemplateSpecification_LaunchTemplateName, v.LaunchTemplateName)
+		case schemas.LaunchTemplateSpecification_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.LaunchTemplateSpecification_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Describes a lifecycle hook. A lifecycle hook lets you create solutions that are
@@ -2090,6 +4282,76 @@ type LifecycleHook struct {
 	RoleARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LifecycleHook) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecycleHook)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecycleHook) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.LifecycleHook_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.DefaultResult != nil {
+		s.WriteString(schemas.LifecycleHook_DefaultResult, *v.DefaultResult)
+	}
+	if v.GlobalTimeout != nil {
+		s.WriteInt32(schemas.LifecycleHook_GlobalTimeout, *v.GlobalTimeout)
+	}
+	if v.HeartbeatTimeout != nil {
+		s.WriteInt32(schemas.LifecycleHook_HeartbeatTimeout, *v.HeartbeatTimeout)
+	}
+	if v.LifecycleHookName != nil {
+		s.WriteString(schemas.LifecycleHook_LifecycleHookName, *v.LifecycleHookName)
+	}
+	if v.LifecycleTransition != nil {
+		s.WriteString(schemas.LifecycleHook_LifecycleTransition, *v.LifecycleTransition)
+	}
+	if v.NotificationMetadata != nil {
+		s.WriteString(schemas.LifecycleHook_NotificationMetadata, *v.NotificationMetadata)
+	}
+	if v.NotificationTargetARN != nil {
+		s.WriteString(schemas.LifecycleHook_NotificationTargetARN, *v.NotificationTargetARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.LifecycleHook_RoleARN, *v.RoleARN)
+	}
+}
+func (v *LifecycleHook) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecycleHook, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecycleHook_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.LifecycleHook_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.LifecycleHook_DefaultResult:
+			v.DefaultResult = new(string)
+			return d.ReadString(schemas.LifecycleHook_DefaultResult, v.DefaultResult)
+		case schemas.LifecycleHook_GlobalTimeout:
+			v.GlobalTimeout = new(int32)
+			return d.ReadInt32(schemas.LifecycleHook_GlobalTimeout, v.GlobalTimeout)
+		case schemas.LifecycleHook_HeartbeatTimeout:
+			v.HeartbeatTimeout = new(int32)
+			return d.ReadInt32(schemas.LifecycleHook_HeartbeatTimeout, v.HeartbeatTimeout)
+		case schemas.LifecycleHook_LifecycleHookName:
+			v.LifecycleHookName = new(string)
+			return d.ReadString(schemas.LifecycleHook_LifecycleHookName, v.LifecycleHookName)
+		case schemas.LifecycleHook_LifecycleTransition:
+			v.LifecycleTransition = new(string)
+			return d.ReadString(schemas.LifecycleHook_LifecycleTransition, v.LifecycleTransition)
+		case schemas.LifecycleHook_NotificationMetadata:
+			v.NotificationMetadata = new(string)
+			return d.ReadString(schemas.LifecycleHook_NotificationMetadata, v.NotificationMetadata)
+		case schemas.LifecycleHook_NotificationTargetARN:
+			v.NotificationTargetARN = new(string)
+			return d.ReadString(schemas.LifecycleHook_NotificationTargetARN, v.NotificationTargetARN)
+		case schemas.LifecycleHook_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.LifecycleHook_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
 }
 
 // Describes information used to specify a lifecycle hook for an Auto Scaling
@@ -2150,6 +4412,64 @@ type LifecycleHookSpecification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LifecycleHookSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecycleHookSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecycleHookSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultResult != nil {
+		s.WriteString(schemas.LifecycleHookSpecification_DefaultResult, *v.DefaultResult)
+	}
+	if v.HeartbeatTimeout != nil {
+		s.WriteInt32(schemas.LifecycleHookSpecification_HeartbeatTimeout, *v.HeartbeatTimeout)
+	}
+	if v.LifecycleHookName != nil {
+		s.WriteString(schemas.LifecycleHookSpecification_LifecycleHookName, *v.LifecycleHookName)
+	}
+	if v.LifecycleTransition != nil {
+		s.WriteString(schemas.LifecycleHookSpecification_LifecycleTransition, *v.LifecycleTransition)
+	}
+	if v.NotificationMetadata != nil {
+		s.WriteString(schemas.LifecycleHookSpecification_NotificationMetadata, *v.NotificationMetadata)
+	}
+	if v.NotificationTargetARN != nil {
+		s.WriteString(schemas.LifecycleHookSpecification_NotificationTargetARN, *v.NotificationTargetARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.LifecycleHookSpecification_RoleARN, *v.RoleARN)
+	}
+}
+func (v *LifecycleHookSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecycleHookSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecycleHookSpecification_DefaultResult:
+			v.DefaultResult = new(string)
+			return d.ReadString(schemas.LifecycleHookSpecification_DefaultResult, v.DefaultResult)
+		case schemas.LifecycleHookSpecification_HeartbeatTimeout:
+			v.HeartbeatTimeout = new(int32)
+			return d.ReadInt32(schemas.LifecycleHookSpecification_HeartbeatTimeout, v.HeartbeatTimeout)
+		case schemas.LifecycleHookSpecification_LifecycleHookName:
+			v.LifecycleHookName = new(string)
+			return d.ReadString(schemas.LifecycleHookSpecification_LifecycleHookName, v.LifecycleHookName)
+		case schemas.LifecycleHookSpecification_LifecycleTransition:
+			v.LifecycleTransition = new(string)
+			return d.ReadString(schemas.LifecycleHookSpecification_LifecycleTransition, v.LifecycleTransition)
+		case schemas.LifecycleHookSpecification_NotificationMetadata:
+			v.NotificationMetadata = new(string)
+			return d.ReadString(schemas.LifecycleHookSpecification_NotificationMetadata, v.NotificationMetadata)
+		case schemas.LifecycleHookSpecification_NotificationTargetARN:
+			v.NotificationTargetARN = new(string)
+			return d.ReadString(schemas.LifecycleHookSpecification_NotificationTargetARN, v.NotificationTargetARN)
+		case schemas.LifecycleHookSpecification_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.LifecycleHookSpecification_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // Describes the state of a Classic Load Balancer.
 type LoadBalancerState struct {
 
@@ -2164,15 +4484,47 @@ type LoadBalancerState struct {
 	//   - Added - All Auto Scaling instances are registered with the load balancer.
 	//
 	//   - InService - At least one Auto Scaling instance passed an ELB health check.
+	//   Note that the load balancer enters this state immediately if you attach it in
+	//   the [CreateAutoScalingGroup]API call.
 	//
 	//   - Removing - The Auto Scaling instances are being deregistered from the load
 	//   balancer. If connection draining is enabled, Elastic Load Balancing waits for
 	//   in-flight requests to complete before deregistering the instances.
 	//
 	//   - Removed - All Auto Scaling instances are deregistered from the load balancer.
+	//
+	// [CreateAutoScalingGroup]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html
 	State *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoadBalancerState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoadBalancerState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoadBalancerState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoadBalancerName != nil {
+		s.WriteString(schemas.LoadBalancerState_LoadBalancerName, *v.LoadBalancerName)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.LoadBalancerState_State, *v.State)
+	}
+}
+func (v *LoadBalancerState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoadBalancerState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoadBalancerState_LoadBalancerName:
+			v.LoadBalancerName = new(string)
+			return d.ReadString(schemas.LoadBalancerState_LoadBalancerName, v.LoadBalancerName)
+		case schemas.LoadBalancerState_State:
+			v.State = new(string)
+			return d.ReadString(schemas.LoadBalancerState_State, v.State)
+		}
+		return nil
+	})
 }
 
 // Describes the state of a target group.
@@ -2189,15 +4541,47 @@ type LoadBalancerTargetGroupState struct {
 	//   - Added - All Auto Scaling instances are registered with the target group.
 	//
 	//   - InService - At least one Auto Scaling instance passed an ELB health check.
+	//   Note that the target group enters this state immediately if you attach it in the
+	//   [CreateAutoScalingGroup]API call.
 	//
 	//   - Removing - The Auto Scaling instances are being deregistered from the target
 	//   group. If connection draining is enabled, Elastic Load Balancing waits for
 	//   in-flight requests to complete before deregistering the instances.
 	//
 	//   - Removed - All Auto Scaling instances are deregistered from the target group.
+	//
+	// [CreateAutoScalingGroup]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html
 	State *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoadBalancerTargetGroupState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoadBalancerTargetGroupState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoadBalancerTargetGroupState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoadBalancerTargetGroupARN != nil {
+		s.WriteString(schemas.LoadBalancerTargetGroupState_LoadBalancerTargetGroupARN, *v.LoadBalancerTargetGroupARN)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.LoadBalancerTargetGroupState_State, *v.State)
+	}
+}
+func (v *LoadBalancerTargetGroupState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoadBalancerTargetGroupState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoadBalancerTargetGroupState_LoadBalancerTargetGroupARN:
+			v.LoadBalancerTargetGroupARN = new(string)
+			return d.ReadString(schemas.LoadBalancerTargetGroupState_LoadBalancerTargetGroupARN, v.LoadBalancerTargetGroupARN)
+		case schemas.LoadBalancerTargetGroupState_State:
+			v.State = new(string)
+			return d.ReadString(schemas.LoadBalancerTargetGroupState_State, v.State)
+		}
+		return nil
+	})
 }
 
 // A GetPredictiveScalingForecast call returns the load forecast for a predictive
@@ -2223,6 +4607,40 @@ type LoadForecast struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoadForecast) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoadForecast)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoadForecast) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricSpecification != nil {
+		s.WriteStruct(schemas.LoadForecast_MetricSpecification)
+		v.MetricSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamps != nil {
+		serializePredictiveScalingForecastTimestamps(s, schemas.LoadForecast_Timestamps, v.Timestamps)
+	}
+	if v.Values != nil {
+		serializePredictiveScalingForecastValues(s, schemas.LoadForecast_Values, v.Values)
+	}
+}
+func (v *LoadForecast) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoadForecast, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoadForecast_MetricSpecification:
+			v.MetricSpecification = &PredictiveScalingMetricSpecification{}
+			return v.MetricSpecification.Deserialize(d)
+		case schemas.LoadForecast_Timestamps:
+			return deserializePredictiveScalingForecastTimestamps(d, schemas.LoadForecast_Timestamps, &v.Timestamps)
+		case schemas.LoadForecast_Values:
+			return deserializePredictiveScalingForecastValues(d, schemas.LoadForecast_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Specifies the minimum and maximum for the MemoryGiBPerVCpu object when you
 // specify [InstanceRequirements]for an Auto Scaling group.
 //
@@ -2236,6 +4654,34 @@ type MemoryGiBPerVCpuRequest struct {
 	Min *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *MemoryGiBPerVCpuRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemoryGiBPerVCpuRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemoryGiBPerVCpuRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max != nil {
+		s.WriteFloat64(schemas.MemoryGiBPerVCpuRequest_Max, *v.Max)
+	}
+	if v.Min != nil {
+		s.WriteFloat64(schemas.MemoryGiBPerVCpuRequest_Min, *v.Min)
+	}
+}
+func (v *MemoryGiBPerVCpuRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemoryGiBPerVCpuRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemoryGiBPerVCpuRequest_Max:
+			v.Max = new(float64)
+			return d.ReadFloat64(schemas.MemoryGiBPerVCpuRequest_Max, v.Max)
+		case schemas.MemoryGiBPerVCpuRequest_Min:
+			v.Min = new(float64)
+			return d.ReadFloat64(schemas.MemoryGiBPerVCpuRequest_Min, v.Min)
+		}
+		return nil
+	})
 }
 
 // Specifies the minimum and maximum for the MemoryMiB object when you specify [InstanceRequirements]
@@ -2253,6 +4699,34 @@ type MemoryMiBRequest struct {
 	Max *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *MemoryMiBRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemoryMiBRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemoryMiBRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max != nil {
+		s.WriteInt32(schemas.MemoryMiBRequest_Max, *v.Max)
+	}
+	if v.Min != nil {
+		s.WriteInt32(schemas.MemoryMiBRequest_Min, *v.Min)
+	}
+}
+func (v *MemoryMiBRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemoryMiBRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemoryMiBRequest_Max:
+			v.Max = new(int32)
+			return d.ReadInt32(schemas.MemoryMiBRequest_Max, v.Max)
+		case schemas.MemoryMiBRequest_Min:
+			v.Min = new(int32)
+			return d.ReadInt32(schemas.MemoryMiBRequest_Min, v.Min)
+		}
+		return nil
+	})
 }
 
 // Represents a specific metric.
@@ -2282,6 +4756,39 @@ type Metric struct {
 	Dimensions []MetricDimension
 
 	noSmithyDocumentSerde
+}
+
+func (v *Metric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Metric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Metric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dimensions != nil {
+		serializeMetricDimensions(s, schemas.Metric_Dimensions, v.Dimensions)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.Metric_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.Metric_Namespace, *v.Namespace)
+	}
+}
+func (v *Metric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Metric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Metric_Dimensions:
+			return deserializeMetricDimensions(d, schemas.Metric_Dimensions, &v.Dimensions)
+		case schemas.Metric_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.Metric_MetricName, v.MetricName)
+		case schemas.Metric_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.Metric_Namespace, v.Namespace)
+		}
+		return nil
+	})
 }
 
 // Describes a metric.
@@ -2331,6 +4838,28 @@ type MetricCollectionType struct {
 	Metric *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricCollectionType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricCollectionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricCollectionType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metric != nil {
+		s.WriteString(schemas.MetricCollectionType_Metric, *v.Metric)
+	}
+}
+func (v *MetricCollectionType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricCollectionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricCollectionType_Metric:
+			v.Metric = new(string)
+			return d.ReadString(schemas.MetricCollectionType_Metric, v.Metric)
+		}
+		return nil
+	})
 }
 
 // The metric data to return. Also defines whether this call is returning data for
@@ -2387,6 +4916,54 @@ type MetricDataQuery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricDataQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDataQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDataQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expression != nil {
+		s.WriteString(schemas.MetricDataQuery_Expression, *v.Expression)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.MetricDataQuery_Id, *v.Id)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.MetricDataQuery_Label, *v.Label)
+	}
+	if v.MetricStat != nil {
+		s.WriteStruct(schemas.MetricDataQuery_MetricStat)
+		v.MetricStat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReturnData != nil {
+		s.WriteBool(schemas.MetricDataQuery_ReturnData, *v.ReturnData)
+	}
+}
+func (v *MetricDataQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDataQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDataQuery_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.MetricDataQuery_Expression, v.Expression)
+		case schemas.MetricDataQuery_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MetricDataQuery_Id, v.Id)
+		case schemas.MetricDataQuery_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.MetricDataQuery_Label, v.Label)
+		case schemas.MetricDataQuery_MetricStat:
+			v.MetricStat = &MetricStat{}
+			return v.MetricStat.Deserialize(d)
+		case schemas.MetricDataQuery_ReturnData:
+			v.ReturnData = new(bool)
+			return d.ReadBool(schemas.MetricDataQuery_ReturnData, v.ReturnData)
+		}
+		return nil
+	})
+}
+
 // Describes the dimension of a metric.
 type MetricDimension struct {
 
@@ -2403,6 +4980,34 @@ type MetricDimension struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricDimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.MetricDimension_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.MetricDimension_Value, *v.Value)
+	}
+}
+func (v *MetricDimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDimension_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MetricDimension_Name, v.Name)
+		case schemas.MetricDimension_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.MetricDimension_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes a granularity of a metric.
 type MetricGranularityType struct {
 
@@ -2410,6 +5015,28 @@ type MetricGranularityType struct {
 	Granularity *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricGranularityType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricGranularityType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricGranularityType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Granularity != nil {
+		s.WriteString(schemas.MetricGranularityType_Granularity, *v.Granularity)
+	}
+}
+func (v *MetricGranularityType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricGranularityType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricGranularityType_Granularity:
+			v.Granularity = new(string)
+			return d.ReadString(schemas.MetricGranularityType_Granularity, v.Granularity)
+		}
+		return nil
+	})
 }
 
 // This structure defines the CloudWatch metric to return, along with the
@@ -2452,6 +5079,42 @@ type MetricStat struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricStat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricStat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricStat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metric != nil {
+		s.WriteStruct(schemas.MetricStat_Metric)
+		v.Metric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Stat != nil {
+		s.WriteString(schemas.MetricStat_Stat, *v.Stat)
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.MetricStat_Unit, *v.Unit)
+	}
+}
+func (v *MetricStat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricStat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricStat_Metric:
+			v.Metric = &Metric{}
+			return v.Metric.Deserialize(d)
+		case schemas.MetricStat_Stat:
+			v.Stat = new(string)
+			return d.ReadString(schemas.MetricStat_Stat, v.Stat)
+		case schemas.MetricStat_Unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.MetricStat_Unit, v.Unit)
+		}
+		return nil
+	})
+}
+
 // Use this structure to launch multiple instance types and configure how capacity
 // is distributed across On-Demand, Spot, and supported Capacity Reservation types
 // within a single Auto Scaling group.
@@ -2476,6 +5139,38 @@ type MixedInstancesPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MixedInstancesPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MixedInstancesPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MixedInstancesPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstancesDistribution != nil {
+		s.WriteStruct(schemas.MixedInstancesPolicy_InstancesDistribution)
+		v.InstancesDistribution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LaunchTemplate != nil {
+		s.WriteStruct(schemas.MixedInstancesPolicy_LaunchTemplate)
+		v.LaunchTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MixedInstancesPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MixedInstancesPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MixedInstancesPolicy_InstancesDistribution:
+			v.InstancesDistribution = &InstancesDistribution{}
+			return v.InstancesDistribution.Deserialize(d)
+		case schemas.MixedInstancesPolicy_LaunchTemplate:
+			v.LaunchTemplate = &LaunchTemplate{}
+			return v.LaunchTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies the minimum and maximum for the NetworkBandwidthGbps object when you
 // specify [InstanceRequirements]for an Auto Scaling group.
 //
@@ -2498,6 +5193,34 @@ type NetworkBandwidthGbpsRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkBandwidthGbpsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkBandwidthGbpsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkBandwidthGbpsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max != nil {
+		s.WriteFloat64(schemas.NetworkBandwidthGbpsRequest_Max, *v.Max)
+	}
+	if v.Min != nil {
+		s.WriteFloat64(schemas.NetworkBandwidthGbpsRequest_Min, *v.Min)
+	}
+}
+func (v *NetworkBandwidthGbpsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkBandwidthGbpsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkBandwidthGbpsRequest_Max:
+			v.Max = new(float64)
+			return d.ReadFloat64(schemas.NetworkBandwidthGbpsRequest_Max, v.Max)
+		case schemas.NetworkBandwidthGbpsRequest_Min:
+			v.Min = new(float64)
+			return d.ReadFloat64(schemas.NetworkBandwidthGbpsRequest_Min, v.Min)
+		}
+		return nil
+	})
+}
+
 // Specifies the minimum and maximum for the NetworkInterfaceCount object when you
 // specify [InstanceRequirements]for an Auto Scaling group.
 //
@@ -2511,6 +5234,34 @@ type NetworkInterfaceCountRequest struct {
 	Min *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkInterfaceCountRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkInterfaceCountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkInterfaceCountRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max != nil {
+		s.WriteInt32(schemas.NetworkInterfaceCountRequest_Max, *v.Max)
+	}
+	if v.Min != nil {
+		s.WriteInt32(schemas.NetworkInterfaceCountRequest_Min, *v.Min)
+	}
+}
+func (v *NetworkInterfaceCountRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkInterfaceCountRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkInterfaceCountRequest_Max:
+			v.Max = new(int32)
+			return d.ReadInt32(schemas.NetworkInterfaceCountRequest_Max, v.Max)
+		case schemas.NetworkInterfaceCountRequest_Min:
+			v.Min = new(int32)
+			return d.ReadInt32(schemas.NetworkInterfaceCountRequest_Min, v.Min)
+		}
+		return nil
+	})
 }
 
 // Describes a notification.
@@ -2538,6 +5289,40 @@ type NotificationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.NotificationConfiguration_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.NotificationType != nil {
+		s.WriteString(schemas.NotificationConfiguration_NotificationType, *v.NotificationType)
+	}
+	if v.TopicARN != nil {
+		s.WriteString(schemas.NotificationConfiguration_TopicARN, *v.TopicARN)
+	}
+}
+func (v *NotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationConfiguration_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.NotificationConfiguration_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.NotificationConfiguration_NotificationType:
+			v.NotificationType = new(string)
+			return d.ReadString(schemas.NotificationConfiguration_NotificationType, v.NotificationType)
+		case schemas.NotificationConfiguration_TopicARN:
+			v.TopicARN = new(string)
+			return d.ReadString(schemas.NotificationConfiguration_TopicARN, v.TopicARN)
+		}
+		return nil
+	})
+}
+
 // Describes the entity that manages an Auto Scaling group.
 type Operator struct {
 
@@ -2549,6 +5334,28 @@ type Operator struct {
 	Principal *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Operator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Operator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Operator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Principal != nil {
+		s.WriteString(schemas.Operator_Principal, *v.Principal)
+	}
+}
+func (v *Operator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Operator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Operator_Principal:
+			v.Principal = new(string)
+			return d.ReadString(schemas.Operator_Principal, v.Principal)
+		}
+		return nil
+	})
 }
 
 //	Specify an instance family to use as the baseline reference for CPU
@@ -2600,6 +5407,28 @@ type PerformanceFactorReferenceRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PerformanceFactorReferenceRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PerformanceFactorReferenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PerformanceFactorReferenceRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceFamily != nil {
+		s.WriteString(schemas.PerformanceFactorReferenceRequest_InstanceFamily, *v.InstanceFamily)
+	}
+}
+func (v *PerformanceFactorReferenceRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PerformanceFactorReferenceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PerformanceFactorReferenceRequest_InstanceFamily:
+			v.InstanceFamily = new(string)
+			return d.ReadString(schemas.PerformanceFactorReferenceRequest_InstanceFamily, v.InstanceFamily)
+		}
+		return nil
+	})
+}
+
 // Represents a predefined metric for a target tracking scaling policy to use with
 // Amazon EC2 Auto Scaling.
 type PredefinedMetricSpecification struct {
@@ -2645,6 +5474,38 @@ type PredefinedMetricSpecification struct {
 	ResourceLabel *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PredefinedMetricSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredefinedMetricSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredefinedMetricSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PredefinedMetricType != "" {
+		s.WriteString(schemas.PredefinedMetricSpecification_PredefinedMetricType, string(v.PredefinedMetricType))
+	}
+	if v.ResourceLabel != nil {
+		s.WriteString(schemas.PredefinedMetricSpecification_ResourceLabel, *v.ResourceLabel)
+	}
+}
+func (v *PredefinedMetricSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredefinedMetricSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredefinedMetricSpecification_PredefinedMetricType:
+			var ev string
+			if err := d.ReadString(schemas.PredefinedMetricSpecification_PredefinedMetricType, &ev); err != nil {
+				return err
+			}
+			v.PredefinedMetricType = MetricType(ev)
+			return nil
+		case schemas.PredefinedMetricSpecification_ResourceLabel:
+			v.ResourceLabel = new(string)
+			return d.ReadString(schemas.PredefinedMetricSpecification_ResourceLabel, v.ResourceLabel)
+		}
+		return nil
+	})
 }
 
 // Represents a predictive scaling policy configuration to use with Amazon EC2
@@ -2715,6 +5576,59 @@ type PredictiveScalingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictiveScalingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictiveScalingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictiveScalingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxCapacityBreachBehavior != "" {
+		s.WriteString(schemas.PredictiveScalingConfiguration_MaxCapacityBreachBehavior, string(v.MaxCapacityBreachBehavior))
+	}
+	if v.MaxCapacityBuffer != nil {
+		s.WriteInt32(schemas.PredictiveScalingConfiguration_MaxCapacityBuffer, *v.MaxCapacityBuffer)
+	}
+	if v.MetricSpecifications != nil {
+		serializePredictiveScalingMetricSpecifications(s, schemas.PredictiveScalingConfiguration_MetricSpecifications, v.MetricSpecifications)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.PredictiveScalingConfiguration_Mode, string(v.Mode))
+	}
+	if v.SchedulingBufferTime != nil {
+		s.WriteInt32(schemas.PredictiveScalingConfiguration_SchedulingBufferTime, *v.SchedulingBufferTime)
+	}
+}
+func (v *PredictiveScalingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictiveScalingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictiveScalingConfiguration_MaxCapacityBreachBehavior:
+			var ev string
+			if err := d.ReadString(schemas.PredictiveScalingConfiguration_MaxCapacityBreachBehavior, &ev); err != nil {
+				return err
+			}
+			v.MaxCapacityBreachBehavior = PredictiveScalingMaxCapacityBreachBehavior(ev)
+			return nil
+		case schemas.PredictiveScalingConfiguration_MaxCapacityBuffer:
+			v.MaxCapacityBuffer = new(int32)
+			return d.ReadInt32(schemas.PredictiveScalingConfiguration_MaxCapacityBuffer, v.MaxCapacityBuffer)
+		case schemas.PredictiveScalingConfiguration_MetricSpecifications:
+			return deserializePredictiveScalingMetricSpecifications(d, schemas.PredictiveScalingConfiguration_MetricSpecifications, &v.MetricSpecifications)
+		case schemas.PredictiveScalingConfiguration_Mode:
+			var ev string
+			if err := d.ReadString(schemas.PredictiveScalingConfiguration_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = PredictiveScalingMode(ev)
+			return nil
+		case schemas.PredictiveScalingConfiguration_SchedulingBufferTime:
+			v.SchedulingBufferTime = new(int32)
+			return d.ReadInt32(schemas.PredictiveScalingConfiguration_SchedulingBufferTime, v.SchedulingBufferTime)
+		}
+		return nil
+	})
+}
+
 // Describes a customized capacity metric for a predictive scaling policy.
 type PredictiveScalingCustomizedCapacityMetric struct {
 
@@ -2726,6 +5640,27 @@ type PredictiveScalingCustomizedCapacityMetric struct {
 	MetricDataQueries []MetricDataQuery
 
 	noSmithyDocumentSerde
+}
+
+func (v *PredictiveScalingCustomizedCapacityMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictiveScalingCustomizedCapacityMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictiveScalingCustomizedCapacityMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricDataQueries != nil {
+		serializeMetricDataQueries(s, schemas.PredictiveScalingCustomizedCapacityMetric_MetricDataQueries, v.MetricDataQueries)
+	}
+}
+func (v *PredictiveScalingCustomizedCapacityMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictiveScalingCustomizedCapacityMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictiveScalingCustomizedCapacityMetric_MetricDataQueries:
+			return deserializeMetricDataQueries(d, schemas.PredictiveScalingCustomizedCapacityMetric_MetricDataQueries, &v.MetricDataQueries)
+		}
+		return nil
+	})
 }
 
 // Describes a custom load metric for a predictive scaling policy.
@@ -2741,6 +5676,27 @@ type PredictiveScalingCustomizedLoadMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictiveScalingCustomizedLoadMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictiveScalingCustomizedLoadMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictiveScalingCustomizedLoadMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricDataQueries != nil {
+		serializeMetricDataQueries(s, schemas.PredictiveScalingCustomizedLoadMetric_MetricDataQueries, v.MetricDataQueries)
+	}
+}
+func (v *PredictiveScalingCustomizedLoadMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictiveScalingCustomizedLoadMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictiveScalingCustomizedLoadMetric_MetricDataQueries:
+			return deserializeMetricDataQueries(d, schemas.PredictiveScalingCustomizedLoadMetric_MetricDataQueries, &v.MetricDataQueries)
+		}
+		return nil
+	})
+}
+
 // Describes a custom scaling metric for a predictive scaling policy.
 type PredictiveScalingCustomizedScalingMetric struct {
 
@@ -2752,6 +5708,27 @@ type PredictiveScalingCustomizedScalingMetric struct {
 	MetricDataQueries []MetricDataQuery
 
 	noSmithyDocumentSerde
+}
+
+func (v *PredictiveScalingCustomizedScalingMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictiveScalingCustomizedScalingMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictiveScalingCustomizedScalingMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricDataQueries != nil {
+		serializeMetricDataQueries(s, schemas.PredictiveScalingCustomizedScalingMetric_MetricDataQueries, v.MetricDataQueries)
+	}
+}
+func (v *PredictiveScalingCustomizedScalingMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictiveScalingCustomizedScalingMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictiveScalingCustomizedScalingMetric_MetricDataQueries:
+			return deserializeMetricDataQueries(d, schemas.PredictiveScalingCustomizedScalingMetric_MetricDataQueries, &v.MetricDataQueries)
+		}
+		return nil
+	})
 }
 
 // This structure specifies the metrics and target utilization settings for a
@@ -2829,6 +5806,76 @@ type PredictiveScalingMetricSpecification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictiveScalingMetricSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictiveScalingMetricSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictiveScalingMetricSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomizedCapacityMetricSpecification != nil {
+		s.WriteStruct(schemas.PredictiveScalingMetricSpecification_CustomizedCapacityMetricSpecification)
+		v.CustomizedCapacityMetricSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomizedLoadMetricSpecification != nil {
+		s.WriteStruct(schemas.PredictiveScalingMetricSpecification_CustomizedLoadMetricSpecification)
+		v.CustomizedLoadMetricSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomizedScalingMetricSpecification != nil {
+		s.WriteStruct(schemas.PredictiveScalingMetricSpecification_CustomizedScalingMetricSpecification)
+		v.CustomizedScalingMetricSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PredefinedLoadMetricSpecification != nil {
+		s.WriteStruct(schemas.PredictiveScalingMetricSpecification_PredefinedLoadMetricSpecification)
+		v.PredefinedLoadMetricSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PredefinedMetricPairSpecification != nil {
+		s.WriteStruct(schemas.PredictiveScalingMetricSpecification_PredefinedMetricPairSpecification)
+		v.PredefinedMetricPairSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PredefinedScalingMetricSpecification != nil {
+		s.WriteStruct(schemas.PredictiveScalingMetricSpecification_PredefinedScalingMetricSpecification)
+		v.PredefinedScalingMetricSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetValue != nil {
+		s.WriteFloat64(schemas.PredictiveScalingMetricSpecification_TargetValue, *v.TargetValue)
+	}
+}
+func (v *PredictiveScalingMetricSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictiveScalingMetricSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictiveScalingMetricSpecification_CustomizedCapacityMetricSpecification:
+			v.CustomizedCapacityMetricSpecification = &PredictiveScalingCustomizedCapacityMetric{}
+			return v.CustomizedCapacityMetricSpecification.Deserialize(d)
+		case schemas.PredictiveScalingMetricSpecification_CustomizedLoadMetricSpecification:
+			v.CustomizedLoadMetricSpecification = &PredictiveScalingCustomizedLoadMetric{}
+			return v.CustomizedLoadMetricSpecification.Deserialize(d)
+		case schemas.PredictiveScalingMetricSpecification_CustomizedScalingMetricSpecification:
+			v.CustomizedScalingMetricSpecification = &PredictiveScalingCustomizedScalingMetric{}
+			return v.CustomizedScalingMetricSpecification.Deserialize(d)
+		case schemas.PredictiveScalingMetricSpecification_PredefinedLoadMetricSpecification:
+			v.PredefinedLoadMetricSpecification = &PredictiveScalingPredefinedLoadMetric{}
+			return v.PredefinedLoadMetricSpecification.Deserialize(d)
+		case schemas.PredictiveScalingMetricSpecification_PredefinedMetricPairSpecification:
+			v.PredefinedMetricPairSpecification = &PredictiveScalingPredefinedMetricPair{}
+			return v.PredefinedMetricPairSpecification.Deserialize(d)
+		case schemas.PredictiveScalingMetricSpecification_PredefinedScalingMetricSpecification:
+			v.PredefinedScalingMetricSpecification = &PredictiveScalingPredefinedScalingMetric{}
+			return v.PredefinedScalingMetricSpecification.Deserialize(d)
+		case schemas.PredictiveScalingMetricSpecification_TargetValue:
+			v.TargetValue = new(float64)
+			return d.ReadFloat64(schemas.PredictiveScalingMetricSpecification_TargetValue, v.TargetValue)
+		}
+		return nil
+	})
+}
+
 // Describes a load metric for a predictive scaling policy.
 //
 // When returned in the output of DescribePolicies , it indicates that a predictive
@@ -2866,6 +5913,38 @@ type PredictiveScalingPredefinedLoadMetric struct {
 	ResourceLabel *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PredictiveScalingPredefinedLoadMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictiveScalingPredefinedLoadMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictiveScalingPredefinedLoadMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PredefinedMetricType != "" {
+		s.WriteString(schemas.PredictiveScalingPredefinedLoadMetric_PredefinedMetricType, string(v.PredefinedMetricType))
+	}
+	if v.ResourceLabel != nil {
+		s.WriteString(schemas.PredictiveScalingPredefinedLoadMetric_ResourceLabel, *v.ResourceLabel)
+	}
+}
+func (v *PredictiveScalingPredefinedLoadMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictiveScalingPredefinedLoadMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictiveScalingPredefinedLoadMetric_PredefinedMetricType:
+			var ev string
+			if err := d.ReadString(schemas.PredictiveScalingPredefinedLoadMetric_PredefinedMetricType, &ev); err != nil {
+				return err
+			}
+			v.PredefinedMetricType = PredefinedLoadMetricType(ev)
+			return nil
+		case schemas.PredictiveScalingPredefinedLoadMetric_ResourceLabel:
+			v.ResourceLabel = new(string)
+			return d.ReadString(schemas.PredictiveScalingPredefinedLoadMetric_ResourceLabel, v.ResourceLabel)
+		}
+		return nil
+	})
 }
 
 // Represents a metric pair for a predictive scaling policy.
@@ -2907,6 +5986,38 @@ type PredictiveScalingPredefinedMetricPair struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictiveScalingPredefinedMetricPair) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictiveScalingPredefinedMetricPair)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictiveScalingPredefinedMetricPair) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PredefinedMetricType != "" {
+		s.WriteString(schemas.PredictiveScalingPredefinedMetricPair_PredefinedMetricType, string(v.PredefinedMetricType))
+	}
+	if v.ResourceLabel != nil {
+		s.WriteString(schemas.PredictiveScalingPredefinedMetricPair_ResourceLabel, *v.ResourceLabel)
+	}
+}
+func (v *PredictiveScalingPredefinedMetricPair) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictiveScalingPredefinedMetricPair, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictiveScalingPredefinedMetricPair_PredefinedMetricType:
+			var ev string
+			if err := d.ReadString(schemas.PredictiveScalingPredefinedMetricPair_PredefinedMetricType, &ev); err != nil {
+				return err
+			}
+			v.PredefinedMetricType = PredefinedMetricPairType(ev)
+			return nil
+		case schemas.PredictiveScalingPredefinedMetricPair_ResourceLabel:
+			v.ResourceLabel = new(string)
+			return d.ReadString(schemas.PredictiveScalingPredefinedMetricPair_ResourceLabel, v.ResourceLabel)
+		}
+		return nil
+	})
+}
+
 // Describes a scaling metric for a predictive scaling policy.
 //
 // When returned in the output of DescribePolicies , it indicates that a predictive
@@ -2946,6 +6057,38 @@ type PredictiveScalingPredefinedScalingMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictiveScalingPredefinedScalingMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictiveScalingPredefinedScalingMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictiveScalingPredefinedScalingMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PredefinedMetricType != "" {
+		s.WriteString(schemas.PredictiveScalingPredefinedScalingMetric_PredefinedMetricType, string(v.PredefinedMetricType))
+	}
+	if v.ResourceLabel != nil {
+		s.WriteString(schemas.PredictiveScalingPredefinedScalingMetric_ResourceLabel, *v.ResourceLabel)
+	}
+}
+func (v *PredictiveScalingPredefinedScalingMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictiveScalingPredefinedScalingMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictiveScalingPredefinedScalingMetric_PredefinedMetricType:
+			var ev string
+			if err := d.ReadString(schemas.PredictiveScalingPredefinedScalingMetric_PredefinedMetricType, &ev); err != nil {
+				return err
+			}
+			v.PredefinedMetricType = PredefinedScalingMetricType(ev)
+			return nil
+		case schemas.PredictiveScalingPredefinedScalingMetric_ResourceLabel:
+			v.ResourceLabel = new(string)
+			return d.ReadString(schemas.PredictiveScalingPredefinedScalingMetric_ResourceLabel, v.ResourceLabel)
+		}
+		return nil
+	})
+}
+
 // Describes a process type.
 //
 // For more information, see [Types of processes] in the Amazon EC2 Auto Scaling User Guide.
@@ -2977,6 +6120,28 @@ type ProcessType struct {
 	ProcessName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProcessType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProcessType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProcessType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcessName != nil {
+		s.WriteString(schemas.ProcessType_ProcessName, *v.ProcessName)
+	}
+}
+func (v *ProcessType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProcessType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProcessType_ProcessName:
+			v.ProcessName = new(string)
+			return d.ReadString(schemas.ProcessType_ProcessName, v.ProcessName)
+		}
+		return nil
+	})
 }
 
 // Describes the preferences for an instance refresh.
@@ -3117,6 +6282,97 @@ type RefreshPreferences struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RefreshPreferences) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RefreshPreferences)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RefreshPreferences) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmSpecification != nil {
+		s.WriteStruct(schemas.RefreshPreferences_AlarmSpecification)
+		v.AlarmSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoRollback != nil {
+		s.WriteBool(schemas.RefreshPreferences_AutoRollback, *v.AutoRollback)
+	}
+	if v.BakeTime != nil {
+		s.WriteInt32(schemas.RefreshPreferences_BakeTime, *v.BakeTime)
+	}
+	if v.CheckpointDelay != nil {
+		s.WriteInt32(schemas.RefreshPreferences_CheckpointDelay, *v.CheckpointDelay)
+	}
+	if v.CheckpointPercentages != nil {
+		serializeCheckpointPercentages(s, schemas.RefreshPreferences_CheckpointPercentages, v.CheckpointPercentages)
+	}
+	if v.InstanceWarmup != nil {
+		s.WriteInt32(schemas.RefreshPreferences_InstanceWarmup, *v.InstanceWarmup)
+	}
+	if v.MaxHealthyPercentage != nil {
+		s.WriteInt32(schemas.RefreshPreferences_MaxHealthyPercentage, *v.MaxHealthyPercentage)
+	}
+	if v.MinHealthyPercentage != nil {
+		s.WriteInt32(schemas.RefreshPreferences_MinHealthyPercentage, *v.MinHealthyPercentage)
+	}
+	if v.ScaleInProtectedInstances != "" {
+		s.WriteString(schemas.RefreshPreferences_ScaleInProtectedInstances, string(v.ScaleInProtectedInstances))
+	}
+	if v.SkipMatching != nil {
+		s.WriteBool(schemas.RefreshPreferences_SkipMatching, *v.SkipMatching)
+	}
+	if v.StandbyInstances != "" {
+		s.WriteString(schemas.RefreshPreferences_StandbyInstances, string(v.StandbyInstances))
+	}
+}
+func (v *RefreshPreferences) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RefreshPreferences, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RefreshPreferences_AlarmSpecification:
+			v.AlarmSpecification = &AlarmSpecification{}
+			return v.AlarmSpecification.Deserialize(d)
+		case schemas.RefreshPreferences_AutoRollback:
+			v.AutoRollback = new(bool)
+			return d.ReadBool(schemas.RefreshPreferences_AutoRollback, v.AutoRollback)
+		case schemas.RefreshPreferences_BakeTime:
+			v.BakeTime = new(int32)
+			return d.ReadInt32(schemas.RefreshPreferences_BakeTime, v.BakeTime)
+		case schemas.RefreshPreferences_CheckpointDelay:
+			v.CheckpointDelay = new(int32)
+			return d.ReadInt32(schemas.RefreshPreferences_CheckpointDelay, v.CheckpointDelay)
+		case schemas.RefreshPreferences_CheckpointPercentages:
+			return deserializeCheckpointPercentages(d, schemas.RefreshPreferences_CheckpointPercentages, &v.CheckpointPercentages)
+		case schemas.RefreshPreferences_InstanceWarmup:
+			v.InstanceWarmup = new(int32)
+			return d.ReadInt32(schemas.RefreshPreferences_InstanceWarmup, v.InstanceWarmup)
+		case schemas.RefreshPreferences_MaxHealthyPercentage:
+			v.MaxHealthyPercentage = new(int32)
+			return d.ReadInt32(schemas.RefreshPreferences_MaxHealthyPercentage, v.MaxHealthyPercentage)
+		case schemas.RefreshPreferences_MinHealthyPercentage:
+			v.MinHealthyPercentage = new(int32)
+			return d.ReadInt32(schemas.RefreshPreferences_MinHealthyPercentage, v.MinHealthyPercentage)
+		case schemas.RefreshPreferences_ScaleInProtectedInstances:
+			var ev string
+			if err := d.ReadString(schemas.RefreshPreferences_ScaleInProtectedInstances, &ev); err != nil {
+				return err
+			}
+			v.ScaleInProtectedInstances = ScaleInProtectedInstances(ev)
+			return nil
+		case schemas.RefreshPreferences_SkipMatching:
+			v.SkipMatching = new(bool)
+			return d.ReadBool(schemas.RefreshPreferences_SkipMatching, v.SkipMatching)
+		case schemas.RefreshPreferences_StandbyInstances:
+			var ev string
+			if err := d.ReadString(schemas.RefreshPreferences_StandbyInstances, &ev); err != nil {
+				return err
+			}
+			v.StandbyInstances = StandbyInstances(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	Defines the specific triggers that cause instances to be retained in a
 //
 // Retained state rather than terminated. Each trigger corresponds to a different
@@ -3135,6 +6391,32 @@ type RetentionTriggers struct {
 	TerminateHookAbandon RetentionAction
 
 	noSmithyDocumentSerde
+}
+
+func (v *RetentionTriggers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetentionTriggers)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetentionTriggers) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TerminateHookAbandon != "" {
+		s.WriteString(schemas.RetentionTriggers_TerminateHookAbandon, string(v.TerminateHookAbandon))
+	}
+}
+func (v *RetentionTriggers) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetentionTriggers, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetentionTriggers_TerminateHookAbandon:
+			var ev string
+			if err := d.ReadString(schemas.RetentionTriggers_TerminateHookAbandon, &ev); err != nil {
+				return err
+			}
+			v.TerminateHookAbandon = RetentionAction(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details about an instance refresh rollback.
@@ -3159,6 +6441,54 @@ type RollbackDetails struct {
 	RollbackStartTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *RollbackDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstancesToUpdateOnRollback != nil {
+		s.WriteInt32(schemas.RollbackDetails_InstancesToUpdateOnRollback, *v.InstancesToUpdateOnRollback)
+	}
+	if v.PercentageCompleteOnRollback != nil {
+		s.WriteInt32(schemas.RollbackDetails_PercentageCompleteOnRollback, *v.PercentageCompleteOnRollback)
+	}
+	if v.ProgressDetailsOnRollback != nil {
+		s.WriteStruct(schemas.RollbackDetails_ProgressDetailsOnRollback)
+		v.ProgressDetailsOnRollback.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RollbackReason != nil {
+		s.WriteString(schemas.RollbackDetails_RollbackReason, *v.RollbackReason)
+	}
+	if v.RollbackStartTime != nil {
+		s.WriteTime(schemas.RollbackDetails_RollbackStartTime, *v.RollbackStartTime)
+	}
+}
+func (v *RollbackDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RollbackDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RollbackDetails_InstancesToUpdateOnRollback:
+			v.InstancesToUpdateOnRollback = new(int32)
+			return d.ReadInt32(schemas.RollbackDetails_InstancesToUpdateOnRollback, v.InstancesToUpdateOnRollback)
+		case schemas.RollbackDetails_PercentageCompleteOnRollback:
+			v.PercentageCompleteOnRollback = new(int32)
+			return d.ReadInt32(schemas.RollbackDetails_PercentageCompleteOnRollback, v.PercentageCompleteOnRollback)
+		case schemas.RollbackDetails_ProgressDetailsOnRollback:
+			v.ProgressDetailsOnRollback = &InstanceRefreshProgressDetails{}
+			return v.ProgressDetailsOnRollback.Deserialize(d)
+		case schemas.RollbackDetails_RollbackReason:
+			v.RollbackReason = new(string)
+			return d.ReadString(schemas.RollbackDetails_RollbackReason, v.RollbackReason)
+		case schemas.RollbackDetails_RollbackStartTime:
+			v.RollbackStartTime = new(time.Time)
+			return d.ReadTime(schemas.RollbackDetails_RollbackStartTime, v.RollbackStartTime)
+		}
+		return nil
+	})
 }
 
 // Describes a scaling policy.
@@ -3238,6 +6568,120 @@ type ScalingPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScalingPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalingPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScalingPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjustmentType != nil {
+		s.WriteString(schemas.ScalingPolicy_AdjustmentType, *v.AdjustmentType)
+	}
+	if v.Alarms != nil {
+		serializeAlarms(s, schemas.ScalingPolicy_Alarms, v.Alarms)
+	}
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.ScalingPolicy_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.Cooldown != nil {
+		s.WriteInt32(schemas.ScalingPolicy_Cooldown, *v.Cooldown)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.ScalingPolicy_Enabled, *v.Enabled)
+	}
+	if v.EstimatedInstanceWarmup != nil {
+		s.WriteInt32(schemas.ScalingPolicy_EstimatedInstanceWarmup, *v.EstimatedInstanceWarmup)
+	}
+	if v.MetricAggregationType != nil {
+		s.WriteString(schemas.ScalingPolicy_MetricAggregationType, *v.MetricAggregationType)
+	}
+	if v.MinAdjustmentMagnitude != nil {
+		s.WriteInt32(schemas.ScalingPolicy_MinAdjustmentMagnitude, *v.MinAdjustmentMagnitude)
+	}
+	if v.MinAdjustmentStep != nil {
+		s.WriteInt32(schemas.ScalingPolicy_MinAdjustmentStep, *v.MinAdjustmentStep)
+	}
+	if v.PolicyARN != nil {
+		s.WriteString(schemas.ScalingPolicy_PolicyARN, *v.PolicyARN)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.ScalingPolicy_PolicyName, *v.PolicyName)
+	}
+	if v.PolicyType != nil {
+		s.WriteString(schemas.ScalingPolicy_PolicyType, *v.PolicyType)
+	}
+	if v.PredictiveScalingConfiguration != nil {
+		s.WriteStruct(schemas.ScalingPolicy_PredictiveScalingConfiguration)
+		v.PredictiveScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScalingAdjustment != nil {
+		s.WriteInt32(schemas.ScalingPolicy_ScalingAdjustment, *v.ScalingAdjustment)
+	}
+	if v.StepAdjustments != nil {
+		serializeStepAdjustments(s, schemas.ScalingPolicy_StepAdjustments, v.StepAdjustments)
+	}
+	if v.TargetTrackingConfiguration != nil {
+		s.WriteStruct(schemas.ScalingPolicy_TargetTrackingConfiguration)
+		v.TargetTrackingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ScalingPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalingPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalingPolicy_AdjustmentType:
+			v.AdjustmentType = new(string)
+			return d.ReadString(schemas.ScalingPolicy_AdjustmentType, v.AdjustmentType)
+		case schemas.ScalingPolicy_Alarms:
+			return deserializeAlarms(d, schemas.ScalingPolicy_Alarms, &v.Alarms)
+		case schemas.ScalingPolicy_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.ScalingPolicy_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.ScalingPolicy_Cooldown:
+			v.Cooldown = new(int32)
+			return d.ReadInt32(schemas.ScalingPolicy_Cooldown, v.Cooldown)
+		case schemas.ScalingPolicy_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.ScalingPolicy_Enabled, v.Enabled)
+		case schemas.ScalingPolicy_EstimatedInstanceWarmup:
+			v.EstimatedInstanceWarmup = new(int32)
+			return d.ReadInt32(schemas.ScalingPolicy_EstimatedInstanceWarmup, v.EstimatedInstanceWarmup)
+		case schemas.ScalingPolicy_MetricAggregationType:
+			v.MetricAggregationType = new(string)
+			return d.ReadString(schemas.ScalingPolicy_MetricAggregationType, v.MetricAggregationType)
+		case schemas.ScalingPolicy_MinAdjustmentMagnitude:
+			v.MinAdjustmentMagnitude = new(int32)
+			return d.ReadInt32(schemas.ScalingPolicy_MinAdjustmentMagnitude, v.MinAdjustmentMagnitude)
+		case schemas.ScalingPolicy_MinAdjustmentStep:
+			v.MinAdjustmentStep = new(int32)
+			return d.ReadInt32(schemas.ScalingPolicy_MinAdjustmentStep, v.MinAdjustmentStep)
+		case schemas.ScalingPolicy_PolicyARN:
+			v.PolicyARN = new(string)
+			return d.ReadString(schemas.ScalingPolicy_PolicyARN, v.PolicyARN)
+		case schemas.ScalingPolicy_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.ScalingPolicy_PolicyName, v.PolicyName)
+		case schemas.ScalingPolicy_PolicyType:
+			v.PolicyType = new(string)
+			return d.ReadString(schemas.ScalingPolicy_PolicyType, v.PolicyType)
+		case schemas.ScalingPolicy_PredictiveScalingConfiguration:
+			v.PredictiveScalingConfiguration = &PredictiveScalingConfiguration{}
+			return v.PredictiveScalingConfiguration.Deserialize(d)
+		case schemas.ScalingPolicy_ScalingAdjustment:
+			v.ScalingAdjustment = new(int32)
+			return d.ReadInt32(schemas.ScalingPolicy_ScalingAdjustment, v.ScalingAdjustment)
+		case schemas.ScalingPolicy_StepAdjustments:
+			return deserializeStepAdjustments(d, schemas.ScalingPolicy_StepAdjustments, &v.StepAdjustments)
+		case schemas.ScalingPolicy_TargetTrackingConfiguration:
+			v.TargetTrackingConfiguration = &TargetTrackingConfiguration{}
+			return v.TargetTrackingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes a scheduled scaling action.
 type ScheduledUpdateGroupAction struct {
 
@@ -3281,6 +6725,88 @@ type ScheduledUpdateGroupAction struct {
 	TimeZone *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduledUpdateGroupAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledUpdateGroupAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledUpdateGroupAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.ScheduledUpdateGroupAction_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.DesiredCapacity != nil {
+		s.WriteInt32(schemas.ScheduledUpdateGroupAction_DesiredCapacity, *v.DesiredCapacity)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ScheduledUpdateGroupAction_EndTime, *v.EndTime)
+	}
+	if v.MaxSize != nil {
+		s.WriteInt32(schemas.ScheduledUpdateGroupAction_MaxSize, *v.MaxSize)
+	}
+	if v.MinSize != nil {
+		s.WriteInt32(schemas.ScheduledUpdateGroupAction_MinSize, *v.MinSize)
+	}
+	if v.Recurrence != nil {
+		s.WriteString(schemas.ScheduledUpdateGroupAction_Recurrence, *v.Recurrence)
+	}
+	if v.ScheduledActionARN != nil {
+		s.WriteString(schemas.ScheduledUpdateGroupAction_ScheduledActionARN, *v.ScheduledActionARN)
+	}
+	if v.ScheduledActionName != nil {
+		s.WriteString(schemas.ScheduledUpdateGroupAction_ScheduledActionName, *v.ScheduledActionName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ScheduledUpdateGroupAction_StartTime, *v.StartTime)
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.ScheduledUpdateGroupAction_Time, *v.Time)
+	}
+	if v.TimeZone != nil {
+		s.WriteString(schemas.ScheduledUpdateGroupAction_TimeZone, *v.TimeZone)
+	}
+}
+func (v *ScheduledUpdateGroupAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledUpdateGroupAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledUpdateGroupAction_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.ScheduledUpdateGroupAction_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.ScheduledUpdateGroupAction_DesiredCapacity:
+			v.DesiredCapacity = new(int32)
+			return d.ReadInt32(schemas.ScheduledUpdateGroupAction_DesiredCapacity, v.DesiredCapacity)
+		case schemas.ScheduledUpdateGroupAction_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledUpdateGroupAction_EndTime, v.EndTime)
+		case schemas.ScheduledUpdateGroupAction_MaxSize:
+			v.MaxSize = new(int32)
+			return d.ReadInt32(schemas.ScheduledUpdateGroupAction_MaxSize, v.MaxSize)
+		case schemas.ScheduledUpdateGroupAction_MinSize:
+			v.MinSize = new(int32)
+			return d.ReadInt32(schemas.ScheduledUpdateGroupAction_MinSize, v.MinSize)
+		case schemas.ScheduledUpdateGroupAction_Recurrence:
+			v.Recurrence = new(string)
+			return d.ReadString(schemas.ScheduledUpdateGroupAction_Recurrence, v.Recurrence)
+		case schemas.ScheduledUpdateGroupAction_ScheduledActionARN:
+			v.ScheduledActionARN = new(string)
+			return d.ReadString(schemas.ScheduledUpdateGroupAction_ScheduledActionARN, v.ScheduledActionARN)
+		case schemas.ScheduledUpdateGroupAction_ScheduledActionName:
+			v.ScheduledActionName = new(string)
+			return d.ReadString(schemas.ScheduledUpdateGroupAction_ScheduledActionName, v.ScheduledActionName)
+		case schemas.ScheduledUpdateGroupAction_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledUpdateGroupAction_StartTime, v.StartTime)
+		case schemas.ScheduledUpdateGroupAction_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.ScheduledUpdateGroupAction_Time, v.Time)
+		case schemas.ScheduledUpdateGroupAction_TimeZone:
+			v.TimeZone = new(string)
+			return d.ReadString(schemas.ScheduledUpdateGroupAction_TimeZone, v.TimeZone)
+		}
+		return nil
+	})
 }
 
 // Describes information used for one or more scheduled scaling action updates in
@@ -3344,6 +6870,70 @@ type ScheduledUpdateGroupActionRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScheduledUpdateGroupActionRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledUpdateGroupActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledUpdateGroupActionRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredCapacity != nil {
+		s.WriteInt32(schemas.ScheduledUpdateGroupActionRequest_DesiredCapacity, *v.DesiredCapacity)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ScheduledUpdateGroupActionRequest_EndTime, *v.EndTime)
+	}
+	if v.MaxSize != nil {
+		s.WriteInt32(schemas.ScheduledUpdateGroupActionRequest_MaxSize, *v.MaxSize)
+	}
+	if v.MinSize != nil {
+		s.WriteInt32(schemas.ScheduledUpdateGroupActionRequest_MinSize, *v.MinSize)
+	}
+	if v.Recurrence != nil {
+		s.WriteString(schemas.ScheduledUpdateGroupActionRequest_Recurrence, *v.Recurrence)
+	}
+	if v.ScheduledActionName != nil {
+		s.WriteString(schemas.ScheduledUpdateGroupActionRequest_ScheduledActionName, *v.ScheduledActionName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ScheduledUpdateGroupActionRequest_StartTime, *v.StartTime)
+	}
+	if v.TimeZone != nil {
+		s.WriteString(schemas.ScheduledUpdateGroupActionRequest_TimeZone, *v.TimeZone)
+	}
+}
+func (v *ScheduledUpdateGroupActionRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledUpdateGroupActionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledUpdateGroupActionRequest_DesiredCapacity:
+			v.DesiredCapacity = new(int32)
+			return d.ReadInt32(schemas.ScheduledUpdateGroupActionRequest_DesiredCapacity, v.DesiredCapacity)
+		case schemas.ScheduledUpdateGroupActionRequest_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledUpdateGroupActionRequest_EndTime, v.EndTime)
+		case schemas.ScheduledUpdateGroupActionRequest_MaxSize:
+			v.MaxSize = new(int32)
+			return d.ReadInt32(schemas.ScheduledUpdateGroupActionRequest_MaxSize, v.MaxSize)
+		case schemas.ScheduledUpdateGroupActionRequest_MinSize:
+			v.MinSize = new(int32)
+			return d.ReadInt32(schemas.ScheduledUpdateGroupActionRequest_MinSize, v.MinSize)
+		case schemas.ScheduledUpdateGroupActionRequest_Recurrence:
+			v.Recurrence = new(string)
+			return d.ReadString(schemas.ScheduledUpdateGroupActionRequest_Recurrence, v.Recurrence)
+		case schemas.ScheduledUpdateGroupActionRequest_ScheduledActionName:
+			v.ScheduledActionName = new(string)
+			return d.ReadString(schemas.ScheduledUpdateGroupActionRequest_ScheduledActionName, v.ScheduledActionName)
+		case schemas.ScheduledUpdateGroupActionRequest_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledUpdateGroupActionRequest_StartTime, v.StartTime)
+		case schemas.ScheduledUpdateGroupActionRequest_TimeZone:
+			v.TimeZone = new(string)
+			return d.ReadString(schemas.ScheduledUpdateGroupActionRequest_TimeZone, v.TimeZone)
+		}
+		return nil
+	})
+}
+
 // Describes information used to create a step adjustment for a step scaling
 // policy.
 //
@@ -3402,6 +6992,40 @@ type StepAdjustment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StepAdjustment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StepAdjustment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StepAdjustment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricIntervalLowerBound != nil {
+		s.WriteFloat64(schemas.StepAdjustment_MetricIntervalLowerBound, *v.MetricIntervalLowerBound)
+	}
+	if v.MetricIntervalUpperBound != nil {
+		s.WriteFloat64(schemas.StepAdjustment_MetricIntervalUpperBound, *v.MetricIntervalUpperBound)
+	}
+	if v.ScalingAdjustment != nil {
+		s.WriteInt32(schemas.StepAdjustment_ScalingAdjustment, *v.ScalingAdjustment)
+	}
+}
+func (v *StepAdjustment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StepAdjustment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StepAdjustment_MetricIntervalLowerBound:
+			v.MetricIntervalLowerBound = new(float64)
+			return d.ReadFloat64(schemas.StepAdjustment_MetricIntervalLowerBound, v.MetricIntervalLowerBound)
+		case schemas.StepAdjustment_MetricIntervalUpperBound:
+			v.MetricIntervalUpperBound = new(float64)
+			return d.ReadFloat64(schemas.StepAdjustment_MetricIntervalUpperBound, v.MetricIntervalUpperBound)
+		case schemas.StepAdjustment_ScalingAdjustment:
+			v.ScalingAdjustment = new(int32)
+			return d.ReadInt32(schemas.StepAdjustment_ScalingAdjustment, v.ScalingAdjustment)
+		}
+		return nil
+	})
+}
+
 // Describes an auto scaling process that has been suspended.
 //
 // For more information, see [Types of processes] in the Amazon EC2 Auto Scaling User Guide.
@@ -3416,6 +7040,34 @@ type SuspendedProcess struct {
 	SuspensionReason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SuspendedProcess) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuspendedProcess)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuspendedProcess) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcessName != nil {
+		s.WriteString(schemas.SuspendedProcess_ProcessName, *v.ProcessName)
+	}
+	if v.SuspensionReason != nil {
+		s.WriteString(schemas.SuspendedProcess_SuspensionReason, *v.SuspensionReason)
+	}
+}
+func (v *SuspendedProcess) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuspendedProcess, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuspendedProcess_ProcessName:
+			v.ProcessName = new(string)
+			return d.ReadString(schemas.SuspendedProcess_ProcessName, v.ProcessName)
+		case schemas.SuspendedProcess_SuspensionReason:
+			v.SuspensionReason = new(string)
+			return d.ReadString(schemas.SuspendedProcess_SuspensionReason, v.SuspensionReason)
+		}
+		return nil
+	})
 }
 
 // Describes a tag for an Auto Scaling group.
@@ -3442,6 +7094,52 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.PropagateAtLaunch != nil {
+		s.WriteBool(schemas.Tag_PropagateAtLaunch, *v.PropagateAtLaunch)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.Tag_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.Tag_ResourceType, *v.ResourceType)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_PropagateAtLaunch:
+			v.PropagateAtLaunch = new(bool)
+			return d.ReadBool(schemas.Tag_PropagateAtLaunch, v.PropagateAtLaunch)
+		case schemas.Tag_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.Tag_ResourceId, v.ResourceId)
+		case schemas.Tag_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.Tag_ResourceType, v.ResourceType)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes a tag for an Auto Scaling group.
 type TagDescription struct {
 
@@ -3462,6 +7160,52 @@ type TagDescription struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TagDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.TagDescription_Key, *v.Key)
+	}
+	if v.PropagateAtLaunch != nil {
+		s.WriteBool(schemas.TagDescription_PropagateAtLaunch, *v.PropagateAtLaunch)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.TagDescription_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.TagDescription_ResourceType, *v.ResourceType)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.TagDescription_Value, *v.Value)
+	}
+}
+func (v *TagDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagDescription_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.TagDescription_Key, v.Key)
+		case schemas.TagDescription_PropagateAtLaunch:
+			v.PropagateAtLaunch = new(bool)
+			return d.ReadBool(schemas.TagDescription_PropagateAtLaunch, v.PropagateAtLaunch)
+		case schemas.TagDescription_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.TagDescription_ResourceId, v.ResourceId)
+		case schemas.TagDescription_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.TagDescription_ResourceType, v.ResourceType)
+		case schemas.TagDescription_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.TagDescription_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Represents a target tracking scaling policy configuration to use with Amazon
@@ -3494,6 +7238,50 @@ type TargetTrackingConfiguration struct {
 	PredefinedMetricSpecification *PredefinedMetricSpecification
 
 	noSmithyDocumentSerde
+}
+
+func (v *TargetTrackingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetTrackingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetTrackingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomizedMetricSpecification != nil {
+		s.WriteStruct(schemas.TargetTrackingConfiguration_CustomizedMetricSpecification)
+		v.CustomizedMetricSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisableScaleIn != nil {
+		s.WriteBool(schemas.TargetTrackingConfiguration_DisableScaleIn, *v.DisableScaleIn)
+	}
+	if v.PredefinedMetricSpecification != nil {
+		s.WriteStruct(schemas.TargetTrackingConfiguration_PredefinedMetricSpecification)
+		v.PredefinedMetricSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetValue != nil {
+		s.WriteFloat64(schemas.TargetTrackingConfiguration_TargetValue, *v.TargetValue)
+	}
+}
+func (v *TargetTrackingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetTrackingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetTrackingConfiguration_CustomizedMetricSpecification:
+			v.CustomizedMetricSpecification = &CustomizedMetricSpecification{}
+			return v.CustomizedMetricSpecification.Deserialize(d)
+		case schemas.TargetTrackingConfiguration_DisableScaleIn:
+			v.DisableScaleIn = new(bool)
+			return d.ReadBool(schemas.TargetTrackingConfiguration_DisableScaleIn, v.DisableScaleIn)
+		case schemas.TargetTrackingConfiguration_PredefinedMetricSpecification:
+			v.PredefinedMetricSpecification = &PredefinedMetricSpecification{}
+			return v.PredefinedMetricSpecification.Deserialize(d)
+		case schemas.TargetTrackingConfiguration_TargetValue:
+			v.TargetValue = new(float64)
+			return d.ReadFloat64(schemas.TargetTrackingConfiguration_TargetValue, v.TargetValue)
+		}
+		return nil
+	})
 }
 
 // The metric data to return. Also defines whether this call is returning data for
@@ -3552,6 +7340,60 @@ type TargetTrackingMetricDataQuery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetTrackingMetricDataQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetTrackingMetricDataQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetTrackingMetricDataQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expression != nil {
+		s.WriteString(schemas.TargetTrackingMetricDataQuery_Expression, *v.Expression)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.TargetTrackingMetricDataQuery_Id, *v.Id)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.TargetTrackingMetricDataQuery_Label, *v.Label)
+	}
+	if v.MetricStat != nil {
+		s.WriteStruct(schemas.TargetTrackingMetricDataQuery_MetricStat)
+		v.MetricStat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.TargetTrackingMetricDataQuery_Period, *v.Period)
+	}
+	if v.ReturnData != nil {
+		s.WriteBool(schemas.TargetTrackingMetricDataQuery_ReturnData, *v.ReturnData)
+	}
+}
+func (v *TargetTrackingMetricDataQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetTrackingMetricDataQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetTrackingMetricDataQuery_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.TargetTrackingMetricDataQuery_Expression, v.Expression)
+		case schemas.TargetTrackingMetricDataQuery_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.TargetTrackingMetricDataQuery_Id, v.Id)
+		case schemas.TargetTrackingMetricDataQuery_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.TargetTrackingMetricDataQuery_Label, v.Label)
+		case schemas.TargetTrackingMetricDataQuery_MetricStat:
+			v.MetricStat = &TargetTrackingMetricStat{}
+			return v.MetricStat.Deserialize(d)
+		case schemas.TargetTrackingMetricDataQuery_Period:
+			v.Period = new(int32)
+			return d.ReadInt32(schemas.TargetTrackingMetricDataQuery_Period, v.Period)
+		case schemas.TargetTrackingMetricDataQuery_ReturnData:
+			v.ReturnData = new(bool)
+			return d.ReadBool(schemas.TargetTrackingMetricDataQuery_ReturnData, v.ReturnData)
+		}
+		return nil
+	})
+}
+
 // This structure defines the CloudWatch metric to return, along with the
 // statistic and unit.
 //
@@ -3594,6 +7436,48 @@ type TargetTrackingMetricStat struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetTrackingMetricStat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetTrackingMetricStat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetTrackingMetricStat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metric != nil {
+		s.WriteStruct(schemas.TargetTrackingMetricStat_Metric)
+		v.Metric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.TargetTrackingMetricStat_Period, *v.Period)
+	}
+	if v.Stat != nil {
+		s.WriteString(schemas.TargetTrackingMetricStat_Stat, *v.Stat)
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.TargetTrackingMetricStat_Unit, *v.Unit)
+	}
+}
+func (v *TargetTrackingMetricStat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetTrackingMetricStat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetTrackingMetricStat_Metric:
+			v.Metric = &Metric{}
+			return v.Metric.Deserialize(d)
+		case schemas.TargetTrackingMetricStat_Period:
+			v.Period = new(int32)
+			return d.ReadInt32(schemas.TargetTrackingMetricStat_Period, v.Period)
+		case schemas.TargetTrackingMetricStat_Stat:
+			v.Stat = new(string)
+			return d.ReadString(schemas.TargetTrackingMetricStat_Stat, v.Stat)
+		case schemas.TargetTrackingMetricStat_Unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.TargetTrackingMetricStat_Unit, v.Unit)
+		}
+		return nil
+	})
+}
+
 // Specifies the minimum and maximum for the TotalLocalStorageGB object when you
 // specify [InstanceRequirements]for an Auto Scaling group.
 //
@@ -3607,6 +7491,34 @@ type TotalLocalStorageGBRequest struct {
 	Min *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *TotalLocalStorageGBRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TotalLocalStorageGBRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TotalLocalStorageGBRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max != nil {
+		s.WriteFloat64(schemas.TotalLocalStorageGBRequest_Max, *v.Max)
+	}
+	if v.Min != nil {
+		s.WriteFloat64(schemas.TotalLocalStorageGBRequest_Min, *v.Min)
+	}
+}
+func (v *TotalLocalStorageGBRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TotalLocalStorageGBRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TotalLocalStorageGBRequest_Max:
+			v.Max = new(float64)
+			return d.ReadFloat64(schemas.TotalLocalStorageGBRequest_Max, v.Max)
+		case schemas.TotalLocalStorageGBRequest_Min:
+			v.Min = new(float64)
+			return d.ReadFloat64(schemas.TotalLocalStorageGBRequest_Min, v.Min)
+		}
+		return nil
+	})
 }
 
 // Identifying information for a traffic source.
@@ -3660,6 +7572,34 @@ type TrafficSourceIdentifier struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TrafficSourceIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrafficSourceIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrafficSourceIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.TrafficSourceIdentifier_Identifier, *v.Identifier)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.TrafficSourceIdentifier_Type, *v.Type)
+	}
+}
+func (v *TrafficSourceIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrafficSourceIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrafficSourceIdentifier_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.TrafficSourceIdentifier_Identifier, v.Identifier)
+		case schemas.TrafficSourceIdentifier_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.TrafficSourceIdentifier_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Describes the state of a traffic source.
 type TrafficSourceState struct {
 
@@ -3711,6 +7651,46 @@ type TrafficSourceState struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TrafficSourceState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrafficSourceState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrafficSourceState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.TrafficSourceState_Identifier, *v.Identifier)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.TrafficSourceState_State, *v.State)
+	}
+	if v.TrafficSource != nil {
+		s.WriteString(schemas.TrafficSourceState_TrafficSource, *v.TrafficSource)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.TrafficSourceState_Type, *v.Type)
+	}
+}
+func (v *TrafficSourceState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrafficSourceState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrafficSourceState_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.TrafficSourceState_Identifier, v.Identifier)
+		case schemas.TrafficSourceState_State:
+			v.State = new(string)
+			return d.ReadString(schemas.TrafficSourceState_State, v.State)
+		case schemas.TrafficSourceState_TrafficSource:
+			v.TrafficSource = new(string)
+			return d.ReadString(schemas.TrafficSourceState_TrafficSource, v.TrafficSource)
+		case schemas.TrafficSourceState_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.TrafficSourceState_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Specifies the minimum and maximum for the VCpuCount object when you specify [InstanceRequirements]
 // for an Auto Scaling group.
 //
@@ -3726,6 +7706,34 @@ type VCpuCountRequest struct {
 	Max *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VCpuCountRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VCpuCountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VCpuCountRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max != nil {
+		s.WriteInt32(schemas.VCpuCountRequest_Max, *v.Max)
+	}
+	if v.Min != nil {
+		s.WriteInt32(schemas.VCpuCountRequest_Min, *v.Min)
+	}
+}
+func (v *VCpuCountRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VCpuCountRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VCpuCountRequest_Max:
+			v.Max = new(int32)
+			return d.ReadInt32(schemas.VCpuCountRequest_Max, v.Max)
+		case schemas.VCpuCountRequest_Min:
+			v.Min = new(int32)
+			return d.ReadInt32(schemas.VCpuCountRequest_Min, v.Min)
+		}
+		return nil
+	})
 }
 
 // Describes a warm pool configuration.
@@ -3748,6 +7756,62 @@ type WarmPoolConfiguration struct {
 	Status WarmPoolStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *WarmPoolConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WarmPoolConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WarmPoolConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceReusePolicy != nil {
+		s.WriteStruct(schemas.WarmPoolConfiguration_InstanceReusePolicy)
+		v.InstanceReusePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxGroupPreparedCapacity != nil {
+		s.WriteInt32(schemas.WarmPoolConfiguration_MaxGroupPreparedCapacity, *v.MaxGroupPreparedCapacity)
+	}
+	if v.MinSize != nil {
+		s.WriteInt32(schemas.WarmPoolConfiguration_MinSize, *v.MinSize)
+	}
+	if v.PoolState != "" {
+		s.WriteString(schemas.WarmPoolConfiguration_PoolState, string(v.PoolState))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.WarmPoolConfiguration_Status, string(v.Status))
+	}
+}
+func (v *WarmPoolConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WarmPoolConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WarmPoolConfiguration_InstanceReusePolicy:
+			v.InstanceReusePolicy = &InstanceReusePolicy{}
+			return v.InstanceReusePolicy.Deserialize(d)
+		case schemas.WarmPoolConfiguration_MaxGroupPreparedCapacity:
+			v.MaxGroupPreparedCapacity = new(int32)
+			return d.ReadInt32(schemas.WarmPoolConfiguration_MaxGroupPreparedCapacity, v.MaxGroupPreparedCapacity)
+		case schemas.WarmPoolConfiguration_MinSize:
+			v.MinSize = new(int32)
+			return d.ReadInt32(schemas.WarmPoolConfiguration_MinSize, v.MinSize)
+		case schemas.WarmPoolConfiguration_PoolState:
+			var ev string
+			if err := d.ReadString(schemas.WarmPoolConfiguration_PoolState, &ev); err != nil {
+				return err
+			}
+			v.PoolState = WarmPoolState(ev)
+			return nil
+		case schemas.WarmPoolConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.WarmPoolConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = WarmPoolStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

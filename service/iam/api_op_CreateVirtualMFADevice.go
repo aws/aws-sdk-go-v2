@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,24 @@ type CreateVirtualMFADeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVirtualMFADeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVirtualMFADeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVirtualMFADeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.CreateVirtualMFADeviceRequest_Path, *v.Path)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.CreateVirtualMFADeviceRequest_Tags, v.Tags)
+	}
+	if v.VirtualMFADeviceName != nil {
+		s.WriteString(schemas.CreateVirtualMFADeviceRequest_VirtualMFADeviceName, *v.VirtualMFADeviceName)
+	}
+}
+
 // Contains the response to a successful [CreateVirtualMFADevice] request.
 //
 // [CreateVirtualMFADevice]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateVirtualMFADevice.html
@@ -98,13 +118,34 @@ type CreateVirtualMFADeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVirtualMFADeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVirtualMFADeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVirtualMFADeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualMFADevice != nil {
+		s.WriteStruct(schemas.CreateVirtualMFADeviceResponse_VirtualMFADevice)
+		v.VirtualMFADevice.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVirtualMFADeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVirtualMFADeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVirtualMFADeviceResponse_VirtualMFADevice:
+			v.VirtualMFADevice = &types.VirtualMFADevice{}
+			return v.VirtualMFADevice.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVirtualMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateVirtualMFADevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVirtualMFADevice, schemas.CreateVirtualMFADeviceRequest, schemas.CreateVirtualMFADeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateVirtualMFADevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVirtualMFADevice, schemas.CreateVirtualMFADeviceRequest, schemas.CreateVirtualMFADeviceResponse), output: &CreateVirtualMFADeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

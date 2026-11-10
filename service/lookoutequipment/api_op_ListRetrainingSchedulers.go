@@ -13,6 +13,10 @@ import (
 
 // Lists all retraining schedulers in your account, filtering by model name prefix
 // and status.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListRetrainingSchedulers(ctx context.Context, params *ListRetrainingSchedulersInput, optFns ...func(*Options)) (*ListRetrainingSchedulersOutput, error) {
 	if params == nil {
 		params = &ListRetrainingSchedulersInput{}

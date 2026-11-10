@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,39 @@ type PutNotificationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutNotificationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutNotificationConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutNotificationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.PutNotificationConfigurationType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.NotificationTypes != nil {
+		serializeAutoScalingNotificationTypes(s, schemas.PutNotificationConfigurationType_NotificationTypes, v.NotificationTypes)
+	}
+	if v.TopicARN != nil {
+		s.WriteString(schemas.PutNotificationConfigurationType_TopicARN, *v.TopicARN)
+	}
+}
+func (v *PutNotificationConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutNotificationConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutNotificationConfigurationType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.PutNotificationConfigurationType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.PutNotificationConfigurationType_NotificationTypes:
+			return deserializeAutoScalingNotificationTypes(d, schemas.PutNotificationConfigurationType_NotificationTypes, &v.NotificationTypes)
+		case schemas.PutNotificationConfigurationType_TopicARN:
+			v.TopicARN = new(string)
+			return d.ReadString(schemas.PutNotificationConfigurationType_TopicARN, v.TopicARN)
+		}
+		return nil
+	})
+}
+
 type PutNotificationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +99,26 @@ type PutNotificationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutNotificationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutNotificationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutNotificationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutNotificationConfiguration, schemas.PutNotificationConfigurationType, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPutNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutNotificationConfiguration, schemas.PutNotificationConfigurationType, nil), output: &PutNotificationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

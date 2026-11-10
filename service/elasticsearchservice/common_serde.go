@@ -3,9 +3,39 @@
 package elasticsearchservice
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 	smithy "github.com/aws/smithy-go"
 )
+
+func serializeRetentionOptions(s smithy.ShapeSerializer, schema *smithy.Schema, v types.RetentionOptions) {
+	switch vv := v.(type) {
+	case *types.RetentionOptionsMemberRetentionAction:
+		s.WriteUnion(schema, schemas.RetentionOptions_RetentionAction)
+		s.WriteString(schemas.RetentionOptions_RetentionAction, string(vv.Value))
+		s.CloseUnion()
+	case *types.RetentionOptionsMemberRetentionInHours:
+		s.WriteUnion(schema, schemas.RetentionOptions_RetentionInHours)
+		s.WriteInt32(schemas.RetentionOptions_RetentionInHours, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func deserializeRetentionOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.RetentionOptions) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.RetentionOptions_RetentionAction:
+			vv := &types.RetentionOptionsMemberRetentionAction{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.RetentionOptions_RetentionInHours:
+			vv := &types.RetentionOptionsMemberRetentionInHours{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
 
 func serializeAdditionalLimitList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AdditionalLimit) {
 	s.WriteList(schema)

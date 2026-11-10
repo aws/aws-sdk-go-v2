@@ -4,7 +4,9 @@ package neptune
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,21 @@ type ModifyDBParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBParameterGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBParameterGroupName != nil {
+		s.WriteString(schemas.ModifyDBParameterGroupMessage_DBParameterGroupName, *v.DBParameterGroupName)
+	}
+	if v.Parameters != nil {
+		serializeParametersList(s, schemas.ModifyDBParameterGroupMessage_Parameters, v.Parameters)
+	}
+}
+
 type ModifyDBParameterGroupOutput struct {
 
 	// Provides the name of the DB parameter group.
@@ -80,13 +97,32 @@ type ModifyDBParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBParameterGroupNameMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBParameterGroupName != nil {
+		s.WriteString(schemas.DBParameterGroupNameMessage_DBParameterGroupName, *v.DBParameterGroupName)
+	}
+}
+func (v *ModifyDBParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBParameterGroupNameMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBParameterGroupNameMessage_DBParameterGroupName:
+			v.DBParameterGroupName = new(string)
+			return d.ReadString(schemas.DBParameterGroupNameMessage_DBParameterGroupName, v.DBParameterGroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBParameterGroup, schemas.ModifyDBParameterGroupMessage, schemas.DBParameterGroupNameMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBParameterGroup, schemas.ModifyDBParameterGroupMessage, schemas.DBParameterGroupNameMessage), output: &ModifyDBParameterGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

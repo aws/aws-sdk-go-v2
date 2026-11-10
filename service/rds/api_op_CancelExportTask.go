@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type CancelExportTaskInput struct {
 	ExportTaskIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CancelExportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelExportTaskMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelExportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportTaskIdentifier != nil {
+		s.WriteString(schemas.CancelExportTaskMessage_ExportTaskIdentifier, *v.ExportTaskIdentifier)
+	}
 }
 
 // Contains the details of a snapshot or cluster export to Amazon S3.
@@ -127,13 +141,125 @@ type CancelExportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelExportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportTask)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelExportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportOnly != nil {
+		serializeStringList(s, schemas.ExportTask_ExportOnly, v.ExportOnly)
+	}
+	if v.ExportTaskIdentifier != nil {
+		s.WriteString(schemas.ExportTask_ExportTaskIdentifier, *v.ExportTaskIdentifier)
+	}
+	if v.FailureCause != nil {
+		s.WriteString(schemas.ExportTask_FailureCause, *v.FailureCause)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.ExportTask_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.ExportTask_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.PercentProgress != nil {
+		s.WriteInt32(schemas.ExportTask_PercentProgress, *v.PercentProgress)
+	}
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.ExportTask_S3Bucket, *v.S3Bucket)
+	}
+	if v.S3Prefix != nil {
+		s.WriteString(schemas.ExportTask_S3Prefix, *v.S3Prefix)
+	}
+	if v.SnapshotTime != nil {
+		s.WriteTime(schemas.ExportTask_SnapshotTime, *v.SnapshotTime)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.ExportTask_SourceArn, *v.SourceArn)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.ExportTask_SourceType, string(v.SourceType))
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ExportTask_Status, *v.Status)
+	}
+	if v.TaskEndTime != nil {
+		s.WriteTime(schemas.ExportTask_TaskEndTime, *v.TaskEndTime)
+	}
+	if v.TaskStartTime != nil {
+		s.WriteTime(schemas.ExportTask_TaskStartTime, *v.TaskStartTime)
+	}
+	if v.TotalExtractedDataInGB != nil {
+		s.WriteInt32(schemas.ExportTask_TotalExtractedDataInGB, *v.TotalExtractedDataInGB)
+	}
+	if v.WarningMessage != nil {
+		s.WriteString(schemas.ExportTask_WarningMessage, *v.WarningMessage)
+	}
+}
+func (v *CancelExportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportTask, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportTask_ExportOnly:
+			return deserializeStringList(d, schemas.ExportTask_ExportOnly, &v.ExportOnly)
+		case schemas.ExportTask_ExportTaskIdentifier:
+			v.ExportTaskIdentifier = new(string)
+			return d.ReadString(schemas.ExportTask_ExportTaskIdentifier, v.ExportTaskIdentifier)
+		case schemas.ExportTask_FailureCause:
+			v.FailureCause = new(string)
+			return d.ReadString(schemas.ExportTask_FailureCause, v.FailureCause)
+		case schemas.ExportTask_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.ExportTask_IamRoleArn, v.IamRoleArn)
+		case schemas.ExportTask_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.ExportTask_KmsKeyId, v.KmsKeyId)
+		case schemas.ExportTask_PercentProgress:
+			v.PercentProgress = new(int32)
+			return d.ReadInt32(schemas.ExportTask_PercentProgress, v.PercentProgress)
+		case schemas.ExportTask_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.ExportTask_S3Bucket, v.S3Bucket)
+		case schemas.ExportTask_S3Prefix:
+			v.S3Prefix = new(string)
+			return d.ReadString(schemas.ExportTask_S3Prefix, v.S3Prefix)
+		case schemas.ExportTask_SnapshotTime:
+			v.SnapshotTime = new(time.Time)
+			return d.ReadTime(schemas.ExportTask_SnapshotTime, v.SnapshotTime)
+		case schemas.ExportTask_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.ExportTask_SourceArn, v.SourceArn)
+		case schemas.ExportTask_SourceType:
+			var ev string
+			if err := d.ReadString(schemas.ExportTask_SourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = types.ExportSourceType(ev)
+			return nil
+		case schemas.ExportTask_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ExportTask_Status, v.Status)
+		case schemas.ExportTask_TaskEndTime:
+			v.TaskEndTime = new(time.Time)
+			return d.ReadTime(schemas.ExportTask_TaskEndTime, v.TaskEndTime)
+		case schemas.ExportTask_TaskStartTime:
+			v.TaskStartTime = new(time.Time)
+			return d.ReadTime(schemas.ExportTask_TaskStartTime, v.TaskStartTime)
+		case schemas.ExportTask_TotalExtractedDataInGB:
+			v.TotalExtractedDataInGB = new(int32)
+			return d.ReadInt32(schemas.ExportTask_TotalExtractedDataInGB, v.TotalExtractedDataInGB)
+		case schemas.ExportTask_WarningMessage:
+			v.WarningMessage = new(string)
+			return d.ReadString(schemas.ExportTask_WarningMessage, v.WarningMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCancelExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelExportTask, schemas.CancelExportTaskMessage, schemas.ExportTask)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCancelExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelExportTask, schemas.CancelExportTaskMessage, schemas.ExportTask), output: &CancelExportTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

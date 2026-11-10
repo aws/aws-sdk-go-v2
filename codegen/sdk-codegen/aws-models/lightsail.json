@@ -78,7 +78,7 @@
                     }
                 },
                 "secretAccessKey": {
-                    "target": "com.amazonaws.lightsail#NonEmptyString",
+                    "target": "com.amazonaws.lightsail#SensitiveNonEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p>The secret access key used to sign requests.</p>\n         <p>You should store the secret access key in a safe location. We recommend that you delete\n      the access key if the secret access key is compromised.</p>"
                     }
@@ -3146,7 +3146,7 @@
                     }
                 },
                 "password": {
-                    "target": "com.amazonaws.lightsail#string",
+                    "target": "com.amazonaws.lightsail#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The container service registry password to use to push container images to the container\n      image registry of a Lightsail account</p>"
                     }
@@ -5269,7 +5269,7 @@
                     }
                 },
                 "privateKeyBase64": {
-                    "target": "com.amazonaws.lightsail#Base64",
+                    "target": "com.amazonaws.lightsail#SensitiveBase64",
                     "traits": {
                         "smithy.api#documentation": "<p>A base64-encoded RSA private key.</p>"
                     }
@@ -8570,7 +8570,7 @@
                     }
                 },
                 "privateKeyBase64": {
-                    "target": "com.amazonaws.lightsail#Base64",
+                    "target": "com.amazonaws.lightsail#SensitiveBase64",
                     "traits": {
                         "smithy.api#documentation": "<p>A base64-encoded RSA private key.</p>"
                     }
@@ -14836,7 +14836,7 @@
                     }
                 },
                 "password": {
-                    "target": "com.amazonaws.lightsail#string",
+                    "target": "com.amazonaws.lightsail#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>For RDP access, the password for your Amazon Lightsail instance. Password will be an empty\n      string if the password for your new instance is not ready yet. When you create an instance, it\n      can take up to 15 minutes for the instance to be ready.</p>\n         <note>\n            <p>If you create an instance using any key pair other than the default\n          (<code>LightsailDefaultKeyPair</code>), <code>password</code> will always be an empty\n        string.</p>\n            <p>If you change the Administrator password on the instance, Lightsail will continue to\n        return the original password value. When accessing the instance using RDP, you need to\n        manually enter the Administrator password after changing it from the default.</p>\n         </note>"
                     }
@@ -14848,7 +14848,7 @@
                     }
                 },
                 "privateKey": {
-                    "target": "com.amazonaws.lightsail#string",
+                    "target": "com.amazonaws.lightsail#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>For SSH access, the temporary private key. For OpenSSH clients (command line SSH), you\n      should save this value to <code>tempkey</code>).</p>"
                     }
@@ -20001,7 +20001,7 @@
             "type": "structure",
             "members": {
                 "ciphertext": {
-                    "target": "com.amazonaws.lightsail#string",
+                    "target": "com.amazonaws.lightsail#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The encrypted password. Ciphertext will be an empty string if access to your new instance\n      is not ready yet. When you create an instance, it can take up to 15 minutes for the instance\n      to be ready.</p>\n         <note>\n            <p>If you use the default key pair (<code>LightsailDefaultKeyPair</code>), the decrypted\n        password will be available in the password field.</p>\n            <p>If you are using a custom key pair, you need to use your own means of decryption.</p>\n            <p>If you change the Administrator password on the instance, Lightsail will continue to\n        return the original ciphertext value. When accessing the instance using RDP, you need to\n        manually enter the Administrator password after changing it from the default.</p>\n         </note>"
                     }
@@ -20117,7 +20117,7 @@
             "type": "structure",
             "members": {
                 "masterUserPassword": {
-                    "target": "com.amazonaws.lightsail#string",
+                    "target": "com.amazonaws.lightsail#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>The password for the master user of the database.</p>"
                     }
@@ -22299,6 +22299,12 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lightsail#SensitiveBase64": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.lightsail#SensitiveNonEmptyString": {

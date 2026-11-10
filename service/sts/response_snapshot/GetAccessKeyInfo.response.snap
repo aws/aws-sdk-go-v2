@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetAccessKeyInfoResponse><GetAccessKeyInfoResult><Account>__Account__</Account></GetAccessKeyInfoResult></GetAccessKeyInfoResponse>

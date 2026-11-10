@@ -6,6 +6,16 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeCategoriesAttributeOrConditionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CategoriesAttributeAndCondition) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeExtractedInformationValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []ExtractedInformationValue) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -52,6 +62,38 @@ func serializeRealtimeContactAnalysisSegments(s smithy.ShapeSerializer, schema *
 		s.CloseStruct()
 	}
 	s.CloseList()
+}
+
+func serializeTagAndConditionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []TagCondition) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func deserializeCategoriesAttributeOrConditionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CategoriesAttributeAndCondition) error {
+	*v = make([]CategoriesAttributeAndCondition, 0)
+	var vv CategoriesAttributeAndCondition
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero CategoriesAttributeAndCondition
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = CategoriesAttributeAndCondition{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
 }
 
 func deserializeExtractedInformationValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ExtractedInformationValue) error {
@@ -154,6 +196,28 @@ func deserializeRealtimeContactAnalysisSegments(d smithy.ShapeDeserializer, s *s
 		}
 
 		vv = RealtimeContactAnalysisSegment{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTagAndConditionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TagCondition) error {
+	*v = make([]TagCondition, 0)
+	var vv TagCondition
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero TagCondition
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = TagCondition{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

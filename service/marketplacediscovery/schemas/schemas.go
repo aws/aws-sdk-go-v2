@@ -1354,8 +1354,12 @@ var ResourceType_MANUFACTURER_INSTRUCTIONS *smithy.Schema
 var ReviewSourceId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacediscovery",
 	Name:      "ReviewSourceId",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 3)
 var ReviewSourceId_AWS_MARKETPLACE *smithy.Schema
+
+var ReviewSourceId_G2 *smithy.Schema
+
+var ReviewSourceId_PEERSPOT *smithy.Schema
 
 var ReviewSourceSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacediscovery",
@@ -2660,6 +2664,10 @@ func init() {
 	_ListingFacetList_member = _ListingFacetList.AddMember("member", ListingFacet)
 
 	ReviewSourceId_AWS_MARKETPLACE = ReviewSourceId.AddMember("AWS_MARKETPLACE", smithyprelude.Unit)
+
+	ReviewSourceId_G2 = ReviewSourceId.AddMember("G2", smithyprelude.Unit)
+
+	ReviewSourceId_PEERSPOT = ReviewSourceId.AddMember("PEERSPOT", smithyprelude.Unit)
 
 	ReviewSourceSummary_sourceName = ReviewSourceSummary.AddMember("sourceName", _NonEmptyString)
 

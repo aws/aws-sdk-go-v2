@@ -15,6 +15,10 @@ import (
 //
 // been successfully ingested in the particular dataset. Can also be used to
 // retreive Sensor Statistics for a previous ingestion job.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListSensorStatistics(ctx context.Context, params *ListSensorStatisticsInput, optFns ...func(*Options)) (*ListSensorStatisticsOutput, error) {
 	if params == nil {
 		params = &ListSensorStatisticsInput{}

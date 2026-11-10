@@ -4,7 +4,9 @@ package docdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -131,6 +133,54 @@ type CreateDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBInstanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.CreateDBInstanceMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateDBInstanceMessage_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.CACertificateIdentifier != nil {
+		s.WriteString(schemas.CreateDBInstanceMessage_CACertificateIdentifier, *v.CACertificateIdentifier)
+	}
+	if v.CopyTagsToSnapshot != nil {
+		s.WriteBool(schemas.CreateDBInstanceMessage_CopyTagsToSnapshot, *v.CopyTagsToSnapshot)
+	}
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.CreateDBInstanceMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.DBInstanceClass != nil {
+		s.WriteString(schemas.CreateDBInstanceMessage_DBInstanceClass, *v.DBInstanceClass)
+	}
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.CreateDBInstanceMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.EnablePerformanceInsights != nil {
+		s.WriteBool(schemas.CreateDBInstanceMessage_EnablePerformanceInsights, *v.EnablePerformanceInsights)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.CreateDBInstanceMessage_Engine, *v.Engine)
+	}
+	if v.PerformanceInsightsKMSKeyId != nil {
+		s.WriteString(schemas.CreateDBInstanceMessage_PerformanceInsightsKMSKeyId, *v.PerformanceInsightsKMSKeyId)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.CreateDBInstanceMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.PromotionTier != nil {
+		s.WriteInt32(schemas.CreateDBInstanceMessage_PromotionTier, *v.PromotionTier)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDBInstanceMessage_Tags, v.Tags)
+	}
+}
+
 type CreateDBInstanceOutput struct {
 
 	// Detailed information about an instance.
@@ -142,13 +192,34 @@ type CreateDBInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBInstanceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstance != nil {
+		s.WriteStruct(schemas.CreateDBInstanceResult_DBInstance)
+		v.DBInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDBInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDBInstanceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDBInstanceResult_DBInstance:
+			v.DBInstance = &types.DBInstance{}
+			return v.DBInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBInstance, schemas.CreateDBInstanceMessage, schemas.CreateDBInstanceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDBInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBInstance, schemas.CreateDBInstanceMessage, schemas.CreateDBInstanceResult), output: &CreateDBInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

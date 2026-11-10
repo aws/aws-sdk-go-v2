@@ -145,6 +145,9 @@ type ApplicationSummary struct {
 	// Deprecated: IsService has been deprecated in favor of ApplicationType
 	IsService bool
 
+	// The Amazon Web Services Region where the application was last modified.
+	LastModifiedRegion *string
+
 	// The time when the application was last modified.
 	LastModifiedTime *time.Time
 
@@ -179,6 +182,9 @@ func (v *ApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsService != false {
 		s.WriteBool(schemas.ApplicationSummary_IsService, v.IsService)
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ApplicationSummary_LastModifiedRegion, *v.LastModifiedRegion)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.ApplicationSummary_LastModifiedTime, *v.LastModifiedTime)
 	}
@@ -210,6 +216,9 @@ func (v *ApplicationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.ApplicationSummary_Id, v.Id)
 		case schemas.ApplicationSummary_IsService:
 			return d.ReadBool(schemas.ApplicationSummary_IsService, &v.IsService)
+		case schemas.ApplicationSummary_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ApplicationSummary_LastModifiedRegion, v.LastModifiedRegion)
 		case schemas.ApplicationSummary_LastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.ApplicationSummary_LastModifiedTime, v.LastModifiedTime)

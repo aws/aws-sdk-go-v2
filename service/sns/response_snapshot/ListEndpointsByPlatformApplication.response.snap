@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListEndpointsByPlatformApplicationResponse><ListEndpointsByPlatformApplicationResult><Endpoints><member><Attributes><entry><key>key0</key><value>__Value__</value></entry></Attributes><EndpointArn>__EndpointArn__</EndpointArn></member><member><Attributes><entry><key>key0</key><value>__Value__</value></entry></Attributes><EndpointArn>__EndpointArn__</EndpointArn></member></Endpoints><NextToken>__NextToken__</NextToken></ListEndpointsByPlatformApplicationResult></ListEndpointsByPlatformApplicationResponse>

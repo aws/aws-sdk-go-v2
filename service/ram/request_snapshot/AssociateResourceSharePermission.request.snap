@@ -2,4 +2,4 @@ POST /associateresourcesharepermission
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","permissionArn":"__PermissionArn__","permissionVersion":1,"replace":true,"resourceShareArn":"__ResourceShareArn__"}
+{"clientToken":"__ClientToken__","permissionArn":"__PermissionArn__","permissionTemplateParameters":[{"name":"__Name__","values":["__Member__","__Member__"]},{"name":"__Name__","values":["__Member__","__Member__"]}],"permissionVersion":1,"replace":true,"resourceShareArn":"__ResourceShareArn__"}

@@ -3593,6 +3593,37 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 	}
 }
 
+type ExtensionStatus string
+
+// Enum values for ExtensionStatus
+const (
+	ExtensionStatusCreating     ExtensionStatus = "Creating"
+	ExtensionStatusActive       ExtensionStatus = "Active"
+	ExtensionStatusCreateFailed ExtensionStatus = "CreateFailed"
+	ExtensionStatusUpdating     ExtensionStatus = "Updating"
+	ExtensionStatusDeleting     ExtensionStatus = "Deleting"
+	ExtensionStatusDeleteFailed ExtensionStatus = "DeleteFailed"
+	ExtensionStatusDegraded     ExtensionStatus = "Degraded"
+	ExtensionStatusUpdateFailed ExtensionStatus = "UpdateFailed"
+)
+
+// Values returns all known values for ExtensionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExtensionStatus) Values() []ExtensionStatus {
+	return []ExtensionStatus{
+		"Creating",
+		"Active",
+		"CreateFailed",
+		"Updating",
+		"Deleting",
+		"DeleteFailed",
+		"Degraded",
+		"UpdateFailed",
+	}
+}
+
 type FailureHandlingPolicy string
 
 // Enum values for FailureHandlingPolicy
@@ -7079,6 +7110,25 @@ func (PipelineExecutionStatus) Values() []PipelineExecutionStatus {
 		"Failed",
 		"Succeeded",
 		"CompletedWithFailures",
+	}
+}
+
+type PipelineManagedBy string
+
+// Enum values for PipelineManagedBy
+const (
+	PipelineManagedByAws      PipelineManagedBy = "AWS"
+	PipelineManagedByCustomer PipelineManagedBy = "CUSTOMER"
+)
+
+// Values returns all known values for PipelineManagedBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PipelineManagedBy) Values() []PipelineManagedBy {
+	return []PipelineManagedBy{
+		"AWS",
+		"CUSTOMER",
 	}
 }
 

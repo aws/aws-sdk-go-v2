@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateStackInstancesResponse><CreateStackInstancesResult><OperationId>__OperationId__</OperationId></CreateStackInstancesResult></CreateStackInstancesResponse>

@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,19 @@ type UpdateConfigurationSetSendingEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationSetSendingEnabledInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationSetSendingEnabledRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationSetSendingEnabledInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.UpdateConfigurationSetSendingEnabledRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	s.WriteBool(schemas.UpdateConfigurationSetSendingEnabledRequest_Enabled, v.Enabled)
+}
+
 type UpdateConfigurationSetSendingEnabledOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +70,26 @@ type UpdateConfigurationSetSendingEnabledOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationSetSendingEnabledOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationSetSendingEnabledOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConfigurationSetSendingEnabledOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfigurationSetSendingEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateConfigurationSetSendingEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationSetSendingEnabled, schemas.UpdateConfigurationSetSendingEnabledRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateConfigurationSetSendingEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationSetSendingEnabled, schemas.UpdateConfigurationSetSendingEnabledRequest, nil), output: &UpdateConfigurationSetSendingEnabledOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -170,6 +170,13 @@ func (o *AgenticRetrieveStreamOutput) GetInitialReply() <-chan AgenticRetrieveSt
 	return o.initialReply
 }
 
+func (v *AgenticRetrieveStreamInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgenticRetrieveStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAgenticRetrieveStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AgenticRetrieveStream, schemas.AgenticRetrieveStreamRequest, schemas.AgenticRetrieveStreamResponse)}, middleware.After); err != nil {
 		return err

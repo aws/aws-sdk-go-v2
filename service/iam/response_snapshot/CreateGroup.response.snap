@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateGroupResponse><CreateGroupResult><Group><Arn>__Arn__</Arn><CreateDate>2000-01-01T00:00:00Z</CreateDate><GroupId>__GroupId__</GroupId><GroupName>__GroupName__</GroupName><Path>__Path__</Path></Group></CreateGroupResult></CreateGroupResponse>

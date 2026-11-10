@@ -148,7 +148,7 @@ var AssumeRoleForPodIdentityRequest_zone *smithy.Schema
 var AssumeRoleForPodIdentityResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eksauth",
 	Name:      "AssumeRoleForPodIdentityResponse",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var AssumeRoleForPodIdentityResponse_subject *smithy.Schema
 
 var AssumeRoleForPodIdentityResponse_audience *smithy.Schema
@@ -158,6 +158,8 @@ var AssumeRoleForPodIdentityResponse_podIdentityAssociation *smithy.Schema
 var AssumeRoleForPodIdentityResponse_assumedRoleUser *smithy.Schema
 
 var AssumeRoleForPodIdentityResponse_credentials *smithy.Schema
+
+var AssumeRoleForPodIdentityResponse_workloadIdentityProviderArn *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -219,5 +221,7 @@ func init() {
 	AssumeRoleForPodIdentityResponse_assumedRoleUser = AssumeRoleForPodIdentityResponse.AddMember("assumedRoleUser", AssumedRoleUser)
 
 	AssumeRoleForPodIdentityResponse_credentials = AssumeRoleForPodIdentityResponse.AddMember("credentials", Credentials)
+
+	AssumeRoleForPodIdentityResponse_workloadIdentityProviderArn = AssumeRoleForPodIdentityResponse.AddMember("workloadIdentityProviderArn", smithyprelude.String)
 
 }

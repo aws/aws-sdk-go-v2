@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListSigningCertificatesResponse><ListSigningCertificatesResult><Certificates><member><CertificateBody>__CertificateBody__</CertificateBody><CertificateId>__CertificateId__</CertificateId><Status>Active</Status><UploadDate>2000-01-01T00:00:00Z</UploadDate><UserName>__UserName__</UserName></member><member><CertificateBody>__CertificateBody__</CertificateBody><CertificateId>__CertificateId__</CertificateId><Status>Active</Status><UploadDate>2000-01-01T00:00:00Z</UploadDate><UserName>__UserName__</UserName></member></Certificates><IsTruncated>true</IsTruncated><Marker>__Marker__</Marker></ListSigningCertificatesResult></ListSigningCertificatesResponse>

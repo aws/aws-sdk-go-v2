@@ -4773,6 +4773,51 @@ func (v *EksContainerEnvironmentVariable) Deserialize(d smithy.ShapeDeserializer
 	})
 }
 
+// The Linux capabilities for the container. For more information, see [Set capabilities for a container] in the
+// Kubernetes documentation.
+//
+// [Set capabilities for a container]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-capabilities-for-a-container
+type EksContainerLinuxCapabilities struct {
+
+	// The Linux capabilities to add to the default capability set for the container.
+	// This parameter contains up to 64 values. Specify capability names without the
+	// CAP_ prefix.
+	Add []string
+
+	// The Linux capabilities to remove from the default capability set for the
+	// container. This parameter contains up to 64 values. Specify capability names
+	// without the CAP_ prefix.
+	Drop []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EksContainerLinuxCapabilities) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EksContainerLinuxCapabilities)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EksContainerLinuxCapabilities) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Add != nil {
+		serializeEksContainerLinuxCapabilityList(s, schemas.EksContainerLinuxCapabilities_add, v.Add)
+	}
+	if v.Drop != nil {
+		serializeEksContainerLinuxCapabilityList(s, schemas.EksContainerLinuxCapabilities_drop, v.Drop)
+	}
+}
+func (v *EksContainerLinuxCapabilities) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EksContainerLinuxCapabilities, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EksContainerLinuxCapabilities_add:
+			return deserializeEksContainerLinuxCapabilityList(d, schemas.EksContainerLinuxCapabilities_add, &v.Add)
+		case schemas.EksContainerLinuxCapabilities_drop:
+			return deserializeEksContainerLinuxCapabilityList(d, schemas.EksContainerLinuxCapabilities_drop, &v.Drop)
+		}
+		return nil
+	})
+}
+
 // Object representing any Kubernetes overrides to a job definition that's used in
 // a [SubmitJob]API operation.
 //
@@ -4969,6 +5014,11 @@ type EksContainerSecurityContext struct {
 	// privileges than its parent process. The default value is false .
 	AllowPrivilegeEscalation *bool
 
+	// Adds or removes Linux capabilities from the container's default capability set.
+	// With Linux capabilities, you can grant specific privileges without granting full
+	// root permissions.
+	Capabilities *EksContainerLinuxCapabilities
+
 	// When this parameter is true , the container is given elevated permissions on the
 	// host container instance. The level of permissions are similar to the root user
 	// permissions. The default value is false . This parameter maps to privileged
@@ -4986,8 +5036,9 @@ type EksContainerSecurityContext struct {
 
 	// When this parameter is specified, the container is run as the specified group
 	// ID ( gid ). If this parameter isn't specified, the default is the group that's
-	// specified in the image metadata. This parameter maps to RunAsGroup and MustRunAs
-	// policy in the [Users and groups pod security policies]in the Kubernetes documentation.
+	// specified in the image metadata. The supported value range is 0 through
+	// 2147483647 . This parameter maps to RunAsGroup and MustRunAs policy in the [Users and groups pod security policies] in
+	// the Kubernetes documentation.
 	//
 	// [Users and groups pod security policies]: https://kubernetes.io/docs/concepts/security/pod-security-policy/#users-and-groups
 	RunAsGroup *int64
@@ -5002,11 +5053,19 @@ type EksContainerSecurityContext struct {
 
 	// When this parameter is specified, the container is run as the specified user ID
 	// ( uid ). If this parameter isn't specified, the default is the user that's
-	// specified in the image metadata. This parameter maps to RunAsUser and MustRanAs
-	// policy in the [Users and groups pod security policies]in the Kubernetes documentation.
+	// specified in the image metadata. The supported value range is 0 through
+	// 2147483647 . This parameter maps to RunAsUser and MustRunAs policy in the [Users and groups pod security policies] in
+	// the Kubernetes documentation.
 	//
 	// [Users and groups pod security policies]: https://kubernetes.io/docs/concepts/security/pod-security-policy/#users-and-groups
 	RunAsUser *int64
+
+	// The seccomp profile for the container. A container-level seccomp profile
+	// overrides the profile in the pod security context, which defines security
+	// settings that apply to all containers in the pod unless a container overrides
+	// them. If this parameter isn't specified, the container uses the pod security
+	// context's seccomp profile when one is specified.
+	SeccompProfile *EksSeccompProfile
 
 	noSmithyDocumentSerde
 }
@@ -5020,6 +5079,11 @@ func (v *EksContainerSecurityContext) Serialize(s smithy.ShapeSerializer) {
 func (v *EksContainerSecurityContext) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllowPrivilegeEscalation != nil {
 		s.WriteBool(schemas.EksContainerSecurityContext_allowPrivilegeEscalation, *v.AllowPrivilegeEscalation)
+	}
+	if v.Capabilities != nil {
+		s.WriteStruct(schemas.EksContainerSecurityContext_capabilities)
+		v.Capabilities.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Privileged != nil {
 		s.WriteBool(schemas.EksContainerSecurityContext_privileged, *v.Privileged)
@@ -5036,6 +5100,11 @@ func (v *EksContainerSecurityContext) SerializeMembers(s smithy.ShapeSerializer)
 	if v.RunAsUser != nil {
 		s.WriteInt64(schemas.EksContainerSecurityContext_runAsUser, *v.RunAsUser)
 	}
+	if v.SeccompProfile != nil {
+		s.WriteStruct(schemas.EksContainerSecurityContext_seccompProfile)
+		v.SeccompProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *EksContainerSecurityContext) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EksContainerSecurityContext, func(s *smithy.Schema) error {
@@ -5043,6 +5112,9 @@ func (v *EksContainerSecurityContext) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.EksContainerSecurityContext_allowPrivilegeEscalation:
 			v.AllowPrivilegeEscalation = new(bool)
 			return d.ReadBool(schemas.EksContainerSecurityContext_allowPrivilegeEscalation, v.AllowPrivilegeEscalation)
+		case schemas.EksContainerSecurityContext_capabilities:
+			v.Capabilities = &EksContainerLinuxCapabilities{}
+			return v.Capabilities.Deserialize(d)
 		case schemas.EksContainerSecurityContext_privileged:
 			v.Privileged = new(bool)
 			return d.ReadBool(schemas.EksContainerSecurityContext_privileged, v.Privileged)
@@ -5058,6 +5130,9 @@ func (v *EksContainerSecurityContext) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.EksContainerSecurityContext_runAsUser:
 			v.RunAsUser = new(int64)
 			return d.ReadInt64(schemas.EksContainerSecurityContext_runAsUser, v.RunAsUser)
+		case schemas.EksContainerSecurityContext_seccompProfile:
+			v.SeccompProfile = &EksSeccompProfile{}
+			return v.SeccompProfile.Deserialize(d)
 		}
 		return nil
 	})
@@ -5414,6 +5489,10 @@ type EksPodProperties struct {
 	// [Understanding Kubernetes Objects]: https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/
 	Metadata *EksMetadata
 
+	// The security context to apply to the pod. The settings apply to all containers
+	// in the pod unless an individual container specifies an overriding value.
+	SecurityContext *EksPodSecurityContext
+
 	// The name of the service account that's used to run the pod. For more
 	// information, see [Kubernetes service accounts]and [Configure a Kubernetes service account to assume an IAM role] in the Amazon EKS User Guide and [Configure service accounts for pods] in the Kubernetes
 	// documentation.
@@ -5462,6 +5541,11 @@ func (v *EksPodProperties) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Metadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SecurityContext != nil {
+		s.WriteStruct(schemas.EksPodProperties_securityContext)
+		v.SecurityContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ServiceAccountName != nil {
 		s.WriteString(schemas.EksPodProperties_serviceAccountName, *v.ServiceAccountName)
 	}
@@ -5490,6 +5574,9 @@ func (v *EksPodProperties) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EksPodProperties_metadata:
 			v.Metadata = &EksMetadata{}
 			return v.Metadata.Deserialize(d)
+		case schemas.EksPodProperties_securityContext:
+			v.SecurityContext = &EksPodSecurityContext{}
+			return v.SecurityContext.Deserialize(d)
 		case schemas.EksPodProperties_serviceAccountName:
 			v.ServiceAccountName = new(string)
 			return d.ReadString(schemas.EksPodProperties_serviceAccountName, v.ServiceAccountName)
@@ -5558,6 +5645,10 @@ type EksPodPropertiesDetail struct {
 	// The name of the pod for this job.
 	PodName *string
 
+	// The security context applied to the pod. The settings apply to all containers
+	// in the pod unless an individual container specifies an overriding value.
+	SecurityContext *EksPodSecurityContext
+
 	// The name of the service account that's used to run the pod. For more
 	// information, see [Kubernetes service accounts]and [Configure a Kubernetes service account to assume an IAM role] in the Amazon EKS User Guide and [Configure service accounts for pods] in the Kubernetes
 	// documentation.
@@ -5612,6 +5703,11 @@ func (v *EksPodPropertiesDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PodName != nil {
 		s.WriteString(schemas.EksPodPropertiesDetail_podName, *v.PodName)
 	}
+	if v.SecurityContext != nil {
+		s.WriteStruct(schemas.EksPodPropertiesDetail_securityContext)
+		v.SecurityContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ServiceAccountName != nil {
 		s.WriteString(schemas.EksPodPropertiesDetail_serviceAccountName, *v.ServiceAccountName)
 	}
@@ -5646,6 +5742,9 @@ func (v *EksPodPropertiesDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EksPodPropertiesDetail_podName:
 			v.PodName = new(string)
 			return d.ReadString(schemas.EksPodPropertiesDetail_podName, v.PodName)
+		case schemas.EksPodPropertiesDetail_securityContext:
+			v.SecurityContext = &EksPodSecurityContext{}
+			return v.SecurityContext.Deserialize(d)
 		case schemas.EksPodPropertiesDetail_serviceAccountName:
 			v.ServiceAccountName = new(string)
 			return d.ReadString(schemas.EksPodPropertiesDetail_serviceAccountName, v.ServiceAccountName)
@@ -5711,6 +5810,86 @@ func (v *EksPodPropertiesOverride) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.EksPodPropertiesOverride_metadata:
 			v.Metadata = &EksMetadata{}
 			return v.Metadata.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The security context for the pod. The settings apply to all containers in the
+// pod when the container does not specify an overriding value. For more
+// information, see [Set the security context for a Pod]in the Kubernetes documentation.
+//
+// [Set the security context for a Pod]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+type EksPodSecurityContext struct {
+
+	// A special supplemental group that is applied to all containers in the pod. Some
+	// volume types allow Kubernetes to change the ownership and permissions of the
+	// volume contents to this group when the volume is mounted. The supported value
+	// range is 0 through 2147483647 .
+	FsGroup *int64
+
+	// The primary group ID that runs containers in the pod when a container does not
+	// specify its own group ID. The supported value range is 0 through 2147483647 .
+	RunAsGroup *int64
+
+	// Specifies whether Kubernetes validates that containers in the pod don't run as
+	// the root user unless a container specifies an overriding value.
+	RunAsNonRoot *bool
+
+	// The user ID that runs containers in the pod when a container does not specify
+	// its own user ID. The supported value range is 0 through 2147483647 .
+	RunAsUser *int64
+
+	// The default seccomp profile for containers in the pod. A container-level
+	// seccomp profile overrides this value.
+	SeccompProfile *EksSeccompProfile
+
+	noSmithyDocumentSerde
+}
+
+func (v *EksPodSecurityContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EksPodSecurityContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EksPodSecurityContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FsGroup != nil {
+		s.WriteInt64(schemas.EksPodSecurityContext_fsGroup, *v.FsGroup)
+	}
+	if v.RunAsGroup != nil {
+		s.WriteInt64(schemas.EksPodSecurityContext_runAsGroup, *v.RunAsGroup)
+	}
+	if v.RunAsNonRoot != nil {
+		s.WriteBool(schemas.EksPodSecurityContext_runAsNonRoot, *v.RunAsNonRoot)
+	}
+	if v.RunAsUser != nil {
+		s.WriteInt64(schemas.EksPodSecurityContext_runAsUser, *v.RunAsUser)
+	}
+	if v.SeccompProfile != nil {
+		s.WriteStruct(schemas.EksPodSecurityContext_seccompProfile)
+		v.SeccompProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EksPodSecurityContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EksPodSecurityContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EksPodSecurityContext_fsGroup:
+			v.FsGroup = new(int64)
+			return d.ReadInt64(schemas.EksPodSecurityContext_fsGroup, v.FsGroup)
+		case schemas.EksPodSecurityContext_runAsGroup:
+			v.RunAsGroup = new(int64)
+			return d.ReadInt64(schemas.EksPodSecurityContext_runAsGroup, v.RunAsGroup)
+		case schemas.EksPodSecurityContext_runAsNonRoot:
+			v.RunAsNonRoot = new(bool)
+			return d.ReadBool(schemas.EksPodSecurityContext_runAsNonRoot, v.RunAsNonRoot)
+		case schemas.EksPodSecurityContext_runAsUser:
+			v.RunAsUser = new(int64)
+			return d.ReadInt64(schemas.EksPodSecurityContext_runAsUser, v.RunAsUser)
+		case schemas.EksPodSecurityContext_seccompProfile:
+			v.SeccompProfile = &EksSeccompProfile{}
+			return v.SeccompProfile.Deserialize(d)
 		}
 		return nil
 	})
@@ -5810,6 +5989,69 @@ func (v *EksPropertiesOverride) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EksPropertiesOverride_podProperties:
 			v.PodProperties = &EksPodPropertiesOverride{}
 			return v.PodProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The Linux seccomp profile for a pod or container. For more information, see [Restrict a Container's Syscalls with seccomp] in
+// the Kubernetes documentation.
+//
+// [Restrict a Container's Syscalls with seccomp]: https://kubernetes.io/docs/tutorials/security/seccomp/
+type EksSeccompProfile struct {
+
+	// The seccomp profile type can be one of the following values:
+	//
+	// RuntimeDefault The RuntimeDefault value uses the container runtime's default
+	// seccomp profile.
+	//
+	// Unconfined The Unconfined value doesn't filter the container with seccomp.
+	//
+	// Localhost The Localhost value uses a custom profile at the path specified by
+	// localhostProfile .
+	//
+	// This member is required.
+	Type EksSeccompProfileType
+
+	// The path of the profile on the node, relative to the configured seccomp profile
+	// location. You must specify this parameter when type is Localhost . Don't set
+	// this parameter for any other type. You are responsible for ensuring that the
+	// profile exists on every eligible worker node. For information about providing
+	// files to Amazon EKS nodes, see [Use a launch template with Batch on Amazon EKS]in the Batch User Guide.
+	//
+	// [Use a launch template with Batch on Amazon EKS]: https://docs.aws.amazon.com/batch/latest/userguide/eks-launch-templates.html
+	LocalhostProfile *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EksSeccompProfile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EksSeccompProfile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EksSeccompProfile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocalhostProfile != nil {
+		s.WriteString(schemas.EksSeccompProfile_localhostProfile, *v.LocalhostProfile)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EksSeccompProfile_type, string(v.Type))
+	}
+}
+func (v *EksSeccompProfile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EksSeccompProfile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EksSeccompProfile_localhostProfile:
+			v.LocalhostProfile = new(string)
+			return d.ReadString(schemas.EksSeccompProfile_localhostProfile, v.LocalhostProfile)
+		case schemas.EksSeccompProfile_type:
+			var ev string
+			if err := d.ReadString(schemas.EksSeccompProfile_type, &ev); err != nil {
+				return err
+			}
+			v.Type = EksSeccompProfileType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -7030,8 +7272,10 @@ type JobDefinition struct {
 	// nodeProperties is used in the job definition, it can't be used in addition to
 	// containerProperties , ecsProperties , or eksProperties .
 	//
-	// If the job runs on Fargate resources, don't specify nodeProperties . Use
-	// containerProperties instead.
+	// If the job runs on Fargate resources, don't specify nodeProperties . We
+	// recommend ecsProperties , which supports both single-container and
+	// multi-container jobs. containerProperties is also supported for
+	// single-container jobs.
 	NodeProperties *NodeProperties
 
 	// Default parameters or parameter substitution placeholders that are set in the

@@ -13425,13 +13425,13 @@
         "com.amazonaws.bedrockagentcorecontrol#DiscoveryUrl": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^.+/\\.well-known/openid-configuration$"
+                "smithy.api#pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#DiscoveryUrlType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^.+/\\.well-known/(openid-configuration|oauth-authorization-server)$"
+                "smithy.api#pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#DomainName": {

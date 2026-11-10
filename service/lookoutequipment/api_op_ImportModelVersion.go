@@ -12,6 +12,10 @@ import (
 )
 
 // Imports a model that has been trained successfully.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ImportModelVersion(ctx context.Context, params *ImportModelVersionInput, optFns ...func(*Options)) (*ImportModelVersionOutput, error) {
 	if params == nil {
 		params = &ImportModelVersionInput{}

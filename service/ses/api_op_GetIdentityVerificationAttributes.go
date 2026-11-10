@@ -5,7 +5,9 @@ package ses
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -63,6 +65,18 @@ type GetIdentityVerificationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityVerificationAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityVerificationAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityVerificationAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identities != nil {
+		serializeIdentityList(s, schemas.GetIdentityVerificationAttributesRequest_Identities, v.Identities)
+	}
+}
+
 // The Amazon SES verification status of a list of identities. For domain
 // identities, this response also contains the verification token.
 type GetIdentityVerificationAttributesOutput struct {
@@ -78,13 +92,31 @@ type GetIdentityVerificationAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityVerificationAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityVerificationAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityVerificationAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VerificationAttributes != nil {
+		serializeVerificationAttributes(s, schemas.GetIdentityVerificationAttributesResponse_VerificationAttributes, v.VerificationAttributes)
+	}
+}
+func (v *GetIdentityVerificationAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdentityVerificationAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdentityVerificationAttributesResponse_VerificationAttributes:
+			return deserializeVerificationAttributes(d, schemas.GetIdentityVerificationAttributesResponse_VerificationAttributes, &v.VerificationAttributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdentityVerificationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetIdentityVerificationAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityVerificationAttributes, schemas.GetIdentityVerificationAttributesRequest, schemas.GetIdentityVerificationAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetIdentityVerificationAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityVerificationAttributes, schemas.GetIdentityVerificationAttributesRequest, schemas.GetIdentityVerificationAttributesResponse), output: &GetIdentityVerificationAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

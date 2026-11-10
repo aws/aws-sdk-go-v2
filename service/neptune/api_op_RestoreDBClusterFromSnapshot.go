@@ -4,7 +4,9 @@ package neptune
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -177,6 +179,77 @@ type RestoreDBClusterFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreDBClusterFromSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreDBClusterFromSnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreDBClusterFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZones(s, schemas.RestoreDBClusterFromSnapshotMessage_AvailabilityZones, v.AvailabilityZones)
+	}
+	if v.CopyTagsToSnapshot != nil {
+		s.WriteBool(schemas.RestoreDBClusterFromSnapshotMessage_CopyTagsToSnapshot, *v.CopyTagsToSnapshot)
+	}
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.DBClusterParameterGroupName != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
+	}
+	if v.DBSubnetGroupName != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_DatabaseName, *v.DatabaseName)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.RestoreDBClusterFromSnapshotMessage_DeletionProtection, *v.DeletionProtection)
+	}
+	if v.EnableCloudwatchLogsExports != nil {
+		serializeLogTypeList(s, schemas.RestoreDBClusterFromSnapshotMessage_EnableCloudwatchLogsExports, v.EnableCloudwatchLogsExports)
+	}
+	if v.EnableIAMDatabaseAuthentication != nil {
+		s.WriteBool(schemas.RestoreDBClusterFromSnapshotMessage_EnableIAMDatabaseAuthentication, *v.EnableIAMDatabaseAuthentication)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.NetworkType != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_NetworkType, *v.NetworkType)
+	}
+	if v.OptionGroupName != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_OptionGroupName, *v.OptionGroupName)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.RestoreDBClusterFromSnapshotMessage_Port, *v.Port)
+	}
+	if v.ServerlessV2ScalingConfiguration != nil {
+		s.WriteStruct(schemas.RestoreDBClusterFromSnapshotMessage_ServerlessV2ScalingConfiguration)
+		v.ServerlessV2ScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotIdentifier != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_SnapshotIdentifier, *v.SnapshotIdentifier)
+	}
+	if v.StorageType != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_StorageType, *v.StorageType)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RestoreDBClusterFromSnapshotMessage_Tags, v.Tags)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.RestoreDBClusterFromSnapshotMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+}
+
 type RestoreDBClusterFromSnapshotOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster.
@@ -190,13 +263,34 @@ type RestoreDBClusterFromSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreDBClusterFromSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreDBClusterFromSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreDBClusterFromSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBCluster != nil {
+		s.WriteStruct(schemas.RestoreDBClusterFromSnapshotResult_DBCluster)
+		v.DBCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RestoreDBClusterFromSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreDBClusterFromSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreDBClusterFromSnapshotResult_DBCluster:
+			v.DBCluster = &types.DBCluster{}
+			return v.DBCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreDBClusterFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBClusterFromSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBClusterFromSnapshot, schemas.RestoreDBClusterFromSnapshotMessage, schemas.RestoreDBClusterFromSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRestoreDBClusterFromSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBClusterFromSnapshot, schemas.RestoreDBClusterFromSnapshotMessage, schemas.RestoreDBClusterFromSnapshotResult), output: &RestoreDBClusterFromSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

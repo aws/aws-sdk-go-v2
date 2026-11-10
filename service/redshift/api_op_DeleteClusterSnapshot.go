@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,34 @@ type DeleteClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterSnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotClusterIdentifier != nil {
+		s.WriteString(schemas.DeleteClusterSnapshotMessage_SnapshotClusterIdentifier, *v.SnapshotClusterIdentifier)
+	}
+	if v.SnapshotIdentifier != nil {
+		s.WriteString(schemas.DeleteClusterSnapshotMessage_SnapshotIdentifier, *v.SnapshotIdentifier)
+	}
+}
+func (v *DeleteClusterSnapshotInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteClusterSnapshotMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteClusterSnapshotMessage_SnapshotClusterIdentifier:
+			v.SnapshotClusterIdentifier = new(string)
+			return d.ReadString(schemas.DeleteClusterSnapshotMessage_SnapshotClusterIdentifier, v.SnapshotClusterIdentifier)
+		case schemas.DeleteClusterSnapshotMessage_SnapshotIdentifier:
+			v.SnapshotIdentifier = new(string)
+			return d.ReadString(schemas.DeleteClusterSnapshotMessage_SnapshotIdentifier, v.SnapshotIdentifier)
+		}
+		return nil
+	})
+}
+
 type DeleteClusterSnapshotOutput struct {
 
 	// Describes a snapshot.
@@ -62,13 +92,34 @@ type DeleteClusterSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Snapshot != nil {
+		s.WriteStruct(schemas.DeleteClusterSnapshotResult_Snapshot)
+		v.Snapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteClusterSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteClusterSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteClusterSnapshotResult_Snapshot:
+			v.Snapshot = &types.Snapshot{}
+			return v.Snapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteClusterSnapshot, schemas.DeleteClusterSnapshotMessage, schemas.DeleteClusterSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteClusterSnapshot, schemas.DeleteClusterSnapshotMessage, schemas.DeleteClusterSnapshotResult), output: &DeleteClusterSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

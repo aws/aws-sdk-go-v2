@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DeregisterInstancesFromLoadBalancerResponse><DeregisterInstancesFromLoadBalancerResult><Instances><member><InstanceId>__InstanceId__</InstanceId></member><member><InstanceId>__InstanceId__</InstanceId></member></Instances></DeregisterInstancesFromLoadBalancerResult></DeregisterInstancesFromLoadBalancerResponse>

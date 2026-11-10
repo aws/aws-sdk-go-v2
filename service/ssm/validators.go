@@ -2050,6 +2050,26 @@ func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterDefaultHostManagementConfiguration struct {
+}
+
+func (*validateOpRegisterDefaultHostManagementConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterDefaultHostManagementConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterDefaultHostManagementConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterDefaultHostManagementConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRegisterDefaultPatchBaseline struct {
 }
 
@@ -3136,6 +3156,10 @@ func addOpPutParameterValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
+}
+
+func addOpRegisterDefaultHostManagementConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterDefaultHostManagementConfiguration{}, middleware.After)
 }
 
 func addOpRegisterDefaultPatchBaselineValidationMiddleware(stack *middleware.Stack) error {
@@ -6963,6 +6987,21 @@ func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
 	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterDefaultHostManagementConfigurationInput(v *RegisterDefaultHostManagementConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterDefaultHostManagementConfigurationInput"}
+	if len(v.PermissionModel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionModel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

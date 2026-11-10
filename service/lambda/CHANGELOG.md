@@ -1,3 +1,16 @@
+# v1.114.3 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.114.2 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.114.1 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.114.0 (2026-10-30)
 
 * **Feature**: Adds ConsumptionMode to SelfManagedKafkaEventSourceConfig, letting Lambda event source mappings consume self-managed Apache Kafka topics as a queue. Set ConsumptionMode to Queue when creating an event source mapping.

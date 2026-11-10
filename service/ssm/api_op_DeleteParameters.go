@@ -11,6 +11,13 @@ import (
 
 // Delete a list of parameters. After deleting a parameter, wait for at least 30
 // seconds to create a parameter with the same name.
+//
+// This operation is authorized against the ssm:DeleteParameters action, not
+// against ssm:DeleteParameter . Denying ssm:DeleteParameter for a parameter
+// doesn't prevent a principal from deleting that parameter with this operation.
+// For more information, see [Restricting access to specific parameters and paths]in the Amazon Web Services Systems Manager User Guide.
+//
+// [Restricting access to specific parameters and paths]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-restrict-parameter-access.html
 func (c *Client) DeleteParameters(ctx context.Context, params *DeleteParametersInput, optFns ...func(*Options)) (*DeleteParametersOutput, error) {
 	if params == nil {
 		params = &DeleteParametersInput{}

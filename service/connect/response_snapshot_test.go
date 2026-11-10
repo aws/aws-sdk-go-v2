@@ -3639,7 +3639,8 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -3790,7 +3791,8 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -6060,6 +6062,16 @@ func TestCheckResponseSnapshot_DescribeContact(t *testing.T) {
 			TaskTemplateInfo: &types.TaskTemplateInfoV2{
 				Arn:  ptr.String("__Arn__"),
 				Name: ptr.String("__Name__"),
+			},
+			Cases: []types.CaseEntry{
+				{
+					CaseId:              ptr.String("__CaseId__"),
+					CaseReferenceNumber: ptr.String("__CaseReferenceNumber__"),
+				},
+				{
+					CaseId:              ptr.String("__CaseId__"),
+					CaseReferenceNumber: ptr.String("__CaseReferenceNumber__"),
+				},
 			},
 			ContactDetails: &types.ContactDetails{
 				Name:        ptr.String("__Name__"),
@@ -8773,7 +8785,8 @@ func TestCheckResponseSnapshot_DescribeRule(t *testing.T) {
 							TargetSlaMinutes: ptr.Int64(1),
 						},
 					},
-					EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 					SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 						EvaluationFormId: ptr.String("__EvaluationFormId__"),
 					},
@@ -8924,7 +8937,8 @@ func TestCheckResponseSnapshot_DescribeRule(t *testing.T) {
 							TargetSlaMinutes: ptr.Int64(1),
 						},
 					},
-					EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 					SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 						EvaluationFormId: ptr.String("__EvaluationFormId__"),
 					},
@@ -24205,7 +24219,8 @@ func TestCheckResponseSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -24356,7 +24371,8 @@ func TestCheckResponseSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},

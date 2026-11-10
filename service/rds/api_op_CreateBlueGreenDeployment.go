@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -150,6 +152,54 @@ type CreateBlueGreenDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBlueGreenDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBlueGreenDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBlueGreenDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueGreenDeploymentName != nil {
+		s.WriteString(schemas.CreateBlueGreenDeploymentRequest_BlueGreenDeploymentName, *v.BlueGreenDeploymentName)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.CreateBlueGreenDeploymentRequest_Source, *v.Source)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateBlueGreenDeploymentRequest_Tags, v.Tags)
+	}
+	if v.TargetAllocatedStorage != nil {
+		s.WriteInt32(schemas.CreateBlueGreenDeploymentRequest_TargetAllocatedStorage, *v.TargetAllocatedStorage)
+	}
+	if v.TargetDBClusterParameterGroupName != nil {
+		s.WriteString(schemas.CreateBlueGreenDeploymentRequest_TargetDBClusterParameterGroupName, *v.TargetDBClusterParameterGroupName)
+	}
+	if v.TargetDBInstanceClass != nil {
+		s.WriteString(schemas.CreateBlueGreenDeploymentRequest_TargetDBInstanceClass, *v.TargetDBInstanceClass)
+	}
+	if v.TargetDBParameterGroupName != nil {
+		s.WriteString(schemas.CreateBlueGreenDeploymentRequest_TargetDBParameterGroupName, *v.TargetDBParameterGroupName)
+	}
+	if v.TargetEngineVersion != nil {
+		s.WriteString(schemas.CreateBlueGreenDeploymentRequest_TargetEngineVersion, *v.TargetEngineVersion)
+	}
+	if v.TargetIops != nil {
+		s.WriteInt32(schemas.CreateBlueGreenDeploymentRequest_TargetIops, *v.TargetIops)
+	}
+	if v.TargetResourceConfigurations != nil {
+		serializeTargetResourceConfigurationList(s, schemas.CreateBlueGreenDeploymentRequest_TargetResourceConfigurations, v.TargetResourceConfigurations)
+	}
+	if v.TargetStorageThroughput != nil {
+		s.WriteInt32(schemas.CreateBlueGreenDeploymentRequest_TargetStorageThroughput, *v.TargetStorageThroughput)
+	}
+	if v.TargetStorageType != nil {
+		s.WriteString(schemas.CreateBlueGreenDeploymentRequest_TargetStorageType, *v.TargetStorageType)
+	}
+	if v.UpgradeTargetStorageConfig != nil {
+		s.WriteBool(schemas.CreateBlueGreenDeploymentRequest_UpgradeTargetStorageConfig, *v.UpgradeTargetStorageConfig)
+	}
+}
+
 type CreateBlueGreenDeploymentOutput struct {
 
 	// Details about a blue/green deployment.
@@ -166,13 +216,34 @@ type CreateBlueGreenDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBlueGreenDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBlueGreenDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBlueGreenDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueGreenDeployment != nil {
+		s.WriteStruct(schemas.CreateBlueGreenDeploymentResponse_BlueGreenDeployment)
+		v.BlueGreenDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateBlueGreenDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBlueGreenDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBlueGreenDeploymentResponse_BlueGreenDeployment:
+			v.BlueGreenDeployment = &types.BlueGreenDeployment{}
+			return v.BlueGreenDeployment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBlueGreenDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateBlueGreenDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBlueGreenDeployment, schemas.CreateBlueGreenDeploymentRequest, schemas.CreateBlueGreenDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateBlueGreenDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBlueGreenDeployment, schemas.CreateBlueGreenDeploymentRequest, schemas.CreateBlueGreenDeploymentResponse), output: &CreateBlueGreenDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
