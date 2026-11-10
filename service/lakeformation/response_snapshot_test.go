@@ -151,6 +151,10 @@ func TestCheckResponseSnapshot_AddLFTagsToResource(t *testing.T) {
 	got, err := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
 		CatalogId: ptr.String("__CatalogId__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -225,6 +229,12 @@ func TestCheckResponseSnapshot_AddLFTagsToResource(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		LFTags: []types.LFTagPair{
@@ -296,6 +306,10 @@ func TestCheckResponseSnapshot_AttachRLSPolicy(t *testing.T) {
 	got, err := svc.AttachRLSPolicy(context.Background(), &AttachRLSPolicyInput{
 		Name: ptr.String("__Name__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -371,6 +385,12 @@ func TestCheckResponseSnapshot_AttachRLSPolicy(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
+			},
 		},
 		Principal: &types.DataLakePrincipal{
 			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
@@ -398,6 +418,10 @@ func TestCheckResponseSnapshot_BatchGrantPermissions(t *testing.T) {
 						DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 					},
 					Resource: &types.Resource{
+						AnyResource: &types.AnyResource{
+							CatalogId:    ptr.String("__CatalogId__"),
+							ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+						},
 						Catalog: &types.CatalogResource{
 							Id: ptr.String("__Id__"),
 						},
@@ -472,6 +496,12 @@ func TestCheckResponseSnapshot_BatchGrantPermissions(t *testing.T) {
 						RLSPolicy: &types.RLSPolicyResource{
 							CatalogId: ptr.String("__CatalogId__"),
 							Name:      ptr.String("__Name__"),
+						},
+						UserDefinedFunction: &types.UserDefinedFunctionResource{
+							CatalogId:                   ptr.String("__CatalogId__"),
+							DatabaseName:                ptr.String("__DatabaseName__"),
+							Name:                        ptr.String("__Name__"),
+							UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 						},
 					},
 					Permissions: []types.Permission{
@@ -498,6 +528,10 @@ func TestCheckResponseSnapshot_BatchGrantPermissions(t *testing.T) {
 						DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 					},
 					Resource: &types.Resource{
+						AnyResource: &types.AnyResource{
+							CatalogId:    ptr.String("__CatalogId__"),
+							ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+						},
 						Catalog: &types.CatalogResource{
 							Id: ptr.String("__Id__"),
 						},
@@ -572,6 +606,12 @@ func TestCheckResponseSnapshot_BatchGrantPermissions(t *testing.T) {
 						RLSPolicy: &types.RLSPolicyResource{
 							CatalogId: ptr.String("__CatalogId__"),
 							Name:      ptr.String("__Name__"),
+						},
+						UserDefinedFunction: &types.UserDefinedFunctionResource{
+							CatalogId:                   ptr.String("__CatalogId__"),
+							DatabaseName:                ptr.String("__DatabaseName__"),
+							Name:                        ptr.String("__Name__"),
+							UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 						},
 					},
 					Permissions: []types.Permission{
@@ -610,6 +650,10 @@ func TestCheckResponseSnapshot_BatchGrantPermissions(t *testing.T) {
 					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 				},
 				Resource: &types.Resource{
+					AnyResource: &types.AnyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+					},
 					Catalog: &types.CatalogResource{
 						Id: ptr.String("__Id__"),
 					},
@@ -684,6 +728,12 @@ func TestCheckResponseSnapshot_BatchGrantPermissions(t *testing.T) {
 					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
+					},
+					UserDefinedFunction: &types.UserDefinedFunctionResource{
+						CatalogId:                   ptr.String("__CatalogId__"),
+						DatabaseName:                ptr.String("__DatabaseName__"),
+						Name:                        ptr.String("__Name__"),
+						UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 					},
 				},
 				Permissions: []types.Permission{
@@ -704,6 +754,10 @@ func TestCheckResponseSnapshot_BatchGrantPermissions(t *testing.T) {
 					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 				},
 				Resource: &types.Resource{
+					AnyResource: &types.AnyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+					},
 					Catalog: &types.CatalogResource{
 						Id: ptr.String("__Id__"),
 					},
@@ -778,6 +832,12 @@ func TestCheckResponseSnapshot_BatchGrantPermissions(t *testing.T) {
 					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
+					},
+					UserDefinedFunction: &types.UserDefinedFunctionResource{
+						CatalogId:                   ptr.String("__CatalogId__"),
+						DatabaseName:                ptr.String("__DatabaseName__"),
+						Name:                        ptr.String("__Name__"),
+						UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 					},
 				},
 				Permissions: []types.Permission{
@@ -812,6 +872,10 @@ func TestCheckResponseSnapshot_BatchRevokePermissions(t *testing.T) {
 						DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 					},
 					Resource: &types.Resource{
+						AnyResource: &types.AnyResource{
+							CatalogId:    ptr.String("__CatalogId__"),
+							ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+						},
 						Catalog: &types.CatalogResource{
 							Id: ptr.String("__Id__"),
 						},
@@ -886,6 +950,12 @@ func TestCheckResponseSnapshot_BatchRevokePermissions(t *testing.T) {
 						RLSPolicy: &types.RLSPolicyResource{
 							CatalogId: ptr.String("__CatalogId__"),
 							Name:      ptr.String("__Name__"),
+						},
+						UserDefinedFunction: &types.UserDefinedFunctionResource{
+							CatalogId:                   ptr.String("__CatalogId__"),
+							DatabaseName:                ptr.String("__DatabaseName__"),
+							Name:                        ptr.String("__Name__"),
+							UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 						},
 					},
 					Permissions: []types.Permission{
@@ -912,6 +982,10 @@ func TestCheckResponseSnapshot_BatchRevokePermissions(t *testing.T) {
 						DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 					},
 					Resource: &types.Resource{
+						AnyResource: &types.AnyResource{
+							CatalogId:    ptr.String("__CatalogId__"),
+							ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+						},
 						Catalog: &types.CatalogResource{
 							Id: ptr.String("__Id__"),
 						},
@@ -986,6 +1060,12 @@ func TestCheckResponseSnapshot_BatchRevokePermissions(t *testing.T) {
 						RLSPolicy: &types.RLSPolicyResource{
 							CatalogId: ptr.String("__CatalogId__"),
 							Name:      ptr.String("__Name__"),
+						},
+						UserDefinedFunction: &types.UserDefinedFunctionResource{
+							CatalogId:                   ptr.String("__CatalogId__"),
+							DatabaseName:                ptr.String("__DatabaseName__"),
+							Name:                        ptr.String("__Name__"),
+							UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 						},
 					},
 					Permissions: []types.Permission{
@@ -1024,6 +1104,10 @@ func TestCheckResponseSnapshot_BatchRevokePermissions(t *testing.T) {
 					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 				},
 				Resource: &types.Resource{
+					AnyResource: &types.AnyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+					},
 					Catalog: &types.CatalogResource{
 						Id: ptr.String("__Id__"),
 					},
@@ -1098,6 +1182,12 @@ func TestCheckResponseSnapshot_BatchRevokePermissions(t *testing.T) {
 					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
+					},
+					UserDefinedFunction: &types.UserDefinedFunctionResource{
+						CatalogId:                   ptr.String("__CatalogId__"),
+						DatabaseName:                ptr.String("__DatabaseName__"),
+						Name:                        ptr.String("__Name__"),
+						UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 					},
 				},
 				Permissions: []types.Permission{
@@ -1118,6 +1208,10 @@ func TestCheckResponseSnapshot_BatchRevokePermissions(t *testing.T) {
 					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 				},
 				Resource: &types.Resource{
+					AnyResource: &types.AnyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+					},
 					Catalog: &types.CatalogResource{
 						Id: ptr.String("__Id__"),
 					},
@@ -1192,6 +1286,12 @@ func TestCheckResponseSnapshot_BatchRevokePermissions(t *testing.T) {
 					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
+					},
+					UserDefinedFunction: &types.UserDefinedFunctionResource{
+						CatalogId:                   ptr.String("__CatalogId__"),
+						DatabaseName:                ptr.String("__DatabaseName__"),
+						Name:                        ptr.String("__Name__"),
+						UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 					},
 				},
 				Permissions: []types.Permission{
@@ -1450,6 +1550,10 @@ func TestCheckResponseSnapshot_CreateLakeFormationOptIn(t *testing.T) {
 			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 		},
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -1524,6 +1628,12 @@ func TestCheckResponseSnapshot_CreateLakeFormationOptIn(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		Condition: &types.Condition{
@@ -1674,6 +1784,10 @@ func TestCheckResponseSnapshot_DeleteLakeFormationOptIn(t *testing.T) {
 			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 		},
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -1748,6 +1862,12 @@ func TestCheckResponseSnapshot_DeleteLakeFormationOptIn(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		Condition: &types.Condition{
@@ -1982,6 +2102,10 @@ func TestCheckResponseSnapshot_DetachRLSPolicy(t *testing.T) {
 	got, err := svc.DetachRLSPolicy(context.Background(), &DetachRLSPolicyInput{
 		Name: ptr.String("__Name__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -2056,6 +2180,12 @@ func TestCheckResponseSnapshot_DetachRLSPolicy(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		Principal: &types.DataLakePrincipal{
@@ -2271,6 +2401,10 @@ func TestCheckResponseSnapshot_GetEffectivePermissionsForPath(t *testing.T) {
 					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 				},
 				Resource: &types.Resource{
+					AnyResource: &types.AnyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+					},
 					Catalog: &types.CatalogResource{
 						Id: ptr.String("__Id__"),
 					},
@@ -2345,6 +2479,12 @@ func TestCheckResponseSnapshot_GetEffectivePermissionsForPath(t *testing.T) {
 					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
+					},
+					UserDefinedFunction: &types.UserDefinedFunctionResource{
+						CatalogId:                   ptr.String("__CatalogId__"),
+						DatabaseName:                ptr.String("__DatabaseName__"),
+						Name:                        ptr.String("__Name__"),
+						UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 					},
 				},
 				Condition: &types.Condition{
@@ -2372,6 +2512,10 @@ func TestCheckResponseSnapshot_GetEffectivePermissionsForPath(t *testing.T) {
 					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 				},
 				Resource: &types.Resource{
+					AnyResource: &types.AnyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+					},
 					Catalog: &types.CatalogResource{
 						Id: ptr.String("__Id__"),
 					},
@@ -2446,6 +2590,12 @@ func TestCheckResponseSnapshot_GetEffectivePermissionsForPath(t *testing.T) {
 					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
+					},
+					UserDefinedFunction: &types.UserDefinedFunctionResource{
+						CatalogId:                   ptr.String("__CatalogId__"),
+						DatabaseName:                ptr.String("__DatabaseName__"),
+						Name:                        ptr.String("__Name__"),
+						UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 					},
 				},
 				Condition: &types.Condition{
@@ -2490,6 +2640,34 @@ func TestCheckResponseSnapshot_GetEffectivePermissionsForPath(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetEffectivePermissionsForPath.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetGlueFunctionSessionContext(t *testing.T) {
+	want := &GetGlueFunctionSessionContextOutput{
+		SessionContextId: ptr.String("__SessionContextId__"),
+		Expiration:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetGlueFunctionSessionContext.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetGlueFunctionSessionContext(context.Background(), &GetGlueFunctionSessionContextInput{
+		UserDefinedFunctionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DurationSeconds: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetGlueFunctionSessionContext.response", err)
 	}
 }
 
@@ -2753,6 +2931,10 @@ func TestCheckResponseSnapshot_GetResourceLFTags(t *testing.T) {
 	got, err := svc.GetResourceLFTags(context.Background(), &GetResourceLFTagsInput{
 		CatalogId: ptr.String("__CatalogId__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -2827,6 +3009,12 @@ func TestCheckResponseSnapshot_GetResourceLFTags(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		ShowAssignedLFTags: ptr.Bool(true),
@@ -2945,6 +3133,35 @@ func TestCheckResponseSnapshot_GetTemporaryDataLocationCredentials(t *testing.T)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetTemporaryDataLocationCredentials.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetTemporaryGlueFunctionCredentials(t *testing.T) {
+	want := &GetTemporaryGlueFunctionCredentialsOutput{
+		AccessKeyId:     ptr.String("__AccessKeyId__"),
+		SecretAccessKey: ptr.String("__SecretAccessKey__"),
+		SessionToken:    ptr.String("__SessionToken__"),
+		Expiration:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetTemporaryGlueFunctionCredentials.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetTemporaryGlueFunctionCredentials(context.Background(), &GetTemporaryGlueFunctionCredentialsInput{
+		UserDefinedFunctionArn: ptr.String("__UserDefinedFunctionArn__"),
+		AuditContext: &types.AuditContext{
+			AdditionalAuditContext: ptr.String("__AdditionalAuditContext__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetTemporaryGlueFunctionCredentials.response", err)
 	}
 }
 
@@ -3123,6 +3340,10 @@ func TestCheckResponseSnapshot_GrantPermissions(t *testing.T) {
 			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 		},
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -3197,6 +3418,12 @@ func TestCheckResponseSnapshot_GrantPermissions(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		Permissions: []types.Permission{
@@ -3411,6 +3638,10 @@ func TestCheckResponseSnapshot_ListLakeFormationOptIns(t *testing.T) {
 		LakeFormationOptInsInfoList: []types.LakeFormationOptInsInfo{
 			{
 				Resource: &types.Resource{
+					AnyResource: &types.AnyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+					},
 					Catalog: &types.CatalogResource{
 						Id: ptr.String("__Id__"),
 					},
@@ -3485,6 +3716,12 @@ func TestCheckResponseSnapshot_ListLakeFormationOptIns(t *testing.T) {
 					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
+					},
+					UserDefinedFunction: &types.UserDefinedFunctionResource{
+						CatalogId:                   ptr.String("__CatalogId__"),
+						DatabaseName:                ptr.String("__DatabaseName__"),
+						Name:                        ptr.String("__Name__"),
+						UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 					},
 				},
 				Principal: &types.DataLakePrincipal{
@@ -3498,6 +3735,10 @@ func TestCheckResponseSnapshot_ListLakeFormationOptIns(t *testing.T) {
 			},
 			{
 				Resource: &types.Resource{
+					AnyResource: &types.AnyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+					},
 					Catalog: &types.CatalogResource{
 						Id: ptr.String("__Id__"),
 					},
@@ -3572,6 +3813,12 @@ func TestCheckResponseSnapshot_ListLakeFormationOptIns(t *testing.T) {
 					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
+					},
+					UserDefinedFunction: &types.UserDefinedFunctionResource{
+						CatalogId:                   ptr.String("__CatalogId__"),
+						DatabaseName:                ptr.String("__DatabaseName__"),
+						Name:                        ptr.String("__Name__"),
+						UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 					},
 				},
 				Principal: &types.DataLakePrincipal{
@@ -3599,6 +3846,10 @@ func TestCheckResponseSnapshot_ListLakeFormationOptIns(t *testing.T) {
 			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 		},
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -3674,6 +3925,12 @@ func TestCheckResponseSnapshot_ListLakeFormationOptIns(t *testing.T) {
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
 			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
+			},
 		},
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
@@ -3694,6 +3951,10 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 				},
 				Resource: &types.Resource{
+					AnyResource: &types.AnyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+					},
 					Catalog: &types.CatalogResource{
 						Id: ptr.String("__Id__"),
 					},
@@ -3768,6 +4029,12 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
+					},
+					UserDefinedFunction: &types.UserDefinedFunctionResource{
+						CatalogId:                   ptr.String("__CatalogId__"),
+						DatabaseName:                ptr.String("__DatabaseName__"),
+						Name:                        ptr.String("__Name__"),
+						UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 					},
 				},
 				Condition: &types.Condition{
@@ -3795,6 +4062,10 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 				},
 				Resource: &types.Resource{
+					AnyResource: &types.AnyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+					},
 					Catalog: &types.CatalogResource{
 						Id: ptr.String("__Id__"),
 					},
@@ -3869,6 +4140,12 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
+					},
+					UserDefinedFunction: &types.UserDefinedFunctionResource{
+						CatalogId:                   ptr.String("__CatalogId__"),
+						DatabaseName:                ptr.String("__DatabaseName__"),
+						Name:                        ptr.String("__Name__"),
+						UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 					},
 				},
 				Condition: &types.Condition{
@@ -3907,8 +4184,12 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 		Principal: &types.DataLakePrincipal{
 			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 		},
-		ResourceType: types.DataLakeResourceType("CATALOG"),
+		ResourceType: types.DataLakeResourceType("ANY_RESOURCE"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -3983,6 +4264,12 @@ func TestCheckResponseSnapshot_ListPermissions(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		NextToken:      ptr.String("__NextToken__"),
@@ -4063,6 +4350,10 @@ func TestCheckResponseSnapshot_ListRLSPolicyAttachments(t *testing.T) {
 					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 				},
 				Resource: &types.Resource{
+					AnyResource: &types.AnyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+					},
 					Catalog: &types.CatalogResource{
 						Id: ptr.String("__Id__"),
 					},
@@ -4137,6 +4428,12 @@ func TestCheckResponseSnapshot_ListRLSPolicyAttachments(t *testing.T) {
 					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
+					},
+					UserDefinedFunction: &types.UserDefinedFunctionResource{
+						CatalogId:                   ptr.String("__CatalogId__"),
+						DatabaseName:                ptr.String("__DatabaseName__"),
+						Name:                        ptr.String("__Name__"),
+						UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 					},
 				},
 				Condition: &types.Condition{
@@ -4151,6 +4448,10 @@ func TestCheckResponseSnapshot_ListRLSPolicyAttachments(t *testing.T) {
 					DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 				},
 				Resource: &types.Resource{
+					AnyResource: &types.AnyResource{
+						CatalogId:    ptr.String("__CatalogId__"),
+						ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+					},
 					Catalog: &types.CatalogResource{
 						Id: ptr.String("__Id__"),
 					},
@@ -4225,6 +4526,12 @@ func TestCheckResponseSnapshot_ListRLSPolicyAttachments(t *testing.T) {
 					RLSPolicy: &types.RLSPolicyResource{
 						CatalogId: ptr.String("__CatalogId__"),
 						Name:      ptr.String("__Name__"),
+					},
+					UserDefinedFunction: &types.UserDefinedFunctionResource{
+						CatalogId:                   ptr.String("__CatalogId__"),
+						DatabaseName:                ptr.String("__DatabaseName__"),
+						Name:                        ptr.String("__Name__"),
+						UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 					},
 				},
 				Condition: &types.Condition{
@@ -4245,6 +4552,10 @@ func TestCheckResponseSnapshot_ListRLSPolicyAttachments(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListRLSPolicyAttachments(context.Background(), &ListRLSPolicyAttachmentsInput{
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -4319,6 +4630,12 @@ func TestCheckResponseSnapshot_ListRLSPolicyAttachments(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		Principal: &types.DataLakePrincipal{
@@ -4659,6 +4976,10 @@ func TestCheckResponseSnapshot_RemoveLFTagsFromResource(t *testing.T) {
 	got, err := svc.RemoveLFTagsFromResource(context.Background(), &RemoveLFTagsFromResourceInput{
 		CatalogId: ptr.String("__CatalogId__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -4733,6 +5054,12 @@ func TestCheckResponseSnapshot_RemoveLFTagsFromResource(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		LFTags: []types.LFTagPair{
@@ -4778,6 +5105,10 @@ func TestCheckResponseSnapshot_RevokePermissions(t *testing.T) {
 			DataLakePrincipalIdentifier: ptr.String("__DataLakePrincipalIdentifier__"),
 		},
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -4852,6 +5183,12 @@ func TestCheckResponseSnapshot_RevokePermissions(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		Permissions: []types.Permission{
@@ -5572,6 +5909,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
 		CatalogId: ptr.String("__CatalogId__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -5646,6 +5987,12 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		LFTags: []types.LFTagPair{
@@ -5694,6 +6041,10 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsException(t *testing.T) {
 	_, opErr := svc.AttachRLSPolicy(context.Background(), &AttachRLSPolicyInput{
 		Name: ptr.String("__Name__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -5768,6 +6119,12 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsException(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		Principal: &types.DataLakePrincipal{
@@ -5805,6 +6162,10 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
 		CatalogId: ptr.String("__CatalogId__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -5879,6 +6240,12 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		LFTags: []types.LFTagPair{
@@ -5962,6 +6329,10 @@ func TestCheckResponseSnapshot_Error_EntityNotFoundException(t *testing.T) {
 	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
 		CatalogId: ptr.String("__CatalogId__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -6036,6 +6407,12 @@ func TestCheckResponseSnapshot_Error_EntityNotFoundException(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		LFTags: []types.LFTagPair{
@@ -6111,6 +6488,10 @@ func TestCheckResponseSnapshot_Error_GlueEncryptionException(t *testing.T) {
 	_, opErr := svc.GetResourceLFTags(context.Background(), &GetResourceLFTagsInput{
 		CatalogId: ptr.String("__CatalogId__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -6185,6 +6566,12 @@ func TestCheckResponseSnapshot_Error_GlueEncryptionException(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		ShowAssignedLFTags: ptr.Bool(true),
@@ -6216,6 +6603,10 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
 		CatalogId: ptr.String("__CatalogId__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -6290,6 +6681,12 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		LFTags: []types.LFTagPair{
@@ -6338,6 +6735,10 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
 		CatalogId: ptr.String("__CatalogId__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -6412,6 +6813,12 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		LFTags: []types.LFTagPair{
@@ -6460,6 +6867,10 @@ func TestCheckResponseSnapshot_Error_OperationTimeoutException(t *testing.T) {
 	_, opErr := svc.AddLFTagsToResource(context.Background(), &AddLFTagsToResourceInput{
 		CatalogId: ptr.String("__CatalogId__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -6534,6 +6945,12 @@ func TestCheckResponseSnapshot_Error_OperationTimeoutException(t *testing.T) {
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		LFTags: []types.LFTagPair{
@@ -6667,6 +7084,10 @@ func TestCheckResponseSnapshot_Error_ResourceNumberLimitExceededException(t *tes
 	_, opErr := svc.AttachRLSPolicy(context.Background(), &AttachRLSPolicyInput{
 		Name: ptr.String("__Name__"),
 		Resource: &types.Resource{
+			AnyResource: &types.AnyResource{
+				CatalogId:    ptr.String("__CatalogId__"),
+				ResourceType: types.AnyResourceSupportedTypes("TABLE"),
+			},
 			Catalog: &types.CatalogResource{
 				Id: ptr.String("__Id__"),
 			},
@@ -6741,6 +7162,12 @@ func TestCheckResponseSnapshot_Error_ResourceNumberLimitExceededException(t *tes
 			RLSPolicy: &types.RLSPolicyResource{
 				CatalogId: ptr.String("__CatalogId__"),
 				Name:      ptr.String("__Name__"),
+			},
+			UserDefinedFunction: &types.UserDefinedFunctionResource{
+				CatalogId:                   ptr.String("__CatalogId__"),
+				DatabaseName:                ptr.String("__DatabaseName__"),
+				Name:                        ptr.String("__Name__"),
+				UserDefinedFunctionWildcard: &types.UserDefinedFunctionWildcard{},
 			},
 		},
 		Principal: &types.DataLakePrincipal{

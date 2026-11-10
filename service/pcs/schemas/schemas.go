@@ -146,6 +146,11 @@ var _AmiId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AmiId",
 }, smithy.ShapeTypeString, 0)
 
+var _AmiIdOrEmpty = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "AmiIdOrEmpty",
+}, smithy.ShapeTypeString, 0)
+
 var _Arn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "Arn",
@@ -293,7 +298,13 @@ var ClusterSummary_status *smithy.Schema
 var ComputeNodeGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "ComputeNodeGroup",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 21)
+var ComputeNodeGroup_amiId *smithy.Schema
+
+var ComputeNodeGroup_securityGroupIds *smithy.Schema
+
+var ComputeNodeGroup_sshKeyName *smithy.Schema
+
 var ComputeNodeGroup_name *smithy.Schema
 
 var ComputeNodeGroup_id *smithy.Schema
@@ -308,11 +319,11 @@ var ComputeNodeGroup_modifiedAt *smithy.Schema
 
 var ComputeNodeGroup_status *smithy.Schema
 
-var ComputeNodeGroup_amiId *smithy.Schema
-
 var ComputeNodeGroup_subnetIds *smithy.Schema
 
 var ComputeNodeGroup_purchaseOption *smithy.Schema
+
+var ComputeNodeGroup_launchTemplateMode *smithy.Schema
 
 var ComputeNodeGroup_customLaunchTemplate *smithy.Schema
 
@@ -544,6 +555,24 @@ var JwtKey = smithy.NewSchema(smithy.ShapeID{
 var JwtKey_secretArn *smithy.Schema
 
 var JwtKey_secretVersion *smithy.Schema
+
+var _KeyPairName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "KeyPairName",
+}, smithy.ShapeTypeString, 0)
+
+var _KeyPairNameOrEmpty = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "KeyPairNameOrEmpty",
+}, smithy.ShapeTypeString, 0)
+
+var LaunchTemplateMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "LaunchTemplateMode",
+}, smithy.ShapeTypeEnum, 2)
+var LaunchTemplateMode_CUSTOM *smithy.Schema
+
+var LaunchTemplateMode_MANAGED *smithy.Schema
 
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
@@ -848,6 +877,12 @@ var _SecurityGroupIdList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _SecurityGroupIdList_member *smithy.Schema
 
+var _SecurityGroupIdListOrEmpty = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "SecurityGroupIdListOrEmpty",
+}, smithy.ShapeTypeList, 1)
+var _SecurityGroupIdListOrEmpty_member *smithy.Schema
+
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "ServiceQuotaExceededException",
@@ -1116,16 +1151,22 @@ var CreateClusterResponse_cluster *smithy.Schema
 var CreateComputeNodeGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "CreateComputeNodeGroupRequest",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 17)
+var CreateComputeNodeGroupRequest_amiId *smithy.Schema
+
+var CreateComputeNodeGroupRequest_securityGroupIds *smithy.Schema
+
+var CreateComputeNodeGroupRequest_sshKeyName *smithy.Schema
+
 var CreateComputeNodeGroupRequest_clusterIdentifier *smithy.Schema
 
 var CreateComputeNodeGroupRequest_computeNodeGroupName *smithy.Schema
 
-var CreateComputeNodeGroupRequest_amiId *smithy.Schema
-
 var CreateComputeNodeGroupRequest_subnetIds *smithy.Schema
 
 var CreateComputeNodeGroupRequest_purchaseOption *smithy.Schema
+
+var CreateComputeNodeGroupRequest_launchTemplateMode *smithy.Schema
 
 var CreateComputeNodeGroupRequest_customLaunchTemplate *smithy.Schema
 
@@ -1395,14 +1436,20 @@ var UpdateClusterResponse_cluster *smithy.Schema
 var UpdateComputeNodeGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "UpdateComputeNodeGroupRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 15)
+var UpdateComputeNodeGroupRequest_amiId *smithy.Schema
+
+var UpdateComputeNodeGroupRequest_securityGroupIds *smithy.Schema
+
+var UpdateComputeNodeGroupRequest_sshKeyName *smithy.Schema
+
 var UpdateComputeNodeGroupRequest_clusterIdentifier *smithy.Schema
 
 var UpdateComputeNodeGroupRequest_computeNodeGroupIdentifier *smithy.Schema
 
-var UpdateComputeNodeGroupRequest_amiId *smithy.Schema
-
 var UpdateComputeNodeGroupRequest_subnetIds *smithy.Schema
+
+var UpdateComputeNodeGroupRequest_launchTemplateMode *smithy.Schema
 
 var UpdateComputeNodeGroupRequest_customLaunchTemplate *smithy.Schema
 
@@ -1665,6 +1712,10 @@ func init() {
 
 	PurchaseOption_INTERRUPTIBLE_CAPACITY_RESERVATION = PurchaseOption.AddMember("INTERRUPTIBLE_CAPACITY_RESERVATION", smithyprelude.Unit)
 
+	LaunchTemplateMode_CUSTOM = LaunchTemplateMode.AddMember("CUSTOM", smithyprelude.Unit)
+
+	LaunchTemplateMode_MANAGED = LaunchTemplateMode.AddMember("MANAGED", smithyprelude.Unit)
+
 	CustomLaunchTemplate_id = CustomLaunchTemplate.AddMember("id", smithyprelude.String)
 
 	CustomLaunchTemplate_version = CustomLaunchTemplate.AddMember("version", smithyprelude.String)
@@ -1739,6 +1790,12 @@ func init() {
 
 	NodeLifecycleActions_scriptCachingPolicy = NodeLifecycleActions.AddMember("scriptCachingPolicy", ScriptCachingPolicy)
 
+	ComputeNodeGroup_amiId = ComputeNodeGroup.AddMember("amiId", _AmiId)
+
+	ComputeNodeGroup_securityGroupIds = ComputeNodeGroup.AddMember("securityGroupIds", _SecurityGroupIdList)
+
+	ComputeNodeGroup_sshKeyName = ComputeNodeGroup.AddMember("sshKeyName", _KeyPairName)
+
 	ComputeNodeGroup_name = ComputeNodeGroup.AddMember("name", _ComputeNodeGroupName)
 
 	ComputeNodeGroup_id = ComputeNodeGroup.AddMember("id", smithyprelude.String)
@@ -1753,11 +1810,11 @@ func init() {
 
 	ComputeNodeGroup_status = ComputeNodeGroup.AddMember("status", ComputeNodeGroupStatus)
 
-	ComputeNodeGroup_amiId = ComputeNodeGroup.AddMember("amiId", _AmiId)
-
 	ComputeNodeGroup_subnetIds = ComputeNodeGroup.AddMember("subnetIds", _SubnetIdList)
 
 	ComputeNodeGroup_purchaseOption = ComputeNodeGroup.AddMember("purchaseOption", PurchaseOption)
+
+	ComputeNodeGroup_launchTemplateMode = ComputeNodeGroup.AddMember("launchTemplateMode", LaunchTemplateMode)
 
 	ComputeNodeGroup_customLaunchTemplate = ComputeNodeGroup.AddMember("customLaunchTemplate", CustomLaunchTemplate)
 
@@ -1901,6 +1958,8 @@ func init() {
 
 	SchedulerRequest_version = SchedulerRequest.AddMember("version", smithyprelude.String)
 
+	_SecurityGroupIdListOrEmpty_member = _SecurityGroupIdListOrEmpty.AddMember("member", _SecurityGroupId)
+
 	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
 
 	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
@@ -1987,15 +2046,21 @@ func init() {
 
 	CreateClusterResponse_cluster = CreateClusterResponse.AddMember("cluster", Cluster)
 
+	CreateComputeNodeGroupRequest_amiId = CreateComputeNodeGroupRequest.AddMember("amiId", _AmiId)
+
+	CreateComputeNodeGroupRequest_securityGroupIds = CreateComputeNodeGroupRequest.AddMember("securityGroupIds", _SecurityGroupIdList)
+
+	CreateComputeNodeGroupRequest_sshKeyName = CreateComputeNodeGroupRequest.AddMember("sshKeyName", _KeyPairName)
+
 	CreateComputeNodeGroupRequest_clusterIdentifier = CreateComputeNodeGroupRequest.AddMember("clusterIdentifier", _ClusterIdentifier)
 
 	CreateComputeNodeGroupRequest_computeNodeGroupName = CreateComputeNodeGroupRequest.AddMember("computeNodeGroupName", _ComputeNodeGroupName)
 
-	CreateComputeNodeGroupRequest_amiId = CreateComputeNodeGroupRequest.AddMember("amiId", _AmiId)
-
 	CreateComputeNodeGroupRequest_subnetIds = CreateComputeNodeGroupRequest.AddMember("subnetIds", _StringList)
 
 	CreateComputeNodeGroupRequest_purchaseOption = CreateComputeNodeGroupRequest.AddMember("purchaseOption", PurchaseOption)
+
+	CreateComputeNodeGroupRequest_launchTemplateMode = CreateComputeNodeGroupRequest.AddMember("launchTemplateMode", LaunchTemplateMode)
 
 	CreateComputeNodeGroupRequest_customLaunchTemplate = CreateComputeNodeGroupRequest.AddMember("customLaunchTemplate", CustomLaunchTemplate)
 
@@ -2133,13 +2198,19 @@ func init() {
 
 	UpdateClusterResponse_cluster = UpdateClusterResponse.AddMember("cluster", Cluster)
 
+	UpdateComputeNodeGroupRequest_amiId = UpdateComputeNodeGroupRequest.AddMember("amiId", _AmiIdOrEmpty)
+
+	UpdateComputeNodeGroupRequest_securityGroupIds = UpdateComputeNodeGroupRequest.AddMember("securityGroupIds", _SecurityGroupIdListOrEmpty)
+
+	UpdateComputeNodeGroupRequest_sshKeyName = UpdateComputeNodeGroupRequest.AddMember("sshKeyName", _KeyPairNameOrEmpty)
+
 	UpdateComputeNodeGroupRequest_clusterIdentifier = UpdateComputeNodeGroupRequest.AddMember("clusterIdentifier", _ClusterIdentifier)
 
 	UpdateComputeNodeGroupRequest_computeNodeGroupIdentifier = UpdateComputeNodeGroupRequest.AddMember("computeNodeGroupIdentifier", _ComputeNodeGroupIdentifier)
 
-	UpdateComputeNodeGroupRequest_amiId = UpdateComputeNodeGroupRequest.AddMember("amiId", _AmiId)
-
 	UpdateComputeNodeGroupRequest_subnetIds = UpdateComputeNodeGroupRequest.AddMember("subnetIds", _StringList)
+
+	UpdateComputeNodeGroupRequest_launchTemplateMode = UpdateComputeNodeGroupRequest.AddMember("launchTemplateMode", LaunchTemplateMode)
 
 	UpdateComputeNodeGroupRequest_customLaunchTemplate = UpdateComputeNodeGroupRequest.AddMember("customLaunchTemplate", CustomLaunchTemplate)
 

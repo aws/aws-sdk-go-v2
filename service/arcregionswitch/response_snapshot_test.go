@@ -2547,3 +2547,226 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ResourceNotFoundException.error", err)
 	}
 }
+
+func TestCheckResponseSnapshot_Error_RetryableConflictException(t *testing.T) {
+	want := &types.RetryableConflictException{
+		Message:      ptr.String("__Message__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RetryableConflictException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.UpdatePlan(context.Background(), &UpdatePlanInput{
+		Arn:         ptr.String("__Arn__"),
+		Description: ptr.String("__Description__"),
+		Workflows: []types.Workflow{
+			{
+				Steps: []types.Step{
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						ExecutionBlockConfiguration: &types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig{
+							Value: types.CustomActionLambdaConfiguration{
+								TimeoutMinutes: ptr.Int32(1),
+								Lambdas: []types.Lambdas{
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+										Payload:          ptr.String("__Payload__"),
+									},
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+										Payload:          ptr.String("__Payload__"),
+									},
+								},
+								RetryIntervalMinutes: ptr.Float32(1.0),
+								RegionToRun:          types.RegionToRunIn("activatingRegion"),
+								Ungraceful: &types.LambdaUngraceful{
+									Behavior: types.LambdaUngracefulBehavior("skip"),
+								},
+							},
+						},
+						ExecutionBlockType: types.ExecutionBlockType("CustomActionLambda"),
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						ExecutionBlockConfiguration: &types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig{
+							Value: types.CustomActionLambdaConfiguration{
+								TimeoutMinutes: ptr.Int32(1),
+								Lambdas: []types.Lambdas{
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+										Payload:          ptr.String("__Payload__"),
+									},
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+										Payload:          ptr.String("__Payload__"),
+									},
+								},
+								RetryIntervalMinutes: ptr.Float32(1.0),
+								RegionToRun:          types.RegionToRunIn("activatingRegion"),
+								Ungraceful: &types.LambdaUngraceful{
+									Behavior: types.LambdaUngracefulBehavior("skip"),
+								},
+							},
+						},
+						ExecutionBlockType: types.ExecutionBlockType("CustomActionLambda"),
+					},
+				},
+				WorkflowTargetAction: types.WorkflowTargetAction("activate"),
+				WorkflowTargetRegion: ptr.String("__WorkflowTargetRegion__"),
+				WorkflowDescription:  ptr.String("__WorkflowDescription__"),
+			},
+			{
+				Steps: []types.Step{
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						ExecutionBlockConfiguration: &types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig{
+							Value: types.CustomActionLambdaConfiguration{
+								TimeoutMinutes: ptr.Int32(1),
+								Lambdas: []types.Lambdas{
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+										Payload:          ptr.String("__Payload__"),
+									},
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+										Payload:          ptr.String("__Payload__"),
+									},
+								},
+								RetryIntervalMinutes: ptr.Float32(1.0),
+								RegionToRun:          types.RegionToRunIn("activatingRegion"),
+								Ungraceful: &types.LambdaUngraceful{
+									Behavior: types.LambdaUngracefulBehavior("skip"),
+								},
+							},
+						},
+						ExecutionBlockType: types.ExecutionBlockType("CustomActionLambda"),
+					},
+					{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						ExecutionBlockConfiguration: &types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig{
+							Value: types.CustomActionLambdaConfiguration{
+								TimeoutMinutes: ptr.Int32(1),
+								Lambdas: []types.Lambdas{
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+										Payload:          ptr.String("__Payload__"),
+									},
+									{
+										CrossAccountRole: ptr.String("__CrossAccountRole__"),
+										ExternalId:       ptr.String("__ExternalId__"),
+										Arn:              ptr.String("__Arn__"),
+										Payload:          ptr.String("__Payload__"),
+									},
+								},
+								RetryIntervalMinutes: ptr.Float32(1.0),
+								RegionToRun:          types.RegionToRunIn("activatingRegion"),
+								Ungraceful: &types.LambdaUngraceful{
+									Behavior: types.LambdaUngracefulBehavior("skip"),
+								},
+							},
+						},
+						ExecutionBlockType: types.ExecutionBlockType("CustomActionLambda"),
+					},
+				},
+				WorkflowTargetAction: types.WorkflowTargetAction("activate"),
+				WorkflowTargetRegion: ptr.String("__WorkflowTargetRegion__"),
+				WorkflowDescription:  ptr.String("__WorkflowDescription__"),
+			},
+		},
+		ExecutionRole:                ptr.String("__ExecutionRole__"),
+		RecoveryTimeObjectiveMinutes: ptr.Int32(1),
+		AssociatedAlarms: map[string]types.AssociatedAlarm{
+			"key0": {
+				CrossAccountRole:   ptr.String("__CrossAccountRole__"),
+				ExternalId:         ptr.String("__ExternalId__"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				AlarmType:          types.AlarmType("applicationHealth"),
+			},
+		},
+		Triggers: []types.Trigger{
+			{
+				Description:  ptr.String("__Description__"),
+				TargetRegion: ptr.String("__TargetRegion__"),
+				Action:       types.WorkflowTargetAction("activate"),
+				Conditions: []types.TriggerCondition{
+					{
+						AssociatedAlarmName: ptr.String("__AssociatedAlarmName__"),
+						Condition:           types.AlarmCondition("red"),
+					},
+					{
+						AssociatedAlarmName: ptr.String("__AssociatedAlarmName__"),
+						Condition:           types.AlarmCondition("red"),
+					},
+				},
+				MinDelayMinutesBetweenExecutions: ptr.Int32(1),
+			},
+			{
+				Description:  ptr.String("__Description__"),
+				TargetRegion: ptr.String("__TargetRegion__"),
+				Action:       types.WorkflowTargetAction("activate"),
+				Conditions: []types.TriggerCondition{
+					{
+						AssociatedAlarmName: ptr.String("__AssociatedAlarmName__"),
+						Condition:           types.AlarmCondition("red"),
+					},
+					{
+						AssociatedAlarmName: ptr.String("__AssociatedAlarmName__"),
+						Condition:           types.AlarmCondition("red"),
+					},
+				},
+				MinDelayMinutesBetweenExecutions: ptr.Int32(1),
+			},
+		},
+		ReportConfiguration: &types.ReportConfiguration{
+			ReportOutput: []types.ReportOutputConfiguration{
+				&types.ReportOutputConfigurationMemberS3Configuration{
+					Value: types.S3ReportOutputConfiguration{
+						BucketPath:  ptr.String("__BucketPath__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+				&types.ReportOutputConfigurationMemberS3Configuration{
+					Value: types.S3ReportOutputConfiguration{
+						BucketPath:  ptr.String("__BucketPath__"),
+						BucketOwner: ptr.String("__BucketOwner__"),
+					},
+				},
+			},
+		},
+		ServiceQuotaChecksEnabled: ptr.Bool(true),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.RetryableConflictException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.RetryableConflictException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "RetryableConflictException.error", err)
+	}
+}

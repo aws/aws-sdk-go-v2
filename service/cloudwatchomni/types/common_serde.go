@@ -174,6 +174,24 @@ func serializeAlertSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeDataAccessActionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeDataAccessTargetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DataAccessTarget) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDomainSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DomainSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -618,6 +636,49 @@ func deserializeAlertSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 
 		vv = AlertSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDataAccessActionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDataAccessTargetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DataAccessTarget) error {
+	*v = make([]DataAccessTarget, 0)
+	var vv DataAccessTarget
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero DataAccessTarget
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = DataAccessTarget{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1360,6 +1421,15 @@ func serializeContextGraphAttributeMap(s smithy.ShapeSerializer, schema *smithy.
 	s.CloseMap()
 }
 
+func serializeDataAccessAuditContext(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func serializeIntelligenceTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -1482,6 +1552,27 @@ func deserializeContextConditionsMap(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeContextGraphAttributeMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeDataAccessAuditContext(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {

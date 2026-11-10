@@ -2432,6 +2432,27 @@ func (LocationUpdateStatus) Values() []LocationUpdateStatus {
 	}
 }
 
+type LogDeliveryDestinationType string
+
+// Enum values for LogDeliveryDestinationType
+const (
+	LogDeliveryDestinationTypeCloudwatch LogDeliveryDestinationType = "CLOUDWATCH"
+	LogDeliveryDestinationTypeS3         LogDeliveryDestinationType = "S3"
+	LogDeliveryDestinationTypeFirehose   LogDeliveryDestinationType = "FIREHOSE"
+)
+
+// Values returns all known values for LogDeliveryDestinationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LogDeliveryDestinationType) Values() []LogDeliveryDestinationType {
+	return []LogDeliveryDestinationType{
+		"CLOUDWATCH",
+		"S3",
+		"FIREHOSE",
+	}
+}
+
 type LogDestination string
 
 // Enum values for LogDestination

@@ -267,6 +267,14 @@ func serializeRedshiftServiceIntegrations(s smithy.ShapeSerializer, schema *smit
 	s.CloseList()
 }
 
+func serializeResourceArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeResourceInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceInfo) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -914,6 +922,27 @@ func deserializeRedshiftServiceIntegrations(d smithy.ShapeDeserializer, s *smith
 		}
 
 		if err := deserializeRedshiftScopeUnion(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeResourceArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

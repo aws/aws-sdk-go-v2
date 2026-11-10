@@ -478,6 +478,16 @@ func serializeLocationStateList(s smithy.ShapeSerializer, schema *smithy.Schema,
 	s.CloseList()
 }
 
+func serializeLogDeliveryDestinationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []LogDeliveryDestination) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeMatchedPlayerSessionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MatchedPlayerSession) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1841,6 +1851,28 @@ func deserializeLocationStateList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 		}
 
 		vv = LocationState{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeLogDeliveryDestinationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LogDeliveryDestination) error {
+	*v = make([]LogDeliveryDestination, 0)
+	var vv LogDeliveryDestination
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero LogDeliveryDestination
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = LogDeliveryDestination{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

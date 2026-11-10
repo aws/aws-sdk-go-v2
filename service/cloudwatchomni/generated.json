@@ -41,6 +41,7 @@
         "api_op_GetOmniDashboard.go",
         "api_op_GetSpace.go",
         "api_op_GetSpaceCredentialsForOrganization.go",
+        "api_op_GetSpaceDataAccess.go",
         "api_op_GetTelemetryQueryResults.go",
         "api_op_GetView.go",
         "api_op_ListAccessGrants.go",

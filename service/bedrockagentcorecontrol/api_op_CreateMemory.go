@@ -29,8 +29,7 @@ func (c *Client) CreateMemory(ctx context.Context, params *CreateMemoryInput, op
 
 type CreateMemoryInput struct {
 
-	// The duration after which memory events expire. Specified as an ISO 8601
-	// duration.
+	// The number of days after which memory events expire, between 7 and 3650 days.
 	//
 	// This member is required.
 	EventExpiryDuration *int32

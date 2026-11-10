@@ -171,6 +171,8 @@ type Artifact struct {
 	//   - CUSTOMER_ARTIFACT_LOG
 	//
 	//   - TESTSPEC_OUTPUT
+	//
+	//   - DEVICE_CONNECT_COMMAND_LOG
 	Type ArtifactType
 
 	// The presigned Amazon S3 URL that can be used with a GET request to download the
@@ -383,8 +385,8 @@ type CreateRemoteAccessSessionConfiguration struct {
 	// access session.
 	//
 	//   - appium:version : The major version of the Appium server to use for the
-	//   session (for example, 2 or 3). The service may reject the selected version if it
-	//   is not available for the selected device.
+	//   session (for example, 2 or 3). The service might reject the selected version if
+	//   it is not available for the selected device.
 	Parameters map[string]string
 
 	// An array of ARNs included in the VPC endpoint configuration.
@@ -3576,6 +3578,10 @@ type Run struct {
 	// The run's stop time.
 	Stopped *time.Time
 
+	// The ARN of the test package the run was scheduled with. This field is not
+	// returned for test types that do not use a test package, such as BUILTIN_FUZZ .
+	TestPackageArn *string
+
 	// The ARN of the YAML-formatted test specification for the run.
 	TestSpecArn *string
 
@@ -3745,6 +3751,9 @@ func (v *Run) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Stopped != nil {
 		s.WriteTime(schemas.Run_stopped, *v.Stopped)
 	}
+	if v.TestPackageArn != nil {
+		s.WriteString(schemas.Run_testPackageArn, *v.TestPackageArn)
+	}
 	if v.TestSpecArn != nil {
 		s.WriteString(schemas.Run_testSpecArn, *v.TestSpecArn)
 	}
@@ -3880,6 +3889,9 @@ func (v *Run) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Run_stopped:
 			v.Stopped = new(time.Time)
 			return d.ReadTime(schemas.Run_stopped, v.Stopped)
+		case schemas.Run_testPackageArn:
+			v.TestPackageArn = new(string)
+			return d.ReadString(schemas.Run_testPackageArn, v.TestPackageArn)
 		case schemas.Run_testSpecArn:
 			v.TestSpecArn = new(string)
 			return d.ReadString(schemas.Run_testSpecArn, v.TestSpecArn)
@@ -4079,11 +4091,14 @@ type ScheduleRunConfiguration struct {
 	// Device Farm extracts to external data for Android or the app's sandbox for iOS.
 	ExtraDataPackageArn *string
 
-	// The types of insights to generate for a run. Specify one or more values to opt
-	// in to insights generation when scheduling a run.
+	// The types of insights to generate for a run. If you do not specify a value, the
+	// default is TEST_REPORT for runs that support insights.
 	//
-	// Insights are currently supported for custom mode runs with Instrumentation,
-	// Appium Java TestNG, and XCTest UI test types.
+	// Specify NONE if you do not want the service to generate insights for the run.
+	// You cannot combine NONE with any other value.
+	//
+	// Insights are supported for custom mode runs of all test types except Appium
+	// Ruby and Appium Web Ruby.
 	InsightsTypes []InsightsType
 
 	// Information about the locale that is used for the run.

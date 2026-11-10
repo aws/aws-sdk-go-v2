@@ -2681,6 +2681,25 @@ func validateGameServerGroupAutoScalingPolicy(v *types.GameServerGroupAutoScalin
 	}
 }
 
+func validateGameSessionQueueLogConfiguration(v *types.GameSessionQueueLogConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GameSessionQueueLogConfiguration"}
+	if v.DeliveryDestinations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryDestinations"))
+	} else if v.DeliveryDestinations != nil {
+		if err := validateLogDeliveryDestinationList(v.DeliveryDestinations); err != nil {
+			invalidParams.AddNested("DeliveryDestinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInstanceDefinition(v *types.InstanceDefinition) error {
 	if v == nil {
 		return nil
@@ -2776,6 +2795,38 @@ func validateLocationConfigurationList(v []types.LocationConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "LocationConfigurationList"}
 	for i := range v {
 		if err := validateLocationConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogDeliveryDestination(v *types.LogDeliveryDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogDeliveryDestination"}
+	if len(v.LogDestination) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogDestination"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogDeliveryDestinationList(v []types.LogDeliveryDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogDeliveryDestinationList"}
+	for i := range v {
+		if err := validateLogDeliveryDestination(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3267,6 +3318,11 @@ func validateOpCreateGameSessionQueueInput(v *CreateGameSessionQueueInput) error
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LogConfiguration != nil {
+		if err := validateGameSessionQueueLogConfiguration(v.LogConfiguration); err != nil {
+			invalidParams.AddNested("LogConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4727,6 +4783,16 @@ func validateOpUpdateGameSessionQueueInput(v *UpdateGameSessionQueueInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateGameSessionQueueInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.AddLogDeliveryDestinations != nil {
+		if err := validateLogDeliveryDestinationList(v.AddLogDeliveryDestinations); err != nil {
+			invalidParams.AddNested("AddLogDeliveryDestinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RemoveLogDeliveryDestinations != nil {
+		if err := validateLogDeliveryDestinationList(v.RemoveLogDeliveryDestinations); err != nil {
+			invalidParams.AddNested("RemoveLogDeliveryDestinations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

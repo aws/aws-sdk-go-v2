@@ -921,6 +921,17 @@ func serializeLaunchTemplateSource(s smithy.ShapeSerializer, schema *smithy.Sche
 	}
 }
 
+func serializeLifecycleHookAction(s smithy.ShapeSerializer, schema *smithy.Schema, v types.LifecycleHookAction) {
+	switch vv := v.(type) {
+	case *types.LifecycleHookActionMemberHttpPost:
+		s.WriteUnion(schema, schemas.LifecycleHookAction_httpPost)
+		s.WriteStruct(schemas.LifecycleHookAction_httpPost)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeMatchPrincipalEntry(s smithy.ShapeSerializer, schema *smithy.Schema, v types.MatchPrincipalEntry) {
 	switch vv := v.(type) {
 	case *types.MatchPrincipalEntryMemberIamPrincipal:
@@ -2402,6 +2413,18 @@ func deserializeLaunchTemplateSource(d smithy.ShapeDeserializer, s *smithy.Schem
 		switch ms {
 		case schemas.LaunchTemplateSource_launchParameters:
 			vv := &types.LaunchTemplateSourceMemberLaunchParameters{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeLifecycleHookAction(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.LifecycleHookAction) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.LifecycleHookAction_httpPost:
+			vv := &types.LifecycleHookActionMemberHttpPost{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -4045,6 +4068,14 @@ func serializePrivateEndpointOverrides(s smithy.ShapeSerializer, schema *smithy.
 	s.CloseList()
 }
 
+func serializePublicDomainNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeRateConfigs(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RateConfig) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -4097,6 +4128,16 @@ func serializeRequiredProperties(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeResourceConfigurations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ResourceConfiguration) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -6835,6 +6876,27 @@ func deserializePrivateEndpointOverrides(d smithy.ShapeDeserializer, s *smithy.S
 	})
 }
 
+func deserializePublicDomainNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeRateConfigs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RateConfig) error {
 	*v = make([]types.RateConfig, 0)
 	var vv types.RateConfig
@@ -6957,6 +7019,28 @@ func deserializeRequiredProperties(d smithy.ShapeDeserializer, s *smithy.Schema,
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeResourceConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ResourceConfiguration) error {
+	*v = make([]types.ResourceConfiguration, 0)
+	var vv types.ResourceConfiguration
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ResourceConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ResourceConfiguration{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

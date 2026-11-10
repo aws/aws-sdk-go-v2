@@ -4828,6 +4828,11 @@ type Contact struct {
 	// a unique identifier for the form.
 	ContactEvaluations map[string]ContactEvaluation
 
+	// Information about the conversational analytics configuration applied to the
+	// contact. This field is present only for contacts where conversational analytics
+	// is enabled in the contact flow.
+	ContactLens *ContactLens
+
 	// Information about the Customer on the contact.
 	Customer *Customer
 
@@ -5033,6 +5038,11 @@ func (v *Contact) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContactEvaluations != nil {
 		serializeContactEvaluations(s, schemas.Contact_ContactEvaluations, v.ContactEvaluations)
 	}
+	if v.ContactLens != nil {
+		s.WriteStruct(schemas.Contact_ContactLens)
+		v.ContactLens.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Customer != nil {
 		s.WriteStruct(schemas.Contact_Customer)
 		v.Customer.SerializeMembers(s)
@@ -5213,6 +5223,9 @@ func (v *Contact) Deserialize(d smithy.ShapeDeserializer) error {
 			return v.ContactDetails.Deserialize(d)
 		case schemas.Contact_ContactEvaluations:
 			return deserializeContactEvaluations(d, schemas.Contact_ContactEvaluations, &v.ContactEvaluations)
+		case schemas.Contact_ContactLens:
+			v.ContactLens = &ContactLens{}
+			return v.ContactLens.Deserialize(d)
 		case schemas.Contact_Customer:
 			v.Customer = &Customer{}
 			return v.Customer.Deserialize(d)
@@ -5440,6 +5453,55 @@ func (v *ContactAnalysisReference) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.ContactAnalysisReference_Value:
 			v.Value = new(string)
 			return d.ReadString(schemas.ContactAnalysisReference_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// The current processing state of conversational analytics for a contact,
+// including the analysis status and, when applicable, the reason for that status.
+type ContactAnalysisReferenceState struct {
+
+	// The status of conversational analytics processing for the contact. Valid values:
+	//
+	//   - REQUESTED – Analysis has been requested for the contact and has not finished.
+	//
+	//   - COMPLETED – Analysis finished successfully.
+	//
+	//   - FAILED – Analysis did not finish successfully. See StatusReason for the
+	//   cause.
+	Status *string
+
+	// The reason for the current analysis status. This value is populated only when
+	// the status is FAILED .
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContactAnalysisReferenceState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactAnalysisReferenceState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactAnalysisReferenceState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteString(schemas.ContactAnalysisReferenceState_Status, *v.Status)
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.ContactAnalysisReferenceState_StatusReason, *v.StatusReason)
+	}
+}
+func (v *ContactAnalysisReferenceState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactAnalysisReferenceState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactAnalysisReferenceState_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ContactAnalysisReferenceState_Status, v.Status)
+		case schemas.ContactAnalysisReferenceState_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.ContactAnalysisReferenceState_StatusReason, v.StatusReason)
 		}
 		return nil
 	})
@@ -7289,6 +7351,225 @@ func (v *ContactFlowVersionSummary) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// Information about the conversational analytics configuration applied to the
+// contact. This field is present only for contacts where conversational analytics
+// is enabled in the contact flow.
+type ContactLens struct {
+
+	// The conversational analytics configuration applied to the contact.
+	ConversationalAnalytics *ConversationalAnalytics
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContactLens) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactLens)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactLens) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConversationalAnalytics != nil {
+		s.WriteStruct(schemas.ContactLens_ConversationalAnalytics)
+		v.ConversationalAnalytics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ContactLens) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactLens, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactLens_ConversationalAnalytics:
+			v.ConversationalAnalytics = &ConversationalAnalytics{}
+			return v.ConversationalAnalytics.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The per-channel conversational analytics configuration for a contact.
+type ContactLensChannelConfiguration struct {
+
+	// The conversational analytics modes enabled for the channel. Valid values:
+	//
+	//   - RealTime – Real-time analysis is enabled during the contact. Voice channel
+	//   only.
+	//
+	//   - PostContact – Post-contact analysis is enabled after the contact ends. Voice
+	//   channel only.
+	//
+	//   - ContactLens – Conversational analytics is enabled for the contact. Chat
+	//   channel only.
+	AnalyticsModes []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContactLensChannelConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactLensChannelConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactLensChannelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsModes != nil {
+		serializeContactLensAnalyticsModeList(s, schemas.ContactLensChannelConfiguration_AnalyticsModes, v.AnalyticsModes)
+	}
+}
+func (v *ContactLensChannelConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactLensChannelConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactLensChannelConfiguration_AnalyticsModes:
+			return deserializeContactLensAnalyticsModeList(d, schemas.ContactLensChannelConfiguration_AnalyticsModes, &v.AnalyticsModes)
+		}
+		return nil
+	})
+}
+
+// The redaction configuration for conversational analytics transcripts.
+type ContactLensRedactionConfiguration struct {
+
+	// Specifies whether redaction is enabled for sensitive data, such as personal
+	// information, in the conversational analytics output. Valid values:
+	//
+	//   - Enable – Redaction is applied according to the other values in this object.
+	//
+	//   - Disable – Redaction is not applied, and all other values in this object are
+	//   ignored.
+	Behavior *string
+
+	// The entity types to redact from the transcript (for example, NAME , EMAIL ,
+	// ADDRESS ).
+	Entities []string
+
+	// How sensitive information is masked in the transcript. Valid values:
+	//
+	//   - PII – All redacted entities are replaced with the [PII] string.
+	//
+	//   - EntityType – All redacted entities are replaced with the label of the
+	//   entity. For example, when the EMAIL entity is configured for redaction, emails
+	//   in the transcript are replaced with the [EMAIL] string.
+	MaskMode *string
+
+	// The redaction policy that determines which versions of the transcript are
+	// stored. Valid values:
+	//
+	//   - None – No redaction is applied.
+	//
+	//   - RedactedOnly – Only the redacted transcript is stored.
+	//
+	//   - RedactedAndOriginal – Both the redacted and the original transcript are
+	//   stored.
+	Policy *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContactLensRedactionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactLensRedactionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactLensRedactionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Behavior != nil {
+		s.WriteString(schemas.ContactLensRedactionConfiguration_Behavior, *v.Behavior)
+	}
+	if v.Entities != nil {
+		serializeContactLensRedactionEntitiesList(s, schemas.ContactLensRedactionConfiguration_Entities, v.Entities)
+	}
+	if v.MaskMode != nil {
+		s.WriteString(schemas.ContactLensRedactionConfiguration_MaskMode, *v.MaskMode)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.ContactLensRedactionConfiguration_Policy, *v.Policy)
+	}
+}
+func (v *ContactLensRedactionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactLensRedactionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactLensRedactionConfiguration_Behavior:
+			v.Behavior = new(string)
+			return d.ReadString(schemas.ContactLensRedactionConfiguration_Behavior, v.Behavior)
+		case schemas.ContactLensRedactionConfiguration_Entities:
+			return deserializeContactLensRedactionEntitiesList(d, schemas.ContactLensRedactionConfiguration_Entities, &v.Entities)
+		case schemas.ContactLensRedactionConfiguration_MaskMode:
+			v.MaskMode = new(string)
+			return d.ReadString(schemas.ContactLensRedactionConfiguration_MaskMode, v.MaskMode)
+		case schemas.ContactLensRedactionConfiguration_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.ContactLensRedactionConfiguration_Policy, v.Policy)
+		}
+		return nil
+	})
+}
+
+// The conversational analytics sentiment analysis configuration for a contact.
+type ContactLensSentimentConfiguration struct {
+
+	// Specifies whether sentiment analysis is enabled for the contact. The default
+	// value is Disable . Valid values:
+	//
+	//   - Enable – Sentiment analysis is performed on the contact.
+	//
+	//   - Disable – Sentiment analysis is not performed on the contact.
+	Behavior *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContactLensSentimentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactLensSentimentConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactLensSentimentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Behavior != nil {
+		s.WriteString(schemas.ContactLensSentimentConfiguration_Behavior, *v.Behavior)
+	}
+}
+func (v *ContactLensSentimentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactLensSentimentConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactLensSentimentConfiguration_Behavior:
+			v.Behavior = new(string)
+			return d.ReadString(schemas.ContactLensSentimentConfiguration_Behavior, v.Behavior)
+		}
+		return nil
+	})
+}
+
+// The conversational analytics summary configuration for a contact.
+type ContactLensSummaryConfiguration struct {
+
+	// The conversational analytics summary modes enabled for the contact. Valid
+	// values: PostContact | AutomatedInteraction | ContactChain .
+	SummaryModes []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContactLensSummaryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactLensSummaryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactLensSummaryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SummaryModes != nil {
+		serializeContactLensSummaryModeList(s, schemas.ContactLensSummaryConfiguration_SummaryModes, v.SummaryModes)
+	}
+}
+func (v *ContactLensSummaryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactLensSummaryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactLensSummaryConfiguration_SummaryModes:
+			return deserializeContactLensSummaryModeList(d, schemas.ContactLensSummaryConfiguration_SummaryModes, &v.SummaryModes)
+		}
+		return nil
+	})
+}
+
 // Contains the details of a metric to be retrieved for a contact. Use this object
 // to specify which contact level metrics you want to include in your
 // GetContactMetrics request.
@@ -8004,6 +8285,144 @@ func (v *ControlPlaneUserAttributeFilter) Deserialize(d smithy.ShapeDeserializer
 		case schemas.ControlPlaneUserAttributeFilter_TagCondition:
 			v.TagCondition = &TagCondition{}
 			return v.TagCondition.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains the conversational analytics configuration and state for a contact.
+type ConversationalAnalytics struct {
+
+	// The conversational analytics settings that apply to the contact.
+	Configuration *ConversationalAnalyticsConfiguration
+
+	// The current state of conversational analytics processing for the contact.
+	ContactAnalysisReferenceState *ContactAnalysisReferenceState
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConversationalAnalytics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConversationalAnalytics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConversationalAnalytics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.ConversationalAnalytics_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContactAnalysisReferenceState != nil {
+		s.WriteStruct(schemas.ConversationalAnalytics_ContactAnalysisReferenceState)
+		v.ContactAnalysisReferenceState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConversationalAnalytics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConversationalAnalytics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConversationalAnalytics_Configuration:
+			v.Configuration = &ConversationalAnalyticsConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.ConversationalAnalytics_ContactAnalysisReferenceState:
+			v.ContactAnalysisReferenceState = &ContactAnalysisReferenceState{}
+			return v.ContactAnalysisReferenceState.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The conversational analytics configuration settings for a contact.
+type ConversationalAnalyticsConfiguration struct {
+
+	// The per-channel conversational analytics settings for the contact.
+	ChannelConfiguration *ContactLensChannelConfiguration
+
+	// Specifies whether conversational analytics is enabled for the contact.
+	Enabled *bool
+
+	// The language locale that conversational analytics uses to analyze the contact
+	// (for example, en-US ).
+	LanguageLocale *string
+
+	// The language locales that conversational analytics uses to analyze the contact
+	// (for example, en-US and es-ES ).
+	LanguageLocales []string
+
+	// The redaction configuration for the contact transcript.
+	RedactionConfiguration *ContactLensRedactionConfiguration
+
+	// The sentiment analysis configuration for the contact.
+	SentimentConfiguration *ContactLensSentimentConfiguration
+
+	// The summary configuration for the contact.
+	SummaryConfiguration *ContactLensSummaryConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConversationalAnalyticsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConversationalAnalyticsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConversationalAnalyticsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelConfiguration != nil {
+		s.WriteStruct(schemas.ConversationalAnalyticsConfiguration_ChannelConfiguration)
+		v.ChannelConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.ConversationalAnalyticsConfiguration_Enabled, *v.Enabled)
+	}
+	if v.LanguageLocale != nil {
+		s.WriteString(schemas.ConversationalAnalyticsConfiguration_LanguageLocale, *v.LanguageLocale)
+	}
+	if v.LanguageLocales != nil {
+		serializeLanguageLocales(s, schemas.ConversationalAnalyticsConfiguration_LanguageLocales, v.LanguageLocales)
+	}
+	if v.RedactionConfiguration != nil {
+		s.WriteStruct(schemas.ConversationalAnalyticsConfiguration_RedactionConfiguration)
+		v.RedactionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SentimentConfiguration != nil {
+		s.WriteStruct(schemas.ConversationalAnalyticsConfiguration_SentimentConfiguration)
+		v.SentimentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SummaryConfiguration != nil {
+		s.WriteStruct(schemas.ConversationalAnalyticsConfiguration_SummaryConfiguration)
+		v.SummaryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConversationalAnalyticsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConversationalAnalyticsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConversationalAnalyticsConfiguration_ChannelConfiguration:
+			v.ChannelConfiguration = &ContactLensChannelConfiguration{}
+			return v.ChannelConfiguration.Deserialize(d)
+		case schemas.ConversationalAnalyticsConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.ConversationalAnalyticsConfiguration_Enabled, v.Enabled)
+		case schemas.ConversationalAnalyticsConfiguration_LanguageLocale:
+			v.LanguageLocale = new(string)
+			return d.ReadString(schemas.ConversationalAnalyticsConfiguration_LanguageLocale, v.LanguageLocale)
+		case schemas.ConversationalAnalyticsConfiguration_LanguageLocales:
+			return deserializeLanguageLocales(d, schemas.ConversationalAnalyticsConfiguration_LanguageLocales, &v.LanguageLocales)
+		case schemas.ConversationalAnalyticsConfiguration_RedactionConfiguration:
+			v.RedactionConfiguration = &ContactLensRedactionConfiguration{}
+			return v.RedactionConfiguration.Deserialize(d)
+		case schemas.ConversationalAnalyticsConfiguration_SentimentConfiguration:
+			v.SentimentConfiguration = &ContactLensSentimentConfiguration{}
+			return v.SentimentConfiguration.Deserialize(d)
+		case schemas.ConversationalAnalyticsConfiguration_SummaryConfiguration:
+			v.SummaryConfiguration = &ContactLensSummaryConfiguration{}
+			return v.SummaryConfiguration.Deserialize(d)
 		}
 		return nil
 	})
@@ -22184,8 +22603,8 @@ func (v *NotificationSearchSummary) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
-// Additional recipients for UpdateContact, allowing an empty list to clear CC
-// recipients.
+// The additional recipients of an outbound email that you can update. An empty
+// list of CcEmailAddresses clears the existing CC recipients.
 type NullableAdditionalRecipients struct {
 
 	// The additional CC email address recipients. You can specify up to 50 addresses.

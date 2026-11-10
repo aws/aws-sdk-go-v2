@@ -573,6 +573,40 @@ func TestUpdateResponseSnapshot_GetTableBucketEncryption(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetTableBucketLogging(t *testing.T) {
+	want := &GetTableBucketLoggingOutput{
+		TableBucketLoggingStatus: &types.TableBucketLoggingStatus{
+			LoggingEnabled: &types.LoggingEnabled{
+				TargetBucket: ptr.String("__TargetBucket__"),
+				TargetPrefix: ptr.String("__TargetPrefix__"),
+				TargetObjectKeyFormat: &types.TargetObjectKeyFormat{
+					PartitionedPrefix: &types.PartitionedPrefix{
+						PartitionDateSource: types.PartitionDateSource("EventTime"),
+					},
+				},
+			},
+		},
+	}
+	proto := restjson1.New(schemas.S3TableBuckets)
+	opSchema := smithy.NewOperationSchema(schemas.GetTableBucketLogging, schemas.GetTableBucketLoggingResponse, schemas.GetTableBucketLoggingResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetTableBucketLogging.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetTableBucketMaintenanceConfiguration(t *testing.T) {
 	want := &GetTableBucketMaintenanceConfigurationOutput{
 		TableBucketARN: ptr.String("__TableBucketARN__"),
@@ -1394,6 +1428,28 @@ func TestUpdateResponseSnapshot_PutTableBucketEncryption(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("PutTableBucketEncryption.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PutTableBucketLogging(t *testing.T) {
+	want := &PutTableBucketLoggingOutput{}
+	proto := restjson1.New(schemas.S3TableBuckets)
+	opSchema := smithy.NewOperationSchema(schemas.PutTableBucketLogging, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutTableBucketLogging.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

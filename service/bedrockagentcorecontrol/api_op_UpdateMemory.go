@@ -45,8 +45,7 @@ type UpdateMemoryInput struct {
 	// The updated description of the AgentCore Memory resource.
 	Description *string
 
-	// The number of days after which memory events will expire, between 7 and 365
-	// days.
+	// The number of days after which memory events expire, between 7 and 3650 days.
 	EventExpiryDuration *int32
 
 	// The ARN of the IAM role that provides permissions for the AgentCore Memory

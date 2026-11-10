@@ -490,6 +490,26 @@ func (m *validateOpGetEffectivePermissionsForPath) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetGlueFunctionSessionContext struct {
+}
+
+func (*validateOpGetGlueFunctionSessionContext) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetGlueFunctionSessionContext) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetGlueFunctionSessionContextInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetGlueFunctionSessionContextInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetLFTagExpression struct {
 }
 
@@ -625,6 +645,26 @@ func (m *validateOpGetTableObjects) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTableObjectsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTemporaryGlueFunctionCredentials struct {
+}
+
+func (*validateOpGetTemporaryGlueFunctionCredentials) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTemporaryGlueFunctionCredentials) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTemporaryGlueFunctionCredentialsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTemporaryGlueFunctionCredentialsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1226,6 +1266,10 @@ func addOpGetEffectivePermissionsForPathValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpGetEffectivePermissionsForPath{}, middleware.After)
 }
 
+func addOpGetGlueFunctionSessionContextValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetGlueFunctionSessionContext{}, middleware.After)
+}
+
 func addOpGetLFTagExpressionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLFTagExpression{}, middleware.After)
 }
@@ -1252,6 +1296,10 @@ func addOpGetRLSPolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetTableObjectsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTableObjects{}, middleware.After)
+}
+
+func addOpGetTemporaryGlueFunctionCredentialsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTemporaryGlueFunctionCredentials{}, middleware.After)
 }
 
 func addOpGetTemporaryGluePartitionCredentialsValidationMiddleware(stack *middleware.Stack) error {
@@ -1364,6 +1412,21 @@ func validateAddObjectInput(v *types.AddObjectInput) error {
 	}
 	if v.ETag == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ETag"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnyResource(v *types.AnyResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnyResource"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1737,6 +1800,11 @@ func validateResource(v *types.Resource) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Resource"}
+	if v.AnyResource != nil {
+		if err := validateAnyResource(v.AnyResource); err != nil {
+			invalidParams.AddNested("AnyResource", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Database != nil {
 		if err := validateDatabaseResource(v.Database); err != nil {
 			invalidParams.AddNested("Database", err.(smithy.InvalidParamsError))
@@ -1775,6 +1843,11 @@ func validateResource(v *types.Resource) error {
 	if v.RLSPolicy != nil {
 		if err := validateRLSPolicyResource(v.RLSPolicy); err != nil {
 			invalidParams.AddNested("RLSPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UserDefinedFunction != nil {
+		if err := validateUserDefinedFunctionResource(v.UserDefinedFunction); err != nil {
+			invalidParams.AddNested("UserDefinedFunction", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1860,6 +1933,21 @@ func validateTableWithColumnsResource(v *types.TableWithColumnsResource) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUserDefinedFunctionResource(v *types.UserDefinedFunctionResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UserDefinedFunctionResource"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2405,6 +2493,21 @@ func validateOpGetEffectivePermissionsForPathInput(v *GetEffectivePermissionsFor
 	}
 }
 
+func validateOpGetGlueFunctionSessionContextInput(v *GetGlueFunctionSessionContextInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetGlueFunctionSessionContextInput"}
+	if v.UserDefinedFunctionArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserDefinedFunctionArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetLFTagExpressionInput(v *GetLFTagExpressionInput) error {
 	if v == nil {
 		return nil
@@ -2509,6 +2612,21 @@ func validateOpGetTableObjectsInput(v *GetTableObjectsInput) error {
 	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTemporaryGlueFunctionCredentialsInput(v *GetTemporaryGlueFunctionCredentialsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTemporaryGlueFunctionCredentialsInput"}
+	if v.UserDefinedFunctionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserDefinedFunctionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

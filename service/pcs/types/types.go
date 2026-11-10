@@ -659,11 +659,6 @@ type ComputeNodeGroup struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// An Amazon EC2 launch template PCS uses to launch compute nodes.
-	//
-	// This member is required.
-	CustomLaunchTemplate *CustomLaunchTemplate
-
 	// The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM
 	// role when launching EC2 instances. The role contained in your instance profile
 	// must have the pcs:RegisterComputeNodeGroupInstance permission and the role name
@@ -725,11 +720,27 @@ type ComputeNodeGroup struct {
 	SubnetIds []string
 
 	// The ID of the Amazon Machine Image (AMI) that PCS uses to launch instances. If
-	// not provided, PCS uses the AMI ID specified in the custom launch template.
+	// not present, PCS uses the AMI ID specified in the custom launch template.
 	AmiId *string
+
+	// The custom Amazon EC2 launch template associated with the compute node group.
+	// This value is present when launchTemplateMode is CUSTOM and isn't present when
+	// launchTemplateMode is MANAGED .
+	CustomLaunchTemplate *CustomLaunchTemplate
 
 	// The list of errors that occurred during compute node group provisioning.
 	ErrorInfo []ErrorInfo
+
+	// Indicates whether the compute node group uses a custom launch template or a
+	// launch template that PCS manages. The default value is CUSTOM .
+	//
+	// Valid values:
+	//
+	//   - CUSTOM – The compute node group uses the launch template in
+	//   customLaunchTemplate .
+	//
+	//   - MANAGED – PCS creates and manages the launch template.
+	LaunchTemplateMode LaunchTemplateMode
 
 	// The lifecycle actions to run on compute nodes in the compute node group. Use
 	// lifecycle actions to run custom scripts at defined stages of a compute node's
@@ -753,12 +764,26 @@ type ComputeNodeGroup struct {
 	// [Amazon EC2 billing and purchasing options]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
 	PurchaseOption PurchaseOption
 
+	// The IDs of the EC2 security groups configured directly on the compute node
+	// group. PCS uses these security groups instead of the security groups in the
+	// custom launch template. This value isn't present if security groups aren't
+	// configured directly on the compute node group. In that case, PCS uses the
+	// security groups in the custom launch template.
+	SecurityGroupIds []string
+
 	// Additional options related to the Slurm scheduler.
 	SlurmConfiguration *ComputeNodeGroupSlurmConfiguration
 
 	// Additional configuration when you specify SPOT as the purchaseOption for the
 	// CreateComputeNodeGroup API action.
 	SpotOptions *SpotOptions
+
+	// The name of the EC2 key pair configured directly on the compute node group. PCS
+	// uses this key pair instead of the key pair in the custom launch template. This
+	// value isn't present if a key pair isn't configured directly on the compute node
+	// group. In that case, PCS uses the key pair in the custom launch template, if one
+	// is specified.
+	SshKeyName *string
 
 	noSmithyDocumentSerde
 }
@@ -799,6 +824,9 @@ func (v *ComputeNodeGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceConfigs != nil {
 		serializeInstanceList(s, schemas.ComputeNodeGroup_instanceConfigs, v.InstanceConfigs)
 	}
+	if v.LaunchTemplateMode != "" {
+		s.WriteString(schemas.ComputeNodeGroup_launchTemplateMode, string(v.LaunchTemplateMode))
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.ComputeNodeGroup_modifiedAt, *v.ModifiedAt)
 	}
@@ -818,6 +846,9 @@ func (v *ComputeNodeGroup) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ScalingConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.ComputeNodeGroup_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SlurmConfiguration != nil {
 		s.WriteStruct(schemas.ComputeNodeGroup_slurmConfiguration)
 		v.SlurmConfiguration.SerializeMembers(s)
@@ -827,6 +858,9 @@ func (v *ComputeNodeGroup) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteStruct(schemas.ComputeNodeGroup_spotOptions)
 		v.SpotOptions.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.SshKeyName != nil {
+		s.WriteString(schemas.ComputeNodeGroup_sshKeyName, *v.SshKeyName)
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.ComputeNodeGroup_status, string(v.Status))
@@ -863,6 +897,13 @@ func (v *ComputeNodeGroup) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.ComputeNodeGroup_id, v.Id)
 		case schemas.ComputeNodeGroup_instanceConfigs:
 			return deserializeInstanceList(d, schemas.ComputeNodeGroup_instanceConfigs, &v.InstanceConfigs)
+		case schemas.ComputeNodeGroup_launchTemplateMode:
+			var ev string
+			if err := d.ReadString(schemas.ComputeNodeGroup_launchTemplateMode, &ev); err != nil {
+				return err
+			}
+			v.LaunchTemplateMode = LaunchTemplateMode(ev)
+			return nil
 		case schemas.ComputeNodeGroup_modifiedAt:
 			v.ModifiedAt = new(time.Time)
 			return d.ReadTime(schemas.ComputeNodeGroup_modifiedAt, v.ModifiedAt)
@@ -882,12 +923,17 @@ func (v *ComputeNodeGroup) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ComputeNodeGroup_scalingConfiguration:
 			v.ScalingConfiguration = &ScalingConfiguration{}
 			return v.ScalingConfiguration.Deserialize(d)
+		case schemas.ComputeNodeGroup_securityGroupIds:
+			return deserializeSecurityGroupIdList(d, schemas.ComputeNodeGroup_securityGroupIds, &v.SecurityGroupIds)
 		case schemas.ComputeNodeGroup_slurmConfiguration:
 			v.SlurmConfiguration = &ComputeNodeGroupSlurmConfiguration{}
 			return v.SlurmConfiguration.Deserialize(d)
 		case schemas.ComputeNodeGroup_spotOptions:
 			v.SpotOptions = &SpotOptions{}
 			return v.SpotOptions.Deserialize(d)
+		case schemas.ComputeNodeGroup_sshKeyName:
+			v.SshKeyName = new(string)
+			return d.ReadString(schemas.ComputeNodeGroup_sshKeyName, v.SshKeyName)
 		case schemas.ComputeNodeGroup_status:
 			var ev string
 			if err := d.ReadString(schemas.ComputeNodeGroup_status, &ev); err != nil {
@@ -1158,17 +1204,20 @@ func (v *ComputeNodeGroupSummary) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// An Amazon EC2 launch template PCS uses to launch compute nodes.
+// An Amazon EC2 launch template PCS uses to launch compute nodes. The structure
+// contains the launch template ID and version.
 type CustomLaunchTemplate struct {
 
-	// The ID of the EC2 launch template to use to provision instances.
+	// The ID of the EC2 launch template to use to provision instances. Specify this
+	// value together with version .
 	//
 	// Example: lt-xxxx
 	//
 	// This member is required.
 	Id *string
 
-	// The version of the EC2 launch template to use to provision instances.
+	// The version of the EC2 launch template to use to provision instances. Specify
+	// this value together with id .
 	//
 	// This member is required.
 	Version *string

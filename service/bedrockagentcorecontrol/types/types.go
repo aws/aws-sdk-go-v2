@@ -1705,6 +1705,42 @@ func (v *BrowserSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The lifecycle hooks that run when you create or update the AgentCore Runtime,
+// before any sessions are created.
+type BuildLifecycleHooks struct {
+
+	// The hook that warms up your agent before any sessions are created. Use this
+	// hook to load the resources that your sessions need, such as models, libraries,
+	// or caches. Your hook must complete within 120 seconds.
+	Warmup *LifecycleHook
+
+	noSmithyDocumentSerde
+}
+
+func (v *BuildLifecycleHooks) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuildLifecycleHooks)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuildLifecycleHooks) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Warmup != nil {
+		s.WriteStruct(schemas.BuildLifecycleHooks_warmup)
+		v.Warmup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BuildLifecycleHooks) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BuildLifecycleHooks, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BuildLifecycleHooks_warmup:
+			v.Warmup = &LifecycleHook{}
+			return v.Warmup.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configuration for customer-managed compute capacity for the AgentCore Runtime.
 // A capacity provider runs the AgentCore Runtime on the Instances compute type,
 // using Amazon Web Services managed compute in your account.
@@ -5544,6 +5580,56 @@ func (v *DimensionRatingScaleMemberNumerical) Serialize(s smithy.ShapeSerializer
 }
 func (v *DimensionRatingScaleMemberNumerical) Deserialize(d smithy.ShapeDeserializer) error {
 	return deserializeNumericalScaleDefinitions(d, schemas.DimensionRatingScale_numerical, &v.Value)
+}
+
+// The public domain names for a gateway that clients reach through your own proxy
+// or custom domain. When you configure a domain override, the gateway advertises
+// these domains instead of the inbound Host header in the URLs that it returns for
+// OAuth discovery, such as the protected resource metadata and the
+// WWW-Authenticate challenge.
+type DomainOverride struct {
+
+	// The default public domain name for the gateway. The gateway advertises this
+	// domain when a request doesn't select a specific domain.
+	//
+	// This member is required.
+	DefaultDomain *string
+
+	// Additional public domain names for the gateway, up to 10. Don't repeat the
+	// default domain or list a domain more than once. A request can select one of
+	// these domains, or the default domain, with the
+	// x-amzn-bedrock-agentcore-gateway-domain header. The gateway rejects a request
+	// that selects a domain that isn't configured.
+	AlternateDomains []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DomainOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlternateDomains != nil {
+		serializePublicDomainNameList(s, schemas.DomainOverride_alternateDomains, v.AlternateDomains)
+	}
+	if v.DefaultDomain != nil {
+		s.WriteString(schemas.DomainOverride_defaultDomain, *v.DefaultDomain)
+	}
+}
+func (v *DomainOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainOverride_alternateDomains:
+			return deserializePublicDomainNameList(d, schemas.DomainOverride_alternateDomains, &v.AlternateDomains)
+		case schemas.DomainOverride_defaultDomain:
+			v.DefaultDomain = new(string)
+			return d.ReadString(schemas.DomainOverride_defaultDomain, v.DefaultDomain)
+		}
+		return nil
+	})
 }
 
 // The configuration for an Amazon EBS-backed persistent volume. The service
@@ -11553,6 +11639,55 @@ func (v *HttpConnectorTargetConfiguration) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
+// A lifecycle hook action that sends an HTTP POST request to the agent's
+// container. The path and port can't conflict with a path that your agent already
+// serves for AgentCore Runtime, such as the protocol's invocation path or the
+// health check path.
+type HttpPostLifecycleHookAction struct {
+
+	// The path in the agent's container that AgentCore Runtime sends the POST request
+	// to.
+	//
+	// This member is required.
+	Path *string
+
+	// The port in the agent's container that AgentCore Runtime sends the POST request
+	// to. If you don't specify a port, the default is the runtime's server port: the
+	// port in the protocol configuration if one is set, otherwise the protocol's
+	// default port.
+	Port *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *HttpPostLifecycleHookAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPostLifecycleHookAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPostLifecycleHookAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.HttpPostLifecycleHookAction_path, *v.Path)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.HttpPostLifecycleHookAction_port, *v.Port)
+	}
+}
+func (v *HttpPostLifecycleHookAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPostLifecycleHookAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPostLifecycleHookAction_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.HttpPostLifecycleHookAction_path, v.Path)
+		case schemas.HttpPostLifecycleHookAction_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.HttpPostLifecycleHookAction_port, v.Port)
+		}
+		return nil
+	})
+}
+
 // The HTTP target configuration for a gateway target. Contains the configuration
 // for HTTP-based target endpoints.
 //
@@ -13032,6 +13167,69 @@ func (v *LifecycleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		}
 		return nil
 	})
+}
+
+// A lifecycle hook, which defines the action that AgentCore Runtime runs at a
+// point in the runtime's lifecycle.
+type LifecycleHook struct {
+
+	// The action that AgentCore Runtime runs for the hook. Specify exactly one action.
+	//
+	// This member is required.
+	Action LifecycleHookAction
+
+	noSmithyDocumentSerde
+}
+
+func (v *LifecycleHook) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecycleHook)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecycleHook) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		serializeLifecycleHookAction(s, schemas.LifecycleHook_action, v.Action)
+	}
+}
+func (v *LifecycleHook) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecycleHook, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecycleHook_action:
+			return deserializeLifecycleHookAction(d, schemas.LifecycleHook_action, &v.Action)
+		}
+		return nil
+	})
+}
+
+// The action that a lifecycle hook runs. Specify exactly one member. Currently,
+// httpPost is the only supported action.
+//
+// The following types satisfy this interface:
+//
+//	LifecycleHookActionMemberHttpPost
+type LifecycleHookAction interface {
+	isLifecycleHookAction()
+}
+
+// Sends an HTTP POST request to your agent's container on the specified port and
+// path to run the hook. The hook succeeds if your container returns a 2xx
+// response. The hook fails if your container returns any other response or doesn't
+// respond before the hook times out.
+type LifecycleHookActionMemberHttpPost struct {
+	Value HttpPostLifecycleHookAction
+
+	noSmithyDocumentSerde
+}
+
+func (*LifecycleHookActionMemberHttpPost) isLifecycleHookAction() {}
+func (v *LifecycleHookActionMemberHttpPost) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecycleHookAction_httpPost)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *LifecycleHookActionMemberHttpPost) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // A single rule entry within a rate limit that maps dimension values to rate
@@ -19457,6 +19655,40 @@ func (v *ResourceMemberArn) Deserialize(d smithy.ShapeDeserializer) error {
 	return d.ReadString(schemas.Resource_arn, &v.Value)
 }
 
+// The resource configuration for an AgentCore Runtime.
+type ResourceConfiguration struct {
+
+	// The minimum amount of memory, in mebibytes, to allocate to the AgentCore
+	// Runtime.
+	//
+	// This member is required.
+	MinimumMemoryInMiB *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinimumMemoryInMiB != nil {
+		s.WriteInt32(schemas.ResourceConfiguration_minimumMemoryInMiB, *v.MinimumMemoryInMiB)
+	}
+}
+func (v *ResourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceConfiguration_minimumMemoryInMiB:
+			v.MinimumMemoryInMiB = new(int32)
+			return d.ReadInt32(schemas.ResourceConfiguration_minimumMemoryInMiB, v.MinimumMemoryInMiB)
+		}
+		return nil
+	})
+}
+
 // The location of a resource.
 //
 // The following types satisfy this interface:
@@ -19674,6 +19906,41 @@ func (v *Rule) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Rule_sessionConfig:
 			v.SessionConfig = &SessionConfig{}
 			return v.SessionConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The lifecycle hooks that AgentCore Runtime runs at fixed points in the
+// runtime's lifecycle.
+type RuntimeHooksConfiguration struct {
+
+	// The hooks that run when you create or update the AgentCore Runtime, before any
+	// sessions are created.
+	Build *BuildLifecycleHooks
+
+	noSmithyDocumentSerde
+}
+
+func (v *RuntimeHooksConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeHooksConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeHooksConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Build != nil {
+		s.WriteStruct(schemas.RuntimeHooksConfiguration_build)
+		v.Build.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RuntimeHooksConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeHooksConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeHooksConfiguration_build:
+			v.Build = &BuildLifecycleHooks{}
+			return v.Build.Deserialize(d)
 		}
 		return nil
 	})
@@ -24689,6 +24956,7 @@ func (*UnknownUnionMember) isInferenceTargetConfiguration()           {}
 func (*UnknownUnionMember) isInterceptorConfiguration()               {}
 func (*UnknownUnionMember) isInterceptorPayloadExclusionSelector()    {}
 func (*UnknownUnionMember) isLaunchTemplateSource()                   {}
+func (*UnknownUnionMember) isLifecycleHookAction()                    {}
 func (*UnknownUnionMember) isMatchPrincipalEntry()                    {}
 func (*UnknownUnionMember) isMcpTargetConfiguration()                 {}
 func (*UnknownUnionMember) isMcpToolSchemaConfiguration()             {}

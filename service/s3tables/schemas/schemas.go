@@ -127,6 +127,13 @@ var GetTableBucketEncryption = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/buckets/{tableBucketARN}/encryption",
 	Code: 200})
 
+var GetTableBucketLogging = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "GetTableBucketLogging",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/buckets/{tableBucketARN}/logging",
+	Code: 200})
+
 var GetTableBucketMaintenanceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3tables",
 	Name:      "GetTableBucketMaintenanceConfiguration",
@@ -280,6 +287,13 @@ var PutTableBucketEncryption = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/buckets/{tableBucketARN}/encryption",
 	Code: 200})
+
+var PutTableBucketLogging = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "PutTableBucketLogging",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/buckets/{tableBucketARN}/logging",
+	Code: 204})
 
 var PutTableBucketMaintenanceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3tables",
@@ -739,6 +753,26 @@ var _ListTablesLimit = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListTablesLimit",
 }, smithy.ShapeTypeInteger, 0)
 
+var LoggingEnabled = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "LoggingEnabled",
+}, smithy.ShapeTypeStructure, 3)
+var LoggingEnabled_targetBucket *smithy.Schema
+
+var LoggingEnabled_targetPrefix *smithy.Schema
+
+var LoggingEnabled_targetObjectKeyFormat *smithy.Schema
+
+var _LoggingTargetBucket = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "LoggingTargetBucket",
+}, smithy.ShapeTypeString, 0)
+
+var _LoggingTargetPrefix = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "LoggingTargetPrefix",
+}, smithy.ShapeTypeString, 0)
+
 var MaintenanceSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3tables",
 	Name:      "MaintenanceSettings",
@@ -1036,6 +1070,20 @@ var OpenTableFormat = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var OpenTableFormat_ICEBERG *smithy.Schema
 
+var PartitionDateSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "PartitionDateSource",
+}, smithy.ShapeTypeEnum, 2)
+var PartitionDateSource_EVENT_TIME *smithy.Schema
+
+var PartitionDateSource_DELIVERY_TIME *smithy.Schema
+
+var PartitionedPrefix = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "PartitionedPrefix",
+}, smithy.ShapeTypeStructure, 1)
+var PartitionedPrefix_partitionDateSource *smithy.Schema
+
 var PlanningStats = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3tables",
 	Name:      "PlanningStats",
@@ -1222,6 +1270,12 @@ var _TableBucketId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3tables",
 	Name:      "TableBucketId",
 }, smithy.ShapeTypeString, 0)
+
+var TableBucketLoggingStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "TableBucketLoggingStatus",
+}, smithy.ShapeTypeStructure, 1)
+var TableBucketLoggingStatus_loggingEnabled *smithy.Schema
 
 var _TableBucketMaintenanceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3tables",
@@ -1509,6 +1563,12 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TagValue",
 }, smithy.ShapeTypeString, 0)
 
+var TargetObjectKeyFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "TargetObjectKeyFormat",
+}, smithy.ShapeTypeStructure, 1)
+var TargetObjectKeyFormat_partitionedPrefix *smithy.Schema
+
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3tables",
 	Name:      "TooManyRequestsException",
@@ -1713,6 +1773,18 @@ var GetTableBucketRequest = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetTableBucketRequest",
 }, smithy.ShapeTypeStructure, 1)
 var GetTableBucketRequest_tableBucketARN *smithy.Schema
+
+var GetTableBucketLoggingRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "GetTableBucketLoggingRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetTableBucketLoggingRequest_tableBucketARN *smithy.Schema
+
+var GetTableBucketLoggingResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "GetTableBucketLoggingResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetTableBucketLoggingResponse_tableBucketLoggingStatus *smithy.Schema
 
 var GetTableBucketMaintenanceConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3tables",
@@ -2167,6 +2239,14 @@ var PutTableBucketEncryptionRequest = smithy.NewSchema(smithy.ShapeID{
 var PutTableBucketEncryptionRequest_tableBucketARN *smithy.Schema
 
 var PutTableBucketEncryptionRequest_encryptionConfiguration *smithy.Schema
+
+var PutTableBucketLoggingRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "PutTableBucketLoggingRequest",
+}, smithy.ShapeTypeStructure, 2)
+var PutTableBucketLoggingRequest_tableBucketARN *smithy.Schema
+
+var PutTableBucketLoggingRequest_tableBucketLoggingStatus *smithy.Schema
 
 var PutTableBucketMaintenanceConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3tables",
@@ -2643,6 +2723,20 @@ func init() {
 
 	LastSuccessfulReplicatedUpdate_timestamp = LastSuccessfulReplicatedUpdate.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
+	PartitionDateSource_EVENT_TIME = PartitionDateSource.AddMember("EVENT_TIME", smithyprelude.Unit)
+
+	PartitionDateSource_DELIVERY_TIME = PartitionDateSource.AddMember("DELIVERY_TIME", smithyprelude.Unit)
+
+	PartitionedPrefix_partitionDateSource = PartitionedPrefix.AddMember("partitionDateSource", PartitionDateSource)
+
+	TargetObjectKeyFormat_partitionedPrefix = TargetObjectKeyFormat.AddMember("partitionedPrefix", PartitionedPrefix)
+
+	LoggingEnabled_targetBucket = LoggingEnabled.AddMember("targetBucket", _LoggingTargetBucket)
+
+	LoggingEnabled_targetPrefix = LoggingEnabled.AddMember("targetPrefix", _LoggingTargetPrefix)
+
+	LoggingEnabled_targetObjectKeyFormat = LoggingEnabled.AddMember("targetObjectKeyFormat", TargetObjectKeyFormat)
+
 	MaintenanceStatus_ENABLED = MaintenanceStatus.AddMember("ENABLED", smithyprelude.Unit)
 
 	MaintenanceStatus_DISABLED = MaintenanceStatus.AddMember("DISABLED", smithyprelude.Unit)
@@ -2808,6 +2902,8 @@ func init() {
 	_ReplicationDestinationStatuses_member = _ReplicationDestinationStatuses.AddMember("member", ReplicationDestinationStatusModel)
 
 	SourceConfiguration_glueTable = SourceConfiguration.AddMember("glueTable", GlueTableSource)
+
+	TableBucketLoggingStatus_loggingEnabled = TableBucketLoggingStatus.AddMember("loggingEnabled", LoggingEnabled)
 
 	TableBucketMaintenanceType_ICEBERG_UNREFERENCED_FILE_REMOVAL = TableBucketMaintenanceType.AddMember("ICEBERG_UNREFERENCED_FILE_REMOVAL", smithyprelude.Unit)
 
@@ -3036,6 +3132,10 @@ func init() {
 	GetTableBucketEncryptionResponse_encryptionConfiguration = GetTableBucketEncryptionResponse.AddMember("encryptionConfiguration", EncryptionConfiguration)
 
 	GetTableBucketRequest_tableBucketARN = GetTableBucketRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
+
+	GetTableBucketLoggingRequest_tableBucketARN = GetTableBucketLoggingRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
+
+	GetTableBucketLoggingResponse_tableBucketLoggingStatus = GetTableBucketLoggingResponse.AddMember("tableBucketLoggingStatus", TableBucketLoggingStatus)
 
 	GetTableBucketMaintenanceConfigurationRequest_tableBucketARN = GetTableBucketMaintenanceConfigurationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
 
@@ -3306,6 +3406,10 @@ func init() {
 	PutTableBucketEncryptionRequest_tableBucketARN = PutTableBucketEncryptionRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
 
 	PutTableBucketEncryptionRequest_encryptionConfiguration = PutTableBucketEncryptionRequest.AddMember("encryptionConfiguration", EncryptionConfiguration)
+
+	PutTableBucketLoggingRequest_tableBucketARN = PutTableBucketLoggingRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
+
+	PutTableBucketLoggingRequest_tableBucketLoggingStatus = PutTableBucketLoggingRequest.AddMember("tableBucketLoggingStatus", TableBucketLoggingStatus)
 
 	PutTableBucketMaintenanceConfigurationRequest_tableBucketARN = PutTableBucketMaintenanceConfigurationRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
 

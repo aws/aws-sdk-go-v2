@@ -151,6 +151,11 @@ type ProfileAssociation struct {
 	//  Amazon Web Services account ID of the Profile association owner.
 	OwnerId *string
 
+	//  The priority of the Profile association. Route 53 VPC Resolver evaluates the
+	// Profile associations for a VPC in priority order, starting with the lowest
+	// value. Associations created without a priority have priority 100.
+	Priority *int32
+
 	//  ID of the Profile.
 	ProfileId *string
 
@@ -188,6 +193,9 @@ func (v *ProfileAssociation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwnerId != nil {
 		s.WriteString(schemas.ProfileAssociation_OwnerId, *v.OwnerId)
 	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.ProfileAssociation_Priority, *v.Priority)
+	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.ProfileAssociation_ProfileId, *v.ProfileId)
 	}
@@ -219,6 +227,9 @@ func (v *ProfileAssociation) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ProfileAssociation_OwnerId:
 			v.OwnerId = new(string)
 			return d.ReadString(schemas.ProfileAssociation_OwnerId, v.OwnerId)
+		case schemas.ProfileAssociation_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.ProfileAssociation_Priority, v.Priority)
 		case schemas.ProfileAssociation_ProfileId:
 			v.ProfileId = new(string)
 			return d.ReadString(schemas.ProfileAssociation_ProfileId, v.ProfileId)
@@ -269,7 +280,8 @@ type ProfileResourceAssociation struct {
 	//  If the DNS resource is a DNS Firewall rule group, this indicates the priority.
 	ResourceProperties *string
 
-	//  Resource type, such as a private hosted zone, or DNS Firewall rule group.
+	//  Resource type, such as a private hosted zone, interface VPC endpoint, Resolver
+	// query log configuration, or DNS Firewall rule group.
 	ResourceType *string
 
 	//  Status of the Profile resource association.

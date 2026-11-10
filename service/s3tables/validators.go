@@ -330,6 +330,26 @@ func (m *validateOpGetTableBucket) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTableBucketLogging struct {
+}
+
+func (*validateOpGetTableBucketLogging) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTableBucketLogging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTableBucketLoggingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTableBucketLoggingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTableBucketMaintenanceConfiguration struct {
 }
 
@@ -705,6 +725,26 @@ func (m *validateOpPutTableBucketEncryption) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutTableBucketEncryptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutTableBucketLogging struct {
+}
+
+func (*validateOpPutTableBucketLogging) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTableBucketLogging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTableBucketLoggingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTableBucketLoggingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1094,6 +1134,10 @@ func addOpGetTableBucketValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTableBucket{}, middleware.After)
 }
 
+func addOpGetTableBucketLoggingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTableBucketLogging{}, middleware.After)
+}
+
 func addOpGetTableBucketMaintenanceConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTableBucketMaintenanceConfiguration{}, middleware.After)
 }
@@ -1168,6 +1212,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutTableBucketEncryptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutTableBucketEncryption{}, middleware.After)
+}
+
+func addOpPutTableBucketLoggingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTableBucketLogging{}, middleware.After)
 }
 
 func addOpPutTableBucketMaintenanceConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1504,6 +1552,31 @@ func validateIcebergSortOrder(v *types.IcebergSortOrder) error {
 	}
 }
 
+func validateLoggingEnabled(v *types.LoggingEnabled) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LoggingEnabled"}
+	if v.TargetBucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetBucket"))
+	}
+	if v.TargetPrefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetPrefix"))
+	}
+	if v.TargetObjectKeyFormat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetObjectKeyFormat"))
+	} else if v.TargetObjectKeyFormat != nil {
+		if err := validateTargetObjectKeyFormat(v.TargetObjectKeyFormat); err != nil {
+			invalidParams.AddNested("TargetObjectKeyFormat", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMigrationOutputConfiguration(v *types.MigrationOutputConfiguration) error {
 	if v == nil {
 		return nil
@@ -1511,6 +1584,21 @@ func validateMigrationOutputConfiguration(v *types.MigrationOutputConfiguration)
 	invalidParams := smithy.InvalidParamsError{Context: "MigrationOutputConfiguration"}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePartitionedPrefix(v *types.PartitionedPrefix) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PartitionedPrefix"}
+	if len(v.PartitionDateSource) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PartitionDateSource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1661,6 +1749,23 @@ func validateStorageClassConfiguration(v *types.StorageClassConfiguration) error
 	}
 }
 
+func validateTableBucketLoggingStatus(v *types.TableBucketLoggingStatus) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableBucketLoggingStatus"}
+	if v.LoggingEnabled != nil {
+		if err := validateLoggingEnabled(v.LoggingEnabled); err != nil {
+			invalidParams.AddNested("LoggingEnabled", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTableBucketReplicationConfiguration(v *types.TableBucketReplicationConfiguration) error {
 	if v == nil {
 		return nil
@@ -1787,6 +1892,25 @@ func validateTableReplicationRules(v []types.TableReplicationRule) error {
 	for i := range v {
 		if err := validateTableReplicationRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetObjectKeyFormat(v *types.TargetObjectKeyFormat) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetObjectKeyFormat"}
+	if v.PartitionedPrefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartitionedPrefix"))
+	} else if v.PartitionedPrefix != nil {
+		if err := validatePartitionedPrefix(v.PartitionedPrefix); err != nil {
+			invalidParams.AddNested("PartitionedPrefix", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2084,6 +2208,21 @@ func validateOpGetTableBucketInput(v *GetTableBucketInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTableBucketInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTableBucketLoggingInput(v *GetTableBucketLoggingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTableBucketLoggingInput"}
 	if v.TableBucketARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
 	}
@@ -2413,6 +2552,28 @@ func validateOpPutTableBucketEncryptionInput(v *PutTableBucketEncryptionInput) e
 	} else if v.EncryptionConfiguration != nil {
 		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
 			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutTableBucketLoggingInput(v *PutTableBucketLoggingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTableBucketLoggingInput"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if v.TableBucketLoggingStatus == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketLoggingStatus"))
+	} else if v.TableBucketLoggingStatus != nil {
+		if err := validateTableBucketLoggingStatus(v.TableBucketLoggingStatus); err != nil {
+			invalidParams.AddNested("TableBucketLoggingStatus", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

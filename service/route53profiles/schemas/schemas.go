@@ -113,6 +113,13 @@ var UntagResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/tags/{ResourceArn}",
 	Code: 204})
 
+var UpdateProfileAssociation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53profiles",
+	Name:      "UpdateProfileAssociation",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/profileassociation/{ProfileAssociationId}",
+	Code: 200})
+
 var UpdateProfileResourceAssociation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53profiles",
 	Name:      "UpdateProfileResourceAssociation",
@@ -202,6 +209,11 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 	Name:      "NextToken",
 }, smithy.ShapeTypeString, 0)
 
+var _Priority = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53profiles",
+	Name:      "Priority",
+}, smithy.ShapeTypeInteger, 0)
+
 var Profile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53profiles",
 	Name:      "Profile",
@@ -229,7 +241,7 @@ var Profile_ClientToken *smithy.Schema
 var ProfileAssociation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53profiles",
 	Name:      "ProfileAssociation",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var ProfileAssociation_Id *smithy.Schema
 
 var ProfileAssociation_Name *smithy.Schema
@@ -247,6 +259,8 @@ var ProfileAssociation_StatusMessage *smithy.Schema
 var ProfileAssociation_CreationTime *smithy.Schema
 
 var ProfileAssociation_ModificationTime *smithy.Schema
+
+var ProfileAssociation_Priority *smithy.Schema
 
 var _ProfileAssociations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53profiles",
@@ -419,7 +433,7 @@ var ValidationException_Message *smithy.Schema
 var AssociateProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53profiles",
 	Name:      "AssociateProfileRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var AssociateProfileRequest_ProfileId *smithy.Schema
 
 var AssociateProfileRequest_ResourceId *smithy.Schema
@@ -427,6 +441,8 @@ var AssociateProfileRequest_ResourceId *smithy.Schema
 var AssociateProfileRequest_Name *smithy.Schema
 
 var AssociateProfileRequest_Tags *smithy.Schema
+
+var AssociateProfileRequest_Priority *smithy.Schema
 
 var AssociateProfileResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53profiles",
@@ -567,10 +583,12 @@ var ListProfileAssociationsResponse_NextToken *smithy.Schema
 var ListProfileResourceAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53profiles",
 	Name:      "ListProfileResourceAssociationsRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ListProfileResourceAssociationsRequest_ProfileId *smithy.Schema
 
 var ListProfileResourceAssociationsRequest_ResourceType *smithy.Schema
+
+var ListProfileResourceAssociationsRequest_ResourceArn *smithy.Schema
 
 var ListProfileResourceAssociationsRequest_MaxResults *smithy.Schema
 
@@ -637,6 +655,22 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53profiles",
 	Name:      "UntagResourceResponse",
 }, smithy.ShapeTypeStructure, 0)
+
+var UpdateProfileAssociationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53profiles",
+	Name:      "UpdateProfileAssociationRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateProfileAssociationRequest_ProfileAssociationId *smithy.Schema
+
+var UpdateProfileAssociationRequest_Name *smithy.Schema
+
+var UpdateProfileAssociationRequest_Priority *smithy.Schema
+
+var UpdateProfileAssociationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53profiles",
+	Name:      "UpdateProfileAssociationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateProfileAssociationResponse_ProfileAssociation *smithy.Schema
 
 var UpdateProfileResourceAssociationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53profiles",
@@ -729,6 +763,8 @@ func init() {
 
 	ProfileAssociation_ModificationTime = ProfileAssociation.AddMember("ModificationTime", _Rfc3339Timestamp)
 
+	ProfileAssociation_Priority = ProfileAssociation.AddMember("Priority", _Priority)
+
 	_ProfileAssociations_member = _ProfileAssociations.AddMember("member", ProfileAssociation)
 
 	ProfileResourceAssociation_Id = ProfileResourceAssociation.AddMember("Id", _ResourceId)
@@ -797,6 +833,8 @@ func init() {
 
 	AssociateProfileRequest_Tags = AssociateProfileRequest.AddMember("Tags", _TagList)
 
+	AssociateProfileRequest_Priority = AssociateProfileRequest.AddMember("Priority", _Priority)
+
 	AssociateProfileResponse_ProfileAssociation = AssociateProfileResponse.AddMember("ProfileAssociation", ProfileAssociation)
 
 	AssociateResourceToProfileRequest_ProfileId = AssociateResourceToProfileRequest.AddMember("ProfileId", _ResourceId)
@@ -861,6 +899,8 @@ func init() {
 
 	ListProfileResourceAssociationsRequest_ResourceType = ListProfileResourceAssociationsRequest.AddMember("ResourceType", _String, &smithytraits.HTTPQuery{Name: "resourceType"})
 
+	ListProfileResourceAssociationsRequest_ResourceArn = ListProfileResourceAssociationsRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
+
 	ListProfileResourceAssociationsRequest_MaxResults = ListProfileResourceAssociationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListProfileResourceAssociationsRequest_NextToken = ListProfileResourceAssociationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
@@ -888,6 +928,14 @@ func init() {
 	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
 
 	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
+
+	UpdateProfileAssociationRequest_ProfileAssociationId = UpdateProfileAssociationRequest.AddMember("ProfileAssociationId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	UpdateProfileAssociationRequest_Name = UpdateProfileAssociationRequest.AddMember("Name", _Name)
+
+	UpdateProfileAssociationRequest_Priority = UpdateProfileAssociationRequest.AddMember("Priority", _Priority)
+
+	UpdateProfileAssociationResponse_ProfileAssociation = UpdateProfileAssociationResponse.AddMember("ProfileAssociation", ProfileAssociation)
 
 	UpdateProfileResourceAssociationRequest_ProfileResourceAssociationId = UpdateProfileResourceAssociationRequest.AddMember("ProfileResourceAssociationId", _ResourceId, &smithytraits.HTTPLabel{})
 

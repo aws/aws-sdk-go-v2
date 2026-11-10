@@ -643,6 +643,39 @@ func TestCheckResponseSnapshot_GetTableBucketEncryption(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetTableBucketLogging(t *testing.T) {
+	want := &GetTableBucketLoggingOutput{
+		TableBucketLoggingStatus: &types.TableBucketLoggingStatus{
+			LoggingEnabled: &types.LoggingEnabled{
+				TargetBucket: ptr.String("__TargetBucket__"),
+				TargetPrefix: ptr.String("__TargetPrefix__"),
+				TargetObjectKeyFormat: &types.TargetObjectKeyFormat{
+					PartitionedPrefix: &types.PartitionedPrefix{
+						PartitionDateSource: types.PartitionDateSource("EventTime"),
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetTableBucketLogging.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetTableBucketLogging(context.Background(), &GetTableBucketLoggingInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetTableBucketLogging.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetTableBucketMaintenanceConfiguration(t *testing.T) {
 	want := &GetTableBucketMaintenanceConfigurationOutput{
 		TableBucketARN: ptr.String("__TableBucketARN__"),
@@ -1477,6 +1510,38 @@ func TestCheckResponseSnapshot_PutTableBucketEncryption(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutTableBucketEncryption.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutTableBucketLogging(t *testing.T) {
+	want := &PutTableBucketLoggingOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutTableBucketLogging.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutTableBucketLogging(context.Background(), &PutTableBucketLoggingInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		TableBucketLoggingStatus: &types.TableBucketLoggingStatus{
+			LoggingEnabled: &types.LoggingEnabled{
+				TargetBucket: ptr.String("__TargetBucket__"),
+				TargetPrefix: ptr.String("__TargetPrefix__"),
+				TargetObjectKeyFormat: &types.TargetObjectKeyFormat{
+					PartitionedPrefix: &types.PartitionedPrefix{
+						PartitionDateSource: types.PartitionDateSource("EventTime"),
+					},
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutTableBucketLogging.response", err)
 	}
 }
 

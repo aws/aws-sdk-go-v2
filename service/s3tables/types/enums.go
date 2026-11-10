@@ -327,6 +327,25 @@ func (OpenTableFormat) Values() []OpenTableFormat {
 	}
 }
 
+type PartitionDateSource string
+
+// Enum values for PartitionDateSource
+const (
+	PartitionDateSourceEventTime    PartitionDateSource = "EventTime"
+	PartitionDateSourceDeliveryTime PartitionDateSource = "DeliveryTime"
+)
+
+// Values returns all known values for PartitionDateSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PartitionDateSource) Values() []PartitionDateSource {
+	return []PartitionDateSource{
+		"EventTime",
+		"DeliveryTime",
+	}
+}
+
 type ReplicationStatus string
 
 // Enum values for ReplicationStatus

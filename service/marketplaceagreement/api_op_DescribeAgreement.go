@@ -83,6 +83,10 @@ type DescribeAgreementOutput struct {
 	// The estimated cost of the agreement.
 	EstimatedCharges *types.EstimatedCharges
 
+	// The free trial details of the agreement. This field is present only when the
+	// agreement includes a free trial.
+	FreeTrialSummary *types.FreeTrialSummary
+
 	// The unique identifier of the very first agreement in a chain of related
 	// agreements, such as renewals or replacements. It stays the same across all
 	// agreements in that chain, which lets you trace an agreement back to the
@@ -159,6 +163,11 @@ func (v *DescribeAgreementOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EstimatedCharges.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.FreeTrialSummary != nil {
+		s.WriteStruct(schemas.DescribeAgreementOutput_freeTrialSummary)
+		v.FreeTrialSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.InitialAgreementId != nil {
 		s.WriteString(schemas.DescribeAgreementOutput_initialAgreementId, *v.InitialAgreementId)
 	}
@@ -203,6 +212,9 @@ func (v *DescribeAgreementOutput) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.DescribeAgreementOutput_estimatedCharges:
 			v.EstimatedCharges = &types.EstimatedCharges{}
 			return v.EstimatedCharges.Deserialize(d)
+		case schemas.DescribeAgreementOutput_freeTrialSummary:
+			v.FreeTrialSummary = &types.FreeTrialSummary{}
+			return v.FreeTrialSummary.Deserialize(d)
 		case schemas.DescribeAgreementOutput_initialAgreementId:
 			v.InitialAgreementId = new(string)
 			return d.ReadString(schemas.DescribeAgreementOutput_initialAgreementId, v.InitialAgreementId)

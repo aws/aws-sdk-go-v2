@@ -1,0 +1,8 @@
+{
+    "id": "df9912a5-a422-4e37-b80f-66cb5f805f6c",
+    "type": "feature",
+    "description": "Inconsequential changes to model formatting",
+    "modules": [
+        "service/verifiedpermissions"
+    ]
+}

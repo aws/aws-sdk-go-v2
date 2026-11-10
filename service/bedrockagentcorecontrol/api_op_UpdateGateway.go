@@ -66,6 +66,11 @@ type UpdateGatewayInput struct {
 	// The updated description for the gateway.
 	Description *string
 
+	// The updated public domain names that the gateway advertises in its OAuth
+	// discovery URLs instead of the inbound Host header. Specify this when clients
+	// reach the gateway through your own proxy or custom domain.
+	DomainOverride *types.DomainOverride
+
 	// The level of detail in error messages returned when invoking the gateway.
 	//
 	//   - If the value is DEBUG , granular exception messages are returned to help a
@@ -120,6 +125,11 @@ func (v *UpdateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateGatewayRequest_description, *v.Description)
+	}
+	if v.DomainOverride != nil {
+		s.WriteStruct(schemas.UpdateGatewayRequest_domainOverride)
+		v.DomainOverride.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.ExceptionLevel != "" {
 		s.WriteString(schemas.UpdateGatewayRequest_exceptionLevel, string(v.ExceptionLevel))
@@ -204,6 +214,10 @@ type UpdateGatewayOutput struct {
 	// The updated description of the gateway.
 	Description *string
 
+	// The public domain names that the gateway advertises in its OAuth discovery URLs
+	// instead of the inbound Host header.
+	DomainOverride *types.DomainOverride
+
 	// The level of detail in error messages returned when invoking the gateway.
 	//
 	//   - If the value is DEBUG , granular exception messages are returned to help a
@@ -277,6 +291,11 @@ func (v *UpdateGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateGatewayResponse_description, *v.Description)
+	}
+	if v.DomainOverride != nil {
+		s.WriteStruct(schemas.UpdateGatewayResponse_domainOverride)
+		v.DomainOverride.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.ExceptionLevel != "" {
 		s.WriteString(schemas.UpdateGatewayResponse_exceptionLevel, string(v.ExceptionLevel))
@@ -357,6 +376,9 @@ func (v *UpdateGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UpdateGatewayResponse_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.UpdateGatewayResponse_description, v.Description)
+		case schemas.UpdateGatewayResponse_domainOverride:
+			v.DomainOverride = &types.DomainOverride{}
+			return v.DomainOverride.Deserialize(d)
 		case schemas.UpdateGatewayResponse_exceptionLevel:
 			var ev string
 			if err := d.ReadString(schemas.UpdateGatewayResponse_exceptionLevel, &ev); err != nil {

@@ -1213,6 +1213,24 @@ func ExampleLaunchTemplateSource_outputUsage() {
 
 var _ *types.LaunchParameters
 
+func ExampleLifecycleHookAction_outputUsage() {
+	var union types.LifecycleHookAction
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.LifecycleHookActionMemberHttpPost:
+		_ = v.Value // Value is types.HttpPostLifecycleHookAction
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HttpPostLifecycleHookAction
+
 func ExampleMatchPrincipalEntry_outputUsage() {
 	var union types.MatchPrincipalEntry
 	// type switches can be used to check the union value

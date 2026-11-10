@@ -127,6 +127,9 @@ type GetAgentRuntimeOutput struct {
 	// The filesystem configurations mounted into the AgentCore Runtime.
 	FilesystemConfigurations []types.FilesystemConfiguration
 
+	// The lifecycle hooks configuration for the AgentCore Runtime.
+	HooksConfiguration *types.RuntimeHooksConfiguration
+
 	// Configuration for microVM Metadata Service (MMDS) settings for the AgentCore
 	// Runtime.
 	MetadataConfiguration *types.RuntimeMetadataConfiguration
@@ -144,6 +147,9 @@ type GetAgentRuntimeOutput struct {
 	// Configuration for HTTP request headers that will be passed through to the
 	// runtime.
 	RequestHeaderConfiguration types.RequestHeaderConfiguration
+
+	// The resource configurations for the AgentCore Runtime.
+	ResourceConfigurations []types.ResourceConfiguration
 
 	// The workload identity details for the AgentCore Runtime.
 	WorkloadIdentityDetails *types.WorkloadIdentityDetails
@@ -202,6 +208,11 @@ func (v *GetAgentRuntimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FilesystemConfigurations != nil {
 		serializeFilesystemConfigurations(s, schemas.GetAgentRuntimeResponse_filesystemConfigurations, v.FilesystemConfigurations)
 	}
+	if v.HooksConfiguration != nil {
+		s.WriteStruct(schemas.GetAgentRuntimeResponse_hooksConfiguration)
+		v.HooksConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.GetAgentRuntimeResponse_lastUpdatedAt, *v.LastUpdatedAt)
 	}
@@ -230,6 +241,9 @@ func (v *GetAgentRuntimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.RequestHeaderConfiguration != nil {
 		serializeRequestHeaderConfiguration(s, schemas.GetAgentRuntimeResponse_requestHeaderConfiguration, v.RequestHeaderConfiguration)
+	}
+	if v.ResourceConfigurations != nil {
+		serializeResourceConfigurations(s, schemas.GetAgentRuntimeResponse_resourceConfigurations, v.ResourceConfigurations)
 	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.GetAgentRuntimeResponse_roleArn, *v.RoleArn)
@@ -280,6 +294,9 @@ func (v *GetAgentRuntimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.GetAgentRuntimeResponse_failureReason, v.FailureReason)
 		case schemas.GetAgentRuntimeResponse_filesystemConfigurations:
 			return deserializeFilesystemConfigurations(d, schemas.GetAgentRuntimeResponse_filesystemConfigurations, &v.FilesystemConfigurations)
+		case schemas.GetAgentRuntimeResponse_hooksConfiguration:
+			v.HooksConfiguration = &types.RuntimeHooksConfiguration{}
+			return v.HooksConfiguration.Deserialize(d)
 		case schemas.GetAgentRuntimeResponse_lastUpdatedAt:
 			v.LastUpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.GetAgentRuntimeResponse_lastUpdatedAt, v.LastUpdatedAt)
@@ -300,6 +317,8 @@ func (v *GetAgentRuntimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			return v.ProtocolConfiguration.Deserialize(d)
 		case schemas.GetAgentRuntimeResponse_requestHeaderConfiguration:
 			return deserializeRequestHeaderConfiguration(d, schemas.GetAgentRuntimeResponse_requestHeaderConfiguration, &v.RequestHeaderConfiguration)
+		case schemas.GetAgentRuntimeResponse_resourceConfigurations:
+			return deserializeResourceConfigurations(d, schemas.GetAgentRuntimeResponse_resourceConfigurations, &v.ResourceConfigurations)
 		case schemas.GetAgentRuntimeResponse_roleArn:
 			v.RoleArn = new(string)
 			return d.ReadString(schemas.GetAgentRuntimeResponse_roleArn, v.RoleArn)

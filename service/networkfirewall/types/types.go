@@ -448,9 +448,11 @@ func (v *Attachment) Deserialize(d smithy.ShapeDeserializer) error {
 
 // Defines the mapping between an Availability Zone and a firewall endpoint for a
 // transit gateway-attached firewall. Each mapping represents where the firewall
-// can process traffic. You use these mappings when calling CreateFirewall, AssociateAvailabilityZones, and DisassociateAvailabilityZones.
+// can process traffic. You use these mappings when calling CreateFirewall ,
+// AssociateAvailabilityZones , and DisassociateAvailabilityZones .
 //
-// To retrieve the current Availability Zone mappings for a firewall, use DescribeFirewall.
+// To retrieve the current Availability Zone mappings for a firewall, use
+// DescribeFirewall .
 type AvailabilityZoneMapping struct {
 
 	// The ID of the Availability Zone where the firewall endpoint is located. For
@@ -1764,12 +1766,11 @@ type FirewallPolicy struct {
 
 	// The settings that enable resolved IP validation for the policy. Resolved IP
 	// validation verifies that a connection's destination IP address is one that the
-	// Amazon Route 53 Resolver returned in a DNS response for a domain. The response
-	// must come from a VPC that's associated with the Route 53 Resolver DNS Firewall
-	// rule group that you specify. This checks how the destination IP address was
-	// obtained, instead of relying only on the domain that the client asserts in its
-	// TLS Server Name Indication (SNI) or HTTP Host header. For more information, see Route53ResolvedIPValidation
-	// .
+	// Amazon Route 53 Resolver returned in a DNS response for a domain. A VPC that's
+	// associated with the Route 53 Resolver DNS Firewall rule group that you specify
+	// must send the response. This checks how the destination IP address was obtained,
+	// instead of relying only on the domain that the client asserts in its TLS Server
+	// Name Indication (SNI) or HTTP Host header. For more information, see Route53ResolvedIPValidation.
 	Route53ResolvedIPValidation *Route53ResolvedIPValidation
 
 	// The default actions to take on a packet that doesn't match any stateful rules.
@@ -2187,6 +2188,808 @@ func (v *FirewallPolicyResponse) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.FirewallPolicyResponse_StatusMessage, v.StatusMessage)
 		case schemas.FirewallPolicyResponse_Tags:
 			return deserializeTagList(d, schemas.FirewallPolicyResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// The object that defines a Next Generation policy. This, along with the FirewallPolicyV2Response, define
+// the policy.
+//
+// A Next Generation policy defines how the firewall engine and IPS engine inspect
+// and control your VPC network traffic. You define the policy as a firewall
+// section and an IPS section, each a collection of rule groups, along with
+// policy-wide settings such as the policy mode and default actions. For more
+// information, see [Next Generation policies]in the Network Firewall Developer Guide.
+//
+// [Next Generation policies]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-policies-v2.html
+type FirewallPolicyV2 struct {
+
+	// The action that the firewall engine takes on traffic that doesn't match any
+	// firewall engine rule at a hook. The firewall engine is drop by default. You can
+	// set the default action to one of the following:
+	//
+	//   - DROP - Block the traffic.
+	//
+	//   - ACCEPT - Allow the traffic.
+	//
+	//   - REJECT - Block the traffic and send a TCP reset packet back to the client.
+	//
+	//   - ALERT - Allow the traffic and generate an alert log for the traffic that
+	//   reaches the default action at every hook. This is distinct from setting the
+	//   policy mode to MONITOR .
+	//
+	// For more information, see [Next Generation policies] in the Network Firewall Developer Guide.
+	//
+	// [Next Generation policies]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-policies-v2.html
+	FirewallDefaultAction PolicyDefaultAction
+
+	// The firewall section of the policy—the rule groups that the firewall engine
+	// evaluates. Each entry references an existing firewall engine rule group or
+	// embeds a rule group directly in the policy, and each entry has a unique priority
+	// that sets its evaluation order within the section.
+	FirewallRuleGroupEntries []FirewallRuleGroupEntry
+
+	// The IPS section of the policy—the rule groups that the IPS engine evaluates.
+	// Each entry references an existing IPS engine rule group or embeds a rule group
+	// directly in the policy. IPS section entries don't use a priority.
+	IpsRuleGroupEntries []IpsRuleGroupEntry
+
+	// Indicates whether the policy's engines enforce their verdicts or only report
+	// them. In ENFORCE mode, the firewall engine and IPS engine apply their verdicts
+	// to traffic. In MONITOR mode, the engines evaluate traffic and generate logs and
+	// metrics, but don't block traffic, so you can observe how a policy would behave
+	// before you enforce it. For more information, see [Next Generation policies]in the Network Firewall
+	// Developer Guide.
+	//
+	// [Next Generation policies]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-policies-v2.html
+	PolicyMode PolicyMode
+
+	// Contains variables that you can use to override default Suricata settings in
+	// your Next Generation policy.
+	PolicyVariables *PolicyVariables
+
+	// The settings that enable resolved IP validation for the Next Generation policy.
+	// Resolved IP validation verifies that a connection's destination IP address is
+	// one that the Amazon Route 53 Resolver returned in a DNS response for a domain. A
+	// VPC that's associated with the Route 53 Resolver DNS Firewall rule group that
+	// you specify must send the response. This checks how the destination IP address
+	// was obtained, instead of relying only on the domain that the client asserts in
+	// its TLS Server Name Indication (SNI) or HTTP Host header. For more information,
+	// see Route53ResolvedIPValidation.
+	Route53ResolvedIPValidation *Route53ResolvedIPValidation
+
+	// Additional options governing how the engines handle stateful traffic, such as
+	// the stream exception policy and flow timeouts.
+	StatefulEngineOptions *StatefulEngineOptionsV2
+
+	// The Amazon Resource Name (ARN) of the TLS inspection configuration to use to
+	// decrypt traffic for inspection. Next Generation policies support session holding
+	// only. For more information, see [Inspecting SSL/TLS traffic with TLS inspection configurations]in the Network Firewall Developer Guide.
+	//
+	// [Inspecting SSL/TLS traffic with TLS inspection configurations]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html
+	TLSInspectionConfigurationArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FirewallPolicyV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallPolicyV2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallPolicyV2) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallDefaultAction != "" {
+		s.WriteString(schemas.FirewallPolicyV2_FirewallDefaultAction, string(v.FirewallDefaultAction))
+	}
+	if v.FirewallRuleGroupEntries != nil {
+		serializeFirewallRuleGroupEntries(s, schemas.FirewallPolicyV2_FirewallRuleGroupEntries, v.FirewallRuleGroupEntries)
+	}
+	if v.IpsRuleGroupEntries != nil {
+		serializeIpsRuleGroupEntries(s, schemas.FirewallPolicyV2_IpsRuleGroupEntries, v.IpsRuleGroupEntries)
+	}
+	if v.PolicyMode != "" {
+		s.WriteString(schemas.FirewallPolicyV2_PolicyMode, string(v.PolicyMode))
+	}
+	if v.PolicyVariables != nil {
+		s.WriteStruct(schemas.FirewallPolicyV2_PolicyVariables)
+		v.PolicyVariables.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Route53ResolvedIPValidation != nil {
+		s.WriteStruct(schemas.FirewallPolicyV2_Route53ResolvedIPValidation)
+		v.Route53ResolvedIPValidation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StatefulEngineOptions != nil {
+		s.WriteStruct(schemas.FirewallPolicyV2_StatefulEngineOptions)
+		v.StatefulEngineOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TLSInspectionConfigurationArn != nil {
+		s.WriteString(schemas.FirewallPolicyV2_TLSInspectionConfigurationArn, *v.TLSInspectionConfigurationArn)
+	}
+}
+func (v *FirewallPolicyV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallPolicyV2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallPolicyV2_FirewallDefaultAction:
+			var ev string
+			if err := d.ReadString(schemas.FirewallPolicyV2_FirewallDefaultAction, &ev); err != nil {
+				return err
+			}
+			v.FirewallDefaultAction = PolicyDefaultAction(ev)
+			return nil
+		case schemas.FirewallPolicyV2_FirewallRuleGroupEntries:
+			return deserializeFirewallRuleGroupEntries(d, schemas.FirewallPolicyV2_FirewallRuleGroupEntries, &v.FirewallRuleGroupEntries)
+		case schemas.FirewallPolicyV2_IpsRuleGroupEntries:
+			return deserializeIpsRuleGroupEntries(d, schemas.FirewallPolicyV2_IpsRuleGroupEntries, &v.IpsRuleGroupEntries)
+		case schemas.FirewallPolicyV2_PolicyMode:
+			var ev string
+			if err := d.ReadString(schemas.FirewallPolicyV2_PolicyMode, &ev); err != nil {
+				return err
+			}
+			v.PolicyMode = PolicyMode(ev)
+			return nil
+		case schemas.FirewallPolicyV2_PolicyVariables:
+			v.PolicyVariables = &PolicyVariables{}
+			return v.PolicyVariables.Deserialize(d)
+		case schemas.FirewallPolicyV2_Route53ResolvedIPValidation:
+			v.Route53ResolvedIPValidation = &Route53ResolvedIPValidation{}
+			return v.Route53ResolvedIPValidation.Deserialize(d)
+		case schemas.FirewallPolicyV2_StatefulEngineOptions:
+			v.StatefulEngineOptions = &StatefulEngineOptionsV2{}
+			return v.StatefulEngineOptions.Deserialize(d)
+		case schemas.FirewallPolicyV2_TLSInspectionConfigurationArn:
+			v.TLSInspectionConfigurationArn = new(string)
+			return d.ReadString(schemas.FirewallPolicyV2_TLSInspectionConfigurationArn, v.TLSInspectionConfigurationArn)
+		}
+		return nil
+	})
+}
+
+// High-level information about a Next Generation policy, returned in a list of
+// policies. To retrieve the policy's full properties, rule groups, and settings,
+// use the Next Generation policy describe operation.
+type FirewallPolicyV2Metadata struct {
+
+	// The Amazon Resource Name (ARN) of the Next Generation policy.
+	Arn *string
+
+	// The descriptive name of the Next Generation policy. You can't change the name
+	// of a firewall policy after you create it.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FirewallPolicyV2Metadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallPolicyV2Metadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallPolicyV2Metadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.FirewallPolicyV2Metadata_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FirewallPolicyV2Metadata_Name, *v.Name)
+	}
+}
+func (v *FirewallPolicyV2Metadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallPolicyV2Metadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallPolicyV2Metadata_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FirewallPolicyV2Metadata_Arn, v.Arn)
+		case schemas.FirewallPolicyV2Metadata_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FirewallPolicyV2Metadata_Name, v.Name)
+		}
+		return nil
+	})
+}
+
+// The high-level properties of a Next Generation policy. This includes the
+// policy's identity, status, consumed capacity, and association count. Network
+// Firewall returns this object in response to the Next Generation policy
+// operations. To retrieve the policy's rule groups and settings, use the
+// FirewallPolicyV2 object.
+type FirewallPolicyV2Response struct {
+
+	// The Amazon Resource Name (ARN) of the Next Generation policy.
+	//
+	// This member is required.
+	FirewallPolicyV2Arn *string
+
+	// The unique identifier of the Next Generation policy. Network Firewall assigns
+	// this identifier when you create the policy.
+	//
+	// This member is required.
+	FirewallPolicyV2Id *string
+
+	// The descriptive name of the Next Generation policy. You can't change the name
+	// of a firewall policy after you create it.
+	//
+	// This member is required.
+	FirewallPolicyV2Name *string
+
+	// The number of firewall engine rule capacity units that the policy's firewall
+	// section currently consumes.
+	ConsumedFirewallRuleCapacity *int32
+
+	// The number of IPS domain list capacity units that the policy's IPS section
+	// currently consumes.
+	ConsumedIpsDomainCapacity *int32
+
+	// The number of IPS engine rule capacity units that the policy's IPS section
+	// currently consumes.
+	ConsumedIpsRuleCapacity *int32
+
+	// A description of the Next Generation policy.
+	Description *string
+
+	// A complex type that contains the Amazon Web Services KMS encryption
+	// configuration settings for your Next Generation policy.
+	EncryptionConfiguration *EncryptionConfiguration
+
+	// Any configuration errors that apply to the Next Generation policy. Network
+	// Firewall detects these errors asynchronously, after you create or update the
+	// policy, so an error can appear after the request that caused it has already
+	// succeeded. Each entry describes the problem and how to resolve it, and Network
+	// Firewall clears it automatically after you resolve the problem.
+	Errors []FirewallPolicyError
+
+	// The current status of the Next Generation policy. A policy must be in the ACTIVE
+	// state before you can use it in a firewall.
+	FirewallPolicyV2Status ResourceStatus
+
+	// The last time that the Next Generation policy was changed.
+	LastModifiedTime *time.Time
+
+	// The number of firewalls that are associated with the Next Generation policy.
+	NumberOfAssociations *int32
+
+	// Additional information about the current status of the Next Generation policy.
+	StatusMessage *string
+
+	// The key-value tag pairs that are associated with the Next Generation policy.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+func (v *FirewallPolicyV2Response) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallPolicyV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallPolicyV2Response) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumedFirewallRuleCapacity != nil {
+		s.WriteInt32(schemas.FirewallPolicyV2Response_ConsumedFirewallRuleCapacity, *v.ConsumedFirewallRuleCapacity)
+	}
+	if v.ConsumedIpsDomainCapacity != nil {
+		s.WriteInt32(schemas.FirewallPolicyV2Response_ConsumedIpsDomainCapacity, *v.ConsumedIpsDomainCapacity)
+	}
+	if v.ConsumedIpsRuleCapacity != nil {
+		s.WriteInt32(schemas.FirewallPolicyV2Response_ConsumedIpsRuleCapacity, *v.ConsumedIpsRuleCapacity)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.FirewallPolicyV2Response_Description, *v.Description)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.FirewallPolicyV2Response_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Errors != nil {
+		serializeFirewallPolicyErrors(s, schemas.FirewallPolicyV2Response_Errors, v.Errors)
+	}
+	if v.FirewallPolicyV2Arn != nil {
+		s.WriteString(schemas.FirewallPolicyV2Response_FirewallPolicyV2Arn, *v.FirewallPolicyV2Arn)
+	}
+	if v.FirewallPolicyV2Id != nil {
+		s.WriteString(schemas.FirewallPolicyV2Response_FirewallPolicyV2Id, *v.FirewallPolicyV2Id)
+	}
+	if v.FirewallPolicyV2Name != nil {
+		s.WriteString(schemas.FirewallPolicyV2Response_FirewallPolicyV2Name, *v.FirewallPolicyV2Name)
+	}
+	if v.FirewallPolicyV2Status != "" {
+		s.WriteString(schemas.FirewallPolicyV2Response_FirewallPolicyV2Status, string(v.FirewallPolicyV2Status))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.FirewallPolicyV2Response_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NumberOfAssociations != nil {
+		s.WriteInt32(schemas.FirewallPolicyV2Response_NumberOfAssociations, *v.NumberOfAssociations)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.FirewallPolicyV2Response_StatusMessage, *v.StatusMessage)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.FirewallPolicyV2Response_Tags, v.Tags)
+	}
+}
+func (v *FirewallPolicyV2Response) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallPolicyV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallPolicyV2Response_ConsumedFirewallRuleCapacity:
+			v.ConsumedFirewallRuleCapacity = new(int32)
+			return d.ReadInt32(schemas.FirewallPolicyV2Response_ConsumedFirewallRuleCapacity, v.ConsumedFirewallRuleCapacity)
+		case schemas.FirewallPolicyV2Response_ConsumedIpsDomainCapacity:
+			v.ConsumedIpsDomainCapacity = new(int32)
+			return d.ReadInt32(schemas.FirewallPolicyV2Response_ConsumedIpsDomainCapacity, v.ConsumedIpsDomainCapacity)
+		case schemas.FirewallPolicyV2Response_ConsumedIpsRuleCapacity:
+			v.ConsumedIpsRuleCapacity = new(int32)
+			return d.ReadInt32(schemas.FirewallPolicyV2Response_ConsumedIpsRuleCapacity, v.ConsumedIpsRuleCapacity)
+		case schemas.FirewallPolicyV2Response_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.FirewallPolicyV2Response_Description, v.Description)
+		case schemas.FirewallPolicyV2Response_EncryptionConfiguration:
+			v.EncryptionConfiguration = &EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.FirewallPolicyV2Response_Errors:
+			return deserializeFirewallPolicyErrors(d, schemas.FirewallPolicyV2Response_Errors, &v.Errors)
+		case schemas.FirewallPolicyV2Response_FirewallPolicyV2Arn:
+			v.FirewallPolicyV2Arn = new(string)
+			return d.ReadString(schemas.FirewallPolicyV2Response_FirewallPolicyV2Arn, v.FirewallPolicyV2Arn)
+		case schemas.FirewallPolicyV2Response_FirewallPolicyV2Id:
+			v.FirewallPolicyV2Id = new(string)
+			return d.ReadString(schemas.FirewallPolicyV2Response_FirewallPolicyV2Id, v.FirewallPolicyV2Id)
+		case schemas.FirewallPolicyV2Response_FirewallPolicyV2Name:
+			v.FirewallPolicyV2Name = new(string)
+			return d.ReadString(schemas.FirewallPolicyV2Response_FirewallPolicyV2Name, v.FirewallPolicyV2Name)
+		case schemas.FirewallPolicyV2Response_FirewallPolicyV2Status:
+			var ev string
+			if err := d.ReadString(schemas.FirewallPolicyV2Response_FirewallPolicyV2Status, &ev); err != nil {
+				return err
+			}
+			v.FirewallPolicyV2Status = ResourceStatus(ev)
+			return nil
+		case schemas.FirewallPolicyV2Response_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.FirewallPolicyV2Response_LastModifiedTime, v.LastModifiedTime)
+		case schemas.FirewallPolicyV2Response_NumberOfAssociations:
+			v.NumberOfAssociations = new(int32)
+			return d.ReadInt32(schemas.FirewallPolicyV2Response_NumberOfAssociations, v.NumberOfAssociations)
+		case schemas.FirewallPolicyV2Response_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.FirewallPolicyV2Response_StatusMessage, v.StatusMessage)
+		case schemas.FirewallPolicyV2Response_Tags:
+			return deserializeTagList(d, schemas.FirewallPolicyV2Response_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// A single structured firewall engine rule, for use in a firewall engine rule
+// group or as an embedded rule in a Next Generation policy. A firewall rule
+// accepts, drops, or rejects traffic at a connection-state hook. For more
+// information about authoring firewall engine rules, see [Rule groups for a firewall using a Next Generation policy]in the Network Firewall
+// Developer Guide.
+//
+// [Rule groups for a firewall using a Next Generation policy]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+type FirewallRule struct {
+
+	// The action that the firewall engine takes on traffic that matches the rule. The
+	// firewall engine supports the following actions:
+	//
+	//   - ACCEPT - Allow the traffic.
+	//
+	//   - DROP - Block the traffic and discontinue inspection.
+	//
+	//   - REJECT - Block the traffic and send a TCP reset packet back to the client.
+	//
+	//   - REJECT_DST - Block the traffic and send a TCP reset packet to the
+	//   destination.
+	//
+	//   - REJECT_BOTH - Block the traffic and send a TCP reset packet to both the
+	//   client and the destination.
+	//
+	// You combine the action with an action scope, for example accept:flow . To send
+	// accepted traffic straight to its destination and skip the IPS engine, pair an
+	// accept action with the BypassIPSEnabled setting. For more information, see [Rule groups for a firewall using a Next Generation policy] in
+	// the Network Firewall Developer Guide.
+	//
+	// [Rule groups for a firewall using a Next Generation policy]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+	//
+	// This member is required.
+	Action FirewallRuleAction
+
+	// The scope that controls how much of the matched traffic the action applies to.
+	// The valid scopes depend on the action: ACCEPT supports all four scopes, and DROP
+	// , REJECT , REJECT_DST , and REJECT_BOTH support only PACKET and FLOW .
+	//
+	//   - PACKET - The current packet only.
+	//
+	//   - HOOK - The current hook only. The firewall engine evaluates the connection
+	//   again at the next hook.
+	//
+	//   - TX - The current transaction. The firewall engine continues to evaluate
+	//   later transactions on the connection.
+	//
+	//   - FLOW - The entire connection. For an accept action, the connection skips the
+	//   firewall engine's remaining hooks and advances to the IPS engine.
+	//
+	// In a Suricata-compatible rule string, you write the scope in lowercase, for
+	// example accept:flow .
+	//
+	// This member is required.
+	ActionScope ActionScope
+
+	// The connection-state hook at which the firewall engine evaluates the rule. The
+	// hook encodes both the protocol and the connection state, for example a TCP hook
+	// or a TLS client_hello hook. For the hooks that the firewall engine supports and
+	// how they map to the connection lifecycle, see [Rule groups for a firewall using a Next Generation policy]in the Network Firewall Developer
+	// Guide and the [Suricata firewall mode documentation].
+	//
+	// [Suricata firewall mode documentation]: https://suricata.readthedocs.io/en/suricata-8.0.3/firewall/firewall-design.html
+	// [Rule groups for a firewall using a Next Generation policy]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+	//
+	// This member is required.
+	Hook HookKey
+
+	// The protocol of the rule's hook. The protocol is derived from the hook and must
+	// match the hook's protocol prefix. Network Firewall rejects a rule whose protocol
+	// doesn't match its hook.
+	//
+	// This member is required.
+	Protocol FirewallRuleProtocol
+
+	// Whether Network Firewall automatically accepts the earlier application-layer
+	// hooks that a connection must pass to reach this rule's hook. Because the
+	// firewall engine is drop by default, accepting prior hooks lets you author a
+	// single rule for the hook you care about, instead of also authoring a rule for
+	// each earlier hook. This setting accepts the earlier application-layer hooks
+	// only; it doesn't accept the TCP layer. For more information, see [Rule groups for a firewall using a Next Generation policy]in the Network
+	// Firewall Developer Guide.
+	//
+	// [Rule groups for a firewall using a Next Generation policy]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+	AcceptPriorHooks *bool
+
+	// Specifies whether the rule also generates an alert log for the traffic that it
+	// matches. Turning on alerting adds a secondary alert action to the rule, so that
+	// Network Firewall logs the match in addition to taking the rule's primary action.
+	AlertEnabled *bool
+
+	// Specifies whether an accepted connection bypasses the IPS engine. By default,
+	// traffic that the firewall engine accepts advances to the IPS engine for threat
+	// inspection. When you turn on this setting for an accept rule, the accepted
+	// traffic goes straight to its destination without IPS inspection. You can set the
+	// bypass only on accept rules, and it uses the same scope as the rule's accept
+	// action; only the flow and packet scopes support a bypass. For more information,
+	// see [Rule groups for a firewall using a Next Generation policy]in the Network Firewall Developer Guide.
+	//
+	// [Rule groups for a firewall using a Next Generation policy]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+	BypassIPSEnabled *bool
+
+	// The destination IP addresses and address ranges to inspect for, in CIDR
+	// notation. A firewall rule always compiles to a forward-direction rule, so you
+	// express inbound compared to outbound traffic through the source and destination
+	// addresses.
+	DestIPs *string
+
+	// The destination ports to inspect for.
+	DestPorts *string
+
+	// Optional metadata for the rule: whether the rule is enabled and a description.
+	// Metadata doesn't change how the rule matches or acts on traffic.
+	RuleMetadata *RuleMetadata
+
+	// Additional options for the rule. These are the Suricata RuleOptions settings,
+	// such as the signature ID ( sid ) and match keywords.
+	RuleOptions []RuleOption
+
+	// The source IP addresses and address ranges to inspect for, in CIDR notation. A
+	// firewall rule always compiles to a forward-direction rule, so you express
+	// inbound compared to outbound traffic through the source and destination
+	// addresses.
+	SourceIPs *string
+
+	// The source ports to inspect for.
+	SourcePorts *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FirewallRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptPriorHooks != nil {
+		s.WriteBool(schemas.FirewallRule_AcceptPriorHooks, *v.AcceptPriorHooks)
+	}
+	if v.Action != "" {
+		s.WriteString(schemas.FirewallRule_Action, string(v.Action))
+	}
+	if v.ActionScope != "" {
+		s.WriteString(schemas.FirewallRule_ActionScope, string(v.ActionScope))
+	}
+	if v.AlertEnabled != nil {
+		s.WriteBool(schemas.FirewallRule_AlertEnabled, *v.AlertEnabled)
+	}
+	if v.BypassIPSEnabled != nil {
+		s.WriteBool(schemas.FirewallRule_BypassIPSEnabled, *v.BypassIPSEnabled)
+	}
+	if v.DestIPs != nil {
+		s.WriteString(schemas.FirewallRule_DestIPs, *v.DestIPs)
+	}
+	if v.DestPorts != nil {
+		s.WriteString(schemas.FirewallRule_DestPorts, *v.DestPorts)
+	}
+	if v.Hook != "" {
+		s.WriteString(schemas.FirewallRule_Hook, string(v.Hook))
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.FirewallRule_Protocol, string(v.Protocol))
+	}
+	if v.RuleMetadata != nil {
+		s.WriteStruct(schemas.FirewallRule_RuleMetadata)
+		v.RuleMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleOptions != nil {
+		serializeRuleOptions(s, schemas.FirewallRule_RuleOptions, v.RuleOptions)
+	}
+	if v.SourceIPs != nil {
+		s.WriteString(schemas.FirewallRule_SourceIPs, *v.SourceIPs)
+	}
+	if v.SourcePorts != nil {
+		s.WriteString(schemas.FirewallRule_SourcePorts, *v.SourcePorts)
+	}
+}
+func (v *FirewallRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallRule_AcceptPriorHooks:
+			v.AcceptPriorHooks = new(bool)
+			return d.ReadBool(schemas.FirewallRule_AcceptPriorHooks, v.AcceptPriorHooks)
+		case schemas.FirewallRule_Action:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRule_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = FirewallRuleAction(ev)
+			return nil
+		case schemas.FirewallRule_ActionScope:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRule_ActionScope, &ev); err != nil {
+				return err
+			}
+			v.ActionScope = ActionScope(ev)
+			return nil
+		case schemas.FirewallRule_AlertEnabled:
+			v.AlertEnabled = new(bool)
+			return d.ReadBool(schemas.FirewallRule_AlertEnabled, v.AlertEnabled)
+		case schemas.FirewallRule_BypassIPSEnabled:
+			v.BypassIPSEnabled = new(bool)
+			return d.ReadBool(schemas.FirewallRule_BypassIPSEnabled, v.BypassIPSEnabled)
+		case schemas.FirewallRule_DestIPs:
+			v.DestIPs = new(string)
+			return d.ReadString(schemas.FirewallRule_DestIPs, v.DestIPs)
+		case schemas.FirewallRule_DestPorts:
+			v.DestPorts = new(string)
+			return d.ReadString(schemas.FirewallRule_DestPorts, v.DestPorts)
+		case schemas.FirewallRule_Hook:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRule_Hook, &ev); err != nil {
+				return err
+			}
+			v.Hook = HookKey(ev)
+			return nil
+		case schemas.FirewallRule_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRule_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = FirewallRuleProtocol(ev)
+			return nil
+		case schemas.FirewallRule_RuleMetadata:
+			v.RuleMetadata = &RuleMetadata{}
+			return v.RuleMetadata.Deserialize(d)
+		case schemas.FirewallRule_RuleOptions:
+			return deserializeRuleOptions(d, schemas.FirewallRule_RuleOptions, &v.RuleOptions)
+		case schemas.FirewallRule_SourceIPs:
+			v.SourceIPs = new(string)
+			return d.ReadString(schemas.FirewallRule_SourceIPs, v.SourceIPs)
+		case schemas.FirewallRule_SourcePorts:
+			v.SourcePorts = new(string)
+			return d.ReadString(schemas.FirewallRule_SourcePorts, v.SourcePorts)
+		}
+		return nil
+	})
+}
+
+// The object that defines a firewall engine rule group, for use in a Next
+// Generation policy. A firewall engine rule group provides access-control rules
+// that the firewall engine evaluates at connection-state hooks. You provide the
+// rules as a Suricata-compatible rule string, as structured firewall rules, or
+// generated from a list of domain names. For more information, see [Rule groups for a firewall using a Next Generation policy]in the Network
+// Firewall Developer Guide.
+//
+// [Rule groups for a firewall using a Next Generation policy]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+type FirewallRuleGroup struct {
+
+	// The stateful inspection criteria for the firewall engine rule group.
+	//
+	// This member is required.
+	RulesSource *FirewallRulesSource
+
+	// The list of a rule group's reference sets. Firewall engine rule groups don't
+	// support IP set references (reference sets); this setting applies to IPS engine
+	// rule groups. To use CIDR ranges in firewall engine rules, use rule variables
+	// instead.
+	ReferenceSets *ReferenceSets
+
+	// Settings that are available for use in the rules in the firewall engine rule
+	// group, such as IP set and port variables that the rules reference.
+	RuleVariables *RuleVariables
+
+	noSmithyDocumentSerde
+}
+
+func (v *FirewallRuleGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallRuleGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallRuleGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReferenceSets != nil {
+		s.WriteStruct(schemas.FirewallRuleGroup_ReferenceSets)
+		v.ReferenceSets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleVariables != nil {
+		s.WriteStruct(schemas.FirewallRuleGroup_RuleVariables)
+		v.RuleVariables.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RulesSource != nil {
+		s.WriteStruct(schemas.FirewallRuleGroup_RulesSource)
+		v.RulesSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FirewallRuleGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallRuleGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallRuleGroup_ReferenceSets:
+			v.ReferenceSets = &ReferenceSets{}
+			return v.ReferenceSets.Deserialize(d)
+		case schemas.FirewallRuleGroup_RuleVariables:
+			v.RuleVariables = &RuleVariables{}
+			return v.RuleVariables.Deserialize(d)
+		case schemas.FirewallRuleGroup_RulesSource:
+			v.RulesSource = &FirewallRulesSource{}
+			return v.RulesSource.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A single entry in the firewall section of a Next Generation policy. An entry
+// either references an existing firewall engine rule group by ARN or embeds a rule
+// group directly in the policy, and it carries the priority that sets the rule
+// group's evaluation order within the firewall section.
+type FirewallRuleGroupEntry struct {
+
+	// A firewall engine rule group defined directly in the policy, instead of
+	// referenced by ARN. Provide either InlineRuleGroup to embed a rule group or
+	// ResourceArn to reference an existing rule group. An embedded rule group can't
+	// use a domain list rules source; to filter on a domain list, reference a
+	// standalone rule group by ARN instead.
+	InlineRuleGroup *FirewallRuleGroup
+
+	// The priority of the rule group entry within the firewall section. Network
+	// Firewall evaluates the firewall section's entries in order of increasing
+	// priority value. Each entry in the firewall section must have a unique priority.
+	Priority *int32
+
+	// The Amazon Resource Name (ARN) of an existing firewall engine rule group to
+	// reference in this entry. Provide either ResourceArn to reference an existing
+	// rule group or InlineRuleGroup to embed a rule group in the policy.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FirewallRuleGroupEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallRuleGroupEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallRuleGroupEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InlineRuleGroup != nil {
+		s.WriteStruct(schemas.FirewallRuleGroupEntry_InlineRuleGroup)
+		v.InlineRuleGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.FirewallRuleGroupEntry_Priority, *v.Priority)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.FirewallRuleGroupEntry_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *FirewallRuleGroupEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallRuleGroupEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallRuleGroupEntry_InlineRuleGroup:
+			v.InlineRuleGroup = &FirewallRuleGroup{}
+			return v.InlineRuleGroup.Deserialize(d)
+		case schemas.FirewallRuleGroupEntry_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.FirewallRuleGroupEntry_Priority, v.Priority)
+		case schemas.FirewallRuleGroupEntry_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupEntry_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
+
+// The source of the rules for a firewall engine rule group. You provide the rules
+// as a single Suricata-compatible rule string, as a list of structured firewall
+// rules, or as a list of domain names to generate rules from.
+type FirewallRulesSource struct {
+
+	// An array of individual firewall engine rules, provided as structured rules
+	// rather than as a rule string.
+	FirewallRules []FirewallRule
+
+	// Stateful inspection criteria for a domain list, specified as the list of domain
+	// names that Network Firewall generates firewall engine rules from.
+	RulesSourceList *RulesSourceList
+
+	// Firewall engine rules, provided as a single Suricata-compatible rule string in
+	// firewall mode. Use this to provide rules that you've already written in the
+	// Suricata firewall-mode format. For the rule format, see [Rule groups for a firewall using a Next Generation policy]in the Network Firewall
+	// Developer Guide.
+	//
+	// [Rule groups for a firewall using a Next Generation policy]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+	RulesString *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FirewallRulesSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallRulesSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallRulesSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRules != nil {
+		serializeFirewallRules(s, schemas.FirewallRulesSource_FirewallRules, v.FirewallRules)
+	}
+	if v.RulesSourceList != nil {
+		s.WriteStruct(schemas.FirewallRulesSource_RulesSourceList)
+		v.RulesSourceList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RulesString != nil {
+		s.WriteString(schemas.FirewallRulesSource_RulesString, *v.RulesString)
+	}
+}
+func (v *FirewallRulesSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallRulesSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallRulesSource_FirewallRules:
+			return deserializeFirewallRules(d, schemas.FirewallRulesSource_FirewallRules, &v.FirewallRules)
+		case schemas.FirewallRulesSource_RulesSourceList:
+			v.RulesSourceList = &RulesSourceList{}
+			return v.RulesSourceList.Deserialize(d)
+		case schemas.FirewallRulesSource_RulesString:
+			v.RulesString = new(string)
+			return d.ReadString(schemas.FirewallRulesSource_RulesString, v.RulesString)
 		}
 		return nil
 	})
@@ -2956,6 +3759,201 @@ func (v *IPSetReference) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The object that defines an IPS engine rule group, for use in a Next Generation
+// policy. An IPS engine rule group provides threat-detection rules that the IPS
+// engine evaluates in the context of the traffic flow. You provide the rules as a
+// Suricata-compatible rule string. For more information, see [Rule groups for a firewall using a Next Generation policy]in the Network
+// Firewall Developer Guide.
+//
+// [Rule groups for a firewall using a Next Generation policy]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+type IpsRuleGroup struct {
+
+	// The stateful inspection criteria for the IPS engine rule group.
+	//
+	// This member is required.
+	RulesSource *IpsRulesSource
+
+	// The list of a rule group's reference sets.
+	ReferenceSets *ReferenceSets
+
+	// Settings that are available for use in the rules in the IPS engine rule group.
+	RuleVariables *RuleVariables
+
+	noSmithyDocumentSerde
+}
+
+func (v *IpsRuleGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpsRuleGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpsRuleGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReferenceSets != nil {
+		s.WriteStruct(schemas.IpsRuleGroup_ReferenceSets)
+		v.ReferenceSets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleVariables != nil {
+		s.WriteStruct(schemas.IpsRuleGroup_RuleVariables)
+		v.RuleVariables.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RulesSource != nil {
+		s.WriteStruct(schemas.IpsRuleGroup_RulesSource)
+		v.RulesSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IpsRuleGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpsRuleGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpsRuleGroup_ReferenceSets:
+			v.ReferenceSets = &ReferenceSets{}
+			return v.ReferenceSets.Deserialize(d)
+		case schemas.IpsRuleGroup_RuleVariables:
+			v.RuleVariables = &RuleVariables{}
+			return v.RuleVariables.Deserialize(d)
+		case schemas.IpsRuleGroup_RulesSource:
+			v.RulesSource = &IpsRulesSource{}
+			return v.RulesSource.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A single entry in the IPS section of a Next Generation policy. An entry either
+// references an existing IPS engine rule group by ARN or embeds a rule group
+// directly in the policy. IPS section entries don't use a priority.
+type IpsRuleGroupEntry struct {
+
+	// An IPS engine rule group defined directly in the policy, instead of referenced
+	// by ARN. Provide either InlineRuleGroup to embed a rule group or ResourceArn to
+	// reference an existing rule group.
+	InlineRuleGroup *IpsRuleGroup
+
+	// The setting that allows the policy owner to change the behavior of the IPS
+	// engine rule group within this policy, such as changing a managed rule group's
+	// action from DROP to ALERT .
+	Override *IpsRuleGroupOverride
+
+	// The Amazon Resource Name (ARN) of an existing IPS engine rule group to
+	// reference in this entry. Provide either ResourceArn to reference an existing
+	// rule group or InlineRuleGroup to embed a rule group in the policy.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IpsRuleGroupEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpsRuleGroupEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpsRuleGroupEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InlineRuleGroup != nil {
+		s.WriteStruct(schemas.IpsRuleGroupEntry_InlineRuleGroup)
+		v.InlineRuleGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Override != nil {
+		s.WriteStruct(schemas.IpsRuleGroupEntry_Override)
+		v.Override.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.IpsRuleGroupEntry_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *IpsRuleGroupEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpsRuleGroupEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpsRuleGroupEntry_InlineRuleGroup:
+			v.InlineRuleGroup = &IpsRuleGroup{}
+			return v.InlineRuleGroup.Deserialize(d)
+		case schemas.IpsRuleGroupEntry_Override:
+			v.Override = &IpsRuleGroupOverride{}
+			return v.Override.Deserialize(d)
+		case schemas.IpsRuleGroupEntry_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.IpsRuleGroupEntry_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
+
+// The setting that allows the policy owner to change the behavior of an IPS
+// engine rule group within a Next Generation policy.
+type IpsRuleGroupOverride struct {
+
+	// The action that changes the rule group from DROP to ALERT . This only applies to
+	// managed rule groups.
+	Action OverrideAction
+
+	noSmithyDocumentSerde
+}
+
+func (v *IpsRuleGroupOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpsRuleGroupOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpsRuleGroupOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.IpsRuleGroupOverride_Action, string(v.Action))
+	}
+}
+func (v *IpsRuleGroupOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpsRuleGroupOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpsRuleGroupOverride_Action:
+			var ev string
+			if err := d.ReadString(schemas.IpsRuleGroupOverride_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = OverrideAction(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The source of the rules for an IPS engine rule group.
+type IpsRulesSource struct {
+
+	// IPS engine rules, provided as a single Suricata-compatible rule string. For the
+	// rule format, see [Rules Format]on the Suricata website.
+	//
+	// [Rules Format]: https://suricata.readthedocs.io/en/suricata-8.0.3/rules/intro.html
+	RulesString *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IpsRulesSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpsRulesSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpsRulesSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RulesString != nil {
+		s.WriteString(schemas.IpsRulesSource_RulesString, *v.RulesString)
+	}
+}
+func (v *IpsRulesSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpsRulesSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpsRulesSource_RulesString:
+			v.RulesString = new(string)
+			return d.ReadString(schemas.IpsRulesSource_RulesString, v.RulesString)
+		}
+		return nil
+	})
+}
+
 // Open port for taking HTTP or HTTPS traffic.
 type ListenerProperty struct {
 
@@ -3345,8 +4343,8 @@ func (v *NatGatewayAttachment) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// A NAT gateway that a proxy mode firewall uses to proxy traffic. This is used in CreateFirewall
-// when NoSourcePreservation is TRUE .
+// A NAT gateway that a proxy mode firewall uses to proxy traffic. This is used in
+// CreateFirewall when NoSourcePreservation is TRUE .
 type NatGatewayMapping struct {
 
 	// A unique identifier for the NAT gateway to use with proxy resources.
@@ -4581,6 +5579,13 @@ func (v *ReferenceSets) Deserialize(d smithy.ShapeDeserializer) error {
 // IP address was resolved for some domain. To match specific domains, also
 // configure stateful rule groups that use the AWS_ROUTE_53_RESOLVED_DOMAIN target
 // type or the aws_route_53_resolved_domain rule keyword.
+//
+// Enabling or disabling resolved IP validation, or changing DNSFirewallRuleGroupId
+// , may require a restart of the stateful engine in order to apply the change.
+// When this occurs, existing connections will be treated according to your stream
+// exception policy configuration. Changes to Action , DNSExpiryExceptionPolicy ,
+// SourceIPRanges , and BypassDestinationValidationIPRanges don't require a
+// restart.
 type Route53ResolvedIPValidation struct {
 
 	// The action that Network Firewall takes for a connection whose destination IP
@@ -4634,7 +5639,9 @@ type Route53ResolvedIPValidation struct {
 	// processes the swap asynchronously. Each policy can have only one managed Route
 	// 53 Resolver DNS Firewall association. While a swap is in progress, Network
 	// Firewall rejects further changes to this setting. Wait until the swap completes,
-	// then retry.
+	// then retry. The change may also require a restart of the stateful engine. When
+	// this occurs, existing connections will be treated according to your stream
+	// exception policy configuration.
 	//
 	// This member is required.
 	DNSFirewallRuleGroupId *string
@@ -5015,9 +6022,15 @@ type RuleGroupResponse struct {
 	// The key:value pairs to associate with the resource.
 	Tags []Tag
 
-	// Indicates whether the rule group is stateless or stateful. If the rule group is
-	// stateless, it contains stateless rules. If it is stateful, it contains stateful
-	// rules.
+	// Indicates the type of the rule group. Valid values are:
+	//
+	//   - STATELESS - Stateless rules, for use in a Classic Network Firewall policy.
+	//
+	//   - STATEFUL - Stateful rules, for use in a Classic Network Firewall policy.
+	//
+	//   - FIREWALL - Firewall engine rules, for use in a Next Generation policy.
+	//
+	//   - IPS - IPS engine rules, for use in a Next Generation policy.
 	Type RuleGroupType
 
 	noSmithyDocumentSerde
@@ -5147,6 +6160,54 @@ func (v *RuleGroupResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Metadata for a single firewall engine rule. Use it to disable a rule without
+// removing it and to attach a description. When you describe a rule group in
+// RULES_STRING format, Network Firewall renders a disabled rule and its
+// description as # comment lines above the rule.
+type RuleMetadata struct {
+
+	// A description of the rule, up to 512 characters. The description can span
+	// multiple lines. A description line can't itself look like a firewall rule; to
+	// disable a rule, set RuleEnabled to FALSE instead.
+	RuleDescription *string
+
+	// Specifies whether the rule is active. The default is TRUE . When you set this to
+	// FALSE , Network Firewall keeps the rule in the rule group but doesn't evaluate
+	// it against traffic and doesn't count it toward the rule group's consumed
+	// capacity.
+	RuleEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *RuleMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleDescription != nil {
+		s.WriteString(schemas.RuleMetadata_RuleDescription, *v.RuleDescription)
+	}
+	if v.RuleEnabled != nil {
+		s.WriteBool(schemas.RuleMetadata_RuleEnabled, *v.RuleEnabled)
+	}
+}
+func (v *RuleMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleMetadata_RuleDescription:
+			v.RuleDescription = new(string)
+			return d.ReadString(schemas.RuleMetadata_RuleDescription, v.RuleDescription)
+		case schemas.RuleMetadata_RuleEnabled:
+			v.RuleEnabled = new(bool)
+			return d.ReadBool(schemas.RuleMetadata_RuleEnabled, v.RuleEnabled)
+		}
+		return nil
+	})
+}
+
 // Additional settings for a stateful rule. This is part of the StatefulRule configuration.
 type RuleOption struct {
 
@@ -5220,7 +6281,7 @@ type RulesSource struct {
 	// An array of individual stateful rules inspection criteria to be used together
 	// in a stateful rule group. Use this option to specify simple Suricata rules with
 	// protocol, source and destination, ports, direction, and rule options. For
-	// information about the Suricata Rules format, see [Rules Format].
+	// information about the Suricata Rules format, see [Rules Format] on the Suricata website.
 	//
 	// [Rules Format]: https://suricata.readthedocs.io/en/suricata-8.0.3/rules/intro.html
 	StatefulRules []StatefulRule
@@ -5848,10 +6909,62 @@ func (v *StatefulEngineOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Configuration settings for the handling of stateful traffic in a Next
+// Generation policy.
+type StatefulEngineOptionsV2 struct {
+
+	// The amount of time that can pass without any traffic sent through the firewall
+	// before the firewall determines that the connection is idle.
+	FlowTimeouts *FlowTimeouts
+
+	// How Network Firewall handles traffic on a network connection that breaks
+	// midstream. A Next Generation policy supports DROP and REJECT . For more
+	// information, see [Stream exception policy options in your firewall policy]in the Network Firewall Developer Guide.
+	//
+	// [Stream exception policy options in your firewall policy]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/stream-exception-policy.html
+	StreamExceptionPolicy StreamExceptionPolicyV2
+
+	noSmithyDocumentSerde
+}
+
+func (v *StatefulEngineOptionsV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StatefulEngineOptionsV2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StatefulEngineOptionsV2) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowTimeouts != nil {
+		s.WriteStruct(schemas.StatefulEngineOptionsV2_FlowTimeouts)
+		v.FlowTimeouts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamExceptionPolicy != "" {
+		s.WriteString(schemas.StatefulEngineOptionsV2_StreamExceptionPolicy, string(v.StreamExceptionPolicy))
+	}
+}
+func (v *StatefulEngineOptionsV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StatefulEngineOptionsV2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StatefulEngineOptionsV2_FlowTimeouts:
+			v.FlowTimeouts = &FlowTimeouts{}
+			return v.FlowTimeouts.Deserialize(d)
+		case schemas.StatefulEngineOptionsV2_StreamExceptionPolicy:
+			var ev string
+			if err := d.ReadString(schemas.StatefulEngineOptionsV2_StreamExceptionPolicy, &ev); err != nil {
+				return err
+			}
+			v.StreamExceptionPolicy = StreamExceptionPolicyV2(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A single Suricata rules specification, for use in a stateful rule group. Use
 // this option to specify a simple Suricata rule with protocol, source and
 // destination, ports, direction, and rule options. For information about the
-// Suricata Rules format, see [Rules Format].
+// Suricata Rules format, see [Rules Format] on the Suricata website.
 //
 // [Rules Format]: https://suricata.readthedocs.io/en/suricata-8.0.3/rules/intro.html
 type StatefulRule struct {
@@ -6252,9 +7365,9 @@ func (v *StatelessRulesAndCustomActions) Deserialize(d smithy.ShapeDeserializer)
 }
 
 // The ID for a subnet that's used in an association with a firewall. This is used
-// in CreateFirewall, AssociateSubnets, and CreateVpcEndpointAssociation. Network Firewall creates an instance of the associated firewall in
-// each subnet that you specify, to filter traffic in the subnet's Availability
-// Zone.
+// in CreateFirewall , AssociateSubnets , and CreateVpcEndpointAssociation .
+// Network Firewall creates an instance of the associated firewall in each subnet
+// that you specify, to filter traffic in the subnet's Availability Zone.
 type SubnetMapping struct {
 
 	// The unique identifier for the subnet.
@@ -7065,12 +8178,12 @@ func (v *UniqueSources) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The VPC and subnets for a proxy mode firewall endpoint. This is used in CreateFirewall when
-// NoSourcePreservation is TRUE , to specify where Network Firewall creates the
-// firewall endpoint.
+// Contains the VPC and subnets for a proxy mode firewall endpoint. You use it in
+// CreateFirewall when NoSourcePreservation is TRUE , to specify where Network
+// Firewall creates the firewall endpoint.
 //
-// This differs from VpcEndpointAssociation, which defines additional secondary endpoints for a firewall
-// in other VPCs.
+// This differs from VpcEndpointAssociation , which defines additional secondary
+// endpoints for a firewall in other VPCs.
 type VpcEndpoint struct {
 
 	// The subnets in which Network Firewall creates the firewall endpoint for a proxy
@@ -7162,9 +8275,9 @@ type VpcEndpointAssociation struct {
 	FirewallArn *string
 
 	// The ID for a subnet that's used in an association with a firewall. This is used
-	// in CreateFirewall, AssociateSubnets, and CreateVpcEndpointAssociation. Network Firewall creates an instance of the associated firewall in
-	// each subnet that you specify, to filter traffic in the subnet's Availability
-	// Zone.
+	// in CreateFirewall , AssociateSubnets , and CreateVpcEndpointAssociation .
+	// Network Firewall creates an instance of the associated firewall in each subnet
+	// that you specify, to filter traffic in the subnet's Availability Zone.
 	//
 	// This member is required.
 	SubnetMapping *SubnetMapping

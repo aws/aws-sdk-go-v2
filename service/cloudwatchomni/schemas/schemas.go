@@ -173,6 +173,11 @@ var GetSpaceCredentialsForOrganization = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetSpaceCredentialsForOrganization",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetSpaceDataAccess = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatchomni",
+	Name:      "GetSpaceDataAccess",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetTelemetryQueryResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchomni",
 	Name:      "GetTelemetryQueryResults",
@@ -796,6 +801,37 @@ var _DashboardId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchomni",
 	Name:      "DashboardId",
 }, smithy.ShapeTypeString, 0)
+
+var _DataAccessActionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatchomni",
+	Name:      "DataAccessActionList",
+}, smithy.ShapeTypeList, 1)
+var _DataAccessActionList_member *smithy.Schema
+
+var _DataAccessActionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatchomni",
+	Name:      "DataAccessActionName",
+}, smithy.ShapeTypeString, 0)
+
+var _DataAccessAuditContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatchomni",
+	Name:      "DataAccessAuditContext",
+}, smithy.ShapeTypeMap, 2)
+var _DataAccessAuditContext_key *smithy.Schema
+
+var _DataAccessAuditContext_value *smithy.Schema
+
+var DataAccessTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatchomni",
+	Name:      "DataAccessTarget",
+}, smithy.ShapeTypeStructure, 1)
+var DataAccessTarget_actions *smithy.Schema
+
+var _DataAccessTargetList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatchomni",
+	Name:      "DataAccessTargetList",
+}, smithy.ShapeTypeList, 1)
+var _DataAccessTargetList_member *smithy.Schema
 
 var _DeepLinkCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchomni",
@@ -1692,6 +1728,13 @@ var PartialResults = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PartialResults",
 }, smithy.ShapeTypeStructure, 1)
 var PartialResults_partialResultsDetected *smithy.Schema
+
+var PolicyTooLargeException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatchomni",
+	Name:      "PolicyTooLargeException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
+var PolicyTooLargeException_message *smithy.Schema
 
 var _PrincipalId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchomni",
@@ -2792,6 +2835,24 @@ var GetSpaceCredentialsForOrganizationOutput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var GetSpaceCredentialsForOrganizationOutput_credentials *smithy.Schema
 
+var GetSpaceDataAccessInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatchomni",
+	Name:      "GetSpaceDataAccessInput",
+}, smithy.ShapeTypeStructure, 4)
+var GetSpaceDataAccessInput_spaceId *smithy.Schema
+
+var GetSpaceDataAccessInput_targetScopes *smithy.Schema
+
+var GetSpaceDataAccessInput_durationSeconds *smithy.Schema
+
+var GetSpaceDataAccessInput_auditContext *smithy.Schema
+
+var GetSpaceDataAccessOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatchomni",
+	Name:      "GetSpaceDataAccessOutput",
+}, smithy.ShapeTypeStructure, 1)
+var GetSpaceDataAccessOutput_credentials *smithy.Schema
+
 var GetSpaceInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchomni",
 	Name:      "GetSpaceInput",
@@ -3724,6 +3785,16 @@ func init() {
 
 	_ContextGraphAttributeMap_value = _ContextGraphAttributeMap.AddMember("value", smithyprelude.String)
 
+	_DataAccessActionList_member = _DataAccessActionList.AddMember("member", _DataAccessActionName)
+
+	_DataAccessAuditContext_key = _DataAccessAuditContext.AddMember("key", smithyprelude.String)
+
+	_DataAccessAuditContext_value = _DataAccessAuditContext.AddMember("value", smithyprelude.String)
+
+	DataAccessTarget_actions = DataAccessTarget.AddMember("actions", _DataAccessActionList)
+
+	_DataAccessTargetList_member = _DataAccessTargetList.AddMember("member", DataAccessTarget)
+
 	IdentityProvider_IAM = IdentityProvider.AddMember("IAM", smithyprelude.Unit)
 
 	IdentityProvider_IDC = IdentityProvider.AddMember("IDC", smithyprelude.Unit)
@@ -4284,6 +4355,8 @@ func init() {
 
 	PartialResults_partialResultsDetected = PartialResults.AddMember("partialResultsDetected", smithyprelude.Boolean)
 
+	PolicyTooLargeException_message = PolicyTooLargeException.AddMember("message", smithyprelude.String)
+
 	PrincipalType_USER = PrincipalType.AddMember("USER", smithyprelude.Unit)
 
 	PrincipalType_GROUP = PrincipalType.AddMember("GROUP", smithyprelude.Unit)
@@ -4705,6 +4778,16 @@ func init() {
 	GetSpaceCredentialsForOrganizationInput_credentialType = GetSpaceCredentialsForOrganizationInput.AddMember("credentialType", OrganizationCredentialType)
 
 	GetSpaceCredentialsForOrganizationOutput_credentials = GetSpaceCredentialsForOrganizationOutput.AddMember("credentials", AwsCredentials)
+
+	GetSpaceDataAccessInput_spaceId = GetSpaceDataAccessInput.AddMember("spaceId", _SpaceId)
+
+	GetSpaceDataAccessInput_targetScopes = GetSpaceDataAccessInput.AddMember("targetScopes", _DataAccessTargetList)
+
+	GetSpaceDataAccessInput_durationSeconds = GetSpaceDataAccessInput.AddMember("durationSeconds", smithyprelude.Integer)
+
+	GetSpaceDataAccessInput_auditContext = GetSpaceDataAccessInput.AddMember("auditContext", _DataAccessAuditContext)
+
+	GetSpaceDataAccessOutput_credentials = GetSpaceDataAccessOutput.AddMember("credentials", AwsCredentials)
 
 	GetSpaceInput_spaceId = GetSpaceInput.AddMember("spaceId", _SpaceId)
 

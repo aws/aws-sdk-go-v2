@@ -38,9 +38,9 @@ type CreateVpcEndpointAssociationInput struct {
 	FirewallArn *string
 
 	// The ID for a subnet that's used in an association with a firewall. This is used
-	// in CreateFirewall, AssociateSubnets, and CreateVpcEndpointAssociation. Network Firewall creates an instance of the associated firewall in
-	// each subnet that you specify, to filter traffic in the subnet's Availability
-	// Zone.
+	// in CreateFirewall , AssociateSubnets , and CreateVpcEndpointAssociation .
+	// Network Firewall creates an instance of the associated firewall in each subnet
+	// that you specify, to filter traffic in the subnet's Availability Zone.
 	//
 	// This member is required.
 	SubnetMapping *types.SubnetMapping

@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/GetSpaceDataAccess
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿lauditContext¿dkey0i__Value__ÿodurationSecondsgspaceIdk__SpaceId__ltargetScopesŸ¿gactionsŸj__Member__j__Member__ÿÿ¿gactionsŸj__Member__j__Member__ÿÿÿÿ

@@ -4693,7 +4693,7 @@ var _ConnectionTypeList_member *smithy.Schema
 var Contact = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "Contact",
-}, smithy.ShapeTypeStructure, 49)
+}, smithy.ShapeTypeStructure, 50)
 var Contact_Arn *smithy.Schema
 
 var Contact_Id *smithy.Schema
@@ -4792,6 +4792,8 @@ var Contact_NextContacts *smithy.Schema
 
 var Contact_GlobalResiliencyMetadata *smithy.Schema
 
+var Contact_ContactLens *smithy.Schema
+
 var ContactAnalysis = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ContactAnalysis",
@@ -4813,6 +4815,14 @@ var ContactAnalysisReference_Arn *smithy.Schema
 var ContactAnalysisReference_AnalyticsMode *smithy.Schema
 
 var ContactAnalysisReference_IsRedacted *smithy.Schema
+
+var ContactAnalysisReferenceState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactAnalysisReferenceState",
+}, smithy.ShapeTypeStructure, 2)
+var ContactAnalysisReferenceState_Status *smithy.Schema
+
+var ContactAnalysisReferenceState_StatusReason *smithy.Schema
 
 var ContactConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -5455,6 +5465,60 @@ var ContactInteractionType_AUTOMATED *smithy.Schema
 
 var ContactInteractionType_CUSTOMER *smithy.Schema
 
+var ContactLens = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLens",
+}, smithy.ShapeTypeStructure, 1)
+var ContactLens_ConversationalAnalytics *smithy.Schema
+
+var _ContactLensAnalyticsModeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensAnalyticsModeList",
+}, smithy.ShapeTypeList, 1)
+var _ContactLensAnalyticsModeList_member *smithy.Schema
+
+var ContactLensChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensChannelConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ContactLensChannelConfiguration_AnalyticsModes *smithy.Schema
+
+var ContactLensRedactionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensRedactionConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var ContactLensRedactionConfiguration_Behavior *smithy.Schema
+
+var ContactLensRedactionConfiguration_Policy *smithy.Schema
+
+var ContactLensRedactionConfiguration_Entities *smithy.Schema
+
+var ContactLensRedactionConfiguration_MaskMode *smithy.Schema
+
+var _ContactLensRedactionEntitiesList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensRedactionEntitiesList",
+}, smithy.ShapeTypeList, 1)
+var _ContactLensRedactionEntitiesList_member *smithy.Schema
+
+var ContactLensSentimentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensSentimentConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ContactLensSentimentConfiguration_Behavior *smithy.Schema
+
+var ContactLensSummaryConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensSummaryConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ContactLensSummaryConfiguration_SummaryModes *smithy.Schema
+
+var _ContactLensSummaryModeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensSummaryModeList",
+}, smithy.ShapeTypeList, 1)
+var _ContactLensSummaryModeList_member *smithy.Schema
+
 var ContactMediaProcessingFailureMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ContactMediaProcessingFailureMode",
@@ -5748,6 +5812,32 @@ var ControlPlaneUserAttributeFilter_AndCondition *smithy.Schema
 var ControlPlaneUserAttributeFilter_TagCondition *smithy.Schema
 
 var ControlPlaneUserAttributeFilter_HierarchyGroupCondition *smithy.Schema
+
+var ConversationalAnalytics = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ConversationalAnalytics",
+}, smithy.ShapeTypeStructure, 2)
+var ConversationalAnalytics_Configuration *smithy.Schema
+
+var ConversationalAnalytics_ContactAnalysisReferenceState *smithy.Schema
+
+var ConversationalAnalyticsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ConversationalAnalyticsConfiguration",
+}, smithy.ShapeTypeStructure, 7)
+var ConversationalAnalyticsConfiguration_Enabled *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_LanguageLocale *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_LanguageLocales *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_ChannelConfiguration *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_RedactionConfiguration *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_SummaryConfiguration *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_SentimentConfiguration *smithy.Schema
 
 var _Count = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -10031,6 +10121,12 @@ var _LanguageLocale = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "LanguageLocale",
 }, smithy.ShapeTypeString, 0)
+
+var _LanguageLocales = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "LanguageLocales",
+}, smithy.ShapeTypeList, 1)
+var _LanguageLocales_member *smithy.Schema
 
 var _LargeNextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -27181,6 +27277,52 @@ func init() {
 
 	GlobalResiliencyMetadata_TrafficDistributionGroupId = GlobalResiliencyMetadata.AddMember("TrafficDistributionGroupId", _TrafficDistributionGroupId)
 
+	_LanguageLocales_member = _LanguageLocales.AddMember("member", _LanguageLocale)
+
+	_ContactLensAnalyticsModeList_member = _ContactLensAnalyticsModeList.AddMember("member", _String)
+
+	ContactLensChannelConfiguration_AnalyticsModes = ContactLensChannelConfiguration.AddMember("AnalyticsModes", _ContactLensAnalyticsModeList)
+
+	_ContactLensRedactionEntitiesList_member = _ContactLensRedactionEntitiesList.AddMember("member", _String)
+
+	ContactLensRedactionConfiguration_Behavior = ContactLensRedactionConfiguration.AddMember("Behavior", _String)
+
+	ContactLensRedactionConfiguration_Policy = ContactLensRedactionConfiguration.AddMember("Policy", _String)
+
+	ContactLensRedactionConfiguration_Entities = ContactLensRedactionConfiguration.AddMember("Entities", _ContactLensRedactionEntitiesList)
+
+	ContactLensRedactionConfiguration_MaskMode = ContactLensRedactionConfiguration.AddMember("MaskMode", _String)
+
+	_ContactLensSummaryModeList_member = _ContactLensSummaryModeList.AddMember("member", _String)
+
+	ContactLensSummaryConfiguration_SummaryModes = ContactLensSummaryConfiguration.AddMember("SummaryModes", _ContactLensSummaryModeList)
+
+	ContactLensSentimentConfiguration_Behavior = ContactLensSentimentConfiguration.AddMember("Behavior", _String)
+
+	ConversationalAnalyticsConfiguration_Enabled = ConversationalAnalyticsConfiguration.AddMember("Enabled", _Boolean)
+
+	ConversationalAnalyticsConfiguration_LanguageLocale = ConversationalAnalyticsConfiguration.AddMember("LanguageLocale", _String)
+
+	ConversationalAnalyticsConfiguration_LanguageLocales = ConversationalAnalyticsConfiguration.AddMember("LanguageLocales", _LanguageLocales)
+
+	ConversationalAnalyticsConfiguration_ChannelConfiguration = ConversationalAnalyticsConfiguration.AddMember("ChannelConfiguration", ContactLensChannelConfiguration)
+
+	ConversationalAnalyticsConfiguration_RedactionConfiguration = ConversationalAnalyticsConfiguration.AddMember("RedactionConfiguration", ContactLensRedactionConfiguration)
+
+	ConversationalAnalyticsConfiguration_SummaryConfiguration = ConversationalAnalyticsConfiguration.AddMember("SummaryConfiguration", ContactLensSummaryConfiguration)
+
+	ConversationalAnalyticsConfiguration_SentimentConfiguration = ConversationalAnalyticsConfiguration.AddMember("SentimentConfiguration", ContactLensSentimentConfiguration)
+
+	ContactAnalysisReferenceState_Status = ContactAnalysisReferenceState.AddMember("Status", _String)
+
+	ContactAnalysisReferenceState_StatusReason = ContactAnalysisReferenceState.AddMember("StatusReason", _String)
+
+	ConversationalAnalytics_Configuration = ConversationalAnalytics.AddMember("Configuration", ConversationalAnalyticsConfiguration)
+
+	ConversationalAnalytics_ContactAnalysisReferenceState = ConversationalAnalytics.AddMember("ContactAnalysisReferenceState", ContactAnalysisReferenceState)
+
+	ContactLens_ConversationalAnalytics = ContactLens.AddMember("ConversationalAnalytics", ConversationalAnalytics)
+
 	Contact_Arn = Contact.AddMember("Arn", _ARN)
 
 	Contact_Id = Contact.AddMember("Id", _ContactId)
@@ -27278,6 +27420,8 @@ func init() {
 	Contact_NextContacts = Contact.AddMember("NextContacts", _NextContacts)
 
 	Contact_GlobalResiliencyMetadata = Contact.AddMember("GlobalResiliencyMetadata", GlobalResiliencyMetadata)
+
+	Contact_ContactLens = Contact.AddMember("ContactLens", ContactLens)
 
 	ParticipantRole_AGENT = ParticipantRole.AddMember("AGENT", smithyprelude.Unit)
 

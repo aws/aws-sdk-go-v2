@@ -10,12 +10,35 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Associates a Route 53 Profiles profile with a VPC. A VPC can have only one
+//	Associates a Route 53 Profiles profile with a VPC. A VPC can have up to two
 //
-// Profile associated with it, but a Profile can be associated with 1000 of VPCs
-// (and you can request a higher quota). For more information, see [https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities].
+// Profile associations. A Profile can be associated with up to 1,000 VPCs, and you
+// can request a higher quota for the number of VPCs. For more information, see [Quotas on Route 53 Profiles].
 //
-// [https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities
+// Route 53 VPC Resolver evaluates the Profile associations for a VPC in priority
+// order, starting with the lowest Priority value. If the VPC has no other Profile
+// associations, you can omit Priority , and the association gets priority 100.
+// When the VPC already has a Profile association, you must specify a Priority ,
+// and each Profile association for the VPC must have a unique priority. To change
+// the priority of an existing association, use UpdateProfileAssociation .
+//
+// The request fails with a ValidationException in these cases:
+//
+//   - You omit Priority , and the VPC already has a Profile association.
+//
+//   - Another Profile association for the VPC already uses the priority that you
+//     specify.
+//
+//   - The priority is outside the range 100–9900.
+//
+//   - The Profile is already associated with the VPC, and you specify a different
+//     Name or Priority . To change the priority, use [UpdateProfileAssociation].
+//
+// The request fails with a LimitExceededException if the VPC already has the
+// maximum number of Profile associations.
+//
+// [UpdateProfileAssociation]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53profiles_UpdateProfileAssociation.html
+// [Quotas on Route 53 Profiles]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-route53-profiles
 func (c *Client) AssociateProfile(ctx context.Context, params *AssociateProfileInput, optFns ...func(*Options)) (*AssociateProfileOutput, error) {
 	if params == nil {
 		params = &AssociateProfileInput{}
@@ -48,6 +71,15 @@ type AssociateProfileInput struct {
 	// This member is required.
 	ResourceId *string
 
+	//  The priority of the Profile association. Route 53 VPC Resolver evaluates the
+	// Profile associations for a VPC in priority order, starting with the lowest
+	// value.
+	//
+	// When the VPC already has a Profile association, you must specify a priority
+	// that no other Profile association for the VPC uses. If you omit the priority for
+	// the first association with a VPC, the association gets priority 100.
+	Priority *int32
+
 	//  A list of the tag keys and values that you want to identify the Profile
 	// association.
 	Tags []types.Tag
@@ -65,6 +97,9 @@ func (v *AssociateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.AssociateProfileRequest_Name, *v.Name)
 	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.AssociateProfileRequest_Priority, *v.Priority)
+	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.AssociateProfileRequest_ProfileId, *v.ProfileId)
 	}
@@ -79,7 +114,7 @@ func (v *AssociateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 type AssociateProfileOutput struct {
 
 	//  The association that you just created. The association has an ID that you can
-	// use to identify it in other requests, like update and delete.
+	// use to identify it in other requests, such as update and delete.
 	ProfileAssociation *types.ProfileAssociation
 
 	// Metadata pertaining to the operation's result.

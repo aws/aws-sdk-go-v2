@@ -1,0 +1,8 @@
+{
+    "id": "852e9795-5c58-40e0-9ec0-e1763d53fab4",
+    "type": "feature",
+    "description": "Adds RetryableConflictException to UpdatePlan so AWS SDKs automatically retry updates that conflict with a concurrent change.",
+    "modules": [
+        "service/arcregionswitch"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "2d671ac3-d440-4f15-a7f0-8eed357edbfa",
+    "type": "feature",
+    "description": "Adds support for having multiple profiles on one VPC. This is done using a priority system to handle conflicts on the dataplane.",
+    "modules": [
+        "service/route53profiles"
+    ]
+}

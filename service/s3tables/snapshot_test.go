@@ -266,6 +266,18 @@ func TestCheckSnapshot_GetTableBucketEncryption(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTableBucketLogging(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTableBucketLogging(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTableBucketLogging")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTableBucketMaintenanceConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTableBucketMaintenanceConfiguration(context.Background(), nil, func(o *Options) {
@@ -523,6 +535,18 @@ func TestCheckSnapshot_PutTableBucketEncryption(t *testing.T) {
 	_, err := svc.PutTableBucketEncryption(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutTableBucketEncryption")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutTableBucketLogging(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTableBucketLogging(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutTableBucketLogging")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -925,6 +949,18 @@ func TestUpdateSnapshot_GetTableBucketEncryption(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetTableBucketLogging(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTableBucketLogging(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTableBucketLogging")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTableBucketMaintenanceConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTableBucketMaintenanceConfiguration(context.Background(), nil, func(o *Options) {
@@ -1182,6 +1218,18 @@ func TestUpdateSnapshot_PutTableBucketEncryption(t *testing.T) {
 	_, err := svc.PutTableBucketEncryption(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutTableBucketEncryption")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutTableBucketLogging(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTableBucketLogging(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutTableBucketLogging")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

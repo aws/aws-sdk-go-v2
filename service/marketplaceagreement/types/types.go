@@ -659,6 +659,13 @@ type AgreementViewSummary struct {
 	// A list of entitlements associated with the agreement.
 	Entitlements []Entitlement
 
+	// The date and time when the free trial of the agreement ends. This field is
+	// present only when the agreement includes a free trial.
+	//
+	// For an agreement that includes both a free trial and usage-based pricing, the
+	// agreement converts to paid usage at this time.
+	FreeTrialEndTime *time.Time
+
 	// The unique identifier of the very first agreement in a chain of related
 	// agreements, such as renewals or replacements. It stays the same across all
 	// agreements in that chain, which lets you trace an agreement back to the
@@ -724,6 +731,9 @@ func (v *AgreementViewSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Entitlements != nil {
 		serializeEntitlementList(s, schemas.AgreementViewSummary_entitlements, v.Entitlements)
 	}
+	if v.FreeTrialEndTime != nil {
+		s.WriteTime(schemas.AgreementViewSummary_freeTrialEndTime, *v.FreeTrialEndTime)
+	}
 	if v.InitialAgreementId != nil {
 		s.WriteString(schemas.AgreementViewSummary_initialAgreementId, *v.InitialAgreementId)
 	}
@@ -781,6 +791,9 @@ func (v *AgreementViewSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			return nil
 		case schemas.AgreementViewSummary_entitlements:
 			return deserializeEntitlementList(d, schemas.AgreementViewSummary_entitlements, &v.Entitlements)
+		case schemas.AgreementViewSummary_freeTrialEndTime:
+			v.FreeTrialEndTime = new(time.Time)
+			return d.ReadTime(schemas.AgreementViewSummary_freeTrialEndTime, v.FreeTrialEndTime)
 		case schemas.AgreementViewSummary_initialAgreementId:
 			v.InitialAgreementId = new(string)
 			return d.ReadString(schemas.AgreementViewSummary_initialAgreementId, v.InitialAgreementId)
@@ -2193,7 +2206,8 @@ func (v *FixedUpfrontPricingTerm) Deserialize(d smithy.ShapeDeserializer) error 
 // anything within a specified limit.
 type FreeTrialPricingTerm struct {
 
-	// Duration of the free trial period (5–31 days).
+	// Duration of the free trial period. The allowed duration depends on the product
+	// type. For SaaS products, the free trial lasts 7 to 90 days.
 	Duration *string
 
 	// Entitlements granted to the acceptor of a free trial as part of an agreement
@@ -2243,6 +2257,40 @@ func (v *FreeTrialPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.FreeTrialPricingTerm_type:
 			v.Type = new(string)
 			return d.ReadString(schemas.FreeTrialPricingTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
+// Contains details about the free trial of an agreement, including when the free
+// trial ends.
+type FreeTrialSummary struct {
+
+	// The date and time when the free trial ends. For an agreement that includes both
+	// a free trial and usage-based pricing, the agreement converts to paid usage at
+	// this time.
+	TrialEndTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *FreeTrialSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FreeTrialSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FreeTrialSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialEndTime != nil {
+		s.WriteTime(schemas.FreeTrialSummary_trialEndTime, *v.TrialEndTime)
+	}
+}
+func (v *FreeTrialSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FreeTrialSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FreeTrialSummary_trialEndTime:
+			v.TrialEndTime = new(time.Time)
+			return d.ReadTime(schemas.FreeTrialSummary_trialEndTime, v.TrialEndTime)
 		}
 		return nil
 	})

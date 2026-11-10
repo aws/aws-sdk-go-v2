@@ -1,0 +1,8 @@
+{
+    "id": "19fa8bcc-de17-4ddd-9bee-b86f0939a672",
+    "type": "feature",
+    "description": "Release of GetSpaceDataAccess API - Used to get temporary credentials, limited to the requested actions, for working with data in a space.",
+    "modules": [
+        "service/cloudwatchomni"
+    ]
+}

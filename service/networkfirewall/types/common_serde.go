@@ -152,7 +152,37 @@ func serializeFirewallPolicies(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeFirewallPoliciesV2(s smithy.ShapeSerializer, schema *smithy.Schema, v []FirewallPolicyV2Metadata) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeFirewallPolicyErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []FirewallPolicyError) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeFirewallRuleGroupEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []FirewallRuleGroupEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeFirewallRules(s smithy.ShapeSerializer, schema *smithy.Schema, v []FirewallRule) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -201,6 +231,16 @@ func serializeFlowOperations(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeFlows(s smithy.ShapeSerializer, schema *smithy.Schema, v []Flow) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeIpsRuleGroupEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []IpsRuleGroupEntry) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -978,6 +1018,28 @@ func deserializeFirewallPolicies(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	})
 }
 
+func deserializeFirewallPoliciesV2(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FirewallPolicyV2Metadata) error {
+	*v = make([]FirewallPolicyV2Metadata, 0)
+	var vv FirewallPolicyV2Metadata
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FirewallPolicyV2Metadata
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = FirewallPolicyV2Metadata{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeFirewallPolicyErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FirewallPolicyError) error {
 	*v = make([]FirewallPolicyError, 0)
 	var vv FirewallPolicyError
@@ -991,6 +1053,50 @@ func deserializeFirewallPolicyErrors(d smithy.ShapeDeserializer, s *smithy.Schem
 		}
 
 		vv = FirewallPolicyError{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFirewallRuleGroupEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FirewallRuleGroupEntry) error {
+	*v = make([]FirewallRuleGroupEntry, 0)
+	var vv FirewallRuleGroupEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FirewallRuleGroupEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = FirewallRuleGroupEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFirewallRules(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FirewallRule) error {
+	*v = make([]FirewallRule, 0)
+	var vv FirewallRule
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FirewallRule
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = FirewallRule{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1100,6 +1206,28 @@ func deserializeFlows(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Flow) e
 		}
 
 		vv = Flow{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIpsRuleGroupEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IpsRuleGroupEntry) error {
+	*v = make([]IpsRuleGroupEntry, 0)
+	var vv IpsRuleGroupEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero IpsRuleGroupEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = IpsRuleGroupEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

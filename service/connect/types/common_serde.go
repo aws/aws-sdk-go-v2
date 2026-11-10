@@ -1421,6 +1421,30 @@ func serializeContactFlowVersionSummaryList(s smithy.ShapeSerializer, schema *sm
 	s.CloseList()
 }
 
+func serializeContactLensAnalyticsModeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeContactLensRedactionEntitiesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeContactLensSummaryModeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeContactMetricResults(s smithy.ShapeSerializer, schema *smithy.Schema, v []ContactMetricResult) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -2302,6 +2326,14 @@ func serializeIpCidrList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeIsolatedRegionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeLanguageLocales(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -5593,6 +5625,69 @@ func deserializeContactFlowVersionSummaryList(d smithy.ShapeDeserializer, s *smi
 	})
 }
 
+func deserializeContactLensAnalyticsModeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeContactLensRedactionEntitiesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeContactLensSummaryModeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeContactMetricResults(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ContactMetricResult) error {
 	*v = make([]ContactMetricResult, 0)
 	var vv ContactMetricResult
@@ -7598,6 +7693,27 @@ func deserializeIpCidrList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeIsolatedRegionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeLanguageLocales(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {

@@ -96,6 +96,10 @@ type GetGatewayOutput struct {
 	// The description of the gateway.
 	Description *string
 
+	// The public domain names that the gateway advertises in its OAuth discovery URLs
+	// instead of the inbound Host header.
+	DomainOverride *types.DomainOverride
+
 	// The level of detail in error messages returned when invoking the gateway.
 	//
 	//   - If the value is DEBUG , granular exception messages are returned to help a
@@ -169,6 +173,11 @@ func (v *GetGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetGatewayResponse_description, *v.Description)
+	}
+	if v.DomainOverride != nil {
+		s.WriteStruct(schemas.GetGatewayResponse_domainOverride)
+		v.DomainOverride.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.ExceptionLevel != "" {
 		s.WriteString(schemas.GetGatewayResponse_exceptionLevel, string(v.ExceptionLevel))
@@ -249,6 +258,9 @@ func (v *GetGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetGatewayResponse_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.GetGatewayResponse_description, v.Description)
+		case schemas.GetGatewayResponse_domainOverride:
+			v.DomainOverride = &types.DomainOverride{}
+			return v.DomainOverride.Deserialize(d)
 		case schemas.GetGatewayResponse_exceptionLevel:
 			var ev string
 			if err := d.ReadString(schemas.GetGatewayResponse_exceptionLevel, &ev); err != nil {

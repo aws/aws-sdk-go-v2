@@ -1,0 +1,5 @@
+PATCH /profileassociation/__ProfileAssociationId__
+
+Content-Type: application/json
+
+{"Name":"__Name__","Priority":1}

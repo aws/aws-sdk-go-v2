@@ -4029,6 +4029,23 @@ func validateBrowserSigningConfigInput(v *types.BrowserSigningConfigInput) error
 	}
 }
 
+func validateBuildLifecycleHooks(v *types.BuildLifecycleHooks) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BuildLifecycleHooks"}
+	if v.Warmup != nil {
+		if err := validateLifecycleHook(v.Warmup); err != nil {
+			invalidParams.AddNested("Warmup", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCapacityProviderConfiguration(v *types.CapacityProviderConfiguration) error {
 	if v == nil {
 		return nil
@@ -5215,6 +5232,21 @@ func validateDimensionRatingScale(v types.DimensionRatingScale) error {
 			invalidParams.AddNested("[numerical]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDomainOverride(v *types.DomainOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DomainOverride"}
+	if v.DefaultDomain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultDomain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6545,6 +6577,21 @@ func validateHttpConnectorTargetConfiguration(v *types.HttpConnectorTargetConfig
 	}
 }
 
+func validateHttpPostLifecycleHookAction(v *types.HttpPostLifecycleHookAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpPostLifecycleHookAction"}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHttpTargetConfiguration(v types.HttpTargetConfiguration) error {
 	if v == nil {
 		return nil
@@ -7060,6 +7107,44 @@ func validateLicenseSpecificationList(v []types.LicenseSpecification) error {
 		if err := validateLicenseSpecification(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLifecycleHook(v *types.LifecycleHook) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LifecycleHook"}
+	if v.Action == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	} else if v.Action != nil {
+		if err := validateLifecycleHookAction(v.Action); err != nil {
+			invalidParams.AddNested("Action", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLifecycleHookAction(v types.LifecycleHookAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LifecycleHookAction"}
+	switch uv := v.(type) {
+	case *types.LifecycleHookActionMemberHttpPost:
+		if err := validateHttpPostLifecycleHookAction(&uv.Value); err != nil {
+			invalidParams.AddNested("[httpPost]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8419,6 +8504,38 @@ func validateRegistryRecordOAuthCredentialProvider(v *types.RegistryRecordOAuthC
 	}
 }
 
+func validateResourceConfiguration(v *types.ResourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceConfiguration"}
+	if v.MinimumMemoryInMiB == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumMemoryInMiB"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceConfigurations(v []types.ResourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceConfigurations"}
+	for i := range v {
+		if err := validateResourceConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResourceLocation(v types.ResourceLocation) error {
 	if v == nil {
 		return nil
@@ -8482,6 +8599,23 @@ func validateRule(v *types.Rule) error {
 	if v.SessionConfig != nil {
 		if err := validateSessionConfig(v.SessionConfig); err != nil {
 			invalidParams.AddNested("SessionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuntimeHooksConfiguration(v *types.RuntimeHooksConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeHooksConfiguration"}
+	if v.Build != nil {
+		if err := validateBuildLifecycleHooks(v.Build); err != nil {
+			invalidParams.AddNested("Build", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -9747,6 +9881,11 @@ func validateOpCreateAgentRuntimeInput(v *CreateAgentRuntimeInput) error {
 			invalidParams.AddNested("ProtocolConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.HooksConfiguration != nil {
+		if err := validateRuntimeHooksConfiguration(v.HooksConfiguration); err != nil {
+			invalidParams.AddNested("HooksConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.FilesystemConfigurations != nil {
 		if err := validateFilesystemConfigurations(v.FilesystemConfigurations); err != nil {
 			invalidParams.AddNested("FilesystemConfigurations", err.(smithy.InvalidParamsError))
@@ -9760,6 +9899,11 @@ func validateOpCreateAgentRuntimeInput(v *CreateAgentRuntimeInput) error {
 	if v.AllowedPorts != nil {
 		if err := validateAllowedPorts(v.AllowedPorts); err != nil {
 			invalidParams.AddNested("AllowedPorts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceConfigurations != nil {
+		if err := validateResourceConfigurations(v.ResourceConfigurations); err != nil {
+			invalidParams.AddNested("ResourceConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -10063,6 +10207,11 @@ func validateOpCreateGatewayInput(v *CreateGatewayInput) error {
 	if v.PolicyEngineConfiguration != nil {
 		if err := validateGatewayPolicyEngineConfiguration(v.PolicyEngineConfiguration); err != nil {
 			invalidParams.AddNested("PolicyEngineConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DomainOverride != nil {
+		if err := validateDomainOverride(v.DomainOverride); err != nil {
+			invalidParams.AddNested("DomainOverride", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -12073,6 +12222,11 @@ func validateOpUpdateAgentRuntimeInput(v *UpdateAgentRuntimeInput) error {
 			invalidParams.AddNested("ProtocolConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.HooksConfiguration != nil {
+		if err := validateRuntimeHooksConfiguration(v.HooksConfiguration); err != nil {
+			invalidParams.AddNested("HooksConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.MetadataConfiguration != nil {
 		if err := validateRuntimeMetadataConfiguration(v.MetadataConfiguration); err != nil {
 			invalidParams.AddNested("MetadataConfiguration", err.(smithy.InvalidParamsError))
@@ -12091,6 +12245,11 @@ func validateOpUpdateAgentRuntimeInput(v *UpdateAgentRuntimeInput) error {
 	if v.AllowedPorts != nil {
 		if err := validateAllowedPorts(v.AllowedPorts); err != nil {
 			invalidParams.AddNested("AllowedPorts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceConfigurations != nil {
+		if err := validateResourceConfigurations(v.ResourceConfigurations); err != nil {
+			invalidParams.AddNested("ResourceConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -12269,6 +12428,11 @@ func validateOpUpdateGatewayInput(v *UpdateGatewayInput) error {
 	if v.PolicyEngineConfiguration != nil {
 		if err := validateGatewayPolicyEngineConfiguration(v.PolicyEngineConfiguration); err != nil {
 			invalidParams.AddNested("PolicyEngineConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DomainOverride != nil {
+		if err := validateDomainOverride(v.DomainOverride); err != nil {
+			invalidParams.AddNested("DomainOverride", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

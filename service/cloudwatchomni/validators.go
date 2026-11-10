@@ -630,6 +630,26 @@ func (m *validateOpGetSpaceCredentialsForOrganization) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSpaceDataAccess struct {
+}
+
+func (*validateOpGetSpaceDataAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSpaceDataAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSpaceDataAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSpaceDataAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSpace struct {
 }
 
@@ -1134,6 +1154,10 @@ func addOpGetSpaceCredentialsForOrganizationValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpGetSpaceCredentialsForOrganization{}, middleware.After)
 }
 
+func addOpGetSpaceDataAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSpaceDataAccess{}, middleware.After)
+}
+
 func addOpGetSpaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSpace{}, middleware.After)
 }
@@ -1305,6 +1329,38 @@ func validateApiKeyCredential(v *types.ApiKeyCredential) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ApiKeyCredential"}
 	if v.ApiKeyValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiKeyValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataAccessTarget(v *types.DataAccessTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataAccessTarget"}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataAccessTargetList(v []types.DataAccessTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataAccessTargetList"}
+	for i := range v {
+		if err := validateDataAccessTarget(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2311,6 +2367,28 @@ func validateOpGetSpaceCredentialsForOrganizationInput(v *GetSpaceCredentialsFor
 	}
 	if len(v.CredentialType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("CredentialType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSpaceDataAccessInput(v *GetSpaceDataAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSpaceDataAccessInput"}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if v.TargetScopes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetScopes"))
+	} else if v.TargetScopes != nil {
+		if err := validateDataAccessTargetList(v.TargetScopes); err != nil {
+			invalidParams.AddNested("TargetScopes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

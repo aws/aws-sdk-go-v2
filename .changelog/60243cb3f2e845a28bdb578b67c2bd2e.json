@@ -1,0 +1,8 @@
+{
+    "id": "60243cb3-f2e8-45a2-8bdb-578b67c2bd2e",
+    "type": "feature",
+    "description": "Adds the NONE insights type to disable insights generation for a run, a testPackageArn field in run details, and a new artifact type for device connect command logs.",
+    "modules": [
+        "service/devicefarm"
+    ]
+}

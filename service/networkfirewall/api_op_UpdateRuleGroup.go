@@ -75,6 +75,14 @@ type UpdateRuleGroupInput struct {
 	// resources.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
+	// An object that defines the rules in a firewall engine rule group, for use in a
+	// Next Generation policy.
+	FirewallRuleGroup *types.FirewallRuleGroup
+
+	// An object that defines the rules in an IPS engine rule group, for use in a Next
+	// Generation policy.
+	IpsRuleGroup *types.IpsRuleGroup
+
 	// An object that defines the rule group rules.
 	//
 	// You must provide either this rule group setting or a Rules setting, but not
@@ -114,9 +122,15 @@ type UpdateRuleGroupInput struct {
 	// Changes affect subsequent responses from DescribeRuleGroupSummary.
 	SummaryConfiguration *types.SummaryConfiguration
 
-	// Indicates whether the rule group is stateless or stateful. If the rule group is
-	// stateless, it contains stateless rules. If it is stateful, it contains stateful
-	// rules.
+	// Indicates the type of the rule group. Valid values are:
+	//
+	//   - STATELESS - Stateless rules, for use in a Classic Network Firewall policy.
+	//
+	//   - STATEFUL - Stateful rules, for use in a Classic Network Firewall policy.
+	//
+	//   - FIREWALL - Firewall engine rules, for use in a Next Generation policy.
+	//
+	//   - IPS - IPS engine rules, for use in a Next Generation policy.
 	//
 	// This setting is required for requests that do not include the RuleGroupARN .
 	Type types.RuleGroupType
@@ -143,6 +157,16 @@ func (v *UpdateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EncryptionConfiguration != nil {
 		s.WriteStruct(schemas.UpdateRuleGroupRequest_EncryptionConfiguration)
 		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallRuleGroup != nil {
+		s.WriteStruct(schemas.UpdateRuleGroupRequest_FirewallRuleGroup)
+		v.FirewallRuleGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IpsRuleGroup != nil {
+		s.WriteStruct(schemas.UpdateRuleGroupRequest_IpsRuleGroup)
+		v.IpsRuleGroup.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.RuleGroup != nil {

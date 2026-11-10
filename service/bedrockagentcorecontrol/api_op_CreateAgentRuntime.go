@@ -73,6 +73,11 @@ type CreateAgentRuntimeInput struct {
 	// Runtime sessions.
 	FilesystemConfigurations []types.FilesystemConfiguration
 
+	// The lifecycle hooks configuration for the AgentCore Runtime. Use lifecycle
+	// hooks to run actions in the agent's container at fixed points in the runtime's
+	// lifecycle, such as warming up the agent before sessions are created.
+	HooksConfiguration *types.RuntimeHooksConfiguration
+
 	// The life cycle configuration for the AgentCore Runtime.
 	LifecycleConfiguration *types.LifecycleConfiguration
 
@@ -89,6 +94,11 @@ type CreateAgentRuntimeInput struct {
 	// Configuration for HTTP request headers that will be passed through to the
 	// runtime.
 	RequestHeaderConfiguration types.RequestHeaderConfiguration
+
+	// The resource configurations for the AgentCore Runtime, such as the minimum
+	// amount of memory to allocate to the runtime. You can specify at most one
+	// resource configuration.
+	ResourceConfigurations []types.ResourceConfiguration
 
 	// A map of tag keys and values to assign to the agent runtime. Tags enable you to
 	// categorize your resources in different ways, for example, by purpose, owner, or
@@ -134,6 +144,11 @@ func (v *CreateAgentRuntimeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FilesystemConfigurations != nil {
 		serializeFilesystemConfigurations(s, schemas.CreateAgentRuntimeRequest_filesystemConfigurations, v.FilesystemConfigurations)
 	}
+	if v.HooksConfiguration != nil {
+		s.WriteStruct(schemas.CreateAgentRuntimeRequest_hooksConfiguration)
+		v.HooksConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LifecycleConfiguration != nil {
 		s.WriteStruct(schemas.CreateAgentRuntimeRequest_lifecycleConfiguration)
 		v.LifecycleConfiguration.SerializeMembers(s)
@@ -154,6 +169,9 @@ func (v *CreateAgentRuntimeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.RequestHeaderConfiguration != nil {
 		serializeRequestHeaderConfiguration(s, schemas.CreateAgentRuntimeRequest_requestHeaderConfiguration, v.RequestHeaderConfiguration)
+	}
+	if v.ResourceConfigurations != nil {
+		serializeResourceConfigurations(s, schemas.CreateAgentRuntimeRequest_resourceConfigurations, v.ResourceConfigurations)
 	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateAgentRuntimeRequest_roleArn, *v.RoleArn)

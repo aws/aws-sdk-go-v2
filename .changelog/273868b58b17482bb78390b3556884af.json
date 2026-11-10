@@ -1,0 +1,8 @@
+{
+    "id": "273868b5-8b17-482b-b783-90b3556884af",
+    "type": "feature",
+    "description": "This release adds the freeTrialSummary.trialEndTime field to DescribeAgreement and the freeTrialEndTime field to SearchAgreements results, so you can see when an agreement's free trial ends.",
+    "modules": [
+        "service/marketplaceagreement"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "e495e107-3134-4ced-b774-2f783acefb1c",
+    "type": "feature",
+    "description": "Firewall Policy V2 for Network Firewall",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

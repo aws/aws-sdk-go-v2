@@ -95,6 +95,53 @@ func (v *AllRowsWildcard) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Represents all resources of the specified type in a Data Catalog, including
+// resources that are created after the grant.
+type AnyResource struct {
+
+	// The type of resource that the grant covers. The only supported value is TABLE .
+	//
+	// This member is required.
+	ResourceType AnyResourceSupportedTypes
+
+	// The ID of the Data Catalog. By default, it's your account ID.
+	CatalogId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AnyResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnyResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnyResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.AnyResource_CatalogId, *v.CatalogId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.AnyResource_ResourceType, string(v.ResourceType))
+	}
+}
+func (v *AnyResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnyResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnyResource_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.AnyResource_CatalogId, v.CatalogId)
+		case schemas.AnyResource_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.AnyResource_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = AnyResourceSupportedTypes(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A structure used to include auditing information on the privileged API.
 type AuditContext struct {
 
@@ -2097,6 +2144,12 @@ func (v *RedshiftScopeUnionMemberRedshiftConnect) Deserialize(d smithy.ShapeDese
 // A structure for the resource.
 type Resource struct {
 
+	// All resources of the specified type in a Data Catalog. When you grant or revoke
+	// permissions on this resource, the principal must be a user-defined function
+	// whose GovernanceMode is LAKE_FORMATION , and the Data Catalog must be in your
+	// account.
+	AnyResource *AnyResource
+
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
 	// table definitions, and other control information to manage your Lake Formation
@@ -2138,6 +2191,22 @@ type Resource struct {
 	// the underlying data in Amazon S3.
 	TableWithColumns *TableWithColumnsResource
 
+	// The user-defined function that you want to grant or revoke permissions on. The
+	// function's GovernanceMode must be LAKE_FORMATION . You can grant the following
+	// permissions:
+	//
+	//   - EXECUTE – Use the function in a job, and get credentials to download its
+	//   artifacts.
+	//
+	//   - DESCRIBE – View the function's definition.
+	//
+	//   - ALTER – Update the function.
+	//
+	//   - DROP – Delete the function.
+	//
+	//   - ALL – All of the preceding permissions.
+	UserDefinedFunction *UserDefinedFunctionResource
+
 	noSmithyDocumentSerde
 }
 
@@ -2148,6 +2217,11 @@ func (v *Resource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnyResource != nil {
+		s.WriteStruct(schemas.Resource_AnyResource)
+		v.AnyResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Catalog != nil {
 		s.WriteStruct(schemas.Resource_Catalog)
 		v.Catalog.SerializeMembers(s)
@@ -2198,10 +2272,18 @@ func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TableWithColumns.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.UserDefinedFunction != nil {
+		s.WriteStruct(schemas.Resource_UserDefinedFunction)
+		v.UserDefinedFunction.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.Resource_AnyResource:
+			v.AnyResource = &AnyResource{}
+			return v.AnyResource.Deserialize(d)
 		case schemas.Resource_Catalog:
 			v.Catalog = &CatalogResource{}
 			return v.Catalog.Deserialize(d)
@@ -2232,6 +2314,9 @@ func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Resource_TableWithColumns:
 			v.TableWithColumns = &TableWithColumnsResource{}
 			return v.TableWithColumns.Deserialize(d)
+		case schemas.Resource_UserDefinedFunction:
+			v.UserDefinedFunction = &UserDefinedFunctionResource{}
+			return v.UserDefinedFunction.Deserialize(d)
 		}
 		return nil
 	})
@@ -3121,6 +3206,98 @@ func (v *TransactionDescription) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.TransactionStatus = TransactionStatus(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Identifies a user-defined function, or all user-defined functions in a
+// database, as a resource that you can grant permissions on. You can grant
+// permissions only on functions whose GovernanceMode is LAKE_FORMATION .
+type UserDefinedFunctionResource struct {
+
+	// The name of the database that contains the function.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// The ID of the Data Catalog. By default, it's your account ID.
+	CatalogId *string
+
+	// The name of the function.
+	//
+	// Exactly one of UserDefinedFunctionResource$Name or
+	// UserDefinedFunctionResource$UserDefinedFunctionWildcard is required.
+	Name *string
+
+	// A wildcard object representing every user-defined function in the database,
+	// including functions created after the grant.
+	//
+	// Exactly one of UserDefinedFunctionResource$Name or
+	// UserDefinedFunctionResource$UserDefinedFunctionWildcard is required.
+	UserDefinedFunctionWildcard *UserDefinedFunctionWildcard
+
+	noSmithyDocumentSerde
+}
+
+func (v *UserDefinedFunctionResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserDefinedFunctionResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserDefinedFunctionResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.UserDefinedFunctionResource_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.UserDefinedFunctionResource_DatabaseName, *v.DatabaseName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UserDefinedFunctionResource_Name, *v.Name)
+	}
+	if v.UserDefinedFunctionWildcard != nil {
+		s.WriteStruct(schemas.UserDefinedFunctionResource_UserDefinedFunctionWildcard)
+		v.UserDefinedFunctionWildcard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UserDefinedFunctionResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserDefinedFunctionResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserDefinedFunctionResource_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.UserDefinedFunctionResource_CatalogId, v.CatalogId)
+		case schemas.UserDefinedFunctionResource_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.UserDefinedFunctionResource_DatabaseName, v.DatabaseName)
+		case schemas.UserDefinedFunctionResource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UserDefinedFunctionResource_Name, v.Name)
+		case schemas.UserDefinedFunctionResource_UserDefinedFunctionWildcard:
+			v.UserDefinedFunctionWildcard = &UserDefinedFunctionWildcard{}
+			return v.UserDefinedFunctionWildcard.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A wildcard object representing every user-defined function in a database.
+type UserDefinedFunctionWildcard struct {
+	noSmithyDocumentSerde
+}
+
+func (v *UserDefinedFunctionWildcard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserDefinedFunctionWildcard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserDefinedFunctionWildcard) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UserDefinedFunctionWildcard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserDefinedFunctionWildcard, func(s *smithy.Schema) error {
+		switch s {
 		}
 		return nil
 	})

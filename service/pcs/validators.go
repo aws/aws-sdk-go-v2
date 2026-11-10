@@ -933,9 +933,7 @@ func validateOpCreateComputeNodeGroupInput(v *CreateComputeNodeGroupInput) error
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
-	if v.CustomLaunchTemplate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomLaunchTemplate"))
-	} else if v.CustomLaunchTemplate != nil {
+	if v.CustomLaunchTemplate != nil {
 		if err := validateCustomLaunchTemplate(v.CustomLaunchTemplate); err != nil {
 			invalidParams.AddNested("CustomLaunchTemplate", err.(smithy.InvalidParamsError))
 		}

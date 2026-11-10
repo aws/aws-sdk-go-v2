@@ -28,7 +28,7 @@ func (c *Client) GetProfileResourceAssociation(ctx context.Context, params *GetP
 
 type GetProfileResourceAssociationInput struct {
 
-	// The ID of the profile resource association that you want to get information
+	//  The ID of the profile resource association that you want to get information
 	// about.
 	//
 	// This member is required.

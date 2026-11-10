@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.CreateFirewallPolicyV2
+
+{"FirewallPolicyV2Response":{"ConsumedFirewallRuleCapacity":1,"ConsumedIpsDomainCapacity":1,"ConsumedIpsRuleCapacity":1,"Description":"__Description__","EncryptionConfiguration":{"KeyId":"__KeyId__","Type":"CUSTOMER_KMS"},"Errors":[{"Code":"DNS_FIREWALL_RULE_GROUP_UNAVAILABLE","Message":"__Message__","ResourceId":"__ResourceId__"},{"Code":"DNS_FIREWALL_RULE_GROUP_UNAVAILABLE","Message":"__Message__","ResourceId":"__ResourceId__"}],"FirewallPolicyV2Arn":"__FirewallPolicyV2Arn__","FirewallPolicyV2Id":"__FirewallPolicyV2Id__","FirewallPolicyV2Name":"__FirewallPolicyV2Name__","FirewallPolicyV2Status":"ACTIVE","LastModifiedTime":946684800,"NumberOfAssociations":1,"StatusMessage":"__StatusMessage__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},"UpdateToken":"__UpdateToken__"}

@@ -69,6 +69,9 @@ type UpdateAgentRuntimeInput struct {
 	// The updated filesystem configurations to mount into the AgentCore Runtime.
 	FilesystemConfigurations []types.FilesystemConfiguration
 
+	// The updated lifecycle hooks configuration for the AgentCore Runtime.
+	HooksConfiguration *types.RuntimeHooksConfiguration
+
 	// The updated life cycle configuration for the AgentCore Runtime.
 	LifecycleConfiguration *types.LifecycleConfiguration
 
@@ -89,6 +92,10 @@ type UpdateAgentRuntimeInput struct {
 	// The updated configuration for HTTP request headers that will be passed through
 	// to the runtime.
 	RequestHeaderConfiguration types.RequestHeaderConfiguration
+
+	// The updated resource configurations for the AgentCore Runtime. You can specify
+	// at most one resource configuration.
+	ResourceConfigurations []types.ResourceConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -129,6 +136,11 @@ func (v *UpdateAgentRuntimeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FilesystemConfigurations != nil {
 		serializeFilesystemConfigurations(s, schemas.UpdateAgentRuntimeRequest_filesystemConfigurations, v.FilesystemConfigurations)
 	}
+	if v.HooksConfiguration != nil {
+		s.WriteStruct(schemas.UpdateAgentRuntimeRequest_hooksConfiguration)
+		v.HooksConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LifecycleConfiguration != nil {
 		s.WriteStruct(schemas.UpdateAgentRuntimeRequest_lifecycleConfiguration)
 		v.LifecycleConfiguration.SerializeMembers(s)
@@ -154,6 +166,9 @@ func (v *UpdateAgentRuntimeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.RequestHeaderConfiguration != nil {
 		serializeRequestHeaderConfiguration(s, schemas.UpdateAgentRuntimeRequest_requestHeaderConfiguration, v.RequestHeaderConfiguration)
+	}
+	if v.ResourceConfigurations != nil {
+		serializeResourceConfigurations(s, schemas.UpdateAgentRuntimeRequest_resourceConfigurations, v.ResourceConfigurations)
 	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateAgentRuntimeRequest_roleArn, *v.RoleArn)

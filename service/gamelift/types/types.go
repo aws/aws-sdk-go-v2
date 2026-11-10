@@ -2046,25 +2046,53 @@ func (v *ContainerPortRange) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Set of rules for processing a deployment for a container fleet update.
+// Set of rules for processing a deployment for a container fleet update. For how
+// Amazon GameLift Servers validates and rolls out a deployment, see [Container fleet deployments].
+//
+// [Container fleet deployments]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/containers-deployment-validation.html
 type DeploymentConfiguration struct {
 
-	// Determines what actions to take if a deployment fails. If the fleet is
-	// multi-location, this strategy applies across all fleet locations. With a
-	// rollback strategy, updated fleet instances are rolled back to the last
-	// successful deployment. Alternatively, you can maintain a few impaired containers
-	// for the purpose of debugging, while all other tasks return to the last
-	// successful deployment.
+	// Determines what actions to take if a deployment fails validation. If the fleet
+	// is multi-location, this strategy applies across all fleet locations.
+	//
+	//   - ROLLBACK -- Returns all of the fleet's containers to the last successful
+	//   deployment.
+	//
+	//   - MAINTAIN -- Keeps the containers that failed validation in place so that you
+	//   can inspect them, and returns all other containers to the last successful
+	//   deployment. Use this option when you're deploying a container image that you
+	//   want to be able to debug on failure.
+	//
+	// Default value: MAINTAIN
 	ImpairmentStrategy DeploymentImpairmentStrategy
 
-	// Sets a minimum level of healthy tasks to maintain during deployment activity.
+	// Sets the minimum percentage of the fleet's game server container groups to keep
+	// healthy during deployment activity. A low value favors deployment speed; a high
+	// value favors game server availability. For example, if the fleet runs 20 game
+	// server container groups and this value is 75, Amazon GameLift Servers keeps at
+	// least 15 of them healthy, so it replaces no more than 5 at a time.
+	//
+	// Default value: 75
 	MinimumHealthyPercentage *int32
 
 	// Determines how fleet deployment activity affects active game sessions on the
-	// fleet. With protection, a deployment honors game session protection, and delays
-	// actions that would interrupt a protected active game session until the game
-	// session ends. Without protection, deployment activity can shut down all running
-	// tasks, including active game sessions, regardless of game session protection.
+	// fleet. A protected game session can't be terminated while it's active; a fleet
+	// sets the default protection for its new game sessions with
+	// NewGameSessionProtectionPolicy .
+	//
+	//   - WITH_PROTECTION -- The deployment honors game session protection, and delays
+	//   actions that would interrupt a protected active game session until the game
+	//   session ends.
+	//
+	//   - IGNORE_PROTECTION -- The deployment replaces containers regardless of game
+	//   session activity, including active game sessions. This option is useful during
+	//   development and testing.
+	//
+	// This setting also affects how long deployment validation can take. When the
+	// fleet's NewGameSessionProtectionPolicy is FullProtection and the deployment
+	// uses WITH_PROTECTION , validation waits for protected game sessions to end.
+	//
+	// Default value: WITH_PROTECTION
 	ProtectionStrategy DeploymentProtectionStrategy
 
 	noSmithyDocumentSerde
@@ -3224,22 +3252,35 @@ type FleetDeployment struct {
 	// A unique identifier for the deployment.
 	DeploymentId *string
 
-	// The status of fleet deployment activity in the location.
+	// The status of the fleet deployment. For per-location status, see
+	// LocationalDeployment .
 	//
-	//   - IN_PROGRESS -- The deployment is in progress.
+	//   - PENDING -- Amazon GameLift Servers has accepted the deployment and hasn't
+	//   started it yet.
 	//
-	//   - IMPAIRED -- The deployment failed and the fleet has some impaired
-	//   containers.
+	//   - IN_PROGRESS -- The deployment is in progress. This status covers validation
+	//   as well as the replacement of the fleet's containers.
 	//
-	//   - COMPLETE -- The deployment has completed successfully.
+	//   - IMPAIRED -- The deployment failed validation, and the fleet kept the
+	//   containers that failed validation so that you can inspect them. A deployment
+	//   reaches this status when its impairment strategy is MAINTAIN .
+	//
+	//   - COMPLETE -- The deployment has completed successfully in every fleet
+	//   location.
 	//
 	//   - ROLLBACK_IN_PROGRESS -- The deployment failed and rollback has been
-	//   initiated.
+	//   initiated. A deployment reaches this status when its impairment strategy is
+	//   ROLLBACK .
 	//
-	//   - ROLLBACK_IN_COMPLETE -- The deployment failed and rollback has been
-	//   completed.
+	//   - ROLLBACK_COMPLETE -- The deployment failed and rollback has been completed.
+	//   The fleet is running the configuration from the last successful deployment.
 	//
-	//   - CANCELLED -- The deployment was cancelled.
+	//   - CANCELLED -- The deployment was cancelled because a new deployment started
+	//   for the same fleet.
+	//
+	// For how to debug an impaired deployment or cancel one, see [Container fleet deployments].
+	//
+	// [Container fleet deployments]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/containers-deployment-validation.html
 	DeploymentStatus DeploymentStatus
 
 	// A unique identifier for the container fleet.
@@ -5271,6 +5312,13 @@ type GameSessionQueue struct {
 	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	GameSessionQueueArn *string
 
+	// An optional configuration that delivers game session placement insight logs to
+	// one or more destinations of your choice. Use these logs to diagnose why a game
+	// session placement is FULFILLED , CANCELLED , TIMED_OUT , or FAILED , which
+	// locations were evaluated, and the latency and cost factors that influenced each
+	// decision.
+	LogConfiguration *GameSessionQueueLogConfiguration
+
 	// A descriptive label that is associated with game session queue. Queue names
 	// must be unique within each Region.
 	Name *string
@@ -5288,9 +5336,9 @@ type GameSessionQueue struct {
 	PlayerLatencyPolicies []PlayerLatencyPolicy
 
 	// Custom settings to use when prioritizing destinations and locations for game
-	// session placements. This configuration replaces the FleetIQ default
-	// prioritization process. Priority types that are not explicitly named will be
-	// automatically applied at the end of the prioritization process.
+	// session placements. This configuration replaces the default prioritization
+	// process. Priority types that are not explicitly named will be automatically
+	// applied at the end of the prioritization process.
 	PriorityConfiguration *PriorityConfiguration
 
 	// The maximum time, in seconds, that a new game session placement request remains
@@ -5324,6 +5372,11 @@ func (v *GameSessionQueue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GameSessionQueueArn != nil {
 		s.WriteString(schemas.GameSessionQueue_GameSessionQueueArn, *v.GameSessionQueueArn)
 	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.GameSessionQueue_LogConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GameSessionQueue_Name, *v.Name)
 	}
@@ -5356,6 +5409,9 @@ func (v *GameSessionQueue) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GameSessionQueue_GameSessionQueueArn:
 			v.GameSessionQueueArn = new(string)
 			return d.ReadString(schemas.GameSessionQueue_GameSessionQueueArn, v.GameSessionQueueArn)
+		case schemas.GameSessionQueue_LogConfiguration:
+			v.LogConfiguration = &GameSessionQueueLogConfiguration{}
+			return v.LogConfiguration.Deserialize(d)
 		case schemas.GameSessionQueue_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.GameSessionQueue_Name, v.Name)
@@ -5405,6 +5461,41 @@ func (v *GameSessionQueueDestination) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.GameSessionQueueDestination_DestinationArn:
 			v.DestinationArn = new(string)
 			return d.ReadString(schemas.GameSessionQueueDestination_DestinationArn, v.DestinationArn)
+		}
+		return nil
+	})
+}
+
+// A configuration that delivers game session placement insight logs to one or
+// more destinations of your choice.
+type GameSessionQueueLogConfiguration struct {
+
+	// The destinations that receive game session placement insight logs for the
+	// queue. You can specify up to 3 destinations. Each destination must have a unique
+	// ARN.
+	//
+	// This member is required.
+	DeliveryDestinations []LogDeliveryDestination
+
+	noSmithyDocumentSerde
+}
+
+func (v *GameSessionQueueLogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameSessionQueueLogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameSessionQueueLogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryDestinations != nil {
+		serializeLogDeliveryDestinationList(s, schemas.GameSessionQueueLogConfiguration_DeliveryDestinations, v.DeliveryDestinations)
+	}
+}
+func (v *GameSessionQueueLogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameSessionQueueLogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameSessionQueueLogConfiguration_DeliveryDestinations:
+			return deserializeLogDeliveryDestinationList(d, schemas.GameSessionQueueLogConfiguration_DeliveryDestinations, &v.DeliveryDestinations)
 		}
 		return nil
 	})
@@ -5952,20 +6043,26 @@ type LocationalDeployment struct {
 
 	// The status of fleet deployment activity in the location.
 	//
-	//   - IN_PROGRESS -- The deployment is in progress.
+	//   - IN_PROGRESS -- The deployment is in progress in the location. This status
+	//   covers validation as well as the replacement of the location's containers.
 	//
-	//   - IMPAIRED -- The deployment failed and the fleet has some impaired
-	//   containers.
+	//   - IMPAIRED -- The deployment failed validation in the location, and the
+	//   location kept the containers that failed validation so that you can inspect
+	//   them. A location reaches this status when the deployment's impairment strategy
+	//   is MAINTAIN .
 	//
-	//   - COMPLETE -- The deployment has completed successfully.
+	//   - COMPLETE -- The deployment has completed successfully in the location.
 	//
 	//   - ROLLBACK_IN_PROGRESS -- The deployment failed and rollback has been
-	//   initiated.
+	//   initiated in the location. A location reaches this status when the deployment's
+	//   impairment strategy is ROLLBACK .
 	//
-	//   - ROLLBACK_IN_COMPLETE -- The deployment failed and rollback has been
-	//   completed.
+	//   - ROLLBACK_COMPLETE -- The deployment failed and rollback has been completed
+	//   in the location. The location is running the configuration from the last
+	//   successful deployment.
 	//
-	//   - CANCELLED -- The deployment was cancelled.
+	//   - CANCELLED -- The deployment was cancelled because a new deployment started
+	//   for the same fleet.
 	DeploymentStatus DeploymentStatus
 
 	noSmithyDocumentSerde
@@ -6300,6 +6397,70 @@ func (v *LogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LogConfiguration_S3BucketName:
 			v.S3BucketName = new(string)
 			return d.ReadString(schemas.LogConfiguration_S3BucketName, v.S3BucketName)
+		}
+		return nil
+	})
+}
+
+// A single destination that receives game session placement insight logs for a
+// game session queue.
+//
+// Amazon CloudWatch Logs vended log charges apply to each destination. Amazon S3
+// and Amazon Data Firehose destinations also incur their own service charges. For
+// more information, see [Amazon CloudWatch Pricing].
+//
+// [Amazon CloudWatch Pricing]: http://aws.amazon.com/cloudwatch/pricing/
+type LogDeliveryDestination struct {
+
+	// The type of Amazon Web Services resource that receives the game session
+	// placement insight logs. This value is required. Valid values are:
+	//
+	//   - CLOUDWATCH -- an Amazon CloudWatch Logs log group.
+	//
+	//   - S3 -- an Amazon S3 bucket.
+	//
+	//   - FIREHOSE -- an Amazon Data Firehose delivery stream.
+	//
+	// This member is required.
+	LogDestination LogDeliveryDestinationType
+
+	// The Amazon Resource Name (ARN) of the resource that receives the game session
+	// placement insight logs. This resource must match the type that you specify in
+	// LogDestination . This value is required for FIREHOSE destinations. For
+	// CLOUDWATCH and S3 , you can omit this value; Amazon GameLift Servers then
+	// creates a destination resource of the specified type on your behalf.
+	DestinationArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LogDeliveryDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogDeliveryDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogDeliveryDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.LogDeliveryDestination_DestinationArn, *v.DestinationArn)
+	}
+	if v.LogDestination != "" {
+		s.WriteString(schemas.LogDeliveryDestination_LogDestination, string(v.LogDestination))
+	}
+}
+func (v *LogDeliveryDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogDeliveryDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogDeliveryDestination_DestinationArn:
+			v.DestinationArn = new(string)
+			return d.ReadString(schemas.LogDeliveryDestination_DestinationArn, v.DestinationArn)
+		case schemas.LogDeliveryDestination_LogDestination:
+			var ev string
+			if err := d.ReadString(schemas.LogDeliveryDestination_LogDestination, &ev); err != nil {
+				return err
+			}
+			v.LogDestination = LogDeliveryDestinationType(ev)
+			return nil
 		}
 		return nil
 	})

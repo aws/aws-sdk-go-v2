@@ -612,6 +612,69 @@ func TestUpdateResponseSnapshot_CreateFirewallPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateFirewallPolicyV2(t *testing.T) {
+	want := &CreateFirewallPolicyV2Output{
+		UpdateToken: ptr.String("__UpdateToken__"),
+		FirewallPolicyV2Response: &types.FirewallPolicyV2Response{
+			FirewallPolicyV2Name:   ptr.String("__FirewallPolicyV2Name__"),
+			FirewallPolicyV2Arn:    ptr.String("__FirewallPolicyV2Arn__"),
+			FirewallPolicyV2Id:     ptr.String("__FirewallPolicyV2Id__"),
+			Description:            ptr.String("__Description__"),
+			FirewallPolicyV2Status: types.ResourceStatus("ACTIVE"),
+			StatusMessage:          ptr.String("__StatusMessage__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ConsumedFirewallRuleCapacity: ptr.Int32(1),
+			ConsumedIpsRuleCapacity:      ptr.Int32(1),
+			ConsumedIpsDomainCapacity:    ptr.Int32(1),
+			NumberOfAssociations:         ptr.Int32(1),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				KeyId: ptr.String("__KeyId__"),
+				Type:  types.EncryptionType("CUSTOMER_KMS"),
+			},
+			Errors: []types.FirewallPolicyError{
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+			},
+			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	opSchema := smithy.NewOperationSchema(schemas.CreateFirewallPolicyV2, schemas.CreateFirewallPolicyV2Response, schemas.CreateFirewallPolicyV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateFirewallPolicyV2.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateProxy(t *testing.T) {
 	want := &CreateProxyOutput{
 		Proxy: &types.Proxy{
@@ -1555,6 +1618,68 @@ func TestUpdateResponseSnapshot_DeleteFirewallPolicy(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteFirewallPolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteFirewallPolicyV2(t *testing.T) {
+	want := &DeleteFirewallPolicyV2Output{
+		FirewallPolicyV2Response: &types.FirewallPolicyV2Response{
+			FirewallPolicyV2Name:   ptr.String("__FirewallPolicyV2Name__"),
+			FirewallPolicyV2Arn:    ptr.String("__FirewallPolicyV2Arn__"),
+			FirewallPolicyV2Id:     ptr.String("__FirewallPolicyV2Id__"),
+			Description:            ptr.String("__Description__"),
+			FirewallPolicyV2Status: types.ResourceStatus("ACTIVE"),
+			StatusMessage:          ptr.String("__StatusMessage__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ConsumedFirewallRuleCapacity: ptr.Int32(1),
+			ConsumedIpsRuleCapacity:      ptr.Int32(1),
+			ConsumedIpsDomainCapacity:    ptr.Int32(1),
+			NumberOfAssociations:         ptr.Int32(1),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				KeyId: ptr.String("__KeyId__"),
+				Type:  types.EncryptionType("CUSTOMER_KMS"),
+			},
+			Errors: []types.FirewallPolicyError{
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+			},
+			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteFirewallPolicyV2, schemas.DeleteFirewallPolicyV2Response, schemas.DeleteFirewallPolicyV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteFirewallPolicyV2.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2509,6 +2634,413 @@ func TestUpdateResponseSnapshot_DescribeFirewallPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeFirewallPolicyV2(t *testing.T) {
+	want := &DescribeFirewallPolicyV2Output{
+		UpdateToken: ptr.String("__UpdateToken__"),
+		FirewallPolicyV2Response: &types.FirewallPolicyV2Response{
+			FirewallPolicyV2Name:   ptr.String("__FirewallPolicyV2Name__"),
+			FirewallPolicyV2Arn:    ptr.String("__FirewallPolicyV2Arn__"),
+			FirewallPolicyV2Id:     ptr.String("__FirewallPolicyV2Id__"),
+			Description:            ptr.String("__Description__"),
+			FirewallPolicyV2Status: types.ResourceStatus("ACTIVE"),
+			StatusMessage:          ptr.String("__StatusMessage__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ConsumedFirewallRuleCapacity: ptr.Int32(1),
+			ConsumedIpsRuleCapacity:      ptr.Int32(1),
+			ConsumedIpsDomainCapacity:    ptr.Int32(1),
+			NumberOfAssociations:         ptr.Int32(1),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				KeyId: ptr.String("__KeyId__"),
+				Type:  types.EncryptionType("CUSTOMER_KMS"),
+			},
+			Errors: []types.FirewallPolicyError{
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+			},
+			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		FirewallPolicyV2: &types.FirewallPolicyV2{
+			FirewallRuleGroupEntries: []types.FirewallRuleGroupEntry{
+				{
+					Priority:    ptr.Int32(1),
+					ResourceArn: ptr.String("__ResourceArn__"),
+					InlineRuleGroup: &types.FirewallRuleGroup{
+						RulesSource: &types.FirewallRulesSource{
+							RulesString: ptr.String("__RulesString__"),
+							FirewallRules: []types.FirewallRule{
+								{
+									Action:      types.FirewallRuleAction("ACCEPT"),
+									ActionScope: types.ActionScope("FLOW"),
+									Hook:        types.HookKey("TCP_ALL"),
+									Protocol:    types.FirewallRuleProtocol("IP"),
+									SourceIPs:   ptr.String("__SourceIPs__"),
+									DestIPs:     ptr.String("__DestIPs__"),
+									SourcePorts: ptr.String("__SourcePorts__"),
+									DestPorts:   ptr.String("__DestPorts__"),
+									RuleOptions: []types.RuleOption{
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									AcceptPriorHooks: ptr.Bool(true),
+									AlertEnabled:     ptr.Bool(true),
+									BypassIPSEnabled: ptr.Bool(true),
+									RuleMetadata: &types.RuleMetadata{
+										RuleEnabled:     ptr.Bool(true),
+										RuleDescription: ptr.String("__RuleDescription__"),
+									},
+								},
+								{
+									Action:      types.FirewallRuleAction("ACCEPT"),
+									ActionScope: types.ActionScope("FLOW"),
+									Hook:        types.HookKey("TCP_ALL"),
+									Protocol:    types.FirewallRuleProtocol("IP"),
+									SourceIPs:   ptr.String("__SourceIPs__"),
+									DestIPs:     ptr.String("__DestIPs__"),
+									SourcePorts: ptr.String("__SourcePorts__"),
+									DestPorts:   ptr.String("__DestPorts__"),
+									RuleOptions: []types.RuleOption{
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									AcceptPriorHooks: ptr.Bool(true),
+									AlertEnabled:     ptr.Bool(true),
+									BypassIPSEnabled: ptr.Bool(true),
+									RuleMetadata: &types.RuleMetadata{
+										RuleEnabled:     ptr.Bool(true),
+										RuleDescription: ptr.String("__RuleDescription__"),
+									},
+								},
+							},
+							RulesSourceList: &types.RulesSourceList{
+								Targets: []string{
+									"__Member__",
+									"__Member__",
+								},
+								TargetTypes: []types.TargetType{
+									types.TargetType("TLS_SNI"),
+									types.TargetType("TLS_SNI"),
+								},
+								GeneratedRulesType: types.GeneratedRulesType("ALLOWLIST"),
+							},
+						},
+						RuleVariables: &types.RuleVariables{
+							IPSets: map[string]types.IPSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						ReferenceSets: &types.ReferenceSets{
+							IPSetReferences: map[string]types.IPSetReference{
+								"key0": {
+									ReferenceArn: ptr.String("__ReferenceArn__"),
+								},
+							},
+						},
+					},
+				},
+				{
+					Priority:    ptr.Int32(1),
+					ResourceArn: ptr.String("__ResourceArn__"),
+					InlineRuleGroup: &types.FirewallRuleGroup{
+						RulesSource: &types.FirewallRulesSource{
+							RulesString: ptr.String("__RulesString__"),
+							FirewallRules: []types.FirewallRule{
+								{
+									Action:      types.FirewallRuleAction("ACCEPT"),
+									ActionScope: types.ActionScope("FLOW"),
+									Hook:        types.HookKey("TCP_ALL"),
+									Protocol:    types.FirewallRuleProtocol("IP"),
+									SourceIPs:   ptr.String("__SourceIPs__"),
+									DestIPs:     ptr.String("__DestIPs__"),
+									SourcePorts: ptr.String("__SourcePorts__"),
+									DestPorts:   ptr.String("__DestPorts__"),
+									RuleOptions: []types.RuleOption{
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									AcceptPriorHooks: ptr.Bool(true),
+									AlertEnabled:     ptr.Bool(true),
+									BypassIPSEnabled: ptr.Bool(true),
+									RuleMetadata: &types.RuleMetadata{
+										RuleEnabled:     ptr.Bool(true),
+										RuleDescription: ptr.String("__RuleDescription__"),
+									},
+								},
+								{
+									Action:      types.FirewallRuleAction("ACCEPT"),
+									ActionScope: types.ActionScope("FLOW"),
+									Hook:        types.HookKey("TCP_ALL"),
+									Protocol:    types.FirewallRuleProtocol("IP"),
+									SourceIPs:   ptr.String("__SourceIPs__"),
+									DestIPs:     ptr.String("__DestIPs__"),
+									SourcePorts: ptr.String("__SourcePorts__"),
+									DestPorts:   ptr.String("__DestPorts__"),
+									RuleOptions: []types.RuleOption{
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									AcceptPriorHooks: ptr.Bool(true),
+									AlertEnabled:     ptr.Bool(true),
+									BypassIPSEnabled: ptr.Bool(true),
+									RuleMetadata: &types.RuleMetadata{
+										RuleEnabled:     ptr.Bool(true),
+										RuleDescription: ptr.String("__RuleDescription__"),
+									},
+								},
+							},
+							RulesSourceList: &types.RulesSourceList{
+								Targets: []string{
+									"__Member__",
+									"__Member__",
+								},
+								TargetTypes: []types.TargetType{
+									types.TargetType("TLS_SNI"),
+									types.TargetType("TLS_SNI"),
+								},
+								GeneratedRulesType: types.GeneratedRulesType("ALLOWLIST"),
+							},
+						},
+						RuleVariables: &types.RuleVariables{
+							IPSets: map[string]types.IPSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						ReferenceSets: &types.ReferenceSets{
+							IPSetReferences: map[string]types.IPSetReference{
+								"key0": {
+									ReferenceArn: ptr.String("__ReferenceArn__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			IpsRuleGroupEntries: []types.IpsRuleGroupEntry{
+				{
+					ResourceArn: ptr.String("__ResourceArn__"),
+					InlineRuleGroup: &types.IpsRuleGroup{
+						RulesSource: &types.IpsRulesSource{
+							RulesString: ptr.String("__RulesString__"),
+						},
+						RuleVariables: &types.RuleVariables{
+							IPSets: map[string]types.IPSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						ReferenceSets: &types.ReferenceSets{
+							IPSetReferences: map[string]types.IPSetReference{
+								"key0": {
+									ReferenceArn: ptr.String("__ReferenceArn__"),
+								},
+							},
+						},
+					},
+					Override: &types.IpsRuleGroupOverride{
+						Action: types.OverrideAction("DROP_TO_ALERT"),
+					},
+				},
+				{
+					ResourceArn: ptr.String("__ResourceArn__"),
+					InlineRuleGroup: &types.IpsRuleGroup{
+						RulesSource: &types.IpsRulesSource{
+							RulesString: ptr.String("__RulesString__"),
+						},
+						RuleVariables: &types.RuleVariables{
+							IPSets: map[string]types.IPSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						ReferenceSets: &types.ReferenceSets{
+							IPSetReferences: map[string]types.IPSetReference{
+								"key0": {
+									ReferenceArn: ptr.String("__ReferenceArn__"),
+								},
+							},
+						},
+					},
+					Override: &types.IpsRuleGroupOverride{
+						Action: types.OverrideAction("DROP_TO_ALERT"),
+					},
+				},
+			},
+			PolicyMode:            types.PolicyMode("ENFORCE"),
+			FirewallDefaultAction: types.PolicyDefaultAction("DROP"),
+			StatefulEngineOptions: &types.StatefulEngineOptionsV2{
+				StreamExceptionPolicy: types.StreamExceptionPolicyV2("DROP"),
+				FlowTimeouts: &types.FlowTimeouts{
+					TcpIdleTimeoutSeconds: ptr.Int32(1),
+				},
+			},
+			TLSInspectionConfigurationArn: ptr.String("__TLSInspectionConfigurationArn__"),
+			PolicyVariables: &types.PolicyVariables{
+				RuleVariables: map[string]types.IPSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			Route53ResolvedIPValidation: &types.Route53ResolvedIPValidation{
+				Action:                   types.Route53ResolvedIPValidationAction("REJECT"),
+				DNSFirewallRuleGroupId:   ptr.String("__DNSFirewallRuleGroupId__"),
+				DNSExpiryExceptionPolicy: types.DNSExpiryExceptionPolicy("REJECT"),
+				BypassDestinationValidationIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+				SourceIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+			},
+		},
+	}
+	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeFirewallPolicyV2, schemas.DescribeFirewallPolicyV2Response, schemas.DescribeFirewallPolicyV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeFirewallPolicyV2.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeFlowOperation(t *testing.T) {
 	want := &DescribeFlowOperationOutput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
@@ -3285,6 +3817,145 @@ func TestUpdateResponseSnapshot_DescribeRuleGroup(t *testing.T) {
 				RuleOrder: types.RuleOrder("DEFAULT_ACTION_ORDER"),
 			},
 		},
+		FirewallRuleGroup: &types.FirewallRuleGroup{
+			RulesSource: &types.FirewallRulesSource{
+				RulesString: ptr.String("__RulesString__"),
+				FirewallRules: []types.FirewallRule{
+					{
+						Action:      types.FirewallRuleAction("ACCEPT"),
+						ActionScope: types.ActionScope("FLOW"),
+						Hook:        types.HookKey("TCP_ALL"),
+						Protocol:    types.FirewallRuleProtocol("IP"),
+						SourceIPs:   ptr.String("__SourceIPs__"),
+						DestIPs:     ptr.String("__DestIPs__"),
+						SourcePorts: ptr.String("__SourcePorts__"),
+						DestPorts:   ptr.String("__DestPorts__"),
+						RuleOptions: []types.RuleOption{
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						AcceptPriorHooks: ptr.Bool(true),
+						AlertEnabled:     ptr.Bool(true),
+						BypassIPSEnabled: ptr.Bool(true),
+						RuleMetadata: &types.RuleMetadata{
+							RuleEnabled:     ptr.Bool(true),
+							RuleDescription: ptr.String("__RuleDescription__"),
+						},
+					},
+					{
+						Action:      types.FirewallRuleAction("ACCEPT"),
+						ActionScope: types.ActionScope("FLOW"),
+						Hook:        types.HookKey("TCP_ALL"),
+						Protocol:    types.FirewallRuleProtocol("IP"),
+						SourceIPs:   ptr.String("__SourceIPs__"),
+						DestIPs:     ptr.String("__DestIPs__"),
+						SourcePorts: ptr.String("__SourcePorts__"),
+						DestPorts:   ptr.String("__DestPorts__"),
+						RuleOptions: []types.RuleOption{
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						AcceptPriorHooks: ptr.Bool(true),
+						AlertEnabled:     ptr.Bool(true),
+						BypassIPSEnabled: ptr.Bool(true),
+						RuleMetadata: &types.RuleMetadata{
+							RuleEnabled:     ptr.Bool(true),
+							RuleDescription: ptr.String("__RuleDescription__"),
+						},
+					},
+				},
+				RulesSourceList: &types.RulesSourceList{
+					Targets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TargetTypes: []types.TargetType{
+						types.TargetType("TLS_SNI"),
+						types.TargetType("TLS_SNI"),
+					},
+					GeneratedRulesType: types.GeneratedRulesType("ALLOWLIST"),
+				},
+			},
+			RuleVariables: &types.RuleVariables{
+				IPSets: map[string]types.IPSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			ReferenceSets: &types.ReferenceSets{
+				IPSetReferences: map[string]types.IPSetReference{
+					"key0": {
+						ReferenceArn: ptr.String("__ReferenceArn__"),
+					},
+				},
+			},
+		},
+		IpsRuleGroup: &types.IpsRuleGroup{
+			RulesSource: &types.IpsRulesSource{
+				RulesString: ptr.String("__RulesString__"),
+			},
+			RuleVariables: &types.RuleVariables{
+				IPSets: map[string]types.IPSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			ReferenceSets: &types.ReferenceSets{
+				IPSetReferences: map[string]types.IPSetReference{
+					"key0": {
+						ReferenceArn: ptr.String("__ReferenceArn__"),
+					},
+				},
+			},
+		},
 		RuleGroupResponse: &types.RuleGroupResponse{
 			RuleGroupArn:    ptr.String("__RuleGroupArn__"),
 			RuleGroupName:   ptr.String("__RuleGroupName__"),
@@ -4053,6 +4724,40 @@ func TestUpdateResponseSnapshot_ListFirewallPolicies(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListFirewallPolicies.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListFirewallPoliciesV2(t *testing.T) {
+	want := &ListFirewallPoliciesV2Output{
+		NextToken: ptr.String("__NextToken__"),
+		FirewallPoliciesV2: []types.FirewallPolicyV2Metadata{
+			{
+				Name: ptr.String("__Name__"),
+				Arn:  ptr.String("__Arn__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Arn:  ptr.String("__Arn__"),
+			},
+		},
+	}
+	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	opSchema := smithy.NewOperationSchema(schemas.ListFirewallPoliciesV2, schemas.ListFirewallPoliciesV2Response, schemas.ListFirewallPoliciesV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListFirewallPoliciesV2.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4893,6 +5598,69 @@ func TestUpdateResponseSnapshot_UpdateFirewallPolicyChangeProtection(t *testing.
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateFirewallPolicyChangeProtection.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
+	want := &UpdateFirewallPolicyV2Output{
+		UpdateToken: ptr.String("__UpdateToken__"),
+		FirewallPolicyV2Response: &types.FirewallPolicyV2Response{
+			FirewallPolicyV2Name:   ptr.String("__FirewallPolicyV2Name__"),
+			FirewallPolicyV2Arn:    ptr.String("__FirewallPolicyV2Arn__"),
+			FirewallPolicyV2Id:     ptr.String("__FirewallPolicyV2Id__"),
+			Description:            ptr.String("__Description__"),
+			FirewallPolicyV2Status: types.ResourceStatus("ACTIVE"),
+			StatusMessage:          ptr.String("__StatusMessage__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ConsumedFirewallRuleCapacity: ptr.Int32(1),
+			ConsumedIpsRuleCapacity:      ptr.Int32(1),
+			ConsumedIpsDomainCapacity:    ptr.Int32(1),
+			NumberOfAssociations:         ptr.Int32(1),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				KeyId: ptr.String("__KeyId__"),
+				Type:  types.EncryptionType("CUSTOMER_KMS"),
+			},
+			Errors: []types.FirewallPolicyError{
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+			},
+			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateFirewallPolicyV2, schemas.UpdateFirewallPolicyV2Response, schemas.UpdateFirewallPolicyV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateFirewallPolicyV2.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

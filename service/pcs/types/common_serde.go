@@ -120,6 +120,14 @@ func serializeSecurityGroupIdList(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseList()
 }
 
+func serializeSecurityGroupIdListOrEmpty(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeSlurmCustomSettings(s smithy.ShapeSerializer, schema *smithy.Schema, v []SlurmCustomSetting) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -416,6 +424,27 @@ func deserializeQueueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Que
 }
 
 func deserializeSecurityGroupIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSecurityGroupIdListOrEmpty(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {

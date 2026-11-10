@@ -984,6 +984,72 @@ func (v *LastSuccessfulReplicatedUpdate) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
+// Describes where logs are stored and the prefix that Amazon S3 assigns to all
+// log object keys for a table bucket.
+type LoggingEnabled struct {
+
+	// The name of the general purpose bucket that logs are delivered to. The bucket
+	// must be in the same Amazon Web Services Region and owned by the same Amazon Web
+	// Services account as the table bucket. The bucket can't use SSE-KMS or DSSE-KMS
+	// default encryption, can't have S3 Object Lock enabled, and can't have Requester
+	// Pays enabled. You can deliver logs from multiple table buckets to the same
+	// target bucket. In this case, choose a different targetPrefix for each table
+	// bucket so that you can tell their log objects apart.
+	//
+	// This member is required.
+	TargetBucket *string
+
+	// The key format of the log objects. Log object keys are always partitioned by
+	// date.
+	//
+	// This member is required.
+	TargetObjectKeyFormat *TargetObjectKeyFormat
+
+	// The prefix for the keys of the log objects that are delivered to the target
+	// bucket.
+	//
+	// This member is required.
+	TargetPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LoggingEnabled) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingEnabled)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingEnabled) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetBucket != nil {
+		s.WriteString(schemas.LoggingEnabled_targetBucket, *v.TargetBucket)
+	}
+	if v.TargetObjectKeyFormat != nil {
+		s.WriteStruct(schemas.LoggingEnabled_targetObjectKeyFormat)
+		v.TargetObjectKeyFormat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetPrefix != nil {
+		s.WriteString(schemas.LoggingEnabled_targetPrefix, *v.TargetPrefix)
+	}
+}
+func (v *LoggingEnabled) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingEnabled, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingEnabled_targetBucket:
+			v.TargetBucket = new(string)
+			return d.ReadString(schemas.LoggingEnabled_targetBucket, v.TargetBucket)
+		case schemas.LoggingEnabled_targetObjectKeyFormat:
+			v.TargetObjectKeyFormat = &TargetObjectKeyFormat{}
+			return v.TargetObjectKeyFormat.Deserialize(d)
+		case schemas.LoggingEnabled_targetPrefix:
+			v.TargetPrefix = new(string)
+			return d.ReadString(schemas.LoggingEnabled_targetPrefix, v.TargetPrefix)
+		}
+		return nil
+	})
+}
+
 // The maintenance settings for the destination table. The migration applies them
 // when it creates the table: snapshot management starts then, and compaction
 // starts after you complete the migration. If you don't specify a setting, the
@@ -1872,6 +1938,46 @@ func (v *NamespaceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Amazon S3 keys for log objects are partitioned in the following format:
+// [targetPrefix][SourceAccountId]/[SourceRegion]/[SourceTableBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]
+type PartitionedPrefix struct {
+
+	// The date to use for the log object key partitions. Valid values are EventTime ,
+	// the time that the requests in the log were made, and DeliveryTime , the time
+	// that the log was delivered.
+	//
+	// This member is required.
+	PartitionDateSource PartitionDateSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *PartitionedPrefix) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartitionedPrefix)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartitionedPrefix) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PartitionDateSource != "" {
+		s.WriteString(schemas.PartitionedPrefix_partitionDateSource, string(v.PartitionDateSource))
+	}
+}
+func (v *PartitionedPrefix) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartitionedPrefix, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartitionedPrefix_partitionDateSource:
+			var ev string
+			if err := d.ReadString(schemas.PartitionedPrefix_partitionDateSource, &ev); err != nil {
+				return err
+			}
+			v.PartitionDateSource = PartitionDateSource(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Statistics about the source and the partitions in a migration.
 type PlanningStats struct {
 
@@ -2372,6 +2478,41 @@ func (v *StorageClassConfiguration) Deserialize(d smithy.ShapeDeserializer) erro
 			}
 			v.StorageClass = StorageClass(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// The server access logging status of a table bucket. To enable logging, specify
+// loggingEnabled . To disable logging, specify an empty TableBucketLoggingStatus .
+type TableBucketLoggingStatus struct {
+
+	// Where logs for the table bucket are delivered and how the log objects are
+	// named. Must be populated to enable logging.
+	LoggingEnabled *LoggingEnabled
+
+	noSmithyDocumentSerde
+}
+
+func (v *TableBucketLoggingStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableBucketLoggingStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableBucketLoggingStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggingEnabled != nil {
+		s.WriteStruct(schemas.TableBucketLoggingStatus_loggingEnabled)
+		v.LoggingEnabled.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TableBucketLoggingStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableBucketLoggingStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableBucketLoggingStatus_loggingEnabled:
+			v.LoggingEnabled = &LoggingEnabled{}
+			return v.LoggingEnabled.Deserialize(d)
 		}
 		return nil
 	})
@@ -3109,6 +3250,41 @@ func (v *TableSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Type = TableType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// The key format of the log objects. Only partitionedPrefix is supported.
+type TargetObjectKeyFormat struct {
+
+	// Partitions log object keys by date.
+	//
+	// This member is required.
+	PartitionedPrefix *PartitionedPrefix
+
+	noSmithyDocumentSerde
+}
+
+func (v *TargetObjectKeyFormat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetObjectKeyFormat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetObjectKeyFormat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PartitionedPrefix != nil {
+		s.WriteStruct(schemas.TargetObjectKeyFormat_partitionedPrefix)
+		v.PartitionedPrefix.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TargetObjectKeyFormat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetObjectKeyFormat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetObjectKeyFormat_partitionedPrefix:
+			v.PartitionedPrefix = &PartitionedPrefix{}
+			return v.PartitionedPrefix.Deserialize(d)
 		}
 		return nil
 	})

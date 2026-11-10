@@ -13,9 +13,8 @@ import (
 //	This API works with the following fleet types: EC2, Anywhere, Container
 //
 // Creates a placement queue that processes requests for new game sessions. A
-// queue uses FleetIQ algorithms to locate the best available placement locations
-// for a new game session, and then prompts the game server process to start a new
-// game session.
+// queue finds the best available game server, then prompts it to start a new game
+// session.
 //
 // A game session queue is configured with a set of destinations (Amazon GameLift
 // Servers fleets or aliases) that determine where the queue can place new game
@@ -61,6 +60,13 @@ import (
 //   - Required parameters Name and Destinations
 //
 //   - PlayerLatencyPolicies
+//
+//   - Create a queue that delivers game session placement insight logs to one or
+//     more log destinations.
+//
+//   - Required parameters Name and Destinations
+//
+//   - LogConfiguration
 //
 // # Results
 //
@@ -125,6 +131,13 @@ type CreateGameSessionQueueInput struct {
 	// queue location.
 	FilterConfiguration *types.FilterConfiguration
 
+	// An optional configuration that delivers game session placement insight logs to
+	// one or more destinations of your choice. Use these logs to diagnose why a game
+	// session placement is FULFILLED , CANCELLED , TIMED_OUT , or FAILED , which
+	// locations were evaluated, and the latency and cost factors that influenced each
+	// decision.
+	LogConfiguration *types.GameSessionQueueLogConfiguration
+
 	// An SNS topic ARN that is set up to receive game session placement
 	// notifications. See [Setting up notifications for game session placement].
 	//
@@ -138,9 +151,9 @@ type CreateGameSessionQueueInput struct {
 	PlayerLatencyPolicies []types.PlayerLatencyPolicy
 
 	// Custom settings to use when prioritizing destinations and locations for game
-	// session placements. This configuration replaces the FleetIQ default
-	// prioritization process. Priority types that are not explicitly named will be
-	// automatically applied at the end of the prioritization process.
+	// session placements. This configuration replaces the default prioritization
+	// process. Priority types that are not explicitly named will be automatically
+	// applied at the end of the prioritization process.
 	PriorityConfiguration *types.PriorityConfiguration
 
 	// A list of labels to assign to the new game session queue resource. Tags are
@@ -178,6 +191,11 @@ func (v *CreateGameSessionQueueInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.FilterConfiguration != nil {
 		s.WriteStruct(schemas.CreateGameSessionQueueInput_FilterConfiguration)
 		v.FilterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.CreateGameSessionQueueInput_LogConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.Name != nil {

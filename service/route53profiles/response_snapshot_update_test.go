@@ -153,6 +153,7 @@ func TestUpdateResponseSnapshot_AssociateProfile(t *testing.T) {
 			StatusMessage:    ptr.String("__StatusMessage__"),
 			CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Priority:         ptr.Int32(1),
 		},
 	}
 	proto := restjson1.New(schemas.Route53Profiles)
@@ -293,6 +294,7 @@ func TestUpdateResponseSnapshot_DisassociateProfile(t *testing.T) {
 			StatusMessage:    ptr.String("__StatusMessage__"),
 			CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Priority:         ptr.Int32(1),
 		},
 	}
 	proto := restjson1.New(schemas.Route53Profiles)
@@ -398,6 +400,7 @@ func TestUpdateResponseSnapshot_GetProfileAssociation(t *testing.T) {
 			StatusMessage:    ptr.String("__StatusMessage__"),
 			CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Priority:         ptr.Int32(1),
 		},
 	}
 	proto := restjson1.New(schemas.Route53Profiles)
@@ -469,6 +472,7 @@ func TestUpdateResponseSnapshot_ListProfileAssociations(t *testing.T) {
 				StatusMessage:    ptr.String("__StatusMessage__"),
 				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Priority:         ptr.Int32(1),
 			},
 			{
 				Id:               ptr.String("__Id__"),
@@ -480,6 +484,7 @@ func TestUpdateResponseSnapshot_ListProfileAssociations(t *testing.T) {
 				StatusMessage:    ptr.String("__StatusMessage__"),
 				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Priority:         ptr.Int32(1),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -660,6 +665,41 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UntagResource.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateProfileAssociation(t *testing.T) {
+	want := &UpdateProfileAssociationOutput{
+		ProfileAssociation: &types.ProfileAssociation{
+			Id:               ptr.String("__Id__"),
+			Name:             ptr.String("__Name__"),
+			OwnerId:          ptr.String("__OwnerId__"),
+			ProfileId:        ptr.String("__ProfileId__"),
+			ResourceId:       ptr.String("__ResourceId__"),
+			Status:           types.ProfileStatus("COMPLETE"),
+			StatusMessage:    ptr.String("__StatusMessage__"),
+			CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Priority:         ptr.Int32(1),
+		},
+	}
+	proto := restjson1.New(schemas.Route53Profiles)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateProfileAssociation, schemas.UpdateProfileAssociationResponse, schemas.UpdateProfileAssociationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateProfileAssociation.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

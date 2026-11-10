@@ -640,6 +640,18 @@ func TestCheckResponseSnapshot_CreateAgentRuntime(t *testing.T) {
 			IdleRuntimeSessionTimeout: ptr.Int32(1),
 			MaxLifetime:               ptr.Int32(1),
 		},
+		HooksConfiguration: &types.RuntimeHooksConfiguration{
+			Build: &types.BuildLifecycleHooks{
+				Warmup: &types.LifecycleHook{
+					Action: &types.LifecycleHookActionMemberHttpPost{
+						Value: types.HttpPostLifecycleHookAction{
+							Path: ptr.String("__Path__"),
+							Port: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
 		},
@@ -668,6 +680,14 @@ func TestCheckResponseSnapshot_CreateAgentRuntime(t *testing.T) {
 			},
 			&types.AllowedPortMemberPort{
 				Value: 1,
+			},
+		},
+		ResourceConfigurations: []types.ResourceConfiguration{
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
+			},
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
 			},
 		},
 	})
@@ -1556,6 +1576,13 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 		WafConfiguration: &types.WafConfiguration{
 			FailureMode: types.WafFailureMode("FAIL_CLOSE"),
 		},
+		DomainOverride: &types.DomainOverride{
+			DefaultDomain: ptr.String("__DefaultDomain__"),
+			AlternateDomains: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateGateway.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1726,6 +1753,13 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 		ExceptionLevel: types.ExceptionLevel("DEBUG"),
 		Tags: map[string]string{
 			"key0": "__Value__",
+		},
+		DomainOverride: &types.DomainOverride{
+			DefaultDomain: ptr.String("__DefaultDomain__"),
+			AlternateDomains: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	})
 	if err != nil {
@@ -5318,6 +5352,18 @@ func TestCheckResponseSnapshot_GetAgentRuntime(t *testing.T) {
 			IdleRuntimeSessionTimeout: ptr.Int32(1),
 			MaxLifetime:               ptr.Int32(1),
 		},
+		HooksConfiguration: &types.RuntimeHooksConfiguration{
+			Build: &types.BuildLifecycleHooks{
+				Warmup: &types.LifecycleHook{
+					Action: &types.LifecycleHookActionMemberHttpPost{
+						Value: types.HttpPostLifecycleHookAction{
+							Path: ptr.String("__Path__"),
+							Port: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
 		FailureReason: ptr.String("__FailureReason__"),
 		Description:   ptr.String("__Description__"),
 		WorkloadIdentityDetails: &types.WorkloadIdentityDetails{
@@ -5446,6 +5492,14 @@ func TestCheckResponseSnapshot_GetAgentRuntime(t *testing.T) {
 			},
 			&types.AllowedPortMemberPort{
 				Value: 1,
+			},
+		},
+		ResourceConfigurations: []types.ResourceConfiguration{
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
+			},
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
 			},
 		},
 	}
@@ -6339,6 +6393,13 @@ func TestCheckResponseSnapshot_GetGateway(t *testing.T) {
 		WebAclArn:      ptr.String("__WebAclArn__"),
 		WafConfiguration: &types.WafConfiguration{
 			FailureMode: types.WafFailureMode("FAIL_CLOSE"),
+		},
+		DomainOverride: &types.DomainOverride{
+			DefaultDomain: ptr.String("__DefaultDomain__"),
+			AlternateDomains: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetGateway.response")
@@ -11058,6 +11119,18 @@ func TestCheckResponseSnapshot_UpdateAgentRuntime(t *testing.T) {
 			IdleRuntimeSessionTimeout: ptr.Int32(1),
 			MaxLifetime:               ptr.Int32(1),
 		},
+		HooksConfiguration: &types.RuntimeHooksConfiguration{
+			Build: &types.BuildLifecycleHooks{
+				Warmup: &types.LifecycleHook{
+					Action: &types.LifecycleHookActionMemberHttpPost{
+						Value: types.HttpPostLifecycleHookAction{
+							Path: ptr.String("__Path__"),
+							Port: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
 		MetadataConfiguration: &types.RuntimeMetadataConfiguration{
 			RequireMMDSV2: ptr.Bool(true),
 		},
@@ -11086,6 +11159,14 @@ func TestCheckResponseSnapshot_UpdateAgentRuntime(t *testing.T) {
 			},
 			&types.AllowedPortMemberPort{
 				Value: 1,
+			},
+		},
+		ResourceConfigurations: []types.ResourceConfiguration{
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
+			},
+			{
+				MinimumMemoryInMiB: ptr.Int32(1),
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
@@ -11609,6 +11690,13 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 		WafConfiguration: &types.WafConfiguration{
 			FailureMode: types.WafFailureMode("FAIL_CLOSE"),
 		},
+		DomainOverride: &types.DomainOverride{
+			DefaultDomain: ptr.String("__DefaultDomain__"),
+			AlternateDomains: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateGateway.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -11784,6 +11872,13 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 		ExceptionLevel: types.ExceptionLevel("DEBUG"),
 		WafConfiguration: &types.WafConfiguration{
 			FailureMode: types.WafFailureMode("FAIL_CLOSE"),
+		},
+		DomainOverride: &types.DomainOverride{
+			DefaultDomain: ptr.String("__DefaultDomain__"),
+			AlternateDomains: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	})
 	if err != nil {

@@ -6127,6 +6127,46 @@ func TestCheckResponseSnapshot_DescribeContact(t *testing.T) {
 				OriginRegion:               ptr.String("__OriginRegion__"),
 				TrafficDistributionGroupId: ptr.String("__TrafficDistributionGroupId__"),
 			},
+			ContactLens: &types.ContactLens{
+				ConversationalAnalytics: &types.ConversationalAnalytics{
+					Configuration: &types.ConversationalAnalyticsConfiguration{
+						Enabled:        ptr.Bool(true),
+						LanguageLocale: ptr.String("__LanguageLocale__"),
+						LanguageLocales: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ChannelConfiguration: &types.ContactLensChannelConfiguration{
+							AnalyticsModes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						RedactionConfiguration: &types.ContactLensRedactionConfiguration{
+							Behavior: ptr.String("__Behavior__"),
+							Policy:   ptr.String("__Policy__"),
+							Entities: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MaskMode: ptr.String("__MaskMode__"),
+						},
+						SummaryConfiguration: &types.ContactLensSummaryConfiguration{
+							SummaryModes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						SentimentConfiguration: &types.ContactLensSentimentConfiguration{
+							Behavior: ptr.String("__Behavior__"),
+						},
+					},
+					ContactAnalysisReferenceState: &types.ContactAnalysisReferenceState{
+						Status:       ptr.String("__Status__"),
+						StatusReason: ptr.String("__StatusReason__"),
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeContact.response")

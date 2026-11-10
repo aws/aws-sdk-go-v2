@@ -1395,6 +1395,41 @@ func (v *ContributorSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// One requested scope: an explicit list of actions for one service. All actions
+// in an entry share one service prefix. The same service may appear in more than
+// one entry.
+type DataAccessTarget struct {
+
+	// The actions of one service, each with its service prefix, for example
+	// "logs:StartQuery".
+	//
+	// This member is required.
+	Actions []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataAccessTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataAccessTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataAccessTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Actions != nil {
+		serializeDataAccessActionList(s, schemas.DataAccessTarget_actions, v.Actions)
+	}
+}
+func (v *DataAccessTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataAccessTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataAccessTarget_actions:
+			return deserializeDataAccessActionList(d, schemas.DataAccessTarget_actions, &v.Actions)
+		}
+		return nil
+	})
+}
+
 // Detailed information about a domain.
 type Domain struct {
 

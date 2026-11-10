@@ -10,9 +10,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Retrieves a Route 53 Profile association for a VPC. A VPC can have only one
+//	Retrieves a Route 53 Profile association for a VPC. A VPC can have up to two
 //
-// Profile association, but a Profile can be associated with up to 5000 VPCs.
+// Profile associations, and a Profile can be associated with up to 1,000 VPCs.
 func (c *Client) GetProfileAssociation(ctx context.Context, params *GetProfileAssociationInput, optFns ...func(*Options)) (*GetProfileAssociationOutput, error) {
 	if params == nil {
 		params = &GetProfileAssociationInput{}
