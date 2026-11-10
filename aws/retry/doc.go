@@ -16,6 +16,7 @@
 // By default the standard retryer uses the DefaultRetryables slice of IsErrorRetryable types to determine whether
 // a given error is retryable. By default this list of retryables includes the following:
 //   - Retrying errors that implement the RetryableError method, and return true.
+//   - Modeled errors targeted by the smithy.api#retryable trait.
 //   - Connection Errors
 //   - Errors that implement a ConnectionError, Temporary, or Timeout method that return true.
 //   - Connection Reset Errors.
