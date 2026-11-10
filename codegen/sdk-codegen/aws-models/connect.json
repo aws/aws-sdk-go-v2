@@ -9142,6 +9142,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the global resiliency configuration for the contact, including traffic distribution details.</p>"
                     }
+                },
+                "ContactLens": {
+                    "target": "com.amazonaws.connect#ContactLens",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the conversational analytics configuration applied to the contact. This field is present only for contacts\n   where conversational analytics is enabled in the contact flow.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9204,6 +9210,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>CONTACT_ANALYSIS</code>. Otherwise,\n   null.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactAnalysisReferenceState": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of conversational analytics processing for the contact. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REQUESTED</code> – Analysis has been requested for the contact and has not finished.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> – Analysis finished successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – Analysis did not finish successfully. See <code>StatusReason</code> for the cause.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current analysis status. This value is populated only when the status is\n   <code>FAILED</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The current processing state of conversational analytics for a contact, including the analysis status and, when\n   applicable, the reason for that status.</p>"
             }
         },
         "com.amazonaws.connect#ContactConfiguration": {
@@ -10657,6 +10683,112 @@
                 }
             }
         },
+        "com.amazonaws.connect#ContactLens": {
+            "type": "structure",
+            "members": {
+                "ConversationalAnalytics": {
+                    "target": "com.amazonaws.connect#ConversationalAnalytics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conversational analytics configuration applied to the contact.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the conversational analytics configuration applied to the contact. This field is present only for contacts\n   where conversational analytics is enabled in the contact flow.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactLensAnalyticsModeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#String"
+            }
+        },
+        "com.amazonaws.connect#ContactLensChannelConfiguration": {
+            "type": "structure",
+            "members": {
+                "AnalyticsModes": {
+                    "target": "com.amazonaws.connect#ContactLensAnalyticsModeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conversational analytics modes enabled for the channel. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RealTime</code> – Real-time analysis is enabled during the contact. Voice channel only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PostContact</code> – Post-contact analysis is enabled after the contact ends. Voice channel only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ContactLens</code> – Conversational analytics is enabled for the contact. Chat channel only.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The per-channel conversational analytics configuration for a contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactLensRedactionConfiguration": {
+            "type": "structure",
+            "members": {
+                "Behavior": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether redaction is enabled for sensitive data, such as personal information, in the conversational analytics\n   output. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Enable</code> – Redaction is applied according to the other values in this object.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Disable</code> – Redaction is not applied, and all other values in this object are ignored.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The redaction policy that determines which versions of the transcript are stored. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>None</code> – No redaction is applied.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RedactedOnly</code> – Only the redacted transcript is stored.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RedactedAndOriginal</code> – Both the redacted and the original transcript are stored.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Entities": {
+                    "target": "com.amazonaws.connect#ContactLensRedactionEntitiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity types to redact from the transcript (for example, <code>NAME</code>, <code>EMAIL</code>,\n   <code>ADDRESS</code>).</p>"
+                    }
+                },
+                "MaskMode": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How sensitive information is masked in the transcript. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PII</code> – All redacted entities are replaced with the <code>[PII]</code> string.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EntityType</code> – All redacted entities are replaced with the label of the entity. For example, when\n     the <code>EMAIL</code> entity is configured for redaction, emails in the transcript are replaced with the\n     <code>[EMAIL]</code> string.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The redaction configuration for conversational analytics transcripts.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactLensRedactionEntitiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#String"
+            }
+        },
+        "com.amazonaws.connect#ContactLensSentimentConfiguration": {
+            "type": "structure",
+            "members": {
+                "Behavior": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether sentiment analysis is enabled for the contact. The default value is <code>Disable</code>. Valid\n   values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Enable</code> – Sentiment analysis is performed on the contact.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Disable</code> – Sentiment analysis is not performed on the contact.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The conversational analytics sentiment analysis configuration for a contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactLensSummaryConfiguration": {
+            "type": "structure",
+            "members": {
+                "SummaryModes": {
+                    "target": "com.amazonaws.connect#ContactLensSummaryModeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conversational analytics summary modes enabled for the contact. Valid values: <code>PostContact</code> |\n   <code>AutomatedInteraction</code> | <code>ContactChain</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The conversational analytics summary configuration for a contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactLensSummaryModeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#String"
+            }
+        },
         "com.amazonaws.connect#ContactMediaProcessingFailureMode": {
             "type": "enum",
             "members": {
@@ -11310,6 +11442,77 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions or Hierarchy Group conditions inside the\n    <code>SearchFilter</code>.</p>\n         <p>This accepts an <code>OR</code> of <code>AND</code> (List of List) input where:</p>\n         <ul>\n            <li>\n               <p>The top level list specifies conditions that need to be applied with <code>OR</code> operator</p>\n            </li>\n            <li>\n               <p>The inner list specifies conditions that need to be applied with <code>AND</code> operator.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Only one field can be populated. Maximum number of allowed Tag conditions is 25. Maximum number of allowed\n    Hierarchy Group conditions is 20.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.connect#ConversationalAnalytics": {
+            "type": "structure",
+            "members": {
+                "Configuration": {
+                    "target": "com.amazonaws.connect#ConversationalAnalyticsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conversational analytics settings that apply to the contact.</p>"
+                    }
+                },
+                "ContactAnalysisReferenceState": {
+                    "target": "com.amazonaws.connect#ContactAnalysisReferenceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of conversational analytics processing for the contact.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the conversational analytics configuration and state for a contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#ConversationalAnalyticsConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Specifies whether conversational analytics is enabled for the contact.</p>"
+                    }
+                },
+                "LanguageLocale": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language locale that conversational analytics uses to analyze the contact (for example, <code>en-US</code>).</p>"
+                    }
+                },
+                "LanguageLocales": {
+                    "target": "com.amazonaws.connect#LanguageLocales",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language locales that conversational analytics uses to analyze the contact (for example, <code>en-US</code> and <code>es-ES</code>).</p>"
+                    }
+                },
+                "ChannelConfiguration": {
+                    "target": "com.amazonaws.connect#ContactLensChannelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The per-channel conversational analytics settings for the contact.</p>"
+                    }
+                },
+                "RedactionConfiguration": {
+                    "target": "com.amazonaws.connect#ContactLensRedactionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The redaction configuration for the contact transcript.</p>"
+                    }
+                },
+                "SummaryConfiguration": {
+                    "target": "com.amazonaws.connect#ContactLensSummaryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary configuration for the contact.</p>"
+                    }
+                },
+                "SentimentConfiguration": {
+                    "target": "com.amazonaws.connect#ContactLensSentimentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sentiment analysis configuration for the contact.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The conversational analytics configuration settings for a contact.</p>"
             }
         },
         "com.amazonaws.connect#Count": {
@@ -34982,6 +35185,18 @@
         "com.amazonaws.connect#LanguageLocale": {
             "type": "string"
         },
+        "com.amazonaws.connect#LanguageLocales": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#LanguageLocale"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.connect#LargeNextToken": {
             "type": "string",
             "traits": {
@@ -44682,7 +44897,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Additional recipients for UpdateContact, allowing an empty list to clear CC recipients."
+                "smithy.api#documentation": "<p>The additional recipients of an outbound email that you can update. An empty list of\n   <code>CcEmailAddresses</code> clears the existing CC recipients.</p>"
             }
         },
         "com.amazonaws.connect#NullableBoolean": {
@@ -45999,7 +46214,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows pausing an ongoing task contact.</p>",
+                "smithy.api#documentation": "<p>Pauses an ongoing task or email contact.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/pause",
@@ -51930,7 +52145,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows resuming a task contact in a paused state.</p>",
+                "smithy.api#documentation": "<p>Resumes a task or email contact in a paused state.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/resume",

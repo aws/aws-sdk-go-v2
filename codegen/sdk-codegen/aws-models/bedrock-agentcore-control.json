@@ -2932,6 +2932,20 @@
                 "smithy.api#documentation": "<p>Contains summary information about a browser. A browser enables Amazon Bedrock AgentCore Agent to interact with web content.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#BuildLifecycleHooks": {
+            "type": "structure",
+            "members": {
+                "warmup": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleHook",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hook that warms up your agent before any sessions are created. Use this hook to load the resources that your sessions need, such as models, libraries, or caches. Your hook must complete within 120 seconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lifecycle hooks that run when you create or update the AgentCore Runtime, before any sessions are created.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#CapacityProviderArn": {
             "type": "string",
             "traits": {
@@ -5263,6 +5277,12 @@
                         "smithy.api#documentation": "<p>The life cycle configuration for the AgentCore Runtime.</p>"
                     }
                 },
+                "hooksConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RuntimeHooksConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle hooks configuration for the AgentCore Runtime. Use lifecycle hooks to run actions in the agent's container at fixed points in the runtime's lifecycle, such as warming up the agent before sessions are created.</p>"
+                    }
+                },
                 "environmentVariables": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#EnvironmentVariablesMap",
                     "traits": {
@@ -5297,6 +5317,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#AllowedPorts",
                     "traits": {
                         "smithy.api#documentation": "<p>The additional ports on the AgentCore Runtime that are reachable through the runtime's session URL. Specify one to five non-overlapping entries, each containing either a single port or an inclusive port range. Ports must be between <code>8000</code> and <code>12000</code>, excluding the reserved port <code>8443</code>.</p>"
+                    }
+                },
+                "resourceConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource configurations for the AgentCore Runtime, such as the minimum amount of memory to allocate to the runtime. You can specify at most one resource configuration.</p>"
                     }
                 }
             },
@@ -6979,6 +7005,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map of key-value pairs to associate with the gateway as metadata tags.</p>"
                     }
+                },
+                "domainOverride": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DomainOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header. Specify this when clients reach the gateway through your own proxy or custom domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7127,6 +7159,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#WafConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services WAF configuration for the gateway.</p>"
+                    }
+                },
+                "domainOverride": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DomainOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header.</p>"
                     }
                 }
             },
@@ -7878,10 +7916,10 @@
                 "eventExpiryDuration": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The duration after which memory events expire. Specified as an ISO 8601 duration.</p>",
+                        "smithy.api#documentation": "<p>The number of days after which memory events expire, between 7 and 3650 days.</p>",
                         "smithy.api#range": {
                             "min": 3,
-                            "max": 365
+                            "max": 3650
                         },
                         "smithy.api#required": {}
                     }
@@ -13437,6 +13475,28 @@
         "com.amazonaws.bedrockagentcorecontrol#DomainName": {
             "type": "string"
         },
+        "com.amazonaws.bedrockagentcorecontrol#DomainOverride": {
+            "type": "structure",
+            "members": {
+                "defaultDomain": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PublicDomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default public domain name for the gateway. The gateway advertises this domain when a request doesn't select a specific domain.</p>",
+                        "smithy.api#jsonName": "default",
+                        "smithy.api#required": {}
+                    }
+                },
+                "alternateDomains": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PublicDomainNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional public domain names for the gateway, up to 10. Don't repeat the default domain or list a domain more than once. A request can select one of these domains, or the default domain, with the <code>x-amzn-bedrock-agentcore-gateway-domain</code> header. The gateway rejects a request that selects a domain that isn't configured.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The public domain names for a gateway that clients reach through your own proxy or custom domain. When you configure a domain override, the gateway advertises these domains instead of the inbound Host header in the URLs that it returns for OAuth discovery, such as the protected resource metadata and the <code>WWW-Authenticate</code> challenge.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#DownloadUrl": {
             "type": "string",
             "traits": {
@@ -16289,6 +16349,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "hooksConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RuntimeHooksConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle hooks configuration for the AgentCore Runtime.</p>"
+                    }
+                },
                 "failureReason": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -16365,6 +16431,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#AllowedPorts",
                     "traits": {
                         "smithy.api#documentation": "<p>The additional ports on the AgentCore Runtime that are reachable through the runtime's session URL.</p>"
+                    }
+                },
+                "resourceConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource configurations for the AgentCore Runtime.</p>"
                     }
                 }
             },
@@ -18079,6 +18151,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#WafConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services WAF configuration for the gateway.</p>"
+                    }
+                },
+                "domainOverride": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DomainOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header.</p>"
                     }
                 }
             },
@@ -23171,6 +23249,27 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#HttpPostLifecycleHookAction": {
+            "type": "structure",
+            "members": {
+                "path": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleHookPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path in the agent's container that AgentCore Runtime sends the <code>POST</code> request to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServerPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port in the agent's container that AgentCore Runtime sends the <code>POST</code> request to. If you don't specify a port, the default is the runtime's server port: the port in the protocol configuration if one is set, otherwise the protocol's default port.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A lifecycle hook action that sends an HTTP <code>POST</code> request to the agent's container. The path and port can't conflict with a path that your agent already serves for AgentCore Runtime, such as the protocol's invocation path or the health check path.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#HttpQueryParameterName": {
             "type": "string",
             "traits": {
@@ -24218,6 +24317,46 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>LifecycleConfiguration lets you manage the lifecycle of runtime sessions and resources in AgentCore Runtime. This configuration helps optimize resource utilization by automatically cleaning up idle sessions and preventing long-running instances from consuming resources indefinitely.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LifecycleHook": {
+            "type": "structure",
+            "members": {
+                "action": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleHookAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that AgentCore Runtime runs for the hook. Specify exactly one action.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A lifecycle hook, which defines the action that AgentCore Runtime runs at a point in the runtime's lifecycle.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LifecycleHookAction": {
+            "type": "union",
+            "members": {
+                "httpPost": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HttpPostLifecycleHookAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sends an HTTP <code>POST</code> request to your agent's container on the specified port and path to run the hook. The hook succeeds if your container returns a <code>2xx</code> response. The hook fails if your container returns any other response or doesn't respond before the hook times out.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action that a lifecycle hook runs. Specify exactly one member. Currently, <code>httpPost</code> is the only supported action.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#LifecycleHookPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The path for an HTTP <code>POST</code> lifecycle hook action. The path must begin with <code>/</code>, can contain up to 32 characters, and can contain only letters, numbers, and the characters <code>.</code>, <code>_</code>, <code>~</code>, <code>/</code>, and <code>-</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^/[A-Za-z0-9._~/-]*$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#LimitEntries": {
@@ -28583,7 +28722,7 @@
                         "smithy.api#documentation": "<p>The number of days after which memory events will expire.</p>",
                         "smithy.api#range": {
                             "min": 1,
-                            "max": 365
+                            "max": 3650
                         },
                         "smithy.api#required": {}
                     }
@@ -32600,6 +32739,28 @@
                 "smithy.api#documentation": "<p>The configuration that controls how a provider prefix is applied to model IDs during translation.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#PublicDomainName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(?:\\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PublicDomainNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#PublicDomainName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#PutResourcePolicy": {
             "type": "operation",
             "input": {
@@ -33543,6 +33704,21 @@
                 "smithy.api#pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetworkresourceassociation/snra-[0-9a-f]{17}$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ResourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "minimumMemoryInMiB": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum amount of memory, in mebibytes, to allocate to the AgentCore Runtime.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource configuration for an AgentCore Runtime.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ResourceConfigurationIdentifier": {
             "type": "string",
             "traits": {
@@ -33551,6 +33727,18 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ResourceConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ResourceConfiguration"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of resource configurations for an AgentCore Runtime. The list can contain at most one resource configuration.</p>",
+                "smithy.api#length": {
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ResourceGatewayArn": {
@@ -33995,6 +34183,20 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com(\\.cn)?|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#RuntimeHooksConfiguration": {
+            "type": "structure",
+            "members": {
+                "build": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#BuildLifecycleHooks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hooks that run when you create or update the AgentCore Runtime, before any sessions are created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lifecycle hooks that AgentCore Runtime runs at fixed points in the runtime's lifecycle.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#RuntimeMetadataConfiguration": {
@@ -37599,6 +37801,12 @@
                         "smithy.api#documentation": "<p>The updated life cycle configuration for the AgentCore Runtime.</p>"
                     }
                 },
+                "hooksConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RuntimeHooksConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated lifecycle hooks configuration for the AgentCore Runtime.</p>"
+                    }
+                },
                 "metadataConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#RuntimeMetadataConfiguration",
                     "traits": {
@@ -37633,6 +37841,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#AllowedPorts",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated additional ports on the AgentCore Runtime that are reachable through the runtime's session URL. Specify one to five non-overlapping entries, each containing either a single port or an inclusive port range. Ports must be between <code>8000</code> and <code>12000</code>, excluding the reserved port <code>8443</code>.</p>"
+                    }
+                },
+                "resourceConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated resource configurations for the AgentCore Runtime. You can specify at most one resource configuration.</p>"
                     }
                 },
                 "clientToken": {
@@ -38890,6 +39104,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated Amazon Web Services WAF configuration for the gateway.</p>"
                     }
+                },
+                "domainOverride": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DomainOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header. Specify this when clients reach the gateway through your own proxy or custom domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -39035,6 +39255,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#WafConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services WAF configuration for the gateway.</p>"
+                    }
+                },
+                "domainOverride": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DomainOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header.</p>"
                     }
                 }
             },
@@ -39769,10 +39995,10 @@
                 "eventExpiryDuration": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days after which memory events will expire, between 7 and 365 days.</p>",
+                        "smithy.api#documentation": "<p>The number of days after which memory events expire, between 7 and 3650 days.</p>",
                         "smithy.api#range": {
                             "min": 3,
-                            "max": 365
+                            "max": 3650
                         }
                     }
                 },

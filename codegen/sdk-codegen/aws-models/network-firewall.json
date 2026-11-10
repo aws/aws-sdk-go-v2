@@ -113,6 +113,9 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.networkfirewall#AcceptPriorHooks": {
+            "type": "boolean"
+        },
         "com.amazonaws.networkfirewall#ActionDefinition": {
             "type": "structure",
             "members": {
@@ -135,6 +138,35 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.networkfirewall#ActionScope": {
+            "type": "enum",
+            "members": {
+                "FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLOW"
+                    }
+                },
+                "TX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TX"
+                    }
+                },
+                "HOOK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOOK"
+                    }
+                },
+                "PACKET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PACKET"
+                    }
+                }
             }
         },
         "com.amazonaws.networkfirewall#Address": {
@@ -170,6 +202,9 @@
         },
         "com.amazonaws.networkfirewall#Age": {
             "type": "integer"
+        },
+        "com.amazonaws.networkfirewall#AlertEnabled": {
+            "type": "boolean"
         },
         "com.amazonaws.networkfirewall#AnalysisReport": {
             "type": "structure",
@@ -796,7 +831,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the mapping between an Availability Zone and a firewall endpoint for a transit gateway-attached firewall. Each mapping represents where the firewall can process traffic. You use these mappings when calling <a>CreateFirewall</a>, <a>AssociateAvailabilityZones</a>, and <a>DisassociateAvailabilityZones</a>.</p>\n         <p>To retrieve the current Availability Zone mappings for a firewall, use <a>DescribeFirewall</a>.</p>"
+                "smithy.api#documentation": "<p>Defines the mapping between an Availability Zone and a firewall endpoint for a transit gateway-attached firewall. Each mapping represents where the firewall can process traffic. You use these mappings when calling <code>CreateFirewall</code>, <code>AssociateAvailabilityZones</code>, and <code>DisassociateAvailabilityZones</code>.</p>\n         <p>To retrieve the current Availability Zone mappings for a firewall, use <code>DescribeFirewall</code>.</p>"
             }
         },
         "com.amazonaws.networkfirewall#AvailabilityZoneMappingString": {
@@ -850,6 +885,9 @@
             "traits": {
                 "smithy.api#default": false
             }
+        },
+        "com.amazonaws.networkfirewall#BypassIPSEnabled": {
+            "type": "boolean"
         },
         "com.amazonaws.networkfirewall#ByteCount": {
             "type": "long",
@@ -1371,6 +1409,107 @@
                     "target": "com.amazonaws.networkfirewall#FirewallPolicyResponse",
                     "traits": {
                         "smithy.api#documentation": "<p>The high-level properties of a firewall policy. This, along with the <a>FirewallPolicy</a>, define the policy. You can retrieve all objects for a firewall policy by calling <a>DescribeFirewallPolicy</a>. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#CreateFirewallPolicyV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#CreateFirewallPolicyV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#CreateFirewallPolicyV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InsufficientCapacityException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Next Generation policy according to the specifications.</p>\n         <p>A Next Generation policy defines the behavior of a firewall in a collection of firewall engine and IPS engine rule groups and other settings. You can use one firewall policy for multiple firewalls. For more information, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-policies-v2.html\">Next Generation policies</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#CreateFirewallPolicyV2Request": {
+            "type": "structure",
+            "members": {
+                "FirewallPolicyV2Name": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the Next Generation policy. You can't change the name of a firewall policy after you create it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirewallPolicyV2": {
+                    "target": "com.amazonaws.networkfirewall#FirewallPolicyV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule groups and other settings that define the Next Generation policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.networkfirewall#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the firewall policy.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.networkfirewall#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key:value pairs to associate with the resource.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.networkfirewall#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request. </p>\n         <p>If set to <code>TRUE</code>, Network Firewall checks whether the request can run successfully,\n         but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with\n         dry run set to <code>FALSE</code>, but doesn't make additions or changes to your resources. This option allows you to make sure that you have\n         the required permissions to run the request and that your request parameters are valid. </p>\n         <p>If set to <code>FALSE</code>, Network Firewall makes the requested changes to your resources. </p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains settings for encryption of your firewall policy resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#CreateFirewallPolicyV2Response": {
+            "type": "structure",
+            "members": {
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the firewall policy. The token marks the state of the policy resource at the time of the request. </p>\n         <p>To make changes to the policy, you provide the token in your request. Network Firewall uses the token to ensure that the policy hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall policy again to get a current copy of it with current token. Reapply your changes as needed, then try the operation again using the new token. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirewallPolicyV2Response": {
+                    "target": "com.amazonaws.networkfirewall#FirewallPolicyV2Response",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The high-level properties of the Next Generation policy. This, along with the <a>FirewallPolicyV2</a>, define the policy. You can retrieve all objects for a Next Generation policy by calling <a>DescribeFirewallPolicyV2</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1992,6 +2131,18 @@
                         "smithy.api#documentation": "<p>An object that defines the rule group rules. </p>\n         <note>\n            <p>You must provide either this rule group setting or a <code>Rules</code> setting, but not both. </p>\n         </note>"
                     }
                 },
+                "FirewallRuleGroup": {
+                    "target": "com.amazonaws.networkfirewall#FirewallRuleGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that defines the rules in a firewall engine rule group, for use in a Next Generation policy.</p>"
+                    }
+                },
+                "IpsRuleGroup": {
+                    "target": "com.amazonaws.networkfirewall#IpsRuleGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that defines the rules in an IPS engine rule group, for use in a Next Generation policy.</p>"
+                    }
+                },
                 "Rules": {
                     "target": "com.amazonaws.networkfirewall#RulesString",
                     "traits": {
@@ -2001,7 +2152,7 @@
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p>",
+                        "smithy.api#documentation": "<p>Indicates the type of the rule group. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STATELESS</code> - Stateless rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATEFUL</code> - Stateful rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FIREWALL</code> - Firewall engine rules, for use in a Next Generation policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPS</code> - IPS engine rules, for use in a Next Generation policy.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2507,6 +2658,73 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.networkfirewall#DeleteFirewallPolicyV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#DeleteFirewallPolicyV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#DeleteFirewallPolicyV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified <a>FirewallPolicyV2</a>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#DeleteFirewallPolicyV2Request": {
+            "type": "structure",
+            "members": {
+                "FirewallPolicyV2Arn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Next Generation policy.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "FirewallPolicyV2Name": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the Next Generation policy. You can't change the name of a firewall policy after you create it.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#DeleteFirewallPolicyV2Response": {
+            "type": "structure",
+            "members": {
+                "FirewallPolicyV2Response": {
+                    "target": "com.amazonaws.networkfirewall#FirewallPolicyV2Response",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The high-level properties of the Next Generation policy that you asked to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.networkfirewall#DeleteFirewallRequest": {
             "type": "structure",
             "members": {
@@ -2986,7 +3204,7 @@
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p>\n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Indicates the type of the rule group. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STATELESS</code> - Stateless rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATEFUL</code> - Stateful rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FIREWALL</code> - Firewall engine rules, for use in a Next Generation policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPS</code> - IPS engine rules, for use in a Next Generation policy.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -3458,6 +3676,86 @@
                     "target": "com.amazonaws.networkfirewall#FirewallPolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>The policy for the specified firewall policy. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#DescribeFirewallPolicyV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#DescribeFirewallPolicyV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#DescribeFirewallPolicyV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the data objects for the specified Next Generation policy.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#DescribeFirewallPolicyV2Request": {
+            "type": "structure",
+            "members": {
+                "FirewallPolicyV2Arn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Next Generation policy.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "FirewallPolicyV2Name": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the Next Generation policy. You can't change the name of a firewall policy after you create it.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "RuleOutputFormat": {
+                    "target": "com.amazonaws.networkfirewall#RuleOutputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format in which to return the rules of any firewall engine rule groups that are embedded in the policy. Specify <code>FIREWALL_RULES</code> for structured <code>FirewallRule</code> objects or <code>RULES_STRING</code> for a Suricata-compatible firewall-mode rule string. If you don't specify a format, Network Firewall returns each embedded rule group in the format you provided it in. Referenced rule groups aren't affected.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#DescribeFirewallPolicyV2Response": {
+            "type": "structure",
+            "members": {
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the firewall policy. The token marks the state of the policy resource at the time of the request. </p>\n         <p>To make changes to the policy, you provide the token in your request. Network Firewall uses the token to ensure that the policy hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall policy again to get a current copy of it with current token. Reapply your changes as needed, then try the operation again using the new token. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirewallPolicyV2Response": {
+                    "target": "com.amazonaws.networkfirewall#FirewallPolicyV2Response",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The high-level properties of the Next Generation policy. This, along with the <a>FirewallPolicyV2</a>, define the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirewallPolicyV2": {
+                    "target": "com.amazonaws.networkfirewall#FirewallPolicyV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule groups and other settings that define the specified Next Generation policy.</p>"
                     }
                 }
             },
@@ -4232,7 +4530,7 @@
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p>\n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Indicates the type of the rule group. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STATELESS</code> - Stateless rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATEFUL</code> - Stateful rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FIREWALL</code> - Firewall engine rules, for use in a Next Generation policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPS</code> - IPS engine rules, for use in a Next Generation policy.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -4266,7 +4564,7 @@
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p>\n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Indicates the type of the rule group. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STATELESS</code> - Stateless rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATEFUL</code> - Stateful rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FIREWALL</code> - Firewall engine rules, for use in a Next Generation policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPS</code> - IPS engine rules, for use in a Next Generation policy.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
                     }
                 },
                 "Capacity": {
@@ -4325,7 +4623,7 @@
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p>\n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Indicates the type of the rule group. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STATELESS</code> - Stateless rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATEFUL</code> - Stateful rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FIREWALL</code> - Firewall engine rules, for use in a Next Generation policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPS</code> - IPS engine rules, for use in a Next Generation policy.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
                     }
                 },
                 "AnalyzeRuleGroup": {
@@ -4333,6 +4631,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing. If set to <code>TRUE</code>, Network Firewall runs the analysis.</p>"
+                    }
+                },
+                "RuleOutputFormat": {
+                    "target": "com.amazonaws.networkfirewall#RuleOutputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For a firewall engine rule group, the format in which to return the rules. Specify one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FIREWALL_RULES</code> - Returns the rules as structured <code>FirewallRule</code> objects.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RULES_STRING</code> - Returns the rules as a Suricata-compatible firewall-mode rule string.</p>\n            </li>\n         </ul>\n         <p>If you don't specify a format, Network Firewall returns the rules in the format you provided them in. This setting applies only to <code>FIREWALL</code> and <code>IPS</code> rule groups; IPS engine rule groups support only <code>RULES_STRING</code>.</p>"
                     }
                 }
             },
@@ -4354,6 +4658,18 @@
                     "target": "com.amazonaws.networkfirewall#RuleGroup",
                     "traits": {
                         "smithy.api#documentation": "<p>The object that defines the rules in a rule group. This, along with <a>RuleGroupResponse</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. </p>\n         <p>Network Firewall uses a rule group to inspect and control network traffic.\n    You define stateless rule groups to inspect individual packets and you define stateful rule groups to inspect packets in the context of their\n    traffic flow. </p>\n         <p>To use a rule group, you include it by reference in an Network Firewall firewall policy, then you use the policy in a firewall. You can reference a rule group from\n    more than one firewall policy, and you can use a firewall policy in more than one firewall. </p>"
+                    }
+                },
+                "FirewallRuleGroup": {
+                    "target": "com.amazonaws.networkfirewall#FirewallRuleGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that defines the rules in a firewall engine rule group, for use in a Next Generation policy.</p>"
+                    }
+                },
+                "IpsRuleGroup": {
+                    "target": "com.amazonaws.networkfirewall#IpsRuleGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that defines the rules in an IPS engine rule group, for use in a Next Generation policy.</p>"
                     }
                 },
                 "RuleGroupResponse": {
@@ -5187,6 +5503,12 @@
                 "target": "com.amazonaws.networkfirewall#FirewallPolicyMetadata"
             }
         },
+        "com.amazonaws.networkfirewall#FirewallPoliciesV2": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#FirewallPolicyV2Metadata"
+            }
+        },
         "com.amazonaws.networkfirewall#FirewallPolicy": {
             "type": "structure",
             "members": {
@@ -5255,7 +5577,7 @@
                 "Route53ResolvedIPValidation": {
                     "target": "com.amazonaws.networkfirewall#Route53ResolvedIPValidation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings that enable resolved IP validation for the policy. Resolved IP validation\n         verifies that a connection's destination IP address is one that the Amazon Route 53 Resolver\n         returned in a DNS response for a domain. The response must come from a VPC that's associated\n         with the Route 53 Resolver DNS Firewall rule group that you specify. This checks how the\n         destination IP address was obtained, instead of relying only on the domain that the client\n         asserts in its TLS Server Name Indication (SNI) or HTTP <code>Host</code> header. For more\n         information, see <a>Route53ResolvedIPValidation</a>.</p>"
+                        "smithy.api#documentation": "<p>The settings that enable resolved IP validation for the policy. Resolved IP validation\n         verifies that a connection's destination IP address is one that the Amazon Route 53 Resolver\n         returned in a DNS response for a domain. A VPC that's associated with the Route 53 Resolver\n         DNS Firewall rule group that you specify must send the response. This checks how the\n         destination IP address was obtained, instead of relying only on the domain that the client\n         asserts in its TLS Server Name Indication (SNI) or HTTP <code>Host</code> header. For more\n         information, see <a>Route53ResolvedIPValidation</a>.</p>"
                     }
                 }
             },
@@ -5443,6 +5765,638 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The high-level properties of a firewall policy. This, along with the <a>FirewallPolicy</a>, define the policy. You can retrieve all objects for a firewall policy by calling <a>DescribeFirewallPolicy</a>. </p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallPolicyV2": {
+            "type": "structure",
+            "members": {
+                "FirewallRuleGroupEntries": {
+                    "target": "com.amazonaws.networkfirewall#FirewallRuleGroupEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The firewall section of the policy—the rule groups that the firewall engine evaluates. Each entry references an existing firewall engine rule group or embeds a rule group directly in the policy, and each entry has a unique priority that sets its evaluation order within the section.</p>"
+                    }
+                },
+                "IpsRuleGroupEntries": {
+                    "target": "com.amazonaws.networkfirewall#IpsRuleGroupEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPS section of the policy—the rule groups that the IPS engine evaluates. Each entry references an existing IPS engine rule group or embeds a rule group directly in the policy. IPS section entries don't use a priority.</p>"
+                    }
+                },
+                "PolicyMode": {
+                    "target": "com.amazonaws.networkfirewall#PolicyMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the policy's engines enforce their verdicts or only report them. In <code>ENFORCE</code> mode, the firewall engine and IPS engine apply their verdicts to traffic. In <code>MONITOR</code> mode, the engines evaluate traffic and generate logs and metrics, but don't block traffic, so you can observe how a policy would behave before you enforce it. For more information, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-policies-v2.html\">Next Generation policies</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                    }
+                },
+                "FirewallDefaultAction": {
+                    "target": "com.amazonaws.networkfirewall#PolicyDefaultAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that the firewall engine takes on traffic that doesn't match any firewall engine rule at a hook. The firewall engine is drop by default. You can set the default action to one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DROP</code> - Block the traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCEPT</code> - Allow the traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECT</code> - Block the traffic and send a TCP reset packet back to the client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALERT</code> - Allow the traffic and generate an alert log for the traffic that reaches the default action at every hook. This is distinct from setting the policy mode to <code>MONITOR</code>.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-policies-v2.html\">Next Generation policies</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                    }
+                },
+                "StatefulEngineOptions": {
+                    "target": "com.amazonaws.networkfirewall#StatefulEngineOptionsV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional options governing how the engines handle stateful traffic, such as the stream exception policy and flow timeouts.</p>"
+                    }
+                },
+                "TLSInspectionConfigurationArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the TLS inspection configuration to use to decrypt traffic for inspection. Next Generation policies support session holding only. For more information, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html\">Inspecting SSL/TLS traffic with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                    }
+                },
+                "PolicyVariables": {
+                    "target": "com.amazonaws.networkfirewall#PolicyVariables",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains variables that you can use to override default Suricata settings in your Next Generation policy.</p>"
+                    }
+                },
+                "Route53ResolvedIPValidation": {
+                    "target": "com.amazonaws.networkfirewall#Route53ResolvedIPValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings that enable resolved IP validation for the Next Generation policy.\n         Resolved IP validation verifies that a connection's destination IP address is one that the\n         Amazon Route 53 Resolver returned in a DNS response for a domain. A VPC that's associated with\n         the Route 53 Resolver DNS Firewall rule group that you specify must send the response.\n         This checks how the destination IP address was obtained, instead of relying only on the\n         domain that the client asserts in its TLS Server Name Indication (SNI) or HTTP\n         <code>Host</code> header. For more information, see\n         <a>Route53ResolvedIPValidation</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object that defines a Next Generation policy. This, along with the <a>FirewallPolicyV2Response</a>, define the policy.</p>\n         <p>A Next Generation policy defines how the firewall engine and IPS engine inspect and control your VPC network traffic. You define the policy as a firewall section and an IPS section, each a collection of rule groups, along with policy-wide settings such as the policy mode and default actions. For more information, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-policies-v2.html\">Next Generation policies</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallPolicyV2Metadata": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the Next Generation policy. You can't change the name of a firewall policy after you create it.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Next Generation policy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>High-level information about a Next Generation policy, returned in a list of policies. To retrieve the policy's full properties, rule groups, and settings, use the Next Generation policy describe operation.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallPolicyV2Response": {
+            "type": "structure",
+            "members": {
+                "FirewallPolicyV2Name": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the Next Generation policy. You can't change the name of a firewall policy after you create it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirewallPolicyV2Arn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Next Generation policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirewallPolicyV2Id": {
+                    "target": "com.amazonaws.networkfirewall#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Next Generation policy. Network Firewall assigns this identifier when you create the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.networkfirewall#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the Next Generation policy.</p>"
+                    }
+                },
+                "FirewallPolicyV2Status": {
+                    "target": "com.amazonaws.networkfirewall#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Next Generation policy. A policy must be in the <code>ACTIVE</code> state before you can use it in a firewall.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.networkfirewall#ResourceStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the current status of the Next Generation policy.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.networkfirewall#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value tag pairs that are associated with the Next Generation policy.</p>"
+                    }
+                },
+                "ConsumedFirewallRuleCapacity": {
+                    "target": "com.amazonaws.networkfirewall#RuleCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of firewall engine rule capacity units that the policy's firewall section currently consumes.</p>"
+                    }
+                },
+                "ConsumedIpsRuleCapacity": {
+                    "target": "com.amazonaws.networkfirewall#RuleCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of IPS engine rule capacity units that the policy's IPS section currently consumes.</p>"
+                    }
+                },
+                "ConsumedIpsDomainCapacity": {
+                    "target": "com.amazonaws.networkfirewall#RuleCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of IPS domain list capacity units that the policy's IPS section currently consumes.</p>"
+                    }
+                },
+                "NumberOfAssociations": {
+                    "target": "com.amazonaws.networkfirewall#NumberOfAssociations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of firewalls that are associated with the Next Generation policy.</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains the Amazon Web Services KMS encryption configuration settings for your Next Generation policy.</p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.networkfirewall#FirewallPolicyErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any configuration errors that apply to the Next Generation policy. Network Firewall detects these errors asynchronously, after you create or update the policy, so an error can appear after the request that caused it has already succeeded. Each entry describes the problem and how to resolve it, and Network Firewall clears it automatically after you resolve the problem.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.networkfirewall#LastUpdateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the Next Generation policy was changed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The high-level properties of a Next Generation policy. This includes the policy's identity, status, consumed capacity, and association count. Network Firewall returns this object in response to the Next Generation policy operations. To retrieve the policy's rule groups and settings, use the <code>FirewallPolicyV2</code> object.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallRule": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.networkfirewall#FirewallRuleAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that the firewall engine takes on traffic that matches the rule. The firewall engine supports the following actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACCEPT</code> - Allow the traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DROP</code> - Block the traffic and discontinue inspection.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECT</code> - Block the traffic and send a TCP reset packet back to the client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECT_DST</code> - Block the traffic and send a TCP reset packet to the destination.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECT_BOTH</code> - Block the traffic and send a TCP reset packet to both the client and the destination.</p>\n            </li>\n         </ul>\n         <p>You combine the action with an action scope, for example <code>accept:flow</code>. To send accepted traffic straight to its destination and skip the IPS engine, pair an accept action with the <code>BypassIPSEnabled</code> setting. For more information, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html\">Rule groups for a firewall using a Next Generation policy</a> in the <i>Network Firewall Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ActionScope": {
+                    "target": "com.amazonaws.networkfirewall#ActionScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope that controls how much of the matched traffic the action applies to. The valid scopes depend on the action: <code>ACCEPT</code> supports all four scopes, and <code>DROP</code>, <code>REJECT</code>, <code>REJECT_DST</code>, and <code>REJECT_BOTH</code> support only <code>PACKET</code> and <code>FLOW</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PACKET</code> - The current packet only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HOOK</code> - The current hook only. The firewall engine evaluates the connection again at the next hook.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TX</code> - The current transaction. The firewall engine continues to evaluate later transactions on the connection.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FLOW</code> - The entire connection. For an accept action, the connection skips the firewall engine's remaining hooks and advances to the IPS engine.</p>\n            </li>\n         </ul>\n         <p>In a Suricata-compatible rule string, you write the scope in lowercase, for example <code>accept:flow</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Hook": {
+                    "target": "com.amazonaws.networkfirewall#HookKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection-state hook at which the firewall engine evaluates the rule. The hook encodes both the protocol and the connection state, for example a TCP hook or a TLS <code>client_hello</code> hook. For the hooks that the firewall engine supports and how they map to the connection lifecycle, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html\">Rule groups for a firewall using a Next Generation policy</a> in the <i>Network Firewall Developer Guide</i> and the <a href=\"https://suricata.readthedocs.io/en/suricata-8.0.3/firewall/firewall-design.html\">Suricata firewall mode documentation</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.networkfirewall#FirewallRuleProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol of the rule's hook. The protocol is derived from the hook and must match the hook's protocol prefix. Network Firewall rejects a rule whose protocol doesn't match its hook.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceIPs": {
+                    "target": "com.amazonaws.networkfirewall#Source",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source IP addresses and address ranges to inspect for, in CIDR notation. A firewall rule always compiles to a forward-direction rule, so you express inbound compared to outbound traffic through the source and destination addresses.</p>"
+                    }
+                },
+                "DestIPs": {
+                    "target": "com.amazonaws.networkfirewall#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination IP addresses and address ranges to inspect for, in CIDR notation. A firewall rule always compiles to a forward-direction rule, so you express inbound compared to outbound traffic through the source and destination addresses.</p>"
+                    }
+                },
+                "SourcePorts": {
+                    "target": "com.amazonaws.networkfirewall#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source ports to inspect for.</p>"
+                    }
+                },
+                "DestPorts": {
+                    "target": "com.amazonaws.networkfirewall#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination ports to inspect for.</p>"
+                    }
+                },
+                "RuleOptions": {
+                    "target": "com.amazonaws.networkfirewall#RuleOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional options for the rule. These are the Suricata <code>RuleOptions</code> settings, such as the signature ID (<code>sid</code>) and match keywords.</p>"
+                    }
+                },
+                "AcceptPriorHooks": {
+                    "target": "com.amazonaws.networkfirewall#AcceptPriorHooks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether Network Firewall automatically accepts the earlier application-layer hooks that a connection must pass to reach this rule's hook. Because the firewall engine is drop by default, accepting prior hooks lets you author a single rule for the hook you care about, instead of also authoring a rule for each earlier hook. This setting accepts the earlier application-layer hooks only; it doesn't accept the TCP layer. For more information, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html\">Rule groups for a firewall using a Next Generation policy</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                    }
+                },
+                "AlertEnabled": {
+                    "target": "com.amazonaws.networkfirewall#AlertEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the rule also generates an alert log for the traffic that it matches. Turning on alerting adds a secondary alert action to the rule, so that Network Firewall logs the match in addition to taking the rule's primary action.</p>"
+                    }
+                },
+                "BypassIPSEnabled": {
+                    "target": "com.amazonaws.networkfirewall#BypassIPSEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether an accepted connection bypasses the IPS engine. By default, traffic that the firewall engine accepts advances to the IPS engine for threat inspection. When you turn on this setting for an accept rule, the accepted traffic goes straight to its destination without IPS inspection. You can set the bypass only on accept rules, and it uses the same scope as the rule's accept action; only the <code>flow</code> and <code>packet</code> scopes support a bypass. For more information, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html\">Rule groups for a firewall using a Next Generation policy</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                    }
+                },
+                "RuleMetadata": {
+                    "target": "com.amazonaws.networkfirewall#RuleMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional metadata for the rule: whether the rule is enabled and a description. Metadata doesn't change how the rule matches or acts on traffic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single structured firewall engine rule, for use in a firewall engine rule group or as an embedded rule in a Next Generation policy. A firewall rule accepts, drops, or rejects traffic at a connection-state hook. For more information about authoring firewall engine rules, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html\">Rule groups for a firewall using a Next Generation policy</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallRuleAction": {
+            "type": "enum",
+            "members": {
+                "ACCEPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCEPT"
+                    }
+                },
+                "DROP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DROP"
+                    }
+                },
+                "REJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECT"
+                    }
+                },
+                "REJECT_DST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECT_DST"
+                    }
+                },
+                "REJECT_BOTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECT_BOTH"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallRuleGroup": {
+            "type": "structure",
+            "members": {
+                "RulesSource": {
+                    "target": "com.amazonaws.networkfirewall#FirewallRulesSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stateful inspection criteria for the firewall engine rule group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleVariables": {
+                    "target": "com.amazonaws.networkfirewall#RuleVariables",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that are available for use in the rules in the firewall engine rule group, such as IP set and port variables that the rules reference.</p>"
+                    }
+                },
+                "ReferenceSets": {
+                    "target": "com.amazonaws.networkfirewall#ReferenceSets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of a rule group's reference sets. Firewall engine rule groups don't support IP set references (reference sets); this setting applies to IPS engine rule groups. To use CIDR ranges in firewall engine rules, use rule variables instead.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object that defines a firewall engine rule group, for use in a Next Generation policy. A firewall engine rule group provides access-control rules that the firewall engine evaluates at connection-state hooks. You provide the rules as a Suricata-compatible rule string, as structured firewall rules, or generated from a list of domain names. For more information, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html\">Rule groups for a firewall using a Next Generation policy</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallRuleGroupEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#FirewallRuleGroupEntry"
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallRuleGroupEntry": {
+            "type": "structure",
+            "members": {
+                "Priority": {
+                    "target": "com.amazonaws.networkfirewall#Priority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority of the rule group entry within the firewall section. Network Firewall evaluates the firewall section's entries in order of increasing priority value. Each entry in the firewall section must have a unique priority.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an existing firewall engine rule group to reference in this entry. Provide either <code>ResourceArn</code> to reference an existing rule group or <code>InlineRuleGroup</code> to embed a rule group in the policy.</p>"
+                    }
+                },
+                "InlineRuleGroup": {
+                    "target": "com.amazonaws.networkfirewall#FirewallRuleGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A firewall engine rule group defined directly in the policy, instead of referenced by ARN. Provide either <code>InlineRuleGroup</code> to embed a rule group or <code>ResourceArn</code> to reference an existing rule group. An embedded rule group can't use a domain list rules source; to filter on a domain list, reference a standalone rule group by ARN instead.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single entry in the firewall section of a Next Generation policy. An entry either references an existing firewall engine rule group by ARN or embeds a rule group directly in the policy, and it carries the priority that sets the rule group's evaluation order within the firewall section.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallRuleProtocol": {
+            "type": "enum",
+            "members": {
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP"
+                    }
+                },
+                "TCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TCP"
+                    }
+                },
+                "UDP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UDP"
+                    }
+                },
+                "ICMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMP"
+                    }
+                },
+                "HTTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP"
+                    }
+                },
+                "FTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FTP"
+                    }
+                },
+                "TLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS"
+                    }
+                },
+                "SMB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMB"
+                    }
+                },
+                "DNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNS"
+                    }
+                },
+                "DCERPC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DCERPC"
+                    }
+                },
+                "SSH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSH"
+                    }
+                },
+                "SMTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMTP"
+                    }
+                },
+                "MSN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MSN"
+                    }
+                },
+                "KRB5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KRB5"
+                    }
+                },
+                "IKEV2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IKEV2"
+                    }
+                },
+                "TFTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TFTP"
+                    }
+                },
+                "NTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NTP"
+                    }
+                },
+                "DHCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DHCP"
+                    }
+                },
+                "HTTP2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2"
+                    }
+                },
+                "QUIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUIC"
+                    }
+                },
+                "ICMPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMPV4"
+                    }
+                },
+                "ICMPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMPV6"
+                    }
+                },
+                "SCTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTP"
+                    }
+                },
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
+                    }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV6"
+                    }
+                },
+                "DOH2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2"
+                    }
+                },
+                "FTP_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FTP_DATA"
+                    }
+                },
+                "NFS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NFS"
+                    }
+                },
+                "RDP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDP"
+                    }
+                },
+                "RFB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RFB"
+                    }
+                },
+                "MQTT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MQTT"
+                    }
+                },
+                "PGSQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PGSQL"
+                    }
+                },
+                "SNMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNMP"
+                    }
+                },
+                "TELNET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TELNET"
+                    }
+                },
+                "WEBSOCKET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBSOCKET"
+                    }
+                },
+                "LDAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LDAP"
+                    }
+                },
+                "POP3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POP3"
+                    }
+                },
+                "MDNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MDNS"
+                    }
+                },
+                "BITTORRENT_DHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BITTORRENT_DHT"
+                    }
+                },
+                "DNP3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNP3"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#FirewallRule"
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallRulesSource": {
+            "type": "structure",
+            "members": {
+                "RulesString": {
+                    "target": "com.amazonaws.networkfirewall#RulesString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Firewall engine rules, provided as a single Suricata-compatible rule string in firewall mode. Use this to provide rules that you've already written in the Suricata firewall-mode format. For the rule format, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html\">Rule groups for a firewall using a Next Generation policy</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                    }
+                },
+                "FirewallRules": {
+                    "target": "com.amazonaws.networkfirewall#FirewallRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of individual firewall engine rules, provided as structured rules rather than as a rule string.</p>"
+                    }
+                },
+                "RulesSourceList": {
+                    "target": "com.amazonaws.networkfirewall#RulesSourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stateful inspection criteria for a domain list, specified as the list of domain names that Network Firewall generates firewall engine rules from.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of the rules for a firewall engine rule group. You provide the rules as a single Suricata-compatible rule string, as a list of structured firewall rules, or as a list of domain names to generate rules from.</p>"
             }
         },
         "com.amazonaws.networkfirewall#FirewallStatus": {
@@ -5990,6 +6944,1187 @@
                 "smithy.api#documentation": "<p>Attempts made to a access domain.</p>"
             }
         },
+        "com.amazonaws.networkfirewall#HookKey": {
+            "type": "enum",
+            "members": {
+                "TCP_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TCP_ALL"
+                    }
+                },
+                "TCP_FLOW_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TCP_FLOW_START"
+                    }
+                },
+                "TCP_PRE_FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TCP_PRE_FLOW"
+                    }
+                },
+                "TCP_PRE_STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TCP_PRE_STREAM"
+                    }
+                },
+                "SCTP_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTP_ALL"
+                    }
+                },
+                "SCTP_FLOW_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTP_FLOW_START"
+                    }
+                },
+                "SCTP_PRE_FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTP_PRE_FLOW"
+                    }
+                },
+                "SCTP_PRE_STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTP_PRE_STREAM"
+                    }
+                },
+                "IPV6_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV6_ALL"
+                    }
+                },
+                "IPV6_FLOW_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV6_FLOW_START"
+                    }
+                },
+                "IPV6_PRE_FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV6_PRE_FLOW"
+                    }
+                },
+                "IPV6_PRE_STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV6_PRE_STREAM"
+                    }
+                },
+                "ICMPV6_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMPV6_ALL"
+                    }
+                },
+                "ICMPV6_FLOW_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMPV6_FLOW_START"
+                    }
+                },
+                "ICMPV6_PRE_FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMPV6_PRE_FLOW"
+                    }
+                },
+                "ICMPV6_PRE_STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMPV6_PRE_STREAM"
+                    }
+                },
+                "UDP_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UDP_ALL"
+                    }
+                },
+                "UDP_FLOW_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UDP_FLOW_START"
+                    }
+                },
+                "UDP_PRE_FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UDP_PRE_FLOW"
+                    }
+                },
+                "UDP_PRE_STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UDP_PRE_STREAM"
+                    }
+                },
+                "ICMP_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMP_ALL"
+                    }
+                },
+                "ICMP_FLOW_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMP_FLOW_START"
+                    }
+                },
+                "ICMP_PRE_FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMP_PRE_FLOW"
+                    }
+                },
+                "ICMP_PRE_STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMP_PRE_STREAM"
+                    }
+                },
+                "ICMPV4_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMPV4_ALL"
+                    }
+                },
+                "ICMPV4_FLOW_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMPV4_FLOW_START"
+                    }
+                },
+                "ICMPV4_PRE_FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMPV4_PRE_FLOW"
+                    }
+                },
+                "ICMPV4_PRE_STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICMPV4_PRE_STREAM"
+                    }
+                },
+                "IP_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_ALL"
+                    }
+                },
+                "IP_FLOW_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_FLOW_START"
+                    }
+                },
+                "IP_PRE_FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_PRE_FLOW"
+                    }
+                },
+                "IP_PRE_STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_PRE_STREAM"
+                    }
+                },
+                "IPV4_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4_ALL"
+                    }
+                },
+                "IPV4_FLOW_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4_FLOW_START"
+                    }
+                },
+                "IPV4_PRE_FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4_PRE_FLOW"
+                    }
+                },
+                "IPV4_PRE_STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4_PRE_STREAM"
+                    }
+                },
+                "TLS_CLIENT_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_CLIENT_STARTED"
+                    }
+                },
+                "TLS_CLIENT_HELLO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_CLIENT_HELLO"
+                    }
+                },
+                "TLS_CLIENT_CERT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_CLIENT_CERT"
+                    }
+                },
+                "TLS_CLIENT_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_CLIENT_DATA"
+                    }
+                },
+                "TLS_CLIENT_FINISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_CLIENT_FINISHED"
+                    }
+                },
+                "TLS_SERVER_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_SERVER_STARTED"
+                    }
+                },
+                "TLS_SERVER_HELLO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_SERVER_HELLO"
+                    }
+                },
+                "TLS_SERVER_CERT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_SERVER_CERT"
+                    }
+                },
+                "TLS_SERVER_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_SERVER_DATA"
+                    }
+                },
+                "TLS_SERVER_FINISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_SERVER_FINISHED"
+                    }
+                },
+                "HTTP1_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP1_REQUEST_STARTED"
+                    }
+                },
+                "HTTP1_REQUEST_LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP1_REQUEST_LINE"
+                    }
+                },
+                "HTTP1_REQUEST_HEADERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP1_REQUEST_HEADERS"
+                    }
+                },
+                "HTTP1_REQUEST_BODY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP1_REQUEST_BODY"
+                    }
+                },
+                "HTTP1_REQUEST_TRAILER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP1_REQUEST_TRAILER"
+                    }
+                },
+                "HTTP1_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP1_REQUEST_COMPLETE"
+                    }
+                },
+                "HTTP1_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP1_RESPONSE_STARTED"
+                    }
+                },
+                "HTTP1_RESPONSE_LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP1_RESPONSE_LINE"
+                    }
+                },
+                "HTTP1_RESPONSE_HEADERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP1_RESPONSE_HEADERS"
+                    }
+                },
+                "HTTP1_RESPONSE_BODY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP1_RESPONSE_BODY"
+                    }
+                },
+                "HTTP1_RESPONSE_TRAILER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP1_RESPONSE_TRAILER"
+                    }
+                },
+                "HTTP1_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP1_RESPONSE_COMPLETE"
+                    }
+                },
+                "HTTP2_STREAM_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_STREAM_REQUEST_STARTED"
+                    }
+                },
+                "HTTP2_STREAM_REQUEST_HEADERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_STREAM_REQUEST_HEADERS"
+                    }
+                },
+                "HTTP2_STREAM_REQUEST_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_STREAM_REQUEST_DATA"
+                    }
+                },
+                "HTTP2_STREAM_REQUEST_CLOSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_STREAM_REQUEST_CLOSED"
+                    }
+                },
+                "HTTP2_STREAM_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_STREAM_REQUEST_COMPLETE"
+                    }
+                },
+                "HTTP2_STREAM_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_STREAM_RESPONSE_STARTED"
+                    }
+                },
+                "HTTP2_STREAM_RESPONSE_HEADERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_STREAM_RESPONSE_HEADERS"
+                    }
+                },
+                "HTTP2_STREAM_RESPONSE_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_STREAM_RESPONSE_DATA"
+                    }
+                },
+                "HTTP2_STREAM_RESPONSE_CLOSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_STREAM_RESPONSE_CLOSED"
+                    }
+                },
+                "HTTP2_STREAM_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_STREAM_RESPONSE_COMPLETE"
+                    }
+                },
+                "HTTP2_GLOBAL_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_GLOBAL_REQUEST_STARTED"
+                    }
+                },
+                "HTTP2_GLOBAL_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_GLOBAL_REQUEST_COMPLETE"
+                    }
+                },
+                "HTTP2_GLOBAL_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_GLOBAL_RESPONSE_STARTED"
+                    }
+                },
+                "HTTP2_GLOBAL_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP2_GLOBAL_RESPONSE_COMPLETE"
+                    }
+                },
+                "DOH2_STREAM_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_STREAM_REQUEST_STARTED"
+                    }
+                },
+                "DOH2_STREAM_REQUEST_HEADERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_STREAM_REQUEST_HEADERS"
+                    }
+                },
+                "DOH2_STREAM_REQUEST_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_STREAM_REQUEST_DATA"
+                    }
+                },
+                "DOH2_STREAM_REQUEST_CLOSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_STREAM_REQUEST_CLOSED"
+                    }
+                },
+                "DOH2_STREAM_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_STREAM_REQUEST_COMPLETE"
+                    }
+                },
+                "DOH2_STREAM_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_STREAM_RESPONSE_STARTED"
+                    }
+                },
+                "DOH2_STREAM_RESPONSE_HEADERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_STREAM_RESPONSE_HEADERS"
+                    }
+                },
+                "DOH2_STREAM_RESPONSE_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_STREAM_RESPONSE_DATA"
+                    }
+                },
+                "DOH2_STREAM_RESPONSE_CLOSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_STREAM_RESPONSE_CLOSED"
+                    }
+                },
+                "DOH2_STREAM_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_STREAM_RESPONSE_COMPLETE"
+                    }
+                },
+                "DOH2_GLOBAL_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_GLOBAL_REQUEST_STARTED"
+                    }
+                },
+                "DOH2_GLOBAL_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_GLOBAL_REQUEST_COMPLETE"
+                    }
+                },
+                "DOH2_GLOBAL_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_GLOBAL_RESPONSE_STARTED"
+                    }
+                },
+                "DOH2_GLOBAL_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOH2_GLOBAL_RESPONSE_COMPLETE"
+                    }
+                },
+                "DNS_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNS_REQUEST_STARTED"
+                    }
+                },
+                "DNS_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNS_REQUEST_COMPLETE"
+                    }
+                },
+                "DNS_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNS_RESPONSE_STARTED"
+                    }
+                },
+                "DNS_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNS_RESPONSE_COMPLETE"
+                    }
+                },
+                "SMTP_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMTP_REQUEST_STARTED"
+                    }
+                },
+                "SMTP_REQUEST_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMTP_REQUEST_DATA"
+                    }
+                },
+                "SMTP_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMTP_REQUEST_COMPLETE"
+                    }
+                },
+                "SMTP_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMTP_RESPONSE_STARTED"
+                    }
+                },
+                "SMTP_RESPONSE_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMTP_RESPONSE_DATA"
+                    }
+                },
+                "SMTP_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMTP_RESPONSE_COMPLETE"
+                    }
+                },
+                "FTP_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FTP_REQUEST_STARTED"
+                    }
+                },
+                "FTP_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FTP_REQUEST_COMPLETE"
+                    }
+                },
+                "FTP_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FTP_RESPONSE_STARTED"
+                    }
+                },
+                "FTP_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FTP_RESPONSE_COMPLETE"
+                    }
+                },
+                "FTP_DATA_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FTP_DATA_REQUEST_STARTED"
+                    }
+                },
+                "FTP_DATA_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FTP_DATA_REQUEST_COMPLETE"
+                    }
+                },
+                "FTP_DATA_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FTP_DATA_RESPONSE_STARTED"
+                    }
+                },
+                "FTP_DATA_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FTP_DATA_RESPONSE_COMPLETE"
+                    }
+                },
+                "SMB_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMB_REQUEST_STARTED"
+                    }
+                },
+                "SMB_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMB_REQUEST_COMPLETE"
+                    }
+                },
+                "SMB_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMB_RESPONSE_STARTED"
+                    }
+                },
+                "SMB_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMB_RESPONSE_COMPLETE"
+                    }
+                },
+                "DCERPC_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DCERPC_REQUEST_STARTED"
+                    }
+                },
+                "DCERPC_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DCERPC_REQUEST_COMPLETE"
+                    }
+                },
+                "DCERPC_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DCERPC_RESPONSE_STARTED"
+                    }
+                },
+                "DCERPC_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DCERPC_RESPONSE_COMPLETE"
+                    }
+                },
+                "NFS_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NFS_REQUEST_STARTED"
+                    }
+                },
+                "NFS_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NFS_REQUEST_COMPLETE"
+                    }
+                },
+                "NFS_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NFS_RESPONSE_STARTED"
+                    }
+                },
+                "NFS_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NFS_RESPONSE_COMPLETE"
+                    }
+                },
+                "KRB5_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KRB5_REQUEST_STARTED"
+                    }
+                },
+                "KRB5_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KRB5_REQUEST_COMPLETE"
+                    }
+                },
+                "KRB5_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KRB5_RESPONSE_STARTED"
+                    }
+                },
+                "KRB5_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KRB5_RESPONSE_COMPLETE"
+                    }
+                },
+                "IKE_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IKE_REQUEST_STARTED"
+                    }
+                },
+                "IKE_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IKE_REQUEST_COMPLETE"
+                    }
+                },
+                "IKE_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IKE_RESPONSE_STARTED"
+                    }
+                },
+                "IKE_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IKE_RESPONSE_COMPLETE"
+                    }
+                },
+                "TFTP_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TFTP_REQUEST_STARTED"
+                    }
+                },
+                "TFTP_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TFTP_REQUEST_COMPLETE"
+                    }
+                },
+                "TFTP_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TFTP_RESPONSE_STARTED"
+                    }
+                },
+                "TFTP_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TFTP_RESPONSE_COMPLETE"
+                    }
+                },
+                "DHCP_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DHCP_REQUEST_STARTED"
+                    }
+                },
+                "DHCP_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DHCP_REQUEST_COMPLETE"
+                    }
+                },
+                "DHCP_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DHCP_RESPONSE_STARTED"
+                    }
+                },
+                "DHCP_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DHCP_RESPONSE_COMPLETE"
+                    }
+                },
+                "QUIC_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUIC_REQUEST_STARTED"
+                    }
+                },
+                "QUIC_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUIC_REQUEST_COMPLETE"
+                    }
+                },
+                "QUIC_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUIC_RESPONSE_STARTED"
+                    }
+                },
+                "QUIC_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUIC_RESPONSE_COMPLETE"
+                    }
+                },
+                "RDP_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDP_REQUEST_STARTED"
+                    }
+                },
+                "RDP_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDP_REQUEST_COMPLETE"
+                    }
+                },
+                "RDP_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDP_RESPONSE_STARTED"
+                    }
+                },
+                "RDP_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDP_RESPONSE_COMPLETE"
+                    }
+                },
+                "RFB_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RFB_REQUEST_STARTED"
+                    }
+                },
+                "RFB_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RFB_REQUEST_COMPLETE"
+                    }
+                },
+                "RFB_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RFB_RESPONSE_STARTED"
+                    }
+                },
+                "RFB_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RFB_RESPONSE_COMPLETE"
+                    }
+                },
+                "MQTT_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MQTT_REQUEST_STARTED"
+                    }
+                },
+                "MQTT_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MQTT_REQUEST_COMPLETE"
+                    }
+                },
+                "MQTT_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MQTT_RESPONSE_STARTED"
+                    }
+                },
+                "MQTT_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MQTT_RESPONSE_COMPLETE"
+                    }
+                },
+                "PGSQL_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PGSQL_REQUEST_STARTED"
+                    }
+                },
+                "PGSQL_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PGSQL_REQUEST_COMPLETE"
+                    }
+                },
+                "PGSQL_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PGSQL_RESPONSE_STARTED"
+                    }
+                },
+                "PGSQL_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PGSQL_RESPONSE_COMPLETE"
+                    }
+                },
+                "SNMP_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNMP_REQUEST_STARTED"
+                    }
+                },
+                "SNMP_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNMP_REQUEST_COMPLETE"
+                    }
+                },
+                "SNMP_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNMP_RESPONSE_STARTED"
+                    }
+                },
+                "SNMP_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNMP_RESPONSE_COMPLETE"
+                    }
+                },
+                "NTP_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NTP_REQUEST_STARTED"
+                    }
+                },
+                "NTP_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NTP_REQUEST_COMPLETE"
+                    }
+                },
+                "NTP_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NTP_RESPONSE_STARTED"
+                    }
+                },
+                "NTP_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NTP_RESPONSE_COMPLETE"
+                    }
+                },
+                "TELNET_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TELNET_REQUEST_STARTED"
+                    }
+                },
+                "TELNET_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TELNET_REQUEST_COMPLETE"
+                    }
+                },
+                "TELNET_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TELNET_RESPONSE_STARTED"
+                    }
+                },
+                "TELNET_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TELNET_RESPONSE_COMPLETE"
+                    }
+                },
+                "WEBSOCKET_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBSOCKET_REQUEST_STARTED"
+                    }
+                },
+                "WEBSOCKET_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBSOCKET_REQUEST_COMPLETE"
+                    }
+                },
+                "WEBSOCKET_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBSOCKET_RESPONSE_STARTED"
+                    }
+                },
+                "WEBSOCKET_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBSOCKET_RESPONSE_COMPLETE"
+                    }
+                },
+                "LDAP_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LDAP_REQUEST_STARTED"
+                    }
+                },
+                "LDAP_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LDAP_REQUEST_COMPLETE"
+                    }
+                },
+                "LDAP_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LDAP_RESPONSE_STARTED"
+                    }
+                },
+                "LDAP_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LDAP_RESPONSE_COMPLETE"
+                    }
+                },
+                "POP3_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POP3_REQUEST_STARTED"
+                    }
+                },
+                "POP3_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POP3_REQUEST_COMPLETE"
+                    }
+                },
+                "POP3_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POP3_RESPONSE_STARTED"
+                    }
+                },
+                "POP3_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POP3_RESPONSE_COMPLETE"
+                    }
+                },
+                "MDNS_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MDNS_REQUEST_STARTED"
+                    }
+                },
+                "MDNS_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MDNS_REQUEST_COMPLETE"
+                    }
+                },
+                "MDNS_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MDNS_RESPONSE_STARTED"
+                    }
+                },
+                "MDNS_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MDNS_RESPONSE_COMPLETE"
+                    }
+                },
+                "BITTORRENT_DHT_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BITTORRENT_DHT_REQUEST_STARTED"
+                    }
+                },
+                "BITTORRENT_DHT_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BITTORRENT_DHT_REQUEST_COMPLETE"
+                    }
+                },
+                "BITTORRENT_DHT_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BITTORRENT_DHT_RESPONSE_STARTED"
+                    }
+                },
+                "BITTORRENT_DHT_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BITTORRENT_DHT_RESPONSE_COMPLETE"
+                    }
+                },
+                "DNP3_REQUEST_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNP3_REQUEST_STARTED"
+                    }
+                },
+                "DNP3_REQUEST_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNP3_REQUEST_COMPLETE"
+                    }
+                },
+                "DNP3_RESPONSE_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNP3_RESPONSE_STARTED"
+                    }
+                },
+                "DNP3_RESPONSE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNP3_RESPONSE_COMPLETE"
+                    }
+                },
+                "SSH_REQUEST_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSH_REQUEST_IN_PROGRESS"
+                    }
+                },
+                "SSH_REQUEST_BANNER_WAIT_EOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSH_REQUEST_BANNER_WAIT_EOL"
+                    }
+                },
+                "SSH_REQUEST_BANNER_DONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSH_REQUEST_BANNER_DONE"
+                    }
+                },
+                "SSH_REQUEST_FINISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSH_REQUEST_FINISHED"
+                    }
+                },
+                "SSH_RESPONSE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSH_RESPONSE_IN_PROGRESS"
+                    }
+                },
+                "SSH_RESPONSE_BANNER_WAIT_EOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSH_RESPONSE_BANNER_WAIT_EOL"
+                    }
+                },
+                "SSH_RESPONSE_BANNER_DONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSH_RESPONSE_BANNER_DONE"
+                    }
+                },
+                "SSH_RESPONSE_FINISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSH_RESPONSE_FINISHED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.networkfirewall#IPAddressType": {
             "type": "enum",
             "members": {
@@ -6186,6 +8321,93 @@
             "traits": {
                 "smithy.api#documentation": "<p>The token you provided is stale or isn't valid for the operation. </p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.networkfirewall#IpsRuleGroup": {
+            "type": "structure",
+            "members": {
+                "RulesSource": {
+                    "target": "com.amazonaws.networkfirewall#IpsRulesSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stateful inspection criteria for the IPS engine rule group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleVariables": {
+                    "target": "com.amazonaws.networkfirewall#RuleVariables",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that are available for use in the rules in the IPS engine rule group.</p>"
+                    }
+                },
+                "ReferenceSets": {
+                    "target": "com.amazonaws.networkfirewall#ReferenceSets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of a rule group's reference sets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object that defines an IPS engine rule group, for use in a Next Generation policy. An IPS engine rule group provides threat-detection rules that the IPS engine evaluates in the context of the traffic flow. You provide the rules as a Suricata-compatible rule string. For more information, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html\">Rule groups for a firewall using a Next Generation policy</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#IpsRuleGroupEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#IpsRuleGroupEntry"
+            }
+        },
+        "com.amazonaws.networkfirewall#IpsRuleGroupEntry": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an existing IPS engine rule group to reference in this entry. Provide either <code>ResourceArn</code> to reference an existing rule group or <code>InlineRuleGroup</code> to embed a rule group in the policy.</p>"
+                    }
+                },
+                "InlineRuleGroup": {
+                    "target": "com.amazonaws.networkfirewall#IpsRuleGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An IPS engine rule group defined directly in the policy, instead of referenced by ARN. Provide either <code>InlineRuleGroup</code> to embed a rule group or <code>ResourceArn</code> to reference an existing rule group.</p>"
+                    }
+                },
+                "Override": {
+                    "target": "com.amazonaws.networkfirewall#IpsRuleGroupOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The setting that allows the policy owner to change the behavior of the IPS engine rule group within this policy, such as changing a managed rule group's action from <code>DROP</code> to <code>ALERT</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single entry in the IPS section of a Next Generation policy. An entry either references an existing IPS engine rule group by ARN or embeds a rule group directly in the policy. IPS section entries don't use a priority.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#IpsRuleGroupOverride": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.networkfirewall#OverrideAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that changes the rule group from <code>DROP</code> to <code>ALERT</code>. This only applies to managed rule groups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The setting that allows the policy owner to change the behavior of an IPS engine rule group within a Next Generation policy.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#IpsRulesSource": {
+            "type": "structure",
+            "members": {
+                "RulesString": {
+                    "target": "com.amazonaws.networkfirewall#RulesString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IPS engine rules, provided as a single Suricata-compatible rule string. For the rule format, see <a href=\"https://suricata.readthedocs.io/en/suricata-8.0.3/rules/intro.html\">Rules Format</a> on the Suricata website.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of the rules for an IPS engine rule group.</p>"
             }
         },
         "com.amazonaws.networkfirewall#KeyId": {
@@ -6441,6 +8663,76 @@
                     "target": "com.amazonaws.networkfirewall#FirewallPolicies",
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata for the firewall policies. Depending on your setting for max results and\n         the number of firewall policies that you have, this might not be the full list. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#ListFirewallPoliciesV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#ListFirewallPoliciesV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#ListFirewallPoliciesV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the metadata for the Next Generation policies that you have defined. Depending on your setting for max results and the number of firewall policies, a single call might not return the full list.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "FirewallPoliciesV2",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#ListFirewallPoliciesV2Request": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.networkfirewall#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkfirewall#PaginationMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects that you want Network Firewall to return for this request. If more\n          objects are available, in the response, Network Firewall provides a\n         <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#ListFirewallPoliciesV2Response": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.networkfirewall#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                    }
+                },
+                "FirewallPoliciesV2": {
+                    "target": "com.amazonaws.networkfirewall#FirewallPoliciesV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for the Next Generation policies. Depending on your setting for max results and the number of firewall policies that you have, this might not be the full list.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -7668,7 +9960,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A NAT gateway that a proxy mode firewall uses to proxy traffic. This is used in <a>CreateFirewall</a> when <code>NoSourcePreservation</code> is <code>TRUE</code>. </p>"
+                "smithy.api#documentation": "<p>A NAT gateway that a proxy mode firewall uses to proxy traffic. This is used in <code>CreateFirewall</code> when <code>NoSourcePreservation</code> is <code>TRUE</code>. </p>"
             }
         },
         "com.amazonaws.networkfirewall#NatGatewayMappingsList": {
@@ -7709,6 +10001,9 @@
                     "target": "com.amazonaws.networkfirewall#CreateFirewallPolicy"
                 },
                 {
+                    "target": "com.amazonaws.networkfirewall#CreateFirewallPolicyV2"
+                },
+                {
                     "target": "com.amazonaws.networkfirewall#CreateProxy"
                 },
                 {
@@ -7737,6 +10032,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#DeleteFirewallPolicy"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#DeleteFirewallPolicyV2"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#DeleteNetworkFirewallTransitGatewayAttachment"
@@ -7776,6 +10074,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#DescribeFirewallPolicy"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#DescribeFirewallPolicyV2"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#DescribeFlowOperation"
@@ -7833,6 +10134,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#ListFirewallPolicies"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ListFirewallPoliciesV2"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#ListFirewalls"
@@ -7908,6 +10212,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#UpdateFirewallPolicyChangeProtection"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#UpdateFirewallPolicyV2"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#UpdateLoggingConfiguration"
@@ -9157,6 +11464,52 @@
                 }
             }
         },
+        "com.amazonaws.networkfirewall#PolicyDefaultAction": {
+            "type": "enum",
+            "members": {
+                "DROP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DROP"
+                    }
+                },
+                "ACCEPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCEPT"
+                    }
+                },
+                "REJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECT"
+                    }
+                },
+                "ALERT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALERT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#PolicyMode": {
+            "type": "enum",
+            "members": {
+                "ENFORCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENFORCE"
+                    }
+                },
+                "MONITOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONITOR"
+                    }
+                }
+            }
+        },
         "com.amazonaws.networkfirewall#PolicyString": {
             "type": "string",
             "traits": {
@@ -10306,7 +12659,7 @@
                 "DNSFirewallRuleGroupId": {
                     "target": "com.amazonaws.networkfirewall#DNSFirewallRuleGroupId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Route 53 Resolver DNS Firewall rule group that determines which VPCs'\n         DNS resolutions count for resolved IP validation. A destination IP address counts as resolved for a domain only when the Route 53 Resolver returned it in a DNS response within a VPC\n         that's associated with this rule group. Associate the rule group with the VPCs that send\n         traffic to the firewall. The ID must match the pattern <code>^rslvr-frg-[0-9a-f]+$</code>. It must also exist and\n         be accessible from your account. Network Firewall validates this when you create or update the\n         policy.</p>\n         <p>Changing this value swaps the managed rule group association. Network Firewall processes\n            the swap asynchronously. Each policy can have only one managed Route 53 Resolver DNS\n            Firewall association. While a swap is in progress, Network Firewall rejects further changes to this setting. Wait\n            until the swap completes, then retry.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Route 53 Resolver DNS Firewall rule group that determines which VPCs'\n         DNS resolutions count for resolved IP validation. A destination IP address counts as resolved for a domain only when the Route 53 Resolver returned it in a DNS response within a VPC\n         that's associated with this rule group. Associate the rule group with the VPCs that send\n         traffic to the firewall. The ID must match the pattern <code>^rslvr-frg-[0-9a-f]+$</code>. It must also exist and\n         be accessible from your account. Network Firewall validates this when you create or update the\n         policy.</p>\n         <p>Changing this value swaps the managed rule group association. Network Firewall processes\n            the swap asynchronously. Each policy can have only one managed Route 53 Resolver DNS\n            Firewall association. While a swap is in progress, Network Firewall rejects further changes to this setting. Wait\n            until the swap completes, then retry. The change may also require a restart of the stateful\n            engine. When this occurs, existing connections will be treated according to your stream\n            exception policy configuration.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10331,7 +12684,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The policy-level configuration for resolved IP validation. When you set this on a firewall policy, you require that the destination IP address of a\n         connection is one that the Amazon Route 53 Resolver returned in a DNS response for a domain. The Route 53 Resolver\n         must have returned the response in a VPC that's associated with the Route 53 Resolver DNS\n         Firewall rule group identified by <code>DNSFirewallRuleGroupId</code>. At the policy level,\n         this verifies that the destination IP address was resolved for some domain. To match specific\n         domains, also configure stateful rule groups that use the\n         <code>AWS_ROUTE_53_RESOLVED_DOMAIN</code> target type or the\n         <code>aws_route_53_resolved_domain</code> rule keyword.</p>"
+                "smithy.api#documentation": "<p>The policy-level configuration for resolved IP validation. When you set this on a firewall policy, you require that the destination IP address of a\n         connection is one that the Amazon Route 53 Resolver returned in a DNS response for a domain. The Route 53 Resolver\n         must have returned the response in a VPC that's associated with the Route 53 Resolver DNS\n         Firewall rule group identified by <code>DNSFirewallRuleGroupId</code>. At the policy level,\n         this verifies that the destination IP address was resolved for some domain. To match specific\n         domains, also configure stateful rule groups that use the\n         <code>AWS_ROUTE_53_RESOLVED_DOMAIN</code> target type or the\n         <code>aws_route_53_resolved_domain</code> rule keyword.</p>\n         <important>\n            <p>Enabling or disabling resolved IP validation, or changing <code>DNSFirewallRuleGroupId</code>, may require a restart of the stateful engine in order to apply the change. When this occurs, existing connections will be treated according to your stream exception policy configuration. Changes to <code>Action</code>, <code>DNSExpiryExceptionPolicy</code>, <code>SourceIPRanges</code>, and <code>BypassDestinationValidationIPRanges</code> don't require a restart.</p>\n         </important>"
             }
         },
         "com.amazonaws.networkfirewall#Route53ResolvedIPValidationAction": {
@@ -10393,6 +12746,19 @@
             "traits": {
                 "smithy.api#documentation": "<p>The inspection criteria and action for a single stateless rule. Network Firewall inspects each packet for the specified matching\n         criteria. When a packet matches the criteria, Network Firewall performs the rule's actions on\n         the packet.</p>"
             }
+        },
+        "com.amazonaws.networkfirewall#RuleDescriptionText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.networkfirewall#RuleEnabled": {
+            "type": "boolean"
         },
         "com.amazonaws.networkfirewall#RuleGroup": {
             "type": "structure",
@@ -10509,7 +12875,7 @@
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p>"
+                        "smithy.api#documentation": "<p>Indicates the type of the rule group. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STATELESS</code> - Stateless rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATEFUL</code> - Stateful rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FIREWALL</code> - Firewall engine rules, for use in a Next Generation policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPS</code> - IPS engine rules, for use in a Next Generation policy.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Capacity": {
@@ -10603,6 +12969,18 @@
                     "traits": {
                         "smithy.api#enumValue": "STATEFUL_DOMAIN"
                     }
+                },
+                "FIREWALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIREWALL"
+                    }
+                },
+                "IPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPS"
+                    }
                 }
             }
         },
@@ -10616,6 +12994,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.networkfirewall#CollectionMember_String"
+            }
+        },
+        "com.amazonaws.networkfirewall#RuleMetadata": {
+            "type": "structure",
+            "members": {
+                "RuleEnabled": {
+                    "target": "com.amazonaws.networkfirewall#RuleEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the rule is active. The default is <code>TRUE</code>. When you set this to <code>FALSE</code>, Network Firewall keeps the rule in the rule group but doesn't evaluate it against traffic and doesn't count it toward the rule group's consumed capacity.</p>"
+                    }
+                },
+                "RuleDescription": {
+                    "target": "com.amazonaws.networkfirewall#RuleDescriptionText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the rule, up to 512 characters. The description can span multiple lines. A description line can't itself look like a firewall rule; to disable a rule, set <code>RuleEnabled</code> to <code>FALSE</code> instead.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata for a single firewall engine rule. Use it to disable a rule without removing it and to attach a description. When you describe a rule group in <code>RULES_STRING</code> format, Network Firewall renders a disabled rule and its description as <code>#</code> comment lines above the rule.</p>"
             }
         },
         "com.amazonaws.networkfirewall#RuleOption": {
@@ -10658,6 +13056,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "STRICT_ORDER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#RuleOutputFormat": {
+            "type": "enum",
+            "members": {
+                "FIREWALL_RULES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIREWALL_RULES"
+                    }
+                },
+                "RULES_STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RULES_STRING"
                     }
                 }
             }
@@ -10748,7 +13163,7 @@
                 "StatefulRules": {
                     "target": "com.amazonaws.networkfirewall#StatefulRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of individual stateful rules inspection criteria to be used together in a stateful rule group.\n       Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-8.0.3/rules/intro.html\">Rules Format</a>. </p>"
+                        "smithy.api#documentation": "<p>An array of individual stateful rules inspection criteria to be used together in a stateful rule group.\n       Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-8.0.3/rules/intro.html\">Rules Format</a> on the Suricata website. </p>"
                     }
                 },
                 "StatelessRulesAndCustomActions": {
@@ -11288,6 +13703,26 @@
                 "smithy.api#documentation": "<p>Configuration settings for the handling of the stateful rule groups in a firewall policy. </p>\n         <important>\n            <p>Updating any setting in <code>StatefulEngineOptions</code> may require a restart of the stateful engine in order to apply the changes. When this occurs, existing connections will be treated according to your stream exception policy configuration.</p>\n         </important>"
             }
         },
+        "com.amazonaws.networkfirewall#StatefulEngineOptionsV2": {
+            "type": "structure",
+            "members": {
+                "StreamExceptionPolicy": {
+                    "target": "com.amazonaws.networkfirewall#StreamExceptionPolicyV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How Network Firewall handles traffic on a network connection that breaks midstream. A Next Generation policy supports <code>DROP</code> and <code>REJECT</code>. For more information, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/stream-exception-policy.html\">Stream exception policy options in your firewall policy</a> in the <i>Network Firewall Developer Guide</i>.</p>"
+                    }
+                },
+                "FlowTimeouts": {
+                    "target": "com.amazonaws.networkfirewall#FlowTimeouts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for the handling of stateful traffic in a Next Generation policy.</p>"
+            }
+        },
         "com.amazonaws.networkfirewall#StatefulRule": {
             "type": "structure",
             "members": {
@@ -11314,7 +13749,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A single Suricata rules specification, for use in a stateful rule group.\n       Use this option to specify a simple Suricata rule with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-8.0.3/rules/intro.html\">Rules Format</a>. </p>"
+                "smithy.api#documentation": "<p>A single Suricata rules specification, for use in a stateful rule group.\n       Use this option to specify a simple Suricata rule with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-8.0.3/rules/intro.html\">Rules Format</a> on the Suricata website. </p>"
             }
         },
         "com.amazonaws.networkfirewall#StatefulRuleDirection": {
@@ -11660,6 +14095,23 @@
                 }
             }
         },
+        "com.amazonaws.networkfirewall#StreamExceptionPolicyV2": {
+            "type": "enum",
+            "members": {
+                "DROP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DROP"
+                    }
+                },
+                "REJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.networkfirewall#SubnetMapping": {
             "type": "structure",
             "members": {
@@ -11678,7 +14130,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ID for a subnet that's used in an association with a firewall. This is used in\n      <a>CreateFirewall</a>, <a>AssociateSubnets</a>, and <a>CreateVpcEndpointAssociation</a>. Network Firewall\n         creates an instance of the associated firewall in each subnet that you specify, to filter\n         traffic in the subnet's Availability Zone.</p>"
+                "smithy.api#documentation": "<p>The ID for a subnet that's used in an association with a firewall. This is used in\n      <code>CreateFirewall</code>, <code>AssociateSubnets</code>, and <code>CreateVpcEndpointAssociation</code>. Network Firewall\n         creates an instance of the associated firewall in each subnet that you specify, to filter\n         traffic in the subnet's Availability Zone.</p>"
             }
         },
         "com.amazonaws.networkfirewall#SubnetMappings": {
@@ -13282,6 +15734,113 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.networkfirewall#UpdateFirewallPolicyV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#UpdateFirewallPolicyV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#UpdateFirewallPolicyV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidTokenException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the properties of the specified Next Generation policy.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#UpdateFirewallPolicyV2Request": {
+            "type": "structure",
+            "members": {
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the firewall policy. The token marks the state of the policy resource at the time of the request. </p>\n         <p>To make changes to the policy, you provide the token in your request. Network Firewall uses the token to ensure that the policy hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall policy again to get a current copy of it with current token. Reapply your changes as needed, then try the operation again using the new token. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirewallPolicyV2Arn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Next Generation policy.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "FirewallPolicyV2Name": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the Next Generation policy. You can't change the name of a firewall policy after you create it.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "FirewallPolicyV2": {
+                    "target": "com.amazonaws.networkfirewall#FirewallPolicyV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated rule groups and other settings that define the Next Generation policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.networkfirewall#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the firewall policy.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.networkfirewall#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request. </p>\n         <p>If set to <code>TRUE</code>, Network Firewall checks whether the request can run successfully,\n         but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with\n         dry run set to <code>FALSE</code>, but doesn't make additions or changes to your resources. This option allows you to make sure that you have\n         the required permissions to run the request and that your request parameters are valid. </p>\n         <p>If set to <code>FALSE</code>, Network Firewall makes the requested changes to your resources. </p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains settings for encryption of your firewall policy resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#UpdateFirewallPolicyV2Response": {
+            "type": "structure",
+            "members": {
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the firewall policy. The token marks the state of the policy resource at the time of the request. </p>\n         <p>To make changes to the policy, you provide the token in your request. Network Firewall uses the token to ensure that the policy hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall policy again to get a current copy of it with current token. Reapply your changes as needed, then try the operation again using the new token. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirewallPolicyV2Response": {
+                    "target": "com.amazonaws.networkfirewall#FirewallPolicyV2Response",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The high-level properties of the Next Generation policy. This, along with the <a>FirewallPolicyV2</a>, define the policy. You can retrieve all objects for a Next Generation policy by calling <a>DescribeFirewallPolicyV2</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.networkfirewall#UpdateLoggingConfiguration": {
             "type": "operation",
             "input": {
@@ -14007,6 +16566,18 @@
                         "smithy.api#documentation": "<p>An object that defines the rule group rules. </p>\n         <note>\n            <p>You must provide either this rule group setting or a <code>Rules</code> setting, but not both. </p>\n         </note>"
                     }
                 },
+                "FirewallRuleGroup": {
+                    "target": "com.amazonaws.networkfirewall#FirewallRuleGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that defines the rules in a firewall engine rule group, for use in a Next Generation policy.</p>"
+                    }
+                },
+                "IpsRuleGroup": {
+                    "target": "com.amazonaws.networkfirewall#IpsRuleGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that defines the rules in an IPS engine rule group, for use in a Next Generation policy.</p>"
+                    }
+                },
                 "Rules": {
                     "target": "com.amazonaws.networkfirewall#RulesString",
                     "traits": {
@@ -14016,7 +16587,7 @@
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#RuleGroupType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains\nstateless rules. If it is stateful, it contains stateful rules. </p>\n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Indicates the type of the rule group. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STATELESS</code> - Stateless rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATEFUL</code> - Stateful rules, for use in a Classic Network Firewall policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FIREWALL</code> - Firewall engine rules, for use in a Next Generation policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IPS</code> - IPS engine rules, for use in a Next Generation policy.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>\n         </note>"
                     }
                 },
                 "Description": {
@@ -14330,7 +16901,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The VPC and subnets for a proxy mode firewall endpoint. This is used in <a>CreateFirewall</a> when <code>NoSourcePreservation</code> is <code>TRUE</code>, to specify where Network Firewall creates the firewall endpoint. </p>\n         <p>This differs from <a>VpcEndpointAssociation</a>, which defines additional secondary endpoints for a firewall in other VPCs. </p>"
+                "smithy.api#documentation": "<p>Contains the VPC and subnets for a proxy mode firewall endpoint. You use it in <code>CreateFirewall</code> when <code>NoSourcePreservation</code> is <code>TRUE</code>, to specify where Network Firewall creates the firewall endpoint. </p>\n         <p>This differs from <code>VpcEndpointAssociation</code>, which defines additional secondary endpoints for a firewall in other VPCs. </p>"
             }
         },
         "com.amazonaws.networkfirewall#VpcEndpointAssociation": {

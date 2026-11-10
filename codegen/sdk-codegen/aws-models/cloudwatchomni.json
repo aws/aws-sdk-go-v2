@@ -1274,6 +1274,9 @@
                     "target": "com.amazonaws.cloudwatchomni#GetSpaceCredentialsForOrganization"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatchomni#GetSpaceDataAccess"
+                },
+                {
                     "target": "com.amazonaws.cloudwatchomni#GetTelemetryQueryResults"
                 },
                 {
@@ -3741,6 +3744,87 @@
                     "max": 36
                 },
                 "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.cloudwatchomni#DataAccessActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchomni#DataAccessActionName"
+            },
+            "traits": {
+                "smithy.api#documentation": "The actions of one requested scope (1-50 entries), all with the same service prefix.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchomni#DataAccessActionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "An action to include in the credentials, with its service prefix, for example\n\"logs:StartQuery\". Wildcards are not supported.",
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-z0-9][a-z0-9-]*:[A-Za-z][A-Za-z0-9]*$"
+            }
+        },
+        "com.amazonaws.cloudwatchomni#DataAccessAuditContext": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 256
+                    },
+                    "smithy.api#pattern": "^[A-Za-z0-9_.:/=+@-]+(?![\\s\\S])"
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 256
+                    },
+                    "smithy.api#pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]+(?![\\s\\S])"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Caller-supplied audit key-value pairs (at most 10 entries). Each key is 1-256 characters\nof letters, digits and _ . : / = + @ -. Each value is 1-256 printable characters: any\ncharacter except a C0 or C1 control character (so no tab, carriage return or newline).",
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchomni#DataAccessTarget": {
+            "type": "structure",
+            "members": {
+                "actions": {
+                    "target": "com.amazonaws.cloudwatchomni#DataAccessActionList",
+                    "traits": {
+                        "smithy.api#documentation": "The actions of one service, each with its service prefix, for example \"logs:StartQuery\".",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "One requested scope: an explicit list of actions for one service. All actions in an\nentry share one service prefix. The same service may appear in more than one entry."
+            }
+        },
+        "com.amazonaws.cloudwatchomni#DataAccessTargetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchomni#DataAccessTarget"
+            },
+            "traits": {
+                "smithy.api#documentation": "The scopes requested for one data credential (1-10 entries, at most 100 actions in total).",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.cloudwatchomni#DeepLinkCode": {
@@ -6222,6 +6306,128 @@
             }
         },
         "com.amazonaws.cloudwatchomni#GetSpaceCredentialsForOrganizationOutput": {
+            "type": "structure",
+            "members": {
+                "credentials": {
+                    "target": "com.amazonaws.cloudwatchomni#AwsCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "The temporary AWS credentials for the space.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchomni#GetSpaceDataAccess": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchomni#GetSpaceDataAccessInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchomni#GetSpaceDataAccessOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchomni#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchomni#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchomni#PolicyTooLargeException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchomni#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchomni#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchomni#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "name": "GetSpaceDataAccess"
+                },
+                "smithy.api#documentation": "Returns temporary credentials for working with data in a space, limited to the actions\nyou request.\n\nThe credentials allow only the requested actions that can be granted in the space and\nthat your access grants allow. Requested actions that cannot be conferred are ignored\nrather than rejected.",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get data credentials for log queries",
+                        "documentation": "The following example requests credentials that allow running log queries and reading metric data in a space. Payloads are shown as JSON; on the wire they are CBOR-encoded.",
+                        "input": {
+                            "spaceId": "a1b2c3d4-5e6f-4a3b-8c9d-0e1f2a3b4c5d",
+                            "targetScopes": [
+                                {
+                                    "actions": [
+                                        "logs:StartQuery",
+                                        "logs:GetQueryResults"
+                                    ]
+                                },
+                                {
+                                    "actions": [
+                                        "cloudwatch:GetMetricData"
+                                    ]
+                                }
+                            ],
+                            "durationSeconds": 3600,
+                            "auditContext": {
+                                "source": "logs-console"
+                            }
+                        },
+                        "output": {
+                            "credentials": {
+                                "accessKeyId": "ASIAIOSFODNN7EXAMPLE",
+                                "secretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+                                "sessionToken": "EXAMPLE-SESSION-TOKEN",
+                                "expiration": "2026-10-20T19:22:31Z"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudwatchomni#GetSpaceDataAccessInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.cloudwatchomni#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "The unique ID of the space to return credentials for.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetScopes": {
+                    "target": "com.amazonaws.cloudwatchomni#DataAccessTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "The actions to include in the credentials, grouped by service.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "durationSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "The lifetime of the credentials, in seconds. Defaults to 3600.",
+                        "smithy.api#range": {
+                            "min": 900,
+                            "max": 3600
+                        }
+                    }
+                },
+                "auditContext": {
+                    "target": "com.amazonaws.cloudwatchomni#DataAccessAuditContext",
+                    "traits": {
+                        "smithy.api#documentation": "Caller-supplied key-value pairs that are recorded for auditing. They do not\naffect authorization or the permissions of the credentials."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchomni#GetSpaceDataAccessOutput": {
             "type": "structure",
             "members": {
                 "credentials": {
@@ -9890,6 +10096,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "Indicates whether a query returned partial results."
+            }
+        },
+        "com.amazonaws.cloudwatchomni#PolicyTooLargeException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "A description of the error.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The requested actions produce a credential that exceeds the maximum size. Request fewer\nactions.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.cloudwatchomni#PrincipalId": {

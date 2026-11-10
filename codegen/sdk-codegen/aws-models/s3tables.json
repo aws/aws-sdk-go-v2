@@ -1523,6 +1523,106 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.s3tables#GetTableBucketLogging": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#GetTableBucketLoggingRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3tables#GetTableBucketLoggingResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the server access logging configuration for a table bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-server-logs.html\">Server access logging for table buckets</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableBucketLogging</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get the server access logging configuration of a table bucket",
+                        "documentation": "The following example gets the server access logging configuration of a table bucket that has logging enabled.",
+                        "input": {
+                            "tableBucketARN": "arn:aws:s3tables:us-east-1:111122223333:bucket/amzn-s3-demo-table-bucket"
+                        },
+                        "output": {
+                            "tableBucketLoggingStatus": {
+                                "loggingEnabled": {
+                                    "targetBucket": "amzn-s3-demo-destination-bucket",
+                                    "targetPrefix": "logs/",
+                                    "targetObjectKeyFormat": {
+                                        "partitionedPrefix": {
+                                            "partitionDateSource": "EventTime"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "title": "To get the server access logging configuration of a table bucket that has logging disabled",
+                        "documentation": "The following example gets the server access logging configuration of a table bucket that has logging disabled. The response has an empty logging status.",
+                        "input": {
+                            "tableBucketARN": "arn:aws:s3tables:us-east-1:111122223333:bucket/amzn-s3-demo-table-bucket"
+                        },
+                        "output": {
+                            "tableBucketLoggingStatus": {}
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/buckets/{tableBucketARN}/logging",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableBucketLoggingRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#GetTableBucketLoggingResponse": {
+            "type": "structure",
+            "members": {
+                "tableBucketLoggingStatus": {
+                    "target": "com.amazonaws.s3tables#TableBucketLoggingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logging status of the table bucket. If logging is disabled, <code>loggingEnabled</code> is absent.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.s3tables#GetTableBucketMaintenanceConfiguration": {
             "type": "operation",
             "input": {
@@ -4243,6 +4343,52 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.s3tables#LoggingEnabled": {
+            "type": "structure",
+            "members": {
+                "targetBucket": {
+                    "target": "com.amazonaws.s3tables#LoggingTargetBucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the general purpose bucket that logs are delivered to. The bucket must be in the same Amazon Web Services Region and owned by the same Amazon Web Services account as the table bucket. The bucket can't use SSE-KMS or DSSE-KMS default encryption, can't have S3 Object Lock enabled, and can't have Requester Pays enabled. You can deliver logs from multiple table buckets to the same target bucket. In this case, choose a different <code>targetPrefix</code> for each table bucket so that you can tell their log objects apart.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetPrefix": {
+                    "target": "com.amazonaws.s3tables#LoggingTargetPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix for the keys of the log objects that are delivered to the target bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetObjectKeyFormat": {
+                    "target": "com.amazonaws.s3tables#TargetObjectKeyFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key format of the log objects. Log object keys are always partitioned by date.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes where logs are stored and the prefix that Amazon S3 assigns to all log object keys for a table bucket.</p>"
+            }
+        },
+        "com.amazonaws.s3tables#LoggingTargetBucket": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                }
+            }
+        },
+        "com.amazonaws.s3tables#LoggingTargetPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.s3tables#MaintenanceSettings": {
             "type": "structure",
             "members": {
@@ -4976,6 +5122,38 @@
                 }
             }
         },
+        "com.amazonaws.s3tables#PartitionDateSource": {
+            "type": "enum",
+            "members": {
+                "EVENT_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EventTime"
+                    }
+                },
+                "DELIVERY_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeliveryTime"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3tables#PartitionedPrefix": {
+            "type": "structure",
+            "members": {
+                "partitionDateSource": {
+                    "target": "com.amazonaws.s3tables#PartitionDateSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date to use for the log object key partitions. Valid values are <code>EventTime</code>, the time that the requests in the log were made, and <code>DeliveryTime</code>, the time that the log was delivered.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Amazon S3 keys for log objects are partitioned in the following format: <code>[targetPrefix][SourceAccountId]/[SourceRegion]/[SourceTableBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]</code> </p>"
+            }
+        },
         "com.amazonaws.s3tables#PlanningStats": {
             "type": "structure",
             "members": {
@@ -5064,6 +5242,95 @@
                     "target": "com.amazonaws.s3tables#EncryptionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption configuration to apply to the table bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3tables#PutTableBucketLogging": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3tables#PutTableBucketLoggingRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.s3tables#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets, updates, or removes the server access logging configuration for a table bucket. When logging is enabled, Amazon S3 delivers a record of the requests made to the table bucket and its tables to the target general purpose bucket that you specify. To disable logging, call this operation with an empty <code>tableBucketLoggingStatus</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-server-logs.html\">Server access logging for table buckets</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableBucketLogging</code> permission to use this operation.</p> </dd> </dl>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To enable server access logging for a table bucket",
+                        "documentation": "The following example enables server access logging for a table bucket. Logs are delivered to the specified general purpose bucket, with object keys partitioned by the time of the logged events.",
+                        "input": {
+                            "tableBucketARN": "arn:aws:s3tables:us-east-1:111122223333:bucket/amzn-s3-demo-table-bucket",
+                            "tableBucketLoggingStatus": {
+                                "loggingEnabled": {
+                                    "targetBucket": "amzn-s3-demo-destination-bucket",
+                                    "targetPrefix": "logs/",
+                                    "targetObjectKeyFormat": {
+                                        "partitionedPrefix": {
+                                            "partitionDateSource": "EventTime"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "title": "To disable server access logging for a table bucket",
+                        "documentation": "The following example disables server access logging for a table bucket by specifying an empty logging status.",
+                        "input": {
+                            "tableBucketARN": "arn:aws:s3tables:us-east-1:111122223333:bucket/amzn-s3-demo-table-bucket",
+                            "tableBucketLoggingStatus": {}
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/buckets/{tableBucketARN}/logging",
+                    "method": "PUT",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.s3tables#PutTableBucketLoggingRequest": {
+            "type": "structure",
+            "members": {
+                "tableBucketARN": {
+                    "target": "com.amazonaws.s3tables#TableBucketARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tableBucketLoggingStatus": {
+                    "target": "com.amazonaws.s3tables#TableBucketLoggingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logging status to apply to the table bucket. To disable logging, specify an empty <code>tableBucketLoggingStatus</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6028,6 +6295,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3tables#TableBucketEncryptionResource"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#TableBucketLoggingResource"
                 },
                 {
                     "target": "com.amazonaws.s3tables#TableBucketPolicyResource"
@@ -7298,6 +7568,31 @@
         "com.amazonaws.s3tables#TableBucketId": {
             "type": "string"
         },
+        "com.amazonaws.s3tables#TableBucketLoggingResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.s3tables#GetTableBucketLogging"
+                },
+                {
+                    "target": "com.amazonaws.s3tables#PutTableBucketLogging"
+                }
+            ]
+        },
+        "com.amazonaws.s3tables#TableBucketLoggingStatus": {
+            "type": "structure",
+            "members": {
+                "loggingEnabled": {
+                    "target": "com.amazonaws.s3tables#LoggingEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where logs for the table bucket are delivered and how the log objects are named. Must be populated to enable logging.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The server access logging status of a table bucket. To enable logging, specify <code>loggingEnabled</code>. To disable logging, specify an empty <code>TableBucketLoggingStatus</code>.</p>"
+            }
+        },
         "com.amazonaws.s3tables#TableBucketMaintenanceConfiguration": {
             "type": "map",
             "key": {
@@ -8189,6 +8484,21 @@
             },
             "value": {
                 "target": "com.amazonaws.s3tables#TagValue"
+            }
+        },
+        "com.amazonaws.s3tables#TargetObjectKeyFormat": {
+            "type": "structure",
+            "members": {
+                "partitionedPrefix": {
+                    "target": "com.amazonaws.s3tables#PartitionedPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Partitions log object keys by date.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The key format of the log objects. Only <code>partitionedPrefix</code> is supported.</p>"
             }
         },
         "com.amazonaws.s3tables#TooManyRequestsException": {
