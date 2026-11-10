@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListMFADevicesResponse><ListMFADevicesResult><IsTruncated>true</IsTruncated><MFADevices><member><EnableDate>2000-01-01T00:00:00Z</EnableDate><SerialNumber>__SerialNumber__</SerialNumber><UserName>__UserName__</UserName></member><member><EnableDate>2000-01-01T00:00:00Z</EnableDate><SerialNumber>__SerialNumber__</SerialNumber><UserName>__UserName__</UserName></member></MFADevices><Marker>__Marker__</Marker></ListMFADevicesResult></ListMFADevicesResponse>

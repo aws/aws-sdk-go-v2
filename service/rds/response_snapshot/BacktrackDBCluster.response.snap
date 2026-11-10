@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<BacktrackDBClusterResponse><BacktrackDBClusterResult><BacktrackIdentifier>__BacktrackIdentifier__</BacktrackIdentifier><BacktrackRequestCreationTime>2000-01-01T00:00:00Z</BacktrackRequestCreationTime><BacktrackTo>2000-01-01T00:00:00Z</BacktrackTo><BacktrackedFrom>2000-01-01T00:00:00Z</BacktrackedFrom><DBClusterIdentifier>__DBClusterIdentifier__</DBClusterIdentifier><Status>__Status__</Status></BacktrackDBClusterResult></BacktrackDBClusterResponse>

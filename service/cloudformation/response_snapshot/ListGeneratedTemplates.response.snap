@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListGeneratedTemplatesResponse><ListGeneratedTemplatesResult><NextToken>__NextToken__</NextToken><Summaries><member><CreationTime>2000-01-01T00:00:00Z</CreationTime><GeneratedTemplateId>__GeneratedTemplateId__</GeneratedTemplateId><GeneratedTemplateName>__GeneratedTemplateName__</GeneratedTemplateName><LastUpdatedTime>2000-01-01T00:00:00Z</LastUpdatedTime><NumberOfResources>1</NumberOfResources><Status>CREATE_PENDING</Status><StatusReason>__StatusReason__</StatusReason></member><member><CreationTime>2000-01-01T00:00:00Z</CreationTime><GeneratedTemplateId>__GeneratedTemplateId__</GeneratedTemplateId><GeneratedTemplateName>__GeneratedTemplateName__</GeneratedTemplateName><LastUpdatedTime>2000-01-01T00:00:00Z</LastUpdatedTime><NumberOfResources>1</NumberOfResources><Status>CREATE_PENDING</Status><StatusReason>__StatusReason__</StatusReason></member></Summaries></ListGeneratedTemplatesResult></ListGeneratedTemplatesResponse>

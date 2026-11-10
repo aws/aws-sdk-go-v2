@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeTrafficSourcesResponse><DescribeTrafficSourcesResult><NextToken>__NextToken__</NextToken><TrafficSources><member><Identifier>__Identifier__</Identifier><State>__State__</State><TrafficSource>__TrafficSource__</TrafficSource><Type>__Type__</Type></member><member><Identifier>__Identifier__</Identifier><State>__State__</State><TrafficSource>__TrafficSource__</TrafficSource><Type>__Type__</Type></member></TrafficSources></DescribeTrafficSourcesResult></DescribeTrafficSourcesResponse>

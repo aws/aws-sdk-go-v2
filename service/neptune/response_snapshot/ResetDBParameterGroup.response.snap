@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ResetDBParameterGroupResponse><ResetDBParameterGroupResult><DBParameterGroupName>__DBParameterGroupName__</DBParameterGroupName></ResetDBParameterGroupResult></ResetDBParameterGroupResponse>

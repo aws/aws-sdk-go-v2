@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetContextKeysForCustomPolicyResponse><GetContextKeysForCustomPolicyResult><ContextKeyNames><member>__Member__</member><member>__Member__</member></ContextKeyNames></GetContextKeysForCustomPolicyResult></GetContextKeysForCustomPolicyResponse>

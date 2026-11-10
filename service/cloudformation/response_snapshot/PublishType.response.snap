@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<PublishTypeResponse><PublishTypeResult><PublicTypeArn>__PublicTypeArn__</PublicTypeArn></PublishTypeResult></PublishTypeResponse>

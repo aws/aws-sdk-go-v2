@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetGeneratedTemplateResponse><GetGeneratedTemplateResult><Status>CREATE_PENDING</Status><TemplateBody>__TemplateBody__</TemplateBody></GetGeneratedTemplateResult></GetGeneratedTemplateResponse>

@@ -1,0 +1,4 @@
+404
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>SourceNotFound</Code><message>__Message__</message></Error></ErrorResponse>

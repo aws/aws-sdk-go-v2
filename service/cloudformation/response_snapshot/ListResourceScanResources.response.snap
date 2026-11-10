@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListResourceScanResourcesResponse><ListResourceScanResourcesResult><NextToken>__NextToken__</NextToken><Resources><member><ManagedByStack>true</ManagedByStack><ResourceIdentifier><entry><key>key0</key><value>__Value__</value></entry></ResourceIdentifier><ResourceType>__ResourceType__</ResourceType></member><member><ManagedByStack>true</ManagedByStack><ResourceIdentifier><entry><key>key0</key><value>__Value__</value></entry></ResourceIdentifier><ResourceType>__ResourceType__</ResourceType></member></Resources></ListResourceScanResourcesResult></ListResourceScanResourcesResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<SendCustomVerificationEmailResponse><SendCustomVerificationEmailResult><MessageId>__MessageId__</MessageId></SendCustomVerificationEmailResult></SendCustomVerificationEmailResponse>

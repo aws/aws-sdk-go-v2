@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateCustomDomainAssociationResponse><CreateCustomDomainAssociationResult><ClusterIdentifier>__ClusterIdentifier__</ClusterIdentifier><CustomDomainCertExpiryTime>__CustomDomainCertExpiryTime__</CustomDomainCertExpiryTime><CustomDomainCertificateArn>__CustomDomainCertificateArn__</CustomDomainCertificateArn><CustomDomainName>__CustomDomainName__</CustomDomainName></CreateCustomDomainAssociationResult></CreateCustomDomainAssociationResponse>

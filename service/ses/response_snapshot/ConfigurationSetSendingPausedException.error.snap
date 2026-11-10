@@ -1,0 +1,4 @@
+400
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>ConfigurationSetSendingPausedException</Code><ConfigurationSetName>__ConfigurationSetName__</ConfigurationSetName><message>__Message__</message></Error></ErrorResponse>

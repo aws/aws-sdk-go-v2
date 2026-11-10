@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<StartExportTaskResponse><StartExportTaskResult><ExportOnly><member>__Member__</member><member>__Member__</member></ExportOnly><ExportTaskIdentifier>__ExportTaskIdentifier__</ExportTaskIdentifier><FailureCause>__FailureCause__</FailureCause><IamRoleArn>__IamRoleArn__</IamRoleArn><KmsKeyId>__KmsKeyId__</KmsKeyId><PercentProgress>1</PercentProgress><S3Bucket>__S3Bucket__</S3Bucket><S3Prefix>__S3Prefix__</S3Prefix><SnapshotTime>2000-01-01T00:00:00Z</SnapshotTime><SourceArn>__SourceArn__</SourceArn><SourceType>SNAPSHOT</SourceType><Status>__Status__</Status><TaskEndTime>2000-01-01T00:00:00Z</TaskEndTime><TaskStartTime>2000-01-01T00:00:00Z</TaskStartTime><TotalExtractedDataInGB>1</TotalExtractedDataInGB><WarningMessage>__WarningMessage__</WarningMessage></StartExportTaskResult></StartExportTaskResponse>

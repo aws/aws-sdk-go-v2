@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<SetSecurityGroupsResponse><SetSecurityGroupsResult><EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic>on</EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic><SecurityGroupIds><member>__Member__</member><member>__Member__</member></SecurityGroupIds></SetSecurityGroupsResult></SetSecurityGroupsResponse>

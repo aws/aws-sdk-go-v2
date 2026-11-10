@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeListenerCertificatesResponse><DescribeListenerCertificatesResult><Certificates><member><CertificateArn>__CertificateArn__</CertificateArn><IsDefault>true</IsDefault></member><member><CertificateArn>__CertificateArn__</CertificateArn><IsDefault>true</IsDefault></member></Certificates><NextMarker>__NextMarker__</NextMarker></DescribeListenerCertificatesResult></DescribeListenerCertificatesResponse>

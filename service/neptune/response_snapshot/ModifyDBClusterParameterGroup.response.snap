@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyDBClusterParameterGroupResponse><ModifyDBClusterParameterGroupResult><DBClusterParameterGroupName>__DBClusterParameterGroupName__</DBClusterParameterGroupName></ModifyDBClusterParameterGroupResult></ModifyDBClusterParameterGroupResponse>

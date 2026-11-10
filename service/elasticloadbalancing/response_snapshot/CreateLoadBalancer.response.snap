@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateLoadBalancerResponse><CreateLoadBalancerResult><DNSName>__DNSName__</DNSName></CreateLoadBalancerResult></CreateLoadBalancerResponse>

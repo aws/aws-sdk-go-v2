@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListPhoneNumbersOptedOutResponse><ListPhoneNumbersOptedOutResult><nextToken>__NextToken__</nextToken><phoneNumbers><member>__Member__</member><member>__Member__</member></phoneNumbers></ListPhoneNumbersOptedOutResult></ListPhoneNumbersOptedOutResponse>

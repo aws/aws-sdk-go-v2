@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeEnvironmentHealthResponse><DescribeEnvironmentHealthResult><ApplicationMetrics><Duration>1</Duration><Latency><P10>1</P10><P50>1</P50><P75>1</P75><P85>1</P85><P90>1</P90><P95>1</P95><P99>1</P99><P999>1</P999></Latency><RequestCount>1</RequestCount><StatusCodes><Status2xx>1</Status2xx><Status3xx>1</Status3xx><Status4xx>1</Status4xx><Status5xx>1</Status5xx></StatusCodes></ApplicationMetrics><Causes><member>__Member__</member><member>__Member__</member></Causes><Color>__Color__</Color><EnvironmentName>__EnvironmentName__</EnvironmentName><HealthStatus>__HealthStatus__</HealthStatus><InstancesHealth><Degraded>1</Degraded><Info>1</Info><NoData>1</NoData><Ok>1</Ok><Pending>1</Pending><Severe>1</Severe><Unknown>1</Unknown><Warning>1</Warning></InstancesHealth><RefreshedAt>2000-01-01T00:00:00Z</RefreshedAt><Status>Green</Status></DescribeEnvironmentHealthResult></DescribeEnvironmentHealthResponse>

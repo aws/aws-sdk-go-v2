@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyUserGroupResponse><ModifyUserGroupResult><ARN>__ARN__</ARN><Engine>__Engine__</Engine><MinimumEngineVersion>__MinimumEngineVersion__</MinimumEngineVersion><PendingChanges><UserIdsToAdd><member>__Member__</member><member>__Member__</member></UserIdsToAdd><UserIdsToRemove><member>__Member__</member><member>__Member__</member></UserIdsToRemove></PendingChanges><ReplicationGroups><member>__Member__</member><member>__Member__</member></ReplicationGroups><ServerlessCaches><member>__Member__</member><member>__Member__</member></ServerlessCaches><Status>__Status__</Status><UserGroupId>__UserGroupId__</UserGroupId><UserIds><member>__Member__</member><member>__Member__</member></UserIds></ModifyUserGroupResult></ModifyUserGroupResponse>

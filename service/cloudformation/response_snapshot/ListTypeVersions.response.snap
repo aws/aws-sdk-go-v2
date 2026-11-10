@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListTypeVersionsResponse><ListTypeVersionsResult><NextToken>__NextToken__</NextToken><TypeVersionSummaries><member><Arn>__Arn__</Arn><Description>__Description__</Description><IsDefaultVersion>true</IsDefaultVersion><PublicVersionNumber>__PublicVersionNumber__</PublicVersionNumber><TimeCreated>2000-01-01T00:00:00Z</TimeCreated><Type>RESOURCE</Type><TypeName>__TypeName__</TypeName><VersionId>__VersionId__</VersionId></member><member><Arn>__Arn__</Arn><Description>__Description__</Description><IsDefaultVersion>true</IsDefaultVersion><PublicVersionNumber>__PublicVersionNumber__</PublicVersionNumber><TimeCreated>2000-01-01T00:00:00Z</TimeCreated><Type>RESOURCE</Type><TypeName>__TypeName__</TypeName><VersionId>__VersionId__</VersionId></member></TypeVersionSummaries></ListTypeVersionsResult></ListTypeVersionsResponse>

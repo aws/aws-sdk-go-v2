@@ -1,0 +1,4 @@
+429
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>Throttled</Code><message>__Message__</message></Error></ErrorResponse>

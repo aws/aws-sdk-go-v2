@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateEventSubscriptionResponse><CreateEventSubscriptionResult><EventSubscription><CustSubscriptionId>__CustSubscriptionId__</CustSubscriptionId><CustomerAwsId>__CustomerAwsId__</CustomerAwsId><Enabled>true</Enabled><EventCategoriesList><EventCategory>__Member__</EventCategory><EventCategory>__Member__</EventCategory></EventCategoriesList><EventSubscriptionArn>__EventSubscriptionArn__</EventSubscriptionArn><SnsTopicArn>__SnsTopicArn__</SnsTopicArn><SourceIdsList><SourceId>__Member__</SourceId><SourceId>__Member__</SourceId></SourceIdsList><SourceType>__SourceType__</SourceType><Status>__Status__</Status><SubscriptionCreationTime>__SubscriptionCreationTime__</SubscriptionCreationTime></EventSubscription></CreateEventSubscriptionResult></CreateEventSubscriptionResponse>

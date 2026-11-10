@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<AddTrustStoreRevocationsResponse><AddTrustStoreRevocationsResult><TrustStoreRevocations><member><NumberOfRevokedEntries>1</NumberOfRevokedEntries><RevocationId>1</RevocationId><RevocationType>CRL</RevocationType><TrustStoreArn>__TrustStoreArn__</TrustStoreArn></member><member><NumberOfRevokedEntries>1</NumberOfRevokedEntries><RevocationId>1</RevocationId><RevocationType>CRL</RevocationType><TrustStoreArn>__TrustStoreArn__</TrustStoreArn></member></TrustStoreRevocations></AddTrustStoreRevocationsResult></AddTrustStoreRevocationsResponse>

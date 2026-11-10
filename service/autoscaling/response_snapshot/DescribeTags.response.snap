@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeTagsResponse><DescribeTagsResult><NextToken>__NextToken__</NextToken><Tags><member><Key>__Key__</Key><PropagateAtLaunch>true</PropagateAtLaunch><ResourceId>__ResourceId__</ResourceId><ResourceType>__ResourceType__</ResourceType><Value>__Value__</Value></member><member><Key>__Key__</Key><PropagateAtLaunch>true</PropagateAtLaunch><ResourceId>__ResourceId__</ResourceId><ResourceType>__ResourceType__</ResourceType><Value>__Value__</Value></member></Tags></DescribeTagsResult></DescribeTagsResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DeleteDomainResponse><DeleteDomainResult><DomainStatus><ARN>__ARN__</ARN><Created>true</Created><Deleted>true</Deleted><DocService><Endpoint>__Endpoint__</Endpoint></DocService><DomainId>__DomainId__</DomainId><DomainName>__DomainName__</DomainName><Limits><MaximumPartitionCount>1</MaximumPartitionCount><MaximumReplicationCount>1</MaximumReplicationCount></Limits><Processing>true</Processing><RequiresIndexDocuments>true</RequiresIndexDocuments><SearchInstanceCount>1</SearchInstanceCount><SearchInstanceType>__SearchInstanceType__</SearchInstanceType><SearchPartitionCount>1</SearchPartitionCount><SearchService><Endpoint>__Endpoint__</Endpoint></SearchService></DomainStatus></DeleteDomainResult></DeleteDomainResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetTrustStoreRevocationContentResponse><GetTrustStoreRevocationContentResult><Location>__Location__</Location></GetTrustStoreRevocationContentResult></GetTrustStoreRevocationContentResponse>

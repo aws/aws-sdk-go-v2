@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeInstanceHealthResponse><DescribeInstanceHealthResult><InstanceStates><member><Description>__Description__</Description><InstanceId>__InstanceId__</InstanceId><ReasonCode>__ReasonCode__</ReasonCode><State>__State__</State></member><member><Description>__Description__</Description><InstanceId>__InstanceId__</InstanceId><ReasonCode>__ReasonCode__</ReasonCode><State>__State__</State></member></InstanceStates></DescribeInstanceHealthResult></DescribeInstanceHealthResponse>

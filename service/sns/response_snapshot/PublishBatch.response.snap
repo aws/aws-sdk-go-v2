@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<PublishBatchResponse><PublishBatchResult><Failed><member><Code>__Code__</Code><Id>__Id__</Id><Message>__Message__</Message><SenderFault>true</SenderFault></member><member><Code>__Code__</Code><Id>__Id__</Id><Message>__Message__</Message><SenderFault>true</SenderFault></member></Failed><Successful><member><Id>__Id__</Id><MessageId>__MessageId__</MessageId><SequenceNumber>__SequenceNumber__</SequenceNumber></member><member><Id>__Id__</Id><MessageId>__MessageId__</MessageId><SequenceNumber>__SequenceNumber__</SequenceNumber></member></Successful></PublishBatchResult></PublishBatchResponse>

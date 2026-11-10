@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ActivateTypeResponse><ActivateTypeResult><Arn>__Arn__</Arn></ActivateTypeResult></ActivateTypeResponse>

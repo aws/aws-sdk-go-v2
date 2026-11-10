@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeDBProxyTargetsResponse><DescribeDBProxyTargetsResult><Marker>__Marker__</Marker><Targets><member><Endpoint>__Endpoint__</Endpoint><Port>1</Port><RdsResourceId>__RdsResourceId__</RdsResourceId><Role>READ_WRITE</Role><TargetArn>__TargetArn__</TargetArn><TargetHealth><Description>__Description__</Description><Reason>UNREACHABLE</Reason><State>REGISTERING</State></TargetHealth><TrackedClusterId>__TrackedClusterId__</TrackedClusterId><Type>RDS_INSTANCE</Type></member><member><Endpoint>__Endpoint__</Endpoint><Port>1</Port><RdsResourceId>__RdsResourceId__</RdsResourceId><Role>READ_WRITE</Role><TargetArn>__TargetArn__</TargetArn><TargetHealth><Description>__Description__</Description><Reason>UNREACHABLE</Reason><State>REGISTERING</State></TargetHealth><TrackedClusterId>__TrackedClusterId__</TrackedClusterId><Type>RDS_INSTANCE</Type></member></Targets></DescribeDBProxyTargetsResult></DescribeDBProxyTargetsResponse>

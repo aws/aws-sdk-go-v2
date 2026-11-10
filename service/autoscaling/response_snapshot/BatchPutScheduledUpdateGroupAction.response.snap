@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<BatchPutScheduledUpdateGroupActionResponse><BatchPutScheduledUpdateGroupActionResult><FailedScheduledUpdateGroupActions><member><ErrorCode>__ErrorCode__</ErrorCode><ErrorMessage>__ErrorMessage__</ErrorMessage><ScheduledActionName>__ScheduledActionName__</ScheduledActionName></member><member><ErrorCode>__ErrorCode__</ErrorCode><ErrorMessage>__ErrorMessage__</ErrorMessage><ScheduledActionName>__ScheduledActionName__</ScheduledActionName></member></FailedScheduledUpdateGroupActions></BatchPutScheduledUpdateGroupActionResult></BatchPutScheduledUpdateGroupActionResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateDBClusterParameterGroupResponse><CreateDBClusterParameterGroupResult><DBClusterParameterGroup><DBClusterParameterGroupArn>__DBClusterParameterGroupArn__</DBClusterParameterGroupArn><DBClusterParameterGroupName>__DBClusterParameterGroupName__</DBClusterParameterGroupName><DBParameterGroupFamily>__DBParameterGroupFamily__</DBParameterGroupFamily><Description>__Description__</Description></DBClusterParameterGroup></CreateDBClusterParameterGroupResult></CreateDBClusterParameterGroupResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListRolePoliciesResponse><ListRolePoliciesResult><IsTruncated>true</IsTruncated><Marker>__Marker__</Marker><PolicyNames><member>__Member__</member><member>__Member__</member></PolicyNames></ListRolePoliciesResult></ListRolePoliciesResponse>

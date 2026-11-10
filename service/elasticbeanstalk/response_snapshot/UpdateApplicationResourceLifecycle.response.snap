@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<UpdateApplicationResourceLifecycleResponse><UpdateApplicationResourceLifecycleResult><ApplicationName>__ApplicationName__</ApplicationName><ResourceLifecycleConfig><ServiceRole>__ServiceRole__</ServiceRole><VersionLifecycleConfig><MaxAgeRule><DeleteSourceFromS3>true</DeleteSourceFromS3><Enabled>true</Enabled><MaxAgeInDays>1</MaxAgeInDays></MaxAgeRule><MaxCountRule><DeleteSourceFromS3>true</DeleteSourceFromS3><Enabled>true</Enabled><MaxCount>1</MaxCount></MaxCountRule></VersionLifecycleConfig></ResourceLifecycleConfig></UpdateApplicationResourceLifecycleResult></UpdateApplicationResourceLifecycleResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DeleteStackInstancesResponse><DeleteStackInstancesResult><OperationId>__OperationId__</OperationId></DeleteStackInstancesResult></DeleteStackInstancesResponse>

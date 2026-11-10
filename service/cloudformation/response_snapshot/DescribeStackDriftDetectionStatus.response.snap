@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeStackDriftDetectionStatusResponse><DescribeStackDriftDetectionStatusResult><DetectionStatus>DETECTION_IN_PROGRESS</DetectionStatus><DetectionStatusReason>__DetectionStatusReason__</DetectionStatusReason><DriftedStackResourceCount>1</DriftedStackResourceCount><StackDriftDetectionId>__StackDriftDetectionId__</StackDriftDetectionId><StackDriftStatus>DRIFTED</StackDriftStatus><StackId>__StackId__</StackId><Timestamp>2000-01-01T00:00:00Z</Timestamp></DescribeStackDriftDetectionStatusResult></DescribeStackDriftDetectionStatusResponse>

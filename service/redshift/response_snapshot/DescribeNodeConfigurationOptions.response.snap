@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeNodeConfigurationOptionsResponse><DescribeNodeConfigurationOptionsResult><Marker>__Marker__</Marker><NodeConfigurationOptionList><NodeConfigurationOption><EstimatedDiskUtilizationPercent>1</EstimatedDiskUtilizationPercent><Mode>standard</Mode><NodeType>__NodeType__</NodeType><NumberOfNodes>1</NumberOfNodes></NodeConfigurationOption><NodeConfigurationOption><EstimatedDiskUtilizationPercent>1</EstimatedDiskUtilizationPercent><Mode>standard</Mode><NodeType>__NodeType__</NodeType><NumberOfNodes>1</NumberOfNodes></NodeConfigurationOption></NodeConfigurationOptionList></DescribeNodeConfigurationOptionsResult></DescribeNodeConfigurationOptionsResponse>

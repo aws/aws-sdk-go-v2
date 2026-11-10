@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeTagsResponse><DescribeTagsResult><TagDescriptions><member><ResourceArn>__ResourceArn__</ResourceArn><Tags><member><Key>__Key__</Key><Value>__Value__</Value></member><member><Key>__Key__</Key><Value>__Value__</Value></member></Tags></member><member><ResourceArn>__ResourceArn__</ResourceArn><Tags><member><Key>__Key__</Key><Value>__Value__</Value></member><member><Key>__Key__</Key><Value>__Value__</Value></member></Tags></member></TagDescriptions></DescribeTagsResult></DescribeTagsResponse>

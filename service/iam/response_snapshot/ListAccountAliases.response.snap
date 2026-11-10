@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListAccountAliasesResponse><ListAccountAliasesResult><AccountAliases><member>__Member__</member><member>__Member__</member></AccountAliases><IsTruncated>true</IsTruncated><Marker>__Marker__</Marker></ListAccountAliasesResult></ListAccountAliasesResponse>

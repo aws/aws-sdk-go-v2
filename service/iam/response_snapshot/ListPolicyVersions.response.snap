@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListPolicyVersionsResponse><ListPolicyVersionsResult><IsTruncated>true</IsTruncated><Marker>__Marker__</Marker><Versions><member><CreateDate>2000-01-01T00:00:00Z</CreateDate><Document>__Document__</Document><IsDefaultVersion>true</IsDefaultVersion><VersionId>__VersionId__</VersionId></member><member><CreateDate>2000-01-01T00:00:00Z</CreateDate><Document>__Document__</Document><IsDefaultVersion>true</IsDefaultVersion><VersionId>__VersionId__</VersionId></member></Versions></ListPolicyVersionsResult></ListPolicyVersionsResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ConfirmSubscriptionResponse><ConfirmSubscriptionResult><SubscriptionArn>__SubscriptionArn__</SubscriptionArn></ConfirmSubscriptionResult></ConfirmSubscriptionResponse>

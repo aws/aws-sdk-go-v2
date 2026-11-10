@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<SendBulkTemplatedEmailResponse><SendBulkTemplatedEmailResult><Status><member><Error>__Error__</Error><MessageId>__MessageId__</MessageId><Status>Success</Status></member><member><Error>__Error__</Error><MessageId>__MessageId__</MessageId><Status>Success</Status></member></Status></SendBulkTemplatedEmailResult></SendBulkTemplatedEmailResponse>

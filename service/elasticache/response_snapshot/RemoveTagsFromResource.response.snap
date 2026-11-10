@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<RemoveTagsFromResourceResponse><RemoveTagsFromResourceResult><TagList><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></TagList></RemoveTagsFromResourceResult></RemoveTagsFromResourceResponse>

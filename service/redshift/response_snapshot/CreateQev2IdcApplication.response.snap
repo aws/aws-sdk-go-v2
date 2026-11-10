@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateQev2IdcApplicationResponse><CreateQev2IdcApplicationResult><Qev2IdcApplication><IdcDisplayName>__IdcDisplayName__</IdcDisplayName><IdcInstanceArn>__IdcInstanceArn__</IdcInstanceArn><IdcManagedApplicationArn>__IdcManagedApplicationArn__</IdcManagedApplicationArn><IdcOnboardStatus>__IdcOnboardStatus__</IdcOnboardStatus><Qev2IdcApplicationArn>__Qev2IdcApplicationArn__</Qev2IdcApplicationArn><Qev2IdcApplicationName>__Qev2IdcApplicationName__</Qev2IdcApplicationName><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags></Qev2IdcApplication></CreateQev2IdcApplicationResult></CreateQev2IdcApplicationResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListResourceScansResponse><ListResourceScansResult><NextToken>__NextToken__</NextToken><ResourceScanSummaries><member><EndTime>2000-01-01T00:00:00Z</EndTime><PercentageCompleted>1</PercentageCompleted><ResourceScanId>__ResourceScanId__</ResourceScanId><ScanType>FULL</ScanType><StartTime>2000-01-01T00:00:00Z</StartTime><Status>IN_PROGRESS</Status><StatusReason>__StatusReason__</StatusReason></member><member><EndTime>2000-01-01T00:00:00Z</EndTime><PercentageCompleted>1</PercentageCompleted><ResourceScanId>__ResourceScanId__</ResourceScanId><ScanType>FULL</ScanType><StartTime>2000-01-01T00:00:00Z</StartTime><Status>IN_PROGRESS</Status><StatusReason>__StatusReason__</StatusReason></member></ResourceScanSummaries></ListResourceScansResult></ListResourceScansResponse>

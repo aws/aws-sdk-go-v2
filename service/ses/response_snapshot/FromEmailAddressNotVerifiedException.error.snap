@@ -1,0 +1,4 @@
+400
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>FromEmailAddressNotVerified</Code><FromEmailAddress>__FromEmailAddress__</FromEmailAddress><message>__Message__</message></Error></ErrorResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ImportStacksToStackSetResponse><ImportStacksToStackSetResult><OperationId>__OperationId__</OperationId></ImportStacksToStackSetResult></ImportStacksToStackSetResponse>

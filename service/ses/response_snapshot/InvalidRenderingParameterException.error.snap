@@ -1,0 +1,4 @@
+400
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>InvalidRenderingParameter</Code><TemplateName>__TemplateName__</TemplateName><message>__Message__</message></Error></ErrorResponse>

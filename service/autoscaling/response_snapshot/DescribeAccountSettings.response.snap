@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeAccountSettingsResponse><DescribeAccountSettingsResult><NextToken>__NextToken__</NextToken><Settings><member><DefaultValue>__DefaultValue__</DefaultValue><EnforcedValue>__EnforcedValue__</EnforcedValue><EnforcementDate>2000-01-01T00:00:00Z</EnforcementDate><EnforcementType>__EnforcementType__</EnforcementType><Name>__Name__</Name><Value>__Value__</Value></member><member><DefaultValue>__DefaultValue__</DefaultValue><EnforcedValue>__EnforcedValue__</EnforcedValue><EnforcementDate>2000-01-01T00:00:00Z</EnforcementDate><EnforcementType>__EnforcementType__</EnforcementType><Name>__Name__</Name><Value>__Value__</Value></member></Settings></DescribeAccountSettingsResult></DescribeAccountSettingsResponse>

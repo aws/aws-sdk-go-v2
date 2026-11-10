@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<UpdateSAMLProviderResponse><UpdateSAMLProviderResult><SAMLProviderArn>__SAMLProviderArn__</SAMLProviderArn></UpdateSAMLProviderResult></UpdateSAMLProviderResponse>

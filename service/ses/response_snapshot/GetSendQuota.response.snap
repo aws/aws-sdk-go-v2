@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetSendQuotaResponse><GetSendQuotaResult><Max24HourSend>1</Max24HourSend><MaxSendRate>1</MaxSendRate><SentLast24Hours>1</SentLast24Hours></GetSendQuotaResult></GetSendQuotaResponse>

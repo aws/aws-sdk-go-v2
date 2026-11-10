@@ -1,0 +1,4 @@
+406
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>InvalidRestore</Code><message>__Message__</message></Error></ErrorResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeNotificationConfigurationsResponse><DescribeNotificationConfigurationsResult><NextToken>__NextToken__</NextToken><NotificationConfigurations><member><AutoScalingGroupName>__AutoScalingGroupName__</AutoScalingGroupName><NotificationType>__NotificationType__</NotificationType><TopicARN>__TopicARN__</TopicARN></member><member><AutoScalingGroupName>__AutoScalingGroupName__</AutoScalingGroupName><NotificationType>__NotificationType__</NotificationType><TopicARN>__TopicARN__</TopicARN></member></NotificationConfigurations></DescribeNotificationConfigurationsResult></DescribeNotificationConfigurationsResponse>

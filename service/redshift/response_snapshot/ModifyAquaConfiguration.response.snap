@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyAquaConfigurationResponse><ModifyAquaConfigurationResult><AquaConfiguration><AquaConfigurationStatus>enabled</AquaConfigurationStatus><AquaStatus>enabled</AquaStatus></AquaConfiguration></ModifyAquaConfigurationResult></ModifyAquaConfigurationResponse>
