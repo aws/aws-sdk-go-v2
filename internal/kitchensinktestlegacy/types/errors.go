@@ -5,6 +5,7 @@ package types
 import (
 	"fmt"
 	smithy "github.com/aws/smithy-go"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 type ItemNotFound struct {
@@ -31,3 +32,71 @@ func (e *ItemNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ItemNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ItemNotFound) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{}, false
+}
+
+type RetryableTraitError struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RetryableTraitError) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RetryableTraitError) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RetryableTraitError) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RetryableTraitError"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RetryableTraitError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *RetryableTraitError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{Throttling: false}, true
+}
+
+type ThrottlingRetryableTraitError struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ThrottlingRetryableTraitError) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ThrottlingRetryableTraitError) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ThrottlingRetryableTraitError) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ThrottlingRetryableTraitError"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ThrottlingRetryableTraitError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// RetryableTrait returns the error's smithy.api#retryable trait, and
+// whether the error is modeled with the trait.
+func (e *ThrottlingRetryableTraitError) RetryableTrait() (smithytraits.Retryable, bool) {
+	return smithytraits.Retryable{Throttling: true}, true
+}

@@ -134,7 +134,7 @@ service AwsJson1KitchenSink {
 operation GetItem {
     input: GetItemInput,
     output: GetItemOutput,
-    errors: [ItemNotFound],
+    errors: [ItemNotFound, RetryableTraitError, ThrottlingRetryableTraitError],
 }
 
 structure GetItemInput {
@@ -149,6 +149,20 @@ structure Item {}
 
 @error("client")
 structure ItemNotFound {
+    message: String,
+}
+
+// Modeled with the retryable trait, but not a throttling error.
+@error("client")
+@retryable
+structure RetryableTraitError {
+    message: String,
+}
+
+// Modeled with the retryable trait as a throttling error.
+@error("client")
+@retryable(throttling: true)
+structure ThrottlingRetryableTraitError {
     message: String,
 }
 

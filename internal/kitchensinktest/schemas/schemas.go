@@ -117,6 +117,12 @@ var MessageEvent = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var MessageEvent_body *smithy.Schema
 
+var RetryableTraitError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "RetryableTraitError",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var RetryableTraitError_message *smithy.Schema
+
 var _SparseStringList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
 	Name:      "SparseStringList",
@@ -130,6 +136,12 @@ var _SparseStringMap = smithy.NewSchema(smithy.ShapeID{
 var _SparseStringMap_key *smithy.Schema
 
 var _SparseStringMap_value *smithy.Schema
+
+var ThrottlingRetryableTraitError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "ThrottlingRetryableTraitError",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var ThrottlingRetryableTraitError_message *smithy.Schema
 
 var GetItemInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
@@ -231,11 +243,15 @@ func init() {
 
 	ItemNotFound_message = ItemNotFound.AddMember("message", smithyprelude.String)
 
+	RetryableTraitError_message = RetryableTraitError.AddMember("message", smithyprelude.String)
+
 	_SparseStringList_member = _SparseStringList.AddMember("member", smithyprelude.String)
 
 	_SparseStringMap_key = _SparseStringMap.AddMember("key", smithyprelude.String)
 
 	_SparseStringMap_value = _SparseStringMap.AddMember("value", smithyprelude.String)
+
+	ThrottlingRetryableTraitError_message = ThrottlingRetryableTraitError.AddMember("message", smithyprelude.String)
 
 	GetItemInput_item = GetItemInput.AddMember("item", Item)
 
