@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -88,6 +90,36 @@ type CreateDBProxyEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBProxyEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBProxyEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBProxyEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBProxyEndpointName != nil {
+		s.WriteString(schemas.CreateDBProxyEndpointRequest_DBProxyEndpointName, *v.DBProxyEndpointName)
+	}
+	if v.DBProxyName != nil {
+		s.WriteString(schemas.CreateDBProxyEndpointRequest_DBProxyName, *v.DBProxyName)
+	}
+	if v.EndpointNetworkType != "" {
+		s.WriteString(schemas.CreateDBProxyEndpointRequest_EndpointNetworkType, string(v.EndpointNetworkType))
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDBProxyEndpointRequest_Tags, v.Tags)
+	}
+	if v.TargetRole != "" {
+		s.WriteString(schemas.CreateDBProxyEndpointRequest_TargetRole, string(v.TargetRole))
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeStringList(s, schemas.CreateDBProxyEndpointRequest_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.VpcSubnetIds != nil {
+		serializeStringList(s, schemas.CreateDBProxyEndpointRequest_VpcSubnetIds, v.VpcSubnetIds)
+	}
+}
+
 type CreateDBProxyEndpointOutput struct {
 
 	// The DBProxyEndpoint object that is created by the API operation. The DB proxy
@@ -101,13 +133,34 @@ type CreateDBProxyEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBProxyEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBProxyEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBProxyEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBProxyEndpoint != nil {
+		s.WriteStruct(schemas.CreateDBProxyEndpointResponse_DBProxyEndpoint)
+		v.DBProxyEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDBProxyEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDBProxyEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDBProxyEndpointResponse_DBProxyEndpoint:
+			v.DBProxyEndpoint = &types.DBProxyEndpoint{}
+			return v.DBProxyEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDBProxyEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBProxyEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBProxyEndpoint, schemas.CreateDBProxyEndpointRequest, schemas.CreateDBProxyEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDBProxyEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBProxyEndpoint, schemas.CreateDBProxyEndpointRequest, schemas.CreateDBProxyEndpointResponse), output: &CreateDBProxyEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

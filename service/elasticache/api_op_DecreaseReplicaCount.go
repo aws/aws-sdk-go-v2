@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,30 @@ type DecreaseReplicaCountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DecreaseReplicaCountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DecreaseReplicaCountMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DecreaseReplicaCountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyImmediately != nil {
+		s.WriteBool(schemas.DecreaseReplicaCountMessage_ApplyImmediately, *v.ApplyImmediately)
+	}
+	if v.NewReplicaCount != nil {
+		s.WriteInt32(schemas.DecreaseReplicaCountMessage_NewReplicaCount, *v.NewReplicaCount)
+	}
+	if v.ReplicaConfiguration != nil {
+		serializeReplicaConfigurationList(s, schemas.DecreaseReplicaCountMessage_ReplicaConfiguration, v.ReplicaConfiguration)
+	}
+	if v.ReplicasToRemove != nil {
+		serializeRemoveReplicasList(s, schemas.DecreaseReplicaCountMessage_ReplicasToRemove, v.ReplicasToRemove)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.DecreaseReplicaCountMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+}
+
 type DecreaseReplicaCountOutput struct {
 
 	// Contains all of the attributes of a specific Valkey or Redis OSS replication
@@ -82,13 +108,34 @@ type DecreaseReplicaCountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DecreaseReplicaCountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DecreaseReplicaCountResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DecreaseReplicaCountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationGroup != nil {
+		s.WriteStruct(schemas.DecreaseReplicaCountResult_ReplicationGroup)
+		v.ReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DecreaseReplicaCountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DecreaseReplicaCountResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DecreaseReplicaCountResult_ReplicationGroup:
+			v.ReplicationGroup = &types.ReplicationGroup{}
+			return v.ReplicationGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDecreaseReplicaCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDecreaseReplicaCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DecreaseReplicaCount, schemas.DecreaseReplicaCountMessage, schemas.DecreaseReplicaCountResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDecreaseReplicaCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DecreaseReplicaCount, schemas.DecreaseReplicaCountMessage, schemas.DecreaseReplicaCountResult), output: &DecreaseReplicaCountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

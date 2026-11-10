@@ -4,6 +4,8 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetTrustStoreRevocationContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrustStoreRevocationContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrustStoreRevocationContentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrustStoreRevocationContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RevocationId != nil {
+		s.WriteInt64(schemas.GetTrustStoreRevocationContentInput_RevocationId, *v.RevocationId)
+	}
+	if v.TrustStoreArn != nil {
+		s.WriteString(schemas.GetTrustStoreRevocationContentInput_TrustStoreArn, *v.TrustStoreArn)
+	}
+}
+
 type GetTrustStoreRevocationContentOutput struct {
 
 	// The revocation files Amazon S3 URI.
@@ -51,13 +68,32 @@ type GetTrustStoreRevocationContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrustStoreRevocationContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrustStoreRevocationContentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrustStoreRevocationContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Location != nil {
+		s.WriteString(schemas.GetTrustStoreRevocationContentOutput_Location, *v.Location)
+	}
+}
+func (v *GetTrustStoreRevocationContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTrustStoreRevocationContentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTrustStoreRevocationContentOutput_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.GetTrustStoreRevocationContentOutput_Location, v.Location)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTrustStoreRevocationContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetTrustStoreRevocationContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrustStoreRevocationContent, schemas.GetTrustStoreRevocationContentInput, schemas.GetTrustStoreRevocationContentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetTrustStoreRevocationContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrustStoreRevocationContent, schemas.GetTrustStoreRevocationContentInput, schemas.GetTrustStoreRevocationContentOutput), output: &GetTrustStoreRevocationContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

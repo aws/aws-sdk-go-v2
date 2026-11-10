@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,24 @@ type RequestEnvironmentInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestEnvironmentInfoInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestEnvironmentInfoMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestEnvironmentInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.RequestEnvironmentInfoMessage_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.RequestEnvironmentInfoMessage_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.InfoType != "" {
+		s.WriteString(schemas.RequestEnvironmentInfoMessage_InfoType, string(v.InfoType))
+	}
+}
+
 type RequestEnvironmentInfoOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -80,13 +100,26 @@ type RequestEnvironmentInfoOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestEnvironmentInfoOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestEnvironmentInfoOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RequestEnvironmentInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRequestEnvironmentInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRequestEnvironmentInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestEnvironmentInfo, schemas.RequestEnvironmentInfoMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRequestEnvironmentInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestEnvironmentInfo, schemas.RequestEnvironmentInfoMessage, nil), output: &RequestEnvironmentInfoOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

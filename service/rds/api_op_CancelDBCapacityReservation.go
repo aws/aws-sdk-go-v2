@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,18 @@ type CancelDBCapacityReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelDBCapacityReservationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelDBCapacityReservationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelDBCapacityReservationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBCapacityReservationIdentifier != nil {
+		s.WriteString(schemas.CancelDBCapacityReservationRequest_DBCapacityReservationIdentifier, *v.DBCapacityReservationIdentifier)
+	}
+}
+
 type CancelDBCapacityReservationOutput struct {
 
 	// Contains the details of the canceled DB capacity reservation.
@@ -65,13 +79,34 @@ type CancelDBCapacityReservationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelDBCapacityReservationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelDBCapacityReservationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelDBCapacityReservationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBCapacityReservation != nil {
+		s.WriteStruct(schemas.CancelDBCapacityReservationResponse_DBCapacityReservation)
+		v.DBCapacityReservation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CancelDBCapacityReservationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelDBCapacityReservationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelDBCapacityReservationResponse_DBCapacityReservation:
+			v.DBCapacityReservation = &types.DBCapacityReservation{}
+			return v.DBCapacityReservation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelDBCapacityReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCancelDBCapacityReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDBCapacityReservation, schemas.CancelDBCapacityReservationRequest, schemas.CancelDBCapacityReservationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCancelDBCapacityReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDBCapacityReservation, schemas.CancelDBCapacityReservationRequest, schemas.CancelDBCapacityReservationResponse), output: &CancelDBCapacityReservationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

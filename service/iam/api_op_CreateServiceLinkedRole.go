@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,24 @@ type CreateServiceLinkedRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceLinkedRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceLinkedRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceLinkedRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWSServiceName != nil {
+		s.WriteString(schemas.CreateServiceLinkedRoleRequest_AWSServiceName, *v.AWSServiceName)
+	}
+	if v.CustomSuffix != nil {
+		s.WriteString(schemas.CreateServiceLinkedRoleRequest_CustomSuffix, *v.CustomSuffix)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateServiceLinkedRoleRequest_Description, *v.Description)
+	}
+}
+
 type CreateServiceLinkedRoleOutput struct {
 
 	// A [Role] object that contains details about the newly created role.
@@ -81,13 +101,34 @@ type CreateServiceLinkedRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceLinkedRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceLinkedRoleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceLinkedRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Role != nil {
+		s.WriteStruct(schemas.CreateServiceLinkedRoleResponse_Role)
+		v.Role.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateServiceLinkedRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceLinkedRoleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceLinkedRoleResponse_Role:
+			v.Role = &types.Role{}
+			return v.Role.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceLinkedRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateServiceLinkedRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceLinkedRole, schemas.CreateServiceLinkedRoleRequest, schemas.CreateServiceLinkedRoleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateServiceLinkedRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceLinkedRole, schemas.CreateServiceLinkedRoleRequest, schemas.CreateServiceLinkedRoleResponse), output: &CreateServiceLinkedRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

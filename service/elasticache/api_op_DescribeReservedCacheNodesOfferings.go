@@ -5,7 +5,9 @@ package elasticache
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -170,6 +172,36 @@ type DescribeReservedCacheNodesOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedCacheNodesOfferingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedCacheNodesOfferingsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedCacheNodesOfferingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheNodeType != nil {
+		s.WriteString(schemas.DescribeReservedCacheNodesOfferingsMessage_CacheNodeType, *v.CacheNodeType)
+	}
+	if v.Duration != nil {
+		s.WriteString(schemas.DescribeReservedCacheNodesOfferingsMessage_Duration, *v.Duration)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReservedCacheNodesOfferingsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReservedCacheNodesOfferingsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.OfferingType != nil {
+		s.WriteString(schemas.DescribeReservedCacheNodesOfferingsMessage_OfferingType, *v.OfferingType)
+	}
+	if v.ProductDescription != nil {
+		s.WriteString(schemas.DescribeReservedCacheNodesOfferingsMessage_ProductDescription, *v.ProductDescription)
+	}
+	if v.ReservedCacheNodesOfferingId != nil {
+		s.WriteString(schemas.DescribeReservedCacheNodesOfferingsMessage_ReservedCacheNodesOfferingId, *v.ReservedCacheNodesOfferingId)
+	}
+}
+
 // Represents the output of a DescribeReservedCacheNodesOfferings operation.
 type DescribeReservedCacheNodesOfferingsOutput struct {
 
@@ -186,13 +218,37 @@ type DescribeReservedCacheNodesOfferingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedCacheNodesOfferingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservedCacheNodesOfferingMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedCacheNodesOfferingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ReservedCacheNodesOfferingMessage_Marker, *v.Marker)
+	}
+	if v.ReservedCacheNodesOfferings != nil {
+		serializeReservedCacheNodesOfferingList(s, schemas.ReservedCacheNodesOfferingMessage_ReservedCacheNodesOfferings, v.ReservedCacheNodesOfferings)
+	}
+}
+func (v *DescribeReservedCacheNodesOfferingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservedCacheNodesOfferingMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservedCacheNodesOfferingMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ReservedCacheNodesOfferingMessage_Marker, v.Marker)
+		case schemas.ReservedCacheNodesOfferingMessage_ReservedCacheNodesOfferings:
+			return deserializeReservedCacheNodesOfferingList(d, schemas.ReservedCacheNodesOfferingMessage_ReservedCacheNodesOfferings, &v.ReservedCacheNodesOfferings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReservedCacheNodesOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeReservedCacheNodesOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedCacheNodesOfferings, schemas.DescribeReservedCacheNodesOfferingsMessage, schemas.ReservedCacheNodesOfferingMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeReservedCacheNodesOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedCacheNodesOfferings, schemas.DescribeReservedCacheNodesOfferingsMessage, schemas.ReservedCacheNodesOfferingMessage), output: &DescribeReservedCacheNodesOfferingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package elasticache
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type DescribeCacheParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCacheParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCacheParametersMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCacheParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheParameterGroupName != nil {
+		s.WriteString(schemas.DescribeCacheParametersMessage_CacheParameterGroupName, *v.CacheParameterGroupName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeCacheParametersMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeCacheParametersMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.DescribeCacheParametersMessage_Source, *v.Source)
+	}
+}
+
 // Represents the output of a DescribeCacheParameters operation.
 type DescribeCacheParametersOutput struct {
 
@@ -75,13 +98,42 @@ type DescribeCacheParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCacheParametersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CacheParameterGroupDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCacheParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheNodeTypeSpecificParameters != nil {
+		serializeCacheNodeTypeSpecificParametersList(s, schemas.CacheParameterGroupDetails_CacheNodeTypeSpecificParameters, v.CacheNodeTypeSpecificParameters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.CacheParameterGroupDetails_Marker, *v.Marker)
+	}
+	if v.Parameters != nil {
+		serializeParametersList(s, schemas.CacheParameterGroupDetails_Parameters, v.Parameters)
+	}
+}
+func (v *DescribeCacheParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CacheParameterGroupDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CacheParameterGroupDetails_CacheNodeTypeSpecificParameters:
+			return deserializeCacheNodeTypeSpecificParametersList(d, schemas.CacheParameterGroupDetails_CacheNodeTypeSpecificParameters, &v.CacheNodeTypeSpecificParameters)
+		case schemas.CacheParameterGroupDetails_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.CacheParameterGroupDetails_Marker, v.Marker)
+		case schemas.CacheParameterGroupDetails_Parameters:
+			return deserializeParametersList(d, schemas.CacheParameterGroupDetails_Parameters, &v.Parameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCacheParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeCacheParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCacheParameters, schemas.DescribeCacheParametersMessage, schemas.CacheParameterGroupDetails)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeCacheParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCacheParameters, schemas.DescribeCacheParametersMessage, schemas.CacheParameterGroupDetails), output: &DescribeCacheParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

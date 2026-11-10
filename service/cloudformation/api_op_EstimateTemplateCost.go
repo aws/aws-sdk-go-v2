@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type EstimateTemplateCostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EstimateTemplateCostInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EstimateTemplateCostInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EstimateTemplateCostInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.EstimateTemplateCostInput_Parameters, v.Parameters)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.EstimateTemplateCostInput_TemplateBody, *v.TemplateBody)
+	}
+	if v.TemplateURL != nil {
+		s.WriteString(schemas.EstimateTemplateCostInput_TemplateURL, *v.TemplateURL)
+	}
+}
+
 // The output for a EstimateTemplateCost action.
 type EstimateTemplateCostOutput struct {
 
@@ -64,13 +84,32 @@ type EstimateTemplateCostOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EstimateTemplateCostOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EstimateTemplateCostOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EstimateTemplateCostOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Url != nil {
+		s.WriteString(schemas.EstimateTemplateCostOutput_Url, *v.Url)
+	}
+}
+func (v *EstimateTemplateCostOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EstimateTemplateCostOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EstimateTemplateCostOutput_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.EstimateTemplateCostOutput_Url, v.Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEstimateTemplateCostMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpEstimateTemplateCost{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EstimateTemplateCost, schemas.EstimateTemplateCostInput, schemas.EstimateTemplateCostOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpEstimateTemplateCost{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EstimateTemplateCost, schemas.EstimateTemplateCostInput, schemas.EstimateTemplateCostOutput), output: &EstimateTemplateCostOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

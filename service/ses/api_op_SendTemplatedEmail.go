@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -171,6 +173,50 @@ type SendTemplatedEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendTemplatedEmailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendTemplatedEmailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendTemplatedEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendTemplatedEmailRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.SendTemplatedEmailRequest_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplyToAddresses != nil {
+		serializeAddressList(s, schemas.SendTemplatedEmailRequest_ReplyToAddresses, v.ReplyToAddresses)
+	}
+	if v.ReturnPath != nil {
+		s.WriteString(schemas.SendTemplatedEmailRequest_ReturnPath, *v.ReturnPath)
+	}
+	if v.ReturnPathArn != nil {
+		s.WriteString(schemas.SendTemplatedEmailRequest_ReturnPathArn, *v.ReturnPathArn)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.SendTemplatedEmailRequest_Source, *v.Source)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.SendTemplatedEmailRequest_SourceArn, *v.SourceArn)
+	}
+	if v.Tags != nil {
+		serializeMessageTagList(s, schemas.SendTemplatedEmailRequest_Tags, v.Tags)
+	}
+	if v.Template != nil {
+		s.WriteString(schemas.SendTemplatedEmailRequest_Template, *v.Template)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.SendTemplatedEmailRequest_TemplateArn, *v.TemplateArn)
+	}
+	if v.TemplateData != nil {
+		s.WriteString(schemas.SendTemplatedEmailRequest_TemplateData, *v.TemplateData)
+	}
+}
+
 type SendTemplatedEmailOutput struct {
 
 	// The unique message identifier returned from the SendTemplatedEmail action.
@@ -184,13 +230,32 @@ type SendTemplatedEmailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendTemplatedEmailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendTemplatedEmailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendTemplatedEmailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendTemplatedEmailResponse_MessageId, *v.MessageId)
+	}
+}
+func (v *SendTemplatedEmailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendTemplatedEmailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendTemplatedEmailResponse_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendTemplatedEmailResponse_MessageId, v.MessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendTemplatedEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSendTemplatedEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendTemplatedEmail, schemas.SendTemplatedEmailRequest, schemas.SendTemplatedEmailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSendTemplatedEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendTemplatedEmail, schemas.SendTemplatedEmailRequest, schemas.SendTemplatedEmailResponse), output: &SendTemplatedEmailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

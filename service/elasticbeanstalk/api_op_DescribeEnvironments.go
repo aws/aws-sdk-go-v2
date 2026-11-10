@@ -5,7 +5,9 @@ package elasticbeanstalk
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -93,6 +95,39 @@ type DescribeEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DescribeEnvironmentsMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.EnvironmentIds != nil {
+		serializeEnvironmentIdList(s, schemas.DescribeEnvironmentsMessage_EnvironmentIds, v.EnvironmentIds)
+	}
+	if v.EnvironmentNames != nil {
+		serializeEnvironmentNamesList(s, schemas.DescribeEnvironmentsMessage_EnvironmentNames, v.EnvironmentNames)
+	}
+	if v.IncludeDeleted != nil {
+		s.WriteBool(schemas.DescribeEnvironmentsMessage_IncludeDeleted, *v.IncludeDeleted)
+	}
+	if v.IncludedDeletedBackTo != nil {
+		s.WriteTime(schemas.DescribeEnvironmentsMessage_IncludedDeletedBackTo, *v.IncludedDeletedBackTo)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeEnvironmentsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEnvironmentsMessage_NextToken, *v.NextToken)
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.DescribeEnvironmentsMessage_VersionLabel, *v.VersionLabel)
+	}
+}
+
 // Result message containing a list of environment descriptions.
 type DescribeEnvironmentsOutput struct {
 
@@ -109,13 +144,37 @@ type DescribeEnvironmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnvironmentDescriptionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Environments != nil {
+		serializeEnvironmentDescriptionsList(s, schemas.EnvironmentDescriptionsMessage_Environments, v.Environments)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.EnvironmentDescriptionsMessage_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnvironmentDescriptionsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnvironmentDescriptionsMessage_Environments:
+			return deserializeEnvironmentDescriptionsList(d, schemas.EnvironmentDescriptionsMessage_Environments, &v.Environments)
+		case schemas.EnvironmentDescriptionsMessage_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.EnvironmentDescriptionsMessage_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironments, schemas.DescribeEnvironmentsMessage, schemas.EnvironmentDescriptionsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironments, schemas.DescribeEnvironmentsMessage, schemas.EnvironmentDescriptionsMessage), output: &DescribeEnvironmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

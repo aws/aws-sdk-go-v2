@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type RebalanceSlotsInGlobalReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebalanceSlotsInGlobalReplicationGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebalanceSlotsInGlobalReplicationGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebalanceSlotsInGlobalReplicationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyImmediately != nil {
+		s.WriteBool(schemas.RebalanceSlotsInGlobalReplicationGroupMessage_ApplyImmediately, *v.ApplyImmediately)
+	}
+	if v.GlobalReplicationGroupId != nil {
+		s.WriteString(schemas.RebalanceSlotsInGlobalReplicationGroupMessage_GlobalReplicationGroupId, *v.GlobalReplicationGroupId)
+	}
+}
+
 type RebalanceSlotsInGlobalReplicationGroupOutput struct {
 
 	// Consists of a primary cluster that accepts writes and an associated secondary
@@ -57,13 +74,34 @@ type RebalanceSlotsInGlobalReplicationGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebalanceSlotsInGlobalReplicationGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebalanceSlotsInGlobalReplicationGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebalanceSlotsInGlobalReplicationGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalReplicationGroup != nil {
+		s.WriteStruct(schemas.RebalanceSlotsInGlobalReplicationGroupResult_GlobalReplicationGroup)
+		v.GlobalReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RebalanceSlotsInGlobalReplicationGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebalanceSlotsInGlobalReplicationGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebalanceSlotsInGlobalReplicationGroupResult_GlobalReplicationGroup:
+			v.GlobalReplicationGroup = &types.GlobalReplicationGroup{}
+			return v.GlobalReplicationGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebalanceSlotsInGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRebalanceSlotsInGlobalReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebalanceSlotsInGlobalReplicationGroup, schemas.RebalanceSlotsInGlobalReplicationGroupMessage, schemas.RebalanceSlotsInGlobalReplicationGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRebalanceSlotsInGlobalReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebalanceSlotsInGlobalReplicationGroup, schemas.RebalanceSlotsInGlobalReplicationGroupMessage, schemas.RebalanceSlotsInGlobalReplicationGroupResult), output: &RebalanceSlotsInGlobalReplicationGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

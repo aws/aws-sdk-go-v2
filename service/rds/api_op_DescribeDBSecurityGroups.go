@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,27 @@ type DescribeDBSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBSecurityGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBSecurityGroupsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBSecurityGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBSecurityGroupName != nil {
+		s.WriteString(schemas.DescribeDBSecurityGroupsMessage_DBSecurityGroupName, *v.DBSecurityGroupName)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDBSecurityGroupsMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBSecurityGroupsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBSecurityGroupsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 // Contains the result of a successful invocation of the DescribeDBSecurityGroups
 // action.
 type DescribeDBSecurityGroupsOutput struct {
@@ -79,13 +102,37 @@ type DescribeDBSecurityGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBSecurityGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBSecurityGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBSecurityGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBSecurityGroups != nil {
+		serializeDBSecurityGroups(s, schemas.DBSecurityGroupMessage_DBSecurityGroups, v.DBSecurityGroups)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DBSecurityGroupMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDBSecurityGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBSecurityGroupMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBSecurityGroupMessage_DBSecurityGroups:
+			return deserializeDBSecurityGroups(d, schemas.DBSecurityGroupMessage_DBSecurityGroups, &v.DBSecurityGroups)
+		case schemas.DBSecurityGroupMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DBSecurityGroupMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBSecurityGroups, schemas.DescribeDBSecurityGroupsMessage, schemas.DBSecurityGroupMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBSecurityGroups, schemas.DescribeDBSecurityGroupsMessage, schemas.DBSecurityGroupMessage), output: &DescribeDBSecurityGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

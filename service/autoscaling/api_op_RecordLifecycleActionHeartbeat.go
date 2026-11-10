@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,46 @@ type RecordLifecycleActionHeartbeatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecordLifecycleActionHeartbeatInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordLifecycleActionHeartbeatType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordLifecycleActionHeartbeatInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.RecordLifecycleActionHeartbeatType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.RecordLifecycleActionHeartbeatType_InstanceId, *v.InstanceId)
+	}
+	if v.LifecycleActionToken != nil {
+		s.WriteString(schemas.RecordLifecycleActionHeartbeatType_LifecycleActionToken, *v.LifecycleActionToken)
+	}
+	if v.LifecycleHookName != nil {
+		s.WriteString(schemas.RecordLifecycleActionHeartbeatType_LifecycleHookName, *v.LifecycleHookName)
+	}
+}
+func (v *RecordLifecycleActionHeartbeatInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordLifecycleActionHeartbeatType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecordLifecycleActionHeartbeatType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.RecordLifecycleActionHeartbeatType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.RecordLifecycleActionHeartbeatType_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.RecordLifecycleActionHeartbeatType_InstanceId, v.InstanceId)
+		case schemas.RecordLifecycleActionHeartbeatType_LifecycleActionToken:
+			v.LifecycleActionToken = new(string)
+			return d.ReadString(schemas.RecordLifecycleActionHeartbeatType_LifecycleActionToken, v.LifecycleActionToken)
+		case schemas.RecordLifecycleActionHeartbeatType_LifecycleHookName:
+			v.LifecycleHookName = new(string)
+			return d.ReadString(schemas.RecordLifecycleActionHeartbeatType_LifecycleHookName, v.LifecycleHookName)
+		}
+		return nil
+	})
+}
+
 type RecordLifecycleActionHeartbeatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -85,13 +127,26 @@ type RecordLifecycleActionHeartbeatOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecordLifecycleActionHeartbeatOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordLifecycleActionHeartbeatAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordLifecycleActionHeartbeatOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RecordLifecycleActionHeartbeatOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordLifecycleActionHeartbeatAnswer, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRecordLifecycleActionHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRecordLifecycleActionHeartbeat{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecordLifecycleActionHeartbeat, schemas.RecordLifecycleActionHeartbeatType, schemas.RecordLifecycleActionHeartbeatAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRecordLifecycleActionHeartbeat{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecordLifecycleActionHeartbeat, schemas.RecordLifecycleActionHeartbeatType, schemas.RecordLifecycleActionHeartbeatAnswer), output: &RecordLifecycleActionHeartbeatOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

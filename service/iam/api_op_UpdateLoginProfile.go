@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,24 @@ type UpdateLoginProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLoginProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLoginProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLoginProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Password != nil {
+		s.WriteString(schemas.UpdateLoginProfileRequest_Password, *v.Password)
+	}
+	if v.PasswordResetRequired != nil {
+		s.WriteBool(schemas.UpdateLoginProfileRequest_PasswordResetRequired, *v.PasswordResetRequired)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.UpdateLoginProfileRequest_UserName, *v.UserName)
+	}
+}
+
 type UpdateLoginProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -80,13 +100,26 @@ type UpdateLoginProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLoginProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLoginProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLoginProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateLoginProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLoginProfile, schemas.UpdateLoginProfileRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateLoginProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLoginProfile, schemas.UpdateLoginProfileRequest, nil), output: &UpdateLoginProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

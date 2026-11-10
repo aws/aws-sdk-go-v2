@@ -4,6 +4,8 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type RebuildEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebuildEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebuildEnvironmentMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebuildEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.RebuildEnvironmentMessage_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.RebuildEnvironmentMessage_EnvironmentName, *v.EnvironmentName)
+	}
+}
+
 type RebuildEnvironmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +67,26 @@ type RebuildEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebuildEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebuildEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RebuildEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebuildEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRebuildEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebuildEnvironment, schemas.RebuildEnvironmentMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRebuildEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebuildEnvironment, schemas.RebuildEnvironmentMessage, nil), output: &RebuildEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

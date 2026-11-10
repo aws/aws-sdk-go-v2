@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type PurchaseReservedNodeOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseReservedNodeOfferingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseReservedNodeOfferingMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseReservedNodeOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NodeCount != nil {
+		s.WriteInt32(schemas.PurchaseReservedNodeOfferingMessage_NodeCount, *v.NodeCount)
+	}
+	if v.ReservedNodeOfferingId != nil {
+		s.WriteString(schemas.PurchaseReservedNodeOfferingMessage_ReservedNodeOfferingId, *v.ReservedNodeOfferingId)
+	}
+}
+
 type PurchaseReservedNodeOfferingOutput struct {
 
 	// Describes a reserved node. You can call the DescribeReservedNodeOfferings API to obtain the available
@@ -60,13 +77,34 @@ type PurchaseReservedNodeOfferingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseReservedNodeOfferingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseReservedNodeOfferingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseReservedNodeOfferingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReservedNode != nil {
+		s.WriteStruct(schemas.PurchaseReservedNodeOfferingResult_ReservedNode)
+		v.ReservedNode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PurchaseReservedNodeOfferingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseReservedNodeOfferingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseReservedNodeOfferingResult_ReservedNode:
+			v.ReservedNode = &types.ReservedNode{}
+			return v.ReservedNode.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPurchaseReservedNodeOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPurchaseReservedNodeOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseReservedNodeOffering, schemas.PurchaseReservedNodeOfferingMessage, schemas.PurchaseReservedNodeOfferingResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPurchaseReservedNodeOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseReservedNodeOffering, schemas.PurchaseReservedNodeOfferingMessage, schemas.PurchaseReservedNodeOfferingResult), output: &PurchaseReservedNodeOfferingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

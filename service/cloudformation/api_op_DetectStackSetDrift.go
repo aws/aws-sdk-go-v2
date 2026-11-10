@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -94,6 +96,29 @@ type DetectStackSetDriftInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectStackSetDriftInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectStackSetDriftInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectStackSetDriftInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallAs != "" {
+		s.WriteString(schemas.DetectStackSetDriftInput_CallAs, string(v.CallAs))
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.DetectStackSetDriftInput_OperationId, *v.OperationId)
+	}
+	if v.OperationPreferences != nil {
+		s.WriteStruct(schemas.DetectStackSetDriftInput_OperationPreferences)
+		v.OperationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.DetectStackSetDriftInput_StackSetName, *v.StackSetName)
+	}
+}
+
 type DetectStackSetDriftOutput struct {
 
 	// The ID of the drift detection StackSet operation.
@@ -108,13 +133,32 @@ type DetectStackSetDriftOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectStackSetDriftOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectStackSetDriftOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectStackSetDriftOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.DetectStackSetDriftOutput_OperationId, *v.OperationId)
+	}
+}
+func (v *DetectStackSetDriftOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectStackSetDriftOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectStackSetDriftOutput_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.DetectStackSetDriftOutput_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectStackSetDriftMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetectStackSetDrift{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectStackSetDrift, schemas.DetectStackSetDriftInput, schemas.DetectStackSetDriftOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDetectStackSetDrift{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectStackSetDrift, schemas.DetectStackSetDriftInput, schemas.DetectStackSetDriftOutput), output: &DetectStackSetDriftOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

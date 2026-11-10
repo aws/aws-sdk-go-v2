@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -141,6 +143,54 @@ type DescribeClusterSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterSnapshotsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterExists != nil {
+		s.WriteBool(schemas.DescribeClusterSnapshotsMessage_ClusterExists, *v.ClusterExists)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeClusterSnapshotsMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeClusterSnapshotsMessage_EndTime, *v.EndTime)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeClusterSnapshotsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeClusterSnapshotsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.DescribeClusterSnapshotsMessage_OwnerAccount, *v.OwnerAccount)
+	}
+	if v.SnapshotArn != nil {
+		s.WriteString(schemas.DescribeClusterSnapshotsMessage_SnapshotArn, *v.SnapshotArn)
+	}
+	if v.SnapshotIdentifier != nil {
+		s.WriteString(schemas.DescribeClusterSnapshotsMessage_SnapshotIdentifier, *v.SnapshotIdentifier)
+	}
+	if v.SnapshotType != nil {
+		s.WriteString(schemas.DescribeClusterSnapshotsMessage_SnapshotType, *v.SnapshotType)
+	}
+	if v.SortingEntities != nil {
+		serializeSnapshotSortingEntityList(s, schemas.DescribeClusterSnapshotsMessage_SortingEntities, v.SortingEntities)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeClusterSnapshotsMessage_StartTime, *v.StartTime)
+	}
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.DescribeClusterSnapshotsMessage_TagKeys, v.TagKeys)
+	}
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.DescribeClusterSnapshotsMessage_TagValues, v.TagValues)
+	}
+}
+
 // Contains the output from the DescribeClusterSnapshots action.
 type DescribeClusterSnapshotsOutput struct {
 
@@ -160,13 +210,37 @@ type DescribeClusterSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.SnapshotMessage_Marker, *v.Marker)
+	}
+	if v.Snapshots != nil {
+		serializeSnapshotList(s, schemas.SnapshotMessage_Snapshots, v.Snapshots)
+	}
+}
+func (v *DescribeClusterSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.SnapshotMessage_Marker, v.Marker)
+		case schemas.SnapshotMessage_Snapshots:
+			return deserializeSnapshotList(d, schemas.SnapshotMessage_Snapshots, &v.Snapshots)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeClusterSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterSnapshots, schemas.DescribeClusterSnapshotsMessage, schemas.SnapshotMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeClusterSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterSnapshots, schemas.DescribeClusterSnapshotsMessage, schemas.SnapshotMessage), output: &DescribeClusterSnapshotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

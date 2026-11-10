@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,21 @@ type GetGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupName != nil {
+		s.WriteString(schemas.GetGroupPolicyRequest_GroupName, *v.GroupName)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.GetGroupPolicyRequest_PolicyName, *v.PolicyName)
+	}
+}
+
 // Contains the response to a successful [GetGroupPolicy] request.
 //
 // [GetGroupPolicy]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetGroupPolicy.html
@@ -98,13 +115,44 @@ type GetGroupPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupName != nil {
+		s.WriteString(schemas.GetGroupPolicyResponse_GroupName, *v.GroupName)
+	}
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.GetGroupPolicyResponse_PolicyDocument, *v.PolicyDocument)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.GetGroupPolicyResponse_PolicyName, *v.PolicyName)
+	}
+}
+func (v *GetGroupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGroupPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGroupPolicyResponse_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.GetGroupPolicyResponse_GroupName, v.GroupName)
+		case schemas.GetGroupPolicyResponse_PolicyDocument:
+			v.PolicyDocument = new(string)
+			return d.ReadString(schemas.GetGroupPolicyResponse_PolicyDocument, v.PolicyDocument)
+		case schemas.GetGroupPolicyResponse_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.GetGroupPolicyResponse_PolicyName, v.PolicyName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupPolicy, schemas.GetGroupPolicyRequest, schemas.GetGroupPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupPolicy, schemas.GetGroupPolicyRequest, schemas.GetGroupPolicyResponse), output: &GetGroupPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

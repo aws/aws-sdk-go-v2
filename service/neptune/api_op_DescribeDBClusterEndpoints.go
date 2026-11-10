@@ -5,7 +5,9 @@ package neptune
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,30 @@ type DescribeDBClusterEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBClusterEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBClusterEndpointsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBClusterEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterEndpointIdentifier != nil {
+		s.WriteString(schemas.DescribeDBClusterEndpointsMessage_DBClusterEndpointIdentifier, *v.DBClusterEndpointIdentifier)
+	}
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeDBClusterEndpointsMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDBClusterEndpointsMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBClusterEndpointsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBClusterEndpointsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeDBClusterEndpointsOutput struct {
 
 	// Contains the details of the endpoints associated with the cluster and matching
@@ -83,13 +109,37 @@ type DescribeDBClusterEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBClusterEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBClusterEndpointMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBClusterEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterEndpoints != nil {
+		serializeDBClusterEndpointList(s, schemas.DBClusterEndpointMessage_DBClusterEndpoints, v.DBClusterEndpoints)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DBClusterEndpointMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDBClusterEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBClusterEndpointMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBClusterEndpointMessage_DBClusterEndpoints:
+			return deserializeDBClusterEndpointList(d, schemas.DBClusterEndpointMessage_DBClusterEndpoints, &v.DBClusterEndpoints)
+		case schemas.DBClusterEndpointMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DBClusterEndpointMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBClusterEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBClusterEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterEndpoints, schemas.DescribeDBClusterEndpointsMessage, schemas.DBClusterEndpointMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBClusterEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterEndpoints, schemas.DescribeDBClusterEndpointsMessage, schemas.DBClusterEndpointMessage), output: &DescribeDBClusterEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

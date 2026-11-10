@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -31,6 +33,22 @@ type GetOutboundWebIdentityFederationInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutboundWebIdentityFederationInfoInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutboundWebIdentityFederationInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetOutboundWebIdentityFederationInfoInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetOutboundWebIdentityFederationInfoOutput struct {
 
 	// A unique issuer URL for your Amazon Web Services account that hosts the OpenID
@@ -51,13 +69,37 @@ type GetOutboundWebIdentityFederationInfoOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutboundWebIdentityFederationInfoOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutboundWebIdentityFederationInfoResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutboundWebIdentityFederationInfoOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IssuerIdentifier != nil {
+		s.WriteString(schemas.GetOutboundWebIdentityFederationInfoResponse_IssuerIdentifier, *v.IssuerIdentifier)
+	}
+	if v.JwtVendingEnabled != false {
+		s.WriteBool(schemas.GetOutboundWebIdentityFederationInfoResponse_JwtVendingEnabled, v.JwtVendingEnabled)
+	}
+}
+func (v *GetOutboundWebIdentityFederationInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOutboundWebIdentityFederationInfoResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOutboundWebIdentityFederationInfoResponse_IssuerIdentifier:
+			v.IssuerIdentifier = new(string)
+			return d.ReadString(schemas.GetOutboundWebIdentityFederationInfoResponse_IssuerIdentifier, v.IssuerIdentifier)
+		case schemas.GetOutboundWebIdentityFederationInfoResponse_JwtVendingEnabled:
+			return d.ReadBool(schemas.GetOutboundWebIdentityFederationInfoResponse_JwtVendingEnabled, &v.JwtVendingEnabled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOutboundWebIdentityFederationInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetOutboundWebIdentityFederationInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutboundWebIdentityFederationInfo, nil, schemas.GetOutboundWebIdentityFederationInfoResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetOutboundWebIdentityFederationInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutboundWebIdentityFederationInfo, nil, schemas.GetOutboundWebIdentityFederationInfoResponse), output: &GetOutboundWebIdentityFederationInfoOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,27 @@ type ListStackSetAutoDeploymentTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStackSetAutoDeploymentTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStackSetAutoDeploymentTargetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStackSetAutoDeploymentTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallAs != "" {
+		s.WriteString(schemas.ListStackSetAutoDeploymentTargetsInput_CallAs, string(v.CallAs))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStackSetAutoDeploymentTargetsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStackSetAutoDeploymentTargetsInput_NextToken, *v.NextToken)
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.ListStackSetAutoDeploymentTargetsInput_StackSetName, *v.StackSetName)
+	}
+}
+
 type ListStackSetAutoDeploymentTargetsOutput struct {
 
 	// If the request doesn't return all the remaining results, NextToken is set to a
@@ -83,13 +106,37 @@ type ListStackSetAutoDeploymentTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStackSetAutoDeploymentTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStackSetAutoDeploymentTargetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStackSetAutoDeploymentTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStackSetAutoDeploymentTargetsOutput_NextToken, *v.NextToken)
+	}
+	if v.Summaries != nil {
+		serializeStackSetAutoDeploymentTargetSummaries(s, schemas.ListStackSetAutoDeploymentTargetsOutput_Summaries, v.Summaries)
+	}
+}
+func (v *ListStackSetAutoDeploymentTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStackSetAutoDeploymentTargetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStackSetAutoDeploymentTargetsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStackSetAutoDeploymentTargetsOutput_NextToken, v.NextToken)
+		case schemas.ListStackSetAutoDeploymentTargetsOutput_Summaries:
+			return deserializeStackSetAutoDeploymentTargetSummaries(d, schemas.ListStackSetAutoDeploymentTargetsOutput_Summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStackSetAutoDeploymentTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListStackSetAutoDeploymentTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStackSetAutoDeploymentTargets, schemas.ListStackSetAutoDeploymentTargetsInput, schemas.ListStackSetAutoDeploymentTargetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListStackSetAutoDeploymentTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStackSetAutoDeploymentTargets, schemas.ListStackSetAutoDeploymentTargetsInput, schemas.ListStackSetAutoDeploymentTargetsOutput), output: &ListStackSetAutoDeploymentTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

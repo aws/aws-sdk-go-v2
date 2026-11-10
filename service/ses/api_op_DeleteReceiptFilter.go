@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type DeleteReceiptFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReceiptFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReceiptFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReceiptFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterName != nil {
+		s.WriteString(schemas.DeleteReceiptFilterRequest_FilterName, *v.FilterName)
+	}
+}
+
 // An empty element returned on a successful request.
 type DeleteReceiptFilterOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -51,13 +65,26 @@ type DeleteReceiptFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReceiptFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReceiptFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReceiptFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteReceiptFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteReceiptFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReceiptFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteReceiptFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReceiptFilter, schemas.DeleteReceiptFilterRequest, schemas.DeleteReceiptFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteReceiptFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReceiptFilter, schemas.DeleteReceiptFilterRequest, schemas.DeleteReceiptFilterResponse), output: &DeleteReceiptFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

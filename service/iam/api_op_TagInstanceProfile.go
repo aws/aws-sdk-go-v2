@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,21 @@ type TagInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagInstanceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagInstanceProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagInstanceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceProfileName != nil {
+		s.WriteString(schemas.TagInstanceProfileRequest_InstanceProfileName, *v.InstanceProfileName)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.TagInstanceProfileRequest_Tags, v.Tags)
+	}
+}
+
 type TagInstanceProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,13 +95,26 @@ type TagInstanceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagInstanceProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagInstanceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TagInstanceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTagInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpTagInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagInstanceProfile, schemas.TagInstanceProfileRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpTagInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagInstanceProfile, schemas.TagInstanceProfileRequest, nil), output: &TagInstanceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

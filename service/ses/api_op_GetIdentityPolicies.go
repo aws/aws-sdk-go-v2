@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,21 @@ type GetIdentityPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identity != nil {
+		s.WriteString(schemas.GetIdentityPoliciesRequest_Identity, *v.Identity)
+	}
+	if v.PolicyNames != nil {
+		serializePolicyNameList(s, schemas.GetIdentityPoliciesRequest_PolicyNames, v.PolicyNames)
+	}
+}
+
 // Represents the requested sending authorization policies.
 type GetIdentityPoliciesOutput struct {
 
@@ -77,13 +94,31 @@ type GetIdentityPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policies != nil {
+		serializePolicyMap(s, schemas.GetIdentityPoliciesResponse_Policies, v.Policies)
+	}
+}
+func (v *GetIdentityPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdentityPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdentityPoliciesResponse_Policies:
+			return deserializePolicyMap(d, schemas.GetIdentityPoliciesResponse_Policies, &v.Policies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdentityPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetIdentityPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityPolicies, schemas.GetIdentityPoliciesRequest, schemas.GetIdentityPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetIdentityPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityPolicies, schemas.GetIdentityPoliciesRequest, schemas.GetIdentityPoliciesResponse), output: &GetIdentityPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

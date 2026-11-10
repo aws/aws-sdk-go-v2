@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,38 @@ type ImportStacksToStackSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportStacksToStackSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportStacksToStackSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportStacksToStackSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallAs != "" {
+		s.WriteString(schemas.ImportStacksToStackSetInput_CallAs, string(v.CallAs))
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.ImportStacksToStackSetInput_OperationId, *v.OperationId)
+	}
+	if v.OperationPreferences != nil {
+		s.WriteStruct(schemas.ImportStacksToStackSetInput_OperationPreferences)
+		v.OperationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationalUnitIds != nil {
+		serializeOrganizationalUnitIdList(s, schemas.ImportStacksToStackSetInput_OrganizationalUnitIds, v.OrganizationalUnitIds)
+	}
+	if v.StackIds != nil {
+		serializeStackIdList(s, schemas.ImportStacksToStackSetInput_StackIds, v.StackIds)
+	}
+	if v.StackIdsUrl != nil {
+		s.WriteString(schemas.ImportStacksToStackSetInput_StackIdsUrl, *v.StackIdsUrl)
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.ImportStacksToStackSetInput_StackSetName, *v.StackSetName)
+	}
+}
+
 type ImportStacksToStackSetOutput struct {
 
 	// The unique identifier for the StackSet operation.
@@ -85,13 +119,32 @@ type ImportStacksToStackSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportStacksToStackSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportStacksToStackSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportStacksToStackSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.ImportStacksToStackSetOutput_OperationId, *v.OperationId)
+	}
+}
+func (v *ImportStacksToStackSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportStacksToStackSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportStacksToStackSetOutput_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.ImportStacksToStackSetOutput_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportStacksToStackSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpImportStacksToStackSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportStacksToStackSet, schemas.ImportStacksToStackSetInput, schemas.ImportStacksToStackSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpImportStacksToStackSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportStacksToStackSet, schemas.ImportStacksToStackSetInput, schemas.ImportStacksToStackSetOutput), output: &ImportStacksToStackSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

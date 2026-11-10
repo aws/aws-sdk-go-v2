@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeResourceScanInput struct {
 	ResourceScanId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeResourceScanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResourceScanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourceScanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceScanId != nil {
+		s.WriteString(schemas.DescribeResourceScanInput_ResourceScanId, *v.ResourceScanId)
+	}
 }
 
 type DescribeResourceScanOutput struct {
@@ -100,13 +114,88 @@ type DescribeResourceScanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResourceScanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResourceScanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourceScanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeResourceScanOutput_EndTime, *v.EndTime)
+	}
+	if v.PercentageCompleted != nil {
+		s.WriteFloat64(schemas.DescribeResourceScanOutput_PercentageCompleted, *v.PercentageCompleted)
+	}
+	if v.ResourceScanId != nil {
+		s.WriteString(schemas.DescribeResourceScanOutput_ResourceScanId, *v.ResourceScanId)
+	}
+	if v.ResourceTypes != nil {
+		serializeResourceTypes(s, schemas.DescribeResourceScanOutput_ResourceTypes, v.ResourceTypes)
+	}
+	if v.ResourcesRead != nil {
+		s.WriteInt32(schemas.DescribeResourceScanOutput_ResourcesRead, *v.ResourcesRead)
+	}
+	if v.ResourcesScanned != nil {
+		s.WriteInt32(schemas.DescribeResourceScanOutput_ResourcesScanned, *v.ResourcesScanned)
+	}
+	if v.ScanFilters != nil {
+		serializeScanFilters(s, schemas.DescribeResourceScanOutput_ScanFilters, v.ScanFilters)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeResourceScanOutput_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeResourceScanOutput_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DescribeResourceScanOutput_StatusReason, *v.StatusReason)
+	}
+}
+func (v *DescribeResourceScanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeResourceScanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeResourceScanOutput_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeResourceScanOutput_EndTime, v.EndTime)
+		case schemas.DescribeResourceScanOutput_PercentageCompleted:
+			v.PercentageCompleted = new(float64)
+			return d.ReadFloat64(schemas.DescribeResourceScanOutput_PercentageCompleted, v.PercentageCompleted)
+		case schemas.DescribeResourceScanOutput_ResourceScanId:
+			v.ResourceScanId = new(string)
+			return d.ReadString(schemas.DescribeResourceScanOutput_ResourceScanId, v.ResourceScanId)
+		case schemas.DescribeResourceScanOutput_ResourceTypes:
+			return deserializeResourceTypes(d, schemas.DescribeResourceScanOutput_ResourceTypes, &v.ResourceTypes)
+		case schemas.DescribeResourceScanOutput_ResourcesRead:
+			v.ResourcesRead = new(int32)
+			return d.ReadInt32(schemas.DescribeResourceScanOutput_ResourcesRead, v.ResourcesRead)
+		case schemas.DescribeResourceScanOutput_ResourcesScanned:
+			v.ResourcesScanned = new(int32)
+			return d.ReadInt32(schemas.DescribeResourceScanOutput_ResourcesScanned, v.ResourcesScanned)
+		case schemas.DescribeResourceScanOutput_ScanFilters:
+			return deserializeScanFilters(d, schemas.DescribeResourceScanOutput_ScanFilters, &v.ScanFilters)
+		case schemas.DescribeResourceScanOutput_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeResourceScanOutput_StartTime, v.StartTime)
+		case schemas.DescribeResourceScanOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeResourceScanOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceScanStatus(ev)
+			return nil
+		case schemas.DescribeResourceScanOutput_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DescribeResourceScanOutput_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeResourceScanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeResourceScan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourceScan, schemas.DescribeResourceScanInput, schemas.DescribeResourceScanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeResourceScan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourceScan, schemas.DescribeResourceScanInput, schemas.DescribeResourceScanOutput), output: &DescribeResourceScanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

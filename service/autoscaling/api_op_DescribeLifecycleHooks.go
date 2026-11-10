@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,33 @@ type DescribeLifecycleHooksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLifecycleHooksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLifecycleHooksType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLifecycleHooksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DescribeLifecycleHooksType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.LifecycleHookNames != nil {
+		serializeLifecycleHookNames(s, schemas.DescribeLifecycleHooksType_LifecycleHookNames, v.LifecycleHookNames)
+	}
+}
+func (v *DescribeLifecycleHooksInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLifecycleHooksType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLifecycleHooksType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DescribeLifecycleHooksType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DescribeLifecycleHooksType_LifecycleHookNames:
+			return deserializeLifecycleHookNames(d, schemas.DescribeLifecycleHooksType_LifecycleHookNames, &v.LifecycleHookNames)
+		}
+		return nil
+	})
+}
+
 type DescribeLifecycleHooksOutput struct {
 
 	// The lifecycle hooks for the specified group.
@@ -49,13 +78,31 @@ type DescribeLifecycleHooksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLifecycleHooksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLifecycleHooksAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLifecycleHooksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleHooks != nil {
+		serializeLifecycleHooks(s, schemas.DescribeLifecycleHooksAnswer_LifecycleHooks, v.LifecycleHooks)
+	}
+}
+func (v *DescribeLifecycleHooksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLifecycleHooksAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLifecycleHooksAnswer_LifecycleHooks:
+			return deserializeLifecycleHooks(d, schemas.DescribeLifecycleHooksAnswer_LifecycleHooks, &v.LifecycleHooks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLifecycleHooksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeLifecycleHooks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLifecycleHooks, schemas.DescribeLifecycleHooksType, schemas.DescribeLifecycleHooksAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeLifecycleHooks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLifecycleHooks, schemas.DescribeLifecycleHooksType, schemas.DescribeLifecycleHooksAnswer), output: &DescribeLifecycleHooksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

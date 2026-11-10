@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,33 @@ type ModifyClusterMaintenanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterMaintenanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterMaintenanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterMaintenanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ModifyClusterMaintenanceMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.DeferMaintenance != nil {
+		s.WriteBool(schemas.ModifyClusterMaintenanceMessage_DeferMaintenance, *v.DeferMaintenance)
+	}
+	if v.DeferMaintenanceDuration != nil {
+		s.WriteInt32(schemas.ModifyClusterMaintenanceMessage_DeferMaintenanceDuration, *v.DeferMaintenanceDuration)
+	}
+	if v.DeferMaintenanceEndTime != nil {
+		s.WriteTime(schemas.ModifyClusterMaintenanceMessage_DeferMaintenanceEndTime, *v.DeferMaintenanceEndTime)
+	}
+	if v.DeferMaintenanceIdentifier != nil {
+		s.WriteString(schemas.ModifyClusterMaintenanceMessage_DeferMaintenanceIdentifier, *v.DeferMaintenanceIdentifier)
+	}
+	if v.DeferMaintenanceStartTime != nil {
+		s.WriteTime(schemas.ModifyClusterMaintenanceMessage_DeferMaintenanceStartTime, *v.DeferMaintenanceStartTime)
+	}
+}
+
 type ModifyClusterMaintenanceOutput struct {
 
 	// Describes a cluster.
@@ -64,13 +93,34 @@ type ModifyClusterMaintenanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterMaintenanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterMaintenanceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterMaintenanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.ModifyClusterMaintenanceResult_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyClusterMaintenanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyClusterMaintenanceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyClusterMaintenanceResult_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyClusterMaintenanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyClusterMaintenance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyClusterMaintenance, schemas.ModifyClusterMaintenanceMessage, schemas.ModifyClusterMaintenanceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyClusterMaintenance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyClusterMaintenance, schemas.ModifyClusterMaintenanceMessage, schemas.ModifyClusterMaintenanceResult), output: &ModifyClusterMaintenanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

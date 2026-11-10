@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,33 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBInstanceAutomatedBackupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBInstanceAutomatedBackupsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBInstanceAutomatedBackupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceAutomatedBackupsArn != nil {
+		s.WriteString(schemas.DescribeDBInstanceAutomatedBackupsMessage_DBInstanceAutomatedBackupsArn, *v.DBInstanceAutomatedBackupsArn)
+	}
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.DescribeDBInstanceAutomatedBackupsMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.DbiResourceId != nil {
+		s.WriteString(schemas.DescribeDBInstanceAutomatedBackupsMessage_DbiResourceId, *v.DbiResourceId)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDBInstanceAutomatedBackupsMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBInstanceAutomatedBackupsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBInstanceAutomatedBackupsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 // Contains the result of a successful invocation of the
 // DescribeDBInstanceAutomatedBackups action.
 type DescribeDBInstanceAutomatedBackupsOutput struct {
@@ -108,13 +137,37 @@ type DescribeDBInstanceAutomatedBackupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBInstanceAutomatedBackupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBInstanceAutomatedBackupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBInstanceAutomatedBackupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceAutomatedBackups != nil {
+		serializeDBInstanceAutomatedBackupList(s, schemas.DBInstanceAutomatedBackupMessage_DBInstanceAutomatedBackups, v.DBInstanceAutomatedBackups)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DBInstanceAutomatedBackupMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDBInstanceAutomatedBackupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBInstanceAutomatedBackupMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBInstanceAutomatedBackupMessage_DBInstanceAutomatedBackups:
+			return deserializeDBInstanceAutomatedBackupList(d, schemas.DBInstanceAutomatedBackupMessage_DBInstanceAutomatedBackups, &v.DBInstanceAutomatedBackups)
+		case schemas.DBInstanceAutomatedBackupMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DBInstanceAutomatedBackupMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBInstanceAutomatedBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBInstanceAutomatedBackups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBInstanceAutomatedBackups, schemas.DescribeDBInstanceAutomatedBackupsMessage, schemas.DBInstanceAutomatedBackupMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBInstanceAutomatedBackups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBInstanceAutomatedBackups, schemas.DescribeDBInstanceAutomatedBackupsMessage, schemas.DBInstanceAutomatedBackupMessage), output: &DescribeDBInstanceAutomatedBackupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

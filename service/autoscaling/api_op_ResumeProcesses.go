@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,33 @@ type ResumeProcessesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeProcessesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalingProcessQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeProcessesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.ScalingProcessQuery_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.ScalingProcesses != nil {
+		serializeProcessNames(s, schemas.ScalingProcessQuery_ScalingProcesses, v.ScalingProcesses)
+	}
+}
+func (v *ResumeProcessesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalingProcessQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalingProcessQuery_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.ScalingProcessQuery_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.ScalingProcessQuery_ScalingProcesses:
+			return deserializeProcessNames(d, schemas.ScalingProcessQuery_ScalingProcesses, &v.ScalingProcesses)
+		}
+		return nil
+	})
+}
+
 type ResumeProcessesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +97,26 @@ type ResumeProcessesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeProcessesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeProcessesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ResumeProcessesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResumeProcessesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpResumeProcesses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeProcesses, schemas.ScalingProcessQuery, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpResumeProcesses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeProcesses, schemas.ScalingProcessQuery, nil), output: &ResumeProcessesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

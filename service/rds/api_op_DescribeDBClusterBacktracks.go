@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -100,6 +102,30 @@ type DescribeDBClusterBacktracksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBClusterBacktracksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBClusterBacktracksMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBClusterBacktracksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BacktrackIdentifier != nil {
+		s.WriteString(schemas.DescribeDBClusterBacktracksMessage_BacktrackIdentifier, *v.BacktrackIdentifier)
+	}
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeDBClusterBacktracksMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDBClusterBacktracksMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBClusterBacktracksMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBClusterBacktracksMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 // Contains the result of a successful invocation of the
 // DescribeDBClusterBacktracks action.
 type DescribeDBClusterBacktracksOutput struct {
@@ -117,13 +143,37 @@ type DescribeDBClusterBacktracksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBClusterBacktracksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBClusterBacktrackMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBClusterBacktracksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterBacktracks != nil {
+		serializeDBClusterBacktrackList(s, schemas.DBClusterBacktrackMessage_DBClusterBacktracks, v.DBClusterBacktracks)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DBClusterBacktrackMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDBClusterBacktracksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBClusterBacktrackMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBClusterBacktrackMessage_DBClusterBacktracks:
+			return deserializeDBClusterBacktrackList(d, schemas.DBClusterBacktrackMessage_DBClusterBacktracks, &v.DBClusterBacktracks)
+		case schemas.DBClusterBacktrackMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DBClusterBacktrackMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBClusterBacktracksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBClusterBacktracks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterBacktracks, schemas.DescribeDBClusterBacktracksMessage, schemas.DBClusterBacktrackMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBClusterBacktracks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterBacktracks, schemas.DescribeDBClusterBacktracksMessage, schemas.DBClusterBacktrackMessage), output: &DescribeDBClusterBacktracksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

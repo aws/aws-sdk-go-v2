@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,24 @@ type GetTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.GetTemplateInput_ChangeSetName, *v.ChangeSetName)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.GetTemplateInput_StackName, *v.StackName)
+	}
+	if v.TemplateStage != "" {
+		s.WriteString(schemas.GetTemplateInput_TemplateStage, string(v.TemplateStage))
+	}
+}
+
 // The output for GetTemplate action.
 type GetTemplateOutput struct {
 
@@ -80,13 +100,37 @@ type GetTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StagesAvailable != nil {
+		serializeStageList(s, schemas.GetTemplateOutput_StagesAvailable, v.StagesAvailable)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.GetTemplateOutput_TemplateBody, *v.TemplateBody)
+	}
+}
+func (v *GetTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTemplateOutput_StagesAvailable:
+			return deserializeStageList(d, schemas.GetTemplateOutput_StagesAvailable, &v.StagesAvailable)
+		case schemas.GetTemplateOutput_TemplateBody:
+			v.TemplateBody = new(string)
+			return d.ReadString(schemas.GetTemplateOutput_TemplateBody, v.TemplateBody)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplate, schemas.GetTemplateInput, schemas.GetTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplate, schemas.GetTemplateInput, schemas.GetTemplateOutput), output: &GetTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

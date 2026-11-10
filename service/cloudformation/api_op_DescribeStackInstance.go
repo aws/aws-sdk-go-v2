@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,27 @@ type DescribeStackInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStackInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStackInstanceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStackInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallAs != "" {
+		s.WriteString(schemas.DescribeStackInstanceInput_CallAs, string(v.CallAs))
+	}
+	if v.StackInstanceAccount != nil {
+		s.WriteString(schemas.DescribeStackInstanceInput_StackInstanceAccount, *v.StackInstanceAccount)
+	}
+	if v.StackInstanceRegion != nil {
+		s.WriteString(schemas.DescribeStackInstanceInput_StackInstanceRegion, *v.StackInstanceRegion)
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.DescribeStackInstanceInput_StackSetName, *v.StackSetName)
+	}
+}
+
 type DescribeStackInstanceOutput struct {
 
 	// The stack instance that matches the specified request parameters.
@@ -80,13 +103,34 @@ type DescribeStackInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStackInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStackInstanceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStackInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackInstance != nil {
+		s.WriteStruct(schemas.DescribeStackInstanceOutput_StackInstance)
+		v.StackInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeStackInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStackInstanceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStackInstanceOutput_StackInstance:
+			v.StackInstance = &types.StackInstance{}
+			return v.StackInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStackInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeStackInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStackInstance, schemas.DescribeStackInstanceInput, schemas.DescribeStackInstanceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeStackInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStackInstance, schemas.DescribeStackInstanceInput, schemas.DescribeStackInstanceOutput), output: &DescribeStackInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

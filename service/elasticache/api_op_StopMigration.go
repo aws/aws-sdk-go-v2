@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type StopMigrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMigrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMigrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerlessCacheName != nil {
+		s.WriteString(schemas.StopMigrationRequest_ServerlessCacheName, *v.ServerlessCacheName)
+	}
+}
+
 type StopMigrationOutput struct {
 
 	// Provides the details of the serverless cache for which the data sync stopped.
@@ -48,13 +62,34 @@ type StopMigrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMigrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMigrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMigrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerlessCache != nil {
+		s.WriteStruct(schemas.StopMigrationResponse_ServerlessCache)
+		v.ServerlessCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopMigrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopMigrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopMigrationResponse_ServerlessCache:
+			v.ServerlessCache = &types.ServerlessCache{}
+			return v.ServerlessCache.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpStopMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMigration, schemas.StopMigrationRequest, schemas.StopMigrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStopMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMigration, schemas.StopMigrationRequest, schemas.StopMigrationResponse), output: &StopMigrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

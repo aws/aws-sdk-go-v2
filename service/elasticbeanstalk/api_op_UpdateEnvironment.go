@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -101,6 +103,53 @@ type UpdateEnvironmentInput struct {
 	VersionLabel *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.UpdateEnvironmentMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEnvironmentMessage_Description, *v.Description)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.UpdateEnvironmentMessage_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.UpdateEnvironmentMessage_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.UpdateEnvironmentMessage_GroupName, *v.GroupName)
+	}
+	if v.OptionSettings != nil {
+		serializeConfigurationOptionSettingsList(s, schemas.UpdateEnvironmentMessage_OptionSettings, v.OptionSettings)
+	}
+	if v.OptionsToRemove != nil {
+		serializeOptionsSpecifierList(s, schemas.UpdateEnvironmentMessage_OptionsToRemove, v.OptionsToRemove)
+	}
+	if v.PlatformArn != nil {
+		s.WriteString(schemas.UpdateEnvironmentMessage_PlatformArn, *v.PlatformArn)
+	}
+	if v.SolutionStackName != nil {
+		s.WriteString(schemas.UpdateEnvironmentMessage_SolutionStackName, *v.SolutionStackName)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.UpdateEnvironmentMessage_TemplateName, *v.TemplateName)
+	}
+	if v.Tier != nil {
+		s.WriteStruct(schemas.UpdateEnvironmentMessage_Tier)
+		v.Tier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.UpdateEnvironmentMessage_VersionLabel, *v.VersionLabel)
+	}
 }
 
 // Describes the properties of an environment.
@@ -226,13 +275,167 @@ type UpdateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnvironmentDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbortableOperationInProgress != nil {
+		s.WriteBool(schemas.EnvironmentDescription_AbortableOperationInProgress, *v.AbortableOperationInProgress)
+	}
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.EnvironmentDescription_ApplicationName, *v.ApplicationName)
+	}
+	if v.CNAME != nil {
+		s.WriteString(schemas.EnvironmentDescription_CNAME, *v.CNAME)
+	}
+	if v.DateCreated != nil {
+		s.WriteTime(schemas.EnvironmentDescription_DateCreated, *v.DateCreated)
+	}
+	if v.DateUpdated != nil {
+		s.WriteTime(schemas.EnvironmentDescription_DateUpdated, *v.DateUpdated)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.EnvironmentDescription_Description, *v.Description)
+	}
+	if v.EndpointURL != nil {
+		s.WriteString(schemas.EnvironmentDescription_EndpointURL, *v.EndpointURL)
+	}
+	if v.EnvironmentArn != nil {
+		s.WriteString(schemas.EnvironmentDescription_EnvironmentArn, *v.EnvironmentArn)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.EnvironmentDescription_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentLinks != nil {
+		serializeEnvironmentLinks(s, schemas.EnvironmentDescription_EnvironmentLinks, v.EnvironmentLinks)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.EnvironmentDescription_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.Health != "" {
+		s.WriteString(schemas.EnvironmentDescription_Health, string(v.Health))
+	}
+	if v.HealthStatus != "" {
+		s.WriteString(schemas.EnvironmentDescription_HealthStatus, string(v.HealthStatus))
+	}
+	if v.OperationsRole != nil {
+		s.WriteString(schemas.EnvironmentDescription_OperationsRole, *v.OperationsRole)
+	}
+	if v.PlatformArn != nil {
+		s.WriteString(schemas.EnvironmentDescription_PlatformArn, *v.PlatformArn)
+	}
+	if v.Resources != nil {
+		s.WriteStruct(schemas.EnvironmentDescription_Resources)
+		v.Resources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SolutionStackName != nil {
+		s.WriteString(schemas.EnvironmentDescription_SolutionStackName, *v.SolutionStackName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EnvironmentDescription_Status, string(v.Status))
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.EnvironmentDescription_TemplateName, *v.TemplateName)
+	}
+	if v.Tier != nil {
+		s.WriteStruct(schemas.EnvironmentDescription_Tier)
+		v.Tier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.EnvironmentDescription_VersionLabel, *v.VersionLabel)
+	}
+}
+func (v *UpdateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnvironmentDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnvironmentDescription_AbortableOperationInProgress:
+			v.AbortableOperationInProgress = new(bool)
+			return d.ReadBool(schemas.EnvironmentDescription_AbortableOperationInProgress, v.AbortableOperationInProgress)
+		case schemas.EnvironmentDescription_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.EnvironmentDescription_ApplicationName, v.ApplicationName)
+		case schemas.EnvironmentDescription_CNAME:
+			v.CNAME = new(string)
+			return d.ReadString(schemas.EnvironmentDescription_CNAME, v.CNAME)
+		case schemas.EnvironmentDescription_DateCreated:
+			v.DateCreated = new(time.Time)
+			return d.ReadTime(schemas.EnvironmentDescription_DateCreated, v.DateCreated)
+		case schemas.EnvironmentDescription_DateUpdated:
+			v.DateUpdated = new(time.Time)
+			return d.ReadTime(schemas.EnvironmentDescription_DateUpdated, v.DateUpdated)
+		case schemas.EnvironmentDescription_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.EnvironmentDescription_Description, v.Description)
+		case schemas.EnvironmentDescription_EndpointURL:
+			v.EndpointURL = new(string)
+			return d.ReadString(schemas.EnvironmentDescription_EndpointURL, v.EndpointURL)
+		case schemas.EnvironmentDescription_EnvironmentArn:
+			v.EnvironmentArn = new(string)
+			return d.ReadString(schemas.EnvironmentDescription_EnvironmentArn, v.EnvironmentArn)
+		case schemas.EnvironmentDescription_EnvironmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.EnvironmentDescription_EnvironmentId, v.EnvironmentId)
+		case schemas.EnvironmentDescription_EnvironmentLinks:
+			return deserializeEnvironmentLinks(d, schemas.EnvironmentDescription_EnvironmentLinks, &v.EnvironmentLinks)
+		case schemas.EnvironmentDescription_EnvironmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.EnvironmentDescription_EnvironmentName, v.EnvironmentName)
+		case schemas.EnvironmentDescription_Health:
+			var ev string
+			if err := d.ReadString(schemas.EnvironmentDescription_Health, &ev); err != nil {
+				return err
+			}
+			v.Health = types.EnvironmentHealth(ev)
+			return nil
+		case schemas.EnvironmentDescription_HealthStatus:
+			var ev string
+			if err := d.ReadString(schemas.EnvironmentDescription_HealthStatus, &ev); err != nil {
+				return err
+			}
+			v.HealthStatus = types.EnvironmentHealthStatus(ev)
+			return nil
+		case schemas.EnvironmentDescription_OperationsRole:
+			v.OperationsRole = new(string)
+			return d.ReadString(schemas.EnvironmentDescription_OperationsRole, v.OperationsRole)
+		case schemas.EnvironmentDescription_PlatformArn:
+			v.PlatformArn = new(string)
+			return d.ReadString(schemas.EnvironmentDescription_PlatformArn, v.PlatformArn)
+		case schemas.EnvironmentDescription_Resources:
+			v.Resources = &types.EnvironmentResourcesDescription{}
+			return v.Resources.Deserialize(d)
+		case schemas.EnvironmentDescription_SolutionStackName:
+			v.SolutionStackName = new(string)
+			return d.ReadString(schemas.EnvironmentDescription_SolutionStackName, v.SolutionStackName)
+		case schemas.EnvironmentDescription_Status:
+			var ev string
+			if err := d.ReadString(schemas.EnvironmentDescription_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EnvironmentStatus(ev)
+			return nil
+		case schemas.EnvironmentDescription_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.EnvironmentDescription_TemplateName, v.TemplateName)
+		case schemas.EnvironmentDescription_Tier:
+			v.Tier = &types.EnvironmentTier{}
+			return v.Tier.Deserialize(d)
+		case schemas.EnvironmentDescription_VersionLabel:
+			v.VersionLabel = new(string)
+			return d.ReadString(schemas.EnvironmentDescription_VersionLabel, v.VersionLabel)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentMessage, schemas.EnvironmentDescription)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentMessage, schemas.EnvironmentDescription), output: &UpdateEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

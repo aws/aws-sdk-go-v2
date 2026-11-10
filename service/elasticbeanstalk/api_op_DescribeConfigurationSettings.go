@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,24 @@ type DescribeConfigurationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationSettingsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DescribeConfigurationSettingsMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.DescribeConfigurationSettingsMessage_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DescribeConfigurationSettingsMessage_TemplateName, *v.TemplateName)
+	}
+}
+
 // The results from a request to change the configuration settings of an
 // environment.
 type DescribeConfigurationSettingsOutput struct {
@@ -93,13 +113,31 @@ type DescribeConfigurationSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationSettingsDescriptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSettings != nil {
+		serializeConfigurationSettingsDescriptionList(s, schemas.ConfigurationSettingsDescriptions_ConfigurationSettings, v.ConfigurationSettings)
+	}
+}
+func (v *DescribeConfigurationSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationSettingsDescriptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationSettingsDescriptions_ConfigurationSettings:
+			return deserializeConfigurationSettingsDescriptionList(d, schemas.ConfigurationSettingsDescriptions_ConfigurationSettings, &v.ConfigurationSettings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigurationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeConfigurationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationSettings, schemas.DescribeConfigurationSettingsMessage, schemas.ConfigurationSettingsDescriptions)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeConfigurationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationSettings, schemas.DescribeConfigurationSettingsMessage, schemas.ConfigurationSettingsDescriptions), output: &DescribeConfigurationSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

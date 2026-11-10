@@ -5,7 +5,9 @@ package elasticache
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type DescribeCacheSubnetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCacheSubnetGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCacheSubnetGroupsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCacheSubnetGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheSubnetGroupName != nil {
+		s.WriteString(schemas.DescribeCacheSubnetGroupsMessage_CacheSubnetGroupName, *v.CacheSubnetGroupName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeCacheSubnetGroupsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeCacheSubnetGroupsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 // Represents the output of a DescribeCacheSubnetGroups operation.
 type DescribeCacheSubnetGroupsOutput struct {
 
@@ -68,13 +88,37 @@ type DescribeCacheSubnetGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCacheSubnetGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CacheSubnetGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCacheSubnetGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheSubnetGroups != nil {
+		serializeCacheSubnetGroups(s, schemas.CacheSubnetGroupMessage_CacheSubnetGroups, v.CacheSubnetGroups)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.CacheSubnetGroupMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeCacheSubnetGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CacheSubnetGroupMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CacheSubnetGroupMessage_CacheSubnetGroups:
+			return deserializeCacheSubnetGroups(d, schemas.CacheSubnetGroupMessage_CacheSubnetGroups, &v.CacheSubnetGroups)
+		case schemas.CacheSubnetGroupMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.CacheSubnetGroupMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCacheSubnetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeCacheSubnetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCacheSubnetGroups, schemas.DescribeCacheSubnetGroupsMessage, schemas.CacheSubnetGroupMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeCacheSubnetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCacheSubnetGroups, schemas.DescribeCacheSubnetGroupsMessage, schemas.CacheSubnetGroupMessage), output: &DescribeCacheSubnetGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

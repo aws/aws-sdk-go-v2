@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type DeleteLifecycleHookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLifecycleHookInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLifecycleHookType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLifecycleHookInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DeleteLifecycleHookType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.LifecycleHookName != nil {
+		s.WriteString(schemas.DeleteLifecycleHookType_LifecycleHookName, *v.LifecycleHookName)
+	}
+}
+func (v *DeleteLifecycleHookInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLifecycleHookType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLifecycleHookType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DeleteLifecycleHookType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DeleteLifecycleHookType_LifecycleHookName:
+			v.LifecycleHookName = new(string)
+			return d.ReadString(schemas.DeleteLifecycleHookType_LifecycleHookName, v.LifecycleHookName)
+		}
+		return nil
+	})
+}
+
 type DeleteLifecycleHookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +78,26 @@ type DeleteLifecycleHookOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLifecycleHookOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLifecycleHookAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLifecycleHookOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLifecycleHookOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLifecycleHookAnswer, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLifecycleHookMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteLifecycleHook{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLifecycleHook, schemas.DeleteLifecycleHookType, schemas.DeleteLifecycleHookAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteLifecycleHook{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLifecycleHook, schemas.DeleteLifecycleHookType, schemas.DeleteLifecycleHookAnswer), output: &DeleteLifecycleHookOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

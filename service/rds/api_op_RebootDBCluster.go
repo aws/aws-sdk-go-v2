@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,18 @@ type RebootDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootDBClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootDBClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.RebootDBClusterMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+}
+
 type RebootDBClusterOutput struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster.
@@ -83,13 +97,34 @@ type RebootDBClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootDBClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootDBClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootDBClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBCluster != nil {
+		s.WriteStruct(schemas.RebootDBClusterResult_DBCluster)
+		v.DBCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RebootDBClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootDBClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootDBClusterResult_DBCluster:
+			v.DBCluster = &types.DBCluster{}
+			return v.DBCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRebootDBCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootDBCluster, schemas.RebootDBClusterMessage, schemas.RebootDBClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRebootDBCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootDBCluster, schemas.RebootDBClusterMessage, schemas.RebootDBClusterResult), output: &RebootDBClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -112,6 +114,47 @@ type ActivateTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivateTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivateTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivateTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoUpdate != nil {
+		s.WriteBool(schemas.ActivateTypeInput_AutoUpdate, *v.AutoUpdate)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.ActivateTypeInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.LoggingConfig != nil {
+		s.WriteStruct(schemas.ActivateTypeInput_LoggingConfig)
+		v.LoggingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MajorVersion != nil {
+		s.WriteInt64(schemas.ActivateTypeInput_MajorVersion, *v.MajorVersion)
+	}
+	if v.PublicTypeArn != nil {
+		s.WriteString(schemas.ActivateTypeInput_PublicTypeArn, *v.PublicTypeArn)
+	}
+	if v.PublisherId != nil {
+		s.WriteString(schemas.ActivateTypeInput_PublisherId, *v.PublisherId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ActivateTypeInput_Type, string(v.Type))
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.ActivateTypeInput_TypeName, *v.TypeName)
+	}
+	if v.TypeNameAlias != nil {
+		s.WriteString(schemas.ActivateTypeInput_TypeNameAlias, *v.TypeNameAlias)
+	}
+	if v.VersionBump != "" {
+		s.WriteString(schemas.ActivateTypeInput_VersionBump, string(v.VersionBump))
+	}
+}
+
 type ActivateTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the activated extension in this account and
@@ -124,13 +167,32 @@ type ActivateTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivateTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivateTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivateTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ActivateTypeOutput_Arn, *v.Arn)
+	}
+}
+func (v *ActivateTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivateTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivateTypeOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ActivateTypeOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationActivateTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpActivateType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ActivateType, schemas.ActivateTypeInput, schemas.ActivateTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpActivateType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ActivateType, schemas.ActivateTypeInput, schemas.ActivateTypeOutput), output: &ActivateTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

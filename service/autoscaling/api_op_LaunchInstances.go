@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,36 @@ type LaunchInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LaunchInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LaunchInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.LaunchInstancesRequest_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.AvailabilityZoneIds != nil {
+		serializeAvailabilityZoneIdsLimit1(s, schemas.LaunchInstancesRequest_AvailabilityZoneIds, v.AvailabilityZoneIds)
+	}
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZonesLimit1(s, schemas.LaunchInstancesRequest_AvailabilityZones, v.AvailabilityZones)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.LaunchInstancesRequest_ClientToken, *v.ClientToken)
+	}
+	if v.RequestedCapacity != nil {
+		s.WriteInt32(schemas.LaunchInstancesRequest_RequestedCapacity, *v.RequestedCapacity)
+	}
+	if v.RetryStrategy != "" {
+		s.WriteString(schemas.LaunchInstancesRequest_RetryStrategy, string(v.RetryStrategy))
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdsLimit1(s, schemas.LaunchInstancesRequest_SubnetIds, v.SubnetIds)
+	}
+}
+
 type LaunchInstancesOutput struct {
 
 	//  The name of the Auto Scaling group where the instances were launched.
@@ -96,13 +128,48 @@ type LaunchInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LaunchInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchInstancesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LaunchInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.LaunchInstancesResult_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.LaunchInstancesResult_ClientToken, *v.ClientToken)
+	}
+	if v.Errors != nil {
+		serializeLaunchInstancesErrors(s, schemas.LaunchInstancesResult_Errors, v.Errors)
+	}
+	if v.Instances != nil {
+		serializeInstanceCollections(s, schemas.LaunchInstancesResult_Instances, v.Instances)
+	}
+}
+func (v *LaunchInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LaunchInstancesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LaunchInstancesResult_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.LaunchInstancesResult_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.LaunchInstancesResult_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.LaunchInstancesResult_ClientToken, v.ClientToken)
+		case schemas.LaunchInstancesResult_Errors:
+			return deserializeLaunchInstancesErrors(d, schemas.LaunchInstancesResult_Errors, &v.Errors)
+		case schemas.LaunchInstancesResult_Instances:
+			return deserializeInstanceCollections(d, schemas.LaunchInstancesResult_Instances, &v.Instances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationLaunchInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpLaunchInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.LaunchInstances, schemas.LaunchInstancesRequest, schemas.LaunchInstancesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpLaunchInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.LaunchInstances, schemas.LaunchInstancesRequest, schemas.LaunchInstancesResult), output: &LaunchInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

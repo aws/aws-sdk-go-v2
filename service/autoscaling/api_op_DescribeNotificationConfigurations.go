@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,45 @@ type DescribeNotificationConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotificationConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotificationConfigurationsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotificationConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupNames != nil {
+		serializeAutoScalingGroupNames(s, schemas.DescribeNotificationConfigurationsType_AutoScalingGroupNames, v.AutoScalingGroupNames)
+	}
+	if v.IncludeManagedResources != nil {
+		s.WriteBool(schemas.DescribeNotificationConfigurationsType_IncludeManagedResources, *v.IncludeManagedResources)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeNotificationConfigurationsType_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeNotificationConfigurationsType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeNotificationConfigurationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNotificationConfigurationsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNotificationConfigurationsType_AutoScalingGroupNames:
+			return deserializeAutoScalingGroupNames(d, schemas.DescribeNotificationConfigurationsType_AutoScalingGroupNames, &v.AutoScalingGroupNames)
+		case schemas.DescribeNotificationConfigurationsType_IncludeManagedResources:
+			v.IncludeManagedResources = new(bool)
+			return d.ReadBool(schemas.DescribeNotificationConfigurationsType_IncludeManagedResources, v.IncludeManagedResources)
+		case schemas.DescribeNotificationConfigurationsType_MaxRecords:
+			v.MaxRecords = new(int32)
+			return d.ReadInt32(schemas.DescribeNotificationConfigurationsType_MaxRecords, v.MaxRecords)
+		case schemas.DescribeNotificationConfigurationsType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeNotificationConfigurationsType_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type DescribeNotificationConfigurationsOutput struct {
 
 	// The notification configurations.
@@ -71,13 +112,37 @@ type DescribeNotificationConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotificationConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotificationConfigurationsAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotificationConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeNotificationConfigurationsAnswer_NextToken, *v.NextToken)
+	}
+	if v.NotificationConfigurations != nil {
+		serializeNotificationConfigurations(s, schemas.DescribeNotificationConfigurationsAnswer_NotificationConfigurations, v.NotificationConfigurations)
+	}
+}
+func (v *DescribeNotificationConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNotificationConfigurationsAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNotificationConfigurationsAnswer_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeNotificationConfigurationsAnswer_NextToken, v.NextToken)
+		case schemas.DescribeNotificationConfigurationsAnswer_NotificationConfigurations:
+			return deserializeNotificationConfigurations(d, schemas.DescribeNotificationConfigurationsAnswer_NotificationConfigurations, &v.NotificationConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNotificationConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeNotificationConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotificationConfigurations, schemas.DescribeNotificationConfigurationsType, schemas.DescribeNotificationConfigurationsAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeNotificationConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotificationConfigurations, schemas.DescribeNotificationConfigurationsType, schemas.DescribeNotificationConfigurationsAnswer), output: &DescribeNotificationConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,24 @@ type ListOpenIDConnectProviderTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpenIDConnectProviderTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpenIDConnectProviderTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpenIDConnectProviderTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListOpenIDConnectProviderTagsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListOpenIDConnectProviderTagsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.OpenIDConnectProviderArn != nil {
+		s.WriteString(schemas.ListOpenIDConnectProviderTagsRequest_OpenIDConnectProviderArn, *v.OpenIDConnectProviderArn)
+	}
+}
+
 type ListOpenIDConnectProviderTagsOutput struct {
 
 	// The list of tags that are currently attached to the OpenID Connect (OIDC)
@@ -94,13 +114,42 @@ type ListOpenIDConnectProviderTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpenIDConnectProviderTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpenIDConnectProviderTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpenIDConnectProviderTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListOpenIDConnectProviderTagsResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListOpenIDConnectProviderTagsResponse_Marker, *v.Marker)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.ListOpenIDConnectProviderTagsResponse_Tags, v.Tags)
+	}
+}
+func (v *ListOpenIDConnectProviderTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOpenIDConnectProviderTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOpenIDConnectProviderTagsResponse_IsTruncated:
+			return d.ReadBool(schemas.ListOpenIDConnectProviderTagsResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListOpenIDConnectProviderTagsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListOpenIDConnectProviderTagsResponse_Marker, v.Marker)
+		case schemas.ListOpenIDConnectProviderTagsResponse_Tags:
+			return deserializetagListType(d, schemas.ListOpenIDConnectProviderTagsResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOpenIDConnectProviderTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListOpenIDConnectProviderTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpenIDConnectProviderTags, schemas.ListOpenIDConnectProviderTagsRequest, schemas.ListOpenIDConnectProviderTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListOpenIDConnectProviderTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpenIDConnectProviderTags, schemas.ListOpenIDConnectProviderTagsRequest, schemas.ListOpenIDConnectProviderTagsResponse), output: &ListOpenIDConnectProviderTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

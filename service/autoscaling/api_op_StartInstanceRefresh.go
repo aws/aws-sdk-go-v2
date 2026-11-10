@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -98,6 +100,54 @@ type StartInstanceRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInstanceRefreshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInstanceRefreshType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInstanceRefreshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.StartInstanceRefreshType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.DesiredConfiguration != nil {
+		s.WriteStruct(schemas.StartInstanceRefreshType_DesiredConfiguration)
+		v.DesiredConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Preferences != nil {
+		s.WriteStruct(schemas.StartInstanceRefreshType_Preferences)
+		v.Preferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Strategy != "" {
+		s.WriteString(schemas.StartInstanceRefreshType_Strategy, string(v.Strategy))
+	}
+}
+func (v *StartInstanceRefreshInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartInstanceRefreshType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartInstanceRefreshType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.StartInstanceRefreshType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.StartInstanceRefreshType_DesiredConfiguration:
+			v.DesiredConfiguration = &types.DesiredConfiguration{}
+			return v.DesiredConfiguration.Deserialize(d)
+		case schemas.StartInstanceRefreshType_Preferences:
+			v.Preferences = &types.RefreshPreferences{}
+			return v.Preferences.Deserialize(d)
+		case schemas.StartInstanceRefreshType_Strategy:
+			var ev string
+			if err := d.ReadString(schemas.StartInstanceRefreshType_Strategy, &ev); err != nil {
+				return err
+			}
+			v.Strategy = types.RefreshStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type StartInstanceRefreshOutput struct {
 
 	// A unique ID for tracking the progress of the instance refresh.
@@ -109,13 +159,32 @@ type StartInstanceRefreshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInstanceRefreshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInstanceRefreshAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInstanceRefreshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceRefreshId != nil {
+		s.WriteString(schemas.StartInstanceRefreshAnswer_InstanceRefreshId, *v.InstanceRefreshId)
+	}
+}
+func (v *StartInstanceRefreshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartInstanceRefreshAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartInstanceRefreshAnswer_InstanceRefreshId:
+			v.InstanceRefreshId = new(string)
+			return d.ReadString(schemas.StartInstanceRefreshAnswer_InstanceRefreshId, v.InstanceRefreshId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartInstanceRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartInstanceRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInstanceRefresh, schemas.StartInstanceRefreshType, schemas.StartInstanceRefreshAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStartInstanceRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInstanceRefresh, schemas.StartInstanceRefreshType, schemas.StartInstanceRefreshAnswer), output: &StartInstanceRefreshOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,34 @@ type PutAccountSettingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountSettingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountSettingType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountSettingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.PutAccountSettingType_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.PutAccountSettingType_Value, *v.Value)
+	}
+}
+func (v *PutAccountSettingInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccountSettingType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAccountSettingType_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PutAccountSettingType_Name, v.Name)
+		case schemas.PutAccountSettingType_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.PutAccountSettingType_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 type PutAccountSettingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +83,26 @@ type PutAccountSettingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountSettingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountSettingAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountSettingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAccountSettingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccountSettingAnswer, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccountSettingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutAccountSetting{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountSetting, schemas.PutAccountSettingType, schemas.PutAccountSettingAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPutAccountSetting{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountSetting, schemas.PutAccountSettingType, schemas.PutAccountSettingAnswer), output: &PutAccountSettingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

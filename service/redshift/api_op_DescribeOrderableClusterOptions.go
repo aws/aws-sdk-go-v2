@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,27 @@ type DescribeOrderableClusterOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrderableClusterOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrderableClusterOptionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrderableClusterOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterVersion != nil {
+		s.WriteString(schemas.DescribeOrderableClusterOptionsMessage_ClusterVersion, *v.ClusterVersion)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeOrderableClusterOptionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeOrderableClusterOptionsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.DescribeOrderableClusterOptionsMessage_NodeType, *v.NodeType)
+	}
+}
+
 // Contains the output from the DescribeOrderableClusterOptions action.
 type DescribeOrderableClusterOptionsOutput struct {
 
@@ -88,13 +111,37 @@ type DescribeOrderableClusterOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrderableClusterOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrderableClusterOptionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrderableClusterOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.OrderableClusterOptionsMessage_Marker, *v.Marker)
+	}
+	if v.OrderableClusterOptions != nil {
+		serializeOrderableClusterOptionsList(s, schemas.OrderableClusterOptionsMessage_OrderableClusterOptions, v.OrderableClusterOptions)
+	}
+}
+func (v *DescribeOrderableClusterOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrderableClusterOptionsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrderableClusterOptionsMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.OrderableClusterOptionsMessage_Marker, v.Marker)
+		case schemas.OrderableClusterOptionsMessage_OrderableClusterOptions:
+			return deserializeOrderableClusterOptionsList(d, schemas.OrderableClusterOptionsMessage_OrderableClusterOptions, &v.OrderableClusterOptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOrderableClusterOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeOrderableClusterOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrderableClusterOptions, schemas.DescribeOrderableClusterOptionsMessage, schemas.OrderableClusterOptionsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeOrderableClusterOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrderableClusterOptions, schemas.DescribeOrderableClusterOptionsMessage, schemas.OrderableClusterOptionsMessage), output: &DescribeOrderableClusterOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

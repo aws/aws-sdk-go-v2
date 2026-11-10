@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,35 @@ type CreatePlatformVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlatformVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePlatformVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePlatformVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.CreatePlatformVersionRequest_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.OptionSettings != nil {
+		serializeConfigurationOptionSettingsList(s, schemas.CreatePlatformVersionRequest_OptionSettings, v.OptionSettings)
+	}
+	if v.PlatformDefinitionBundle != nil {
+		s.WriteStruct(schemas.CreatePlatformVersionRequest_PlatformDefinitionBundle)
+		v.PlatformDefinitionBundle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlatformName != nil {
+		s.WriteString(schemas.CreatePlatformVersionRequest_PlatformName, *v.PlatformName)
+	}
+	if v.PlatformVersion != nil {
+		s.WriteString(schemas.CreatePlatformVersionRequest_PlatformVersion, *v.PlatformVersion)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePlatformVersionRequest_Tags, v.Tags)
+	}
+}
+
 type CreatePlatformVersionOutput struct {
 
 	// The builder used to create the custom platform.
@@ -71,13 +102,42 @@ type CreatePlatformVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlatformVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePlatformVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePlatformVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Builder != nil {
+		s.WriteStruct(schemas.CreatePlatformVersionResult_Builder)
+		v.Builder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlatformSummary != nil {
+		s.WriteStruct(schemas.CreatePlatformVersionResult_PlatformSummary)
+		v.PlatformSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreatePlatformVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePlatformVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePlatformVersionResult_Builder:
+			v.Builder = &types.Builder{}
+			return v.Builder.Deserialize(d)
+		case schemas.CreatePlatformVersionResult_PlatformSummary:
+			v.PlatformSummary = &types.PlatformSummary{}
+			return v.PlatformSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePlatformVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreatePlatformVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlatformVersion, schemas.CreatePlatformVersionRequest, schemas.CreatePlatformVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreatePlatformVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlatformVersion, schemas.CreatePlatformVersionRequest, schemas.CreatePlatformVersionResult), output: &CreatePlatformVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

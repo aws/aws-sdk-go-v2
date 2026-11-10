@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,32 @@ type DescribeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.DescribeEventsInput_ChangeSetName, *v.ChangeSetName)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.DescribeEventsInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEventsInput_NextToken, *v.NextToken)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.DescribeEventsInput_OperationId, *v.OperationId)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DescribeEventsInput_StackName, *v.StackName)
+	}
+}
+
 type DescribeEventsOutput struct {
 
 	// If the request doesn't return all the remaining results, NextToken is set to a
@@ -87,13 +115,37 @@ type DescribeEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEventsOutput_NextToken, *v.NextToken)
+	}
+	if v.OperationEvents != nil {
+		serializeOperationEvents(s, schemas.DescribeEventsOutput_OperationEvents, v.OperationEvents)
+	}
+}
+func (v *DescribeEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEventsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEventsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeEventsOutput_NextToken, v.NextToken)
+		case schemas.DescribeEventsOutput_OperationEvents:
+			return deserializeOperationEvents(d, schemas.DescribeEventsOutput_OperationEvents, &v.OperationEvents)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEvents, schemas.DescribeEventsInput, schemas.DescribeEventsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEvents, schemas.DescribeEventsInput, schemas.DescribeEventsOutput), output: &DescribeEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

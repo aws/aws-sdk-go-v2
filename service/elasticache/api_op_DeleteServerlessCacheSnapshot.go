@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteServerlessCacheSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServerlessCacheSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServerlessCacheSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServerlessCacheSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerlessCacheSnapshotName != nil {
+		s.WriteString(schemas.DeleteServerlessCacheSnapshotRequest_ServerlessCacheSnapshotName, *v.ServerlessCacheSnapshotName)
+	}
+}
+
 type DeleteServerlessCacheSnapshotOutput struct {
 
 	// The snapshot to be deleted. Available for Valkey, Redis OSS and Serverless
@@ -48,13 +62,34 @@ type DeleteServerlessCacheSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServerlessCacheSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServerlessCacheSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServerlessCacheSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerlessCacheSnapshot != nil {
+		s.WriteStruct(schemas.DeleteServerlessCacheSnapshotResponse_ServerlessCacheSnapshot)
+		v.ServerlessCacheSnapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteServerlessCacheSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServerlessCacheSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServerlessCacheSnapshotResponse_ServerlessCacheSnapshot:
+			v.ServerlessCacheSnapshot = &types.ServerlessCacheSnapshot{}
+			return v.ServerlessCacheSnapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServerlessCacheSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteServerlessCacheSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServerlessCacheSnapshot, schemas.DeleteServerlessCacheSnapshotRequest, schemas.DeleteServerlessCacheSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteServerlessCacheSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServerlessCacheSnapshot, schemas.DeleteServerlessCacheSnapshotRequest, schemas.DeleteServerlessCacheSnapshotResponse), output: &DeleteServerlessCacheSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

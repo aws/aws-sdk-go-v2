@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type DescribeDBProxiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBProxiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBProxiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBProxiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBProxyName != nil {
+		s.WriteString(schemas.DescribeDBProxiesRequest_DBProxyName, *v.DBProxyName)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDBProxiesRequest_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBProxiesRequest_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBProxiesRequest_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeDBProxiesOutput struct {
 
 	// A return value representing an arbitrary number of DBProxy data structures.
@@ -67,13 +90,37 @@ type DescribeDBProxiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBProxiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBProxiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBProxiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBProxies != nil {
+		serializeDBProxyList(s, schemas.DescribeDBProxiesResponse_DBProxies, v.DBProxies)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBProxiesResponse_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDBProxiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDBProxiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDBProxiesResponse_DBProxies:
+			return deserializeDBProxyList(d, schemas.DescribeDBProxiesResponse_DBProxies, &v.DBProxies)
+		case schemas.DescribeDBProxiesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeDBProxiesResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBProxiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBProxies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBProxies, schemas.DescribeDBProxiesRequest, schemas.DescribeDBProxiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBProxies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBProxies, schemas.DescribeDBProxiesRequest, schemas.DescribeDBProxiesResponse), output: &DescribeDBProxiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

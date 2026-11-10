@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,18 @@ type DescribeApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationNames != nil {
+		serializeApplicationNamesList(s, schemas.DescribeApplicationsMessage_ApplicationNames, v.ApplicationNames)
+	}
+}
+
 // Result message containing a list of application descriptions.
 type DescribeApplicationsOutput struct {
 
@@ -63,13 +77,31 @@ type DescribeApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationDescriptionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Applications != nil {
+		serializeApplicationDescriptionList(s, schemas.ApplicationDescriptionsMessage_Applications, v.Applications)
+	}
+}
+func (v *DescribeApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationDescriptionsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationDescriptionsMessage_Applications:
+			return deserializeApplicationDescriptionList(d, schemas.ApplicationDescriptionsMessage_Applications, &v.Applications)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplications, schemas.DescribeApplicationsMessage, schemas.ApplicationDescriptionsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplications, schemas.DescribeApplicationsMessage, schemas.ApplicationDescriptionsMessage), output: &DescribeApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

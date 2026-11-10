@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,18 @@ type DeleteLoginProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLoginProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLoginProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLoginProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserName != nil {
+		s.WriteString(schemas.DeleteLoginProfileRequest_UserName, *v.UserName)
+	}
+}
+
 type DeleteLoginProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,13 +79,26 @@ type DeleteLoginProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLoginProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLoginProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLoginProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteLoginProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLoginProfile, schemas.DeleteLoginProfileRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteLoginProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLoginProfile, schemas.DeleteLoginProfileRequest, nil), output: &DeleteLoginProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

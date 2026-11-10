@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -26,6 +28,36 @@ type AccessPoliciesStatus struct {
 	Status *OptionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccessPoliciesStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessPoliciesStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessPoliciesStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Options != nil {
+		s.WriteString(schemas.AccessPoliciesStatus_Options, *v.Options)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.AccessPoliciesStatus_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AccessPoliciesStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessPoliciesStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessPoliciesStatus_Options:
+			v.Options = new(string)
+			return d.ReadString(schemas.AccessPoliciesStatus_Options, v.Options)
+		case schemas.AccessPoliciesStatus_Status:
+			v.Status = &OptionStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Synonyms, stopwords, and stemming options for an analysis scheme. Includes
@@ -73,6 +105,56 @@ type AnalysisOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalysisOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalysisOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalysisOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmicStemming != "" {
+		s.WriteString(schemas.AnalysisOptions_AlgorithmicStemming, string(v.AlgorithmicStemming))
+	}
+	if v.JapaneseTokenizationDictionary != nil {
+		s.WriteString(schemas.AnalysisOptions_JapaneseTokenizationDictionary, *v.JapaneseTokenizationDictionary)
+	}
+	if v.StemmingDictionary != nil {
+		s.WriteString(schemas.AnalysisOptions_StemmingDictionary, *v.StemmingDictionary)
+	}
+	if v.Stopwords != nil {
+		s.WriteString(schemas.AnalysisOptions_Stopwords, *v.Stopwords)
+	}
+	if v.Synonyms != nil {
+		s.WriteString(schemas.AnalysisOptions_Synonyms, *v.Synonyms)
+	}
+}
+func (v *AnalysisOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalysisOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalysisOptions_AlgorithmicStemming:
+			var ev string
+			if err := d.ReadString(schemas.AnalysisOptions_AlgorithmicStemming, &ev); err != nil {
+				return err
+			}
+			v.AlgorithmicStemming = AlgorithmicStemming(ev)
+			return nil
+		case schemas.AnalysisOptions_JapaneseTokenizationDictionary:
+			v.JapaneseTokenizationDictionary = new(string)
+			return d.ReadString(schemas.AnalysisOptions_JapaneseTokenizationDictionary, v.JapaneseTokenizationDictionary)
+		case schemas.AnalysisOptions_StemmingDictionary:
+			v.StemmingDictionary = new(string)
+			return d.ReadString(schemas.AnalysisOptions_StemmingDictionary, v.StemmingDictionary)
+		case schemas.AnalysisOptions_Stopwords:
+			v.Stopwords = new(string)
+			return d.ReadString(schemas.AnalysisOptions_Stopwords, v.Stopwords)
+		case schemas.AnalysisOptions_Synonyms:
+			v.Synonyms = new(string)
+			return d.ReadString(schemas.AnalysisOptions_Synonyms, v.Synonyms)
+		}
+		return nil
+	})
+}
+
 // Configuration information for an analysis scheme. Each analysis scheme has a
 // unique name and specifies the language of the text to be processed. The
 // following options can be configured for an analysis scheme: Synonyms , Stopwords
@@ -99,6 +181,46 @@ type AnalysisScheme struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalysisScheme) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalysisScheme)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalysisScheme) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisOptions != nil {
+		s.WriteStruct(schemas.AnalysisScheme_AnalysisOptions)
+		v.AnalysisOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AnalysisSchemeLanguage != "" {
+		s.WriteString(schemas.AnalysisScheme_AnalysisSchemeLanguage, string(v.AnalysisSchemeLanguage))
+	}
+	if v.AnalysisSchemeName != nil {
+		s.WriteString(schemas.AnalysisScheme_AnalysisSchemeName, *v.AnalysisSchemeName)
+	}
+}
+func (v *AnalysisScheme) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalysisScheme, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalysisScheme_AnalysisOptions:
+			v.AnalysisOptions = &AnalysisOptions{}
+			return v.AnalysisOptions.Deserialize(d)
+		case schemas.AnalysisScheme_AnalysisSchemeLanguage:
+			var ev string
+			if err := d.ReadString(schemas.AnalysisScheme_AnalysisSchemeLanguage, &ev); err != nil {
+				return err
+			}
+			v.AnalysisSchemeLanguage = AnalysisSchemeLanguage(ev)
+			return nil
+		case schemas.AnalysisScheme_AnalysisSchemeName:
+			v.AnalysisSchemeName = new(string)
+			return d.ReadString(schemas.AnalysisScheme_AnalysisSchemeName, v.AnalysisSchemeName)
+		}
+		return nil
+	})
+}
+
 // The status and configuration of an AnalysisScheme .
 type AnalysisSchemeStatus struct {
 
@@ -118,6 +240,38 @@ type AnalysisSchemeStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalysisSchemeStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalysisSchemeStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalysisSchemeStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Options != nil {
+		s.WriteStruct(schemas.AnalysisSchemeStatus_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.AnalysisSchemeStatus_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AnalysisSchemeStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalysisSchemeStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalysisSchemeStatus_Options:
+			v.Options = &AnalysisScheme{}
+			return v.Options.Deserialize(d)
+		case schemas.AnalysisSchemeStatus_Status:
+			v.Status = &OptionStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The status and configuration of the domain's availability options.
 type AvailabilityOptionsStatus struct {
 
@@ -132,6 +286,33 @@ type AvailabilityOptionsStatus struct {
 	Status *OptionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *AvailabilityOptionsStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvailabilityOptionsStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvailabilityOptionsStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.AvailabilityOptionsStatus_Options, v.Options)
+	if v.Status != nil {
+		s.WriteStruct(schemas.AvailabilityOptionsStatus_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AvailabilityOptionsStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvailabilityOptionsStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvailabilityOptionsStatus_Options:
+			return d.ReadBool(schemas.AvailabilityOptionsStatus_Options, &v.Options)
+		case schemas.AvailabilityOptionsStatus_Status:
+			v.Status = &OptionStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Options for a field that contains an array of dates. Present if IndexFieldType
@@ -154,6 +335,52 @@ type DateArrayOptions struct {
 	SourceFields *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DateArrayOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DateArrayOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DateArrayOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.DateArrayOptions_DefaultValue, *v.DefaultValue)
+	}
+	if v.FacetEnabled != nil {
+		s.WriteBool(schemas.DateArrayOptions_FacetEnabled, *v.FacetEnabled)
+	}
+	if v.ReturnEnabled != nil {
+		s.WriteBool(schemas.DateArrayOptions_ReturnEnabled, *v.ReturnEnabled)
+	}
+	if v.SearchEnabled != nil {
+		s.WriteBool(schemas.DateArrayOptions_SearchEnabled, *v.SearchEnabled)
+	}
+	if v.SourceFields != nil {
+		s.WriteString(schemas.DateArrayOptions_SourceFields, *v.SourceFields)
+	}
+}
+func (v *DateArrayOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DateArrayOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DateArrayOptions_DefaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.DateArrayOptions_DefaultValue, v.DefaultValue)
+		case schemas.DateArrayOptions_FacetEnabled:
+			v.FacetEnabled = new(bool)
+			return d.ReadBool(schemas.DateArrayOptions_FacetEnabled, v.FacetEnabled)
+		case schemas.DateArrayOptions_ReturnEnabled:
+			v.ReturnEnabled = new(bool)
+			return d.ReadBool(schemas.DateArrayOptions_ReturnEnabled, v.ReturnEnabled)
+		case schemas.DateArrayOptions_SearchEnabled:
+			v.SearchEnabled = new(bool)
+			return d.ReadBool(schemas.DateArrayOptions_SearchEnabled, v.SearchEnabled)
+		case schemas.DateArrayOptions_SourceFields:
+			v.SourceFields = new(string)
+			return d.ReadString(schemas.DateArrayOptions_SourceFields, v.SourceFields)
+		}
+		return nil
+	})
 }
 
 // Options for a date field. Dates and times are specified in UTC (Coordinated
@@ -196,6 +423,58 @@ type DateOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DateOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DateOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DateOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.DateOptions_DefaultValue, *v.DefaultValue)
+	}
+	if v.FacetEnabled != nil {
+		s.WriteBool(schemas.DateOptions_FacetEnabled, *v.FacetEnabled)
+	}
+	if v.ReturnEnabled != nil {
+		s.WriteBool(schemas.DateOptions_ReturnEnabled, *v.ReturnEnabled)
+	}
+	if v.SearchEnabled != nil {
+		s.WriteBool(schemas.DateOptions_SearchEnabled, *v.SearchEnabled)
+	}
+	if v.SortEnabled != nil {
+		s.WriteBool(schemas.DateOptions_SortEnabled, *v.SortEnabled)
+	}
+	if v.SourceField != nil {
+		s.WriteString(schemas.DateOptions_SourceField, *v.SourceField)
+	}
+}
+func (v *DateOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DateOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DateOptions_DefaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.DateOptions_DefaultValue, v.DefaultValue)
+		case schemas.DateOptions_FacetEnabled:
+			v.FacetEnabled = new(bool)
+			return d.ReadBool(schemas.DateOptions_FacetEnabled, v.FacetEnabled)
+		case schemas.DateOptions_ReturnEnabled:
+			v.ReturnEnabled = new(bool)
+			return d.ReadBool(schemas.DateOptions_ReturnEnabled, v.ReturnEnabled)
+		case schemas.DateOptions_SearchEnabled:
+			v.SearchEnabled = new(bool)
+			return d.ReadBool(schemas.DateOptions_SearchEnabled, v.SearchEnabled)
+		case schemas.DateOptions_SortEnabled:
+			v.SortEnabled = new(bool)
+			return d.ReadBool(schemas.DateOptions_SortEnabled, v.SortEnabled)
+		case schemas.DateOptions_SourceField:
+			v.SourceField = new(string)
+			return d.ReadString(schemas.DateOptions_SourceField, v.SourceField)
+		}
+		return nil
+	})
+}
+
 // Options for a search suggester.
 type DocumentSuggesterOptions struct {
 
@@ -223,6 +502,44 @@ type DocumentSuggesterOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentSuggesterOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentSuggesterOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentSuggesterOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FuzzyMatching != "" {
+		s.WriteString(schemas.DocumentSuggesterOptions_FuzzyMatching, string(v.FuzzyMatching))
+	}
+	if v.SortExpression != nil {
+		s.WriteString(schemas.DocumentSuggesterOptions_SortExpression, *v.SortExpression)
+	}
+	if v.SourceField != nil {
+		s.WriteString(schemas.DocumentSuggesterOptions_SourceField, *v.SourceField)
+	}
+}
+func (v *DocumentSuggesterOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentSuggesterOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentSuggesterOptions_FuzzyMatching:
+			var ev string
+			if err := d.ReadString(schemas.DocumentSuggesterOptions_FuzzyMatching, &ev); err != nil {
+				return err
+			}
+			v.FuzzyMatching = SuggesterFuzzyMatching(ev)
+			return nil
+		case schemas.DocumentSuggesterOptions_SortExpression:
+			v.SortExpression = new(string)
+			return d.ReadString(schemas.DocumentSuggesterOptions_SortExpression, v.SortExpression)
+		case schemas.DocumentSuggesterOptions_SourceField:
+			v.SourceField = new(string)
+			return d.ReadString(schemas.DocumentSuggesterOptions_SourceField, v.SourceField)
+		}
+		return nil
+	})
+}
+
 // The domain's endpoint options.
 type DomainEndpointOptions struct {
 
@@ -233,6 +550,38 @@ type DomainEndpointOptions struct {
 	TLSSecurityPolicy TLSSecurityPolicy
 
 	noSmithyDocumentSerde
+}
+
+func (v *DomainEndpointOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainEndpointOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainEndpointOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnforceHTTPS != nil {
+		s.WriteBool(schemas.DomainEndpointOptions_EnforceHTTPS, *v.EnforceHTTPS)
+	}
+	if v.TLSSecurityPolicy != "" {
+		s.WriteString(schemas.DomainEndpointOptions_TLSSecurityPolicy, string(v.TLSSecurityPolicy))
+	}
+}
+func (v *DomainEndpointOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainEndpointOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainEndpointOptions_EnforceHTTPS:
+			v.EnforceHTTPS = new(bool)
+			return d.ReadBool(schemas.DomainEndpointOptions_EnforceHTTPS, v.EnforceHTTPS)
+		case schemas.DomainEndpointOptions_TLSSecurityPolicy:
+			var ev string
+			if err := d.ReadString(schemas.DomainEndpointOptions_TLSSecurityPolicy, &ev); err != nil {
+				return err
+			}
+			v.TLSSecurityPolicy = TLSSecurityPolicy(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The configuration and status of the domain's endpoint options.
@@ -249,6 +598,38 @@ type DomainEndpointOptionsStatus struct {
 	Status *OptionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *DomainEndpointOptionsStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainEndpointOptionsStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainEndpointOptionsStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Options != nil {
+		s.WriteStruct(schemas.DomainEndpointOptionsStatus_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.DomainEndpointOptionsStatus_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DomainEndpointOptionsStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainEndpointOptionsStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainEndpointOptionsStatus_Options:
+			v.Options = &DomainEndpointOptions{}
+			return v.Options.Deserialize(d)
+		case schemas.DomainEndpointOptionsStatus_Status:
+			v.Status = &OptionStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The current status of the search domain.
@@ -312,6 +693,106 @@ type DomainStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DomainStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.DomainStatus_ARN, *v.ARN)
+	}
+	if v.Created != nil {
+		s.WriteBool(schemas.DomainStatus_Created, *v.Created)
+	}
+	if v.Deleted != nil {
+		s.WriteBool(schemas.DomainStatus_Deleted, *v.Deleted)
+	}
+	if v.DocService != nil {
+		s.WriteStruct(schemas.DomainStatus_DocService)
+		v.DocService.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.DomainStatus_DomainId, *v.DomainId)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DomainStatus_DomainName, *v.DomainName)
+	}
+	if v.Limits != nil {
+		s.WriteStruct(schemas.DomainStatus_Limits)
+		v.Limits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Processing != nil {
+		s.WriteBool(schemas.DomainStatus_Processing, *v.Processing)
+	}
+	if v.RequiresIndexDocuments != nil {
+		s.WriteBool(schemas.DomainStatus_RequiresIndexDocuments, *v.RequiresIndexDocuments)
+	}
+	if v.SearchInstanceCount != nil {
+		s.WriteInt32(schemas.DomainStatus_SearchInstanceCount, *v.SearchInstanceCount)
+	}
+	if v.SearchInstanceType != nil {
+		s.WriteString(schemas.DomainStatus_SearchInstanceType, *v.SearchInstanceType)
+	}
+	if v.SearchPartitionCount != nil {
+		s.WriteInt32(schemas.DomainStatus_SearchPartitionCount, *v.SearchPartitionCount)
+	}
+	if v.SearchService != nil {
+		s.WriteStruct(schemas.DomainStatus_SearchService)
+		v.SearchService.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DomainStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainStatus_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.DomainStatus_ARN, v.ARN)
+		case schemas.DomainStatus_Created:
+			v.Created = new(bool)
+			return d.ReadBool(schemas.DomainStatus_Created, v.Created)
+		case schemas.DomainStatus_Deleted:
+			v.Deleted = new(bool)
+			return d.ReadBool(schemas.DomainStatus_Deleted, v.Deleted)
+		case schemas.DomainStatus_DocService:
+			v.DocService = &ServiceEndpoint{}
+			return v.DocService.Deserialize(d)
+		case schemas.DomainStatus_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DomainStatus_DomainId, v.DomainId)
+		case schemas.DomainStatus_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.DomainStatus_DomainName, v.DomainName)
+		case schemas.DomainStatus_Limits:
+			v.Limits = &Limits{}
+			return v.Limits.Deserialize(d)
+		case schemas.DomainStatus_Processing:
+			v.Processing = new(bool)
+			return d.ReadBool(schemas.DomainStatus_Processing, v.Processing)
+		case schemas.DomainStatus_RequiresIndexDocuments:
+			v.RequiresIndexDocuments = new(bool)
+			return d.ReadBool(schemas.DomainStatus_RequiresIndexDocuments, v.RequiresIndexDocuments)
+		case schemas.DomainStatus_SearchInstanceCount:
+			v.SearchInstanceCount = new(int32)
+			return d.ReadInt32(schemas.DomainStatus_SearchInstanceCount, v.SearchInstanceCount)
+		case schemas.DomainStatus_SearchInstanceType:
+			v.SearchInstanceType = new(string)
+			return d.ReadString(schemas.DomainStatus_SearchInstanceType, v.SearchInstanceType)
+		case schemas.DomainStatus_SearchPartitionCount:
+			v.SearchPartitionCount = new(int32)
+			return d.ReadInt32(schemas.DomainStatus_SearchPartitionCount, v.SearchPartitionCount)
+		case schemas.DomainStatus_SearchService:
+			v.SearchService = &ServiceEndpoint{}
+			return v.SearchService.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Options for a field that contains an array of double-precision 64-bit floating
 // point values. Present if IndexFieldType specifies the field is of type
 // double-array . All options are enabled by default.
@@ -333,6 +814,52 @@ type DoubleArrayOptions struct {
 	SourceFields *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DoubleArrayOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DoubleArrayOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DoubleArrayOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteFloat64(schemas.DoubleArrayOptions_DefaultValue, *v.DefaultValue)
+	}
+	if v.FacetEnabled != nil {
+		s.WriteBool(schemas.DoubleArrayOptions_FacetEnabled, *v.FacetEnabled)
+	}
+	if v.ReturnEnabled != nil {
+		s.WriteBool(schemas.DoubleArrayOptions_ReturnEnabled, *v.ReturnEnabled)
+	}
+	if v.SearchEnabled != nil {
+		s.WriteBool(schemas.DoubleArrayOptions_SearchEnabled, *v.SearchEnabled)
+	}
+	if v.SourceFields != nil {
+		s.WriteString(schemas.DoubleArrayOptions_SourceFields, *v.SourceFields)
+	}
+}
+func (v *DoubleArrayOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DoubleArrayOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DoubleArrayOptions_DefaultValue:
+			v.DefaultValue = new(float64)
+			return d.ReadFloat64(schemas.DoubleArrayOptions_DefaultValue, v.DefaultValue)
+		case schemas.DoubleArrayOptions_FacetEnabled:
+			v.FacetEnabled = new(bool)
+			return d.ReadBool(schemas.DoubleArrayOptions_FacetEnabled, v.FacetEnabled)
+		case schemas.DoubleArrayOptions_ReturnEnabled:
+			v.ReturnEnabled = new(bool)
+			return d.ReadBool(schemas.DoubleArrayOptions_ReturnEnabled, v.ReturnEnabled)
+		case schemas.DoubleArrayOptions_SearchEnabled:
+			v.SearchEnabled = new(bool)
+			return d.ReadBool(schemas.DoubleArrayOptions_SearchEnabled, v.SearchEnabled)
+		case schemas.DoubleArrayOptions_SourceFields:
+			v.SourceFields = new(string)
+			return d.ReadString(schemas.DoubleArrayOptions_SourceFields, v.SourceFields)
+		}
+		return nil
+	})
 }
 
 // Options for a double-precision 64-bit floating point field. Present if
@@ -363,6 +890,58 @@ type DoubleOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DoubleOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DoubleOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DoubleOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteFloat64(schemas.DoubleOptions_DefaultValue, *v.DefaultValue)
+	}
+	if v.FacetEnabled != nil {
+		s.WriteBool(schemas.DoubleOptions_FacetEnabled, *v.FacetEnabled)
+	}
+	if v.ReturnEnabled != nil {
+		s.WriteBool(schemas.DoubleOptions_ReturnEnabled, *v.ReturnEnabled)
+	}
+	if v.SearchEnabled != nil {
+		s.WriteBool(schemas.DoubleOptions_SearchEnabled, *v.SearchEnabled)
+	}
+	if v.SortEnabled != nil {
+		s.WriteBool(schemas.DoubleOptions_SortEnabled, *v.SortEnabled)
+	}
+	if v.SourceField != nil {
+		s.WriteString(schemas.DoubleOptions_SourceField, *v.SourceField)
+	}
+}
+func (v *DoubleOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DoubleOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DoubleOptions_DefaultValue:
+			v.DefaultValue = new(float64)
+			return d.ReadFloat64(schemas.DoubleOptions_DefaultValue, v.DefaultValue)
+		case schemas.DoubleOptions_FacetEnabled:
+			v.FacetEnabled = new(bool)
+			return d.ReadBool(schemas.DoubleOptions_FacetEnabled, v.FacetEnabled)
+		case schemas.DoubleOptions_ReturnEnabled:
+			v.ReturnEnabled = new(bool)
+			return d.ReadBool(schemas.DoubleOptions_ReturnEnabled, v.ReturnEnabled)
+		case schemas.DoubleOptions_SearchEnabled:
+			v.SearchEnabled = new(bool)
+			return d.ReadBool(schemas.DoubleOptions_SearchEnabled, v.SearchEnabled)
+		case schemas.DoubleOptions_SortEnabled:
+			v.SortEnabled = new(bool)
+			return d.ReadBool(schemas.DoubleOptions_SortEnabled, v.SortEnabled)
+		case schemas.DoubleOptions_SourceField:
+			v.SourceField = new(string)
+			return d.ReadString(schemas.DoubleOptions_SourceField, v.SourceField)
+		}
+		return nil
+	})
+}
+
 // A named expression that can be evaluated at search time. Can be used to sort
 // the search results, define other expressions, or return computed information in
 // the search results.
@@ -386,6 +965,34 @@ type Expression struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Expression) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Expression)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpressionName != nil {
+		s.WriteString(schemas.Expression_ExpressionName, *v.ExpressionName)
+	}
+	if v.ExpressionValue != nil {
+		s.WriteString(schemas.Expression_ExpressionValue, *v.ExpressionValue)
+	}
+}
+func (v *Expression) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Expression, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Expression_ExpressionName:
+			v.ExpressionName = new(string)
+			return d.ReadString(schemas.Expression_ExpressionName, v.ExpressionName)
+		case schemas.Expression_ExpressionValue:
+			v.ExpressionValue = new(string)
+			return d.ReadString(schemas.Expression_ExpressionValue, v.ExpressionValue)
+		}
+		return nil
+	})
+}
+
 // The value of an Expression and its current status.
 type ExpressionStatus struct {
 
@@ -400,6 +1007,38 @@ type ExpressionStatus struct {
 	Status *OptionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExpressionStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpressionStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpressionStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Options != nil {
+		s.WriteStruct(schemas.ExpressionStatus_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.ExpressionStatus_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExpressionStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpressionStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpressionStatus_Options:
+			v.Options = &Expression{}
+			return v.Options.Deserialize(d)
+		case schemas.ExpressionStatus_Status:
+			v.Status = &OptionStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Configuration information for a field in the index, including its name, type,
@@ -489,6 +1128,126 @@ type IndexField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IndexField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndexField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateArrayOptions != nil {
+		s.WriteStruct(schemas.IndexField_DateArrayOptions)
+		v.DateArrayOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DateOptions != nil {
+		s.WriteStruct(schemas.IndexField_DateOptions)
+		v.DateOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DoubleArrayOptions != nil {
+		s.WriteStruct(schemas.IndexField_DoubleArrayOptions)
+		v.DoubleArrayOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DoubleOptions != nil {
+		s.WriteStruct(schemas.IndexField_DoubleOptions)
+		v.DoubleOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndexFieldName != nil {
+		s.WriteString(schemas.IndexField_IndexFieldName, *v.IndexFieldName)
+	}
+	if v.IndexFieldType != "" {
+		s.WriteString(schemas.IndexField_IndexFieldType, string(v.IndexFieldType))
+	}
+	if v.IntArrayOptions != nil {
+		s.WriteStruct(schemas.IndexField_IntArrayOptions)
+		v.IntArrayOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntOptions != nil {
+		s.WriteStruct(schemas.IndexField_IntOptions)
+		v.IntOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatLonOptions != nil {
+		s.WriteStruct(schemas.IndexField_LatLonOptions)
+		v.LatLonOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LiteralArrayOptions != nil {
+		s.WriteStruct(schemas.IndexField_LiteralArrayOptions)
+		v.LiteralArrayOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LiteralOptions != nil {
+		s.WriteStruct(schemas.IndexField_LiteralOptions)
+		v.LiteralOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TextArrayOptions != nil {
+		s.WriteStruct(schemas.IndexField_TextArrayOptions)
+		v.TextArrayOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TextOptions != nil {
+		s.WriteStruct(schemas.IndexField_TextOptions)
+		v.TextOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IndexField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndexField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndexField_DateArrayOptions:
+			v.DateArrayOptions = &DateArrayOptions{}
+			return v.DateArrayOptions.Deserialize(d)
+		case schemas.IndexField_DateOptions:
+			v.DateOptions = &DateOptions{}
+			return v.DateOptions.Deserialize(d)
+		case schemas.IndexField_DoubleArrayOptions:
+			v.DoubleArrayOptions = &DoubleArrayOptions{}
+			return v.DoubleArrayOptions.Deserialize(d)
+		case schemas.IndexField_DoubleOptions:
+			v.DoubleOptions = &DoubleOptions{}
+			return v.DoubleOptions.Deserialize(d)
+		case schemas.IndexField_IndexFieldName:
+			v.IndexFieldName = new(string)
+			return d.ReadString(schemas.IndexField_IndexFieldName, v.IndexFieldName)
+		case schemas.IndexField_IndexFieldType:
+			var ev string
+			if err := d.ReadString(schemas.IndexField_IndexFieldType, &ev); err != nil {
+				return err
+			}
+			v.IndexFieldType = IndexFieldType(ev)
+			return nil
+		case schemas.IndexField_IntArrayOptions:
+			v.IntArrayOptions = &IntArrayOptions{}
+			return v.IntArrayOptions.Deserialize(d)
+		case schemas.IndexField_IntOptions:
+			v.IntOptions = &IntOptions{}
+			return v.IntOptions.Deserialize(d)
+		case schemas.IndexField_LatLonOptions:
+			v.LatLonOptions = &LatLonOptions{}
+			return v.LatLonOptions.Deserialize(d)
+		case schemas.IndexField_LiteralArrayOptions:
+			v.LiteralArrayOptions = &LiteralArrayOptions{}
+			return v.LiteralArrayOptions.Deserialize(d)
+		case schemas.IndexField_LiteralOptions:
+			v.LiteralOptions = &LiteralOptions{}
+			return v.LiteralOptions.Deserialize(d)
+		case schemas.IndexField_TextArrayOptions:
+			v.TextArrayOptions = &TextArrayOptions{}
+			return v.TextArrayOptions.Deserialize(d)
+		case schemas.IndexField_TextOptions:
+			v.TextOptions = &TextOptions{}
+			return v.TextOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The value of an IndexField and its current status.
 type IndexFieldStatus struct {
 
@@ -504,6 +1263,38 @@ type IndexFieldStatus struct {
 	Status *OptionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *IndexFieldStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexFieldStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndexFieldStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Options != nil {
+		s.WriteStruct(schemas.IndexFieldStatus_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.IndexFieldStatus_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IndexFieldStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndexFieldStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndexFieldStatus_Options:
+			v.Options = &IndexField{}
+			return v.Options.Deserialize(d)
+		case schemas.IndexFieldStatus_Status:
+			v.Status = &OptionStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Options for a field that contains an array of 64-bit signed integers. Present
@@ -527,6 +1318,52 @@ type IntArrayOptions struct {
 	SourceFields *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IntArrayOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IntArrayOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IntArrayOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteInt64(schemas.IntArrayOptions_DefaultValue, *v.DefaultValue)
+	}
+	if v.FacetEnabled != nil {
+		s.WriteBool(schemas.IntArrayOptions_FacetEnabled, *v.FacetEnabled)
+	}
+	if v.ReturnEnabled != nil {
+		s.WriteBool(schemas.IntArrayOptions_ReturnEnabled, *v.ReturnEnabled)
+	}
+	if v.SearchEnabled != nil {
+		s.WriteBool(schemas.IntArrayOptions_SearchEnabled, *v.SearchEnabled)
+	}
+	if v.SourceFields != nil {
+		s.WriteString(schemas.IntArrayOptions_SourceFields, *v.SourceFields)
+	}
+}
+func (v *IntArrayOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IntArrayOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IntArrayOptions_DefaultValue:
+			v.DefaultValue = new(int64)
+			return d.ReadInt64(schemas.IntArrayOptions_DefaultValue, v.DefaultValue)
+		case schemas.IntArrayOptions_FacetEnabled:
+			v.FacetEnabled = new(bool)
+			return d.ReadBool(schemas.IntArrayOptions_FacetEnabled, v.FacetEnabled)
+		case schemas.IntArrayOptions_ReturnEnabled:
+			v.ReturnEnabled = new(bool)
+			return d.ReadBool(schemas.IntArrayOptions_ReturnEnabled, v.ReturnEnabled)
+		case schemas.IntArrayOptions_SearchEnabled:
+			v.SearchEnabled = new(bool)
+			return d.ReadBool(schemas.IntArrayOptions_SearchEnabled, v.SearchEnabled)
+		case schemas.IntArrayOptions_SourceFields:
+			v.SourceFields = new(string)
+			return d.ReadString(schemas.IntArrayOptions_SourceFields, v.SourceFields)
+		}
+		return nil
+	})
 }
 
 // Options for a 64-bit signed integer field. Present if IndexFieldType specifies
@@ -554,6 +1391,58 @@ type IntOptions struct {
 	SourceField *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IntOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IntOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IntOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteInt64(schemas.IntOptions_DefaultValue, *v.DefaultValue)
+	}
+	if v.FacetEnabled != nil {
+		s.WriteBool(schemas.IntOptions_FacetEnabled, *v.FacetEnabled)
+	}
+	if v.ReturnEnabled != nil {
+		s.WriteBool(schemas.IntOptions_ReturnEnabled, *v.ReturnEnabled)
+	}
+	if v.SearchEnabled != nil {
+		s.WriteBool(schemas.IntOptions_SearchEnabled, *v.SearchEnabled)
+	}
+	if v.SortEnabled != nil {
+		s.WriteBool(schemas.IntOptions_SortEnabled, *v.SortEnabled)
+	}
+	if v.SourceField != nil {
+		s.WriteString(schemas.IntOptions_SourceField, *v.SourceField)
+	}
+}
+func (v *IntOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IntOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IntOptions_DefaultValue:
+			v.DefaultValue = new(int64)
+			return d.ReadInt64(schemas.IntOptions_DefaultValue, v.DefaultValue)
+		case schemas.IntOptions_FacetEnabled:
+			v.FacetEnabled = new(bool)
+			return d.ReadBool(schemas.IntOptions_FacetEnabled, v.FacetEnabled)
+		case schemas.IntOptions_ReturnEnabled:
+			v.ReturnEnabled = new(bool)
+			return d.ReadBool(schemas.IntOptions_ReturnEnabled, v.ReturnEnabled)
+		case schemas.IntOptions_SearchEnabled:
+			v.SearchEnabled = new(bool)
+			return d.ReadBool(schemas.IntOptions_SearchEnabled, v.SearchEnabled)
+		case schemas.IntOptions_SortEnabled:
+			v.SortEnabled = new(bool)
+			return d.ReadBool(schemas.IntOptions_SortEnabled, v.SortEnabled)
+		case schemas.IntOptions_SourceField:
+			v.SourceField = new(string)
+			return d.ReadString(schemas.IntOptions_SourceField, v.SourceField)
+		}
+		return nil
+	})
 }
 
 // Options for a latlon field. A latlon field contains a location stored as a
@@ -595,6 +1484,58 @@ type LatLonOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LatLonOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LatLonOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LatLonOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.LatLonOptions_DefaultValue, *v.DefaultValue)
+	}
+	if v.FacetEnabled != nil {
+		s.WriteBool(schemas.LatLonOptions_FacetEnabled, *v.FacetEnabled)
+	}
+	if v.ReturnEnabled != nil {
+		s.WriteBool(schemas.LatLonOptions_ReturnEnabled, *v.ReturnEnabled)
+	}
+	if v.SearchEnabled != nil {
+		s.WriteBool(schemas.LatLonOptions_SearchEnabled, *v.SearchEnabled)
+	}
+	if v.SortEnabled != nil {
+		s.WriteBool(schemas.LatLonOptions_SortEnabled, *v.SortEnabled)
+	}
+	if v.SourceField != nil {
+		s.WriteString(schemas.LatLonOptions_SourceField, *v.SourceField)
+	}
+}
+func (v *LatLonOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LatLonOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LatLonOptions_DefaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.LatLonOptions_DefaultValue, v.DefaultValue)
+		case schemas.LatLonOptions_FacetEnabled:
+			v.FacetEnabled = new(bool)
+			return d.ReadBool(schemas.LatLonOptions_FacetEnabled, v.FacetEnabled)
+		case schemas.LatLonOptions_ReturnEnabled:
+			v.ReturnEnabled = new(bool)
+			return d.ReadBool(schemas.LatLonOptions_ReturnEnabled, v.ReturnEnabled)
+		case schemas.LatLonOptions_SearchEnabled:
+			v.SearchEnabled = new(bool)
+			return d.ReadBool(schemas.LatLonOptions_SearchEnabled, v.SearchEnabled)
+		case schemas.LatLonOptions_SortEnabled:
+			v.SortEnabled = new(bool)
+			return d.ReadBool(schemas.LatLonOptions_SortEnabled, v.SortEnabled)
+		case schemas.LatLonOptions_SourceField:
+			v.SourceField = new(string)
+			return d.ReadString(schemas.LatLonOptions_SourceField, v.SourceField)
+		}
+		return nil
+	})
+}
+
 type Limits struct {
 
 	// This member is required.
@@ -604,6 +1545,34 @@ type Limits struct {
 	MaximumReplicationCount *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Limits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Limits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Limits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaximumPartitionCount != nil {
+		s.WriteInt32(schemas.Limits_MaximumPartitionCount, *v.MaximumPartitionCount)
+	}
+	if v.MaximumReplicationCount != nil {
+		s.WriteInt32(schemas.Limits_MaximumReplicationCount, *v.MaximumReplicationCount)
+	}
+}
+func (v *Limits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Limits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Limits_MaximumPartitionCount:
+			v.MaximumPartitionCount = new(int32)
+			return d.ReadInt32(schemas.Limits_MaximumPartitionCount, v.MaximumPartitionCount)
+		case schemas.Limits_MaximumReplicationCount:
+			v.MaximumReplicationCount = new(int32)
+			return d.ReadInt32(schemas.Limits_MaximumReplicationCount, v.MaximumReplicationCount)
+		}
+		return nil
+	})
 }
 
 // Options for a field that contains an array of literal strings. Present if
@@ -627,6 +1596,52 @@ type LiteralArrayOptions struct {
 	SourceFields *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LiteralArrayOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LiteralArrayOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LiteralArrayOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.LiteralArrayOptions_DefaultValue, *v.DefaultValue)
+	}
+	if v.FacetEnabled != nil {
+		s.WriteBool(schemas.LiteralArrayOptions_FacetEnabled, *v.FacetEnabled)
+	}
+	if v.ReturnEnabled != nil {
+		s.WriteBool(schemas.LiteralArrayOptions_ReturnEnabled, *v.ReturnEnabled)
+	}
+	if v.SearchEnabled != nil {
+		s.WriteBool(schemas.LiteralArrayOptions_SearchEnabled, *v.SearchEnabled)
+	}
+	if v.SourceFields != nil {
+		s.WriteString(schemas.LiteralArrayOptions_SourceFields, *v.SourceFields)
+	}
+}
+func (v *LiteralArrayOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LiteralArrayOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LiteralArrayOptions_DefaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.LiteralArrayOptions_DefaultValue, v.DefaultValue)
+		case schemas.LiteralArrayOptions_FacetEnabled:
+			v.FacetEnabled = new(bool)
+			return d.ReadBool(schemas.LiteralArrayOptions_FacetEnabled, v.FacetEnabled)
+		case schemas.LiteralArrayOptions_ReturnEnabled:
+			v.ReturnEnabled = new(bool)
+			return d.ReadBool(schemas.LiteralArrayOptions_ReturnEnabled, v.ReturnEnabled)
+		case schemas.LiteralArrayOptions_SearchEnabled:
+			v.SearchEnabled = new(bool)
+			return d.ReadBool(schemas.LiteralArrayOptions_SearchEnabled, v.SearchEnabled)
+		case schemas.LiteralArrayOptions_SourceFields:
+			v.SourceFields = new(string)
+			return d.ReadString(schemas.LiteralArrayOptions_SourceFields, v.SourceFields)
+		}
+		return nil
+	})
 }
 
 // Options for literal field. Present if IndexFieldType specifies the field is of
@@ -667,6 +1682,58 @@ type LiteralOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LiteralOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LiteralOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LiteralOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.LiteralOptions_DefaultValue, *v.DefaultValue)
+	}
+	if v.FacetEnabled != nil {
+		s.WriteBool(schemas.LiteralOptions_FacetEnabled, *v.FacetEnabled)
+	}
+	if v.ReturnEnabled != nil {
+		s.WriteBool(schemas.LiteralOptions_ReturnEnabled, *v.ReturnEnabled)
+	}
+	if v.SearchEnabled != nil {
+		s.WriteBool(schemas.LiteralOptions_SearchEnabled, *v.SearchEnabled)
+	}
+	if v.SortEnabled != nil {
+		s.WriteBool(schemas.LiteralOptions_SortEnabled, *v.SortEnabled)
+	}
+	if v.SourceField != nil {
+		s.WriteString(schemas.LiteralOptions_SourceField, *v.SourceField)
+	}
+}
+func (v *LiteralOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LiteralOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LiteralOptions_DefaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.LiteralOptions_DefaultValue, v.DefaultValue)
+		case schemas.LiteralOptions_FacetEnabled:
+			v.FacetEnabled = new(bool)
+			return d.ReadBool(schemas.LiteralOptions_FacetEnabled, v.FacetEnabled)
+		case schemas.LiteralOptions_ReturnEnabled:
+			v.ReturnEnabled = new(bool)
+			return d.ReadBool(schemas.LiteralOptions_ReturnEnabled, v.ReturnEnabled)
+		case schemas.LiteralOptions_SearchEnabled:
+			v.SearchEnabled = new(bool)
+			return d.ReadBool(schemas.LiteralOptions_SearchEnabled, v.SearchEnabled)
+		case schemas.LiteralOptions_SortEnabled:
+			v.SortEnabled = new(bool)
+			return d.ReadBool(schemas.LiteralOptions_SortEnabled, v.SortEnabled)
+		case schemas.LiteralOptions_SourceField:
+			v.SourceField = new(string)
+			return d.ReadString(schemas.LiteralOptions_SourceField, v.SourceField)
+		}
+		return nil
+	})
+}
+
 // The status of domain configuration option.
 type OptionStatus struct {
 
@@ -702,6 +1769,55 @@ type OptionStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OptionStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OptionStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OptionStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.OptionStatus_CreationDate, *v.CreationDate)
+	}
+	if v.PendingDeletion != nil {
+		s.WriteBool(schemas.OptionStatus_PendingDeletion, *v.PendingDeletion)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.OptionStatus_State, string(v.State))
+	}
+	if v.UpdateDate != nil {
+		s.WriteTime(schemas.OptionStatus_UpdateDate, *v.UpdateDate)
+	}
+	if v.UpdateVersion != 0 {
+		s.WriteInt32(schemas.OptionStatus_UpdateVersion, v.UpdateVersion)
+	}
+}
+func (v *OptionStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OptionStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OptionStatus_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.OptionStatus_CreationDate, v.CreationDate)
+		case schemas.OptionStatus_PendingDeletion:
+			v.PendingDeletion = new(bool)
+			return d.ReadBool(schemas.OptionStatus_PendingDeletion, v.PendingDeletion)
+		case schemas.OptionStatus_State:
+			var ev string
+			if err := d.ReadString(schemas.OptionStatus_State, &ev); err != nil {
+				return err
+			}
+			v.State = OptionState(ev)
+			return nil
+		case schemas.OptionStatus_UpdateDate:
+			v.UpdateDate = new(time.Time)
+			return d.ReadTime(schemas.OptionStatus_UpdateDate, v.UpdateDate)
+		case schemas.OptionStatus_UpdateVersion:
+			return d.ReadInt32(schemas.OptionStatus_UpdateVersion, &v.UpdateVersion)
+		}
+		return nil
+	})
+}
+
 // The desired instance type and desired number of replicas of each index
 // partition.
 type ScalingParameters struct {
@@ -718,6 +1834,42 @@ type ScalingParameters struct {
 	DesiredReplicationCount int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScalingParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalingParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScalingParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredInstanceType != "" {
+		s.WriteString(schemas.ScalingParameters_DesiredInstanceType, string(v.DesiredInstanceType))
+	}
+	if v.DesiredPartitionCount != 0 {
+		s.WriteInt32(schemas.ScalingParameters_DesiredPartitionCount, v.DesiredPartitionCount)
+	}
+	if v.DesiredReplicationCount != 0 {
+		s.WriteInt32(schemas.ScalingParameters_DesiredReplicationCount, v.DesiredReplicationCount)
+	}
+}
+func (v *ScalingParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalingParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalingParameters_DesiredInstanceType:
+			var ev string
+			if err := d.ReadString(schemas.ScalingParameters_DesiredInstanceType, &ev); err != nil {
+				return err
+			}
+			v.DesiredInstanceType = PartitionInstanceType(ev)
+			return nil
+		case schemas.ScalingParameters_DesiredPartitionCount:
+			return d.ReadInt32(schemas.ScalingParameters_DesiredPartitionCount, &v.DesiredPartitionCount)
+		case schemas.ScalingParameters_DesiredReplicationCount:
+			return d.ReadInt32(schemas.ScalingParameters_DesiredReplicationCount, &v.DesiredReplicationCount)
+		}
+		return nil
+	})
 }
 
 // The status and configuration of a search domain's scaling parameters.
@@ -737,6 +1889,38 @@ type ScalingParametersStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScalingParametersStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalingParametersStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScalingParametersStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Options != nil {
+		s.WriteStruct(schemas.ScalingParametersStatus_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.ScalingParametersStatus_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ScalingParametersStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalingParametersStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalingParametersStatus_Options:
+			v.Options = &ScalingParameters{}
+			return v.Options.Deserialize(d)
+		case schemas.ScalingParametersStatus_Status:
+			v.Status = &OptionStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The endpoint to which service requests can be submitted.
 type ServiceEndpoint struct {
 
@@ -747,6 +1931,28 @@ type ServiceEndpoint struct {
 	Endpoint *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteString(schemas.ServiceEndpoint_Endpoint, *v.Endpoint)
+	}
+}
+func (v *ServiceEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceEndpoint_Endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.ServiceEndpoint_Endpoint, v.Endpoint)
+		}
+		return nil
+	})
 }
 
 // Configuration information for a search suggester. Each suggester has a unique
@@ -768,6 +1974,36 @@ type Suggester struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Suggester) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Suggester)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Suggester) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentSuggesterOptions != nil {
+		s.WriteStruct(schemas.Suggester_DocumentSuggesterOptions)
+		v.DocumentSuggesterOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SuggesterName != nil {
+		s.WriteString(schemas.Suggester_SuggesterName, *v.SuggesterName)
+	}
+}
+func (v *Suggester) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Suggester, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Suggester_DocumentSuggesterOptions:
+			v.DocumentSuggesterOptions = &DocumentSuggesterOptions{}
+			return v.DocumentSuggesterOptions.Deserialize(d)
+		case schemas.Suggester_SuggesterName:
+			v.SuggesterName = new(string)
+			return d.ReadString(schemas.Suggester_SuggesterName, v.SuggesterName)
+		}
+		return nil
+	})
+}
+
 // The value of a Suggester and its current status.
 type SuggesterStatus struct {
 
@@ -784,6 +2020,38 @@ type SuggesterStatus struct {
 	Status *OptionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *SuggesterStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuggesterStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuggesterStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Options != nil {
+		s.WriteStruct(schemas.SuggesterStatus_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.SuggesterStatus_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SuggesterStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuggesterStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuggesterStatus_Options:
+			v.Options = &Suggester{}
+			return v.Options.Deserialize(d)
+		case schemas.SuggesterStatus_Status:
+			v.Status = &OptionStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Options for a field that contains an array of text strings. Present if
@@ -807,6 +2075,52 @@ type TextArrayOptions struct {
 	SourceFields *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TextArrayOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextArrayOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextArrayOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisScheme != nil {
+		s.WriteString(schemas.TextArrayOptions_AnalysisScheme, *v.AnalysisScheme)
+	}
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.TextArrayOptions_DefaultValue, *v.DefaultValue)
+	}
+	if v.HighlightEnabled != nil {
+		s.WriteBool(schemas.TextArrayOptions_HighlightEnabled, *v.HighlightEnabled)
+	}
+	if v.ReturnEnabled != nil {
+		s.WriteBool(schemas.TextArrayOptions_ReturnEnabled, *v.ReturnEnabled)
+	}
+	if v.SourceFields != nil {
+		s.WriteString(schemas.TextArrayOptions_SourceFields, *v.SourceFields)
+	}
+}
+func (v *TextArrayOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextArrayOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextArrayOptions_AnalysisScheme:
+			v.AnalysisScheme = new(string)
+			return d.ReadString(schemas.TextArrayOptions_AnalysisScheme, v.AnalysisScheme)
+		case schemas.TextArrayOptions_DefaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.TextArrayOptions_DefaultValue, v.DefaultValue)
+		case schemas.TextArrayOptions_HighlightEnabled:
+			v.HighlightEnabled = new(bool)
+			return d.ReadBool(schemas.TextArrayOptions_HighlightEnabled, v.HighlightEnabled)
+		case schemas.TextArrayOptions_ReturnEnabled:
+			v.ReturnEnabled = new(bool)
+			return d.ReadBool(schemas.TextArrayOptions_ReturnEnabled, v.ReturnEnabled)
+		case schemas.TextArrayOptions_SourceFields:
+			v.SourceFields = new(string)
+			return d.ReadString(schemas.TextArrayOptions_SourceFields, v.SourceFields)
+		}
+		return nil
+	})
 }
 
 // Options for text field. Present if IndexFieldType specifies the field is of
@@ -846,6 +2160,58 @@ type TextOptions struct {
 	SourceField *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TextOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisScheme != nil {
+		s.WriteString(schemas.TextOptions_AnalysisScheme, *v.AnalysisScheme)
+	}
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.TextOptions_DefaultValue, *v.DefaultValue)
+	}
+	if v.HighlightEnabled != nil {
+		s.WriteBool(schemas.TextOptions_HighlightEnabled, *v.HighlightEnabled)
+	}
+	if v.ReturnEnabled != nil {
+		s.WriteBool(schemas.TextOptions_ReturnEnabled, *v.ReturnEnabled)
+	}
+	if v.SortEnabled != nil {
+		s.WriteBool(schemas.TextOptions_SortEnabled, *v.SortEnabled)
+	}
+	if v.SourceField != nil {
+		s.WriteString(schemas.TextOptions_SourceField, *v.SourceField)
+	}
+}
+func (v *TextOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextOptions_AnalysisScheme:
+			v.AnalysisScheme = new(string)
+			return d.ReadString(schemas.TextOptions_AnalysisScheme, v.AnalysisScheme)
+		case schemas.TextOptions_DefaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.TextOptions_DefaultValue, v.DefaultValue)
+		case schemas.TextOptions_HighlightEnabled:
+			v.HighlightEnabled = new(bool)
+			return d.ReadBool(schemas.TextOptions_HighlightEnabled, v.HighlightEnabled)
+		case schemas.TextOptions_ReturnEnabled:
+			v.ReturnEnabled = new(bool)
+			return d.ReadBool(schemas.TextOptions_ReturnEnabled, v.ReturnEnabled)
+		case schemas.TextOptions_SortEnabled:
+			v.SortEnabled = new(bool)
+			return d.ReadBool(schemas.TextOptions_SortEnabled, v.SortEnabled)
+		case schemas.TextOptions_SourceField:
+			v.SourceField = new(string)
+			return d.ReadString(schemas.TextOptions_SourceField, v.SourceField)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

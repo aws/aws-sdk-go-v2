@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type ModifyDBRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBRecommendationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Locale != nil {
+		s.WriteString(schemas.ModifyDBRecommendationMessage_Locale, *v.Locale)
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.ModifyDBRecommendationMessage_RecommendationId, *v.RecommendationId)
+	}
+	if v.RecommendedActionUpdates != nil {
+		serializeRecommendedActionUpdateList(s, schemas.ModifyDBRecommendationMessage_RecommendedActionUpdates, v.RecommendedActionUpdates)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ModifyDBRecommendationMessage_Status, *v.Status)
+	}
+}
+
 type ModifyDBRecommendationOutput struct {
 
 	// The recommendation for your DB instances, DB clusters, and DB parameter groups.
@@ -62,13 +85,34 @@ type ModifyDBRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBRecommendationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBRecommendation != nil {
+		s.WriteStruct(schemas.DBRecommendationMessage_DBRecommendation)
+		v.DBRecommendation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyDBRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBRecommendationMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBRecommendationMessage_DBRecommendation:
+			v.DBRecommendation = &types.DBRecommendation{}
+			return v.DBRecommendation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyDBRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBRecommendation, schemas.ModifyDBRecommendationMessage, schemas.DBRecommendationMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBRecommendation, schemas.ModifyDBRecommendationMessage, schemas.DBRecommendationMessage), output: &ModifyDBRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

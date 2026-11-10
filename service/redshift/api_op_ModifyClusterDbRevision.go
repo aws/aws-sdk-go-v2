@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type ModifyClusterDbRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterDbRevisionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterDbRevisionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterDbRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ModifyClusterDbRevisionMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.RevisionTarget != nil {
+		s.WriteString(schemas.ModifyClusterDbRevisionMessage_RevisionTarget, *v.RevisionTarget)
+	}
+}
+
 type ModifyClusterDbRevisionOutput struct {
 
 	// Describes a cluster.
@@ -54,13 +71,34 @@ type ModifyClusterDbRevisionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterDbRevisionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterDbRevisionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterDbRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.ModifyClusterDbRevisionResult_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyClusterDbRevisionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyClusterDbRevisionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyClusterDbRevisionResult_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyClusterDbRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyClusterDbRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyClusterDbRevision, schemas.ModifyClusterDbRevisionMessage, schemas.ModifyClusterDbRevisionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyClusterDbRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyClusterDbRevision, schemas.ModifyClusterDbRevisionMessage, schemas.ModifyClusterDbRevisionResult), output: &ModifyClusterDbRevisionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

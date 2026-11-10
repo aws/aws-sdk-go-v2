@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,30 @@ type StartDBInstanceAutomatedBackupsReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDBInstanceAutomatedBackupsReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDBInstanceAutomatedBackupsReplicationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDBInstanceAutomatedBackupsReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupRetentionPeriod != nil {
+		s.WriteInt32(schemas.StartDBInstanceAutomatedBackupsReplicationMessage_BackupRetentionPeriod, *v.BackupRetentionPeriod)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.StartDBInstanceAutomatedBackupsReplicationMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.PreSignedUrl != nil {
+		s.WriteString(schemas.StartDBInstanceAutomatedBackupsReplicationMessage_PreSignedUrl, *v.PreSignedUrl)
+	}
+	if v.SourceDBInstanceArn != nil {
+		s.WriteString(schemas.StartDBInstanceAutomatedBackupsReplicationMessage_SourceDBInstanceArn, *v.SourceDBInstanceArn)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartDBInstanceAutomatedBackupsReplicationMessage_Tags, v.Tags)
+	}
+}
+
 type StartDBInstanceAutomatedBackupsReplicationOutput struct {
 
 	// An automated backup of a DB instance. It consists of system backups,
@@ -89,13 +115,34 @@ type StartDBInstanceAutomatedBackupsReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDBInstanceAutomatedBackupsReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDBInstanceAutomatedBackupsReplicationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDBInstanceAutomatedBackupsReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceAutomatedBackup != nil {
+		s.WriteStruct(schemas.StartDBInstanceAutomatedBackupsReplicationResult_DBInstanceAutomatedBackup)
+		v.DBInstanceAutomatedBackup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartDBInstanceAutomatedBackupsReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDBInstanceAutomatedBackupsReplicationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDBInstanceAutomatedBackupsReplicationResult_DBInstanceAutomatedBackup:
+			v.DBInstanceAutomatedBackup = &types.DBInstanceAutomatedBackup{}
+			return v.DBInstanceAutomatedBackup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDBInstanceAutomatedBackupsReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartDBInstanceAutomatedBackupsReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDBInstanceAutomatedBackupsReplication, schemas.StartDBInstanceAutomatedBackupsReplicationMessage, schemas.StartDBInstanceAutomatedBackupsReplicationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStartDBInstanceAutomatedBackupsReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDBInstanceAutomatedBackupsReplication, schemas.StartDBInstanceAutomatedBackupsReplicationMessage, schemas.StartDBInstanceAutomatedBackupsReplicationResult), output: &StartDBInstanceAutomatedBackupsReplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

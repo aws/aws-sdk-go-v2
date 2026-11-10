@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type DescribeSSLPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSSLPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSSLPoliciesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSSLPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoadBalancerType != "" {
+		s.WriteString(schemas.DescribeSSLPoliciesInput_LoadBalancerType, string(v.LoadBalancerType))
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeSSLPoliciesInput_Marker, *v.Marker)
+	}
+	if v.Names != nil {
+		serializeSslPolicyNames(s, schemas.DescribeSSLPoliciesInput_Names, v.Names)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.DescribeSSLPoliciesInput_PageSize, *v.PageSize)
+	}
+}
+
 type DescribeSSLPoliciesOutput struct {
 
 	// If there are additional results, this is the marker for the next set of
@@ -63,13 +86,37 @@ type DescribeSSLPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSSLPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSSLPoliciesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSSLPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.DescribeSSLPoliciesOutput_NextMarker, *v.NextMarker)
+	}
+	if v.SslPolicies != nil {
+		serializeSslPolicies(s, schemas.DescribeSSLPoliciesOutput_SslPolicies, v.SslPolicies)
+	}
+}
+func (v *DescribeSSLPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSSLPoliciesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSSLPoliciesOutput_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.DescribeSSLPoliciesOutput_NextMarker, v.NextMarker)
+		case schemas.DescribeSSLPoliciesOutput_SslPolicies:
+			return deserializeSslPolicies(d, schemas.DescribeSSLPoliciesOutput_SslPolicies, &v.SslPolicies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSSLPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeSSLPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSSLPolicies, schemas.DescribeSSLPoliciesInput, schemas.DescribeSSLPoliciesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeSSLPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSSLPolicies, schemas.DescribeSSLPoliciesInput, schemas.DescribeSSLPoliciesOutput), output: &DescribeSSLPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

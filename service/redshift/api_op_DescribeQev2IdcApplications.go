@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type DescribeQev2IdcApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQev2IdcApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQev2IdcApplicationsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQev2IdcApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeQev2IdcApplicationsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeQev2IdcApplicationsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.Qev2IdcApplicationArn != nil {
+		s.WriteString(schemas.DescribeQev2IdcApplicationsMessage_Qev2IdcApplicationArn, *v.Qev2IdcApplicationArn)
+	}
+}
+
 type DescribeQev2IdcApplicationsOutput struct {
 
 	// A value that indicates the starting point for the next set of response records
@@ -67,13 +87,37 @@ type DescribeQev2IdcApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQev2IdcApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQev2IdcApplicationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQev2IdcApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeQev2IdcApplicationsResult_Marker, *v.Marker)
+	}
+	if v.Qev2IdcApplications != nil {
+		serializeQev2IdcApplicationList(s, schemas.DescribeQev2IdcApplicationsResult_Qev2IdcApplications, v.Qev2IdcApplications)
+	}
+}
+func (v *DescribeQev2IdcApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeQev2IdcApplicationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeQev2IdcApplicationsResult_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeQev2IdcApplicationsResult_Marker, v.Marker)
+		case schemas.DescribeQev2IdcApplicationsResult_Qev2IdcApplications:
+			return deserializeQev2IdcApplicationList(d, schemas.DescribeQev2IdcApplicationsResult_Qev2IdcApplications, &v.Qev2IdcApplications)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeQev2IdcApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeQev2IdcApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQev2IdcApplications, schemas.DescribeQev2IdcApplicationsMessage, schemas.DescribeQev2IdcApplicationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeQev2IdcApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQev2IdcApplications, schemas.DescribeQev2IdcApplicationsMessage, schemas.DescribeQev2IdcApplicationsResult), output: &DescribeQev2IdcApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type ListPolicyTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListPolicyTagsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListPolicyTagsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.ListPolicyTagsRequest_PolicyArn, *v.PolicyArn)
+	}
+}
+
 type ListPolicyTagsOutput struct {
 
 	// The list of tags that are currently attached to the IAM customer managed
@@ -89,13 +109,42 @@ type ListPolicyTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListPolicyTagsResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListPolicyTagsResponse_Marker, *v.Marker)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.ListPolicyTagsResponse_Tags, v.Tags)
+	}
+}
+func (v *ListPolicyTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPolicyTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPolicyTagsResponse_IsTruncated:
+			return d.ReadBool(schemas.ListPolicyTagsResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListPolicyTagsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListPolicyTagsResponse_Marker, v.Marker)
+		case schemas.ListPolicyTagsResponse_Tags:
+			return deserializetagListType(d, schemas.ListPolicyTagsResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPolicyTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListPolicyTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyTags, schemas.ListPolicyTagsRequest, schemas.ListPolicyTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListPolicyTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyTags, schemas.ListPolicyTagsRequest, schemas.ListPolicyTagsResponse), output: &ListPolicyTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

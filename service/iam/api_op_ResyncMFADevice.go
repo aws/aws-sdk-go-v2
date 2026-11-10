@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,27 @@ type ResyncMFADeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResyncMFADeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResyncMFADeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResyncMFADeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationCode1 != nil {
+		s.WriteString(schemas.ResyncMFADeviceRequest_AuthenticationCode1, *v.AuthenticationCode1)
+	}
+	if v.AuthenticationCode2 != nil {
+		s.WriteString(schemas.ResyncMFADeviceRequest_AuthenticationCode2, *v.AuthenticationCode2)
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.ResyncMFADeviceRequest_SerialNumber, *v.SerialNumber)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.ResyncMFADeviceRequest_UserName, *v.UserName)
+	}
+}
+
 type ResyncMFADeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -77,13 +100,26 @@ type ResyncMFADeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResyncMFADeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResyncMFADeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ResyncMFADeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResyncMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpResyncMFADevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResyncMFADevice, schemas.ResyncMFADeviceRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpResyncMFADevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResyncMFADevice, schemas.ResyncMFADeviceRequest, nil), output: &ResyncMFADeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

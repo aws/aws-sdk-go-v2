@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type DescribeAnalysisSchemesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAnalysisSchemesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAnalysisSchemesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAnalysisSchemesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisSchemeNames != nil {
+		serializeStandardNameList(s, schemas.DescribeAnalysisSchemesRequest_AnalysisSchemeNames, v.AnalysisSchemeNames)
+	}
+	if v.Deployed != nil {
+		s.WriteBool(schemas.DescribeAnalysisSchemesRequest_Deployed, *v.Deployed)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeAnalysisSchemesRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of a DescribeAnalysisSchemes request. Contains the analysis schemes
 // configured for the domain specified in the request.
 type DescribeAnalysisSchemesOutput struct {
@@ -68,13 +88,31 @@ type DescribeAnalysisSchemesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAnalysisSchemesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAnalysisSchemesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAnalysisSchemesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisSchemes != nil {
+		serializeAnalysisSchemeStatusList(s, schemas.DescribeAnalysisSchemesResponse_AnalysisSchemes, v.AnalysisSchemes)
+	}
+}
+func (v *DescribeAnalysisSchemesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAnalysisSchemesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAnalysisSchemesResponse_AnalysisSchemes:
+			return deserializeAnalysisSchemeStatusList(d, schemas.DescribeAnalysisSchemesResponse_AnalysisSchemes, &v.AnalysisSchemes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAnalysisSchemesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAnalysisSchemes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAnalysisSchemes, schemas.DescribeAnalysisSchemesRequest, schemas.DescribeAnalysisSchemesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeAnalysisSchemes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAnalysisSchemes, schemas.DescribeAnalysisSchemesRequest, schemas.DescribeAnalysisSchemesResponse), output: &DescribeAnalysisSchemesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

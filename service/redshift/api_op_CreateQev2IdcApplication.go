@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type CreateQev2IdcApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQev2IdcApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQev2IdcApplicationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQev2IdcApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdcDisplayName != nil {
+		s.WriteString(schemas.CreateQev2IdcApplicationMessage_IdcDisplayName, *v.IdcDisplayName)
+	}
+	if v.IdcInstanceArn != nil {
+		s.WriteString(schemas.CreateQev2IdcApplicationMessage_IdcInstanceArn, *v.IdcInstanceArn)
+	}
+	if v.Qev2IdcApplicationName != nil {
+		s.WriteString(schemas.CreateQev2IdcApplicationMessage_Qev2IdcApplicationName, *v.Qev2IdcApplicationName)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateQev2IdcApplicationMessage_Tags, v.Tags)
+	}
+}
+
 type CreateQev2IdcApplicationOutput struct {
 
 	// Contains configuration and status information for an Amazon Redshift Query
@@ -63,13 +86,34 @@ type CreateQev2IdcApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQev2IdcApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQev2IdcApplicationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQev2IdcApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Qev2IdcApplication != nil {
+		s.WriteStruct(schemas.CreateQev2IdcApplicationResult_Qev2IdcApplication)
+		v.Qev2IdcApplication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateQev2IdcApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateQev2IdcApplicationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateQev2IdcApplicationResult_Qev2IdcApplication:
+			v.Qev2IdcApplication = &types.Qev2IdcApplication{}
+			return v.Qev2IdcApplication.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateQev2IdcApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateQev2IdcApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQev2IdcApplication, schemas.CreateQev2IdcApplicationMessage, schemas.CreateQev2IdcApplicationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateQev2IdcApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQev2IdcApplication, schemas.CreateQev2IdcApplicationMessage, schemas.CreateQev2IdcApplicationResult), output: &CreateQev2IdcApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

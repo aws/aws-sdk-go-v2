@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,24 @@ type AuthorizeEndpointAccessInput struct {
 	VpcIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AuthorizeEndpointAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthorizeEndpointAccessMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthorizeEndpointAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteString(schemas.AuthorizeEndpointAccessMessage_Account, *v.Account)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.AuthorizeEndpointAccessMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.VpcIds != nil {
+		serializeVpcIdentifierList(s, schemas.AuthorizeEndpointAccessMessage_VpcIds, v.VpcIds)
+	}
 }
 
 // Describes an endpoint authorization for authorizing Redshift-managed VPC
@@ -79,13 +99,83 @@ type AuthorizeEndpointAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthorizeEndpointAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointAuthorization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthorizeEndpointAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedAllVPCs != nil {
+		s.WriteBool(schemas.EndpointAuthorization_AllowedAllVPCs, *v.AllowedAllVPCs)
+	}
+	if v.AllowedVPCs != nil {
+		serializeVpcIdentifierList(s, schemas.EndpointAuthorization_AllowedVPCs, v.AllowedVPCs)
+	}
+	if v.AuthorizeTime != nil {
+		s.WriteTime(schemas.EndpointAuthorization_AuthorizeTime, *v.AuthorizeTime)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.EndpointAuthorization_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.ClusterStatus != nil {
+		s.WriteString(schemas.EndpointAuthorization_ClusterStatus, *v.ClusterStatus)
+	}
+	if v.EndpointCount != nil {
+		s.WriteInt32(schemas.EndpointAuthorization_EndpointCount, *v.EndpointCount)
+	}
+	if v.Grantee != nil {
+		s.WriteString(schemas.EndpointAuthorization_Grantee, *v.Grantee)
+	}
+	if v.Grantor != nil {
+		s.WriteString(schemas.EndpointAuthorization_Grantor, *v.Grantor)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EndpointAuthorization_Status, string(v.Status))
+	}
+}
+func (v *AuthorizeEndpointAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointAuthorization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointAuthorization_AllowedAllVPCs:
+			v.AllowedAllVPCs = new(bool)
+			return d.ReadBool(schemas.EndpointAuthorization_AllowedAllVPCs, v.AllowedAllVPCs)
+		case schemas.EndpointAuthorization_AllowedVPCs:
+			return deserializeVpcIdentifierList(d, schemas.EndpointAuthorization_AllowedVPCs, &v.AllowedVPCs)
+		case schemas.EndpointAuthorization_AuthorizeTime:
+			v.AuthorizeTime = new(time.Time)
+			return d.ReadTime(schemas.EndpointAuthorization_AuthorizeTime, v.AuthorizeTime)
+		case schemas.EndpointAuthorization_ClusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.EndpointAuthorization_ClusterIdentifier, v.ClusterIdentifier)
+		case schemas.EndpointAuthorization_ClusterStatus:
+			v.ClusterStatus = new(string)
+			return d.ReadString(schemas.EndpointAuthorization_ClusterStatus, v.ClusterStatus)
+		case schemas.EndpointAuthorization_EndpointCount:
+			v.EndpointCount = new(int32)
+			return d.ReadInt32(schemas.EndpointAuthorization_EndpointCount, v.EndpointCount)
+		case schemas.EndpointAuthorization_Grantee:
+			v.Grantee = new(string)
+			return d.ReadString(schemas.EndpointAuthorization_Grantee, v.Grantee)
+		case schemas.EndpointAuthorization_Grantor:
+			v.Grantor = new(string)
+			return d.ReadString(schemas.EndpointAuthorization_Grantor, v.Grantor)
+		case schemas.EndpointAuthorization_Status:
+			var ev string
+			if err := d.ReadString(schemas.EndpointAuthorization_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AuthorizationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAuthorizeEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAuthorizeEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AuthorizeEndpointAccess, schemas.AuthorizeEndpointAccessMessage, schemas.EndpointAuthorization)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAuthorizeEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AuthorizeEndpointAccess, schemas.AuthorizeEndpointAccessMessage, schemas.EndpointAuthorization), output: &AuthorizeEndpointAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

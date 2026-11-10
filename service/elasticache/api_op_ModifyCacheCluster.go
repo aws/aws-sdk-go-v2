@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -323,6 +325,86 @@ type ModifyCacheClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyCacheClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyCacheClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyCacheClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AZMode != "" {
+		s.WriteString(schemas.ModifyCacheClusterMessage_AZMode, string(v.AZMode))
+	}
+	if v.ApplyImmediately != nil {
+		s.WriteBool(schemas.ModifyCacheClusterMessage_ApplyImmediately, *v.ApplyImmediately)
+	}
+	if v.AuthToken != nil {
+		s.WriteString(schemas.ModifyCacheClusterMessage_AuthToken, *v.AuthToken)
+	}
+	if v.AuthTokenUpdateStrategy != "" {
+		s.WriteString(schemas.ModifyCacheClusterMessage_AuthTokenUpdateStrategy, string(v.AuthTokenUpdateStrategy))
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.ModifyCacheClusterMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.CacheClusterId != nil {
+		s.WriteString(schemas.ModifyCacheClusterMessage_CacheClusterId, *v.CacheClusterId)
+	}
+	if v.CacheNodeIdsToRemove != nil {
+		serializeCacheNodeIdsList(s, schemas.ModifyCacheClusterMessage_CacheNodeIdsToRemove, v.CacheNodeIdsToRemove)
+	}
+	if v.CacheNodeType != nil {
+		s.WriteString(schemas.ModifyCacheClusterMessage_CacheNodeType, *v.CacheNodeType)
+	}
+	if v.CacheParameterGroupName != nil {
+		s.WriteString(schemas.ModifyCacheClusterMessage_CacheParameterGroupName, *v.CacheParameterGroupName)
+	}
+	if v.CacheSecurityGroupNames != nil {
+		serializeCacheSecurityGroupNameList(s, schemas.ModifyCacheClusterMessage_CacheSecurityGroupNames, v.CacheSecurityGroupNames)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.ModifyCacheClusterMessage_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.ModifyCacheClusterMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.IpDiscovery != "" {
+		s.WriteString(schemas.ModifyCacheClusterMessage_IpDiscovery, string(v.IpDiscovery))
+	}
+	if v.LogDeliveryConfigurations != nil {
+		serializeLogDeliveryConfigurationRequestList(s, schemas.ModifyCacheClusterMessage_LogDeliveryConfigurations, v.LogDeliveryConfigurations)
+	}
+	if v.NewAvailabilityZones != nil {
+		serializePreferredAvailabilityZoneList(s, schemas.ModifyCacheClusterMessage_NewAvailabilityZones, v.NewAvailabilityZones)
+	}
+	if v.NotificationTopicArn != nil {
+		s.WriteString(schemas.ModifyCacheClusterMessage_NotificationTopicArn, *v.NotificationTopicArn)
+	}
+	if v.NotificationTopicStatus != nil {
+		s.WriteString(schemas.ModifyCacheClusterMessage_NotificationTopicStatus, *v.NotificationTopicStatus)
+	}
+	if v.NumCacheNodes != nil {
+		s.WriteInt32(schemas.ModifyCacheClusterMessage_NumCacheNodes, *v.NumCacheNodes)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.ModifyCacheClusterMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.ScaleConfig != nil {
+		s.WriteStruct(schemas.ModifyCacheClusterMessage_ScaleConfig)
+		v.ScaleConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdsList(s, schemas.ModifyCacheClusterMessage_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SnapshotRetentionLimit != nil {
+		s.WriteInt32(schemas.ModifyCacheClusterMessage_SnapshotRetentionLimit, *v.SnapshotRetentionLimit)
+	}
+	if v.SnapshotWindow != nil {
+		s.WriteString(schemas.ModifyCacheClusterMessage_SnapshotWindow, *v.SnapshotWindow)
+	}
+}
+
 type ModifyCacheClusterOutput struct {
 
 	// Contains all of the attributes of a specific cluster.
@@ -334,13 +416,34 @@ type ModifyCacheClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyCacheClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyCacheClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyCacheClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheCluster != nil {
+		s.WriteStruct(schemas.ModifyCacheClusterResult_CacheCluster)
+		v.CacheCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyCacheClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyCacheClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyCacheClusterResult_CacheCluster:
+			v.CacheCluster = &types.CacheCluster{}
+			return v.CacheCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyCacheCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyCacheCluster, schemas.ModifyCacheClusterMessage, schemas.ModifyCacheClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyCacheCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyCacheCluster, schemas.ModifyCacheClusterMessage, schemas.ModifyCacheClusterResult), output: &ModifyCacheClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,33 @@ type ExitStandbyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExitStandbyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExitStandbyQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExitStandbyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.ExitStandbyQuery_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.InstanceIds != nil {
+		serializeInstanceIds(s, schemas.ExitStandbyQuery_InstanceIds, v.InstanceIds)
+	}
+}
+func (v *ExitStandbyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExitStandbyQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExitStandbyQuery_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.ExitStandbyQuery_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.ExitStandbyQuery_InstanceIds:
+			return deserializeInstanceIds(d, schemas.ExitStandbyQuery_InstanceIds, &v.InstanceIds)
+		}
+		return nil
+	})
+}
+
 type ExitStandbyOutput struct {
 
 	// The activities related to moving instances out of Standby mode.
@@ -55,13 +84,31 @@ type ExitStandbyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExitStandbyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExitStandbyAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExitStandbyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activities != nil {
+		serializeActivities(s, schemas.ExitStandbyAnswer_Activities, v.Activities)
+	}
+}
+func (v *ExitStandbyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExitStandbyAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExitStandbyAnswer_Activities:
+			return deserializeActivities(d, schemas.ExitStandbyAnswer_Activities, &v.Activities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExitStandbyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpExitStandby{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExitStandby, schemas.ExitStandbyQuery, schemas.ExitStandbyAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpExitStandby{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExitStandby, schemas.ExitStandbyQuery, schemas.ExitStandbyAnswer), output: &ExitStandbyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

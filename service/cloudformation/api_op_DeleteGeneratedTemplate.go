@@ -4,6 +4,8 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteGeneratedTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGeneratedTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGeneratedTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGeneratedTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GeneratedTemplateName != nil {
+		s.WriteString(schemas.DeleteGeneratedTemplateInput_GeneratedTemplateName, *v.GeneratedTemplateName)
+	}
+}
+
 type DeleteGeneratedTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteGeneratedTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGeneratedTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGeneratedTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteGeneratedTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGeneratedTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteGeneratedTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGeneratedTemplate, schemas.DeleteGeneratedTemplateInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteGeneratedTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGeneratedTemplate, schemas.DeleteGeneratedTemplateInput, nil), output: &DeleteGeneratedTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

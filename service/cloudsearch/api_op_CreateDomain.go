@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type CreateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateDomainRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of a CreateDomainRequest . Contains the status of a newly created
 // domain.
 type CreateDomainOutput struct {
@@ -54,13 +68,34 @@ type CreateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainStatus != nil {
+		s.WriteStruct(schemas.CreateDomainResponse_DomainStatus)
+		v.DomainStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDomainResponse_DomainStatus:
+			v.DomainStatus = &types.DomainStatus{}
+			return v.DomainStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainRequest, schemas.CreateDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainRequest, schemas.CreateDomainResponse), output: &CreateDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

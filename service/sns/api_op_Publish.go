@@ -4,7 +4,9 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -216,6 +218,42 @@ type PublishInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PublishInput_Message, *v.Message)
+	}
+	if v.MessageAttributes != nil {
+		serializeMessageAttributeMap(s, schemas.PublishInput_MessageAttributes, v.MessageAttributes)
+	}
+	if v.MessageDeduplicationId != nil {
+		s.WriteString(schemas.PublishInput_MessageDeduplicationId, *v.MessageDeduplicationId)
+	}
+	if v.MessageGroupId != nil {
+		s.WriteString(schemas.PublishInput_MessageGroupId, *v.MessageGroupId)
+	}
+	if v.MessageStructure != nil {
+		s.WriteString(schemas.PublishInput_MessageStructure, *v.MessageStructure)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.PublishInput_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.Subject != nil {
+		s.WriteString(schemas.PublishInput_Subject, *v.Subject)
+	}
+	if v.TargetArn != nil {
+		s.WriteString(schemas.PublishInput_TargetArn, *v.TargetArn)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.PublishInput_TopicArn, *v.TopicArn)
+	}
+}
+
 // Response for Publish action.
 type PublishOutput struct {
 
@@ -237,13 +275,38 @@ type PublishOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.PublishResponse_MessageId, *v.MessageId)
+	}
+	if v.SequenceNumber != nil {
+		s.WriteString(schemas.PublishResponse_SequenceNumber, *v.SequenceNumber)
+	}
+}
+func (v *PublishOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublishResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublishResponse_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.PublishResponse_MessageId, v.MessageId)
+		case schemas.PublishResponse_SequenceNumber:
+			v.SequenceNumber = new(string)
+			return d.ReadString(schemas.PublishResponse_SequenceNumber, v.SequenceNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPublishMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPublish{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Publish, schemas.PublishInput, schemas.PublishResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPublish{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Publish, schemas.PublishInput, schemas.PublishResponse), output: &PublishOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

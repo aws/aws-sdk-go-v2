@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -128,6 +130,53 @@ type CreateApplicationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationVersionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.CreateApplicationVersionMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.AutoCreateApplication != nil {
+		s.WriteBool(schemas.CreateApplicationVersionMessage_AutoCreateApplication, *v.AutoCreateApplication)
+	}
+	if v.BuildConfiguration != nil {
+		s.WriteStruct(schemas.CreateApplicationVersionMessage_BuildConfiguration)
+		v.BuildConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateApplicationVersionMessage_Description, *v.Description)
+	}
+	if v.ImageConfiguration != nil {
+		s.WriteStruct(schemas.CreateApplicationVersionMessage_ImageConfiguration)
+		v.ImageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Process != nil {
+		s.WriteBool(schemas.CreateApplicationVersionMessage_Process, *v.Process)
+	}
+	if v.SourceBuildInformation != nil {
+		s.WriteStruct(schemas.CreateApplicationVersionMessage_SourceBuildInformation)
+		v.SourceBuildInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceBundle != nil {
+		s.WriteStruct(schemas.CreateApplicationVersionMessage_SourceBundle)
+		v.SourceBundle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateApplicationVersionMessage_Tags, v.Tags)
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.CreateApplicationVersionMessage_VersionLabel, *v.VersionLabel)
+	}
+}
+
 // Result message wrapping a single description of an application version.
 type CreateApplicationVersionOutput struct {
 
@@ -140,13 +189,34 @@ type CreateApplicationVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationVersionDescriptionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationVersion != nil {
+		s.WriteStruct(schemas.ApplicationVersionDescriptionMessage_ApplicationVersion)
+		v.ApplicationVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateApplicationVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationVersionDescriptionMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationVersionDescriptionMessage_ApplicationVersion:
+			v.ApplicationVersion = &types.ApplicationVersionDescription{}
+			return v.ApplicationVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateApplicationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplicationVersion, schemas.CreateApplicationVersionMessage, schemas.ApplicationVersionDescriptionMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateApplicationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplicationVersion, schemas.CreateApplicationVersionMessage, schemas.ApplicationVersionDescriptionMessage), output: &CreateApplicationVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

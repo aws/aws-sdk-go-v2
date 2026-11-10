@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,21 @@ type DeleteCacheClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCacheClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCacheClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCacheClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheClusterId != nil {
+		s.WriteString(schemas.DeleteCacheClusterMessage_CacheClusterId, *v.CacheClusterId)
+	}
+	if v.FinalSnapshotIdentifier != nil {
+		s.WriteString(schemas.DeleteCacheClusterMessage_FinalSnapshotIdentifier, *v.FinalSnapshotIdentifier)
+	}
+}
+
 type DeleteCacheClusterOutput struct {
 
 	// Contains all of the attributes of a specific cluster.
@@ -72,13 +89,34 @@ type DeleteCacheClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCacheClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCacheClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCacheClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheCluster != nil {
+		s.WriteStruct(schemas.DeleteCacheClusterResult_CacheCluster)
+		v.CacheCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteCacheClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCacheClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCacheClusterResult_CacheCluster:
+			v.CacheCluster = &types.CacheCluster{}
+			return v.CacheCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteCacheCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCacheCluster, schemas.DeleteCacheClusterMessage, schemas.DeleteCacheClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteCacheCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCacheCluster, schemas.DeleteCacheClusterMessage, schemas.DeleteCacheClusterResult), output: &DeleteCacheClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

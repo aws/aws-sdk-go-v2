@@ -4,7 +4,9 @@ package elasticloadbalancing
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type CreateLoadBalancerListenersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLoadBalancerListenersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLoadBalancerListenerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLoadBalancerListenersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Listeners != nil {
+		serializeListeners(s, schemas.CreateLoadBalancerListenerInput_Listeners, v.Listeners)
+	}
+	if v.LoadBalancerName != nil {
+		s.WriteString(schemas.CreateLoadBalancerListenerInput_LoadBalancerName, *v.LoadBalancerName)
+	}
+}
+
 // Contains the parameters for CreateLoadBalancerListener.
 type CreateLoadBalancerListenersOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -55,13 +72,26 @@ type CreateLoadBalancerListenersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLoadBalancerListenersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLoadBalancerListenerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLoadBalancerListenersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateLoadBalancerListenersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLoadBalancerListenerOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLoadBalancerListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateLoadBalancerListeners{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoadBalancerListeners, schemas.CreateLoadBalancerListenerInput, schemas.CreateLoadBalancerListenerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateLoadBalancerListeners{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoadBalancerListeners, schemas.CreateLoadBalancerListenerInput, schemas.CreateLoadBalancerListenerOutput), output: &CreateLoadBalancerListenersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

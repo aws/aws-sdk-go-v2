@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,24 @@ type ListMFADeviceTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMFADeviceTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMFADeviceTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMFADeviceTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListMFADeviceTagsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListMFADeviceTagsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.ListMFADeviceTagsRequest_SerialNumber, *v.SerialNumber)
+	}
+}
+
 type ListMFADeviceTagsOutput struct {
 
 	// The list of tags that are currently attached to the virtual MFA device. Each
@@ -90,13 +110,42 @@ type ListMFADeviceTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMFADeviceTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMFADeviceTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMFADeviceTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListMFADeviceTagsResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListMFADeviceTagsResponse_Marker, *v.Marker)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.ListMFADeviceTagsResponse_Tags, v.Tags)
+	}
+}
+func (v *ListMFADeviceTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMFADeviceTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMFADeviceTagsResponse_IsTruncated:
+			return d.ReadBool(schemas.ListMFADeviceTagsResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListMFADeviceTagsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListMFADeviceTagsResponse_Marker, v.Marker)
+		case schemas.ListMFADeviceTagsResponse_Tags:
+			return deserializetagListType(d, schemas.ListMFADeviceTagsResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMFADeviceTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListMFADeviceTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMFADeviceTags, schemas.ListMFADeviceTagsRequest, schemas.ListMFADeviceTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListMFADeviceTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMFADeviceTags, schemas.ListMFADeviceTagsRequest, schemas.ListMFADeviceTagsResponse), output: &ListMFADeviceTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

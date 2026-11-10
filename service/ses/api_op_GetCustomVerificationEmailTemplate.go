@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type GetCustomVerificationEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCustomVerificationEmailTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomVerificationEmailTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomVerificationEmailTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.GetCustomVerificationEmailTemplateRequest_TemplateName, *v.TemplateName)
+	}
+}
+
 // The content of the custom verification email template.
 type GetCustomVerificationEmailTemplateOutput struct {
 
@@ -71,13 +85,62 @@ type GetCustomVerificationEmailTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCustomVerificationEmailTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomVerificationEmailTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomVerificationEmailTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureRedirectionURL != nil {
+		s.WriteString(schemas.GetCustomVerificationEmailTemplateResponse_FailureRedirectionURL, *v.FailureRedirectionURL)
+	}
+	if v.FromEmailAddress != nil {
+		s.WriteString(schemas.GetCustomVerificationEmailTemplateResponse_FromEmailAddress, *v.FromEmailAddress)
+	}
+	if v.SuccessRedirectionURL != nil {
+		s.WriteString(schemas.GetCustomVerificationEmailTemplateResponse_SuccessRedirectionURL, *v.SuccessRedirectionURL)
+	}
+	if v.TemplateContent != nil {
+		s.WriteString(schemas.GetCustomVerificationEmailTemplateResponse_TemplateContent, *v.TemplateContent)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.GetCustomVerificationEmailTemplateResponse_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateSubject != nil {
+		s.WriteString(schemas.GetCustomVerificationEmailTemplateResponse_TemplateSubject, *v.TemplateSubject)
+	}
+}
+func (v *GetCustomVerificationEmailTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCustomVerificationEmailTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCustomVerificationEmailTemplateResponse_FailureRedirectionURL:
+			v.FailureRedirectionURL = new(string)
+			return d.ReadString(schemas.GetCustomVerificationEmailTemplateResponse_FailureRedirectionURL, v.FailureRedirectionURL)
+		case schemas.GetCustomVerificationEmailTemplateResponse_FromEmailAddress:
+			v.FromEmailAddress = new(string)
+			return d.ReadString(schemas.GetCustomVerificationEmailTemplateResponse_FromEmailAddress, v.FromEmailAddress)
+		case schemas.GetCustomVerificationEmailTemplateResponse_SuccessRedirectionURL:
+			v.SuccessRedirectionURL = new(string)
+			return d.ReadString(schemas.GetCustomVerificationEmailTemplateResponse_SuccessRedirectionURL, v.SuccessRedirectionURL)
+		case schemas.GetCustomVerificationEmailTemplateResponse_TemplateContent:
+			v.TemplateContent = new(string)
+			return d.ReadString(schemas.GetCustomVerificationEmailTemplateResponse_TemplateContent, v.TemplateContent)
+		case schemas.GetCustomVerificationEmailTemplateResponse_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.GetCustomVerificationEmailTemplateResponse_TemplateName, v.TemplateName)
+		case schemas.GetCustomVerificationEmailTemplateResponse_TemplateSubject:
+			v.TemplateSubject = new(string)
+			return d.ReadString(schemas.GetCustomVerificationEmailTemplateResponse_TemplateSubject, v.TemplateSubject)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetCustomVerificationEmailTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomVerificationEmailTemplate, schemas.GetCustomVerificationEmailTemplateRequest, schemas.GetCustomVerificationEmailTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetCustomVerificationEmailTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomVerificationEmailTemplate, schemas.GetCustomVerificationEmailTemplateRequest, schemas.GetCustomVerificationEmailTemplateResponse), output: &GetCustomVerificationEmailTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

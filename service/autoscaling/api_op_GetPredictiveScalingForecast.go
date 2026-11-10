@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -69,6 +71,46 @@ type GetPredictiveScalingForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPredictiveScalingForecastInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPredictiveScalingForecastType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPredictiveScalingForecastInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.GetPredictiveScalingForecastType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetPredictiveScalingForecastType_EndTime, *v.EndTime)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.GetPredictiveScalingForecastType_PolicyName, *v.PolicyName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetPredictiveScalingForecastType_StartTime, *v.StartTime)
+	}
+}
+func (v *GetPredictiveScalingForecastInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPredictiveScalingForecastType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPredictiveScalingForecastType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.GetPredictiveScalingForecastType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.GetPredictiveScalingForecastType_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetPredictiveScalingForecastType_EndTime, v.EndTime)
+		case schemas.GetPredictiveScalingForecastType_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.GetPredictiveScalingForecastType_PolicyName, v.PolicyName)
+		case schemas.GetPredictiveScalingForecastType_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetPredictiveScalingForecastType_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 type GetPredictiveScalingForecastOutput struct {
 
 	// The capacity forecast.
@@ -92,13 +134,45 @@ type GetPredictiveScalingForecastOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPredictiveScalingForecastOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPredictiveScalingForecastAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPredictiveScalingForecastOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityForecast != nil {
+		s.WriteStruct(schemas.GetPredictiveScalingForecastAnswer_CapacityForecast)
+		v.CapacityForecast.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LoadForecast != nil {
+		serializeLoadForecasts(s, schemas.GetPredictiveScalingForecastAnswer_LoadForecast, v.LoadForecast)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.GetPredictiveScalingForecastAnswer_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *GetPredictiveScalingForecastOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPredictiveScalingForecastAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPredictiveScalingForecastAnswer_CapacityForecast:
+			v.CapacityForecast = &types.CapacityForecast{}
+			return v.CapacityForecast.Deserialize(d)
+		case schemas.GetPredictiveScalingForecastAnswer_LoadForecast:
+			return deserializeLoadForecasts(d, schemas.GetPredictiveScalingForecastAnswer_LoadForecast, &v.LoadForecast)
+		case schemas.GetPredictiveScalingForecastAnswer_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetPredictiveScalingForecastAnswer_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPredictiveScalingForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetPredictiveScalingForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPredictiveScalingForecast, schemas.GetPredictiveScalingForecastType, schemas.GetPredictiveScalingForecastAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetPredictiveScalingForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPredictiveScalingForecast, schemas.GetPredictiveScalingForecastType, schemas.GetPredictiveScalingForecastAnswer), output: &GetPredictiveScalingForecastOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

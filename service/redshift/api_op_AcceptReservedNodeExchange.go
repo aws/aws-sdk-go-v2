@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type AcceptReservedNodeExchangeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptReservedNodeExchangeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptReservedNodeExchangeInputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptReservedNodeExchangeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReservedNodeId != nil {
+		s.WriteString(schemas.AcceptReservedNodeExchangeInputMessage_ReservedNodeId, *v.ReservedNodeId)
+	}
+	if v.TargetReservedNodeOfferingId != nil {
+		s.WriteString(schemas.AcceptReservedNodeExchangeInputMessage_TargetReservedNodeOfferingId, *v.TargetReservedNodeOfferingId)
+	}
+}
+
 type AcceptReservedNodeExchangeOutput struct {
 
 	//
@@ -53,13 +70,34 @@ type AcceptReservedNodeExchangeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptReservedNodeExchangeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptReservedNodeExchangeOutputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptReservedNodeExchangeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExchangedReservedNode != nil {
+		s.WriteStruct(schemas.AcceptReservedNodeExchangeOutputMessage_ExchangedReservedNode)
+		v.ExchangedReservedNode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AcceptReservedNodeExchangeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptReservedNodeExchangeOutputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptReservedNodeExchangeOutputMessage_ExchangedReservedNode:
+			v.ExchangedReservedNode = &types.ReservedNode{}
+			return v.ExchangedReservedNode.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptReservedNodeExchangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAcceptReservedNodeExchange{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptReservedNodeExchange, schemas.AcceptReservedNodeExchangeInputMessage, schemas.AcceptReservedNodeExchangeOutputMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAcceptReservedNodeExchange{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptReservedNodeExchange, schemas.AcceptReservedNodeExchangeInputMessage, schemas.AcceptReservedNodeExchangeOutputMessage), output: &AcceptReservedNodeExchangeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

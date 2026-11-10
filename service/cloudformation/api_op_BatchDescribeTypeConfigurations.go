@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type BatchDescribeTypeConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDescribeTypeConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeTypeConfigurationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeTypeConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TypeConfigurationIdentifiers != nil {
+		serializeTypeConfigurationIdentifiers(s, schemas.BatchDescribeTypeConfigurationsInput_TypeConfigurationIdentifiers, v.TypeConfigurationIdentifiers)
+	}
+}
+
 type BatchDescribeTypeConfigurationsOutput struct {
 
 	// A list of information concerning any errors generated during the setting of the
@@ -59,13 +73,41 @@ type BatchDescribeTypeConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDescribeTypeConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeTypeConfigurationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeTypeConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Errors != nil {
+		serializeBatchDescribeTypeConfigurationsErrors(s, schemas.BatchDescribeTypeConfigurationsOutput_Errors, v.Errors)
+	}
+	if v.TypeConfigurations != nil {
+		serializeTypeConfigurationDetailsList(s, schemas.BatchDescribeTypeConfigurationsOutput_TypeConfigurations, v.TypeConfigurations)
+	}
+	if v.UnprocessedTypeConfigurations != nil {
+		serializeUnprocessedTypeConfigurations(s, schemas.BatchDescribeTypeConfigurationsOutput_UnprocessedTypeConfigurations, v.UnprocessedTypeConfigurations)
+	}
+}
+func (v *BatchDescribeTypeConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDescribeTypeConfigurationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDescribeTypeConfigurationsOutput_Errors:
+			return deserializeBatchDescribeTypeConfigurationsErrors(d, schemas.BatchDescribeTypeConfigurationsOutput_Errors, &v.Errors)
+		case schemas.BatchDescribeTypeConfigurationsOutput_TypeConfigurations:
+			return deserializeTypeConfigurationDetailsList(d, schemas.BatchDescribeTypeConfigurationsOutput_TypeConfigurations, &v.TypeConfigurations)
+		case schemas.BatchDescribeTypeConfigurationsOutput_UnprocessedTypeConfigurations:
+			return deserializeUnprocessedTypeConfigurations(d, schemas.BatchDescribeTypeConfigurationsOutput_UnprocessedTypeConfigurations, &v.UnprocessedTypeConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDescribeTypeConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpBatchDescribeTypeConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDescribeTypeConfigurations, schemas.BatchDescribeTypeConfigurationsInput, schemas.BatchDescribeTypeConfigurationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpBatchDescribeTypeConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDescribeTypeConfigurations, schemas.BatchDescribeTypeConfigurationsInput, schemas.BatchDescribeTypeConfigurationsOutput), output: &BatchDescribeTypeConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

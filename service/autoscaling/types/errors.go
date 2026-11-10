@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,6 +36,27 @@ func (e *ActiveInstanceRefreshNotFoundFault) ErrorCode() string {
 func (e *ActiveInstanceRefreshNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ActiveInstanceRefreshNotFoundFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveInstanceRefreshNotFoundFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveInstanceRefreshNotFoundFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ActiveInstanceRefreshNotFoundFault_message, *v.Message)
+	}
+}
+func (v *ActiveInstanceRefreshNotFoundFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveInstanceRefreshNotFoundFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveInstanceRefreshNotFoundFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ActiveInstanceRefreshNotFoundFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You already have an Auto Scaling group or launch configuration with this name.
 type AlreadyExistsFault struct {
@@ -61,6 +83,27 @@ func (e *AlreadyExistsFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AlreadyExistsFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlreadyExistsFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlreadyExistsFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AlreadyExistsFault_message, *v.Message)
+	}
+}
+func (v *AlreadyExistsFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlreadyExistsFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlreadyExistsFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AlreadyExistsFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	The service is currently processing another request with the same client
 //
@@ -90,6 +133,27 @@ func (e *IdempotentCallInProgressFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IdempotentCallInProgressFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *IdempotentCallInProgressFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdempotentCallInProgressFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdempotentCallInProgressFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.IdempotentCallInProgressFault_Message, *v.Message)
+	}
+}
+func (v *IdempotentCallInProgressFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdempotentCallInProgressFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdempotentCallInProgressFault_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IdempotentCallInProgressFault_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	Indicates that the parameters in the current request do not match the
 //
@@ -119,6 +183,27 @@ func (e *IdempotentParameterMismatchError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IdempotentParameterMismatchError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *IdempotentParameterMismatchError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdempotentParameterMismatchError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdempotentParameterMismatchError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.IdempotentParameterMismatchError_Message, *v.Message)
+	}
+}
+func (v *IdempotentParameterMismatchError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdempotentParameterMismatchError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdempotentParameterMismatchError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IdempotentParameterMismatchError_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because an active instance refresh already exists for the
 // specified Auto Scaling group.
@@ -146,6 +231,27 @@ func (e *InstanceRefreshInProgressFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InstanceRefreshInProgressFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InstanceRefreshInProgressFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceRefreshInProgressFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceRefreshInProgressFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InstanceRefreshInProgressFault_message, *v.Message)
+	}
+}
+func (v *InstanceRefreshInProgressFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceRefreshInProgressFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceRefreshInProgressFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InstanceRefreshInProgressFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The NextToken value is not valid.
 type InvalidNextToken struct {
@@ -172,6 +278,27 @@ func (e *InvalidNextToken) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNextToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidNextToken) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidNextToken)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidNextToken) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidNextToken_message, *v.Message)
+	}
+}
+func (v *InvalidNextToken) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidNextToken, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidNextToken_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidNextToken_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because a desired configuration was not found or an
 // incompatible launch template (uses a Systems Manager parameter instead of an AMI
@@ -201,6 +328,27 @@ func (e *IrreversibleInstanceRefreshFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IrreversibleInstanceRefreshFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *IrreversibleInstanceRefreshFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IrreversibleInstanceRefreshFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IrreversibleInstanceRefreshFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.IrreversibleInstanceRefreshFault_message, *v.Message)
+	}
+}
+func (v *IrreversibleInstanceRefreshFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IrreversibleInstanceRefreshFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IrreversibleInstanceRefreshFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IrreversibleInstanceRefreshFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You have already reached a limit for your Amazon EC2 Auto Scaling resources
 // (for example, Auto Scaling groups, launch configurations, or lifecycle hooks).
@@ -231,6 +379,27 @@ func (e *LimitExceededFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededFault_message, *v.Message)
+	}
+}
+func (v *LimitExceededFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You already have a pending update to an Amazon EC2 Auto Scaling resource (for
 // example, an Auto Scaling group, instance, or load balancer).
@@ -258,6 +427,27 @@ func (e *ResourceContentionFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceContentionFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ResourceContentionFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceContentionFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceContentionFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceContentionFault_message, *v.Message)
+	}
+}
+func (v *ResourceContentionFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceContentionFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceContentionFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceContentionFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation can't be performed because the resource is in use.
 type ResourceInUseFault struct {
@@ -284,6 +474,27 @@ func (e *ResourceInUseFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUseFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceInUseFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceInUseFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceInUseFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceInUseFault_message, *v.Message)
+	}
+}
+func (v *ResourceInUseFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceInUseFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceInUseFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceInUseFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation can't be performed because there are scaling activities in
 // progress.
@@ -311,6 +522,27 @@ func (e *ScalingActivityInProgressFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ScalingActivityInProgressFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ScalingActivityInProgressFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalingActivityInProgressFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScalingActivityInProgressFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ScalingActivityInProgressFault_message, *v.Message)
+	}
+}
+func (v *ScalingActivityInProgressFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalingActivityInProgressFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalingActivityInProgressFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ScalingActivityInProgressFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The service-linked role is not yet ready for use.
 type ServiceLinkedRoleFailure struct {
@@ -337,3 +569,24 @@ func (e *ServiceLinkedRoleFailure) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceLinkedRoleFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceLinkedRoleFailure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLinkedRoleFailure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLinkedRoleFailure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceLinkedRoleFailure_message, *v.Message)
+	}
+}
+func (v *ServiceLinkedRoleFailure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLinkedRoleFailure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLinkedRoleFailure_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceLinkedRoleFailure_message, v.Message)
+		}
+		return nil
+	})
+}

@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,33 @@ type DescribeSnapshotSchedulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSnapshotSchedulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSnapshotSchedulesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSnapshotSchedulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeSnapshotSchedulesMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeSnapshotSchedulesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeSnapshotSchedulesMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ScheduleIdentifier != nil {
+		s.WriteString(schemas.DescribeSnapshotSchedulesMessage_ScheduleIdentifier, *v.ScheduleIdentifier)
+	}
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.DescribeSnapshotSchedulesMessage_TagKeys, v.TagKeys)
+	}
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.DescribeSnapshotSchedulesMessage_TagValues, v.TagValues)
+	}
+}
+
 type DescribeSnapshotSchedulesOutput struct {
 
 	// A value that indicates the starting point for the next set of response records
@@ -73,13 +102,37 @@ type DescribeSnapshotSchedulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSnapshotSchedulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSnapshotSchedulesOutputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSnapshotSchedulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeSnapshotSchedulesOutputMessage_Marker, *v.Marker)
+	}
+	if v.SnapshotSchedules != nil {
+		serializeSnapshotScheduleList(s, schemas.DescribeSnapshotSchedulesOutputMessage_SnapshotSchedules, v.SnapshotSchedules)
+	}
+}
+func (v *DescribeSnapshotSchedulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSnapshotSchedulesOutputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSnapshotSchedulesOutputMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeSnapshotSchedulesOutputMessage_Marker, v.Marker)
+		case schemas.DescribeSnapshotSchedulesOutputMessage_SnapshotSchedules:
+			return deserializeSnapshotScheduleList(d, schemas.DescribeSnapshotSchedulesOutputMessage_SnapshotSchedules, &v.SnapshotSchedules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSnapshotSchedulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeSnapshotSchedules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSnapshotSchedules, schemas.DescribeSnapshotSchedulesMessage, schemas.DescribeSnapshotSchedulesOutputMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeSnapshotSchedules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSnapshotSchedules, schemas.DescribeSnapshotSchedulesMessage, schemas.DescribeSnapshotSchedulesOutputMessage), output: &DescribeSnapshotSchedulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,19 @@ type SetIdentityFeedbackForwardingEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIdentityFeedbackForwardingEnabledInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIdentityFeedbackForwardingEnabledRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIdentityFeedbackForwardingEnabledInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.SetIdentityFeedbackForwardingEnabledRequest_ForwardingEnabled, v.ForwardingEnabled)
+	if v.Identity != nil {
+		s.WriteString(schemas.SetIdentityFeedbackForwardingEnabledRequest_Identity, *v.Identity)
+	}
+}
+
 // An empty element returned on a successful request.
 type SetIdentityFeedbackForwardingEnabledOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -69,13 +84,26 @@ type SetIdentityFeedbackForwardingEnabledOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIdentityFeedbackForwardingEnabledOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIdentityFeedbackForwardingEnabledResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIdentityFeedbackForwardingEnabledOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetIdentityFeedbackForwardingEnabledOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetIdentityFeedbackForwardingEnabledResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetIdentityFeedbackForwardingEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetIdentityFeedbackForwardingEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIdentityFeedbackForwardingEnabled, schemas.SetIdentityFeedbackForwardingEnabledRequest, schemas.SetIdentityFeedbackForwardingEnabledResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetIdentityFeedbackForwardingEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIdentityFeedbackForwardingEnabled, schemas.SetIdentityFeedbackForwardingEnabledRequest, schemas.SetIdentityFeedbackForwardingEnabledResponse), output: &SetIdentityFeedbackForwardingEnabledOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

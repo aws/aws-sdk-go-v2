@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,24 @@ type UpdateTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTagsForResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTagsForResourceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTagsForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UpdateTagsForResourceMessage_ResourceArn, *v.ResourceArn)
+	}
+	if v.TagsToAdd != nil {
+		serializeTagList(s, schemas.UpdateTagsForResourceMessage_TagsToAdd, v.TagsToAdd)
+	}
+	if v.TagsToRemove != nil {
+		serializeTagKeyList(s, schemas.UpdateTagsForResourceMessage_TagsToRemove, v.TagsToRemove)
+	}
+}
+
 type UpdateTagsForResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,13 +94,26 @@ type UpdateTagsForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTagsForResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTagsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateTagsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTagsForResource, schemas.UpdateTagsForResourceMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTagsForResource, schemas.UpdateTagsForResourceMessage, nil), output: &UpdateTagsForResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

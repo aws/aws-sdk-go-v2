@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -131,6 +133,30 @@ type CopySnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopySnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopySnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopySnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CopySnapshotMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.SourceSnapshotName != nil {
+		s.WriteString(schemas.CopySnapshotMessage_SourceSnapshotName, *v.SourceSnapshotName)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CopySnapshotMessage_Tags, v.Tags)
+	}
+	if v.TargetBucket != nil {
+		s.WriteString(schemas.CopySnapshotMessage_TargetBucket, *v.TargetBucket)
+	}
+	if v.TargetSnapshotName != nil {
+		s.WriteString(schemas.CopySnapshotMessage_TargetSnapshotName, *v.TargetSnapshotName)
+	}
+}
+
 type CopySnapshotOutput struct {
 
 	// Represents a copy of an entire Valkey or Redis OSS cluster as of the time when
@@ -143,13 +169,34 @@ type CopySnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopySnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopySnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopySnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Snapshot != nil {
+		s.WriteStruct(schemas.CopySnapshotResult_Snapshot)
+		v.Snapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CopySnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopySnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopySnapshotResult_Snapshot:
+			v.Snapshot = &types.Snapshot{}
+			return v.Snapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopySnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopySnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopySnapshot, schemas.CopySnapshotMessage, schemas.CopySnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCopySnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopySnapshot, schemas.CopySnapshotMessage, schemas.CopySnapshotResult), output: &CopySnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteSnapshotScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSnapshotScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSnapshotScheduleMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSnapshotScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduleIdentifier != nil {
+		s.WriteString(schemas.DeleteSnapshotScheduleMessage_ScheduleIdentifier, *v.ScheduleIdentifier)
+	}
+}
+
 type DeleteSnapshotScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteSnapshotScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSnapshotScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSnapshotScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSnapshotScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteSnapshotSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSnapshotSchedule, schemas.DeleteSnapshotScheduleMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteSnapshotSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSnapshotSchedule, schemas.DeleteSnapshotScheduleMessage, nil), output: &DeleteSnapshotScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

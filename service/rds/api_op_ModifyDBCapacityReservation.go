@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -95,6 +97,27 @@ type ModifyDBCapacityReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBCapacityReservationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBCapacityReservationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBCapacityReservationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityPerAvailabilityZone != nil {
+		s.WriteInt32(schemas.ModifyDBCapacityReservationRequest_CapacityPerAvailabilityZone, *v.CapacityPerAvailabilityZone)
+	}
+	if v.DBCapacityReservationIdentifier != nil {
+		s.WriteString(schemas.ModifyDBCapacityReservationRequest_DBCapacityReservationIdentifier, *v.DBCapacityReservationIdentifier)
+	}
+	if v.EndDate != nil {
+		s.WriteTime(schemas.ModifyDBCapacityReservationRequest_EndDate, *v.EndDate)
+	}
+	if v.EndDateType != "" {
+		s.WriteString(schemas.ModifyDBCapacityReservationRequest_EndDateType, string(v.EndDateType))
+	}
+}
+
 type ModifyDBCapacityReservationOutput struct {
 
 	// Contains the details of the modified DB capacity reservation.
@@ -106,13 +129,34 @@ type ModifyDBCapacityReservationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBCapacityReservationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBCapacityReservationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBCapacityReservationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBCapacityReservation != nil {
+		s.WriteStruct(schemas.ModifyDBCapacityReservationResponse_DBCapacityReservation)
+		v.DBCapacityReservation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyDBCapacityReservationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyDBCapacityReservationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyDBCapacityReservationResponse_DBCapacityReservation:
+			v.DBCapacityReservation = &types.DBCapacityReservation{}
+			return v.DBCapacityReservation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyDBCapacityReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBCapacityReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBCapacityReservation, schemas.ModifyDBCapacityReservationRequest, schemas.ModifyDBCapacityReservationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBCapacityReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBCapacityReservation, schemas.ModifyDBCapacityReservationRequest, schemas.ModifyDBCapacityReservationResponse), output: &ModifyDBCapacityReservationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

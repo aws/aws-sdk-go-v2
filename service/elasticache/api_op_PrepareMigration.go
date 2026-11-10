@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,31 @@ type PrepareMigrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrepareMigrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrepareMigrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrepareMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerNodeEndpointList != nil {
+		serializeCustomerNodeEndpointList(s, schemas.PrepareMigrationRequest_CustomerNodeEndpointList, v.CustomerNodeEndpointList)
+	}
+	if v.ServerlessCacheName != nil {
+		s.WriteString(schemas.PrepareMigrationRequest_ServerlessCacheName, *v.ServerlessCacheName)
+	}
+	if v.SourceAuthenticationConfiguration != nil {
+		s.WriteStruct(schemas.PrepareMigrationRequest_SourceAuthenticationConfiguration)
+		v.SourceAuthenticationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceTlsConfiguration != nil {
+		s.WriteStruct(schemas.PrepareMigrationRequest_SourceTlsConfiguration)
+		v.SourceTlsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PrepareMigrationOutput struct {
 
 	// Provides the details of the serverless cache prepared for migration.
@@ -58,13 +85,34 @@ type PrepareMigrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrepareMigrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrepareMigrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrepareMigrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerlessCache != nil {
+		s.WriteStruct(schemas.PrepareMigrationResponse_ServerlessCache)
+		v.ServerlessCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PrepareMigrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrepareMigrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrepareMigrationResponse_ServerlessCache:
+			v.ServerlessCache = &types.ServerlessCache{}
+			return v.ServerlessCache.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPrepareMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPrepareMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PrepareMigration, schemas.PrepareMigrationRequest, schemas.PrepareMigrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPrepareMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PrepareMigration, schemas.PrepareMigrationRequest, schemas.PrepareMigrationResponse), output: &PrepareMigrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

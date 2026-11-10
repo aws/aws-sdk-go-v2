@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,22 @@ type DescribeAccountAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeAccountAttributesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeAccountAttributesOutput struct {
 
 	// The Elastic Beanstalk resource quotas associated with the calling Amazon Web
@@ -59,13 +77,34 @@ type DescribeAccountAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountAttributesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceQuotas != nil {
+		s.WriteStruct(schemas.DescribeAccountAttributesResult_ResourceQuotas)
+		v.ResourceQuotas.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAccountAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountAttributesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountAttributesResult_ResourceQuotas:
+			v.ResourceQuotas = &types.ResourceQuotas{}
+			return v.ResourceQuotas.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAccountAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountAttributes, nil, schemas.DescribeAccountAttributesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeAccountAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountAttributes, nil, schemas.DescribeAccountAttributesResult), output: &DescribeAccountAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

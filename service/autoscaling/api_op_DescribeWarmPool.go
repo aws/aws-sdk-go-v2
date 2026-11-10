@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,40 @@ type DescribeWarmPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWarmPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWarmPoolType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWarmPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DescribeWarmPoolType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeWarmPoolType_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeWarmPoolType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeWarmPoolInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWarmPoolType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWarmPoolType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DescribeWarmPoolType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DescribeWarmPoolType_MaxRecords:
+			v.MaxRecords = new(int32)
+			return d.ReadInt32(schemas.DescribeWarmPoolType_MaxRecords, v.MaxRecords)
+		case schemas.DescribeWarmPoolType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeWarmPoolType_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type DescribeWarmPoolOutput struct {
 
 	// The instances that are currently in the warm pool.
@@ -67,13 +103,45 @@ type DescribeWarmPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWarmPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWarmPoolAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWarmPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Instances != nil {
+		serializeInstances(s, schemas.DescribeWarmPoolAnswer_Instances, v.Instances)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeWarmPoolAnswer_NextToken, *v.NextToken)
+	}
+	if v.WarmPoolConfiguration != nil {
+		s.WriteStruct(schemas.DescribeWarmPoolAnswer_WarmPoolConfiguration)
+		v.WarmPoolConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeWarmPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWarmPoolAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWarmPoolAnswer_Instances:
+			return deserializeInstances(d, schemas.DescribeWarmPoolAnswer_Instances, &v.Instances)
+		case schemas.DescribeWarmPoolAnswer_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeWarmPoolAnswer_NextToken, v.NextToken)
+		case schemas.DescribeWarmPoolAnswer_WarmPoolConfiguration:
+			v.WarmPoolConfiguration = &types.WarmPoolConfiguration{}
+			return v.WarmPoolConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWarmPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeWarmPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWarmPool, schemas.DescribeWarmPoolType, schemas.DescribeWarmPoolAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeWarmPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWarmPool, schemas.DescribeWarmPoolType, schemas.DescribeWarmPoolAnswer), output: &DescribeWarmPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

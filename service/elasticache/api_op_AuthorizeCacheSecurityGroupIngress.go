@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type AuthorizeCacheSecurityGroupIngressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthorizeCacheSecurityGroupIngressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthorizeCacheSecurityGroupIngressMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthorizeCacheSecurityGroupIngressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheSecurityGroupName != nil {
+		s.WriteString(schemas.AuthorizeCacheSecurityGroupIngressMessage_CacheSecurityGroupName, *v.CacheSecurityGroupName)
+	}
+	if v.EC2SecurityGroupName != nil {
+		s.WriteString(schemas.AuthorizeCacheSecurityGroupIngressMessage_EC2SecurityGroupName, *v.EC2SecurityGroupName)
+	}
+	if v.EC2SecurityGroupOwnerId != nil {
+		s.WriteString(schemas.AuthorizeCacheSecurityGroupIngressMessage_EC2SecurityGroupOwnerId, *v.EC2SecurityGroupOwnerId)
+	}
+}
+
 type AuthorizeCacheSecurityGroupIngressOutput struct {
 
 	// Represents the output of one of the following operations:
@@ -70,13 +90,34 @@ type AuthorizeCacheSecurityGroupIngressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthorizeCacheSecurityGroupIngressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthorizeCacheSecurityGroupIngressResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthorizeCacheSecurityGroupIngressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheSecurityGroup != nil {
+		s.WriteStruct(schemas.AuthorizeCacheSecurityGroupIngressResult_CacheSecurityGroup)
+		v.CacheSecurityGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AuthorizeCacheSecurityGroupIngressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthorizeCacheSecurityGroupIngressResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthorizeCacheSecurityGroupIngressResult_CacheSecurityGroup:
+			v.CacheSecurityGroup = &types.CacheSecurityGroup{}
+			return v.CacheSecurityGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAuthorizeCacheSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAuthorizeCacheSecurityGroupIngress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AuthorizeCacheSecurityGroupIngress, schemas.AuthorizeCacheSecurityGroupIngressMessage, schemas.AuthorizeCacheSecurityGroupIngressResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAuthorizeCacheSecurityGroupIngress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AuthorizeCacheSecurityGroupIngress, schemas.AuthorizeCacheSecurityGroupIngressMessage, schemas.AuthorizeCacheSecurityGroupIngressResult), output: &AuthorizeCacheSecurityGroupIngressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

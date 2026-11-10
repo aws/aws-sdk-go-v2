@@ -4,7 +4,9 @@ package neptune
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type RemoveFromGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveFromGlobalClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveFromGlobalClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveFromGlobalClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbClusterIdentifier != nil {
+		s.WriteString(schemas.RemoveFromGlobalClusterMessage_DbClusterIdentifier, *v.DbClusterIdentifier)
+	}
+	if v.GlobalClusterIdentifier != nil {
+		s.WriteString(schemas.RemoveFromGlobalClusterMessage_GlobalClusterIdentifier, *v.GlobalClusterIdentifier)
+	}
+}
+
 type RemoveFromGlobalClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune global database.
@@ -56,13 +73,34 @@ type RemoveFromGlobalClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveFromGlobalClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveFromGlobalClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveFromGlobalClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalCluster != nil {
+		s.WriteStruct(schemas.RemoveFromGlobalClusterResult_GlobalCluster)
+		v.GlobalCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RemoveFromGlobalClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveFromGlobalClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveFromGlobalClusterResult_GlobalCluster:
+			v.GlobalCluster = &types.GlobalCluster{}
+			return v.GlobalCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveFromGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveFromGlobalCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveFromGlobalCluster, schemas.RemoveFromGlobalClusterMessage, schemas.RemoveFromGlobalClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRemoveFromGlobalCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveFromGlobalCluster, schemas.RemoveFromGlobalClusterMessage, schemas.RemoveFromGlobalClusterResult), output: &RemoveFromGlobalClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

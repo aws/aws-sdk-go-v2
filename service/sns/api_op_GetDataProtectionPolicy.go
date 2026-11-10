@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,18 @@ type GetDataProtectionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataProtectionPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataProtectionPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataProtectionPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetDataProtectionPolicyInput_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type GetDataProtectionPolicyOutput struct {
 
 	// Retrieves the DataProtectionPolicy in JSON string format.
@@ -55,13 +69,32 @@ type GetDataProtectionPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataProtectionPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataProtectionPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataProtectionPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataProtectionPolicy != nil {
+		s.WriteString(schemas.GetDataProtectionPolicyResponse_DataProtectionPolicy, *v.DataProtectionPolicy)
+	}
+}
+func (v *GetDataProtectionPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataProtectionPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataProtectionPolicyResponse_DataProtectionPolicy:
+			v.DataProtectionPolicy = new(string)
+			return d.ReadString(schemas.GetDataProtectionPolicyResponse_DataProtectionPolicy, v.DataProtectionPolicy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataProtectionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetDataProtectionPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataProtectionPolicy, schemas.GetDataProtectionPolicyInput, schemas.GetDataProtectionPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetDataProtectionPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataProtectionPolicy, schemas.GetDataProtectionPolicyInput, schemas.GetDataProtectionPolicyResponse), output: &GetDataProtectionPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

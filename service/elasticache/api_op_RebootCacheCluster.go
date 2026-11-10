@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,21 @@ type RebootCacheClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootCacheClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootCacheClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootCacheClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheClusterId != nil {
+		s.WriteString(schemas.RebootCacheClusterMessage_CacheClusterId, *v.CacheClusterId)
+	}
+	if v.CacheNodeIdsToReboot != nil {
+		serializeCacheNodeIdsList(s, schemas.RebootCacheClusterMessage_CacheNodeIdsToReboot, v.CacheNodeIdsToReboot)
+	}
+}
+
 type RebootCacheClusterOutput struct {
 
 	// Contains all of the attributes of a specific cluster.
@@ -70,13 +87,34 @@ type RebootCacheClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootCacheClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootCacheClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootCacheClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheCluster != nil {
+		s.WriteStruct(schemas.RebootCacheClusterResult_CacheCluster)
+		v.CacheCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RebootCacheClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootCacheClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootCacheClusterResult_CacheCluster:
+			v.CacheCluster = &types.CacheCluster{}
+			return v.CacheCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRebootCacheCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootCacheCluster, schemas.RebootCacheClusterMessage, schemas.RebootCacheClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRebootCacheCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootCacheCluster, schemas.RebootCacheClusterMessage, schemas.RebootCacheClusterResult), output: &RebootCacheClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,27 @@ type DescribeTrafficSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrafficSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrafficSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrafficSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DescribeTrafficSourcesRequest_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeTrafficSourcesRequest_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeTrafficSourcesRequest_NextToken, *v.NextToken)
+	}
+	if v.TrafficSourceType != nil {
+		s.WriteString(schemas.DescribeTrafficSourcesRequest_TrafficSourceType, *v.TrafficSourceType)
+	}
+}
+
 type DescribeTrafficSourcesOutput struct {
 
 	// This string indicates that the response contains more items than can be
@@ -77,13 +100,37 @@ type DescribeTrafficSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrafficSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrafficSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrafficSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeTrafficSourcesResponse_NextToken, *v.NextToken)
+	}
+	if v.TrafficSources != nil {
+		serializeTrafficSourceStates(s, schemas.DescribeTrafficSourcesResponse_TrafficSources, v.TrafficSources)
+	}
+}
+func (v *DescribeTrafficSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTrafficSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTrafficSourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeTrafficSourcesResponse_NextToken, v.NextToken)
+		case schemas.DescribeTrafficSourcesResponse_TrafficSources:
+			return deserializeTrafficSourceStates(d, schemas.DescribeTrafficSourcesResponse_TrafficSources, &v.TrafficSources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTrafficSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTrafficSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrafficSources, schemas.DescribeTrafficSourcesRequest, schemas.DescribeTrafficSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeTrafficSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrafficSources, schemas.DescribeTrafficSourcesRequest, schemas.DescribeTrafficSourcesResponse), output: &DescribeTrafficSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

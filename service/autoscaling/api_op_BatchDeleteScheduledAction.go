@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,33 @@ type BatchDeleteScheduledActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteScheduledActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteScheduledActionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteScheduledActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.BatchDeleteScheduledActionType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.ScheduledActionNames != nil {
+		serializeScheduledActionNames(s, schemas.BatchDeleteScheduledActionType_ScheduledActionNames, v.ScheduledActionNames)
+	}
+}
+func (v *BatchDeleteScheduledActionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteScheduledActionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteScheduledActionType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.BatchDeleteScheduledActionType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.BatchDeleteScheduledActionType_ScheduledActionNames:
+			return deserializeScheduledActionNames(d, schemas.BatchDeleteScheduledActionType_ScheduledActionNames, &v.ScheduledActionNames)
+		}
+		return nil
+	})
+}
+
 type BatchDeleteScheduledActionOutput struct {
 
 	// The names of the scheduled actions that could not be deleted, including an
@@ -51,13 +80,31 @@ type BatchDeleteScheduledActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteScheduledActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteScheduledActionAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteScheduledActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailedScheduledActions != nil {
+		serializeFailedScheduledUpdateGroupActionRequests(s, schemas.BatchDeleteScheduledActionAnswer_FailedScheduledActions, v.FailedScheduledActions)
+	}
+}
+func (v *BatchDeleteScheduledActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteScheduledActionAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteScheduledActionAnswer_FailedScheduledActions:
+			return deserializeFailedScheduledUpdateGroupActionRequests(d, schemas.BatchDeleteScheduledActionAnswer_FailedScheduledActions, &v.FailedScheduledActions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpBatchDeleteScheduledAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteScheduledAction, schemas.BatchDeleteScheduledActionType, schemas.BatchDeleteScheduledActionAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpBatchDeleteScheduledAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteScheduledAction, schemas.BatchDeleteScheduledActionType, schemas.BatchDeleteScheduledActionAnswer), output: &BatchDeleteScheduledActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

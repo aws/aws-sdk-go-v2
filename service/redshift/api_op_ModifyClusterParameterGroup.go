@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,21 @@ type ModifyClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterParameterGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParameterGroupName != nil {
+		s.WriteString(schemas.ModifyClusterParameterGroupMessage_ParameterGroupName, *v.ParameterGroupName)
+	}
+	if v.Parameters != nil {
+		serializeParametersList(s, schemas.ModifyClusterParameterGroupMessage_Parameters, v.Parameters)
+	}
+}
+
 type ModifyClusterParameterGroupOutput struct {
 
 	// The name of the cluster parameter group.
@@ -69,13 +86,38 @@ type ModifyClusterParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterParameterGroupNameMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParameterGroupName != nil {
+		s.WriteString(schemas.ClusterParameterGroupNameMessage_ParameterGroupName, *v.ParameterGroupName)
+	}
+	if v.ParameterGroupStatus != nil {
+		s.WriteString(schemas.ClusterParameterGroupNameMessage_ParameterGroupStatus, *v.ParameterGroupStatus)
+	}
+}
+func (v *ModifyClusterParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterParameterGroupNameMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterParameterGroupNameMessage_ParameterGroupName:
+			v.ParameterGroupName = new(string)
+			return d.ReadString(schemas.ClusterParameterGroupNameMessage_ParameterGroupName, v.ParameterGroupName)
+		case schemas.ClusterParameterGroupNameMessage_ParameterGroupStatus:
+			v.ParameterGroupStatus = new(string)
+			return d.ReadString(schemas.ClusterParameterGroupNameMessage_ParameterGroupStatus, v.ParameterGroupStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyClusterParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyClusterParameterGroup, schemas.ModifyClusterParameterGroupMessage, schemas.ClusterParameterGroupNameMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyClusterParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyClusterParameterGroup, schemas.ModifyClusterParameterGroupMessage, schemas.ClusterParameterGroupNameMessage), output: &ModifyClusterParameterGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

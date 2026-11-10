@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,33 @@ type ListTypeRegistrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTypeRegistrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTypeRegistrationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTypeRegistrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTypeRegistrationsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTypeRegistrationsInput_NextToken, *v.NextToken)
+	}
+	if v.RegistrationStatusFilter != "" {
+		s.WriteString(schemas.ListTypeRegistrationsInput_RegistrationStatusFilter, string(v.RegistrationStatusFilter))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListTypeRegistrationsInput_Type, string(v.Type))
+	}
+	if v.TypeArn != nil {
+		s.WriteString(schemas.ListTypeRegistrationsInput_TypeArn, *v.TypeArn)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.ListTypeRegistrationsInput_TypeName, *v.TypeName)
+	}
+}
+
 type ListTypeRegistrationsOutput struct {
 
 	// If the request doesn't return all the remaining results, NextToken is set to a
@@ -79,13 +108,37 @@ type ListTypeRegistrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTypeRegistrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTypeRegistrationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTypeRegistrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTypeRegistrationsOutput_NextToken, *v.NextToken)
+	}
+	if v.RegistrationTokenList != nil {
+		serializeRegistrationTokenList(s, schemas.ListTypeRegistrationsOutput_RegistrationTokenList, v.RegistrationTokenList)
+	}
+}
+func (v *ListTypeRegistrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTypeRegistrationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTypeRegistrationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTypeRegistrationsOutput_NextToken, v.NextToken)
+		case schemas.ListTypeRegistrationsOutput_RegistrationTokenList:
+			return deserializeRegistrationTokenList(d, schemas.ListTypeRegistrationsOutput_RegistrationTokenList, &v.RegistrationTokenList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTypeRegistrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListTypeRegistrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypeRegistrations, schemas.ListTypeRegistrationsInput, schemas.ListTypeRegistrationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListTypeRegistrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypeRegistrations, schemas.ListTypeRegistrationsInput, schemas.ListTypeRegistrationsOutput), output: &ListTypeRegistrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

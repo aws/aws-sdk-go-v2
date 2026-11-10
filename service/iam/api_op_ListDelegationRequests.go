@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type ListDelegationRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDelegationRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDelegationRequestsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDelegationRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListDelegationRequestsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListDelegationRequestsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.ListDelegationRequestsRequest_OwnerId, *v.OwnerId)
+	}
+}
+
 type ListDelegationRequestsOutput struct {
 
 	// A list of delegation requests that match the specified criteria.
@@ -77,13 +97,42 @@ type ListDelegationRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDelegationRequestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDelegationRequestsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDelegationRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DelegationRequests != nil {
+		serializedelegationRequestsListType(s, schemas.ListDelegationRequestsResponse_DelegationRequests, v.DelegationRequests)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListDelegationRequestsResponse_Marker, *v.Marker)
+	}
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListDelegationRequestsResponse_isTruncated, v.IsTruncated)
+	}
+}
+func (v *ListDelegationRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDelegationRequestsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDelegationRequestsResponse_DelegationRequests:
+			return deserializedelegationRequestsListType(d, schemas.ListDelegationRequestsResponse_DelegationRequests, &v.DelegationRequests)
+		case schemas.ListDelegationRequestsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListDelegationRequestsResponse_Marker, v.Marker)
+		case schemas.ListDelegationRequestsResponse_isTruncated:
+			return d.ReadBool(schemas.ListDelegationRequestsResponse_isTruncated, &v.IsTruncated)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDelegationRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListDelegationRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDelegationRequests, schemas.ListDelegationRequestsRequest, schemas.ListDelegationRequestsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListDelegationRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDelegationRequests, schemas.ListDelegationRequestsRequest, schemas.ListDelegationRequestsResponse), output: &ListDelegationRequestsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

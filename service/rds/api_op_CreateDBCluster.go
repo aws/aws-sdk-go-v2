@@ -7,7 +7,9 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -895,6 +897,204 @@ type CreateDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.CreateDBClusterMessage_AllocatedStorage, *v.AllocatedStorage)
+	}
+	if v.AssociatedRoles != nil {
+		serializeDBClusterAssociatedRoles(s, schemas.CreateDBClusterMessage_AssociatedRoles, v.AssociatedRoles)
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZones(s, schemas.CreateDBClusterMessage_AvailabilityZones, v.AvailabilityZones)
+	}
+	if v.BacktrackWindow != nil {
+		s.WriteInt64(schemas.CreateDBClusterMessage_BacktrackWindow, *v.BacktrackWindow)
+	}
+	if v.BackupRetentionPeriod != nil {
+		s.WriteInt32(schemas.CreateDBClusterMessage_BackupRetentionPeriod, *v.BackupRetentionPeriod)
+	}
+	if v.CACertificateIdentifier != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_CACertificateIdentifier, *v.CACertificateIdentifier)
+	}
+	if v.CharacterSetName != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_CharacterSetName, *v.CharacterSetName)
+	}
+	if v.ClusterScalabilityType != "" {
+		s.WriteString(schemas.CreateDBClusterMessage_ClusterScalabilityType, string(v.ClusterScalabilityType))
+	}
+	if v.CopyTagsToSnapshot != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_CopyTagsToSnapshot, *v.CopyTagsToSnapshot)
+	}
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.DBClusterInstanceClass != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_DBClusterInstanceClass, *v.DBClusterInstanceClass)
+	}
+	if v.DBClusterParameterGroupName != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
+	}
+	if v.DBSubnetGroupName != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
+	}
+	if v.DBSystemId != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_DBSystemId, *v.DBSystemId)
+	}
+	if v.DatabaseInsightsMode != "" {
+		s.WriteString(schemas.CreateDBClusterMessage_DatabaseInsightsMode, string(v.DatabaseInsightsMode))
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_DatabaseName, *v.DatabaseName)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_DeletionProtection, *v.DeletionProtection)
+	}
+	if v.destinationRegion != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_DestinationRegion, *v.destinationRegion)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_Domain, *v.Domain)
+	}
+	if v.DomainIAMRoleName != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_DomainIAMRoleName, *v.DomainIAMRoleName)
+	}
+	if v.EnableCloudwatchLogsExports != nil {
+		serializeLogTypeList(s, schemas.CreateDBClusterMessage_EnableCloudwatchLogsExports, v.EnableCloudwatchLogsExports)
+	}
+	if v.EnableGlobalWriteForwarding != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_EnableGlobalWriteForwarding, *v.EnableGlobalWriteForwarding)
+	}
+	if v.EnableHttpEndpoint != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_EnableHttpEndpoint, *v.EnableHttpEndpoint)
+	}
+	if v.EnableIAMDatabaseAuthentication != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_EnableIAMDatabaseAuthentication, *v.EnableIAMDatabaseAuthentication)
+	}
+	if v.EnableLimitlessDatabase != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_EnableLimitlessDatabase, *v.EnableLimitlessDatabase)
+	}
+	if v.EnableLocalWriteForwarding != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_EnableLocalWriteForwarding, *v.EnableLocalWriteForwarding)
+	}
+	if v.EnablePerformanceInsights != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_EnablePerformanceInsights, *v.EnablePerformanceInsights)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_Engine, *v.Engine)
+	}
+	if v.EngineLifecycleSupport != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_EngineLifecycleSupport, *v.EngineLifecycleSupport)
+	}
+	if v.EngineMode != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_EngineMode, *v.EngineMode)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.GlobalClusterIdentifier != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_GlobalClusterIdentifier, *v.GlobalClusterIdentifier)
+	}
+	if v.Iops != nil {
+		s.WriteInt32(schemas.CreateDBClusterMessage_Iops, *v.Iops)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.ManageMasterUserPassword != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_ManageMasterUserPassword, *v.ManageMasterUserPassword)
+	}
+	if v.MasterUserAuthenticationType != "" {
+		s.WriteString(schemas.CreateDBClusterMessage_MasterUserAuthenticationType, string(v.MasterUserAuthenticationType))
+	}
+	if v.MasterUserPassword != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_MasterUserPassword, *v.MasterUserPassword)
+	}
+	if v.MasterUserSecretKmsKeyId != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_MasterUserSecretKmsKeyId, *v.MasterUserSecretKmsKeyId)
+	}
+	if v.MasterUsername != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_MasterUsername, *v.MasterUsername)
+	}
+	if v.MonitoringInterval != nil {
+		s.WriteInt32(schemas.CreateDBClusterMessage_MonitoringInterval, *v.MonitoringInterval)
+	}
+	if v.MonitoringRoleArn != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_MonitoringRoleArn, *v.MonitoringRoleArn)
+	}
+	if v.NetworkType != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_NetworkType, *v.NetworkType)
+	}
+	if v.OptionGroupName != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_OptionGroupName, *v.OptionGroupName)
+	}
+	if v.PerformanceInsightsKMSKeyId != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_PerformanceInsightsKMSKeyId, *v.PerformanceInsightsKMSKeyId)
+	}
+	if v.PerformanceInsightsRetentionPeriod != nil {
+		s.WriteInt32(schemas.CreateDBClusterMessage_PerformanceInsightsRetentionPeriod, *v.PerformanceInsightsRetentionPeriod)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.CreateDBClusterMessage_Port, *v.Port)
+	}
+	if v.PreSignedUrl != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_PreSignedUrl, *v.PreSignedUrl)
+	}
+	if v.PreferredBackupWindow != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_PreferredBackupWindow, *v.PreferredBackupWindow)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_PubliclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.RdsCustomClusterConfiguration != nil {
+		s.WriteStruct(schemas.CreateDBClusterMessage_RdsCustomClusterConfiguration)
+		v.RdsCustomClusterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationSourceIdentifier != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_ReplicationSourceIdentifier, *v.ReplicationSourceIdentifier)
+	}
+	if v.ScalingConfiguration != nil {
+		s.WriteStruct(schemas.CreateDBClusterMessage_ScalingConfiguration)
+		v.ScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerlessV2ScalingConfiguration != nil {
+		s.WriteStruct(schemas.CreateDBClusterMessage_ServerlessV2ScalingConfiguration)
+		v.ServerlessV2ScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageEncrypted != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_StorageEncrypted, *v.StorageEncrypted)
+	}
+	if v.StorageType != nil {
+		s.WriteString(schemas.CreateDBClusterMessage_StorageType, *v.StorageType)
+	}
+	if v.TagSpecifications != nil {
+		serializeTagSpecificationList(s, schemas.CreateDBClusterMessage_TagSpecifications, v.TagSpecifications)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDBClusterMessage_Tags, v.Tags)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.CreateDBClusterMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.WithExpressConfiguration != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_WithExpressConfiguration, *v.WithExpressConfiguration)
+	}
+}
+
 type CreateDBClusterOutput struct {
 
 	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster.
@@ -926,13 +1126,34 @@ type CreateDBClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBCluster != nil {
+		s.WriteStruct(schemas.CreateDBClusterResult_DBCluster)
+		v.DBCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDBClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDBClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDBClusterResult_DBCluster:
+			v.DBCluster = &types.DBCluster{}
+			return v.DBCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBCluster, schemas.CreateDBClusterMessage, schemas.CreateDBClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDBCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBCluster, schemas.CreateDBClusterMessage, schemas.CreateDBClusterResult), output: &CreateDBClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

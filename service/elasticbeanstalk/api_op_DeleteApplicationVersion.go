@@ -4,6 +4,8 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DeleteApplicationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationVersionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DeleteApplicationVersionMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.DeleteSourceBundle != nil {
+		s.WriteBool(schemas.DeleteApplicationVersionMessage_DeleteSourceBundle, *v.DeleteSourceBundle)
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.DeleteApplicationVersionMessage_VersionLabel, *v.VersionLabel)
+	}
+}
+
 type DeleteApplicationVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +74,26 @@ type DeleteApplicationVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteApplicationVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteApplicationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationVersion, schemas.DeleteApplicationVersionMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteApplicationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationVersion, schemas.DeleteApplicationVersionMessage, nil), output: &DeleteApplicationVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

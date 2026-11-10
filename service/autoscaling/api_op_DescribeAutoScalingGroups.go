@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -76,6 +78,56 @@ type DescribeAutoScalingGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutoScalingGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingGroupNamesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoScalingGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupNames != nil {
+		serializeAutoScalingGroupNames(s, schemas.AutoScalingGroupNamesType_AutoScalingGroupNames, v.AutoScalingGroupNames)
+	}
+	if v.Filters != nil {
+		serializeFilters(s, schemas.AutoScalingGroupNamesType_Filters, v.Filters)
+	}
+	if v.IncludeInstances != nil {
+		s.WriteBool(schemas.AutoScalingGroupNamesType_IncludeInstances, *v.IncludeInstances)
+	}
+	if v.IncludeManagedResources != nil {
+		s.WriteBool(schemas.AutoScalingGroupNamesType_IncludeManagedResources, *v.IncludeManagedResources)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.AutoScalingGroupNamesType_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.AutoScalingGroupNamesType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAutoScalingGroupsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingGroupNamesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingGroupNamesType_AutoScalingGroupNames:
+			return deserializeAutoScalingGroupNames(d, schemas.AutoScalingGroupNamesType_AutoScalingGroupNames, &v.AutoScalingGroupNames)
+		case schemas.AutoScalingGroupNamesType_Filters:
+			return deserializeFilters(d, schemas.AutoScalingGroupNamesType_Filters, &v.Filters)
+		case schemas.AutoScalingGroupNamesType_IncludeInstances:
+			v.IncludeInstances = new(bool)
+			return d.ReadBool(schemas.AutoScalingGroupNamesType_IncludeInstances, v.IncludeInstances)
+		case schemas.AutoScalingGroupNamesType_IncludeManagedResources:
+			v.IncludeManagedResources = new(bool)
+			return d.ReadBool(schemas.AutoScalingGroupNamesType_IncludeManagedResources, v.IncludeManagedResources)
+		case schemas.AutoScalingGroupNamesType_MaxRecords:
+			v.MaxRecords = new(int32)
+			return d.ReadInt32(schemas.AutoScalingGroupNamesType_MaxRecords, v.MaxRecords)
+		case schemas.AutoScalingGroupNamesType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.AutoScalingGroupNamesType_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type DescribeAutoScalingGroupsOutput struct {
 
 	// The groups.
@@ -95,13 +147,37 @@ type DescribeAutoScalingGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutoScalingGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingGroupsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoScalingGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroups != nil {
+		serializeAutoScalingGroups(s, schemas.AutoScalingGroupsType_AutoScalingGroups, v.AutoScalingGroups)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.AutoScalingGroupsType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAutoScalingGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingGroupsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingGroupsType_AutoScalingGroups:
+			return deserializeAutoScalingGroups(d, schemas.AutoScalingGroupsType_AutoScalingGroups, &v.AutoScalingGroups)
+		case schemas.AutoScalingGroupsType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.AutoScalingGroupsType_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAutoScalingGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAutoScalingGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoScalingGroups, schemas.AutoScalingGroupNamesType, schemas.AutoScalingGroupsType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeAutoScalingGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoScalingGroups, schemas.AutoScalingGroupNamesType, schemas.AutoScalingGroupsType), output: &DescribeAutoScalingGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

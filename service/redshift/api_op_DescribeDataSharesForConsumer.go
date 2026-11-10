@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type DescribeDataSharesForConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSharesForConsumerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSharesForConsumerMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSharesForConsumerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumerArn != nil {
+		s.WriteString(schemas.DescribeDataSharesForConsumerMessage_ConsumerArn, *v.ConsumerArn)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDataSharesForConsumerMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDataSharesForConsumerMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeDataSharesForConsumerMessage_Status, string(v.Status))
+	}
+}
+
 type DescribeDataSharesForConsumerOutput struct {
 
 	// Shows the results of datashares available for consumers.
@@ -71,13 +94,37 @@ type DescribeDataSharesForConsumerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSharesForConsumerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSharesForConsumerResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSharesForConsumerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataShares != nil {
+		serializeDataShareList(s, schemas.DescribeDataSharesForConsumerResult_DataShares, v.DataShares)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDataSharesForConsumerResult_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDataSharesForConsumerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataSharesForConsumerResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataSharesForConsumerResult_DataShares:
+			return deserializeDataShareList(d, schemas.DescribeDataSharesForConsumerResult_DataShares, &v.DataShares)
+		case schemas.DescribeDataSharesForConsumerResult_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeDataSharesForConsumerResult_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataSharesForConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDataSharesForConsumer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSharesForConsumer, schemas.DescribeDataSharesForConsumerMessage, schemas.DescribeDataSharesForConsumerResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDataSharesForConsumer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSharesForConsumer, schemas.DescribeDataSharesForConsumerMessage, schemas.DescribeDataSharesForConsumerResult), output: &DescribeDataSharesForConsumerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

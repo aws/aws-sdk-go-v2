@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type DescribeIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIntegrationsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		serializeDescribeIntegrationsFilterList(s, schemas.DescribeIntegrationsMessage_Filters, v.Filters)
+	}
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.DescribeIntegrationsMessage_IntegrationArn, *v.IntegrationArn)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeIntegrationsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeIntegrationsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeIntegrationsOutput struct {
 
 	// List of integrations that are described.
@@ -69,13 +92,37 @@ type DescribeIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IntegrationsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Integrations != nil {
+		serializeIntegrationList(s, schemas.IntegrationsMessage_Integrations, v.Integrations)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.IntegrationsMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IntegrationsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IntegrationsMessage_Integrations:
+			return deserializeIntegrationList(d, schemas.IntegrationsMessage_Integrations, &v.Integrations)
+		case schemas.IntegrationsMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.IntegrationsMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIntegrations, schemas.DescribeIntegrationsMessage, schemas.IntegrationsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIntegrations, schemas.DescribeIntegrationsMessage, schemas.IntegrationsMessage), output: &DescribeIntegrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

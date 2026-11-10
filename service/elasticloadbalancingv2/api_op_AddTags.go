@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type AddTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddTagsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArns != nil {
+		serializeResourceArns(s, schemas.AddTagsInput_ResourceArns, v.ResourceArns)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.AddTagsInput_Tags, v.Tags)
+	}
+}
+
 type AddTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +68,26 @@ type AddTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddTagsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AddTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddTagsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddTags, schemas.AddTagsInput, schemas.AddTagsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAddTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddTags, schemas.AddTagsInput, schemas.AddTagsOutput), output: &AddTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

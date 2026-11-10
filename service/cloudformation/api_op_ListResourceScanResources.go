@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,36 @@ type ListResourceScanResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceScanResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceScanResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceScanResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceScanResourcesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceScanResourcesInput_NextToken, *v.NextToken)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.ListResourceScanResourcesInput_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ResourceScanId != nil {
+		s.WriteString(schemas.ListResourceScanResourcesInput_ResourceScanId, *v.ResourceScanId)
+	}
+	if v.ResourceTypePrefix != nil {
+		s.WriteString(schemas.ListResourceScanResourcesInput_ResourceTypePrefix, *v.ResourceTypePrefix)
+	}
+	if v.TagKey != nil {
+		s.WriteString(schemas.ListResourceScanResourcesInput_TagKey, *v.TagKey)
+	}
+	if v.TagValue != nil {
+		s.WriteString(schemas.ListResourceScanResourcesInput_TagValue, *v.TagValue)
+	}
+}
+
 type ListResourceScanResourcesOutput struct {
 
 	// If the request doesn't return all the remaining results, NextToken is set to a
@@ -81,13 +113,37 @@ type ListResourceScanResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceScanResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceScanResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceScanResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceScanResourcesOutput_NextToken, *v.NextToken)
+	}
+	if v.Resources != nil {
+		serializeScannedResources(s, schemas.ListResourceScanResourcesOutput_Resources, v.Resources)
+	}
+}
+func (v *ListResourceScanResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceScanResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceScanResourcesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceScanResourcesOutput_NextToken, v.NextToken)
+		case schemas.ListResourceScanResourcesOutput_Resources:
+			return deserializeScannedResources(d, schemas.ListResourceScanResourcesOutput_Resources, &v.Resources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceScanResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListResourceScanResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceScanResources, schemas.ListResourceScanResourcesInput, schemas.ListResourceScanResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListResourceScanResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceScanResources, schemas.ListResourceScanResourcesInput, schemas.ListResourceScanResourcesOutput), output: &ListResourceScanResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

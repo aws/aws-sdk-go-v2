@@ -5,7 +5,9 @@ package docdb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,36 @@ type DescribeServerlessV2PlatformVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServerlessV2PlatformVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeServerlessV2PlatformVersionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServerlessV2PlatformVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultOnly != nil {
+		s.WriteBool(schemas.DescribeServerlessV2PlatformVersionsMessage_DefaultOnly, *v.DefaultOnly)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.DescribeServerlessV2PlatformVersionsMessage_Engine, *v.Engine)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeServerlessV2PlatformVersionsMessage_Filters, v.Filters)
+	}
+	if v.IncludeAll != nil {
+		s.WriteBool(schemas.DescribeServerlessV2PlatformVersionsMessage_IncludeAll, *v.IncludeAll)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeServerlessV2PlatformVersionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeServerlessV2PlatformVersionsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ServerlessV2PlatformVersion != nil {
+		s.WriteString(schemas.DescribeServerlessV2PlatformVersionsMessage_ServerlessV2PlatformVersion, *v.ServerlessV2PlatformVersion)
+	}
+}
+
 // Contains the result of a successful invocation of the
 // DescribeServerlessV2PlatformVersions operation.
 type DescribeServerlessV2PlatformVersionsOutput struct {
@@ -84,13 +116,37 @@ type DescribeServerlessV2PlatformVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServerlessV2PlatformVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServerlessV2PlatformVersionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServerlessV2PlatformVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ServerlessV2PlatformVersionsMessage_Marker, *v.Marker)
+	}
+	if v.ServerlessV2PlatformVersions != nil {
+		serializeServerlessV2PlatformVersionList(s, schemas.ServerlessV2PlatformVersionsMessage_ServerlessV2PlatformVersions, v.ServerlessV2PlatformVersions)
+	}
+}
+func (v *DescribeServerlessV2PlatformVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServerlessV2PlatformVersionsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServerlessV2PlatformVersionsMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ServerlessV2PlatformVersionsMessage_Marker, v.Marker)
+		case schemas.ServerlessV2PlatformVersionsMessage_ServerlessV2PlatformVersions:
+			return deserializeServerlessV2PlatformVersionList(d, schemas.ServerlessV2PlatformVersionsMessage_ServerlessV2PlatformVersions, &v.ServerlessV2PlatformVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeServerlessV2PlatformVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeServerlessV2PlatformVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServerlessV2PlatformVersions, schemas.DescribeServerlessV2PlatformVersionsMessage, schemas.ServerlessV2PlatformVersionsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeServerlessV2PlatformVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServerlessV2PlatformVersions, schemas.DescribeServerlessV2PlatformVersionsMessage, schemas.ServerlessV2PlatformVersionsMessage), output: &DescribeServerlessV2PlatformVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

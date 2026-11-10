@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,24 @@ type ResetDBParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetDBParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetDBParameterGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetDBParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBParameterGroupName != nil {
+		s.WriteString(schemas.ResetDBParameterGroupMessage_DBParameterGroupName, *v.DBParameterGroupName)
+	}
+	if v.Parameters != nil {
+		serializeParametersList(s, schemas.ResetDBParameterGroupMessage_Parameters, v.Parameters)
+	}
+	if v.ResetAllParameters != nil {
+		s.WriteBool(schemas.ResetDBParameterGroupMessage_ResetAllParameters, *v.ResetAllParameters)
+	}
+}
+
 // Contains the result of a successful invocation of the ModifyDBParameterGroup or
 // ResetDBParameterGroup operation.
 type ResetDBParameterGroupOutput struct {
@@ -88,13 +108,32 @@ type ResetDBParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetDBParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBParameterGroupNameMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetDBParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBParameterGroupName != nil {
+		s.WriteString(schemas.DBParameterGroupNameMessage_DBParameterGroupName, *v.DBParameterGroupName)
+	}
+}
+func (v *ResetDBParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBParameterGroupNameMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBParameterGroupNameMessage_DBParameterGroupName:
+			v.DBParameterGroupName = new(string)
+			return d.ReadString(schemas.DBParameterGroupNameMessage_DBParameterGroupName, v.DBParameterGroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpResetDBParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetDBParameterGroup, schemas.ResetDBParameterGroupMessage, schemas.DBParameterGroupNameMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpResetDBParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetDBParameterGroup, schemas.ResetDBParameterGroupMessage, schemas.DBParameterGroupNameMessage), output: &ResetDBParameterGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

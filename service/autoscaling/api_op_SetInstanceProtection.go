@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,39 @@ type SetInstanceProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetInstanceProtectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetInstanceProtectionQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetInstanceProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.SetInstanceProtectionQuery_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.InstanceIds != nil {
+		serializeInstanceIds(s, schemas.SetInstanceProtectionQuery_InstanceIds, v.InstanceIds)
+	}
+	if v.ProtectedFromScaleIn != nil {
+		s.WriteBool(schemas.SetInstanceProtectionQuery_ProtectedFromScaleIn, *v.ProtectedFromScaleIn)
+	}
+}
+func (v *SetInstanceProtectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetInstanceProtectionQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetInstanceProtectionQuery_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.SetInstanceProtectionQuery_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.SetInstanceProtectionQuery_InstanceIds:
+			return deserializeInstanceIds(d, schemas.SetInstanceProtectionQuery_InstanceIds, &v.InstanceIds)
+		case schemas.SetInstanceProtectionQuery_ProtectedFromScaleIn:
+			v.ProtectedFromScaleIn = new(bool)
+			return d.ReadBool(schemas.SetInstanceProtectionQuery_ProtectedFromScaleIn, v.ProtectedFromScaleIn)
+		}
+		return nil
+	})
+}
+
 type SetInstanceProtectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +94,26 @@ type SetInstanceProtectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetInstanceProtectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetInstanceProtectionAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetInstanceProtectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetInstanceProtectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetInstanceProtectionAnswer, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetInstanceProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetInstanceProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetInstanceProtection, schemas.SetInstanceProtectionQuery, schemas.SetInstanceProtectionAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetInstanceProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetInstanceProtection, schemas.SetInstanceProtectionQuery, schemas.SetInstanceProtectionAnswer), output: &SetInstanceProtectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

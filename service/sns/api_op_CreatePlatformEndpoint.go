@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,27 @@ type CreatePlatformEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlatformEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePlatformEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePlatformEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeMapStringToString(s, schemas.CreatePlatformEndpointInput_Attributes, v.Attributes)
+	}
+	if v.CustomUserData != nil {
+		s.WriteString(schemas.CreatePlatformEndpointInput_CustomUserData, *v.CustomUserData)
+	}
+	if v.PlatformApplicationArn != nil {
+		s.WriteString(schemas.CreatePlatformEndpointInput_PlatformApplicationArn, *v.PlatformApplicationArn)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.CreatePlatformEndpointInput_Token, *v.Token)
+	}
+}
+
 // Response from CreateEndpoint action.
 type CreatePlatformEndpointOutput struct {
 
@@ -79,13 +102,32 @@ type CreatePlatformEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlatformEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePlatformEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.CreateEndpointResponse_EndpointArn, *v.EndpointArn)
+	}
+}
+func (v *CreatePlatformEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEndpointResponse_EndpointArn:
+			v.EndpointArn = new(string)
+			return d.ReadString(schemas.CreateEndpointResponse_EndpointArn, v.EndpointArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePlatformEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreatePlatformEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlatformEndpoint, schemas.CreatePlatformEndpointInput, schemas.CreateEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreatePlatformEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlatformEndpoint, schemas.CreatePlatformEndpointInput, schemas.CreateEndpointResponse), output: &CreatePlatformEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

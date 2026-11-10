@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type RebootClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.RebootClusterMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+}
+
 type RebootClusterOutput struct {
 
 	// Describes a cluster.
@@ -51,13 +65,34 @@ type RebootClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.RebootClusterResult_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RebootClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootClusterResult_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRebootCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootCluster, schemas.RebootClusterMessage, schemas.RebootClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRebootCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootCluster, schemas.RebootClusterMessage, schemas.RebootClusterResult), output: &RebootClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

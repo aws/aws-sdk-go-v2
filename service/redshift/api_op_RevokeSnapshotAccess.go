@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type RevokeSnapshotAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeSnapshotAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeSnapshotAccessMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeSnapshotAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountWithRestoreAccess != nil {
+		s.WriteString(schemas.RevokeSnapshotAccessMessage_AccountWithRestoreAccess, *v.AccountWithRestoreAccess)
+	}
+	if v.SnapshotArn != nil {
+		s.WriteString(schemas.RevokeSnapshotAccessMessage_SnapshotArn, *v.SnapshotArn)
+	}
+	if v.SnapshotClusterIdentifier != nil {
+		s.WriteString(schemas.RevokeSnapshotAccessMessage_SnapshotClusterIdentifier, *v.SnapshotClusterIdentifier)
+	}
+	if v.SnapshotIdentifier != nil {
+		s.WriteString(schemas.RevokeSnapshotAccessMessage_SnapshotIdentifier, *v.SnapshotIdentifier)
+	}
+}
+
 type RevokeSnapshotAccessOutput struct {
 
 	// Describes a snapshot.
@@ -65,13 +88,34 @@ type RevokeSnapshotAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeSnapshotAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeSnapshotAccessResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeSnapshotAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Snapshot != nil {
+		s.WriteStruct(schemas.RevokeSnapshotAccessResult_Snapshot)
+		v.Snapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RevokeSnapshotAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevokeSnapshotAccessResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevokeSnapshotAccessResult_Snapshot:
+			v.Snapshot = &types.Snapshot{}
+			return v.Snapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeSnapshotAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRevokeSnapshotAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeSnapshotAccess, schemas.RevokeSnapshotAccessMessage, schemas.RevokeSnapshotAccessResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRevokeSnapshotAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeSnapshotAccess, schemas.RevokeSnapshotAccessMessage, schemas.RevokeSnapshotAccessResult), output: &RevokeSnapshotAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

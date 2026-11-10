@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type DeleteExpressionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExpressionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExpressionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExpressionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteExpressionRequest_DomainName, *v.DomainName)
+	}
+	if v.ExpressionName != nil {
+		s.WriteString(schemas.DeleteExpressionRequest_ExpressionName, *v.ExpressionName)
+	}
+}
+
 // The result of a DeleteExpression request. Specifies the expression being deleted.
 type DeleteExpressionOutput struct {
 
@@ -61,13 +78,34 @@ type DeleteExpressionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExpressionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExpressionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExpressionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expression != nil {
+		s.WriteStruct(schemas.DeleteExpressionResponse_Expression)
+		v.Expression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteExpressionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteExpressionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteExpressionResponse_Expression:
+			v.Expression = &types.ExpressionStatus{}
+			return v.Expression.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteExpression{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExpression, schemas.DeleteExpressionRequest, schemas.DeleteExpressionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteExpression{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExpression, schemas.DeleteExpressionRequest, schemas.DeleteExpressionResponse), output: &DeleteExpressionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

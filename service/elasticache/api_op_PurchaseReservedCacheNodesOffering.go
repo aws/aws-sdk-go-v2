@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,27 @@ type PurchaseReservedCacheNodesOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseReservedCacheNodesOfferingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseReservedCacheNodesOfferingMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseReservedCacheNodesOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheNodeCount != nil {
+		s.WriteInt32(schemas.PurchaseReservedCacheNodesOfferingMessage_CacheNodeCount, *v.CacheNodeCount)
+	}
+	if v.ReservedCacheNodeId != nil {
+		s.WriteString(schemas.PurchaseReservedCacheNodesOfferingMessage_ReservedCacheNodeId, *v.ReservedCacheNodeId)
+	}
+	if v.ReservedCacheNodesOfferingId != nil {
+		s.WriteString(schemas.PurchaseReservedCacheNodesOfferingMessage_ReservedCacheNodesOfferingId, *v.ReservedCacheNodesOfferingId)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PurchaseReservedCacheNodesOfferingMessage_Tags, v.Tags)
+	}
+}
+
 type PurchaseReservedCacheNodesOfferingOutput struct {
 
 	// Represents the output of a PurchaseReservedCacheNodesOffering operation.
@@ -69,13 +92,34 @@ type PurchaseReservedCacheNodesOfferingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseReservedCacheNodesOfferingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseReservedCacheNodesOfferingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseReservedCacheNodesOfferingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReservedCacheNode != nil {
+		s.WriteStruct(schemas.PurchaseReservedCacheNodesOfferingResult_ReservedCacheNode)
+		v.ReservedCacheNode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PurchaseReservedCacheNodesOfferingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseReservedCacheNodesOfferingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseReservedCacheNodesOfferingResult_ReservedCacheNode:
+			v.ReservedCacheNode = &types.ReservedCacheNode{}
+			return v.ReservedCacheNode.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPurchaseReservedCacheNodesOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPurchaseReservedCacheNodesOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseReservedCacheNodesOffering, schemas.PurchaseReservedCacheNodesOfferingMessage, schemas.PurchaseReservedCacheNodesOfferingResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPurchaseReservedCacheNodesOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseReservedCacheNodesOffering, schemas.PurchaseReservedCacheNodesOfferingMessage, schemas.PurchaseReservedCacheNodesOfferingResult), output: &PurchaseReservedCacheNodesOfferingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

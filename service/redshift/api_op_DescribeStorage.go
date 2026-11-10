@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,22 @@ type DescribeStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStorageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStorageInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeStorageInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeStorageOutput struct {
 
 	// The total amount of storage currently used for snapshots.
@@ -41,13 +59,38 @@ type DescribeStorageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStorageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomerStorageMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStorageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TotalBackupSizeInMegaBytes != nil {
+		s.WriteFloat64(schemas.CustomerStorageMessage_TotalBackupSizeInMegaBytes, *v.TotalBackupSizeInMegaBytes)
+	}
+	if v.TotalProvisionedStorageInMegaBytes != nil {
+		s.WriteFloat64(schemas.CustomerStorageMessage_TotalProvisionedStorageInMegaBytes, *v.TotalProvisionedStorageInMegaBytes)
+	}
+}
+func (v *DescribeStorageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomerStorageMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomerStorageMessage_TotalBackupSizeInMegaBytes:
+			v.TotalBackupSizeInMegaBytes = new(float64)
+			return d.ReadFloat64(schemas.CustomerStorageMessage_TotalBackupSizeInMegaBytes, v.TotalBackupSizeInMegaBytes)
+		case schemas.CustomerStorageMessage_TotalProvisionedStorageInMegaBytes:
+			v.TotalProvisionedStorageInMegaBytes = new(float64)
+			return d.ReadFloat64(schemas.CustomerStorageMessage_TotalProvisionedStorageInMegaBytes, v.TotalProvisionedStorageInMegaBytes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStorage, nil, schemas.CustomerStorageMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStorage, nil, schemas.CustomerStorageMessage), output: &DescribeStorageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

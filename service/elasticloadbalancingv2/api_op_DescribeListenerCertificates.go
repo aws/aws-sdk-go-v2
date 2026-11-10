@@ -5,7 +5,9 @@ package elasticloadbalancingv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type DescribeListenerCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeListenerCertificatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeListenerCertificatesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeListenerCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListenerArn != nil {
+		s.WriteString(schemas.DescribeListenerCertificatesInput_ListenerArn, *v.ListenerArn)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeListenerCertificatesInput_Marker, *v.Marker)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.DescribeListenerCertificatesInput_PageSize, *v.PageSize)
+	}
+}
+
 type DescribeListenerCertificatesOutput struct {
 
 	// Information about the certificates.
@@ -68,13 +88,37 @@ type DescribeListenerCertificatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeListenerCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeListenerCertificatesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeListenerCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certificates != nil {
+		serializeCertificateList(s, schemas.DescribeListenerCertificatesOutput_Certificates, v.Certificates)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.DescribeListenerCertificatesOutput_NextMarker, *v.NextMarker)
+	}
+}
+func (v *DescribeListenerCertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeListenerCertificatesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeListenerCertificatesOutput_Certificates:
+			return deserializeCertificateList(d, schemas.DescribeListenerCertificatesOutput_Certificates, &v.Certificates)
+		case schemas.DescribeListenerCertificatesOutput_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.DescribeListenerCertificatesOutput_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeListenerCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeListenerCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeListenerCertificates, schemas.DescribeListenerCertificatesInput, schemas.DescribeListenerCertificatesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeListenerCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeListenerCertificates, schemas.DescribeListenerCertificatesInput, schemas.DescribeListenerCertificatesOutput), output: &DescribeListenerCertificatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

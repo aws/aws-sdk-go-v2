@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,33 @@ type DescribeEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointAccessMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeEndpointAccessMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.DescribeEndpointAccessMessage_EndpointName, *v.EndpointName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeEndpointAccessMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeEndpointAccessMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.DescribeEndpointAccessMessage_ResourceOwner, *v.ResourceOwner)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.DescribeEndpointAccessMessage_VpcId, *v.VpcId)
+	}
+}
+
 type DescribeEndpointAccessOutput struct {
 
 	// The list of endpoints with access to the cluster.
@@ -68,13 +97,37 @@ type DescribeEndpointAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointAccessList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointAccessList != nil {
+		serializeEndpointAccesses(s, schemas.EndpointAccessList_EndpointAccessList, v.EndpointAccessList)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.EndpointAccessList_Marker, *v.Marker)
+	}
+}
+func (v *DescribeEndpointAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointAccessList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointAccessList_EndpointAccessList:
+			return deserializeEndpointAccesses(d, schemas.EndpointAccessList_EndpointAccessList, &v.EndpointAccessList)
+		case schemas.EndpointAccessList_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.EndpointAccessList_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpointAccess, schemas.DescribeEndpointAccessMessage, schemas.EndpointAccessList)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpointAccess, schemas.DescribeEndpointAccessMessage, schemas.EndpointAccessList), output: &DescribeEndpointAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package neptune
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type DeleteDBClusterEndpointInput struct {
 	DBClusterEndpointIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteDBClusterEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDBClusterEndpointMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBClusterEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterEndpointIdentifier != nil {
+		s.WriteString(schemas.DeleteDBClusterEndpointMessage_DBClusterEndpointIdentifier, *v.DBClusterEndpointIdentifier)
+	}
 }
 
 // This data type represents the information you need to connect to an Amazon
@@ -94,13 +108,84 @@ type DeleteDBClusterEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBClusterEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDBClusterEndpointOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBClusterEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomEndpointType != nil {
+		s.WriteString(schemas.DeleteDBClusterEndpointOutput_CustomEndpointType, *v.CustomEndpointType)
+	}
+	if v.DBClusterEndpointArn != nil {
+		s.WriteString(schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointArn, *v.DBClusterEndpointArn)
+	}
+	if v.DBClusterEndpointIdentifier != nil {
+		s.WriteString(schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointIdentifier, *v.DBClusterEndpointIdentifier)
+	}
+	if v.DBClusterEndpointResourceIdentifier != nil {
+		s.WriteString(schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier, *v.DBClusterEndpointResourceIdentifier)
+	}
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.DeleteDBClusterEndpointOutput_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.DeleteDBClusterEndpointOutput_Endpoint, *v.Endpoint)
+	}
+	if v.EndpointType != nil {
+		s.WriteString(schemas.DeleteDBClusterEndpointOutput_EndpointType, *v.EndpointType)
+	}
+	if v.ExcludedMembers != nil {
+		serializeStringList(s, schemas.DeleteDBClusterEndpointOutput_ExcludedMembers, v.ExcludedMembers)
+	}
+	if v.StaticMembers != nil {
+		serializeStringList(s, schemas.DeleteDBClusterEndpointOutput_StaticMembers, v.StaticMembers)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DeleteDBClusterEndpointOutput_Status, *v.Status)
+	}
+}
+func (v *DeleteDBClusterEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDBClusterEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDBClusterEndpointOutput_CustomEndpointType:
+			v.CustomEndpointType = new(string)
+			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_CustomEndpointType, v.CustomEndpointType)
+		case schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointArn:
+			v.DBClusterEndpointArn = new(string)
+			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointArn, v.DBClusterEndpointArn)
+		case schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointIdentifier:
+			v.DBClusterEndpointIdentifier = new(string)
+			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointIdentifier, v.DBClusterEndpointIdentifier)
+		case schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier:
+			v.DBClusterEndpointResourceIdentifier = new(string)
+			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier, v.DBClusterEndpointResourceIdentifier)
+		case schemas.DeleteDBClusterEndpointOutput_DBClusterIdentifier:
+			v.DBClusterIdentifier = new(string)
+			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_DBClusterIdentifier, v.DBClusterIdentifier)
+		case schemas.DeleteDBClusterEndpointOutput_Endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_Endpoint, v.Endpoint)
+		case schemas.DeleteDBClusterEndpointOutput_EndpointType:
+			v.EndpointType = new(string)
+			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_EndpointType, v.EndpointType)
+		case schemas.DeleteDBClusterEndpointOutput_ExcludedMembers:
+			return deserializeStringList(d, schemas.DeleteDBClusterEndpointOutput_ExcludedMembers, &v.ExcludedMembers)
+		case schemas.DeleteDBClusterEndpointOutput_StaticMembers:
+			return deserializeStringList(d, schemas.DeleteDBClusterEndpointOutput_StaticMembers, &v.StaticMembers)
+		case schemas.DeleteDBClusterEndpointOutput_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDBClusterEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBClusterEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBClusterEndpoint, schemas.DeleteDBClusterEndpointMessage, schemas.DeleteDBClusterEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteDBClusterEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBClusterEndpoint, schemas.DeleteDBClusterEndpointMessage, schemas.DeleteDBClusterEndpointOutput), output: &DeleteDBClusterEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

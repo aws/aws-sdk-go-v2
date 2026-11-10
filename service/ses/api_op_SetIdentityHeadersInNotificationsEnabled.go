@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,22 @@ type SetIdentityHeadersInNotificationsEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIdentityHeadersInNotificationsEnabledInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIdentityHeadersInNotificationsEnabledRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIdentityHeadersInNotificationsEnabledInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.SetIdentityHeadersInNotificationsEnabledRequest_Enabled, v.Enabled)
+	if v.Identity != nil {
+		s.WriteString(schemas.SetIdentityHeadersInNotificationsEnabledRequest_Identity, *v.Identity)
+	}
+	if v.NotificationType != "" {
+		s.WriteString(schemas.SetIdentityHeadersInNotificationsEnabledRequest_NotificationType, string(v.NotificationType))
+	}
+}
+
 // An empty element returned on a successful request.
 type SetIdentityHeadersInNotificationsEnabledOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -72,13 +90,26 @@ type SetIdentityHeadersInNotificationsEnabledOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIdentityHeadersInNotificationsEnabledOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIdentityHeadersInNotificationsEnabledResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIdentityHeadersInNotificationsEnabledOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetIdentityHeadersInNotificationsEnabledOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetIdentityHeadersInNotificationsEnabledResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetIdentityHeadersInNotificationsEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetIdentityHeadersInNotificationsEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIdentityHeadersInNotificationsEnabled, schemas.SetIdentityHeadersInNotificationsEnabledRequest, schemas.SetIdentityHeadersInNotificationsEnabledResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetIdentityHeadersInNotificationsEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIdentityHeadersInNotificationsEnabled, schemas.SetIdentityHeadersInNotificationsEnabledRequest, schemas.SetIdentityHeadersInNotificationsEnabledResponse), output: &SetIdentityHeadersInNotificationsEnabledOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

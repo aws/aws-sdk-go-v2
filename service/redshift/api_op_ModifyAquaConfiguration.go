@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ModifyAquaConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyAquaConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyAquaInputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyAquaConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AquaConfigurationStatus != "" {
+		s.WriteString(schemas.ModifyAquaInputMessage_AquaConfigurationStatus, string(v.AquaConfigurationStatus))
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ModifyAquaInputMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+}
+
 type ModifyAquaConfigurationOutput struct {
 
 	// This parameter is retired. Amazon Redshift automatically determines whether to
@@ -52,13 +69,34 @@ type ModifyAquaConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyAquaConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyAquaOutputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyAquaConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AquaConfiguration != nil {
+		s.WriteStruct(schemas.ModifyAquaOutputMessage_AquaConfiguration)
+		v.AquaConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyAquaConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyAquaOutputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyAquaOutputMessage_AquaConfiguration:
+			v.AquaConfiguration = &types.AquaConfiguration{}
+			return v.AquaConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyAquaConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyAquaConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyAquaConfiguration, schemas.ModifyAquaInputMessage, schemas.ModifyAquaOutputMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyAquaConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyAquaConfiguration, schemas.ModifyAquaInputMessage, schemas.ModifyAquaOutputMessage), output: &ModifyAquaConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

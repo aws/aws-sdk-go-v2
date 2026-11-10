@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,21 @@ type TagPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.TagPolicyRequest_PolicyArn, *v.PolicyArn)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.TagPolicyRequest_Tags, v.Tags)
+	}
+}
+
 type TagPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,13 +95,26 @@ type TagPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TagPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTagPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpTagPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagPolicy, schemas.TagPolicyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpTagPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagPolicy, schemas.TagPolicyRequest, nil), output: &TagPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,36 @@ type DescribeDBLogFilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBLogFilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBLogFilesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBLogFilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.DescribeDBLogFilesMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	if v.FileLastWritten != nil {
+		s.WriteInt64(schemas.DescribeDBLogFilesMessage_FileLastWritten, *v.FileLastWritten)
+	}
+	if v.FileSize != nil {
+		s.WriteInt64(schemas.DescribeDBLogFilesMessage_FileSize, *v.FileSize)
+	}
+	if v.FilenameContains != nil {
+		s.WriteString(schemas.DescribeDBLogFilesMessage_FilenameContains, *v.FilenameContains)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDBLogFilesMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBLogFilesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBLogFilesMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 // The response from a call to DescribeDBLogFiles .
 type DescribeDBLogFilesOutput struct {
 
@@ -81,13 +113,37 @@ type DescribeDBLogFilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBLogFilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBLogFilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBLogFilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DescribeDBLogFiles != nil {
+		serializeDescribeDBLogFilesList(s, schemas.DescribeDBLogFilesResponse_DescribeDBLogFiles, v.DescribeDBLogFiles)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBLogFilesResponse_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDBLogFilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDBLogFilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDBLogFilesResponse_DescribeDBLogFiles:
+			return deserializeDescribeDBLogFilesList(d, schemas.DescribeDBLogFilesResponse_DescribeDBLogFiles, &v.DescribeDBLogFiles)
+		case schemas.DescribeDBLogFilesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeDBLogFilesResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBLogFilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBLogFiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBLogFiles, schemas.DescribeDBLogFilesMessage, schemas.DescribeDBLogFilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBLogFiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBLogFiles, schemas.DescribeDBLogFilesMessage, schemas.DescribeDBLogFilesResponse), output: &DescribeDBLogFilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
