@@ -1009,242 +1009,242 @@ var (
 )
 
 var (
-	iAssociateHostedZone                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "AssociateHostedZone"}
-	iBatchCreateFirewallRule              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRule"}
-	iBatchDeleteFirewallRule              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRule"}
-	iBatchUpdateFirewallRule              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRule"}
-	iCreateAccessSource                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateAccessSource"}
-	iCreateAccessToken                    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateAccessToken"}
-	iCreateDNSView                        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateDNSView"}
-	iCreateFirewallDomainList             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateFirewallDomainList"}
-	iCreateFirewallRule                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateFirewallRule"}
-	iCreateGlobalResolver                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateGlobalResolver"}
-	iDeleteAccessSource                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteAccessSource"}
-	iDeleteAccessToken                    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteAccessToken"}
-	iDeleteDNSView                        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteDNSView"}
-	iDeleteFirewallDomainList             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteFirewallDomainList"}
-	iDeleteFirewallRule                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteFirewallRule"}
-	iDeleteGlobalResolver                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteGlobalResolver"}
-	iDisableDNSView                       = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DisableDNSView"}
-	iDisassociateHostedZone               = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DisassociateHostedZone"}
-	iEnableDNSView                        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "EnableDNSView"}
-	iGetAccessSource                      = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetAccessSource"}
-	iGetAccessToken                       = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetAccessToken"}
-	iGetDNSView                           = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetDNSView"}
-	iGetFirewallDomainList                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetFirewallDomainList"}
-	iGetFirewallRule                      = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetFirewallRule"}
-	iGetGlobalResolver                    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetGlobalResolver"}
-	iGetHostedZoneAssociation             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetHostedZoneAssociation"}
-	iGetManagedFirewallDomainList         = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetManagedFirewallDomainList"}
-	iImportFirewallDomains                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ImportFirewallDomains"}
-	iListAccessSources                    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListAccessSources"}
-	iListAccessTokens                     = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListAccessTokens"}
-	iListDNSViews                         = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListDNSViews"}
-	iListFirewallDomainLists              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallDomainLists"}
-	iListFirewallDomains                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallDomains"}
-	iListFirewallRules                    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallRules"}
-	iListGlobalResolvers                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListGlobalResolvers"}
-	iListHostedZoneAssociations           = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListHostedZoneAssociations"}
-	iListManagedFirewallDomainLists       = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListManagedFirewallDomainLists"}
-	iListSharedDNSViews                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListSharedDNSViews"}
-	iListTagsForResource                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListTagsForResource"}
-	iTagResource                          = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "TagResource"}
-	iUntagResource                        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UntagResource"}
-	iUpdateAccessSource                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateAccessSource"}
-	iUpdateAccessToken                    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateAccessToken"}
-	iUpdateDNSView                        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateDNSView"}
-	iUpdateFirewallDomains                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateFirewallDomains"}
-	iUpdateFirewallRule                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateFirewallRule"}
-	iUpdateGlobalResolver                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateGlobalResolver"}
-	iUpdateHostedZoneAssociation          = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateHostedZoneAssociation"}
-	i_EC2DNSGlobalResolverCustomerAPI     = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "EC2DNSGlobalResolverCustomerAPI"}
-	iAccessDeniedException                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "AccessDeniedException"}
-	i_AccessSources                       = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "AccessSources"}
-	iAccessSourcesItem                    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "AccessSourcesItem"}
-	iAccessTokenItem                      = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "AccessTokenItem"}
-	i_AccessTokens                        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "AccessTokens"}
-	i_AccessTokenValue                    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "AccessTokenValue"}
-	i_AccountId                           = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "AccountId"}
-	iBatchCreateFirewallRuleInputItem     = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleInputItem"}
-	i_BatchCreateFirewallRuleInputItems   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleInputItems"}
-	iBatchCreateFirewallRuleOutputItem    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleOutputItem"}
-	i_BatchCreateFirewallRuleOutputItems  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleOutputItems"}
-	iBatchCreateFirewallRuleResult        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleResult"}
-	iBatchDeleteFirewallRuleInputItem     = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleInputItem"}
-	i_BatchDeleteFirewallRuleInputItems   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleInputItems"}
-	iBatchDeleteFirewallRuleOutputItem    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleOutputItem"}
-	i_BatchDeleteFirewallRuleOutputItems  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleOutputItems"}
-	iBatchDeleteFirewallRuleResult        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleResult"}
-	iBatchUpdateFirewallRuleInputItem     = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleInputItem"}
-	i_BatchUpdateFirewallRuleInputItems   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleInputItems"}
-	iBatchUpdateFirewallRuleOutputItem    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleOutputItem"}
-	i_BatchUpdateFirewallRuleOutputItems  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleOutputItems"}
-	iBatchUpdateFirewallRuleResult        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleResult"}
-	iBlockOverrideDnsQueryType            = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BlockOverrideDnsQueryType"}
-	i_BlockOverrideTtl                    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BlockOverrideTtl"}
-	i_Cidr                                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "Cidr"}
-	i_ClientToken                         = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ClientToken"}
-	iConfidenceThreshold                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ConfidenceThreshold"}
-	iConflictException                    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ConflictException"}
-	iCRResourceStatus                     = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CRResourceStatus"}
-	iDnsAdvancedProtection                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DnsAdvancedProtection"}
-	iDnsProtocol                          = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DnsProtocol"}
-	i_DnsQueryType                        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DnsQueryType"}
-	iDnsSecValidationType                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DnsSecValidationType"}
-	i_DNSViews                            = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DNSViews"}
-	iDNSViewSummary                       = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DNSViewSummary"}
-	i_Domain                              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "Domain"}
-	i_Domains                             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "Domains"}
-	iEdnsClientSubnetType                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "EdnsClientSubnetType"}
-	i_Filters                             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "Filters"}
-	iFirewallBlockResponse                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallBlockResponse"}
-	i_FirewallDomainLists                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallDomainLists"}
-	iFirewallDomainListsItem              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallDomainListsItem"}
-	iFirewallRuleAction                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallRuleAction"}
-	i_FirewallRulePriority                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallRulePriority"}
-	i_FirewallRules                       = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallRules"}
-	iFirewallRulesFailOpenType            = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallRulesFailOpenType"}
-	iFirewallRulesItem                    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallRulesItem"}
-	iGlobalResolverIpAddressType          = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GlobalResolverIpAddressType"}
-	i_GlobalResolvers                     = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GlobalResolvers"}
-	iGlobalResolversItem                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GlobalResolversItem"}
-	i_HostedZoneAssociations              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "HostedZoneAssociations"}
-	iHostedZoneAssociationStatus          = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "HostedZoneAssociationStatus"}
-	iHostedZoneAssociationSummary         = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "HostedZoneAssociationSummary"}
-	i_HostedZoneId                        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "HostedZoneId"}
-	i_HostedZoneName                      = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "HostedZoneName"}
-	iInternalServerException              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "InternalServerException"}
-	iIpAddressType                        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "IpAddressType"}
-	i_IPv4Address                         = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "IPv4Address"}
-	i_IPv4Addresses                       = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "IPv4Addresses"}
-	i_IPv6Address                         = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "IPv6Address"}
-	i_IPv6Addresses                       = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "IPv6Addresses"}
-	i_ISO8601TimeString                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ISO8601TimeString"}
-	i_ManagedFirewallDomainLists          = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ManagedFirewallDomainLists"}
-	iManagedFirewallDomainListsItem       = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ManagedFirewallDomainListsItem"}
-	iProfileResourceStatus                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ProfileResourceStatus"}
-	i_Region                              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "Region"}
-	i_Regions                             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "Regions"}
-	i_ResourceArn                         = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ResourceArn"}
-	i_ResourceDescription                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ResourceDescription"}
-	i_ResourceId                          = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ResourceId"}
-	i_ResourceName                        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ResourceName"}
-	i_ResourceNameShort                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ResourceNameShort"}
-	iResourceNotFoundException            = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ResourceNotFoundException"}
-	iServiceQuotaExceededException        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ServiceQuotaExceededException"}
-	i_SharedDNSViews                      = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "SharedDNSViews"}
-	iSharedDNSViewSummary                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "SharedDNSViewSummary"}
-	i_Sni                                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "Sni"}
-	i_Strings                             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "Strings"}
-	i_TagKey                              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "TagKey"}
-	i_TagKeys                             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "TagKeys"}
-	i_Tags                                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "Tags"}
-	i_TagValue                            = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "TagValue"}
-	iThrottlingException                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ThrottlingException"}
-	iTokenStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "TokenStatus"}
-	iValidationException                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ValidationException"}
-	iValidationExceptionField             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ValidationExceptionField"}
-	i_ValidationExceptionFieldList        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ValidationExceptionFieldList"}
-	iValidationExceptionReason            = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ValidationExceptionReason"}
-	iAssociateHostedZoneInput             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "AssociateHostedZoneInput"}
-	iAssociateHostedZoneOutput            = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "AssociateHostedZoneOutput"}
-	iBatchCreateFirewallRuleInput         = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleInput"}
-	iBatchCreateFirewallRuleOutput        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleOutput"}
-	iBatchDeleteFirewallRuleInput         = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleInput"}
-	iBatchDeleteFirewallRuleOutput        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleOutput"}
-	iBatchUpdateFirewallRuleInput         = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleInput"}
-	iBatchUpdateFirewallRuleOutput        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleOutput"}
-	iCreateAccessSourceInput              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateAccessSourceInput"}
-	iCreateAccessSourceOutput             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateAccessSourceOutput"}
-	iCreateAccessTokenInput               = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateAccessTokenInput"}
-	iCreateAccessTokenOutput              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateAccessTokenOutput"}
-	iCreateDNSViewInput                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateDNSViewInput"}
-	iCreateDNSViewOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateDNSViewOutput"}
-	iCreateFirewallDomainListInput        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateFirewallDomainListInput"}
-	iCreateFirewallDomainListOutput       = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateFirewallDomainListOutput"}
-	iCreateFirewallRuleInput              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateFirewallRuleInput"}
-	iCreateFirewallRuleOutput             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateFirewallRuleOutput"}
-	iCreateGlobalResolverInput            = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateGlobalResolverInput"}
-	iCreateGlobalResolverOutput           = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateGlobalResolverOutput"}
-	iDeleteAccessSourceInput              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteAccessSourceInput"}
-	iDeleteAccessSourceOutput             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteAccessSourceOutput"}
-	iDeleteAccessTokenInput               = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteAccessTokenInput"}
-	iDeleteAccessTokenOutput              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteAccessTokenOutput"}
-	iDeleteDNSViewInput                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteDNSViewInput"}
-	iDeleteDNSViewOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteDNSViewOutput"}
-	iDeleteFirewallDomainListInput        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteFirewallDomainListInput"}
-	iDeleteFirewallDomainListOutput       = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteFirewallDomainListOutput"}
-	iDeleteFirewallRuleInput              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteFirewallRuleInput"}
-	iDeleteFirewallRuleOutput             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteFirewallRuleOutput"}
-	iDeleteGlobalResolverInput            = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteGlobalResolverInput"}
-	iDeleteGlobalResolverOutput           = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteGlobalResolverOutput"}
-	iDisableDNSViewInput                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DisableDNSViewInput"}
-	iDisableDNSViewOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DisableDNSViewOutput"}
-	iDisassociateHostedZoneInput          = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DisassociateHostedZoneInput"}
-	iDisassociateHostedZoneOutput         = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "DisassociateHostedZoneOutput"}
-	iEnableDNSViewInput                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "EnableDNSViewInput"}
-	iEnableDNSViewOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "EnableDNSViewOutput"}
-	iGetAccessSourceInput                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetAccessSourceInput"}
-	iGetAccessSourceOutput                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetAccessSourceOutput"}
-	iGetAccessTokenInput                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetAccessTokenInput"}
-	iGetAccessTokenOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetAccessTokenOutput"}
-	iGetDNSViewInput                      = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetDNSViewInput"}
-	iGetDNSViewOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetDNSViewOutput"}
-	iGetFirewallDomainListInput           = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetFirewallDomainListInput"}
-	iGetFirewallDomainListOutput          = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetFirewallDomainListOutput"}
-	iGetFirewallRuleInput                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetFirewallRuleInput"}
-	iGetFirewallRuleOutput                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetFirewallRuleOutput"}
-	iGetGlobalResolverInput               = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetGlobalResolverInput"}
-	iGetGlobalResolverOutput              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetGlobalResolverOutput"}
-	iGetHostedZoneAssociationInput        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetHostedZoneAssociationInput"}
-	iGetHostedZoneAssociationOutput       = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetHostedZoneAssociationOutput"}
-	iGetManagedFirewallDomainListInput    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetManagedFirewallDomainListInput"}
-	iGetManagedFirewallDomainListOutput   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "GetManagedFirewallDomainListOutput"}
-	iImportFirewallDomainsInput           = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ImportFirewallDomainsInput"}
-	iImportFirewallDomainsOutput          = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ImportFirewallDomainsOutput"}
-	iListAccessSourcesInput               = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListAccessSourcesInput"}
-	iListAccessSourcesOutput              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListAccessSourcesOutput"}
-	iListAccessTokensInput                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListAccessTokensInput"}
-	iListAccessTokensOutput               = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListAccessTokensOutput"}
-	iListDNSViewsInput                    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListDNSViewsInput"}
-	iListDNSViewsOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListDNSViewsOutput"}
-	iListFirewallDomainListsInput         = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallDomainListsInput"}
-	iListFirewallDomainListsOutput        = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallDomainListsOutput"}
-	iListFirewallDomainsInput             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallDomainsInput"}
-	iListFirewallDomainsOutput            = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallDomainsOutput"}
-	iListFirewallRulesInput               = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallRulesInput"}
-	iListFirewallRulesOutput              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallRulesOutput"}
-	iListGlobalResolversInput             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListGlobalResolversInput"}
-	iListGlobalResolversOutput            = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListGlobalResolversOutput"}
-	iListHostedZoneAssociationsInput      = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListHostedZoneAssociationsInput"}
-	iListHostedZoneAssociationsOutput     = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListHostedZoneAssociationsOutput"}
-	iListManagedFirewallDomainListsInput  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListManagedFirewallDomainListsInput"}
-	iListManagedFirewallDomainListsOutput = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListManagedFirewallDomainListsOutput"}
-	iListSharedDNSViewsInput              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListSharedDNSViewsInput"}
-	iListSharedDNSViewsOutput             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListSharedDNSViewsOutput"}
-	iListTagsForResourceRequest           = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListTagsForResourceRequest"}
-	iListTagsForResourceResponse          = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "ListTagsForResourceResponse"}
-	iTagResourceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "TagResourceRequest"}
-	iTagResourceResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "TagResourceResponse"}
-	iUntagResourceRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UntagResourceRequest"}
-	iUntagResourceResponse                = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UntagResourceResponse"}
-	iUpdateAccessSourceInput              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateAccessSourceInput"}
-	iUpdateAccessSourceOutput             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateAccessSourceOutput"}
-	iUpdateAccessTokenInput               = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateAccessTokenInput"}
-	iUpdateAccessTokenOutput              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateAccessTokenOutput"}
-	iUpdateDNSViewInput                   = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateDNSViewInput"}
-	iUpdateDNSViewOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateDNSViewOutput"}
-	iUpdateFirewallDomainsInput           = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateFirewallDomainsInput"}
-	iUpdateFirewallDomainsOutput          = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateFirewallDomainsOutput"}
-	iUpdateFirewallRuleInput              = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateFirewallRuleInput"}
-	iUpdateFirewallRuleOutput             = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateFirewallRuleOutput"}
-	iUpdateGlobalResolverInput            = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateGlobalResolverInput"}
-	iUpdateGlobalResolverOutput           = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateGlobalResolverOutput"}
-	iUpdateHostedZoneAssociationInput     = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateHostedZoneAssociationInput"}
-	iUpdateHostedZoneAssociationOutput    = smithy.ShapeID{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateHostedZoneAssociationOutput"}
-	pString                               = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
-	pInteger                              = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
-	pUnit                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	iAssociateHostedZone                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "AssociateHostedZone"}
+	iBatchCreateFirewallRule              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRule"}
+	iBatchDeleteFirewallRule              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRule"}
+	iBatchUpdateFirewallRule              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRule"}
+	iCreateAccessSource                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateAccessSource"}
+	iCreateAccessToken                    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateAccessToken"}
+	iCreateDNSView                        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateDNSView"}
+	iCreateFirewallDomainList             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateFirewallDomainList"}
+	iCreateFirewallRule                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateFirewallRule"}
+	iCreateGlobalResolver                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateGlobalResolver"}
+	iDeleteAccessSource                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteAccessSource"}
+	iDeleteAccessToken                    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteAccessToken"}
+	iDeleteDNSView                        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteDNSView"}
+	iDeleteFirewallDomainList             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteFirewallDomainList"}
+	iDeleteFirewallRule                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteFirewallRule"}
+	iDeleteGlobalResolver                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteGlobalResolver"}
+	iDisableDNSView                       = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DisableDNSView"}
+	iDisassociateHostedZone               = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DisassociateHostedZone"}
+	iEnableDNSView                        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "EnableDNSView"}
+	iGetAccessSource                      = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetAccessSource"}
+	iGetAccessToken                       = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetAccessToken"}
+	iGetDNSView                           = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetDNSView"}
+	iGetFirewallDomainList                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetFirewallDomainList"}
+	iGetFirewallRule                      = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetFirewallRule"}
+	iGetGlobalResolver                    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetGlobalResolver"}
+	iGetHostedZoneAssociation             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetHostedZoneAssociation"}
+	iGetManagedFirewallDomainList         = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetManagedFirewallDomainList"}
+	iImportFirewallDomains                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ImportFirewallDomains"}
+	iListAccessSources                    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListAccessSources"}
+	iListAccessTokens                     = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListAccessTokens"}
+	iListDNSViews                         = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListDNSViews"}
+	iListFirewallDomainLists              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallDomainLists"}
+	iListFirewallDomains                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallDomains"}
+	iListFirewallRules                    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallRules"}
+	iListGlobalResolvers                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListGlobalResolvers"}
+	iListHostedZoneAssociations           = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListHostedZoneAssociations"}
+	iListManagedFirewallDomainLists       = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListManagedFirewallDomainLists"}
+	iListSharedDNSViews                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListSharedDNSViews"}
+	iListTagsForResource                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListTagsForResource"}
+	iTagResource                          = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "TagResource"}
+	iUntagResource                        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UntagResource"}
+	iUpdateAccessSource                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateAccessSource"}
+	iUpdateAccessToken                    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateAccessToken"}
+	iUpdateDNSView                        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateDNSView"}
+	iUpdateFirewallDomains                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateFirewallDomains"}
+	iUpdateFirewallRule                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateFirewallRule"}
+	iUpdateGlobalResolver                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateGlobalResolver"}
+	iUpdateHostedZoneAssociation          = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateHostedZoneAssociation"}
+	i_EC2DNSGlobalResolverCustomerAPI     = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "EC2DNSGlobalResolverCustomerAPI"}
+	iAccessDeniedException                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "AccessDeniedException"}
+	i_AccessSources                       = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "AccessSources"}
+	iAccessSourcesItem                    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "AccessSourcesItem"}
+	iAccessTokenItem                      = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "AccessTokenItem"}
+	i_AccessTokens                        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "AccessTokens"}
+	i_AccessTokenValue                    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "AccessTokenValue"}
+	i_AccountId                           = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "AccountId"}
+	iBatchCreateFirewallRuleInputItem     = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleInputItem"}
+	i_BatchCreateFirewallRuleInputItems   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleInputItems"}
+	iBatchCreateFirewallRuleOutputItem    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleOutputItem"}
+	i_BatchCreateFirewallRuleOutputItems  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleOutputItems"}
+	iBatchCreateFirewallRuleResult        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleResult"}
+	iBatchDeleteFirewallRuleInputItem     = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleInputItem"}
+	i_BatchDeleteFirewallRuleInputItems   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleInputItems"}
+	iBatchDeleteFirewallRuleOutputItem    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleOutputItem"}
+	i_BatchDeleteFirewallRuleOutputItems  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleOutputItems"}
+	iBatchDeleteFirewallRuleResult        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleResult"}
+	iBatchUpdateFirewallRuleInputItem     = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleInputItem"}
+	i_BatchUpdateFirewallRuleInputItems   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleInputItems"}
+	iBatchUpdateFirewallRuleOutputItem    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleOutputItem"}
+	i_BatchUpdateFirewallRuleOutputItems  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleOutputItems"}
+	iBatchUpdateFirewallRuleResult        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleResult"}
+	iBlockOverrideDnsQueryType            = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BlockOverrideDnsQueryType"}
+	i_BlockOverrideTtl                    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BlockOverrideTtl"}
+	i_Cidr                                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "Cidr"}
+	i_ClientToken                         = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ClientToken"}
+	iConfidenceThreshold                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ConfidenceThreshold"}
+	iConflictException                    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ConflictException"}
+	iCRResourceStatus                     = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CRResourceStatus"}
+	iDnsAdvancedProtection                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DnsAdvancedProtection"}
+	iDnsProtocol                          = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DnsProtocol"}
+	i_DnsQueryType                        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DnsQueryType"}
+	iDnsSecValidationType                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DnsSecValidationType"}
+	i_DNSViews                            = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DNSViews"}
+	iDNSViewSummary                       = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DNSViewSummary"}
+	i_Domain                              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "Domain"}
+	i_Domains                             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "Domains"}
+	iEdnsClientSubnetType                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "EdnsClientSubnetType"}
+	i_Filters                             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "Filters"}
+	iFirewallBlockResponse                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallBlockResponse"}
+	i_FirewallDomainLists                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallDomainLists"}
+	iFirewallDomainListsItem              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallDomainListsItem"}
+	iFirewallRuleAction                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallRuleAction"}
+	i_FirewallRulePriority                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallRulePriority"}
+	i_FirewallRules                       = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallRules"}
+	iFirewallRulesFailOpenType            = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallRulesFailOpenType"}
+	iFirewallRulesItem                    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "FirewallRulesItem"}
+	iGlobalResolverIpAddressType          = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GlobalResolverIpAddressType"}
+	i_GlobalResolvers                     = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GlobalResolvers"}
+	iGlobalResolversItem                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GlobalResolversItem"}
+	i_HostedZoneAssociations              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "HostedZoneAssociations"}
+	iHostedZoneAssociationStatus          = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "HostedZoneAssociationStatus"}
+	iHostedZoneAssociationSummary         = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "HostedZoneAssociationSummary"}
+	i_HostedZoneId                        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "HostedZoneId"}
+	i_HostedZoneName                      = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "HostedZoneName"}
+	iInternalServerException              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "InternalServerException"}
+	iIpAddressType                        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "IpAddressType"}
+	i_IPv4Address                         = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "IPv4Address"}
+	i_IPv4Addresses                       = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "IPv4Addresses"}
+	i_IPv6Address                         = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "IPv6Address"}
+	i_IPv6Addresses                       = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "IPv6Addresses"}
+	i_ISO8601TimeString                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ISO8601TimeString"}
+	i_ManagedFirewallDomainLists          = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ManagedFirewallDomainLists"}
+	iManagedFirewallDomainListsItem       = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ManagedFirewallDomainListsItem"}
+	iProfileResourceStatus                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ProfileResourceStatus"}
+	i_Region                              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "Region"}
+	i_Regions                             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "Regions"}
+	i_ResourceArn                         = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ResourceArn"}
+	i_ResourceDescription                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ResourceDescription"}
+	i_ResourceId                          = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ResourceId"}
+	i_ResourceName                        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ResourceName"}
+	i_ResourceNameShort                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ResourceNameShort"}
+	iResourceNotFoundException            = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ResourceNotFoundException"}
+	iServiceQuotaExceededException        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ServiceQuotaExceededException"}
+	i_SharedDNSViews                      = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "SharedDNSViews"}
+	iSharedDNSViewSummary                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "SharedDNSViewSummary"}
+	i_Sni                                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "Sni"}
+	i_Strings                             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "Strings"}
+	i_TagKey                              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "TagKey"}
+	i_TagKeys                             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "TagKeys"}
+	i_Tags                                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "Tags"}
+	i_TagValue                            = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "TagValue"}
+	iThrottlingException                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ThrottlingException"}
+	iTokenStatus                          = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "TokenStatus"}
+	iValidationException                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ValidationException"}
+	iValidationExceptionField             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason            = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ValidationExceptionReason"}
+	iAssociateHostedZoneInput             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "AssociateHostedZoneInput"}
+	iAssociateHostedZoneOutput            = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "AssociateHostedZoneOutput"}
+	iBatchCreateFirewallRuleInput         = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleInput"}
+	iBatchCreateFirewallRuleOutput        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchCreateFirewallRuleOutput"}
+	iBatchDeleteFirewallRuleInput         = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleInput"}
+	iBatchDeleteFirewallRuleOutput        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchDeleteFirewallRuleOutput"}
+	iBatchUpdateFirewallRuleInput         = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleInput"}
+	iBatchUpdateFirewallRuleOutput        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "BatchUpdateFirewallRuleOutput"}
+	iCreateAccessSourceInput              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateAccessSourceInput"}
+	iCreateAccessSourceOutput             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateAccessSourceOutput"}
+	iCreateAccessTokenInput               = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateAccessTokenInput"}
+	iCreateAccessTokenOutput              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateAccessTokenOutput"}
+	iCreateDNSViewInput                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateDNSViewInput"}
+	iCreateDNSViewOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateDNSViewOutput"}
+	iCreateFirewallDomainListInput        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateFirewallDomainListInput"}
+	iCreateFirewallDomainListOutput       = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateFirewallDomainListOutput"}
+	iCreateFirewallRuleInput              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateFirewallRuleInput"}
+	iCreateFirewallRuleOutput             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateFirewallRuleOutput"}
+	iCreateGlobalResolverInput            = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateGlobalResolverInput"}
+	iCreateGlobalResolverOutput           = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "CreateGlobalResolverOutput"}
+	iDeleteAccessSourceInput              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteAccessSourceInput"}
+	iDeleteAccessSourceOutput             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteAccessSourceOutput"}
+	iDeleteAccessTokenInput               = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteAccessTokenInput"}
+	iDeleteAccessTokenOutput              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteAccessTokenOutput"}
+	iDeleteDNSViewInput                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteDNSViewInput"}
+	iDeleteDNSViewOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteDNSViewOutput"}
+	iDeleteFirewallDomainListInput        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteFirewallDomainListInput"}
+	iDeleteFirewallDomainListOutput       = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteFirewallDomainListOutput"}
+	iDeleteFirewallRuleInput              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteFirewallRuleInput"}
+	iDeleteFirewallRuleOutput             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteFirewallRuleOutput"}
+	iDeleteGlobalResolverInput            = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteGlobalResolverInput"}
+	iDeleteGlobalResolverOutput           = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DeleteGlobalResolverOutput"}
+	iDisableDNSViewInput                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DisableDNSViewInput"}
+	iDisableDNSViewOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DisableDNSViewOutput"}
+	iDisassociateHostedZoneInput          = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DisassociateHostedZoneInput"}
+	iDisassociateHostedZoneOutput         = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "DisassociateHostedZoneOutput"}
+	iEnableDNSViewInput                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "EnableDNSViewInput"}
+	iEnableDNSViewOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "EnableDNSViewOutput"}
+	iGetAccessSourceInput                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetAccessSourceInput"}
+	iGetAccessSourceOutput                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetAccessSourceOutput"}
+	iGetAccessTokenInput                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetAccessTokenInput"}
+	iGetAccessTokenOutput                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetAccessTokenOutput"}
+	iGetDNSViewInput                      = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetDNSViewInput"}
+	iGetDNSViewOutput                     = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetDNSViewOutput"}
+	iGetFirewallDomainListInput           = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetFirewallDomainListInput"}
+	iGetFirewallDomainListOutput          = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetFirewallDomainListOutput"}
+	iGetFirewallRuleInput                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetFirewallRuleInput"}
+	iGetFirewallRuleOutput                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetFirewallRuleOutput"}
+	iGetGlobalResolverInput               = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetGlobalResolverInput"}
+	iGetGlobalResolverOutput              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetGlobalResolverOutput"}
+	iGetHostedZoneAssociationInput        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetHostedZoneAssociationInput"}
+	iGetHostedZoneAssociationOutput       = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetHostedZoneAssociationOutput"}
+	iGetManagedFirewallDomainListInput    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetManagedFirewallDomainListInput"}
+	iGetManagedFirewallDomainListOutput   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "GetManagedFirewallDomainListOutput"}
+	iImportFirewallDomainsInput           = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ImportFirewallDomainsInput"}
+	iImportFirewallDomainsOutput          = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ImportFirewallDomainsOutput"}
+	iListAccessSourcesInput               = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListAccessSourcesInput"}
+	iListAccessSourcesOutput              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListAccessSourcesOutput"}
+	iListAccessTokensInput                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListAccessTokensInput"}
+	iListAccessTokensOutput               = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListAccessTokensOutput"}
+	iListDNSViewsInput                    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListDNSViewsInput"}
+	iListDNSViewsOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListDNSViewsOutput"}
+	iListFirewallDomainListsInput         = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallDomainListsInput"}
+	iListFirewallDomainListsOutput        = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallDomainListsOutput"}
+	iListFirewallDomainsInput             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallDomainsInput"}
+	iListFirewallDomainsOutput            = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallDomainsOutput"}
+	iListFirewallRulesInput               = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallRulesInput"}
+	iListFirewallRulesOutput              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListFirewallRulesOutput"}
+	iListGlobalResolversInput             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListGlobalResolversInput"}
+	iListGlobalResolversOutput            = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListGlobalResolversOutput"}
+	iListHostedZoneAssociationsInput      = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListHostedZoneAssociationsInput"}
+	iListHostedZoneAssociationsOutput     = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListHostedZoneAssociationsOutput"}
+	iListManagedFirewallDomainListsInput  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListManagedFirewallDomainListsInput"}
+	iListManagedFirewallDomainListsOutput = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListManagedFirewallDomainListsOutput"}
+	iListSharedDNSViewsInput              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListSharedDNSViewsInput"}
+	iListSharedDNSViewsOutput             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListSharedDNSViewsOutput"}
+	iListTagsForResourceRequest           = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse          = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "ListTagsForResourceResponse"}
+	iTagResourceRequest                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "TagResourceRequest"}
+	iTagResourceResponse                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "TagResourceResponse"}
+	iUntagResourceRequest                 = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UntagResourceResponse"}
+	iUpdateAccessSourceInput              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateAccessSourceInput"}
+	iUpdateAccessSourceOutput             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateAccessSourceOutput"}
+	iUpdateAccessTokenInput               = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateAccessTokenInput"}
+	iUpdateAccessTokenOutput              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateAccessTokenOutput"}
+	iUpdateDNSViewInput                   = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateDNSViewInput"}
+	iUpdateDNSViewOutput                  = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateDNSViewOutput"}
+	iUpdateFirewallDomainsInput           = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateFirewallDomainsInput"}
+	iUpdateFirewallDomainsOutput          = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateFirewallDomainsOutput"}
+	iUpdateFirewallRuleInput              = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateFirewallRuleInput"}
+	iUpdateFirewallRuleOutput             = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateFirewallRuleOutput"}
+	iUpdateGlobalResolverInput            = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateGlobalResolverInput"}
+	iUpdateGlobalResolverOutput           = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateGlobalResolverOutput"}
+	iUpdateHostedZoneAssociationInput     = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateHostedZoneAssociationInput"}
+	iUpdateHostedZoneAssociationOutput    = smithy.ShapeName{Namespace: "com.amazonaws.route53globalresolver", Name: "UpdateHostedZoneAssociationOutput"}
+	pString                               = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pInteger                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Integer"}
+	pUnit                                 = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
 )
 
 var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
@@ -1413,44 +1413,24 @@ var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytra
 
 var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
 var m_AccessSources = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessSources_member}}
-var mAccessSourcesItem = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessSourcesItem_arn, &sAccessSourcesItem_cidr, &sAccessSourcesItem_createdAt, &sAccessSourcesItem_id, &sAccessSourcesItem_ipAddressType, &sAccessSourcesItem_name, &sAccessSourcesItem_dnsViewId, &sAccessSourcesItem_protocol, &sAccessSourcesItem_status, &sAccessSourcesItem_updatedAt}, Seed: 1, Slots: []uint16{
-	1, 4, 0, 3, 7, 0, 6, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 9, 0,
-	5, 0, 2, 0, 0, 0, 0, 0,
-}}
-var mAccessTokenItem = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessTokenItem_id, &sAccessTokenItem_arn, &sAccessTokenItem_createdAt, &sAccessTokenItem_dnsViewId, &sAccessTokenItem_expiresAt, &sAccessTokenItem_globalResolverId, &sAccessTokenItem_name, &sAccessTokenItem_status, &sAccessTokenItem_updatedAt}, Seed: 1, Slots: []uint16{
-	2, 1, 0, 3, 4, 0, 7, 0, 0, 9, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0,
-	5, 0, 0, 0, 0, 0, 0, 0,
-}}
+var mAccessSourcesItem = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessSourcesItem_arn, &sAccessSourcesItem_cidr, &sAccessSourcesItem_createdAt, &sAccessSourcesItem_id, &sAccessSourcesItem_ipAddressType, &sAccessSourcesItem_name, &sAccessSourcesItem_dnsViewId, &sAccessSourcesItem_protocol, &sAccessSourcesItem_status, &sAccessSourcesItem_updatedAt}, Hash: &hAccessSourcesItem}
+var mAccessTokenItem = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessTokenItem_id, &sAccessTokenItem_arn, &sAccessTokenItem_createdAt, &sAccessTokenItem_dnsViewId, &sAccessTokenItem_expiresAt, &sAccessTokenItem_globalResolverId, &sAccessTokenItem_name, &sAccessTokenItem_status, &sAccessTokenItem_updatedAt}, Hash: &hAccessTokenItem}
 var m_AccessTokens = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessTokens_member}}
-var mBatchCreateFirewallRuleInputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateFirewallRuleInputItem_action, &sBatchCreateFirewallRuleInputItem_blockOverrideDnsType, &sBatchCreateFirewallRuleInputItem_blockOverrideDomain, &sBatchCreateFirewallRuleInputItem_blockOverrideTtl, &sBatchCreateFirewallRuleInputItem_blockResponse, &sBatchCreateFirewallRuleInputItem_clientToken, &sBatchCreateFirewallRuleInputItem_confidenceThreshold, &sBatchCreateFirewallRuleInputItem_description, &sBatchCreateFirewallRuleInputItem_dnsAdvancedProtection, &sBatchCreateFirewallRuleInputItem_firewallDomainListId, &sBatchCreateFirewallRuleInputItem_name, &sBatchCreateFirewallRuleInputItem_priority, &sBatchCreateFirewallRuleInputItem_dnsViewId, &sBatchCreateFirewallRuleInputItem_qType}, Seed: 1, Slots: []uint16{
-	6, 0, 9, 4, 13, 7, 11, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 12, 0, 5, 0, 1, 3, 0,
-	8, 0, 0, 2, 0, 0, 0, 0,
-}}
+var mBatchCreateFirewallRuleInputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateFirewallRuleInputItem_action, &sBatchCreateFirewallRuleInputItem_blockOverrideDnsType, &sBatchCreateFirewallRuleInputItem_blockOverrideDomain, &sBatchCreateFirewallRuleInputItem_blockOverrideTtl, &sBatchCreateFirewallRuleInputItem_blockResponse, &sBatchCreateFirewallRuleInputItem_clientToken, &sBatchCreateFirewallRuleInputItem_confidenceThreshold, &sBatchCreateFirewallRuleInputItem_description, &sBatchCreateFirewallRuleInputItem_dnsAdvancedProtection, &sBatchCreateFirewallRuleInputItem_firewallDomainListId, &sBatchCreateFirewallRuleInputItem_name, &sBatchCreateFirewallRuleInputItem_priority, &sBatchCreateFirewallRuleInputItem_dnsViewId, &sBatchCreateFirewallRuleInputItem_qType}, Hash: &hBatchCreateFirewallRuleInputItem}
 var m_BatchCreateFirewallRuleInputItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchCreateFirewallRuleInputItems_member}}
 var mBatchCreateFirewallRuleOutputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateFirewallRuleOutputItem_firewallRule, &sBatchCreateFirewallRuleOutputItem_code, &sBatchCreateFirewallRuleOutputItem_message}}
 var m_BatchCreateFirewallRuleOutputItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchCreateFirewallRuleOutputItems_member}}
-var mBatchCreateFirewallRuleResult = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateFirewallRuleResult_action, &sBatchCreateFirewallRuleResult_blockOverrideDnsType, &sBatchCreateFirewallRuleResult_blockOverrideDomain, &sBatchCreateFirewallRuleResult_blockOverrideTtl, &sBatchCreateFirewallRuleResult_blockResponse, &sBatchCreateFirewallRuleResult_clientToken, &sBatchCreateFirewallRuleResult_confidenceThreshold, &sBatchCreateFirewallRuleResult_createdAt, &sBatchCreateFirewallRuleResult_description, &sBatchCreateFirewallRuleResult_dnsAdvancedProtection, &sBatchCreateFirewallRuleResult_firewallDomainListId, &sBatchCreateFirewallRuleResult_id, &sBatchCreateFirewallRuleResult_managedDomainListName, &sBatchCreateFirewallRuleResult_name, &sBatchCreateFirewallRuleResult_priority, &sBatchCreateFirewallRuleResult_dnsViewId, &sBatchCreateFirewallRuleResult_queryType, &sBatchCreateFirewallRuleResult_status, &sBatchCreateFirewallRuleResult_updatedAt}, Seed: 20, Slots: []uint16{
-	10, 0, 0, 0, 0, 0, 0, 3, 9, 0, 11, 7, 0, 4, 12, 0, 0, 0, 0, 8, 0, 16, 0, 0,
-	0, 0, 0, 14, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 17, 0, 0, 13,
-	0, 5, 0, 0, 0, 0, 19, 2, 0, 0, 0, 0, 6, 0, 0, 1,
-}}
+var mBatchCreateFirewallRuleResult = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateFirewallRuleResult_action, &sBatchCreateFirewallRuleResult_blockOverrideDnsType, &sBatchCreateFirewallRuleResult_blockOverrideDomain, &sBatchCreateFirewallRuleResult_blockOverrideTtl, &sBatchCreateFirewallRuleResult_blockResponse, &sBatchCreateFirewallRuleResult_clientToken, &sBatchCreateFirewallRuleResult_confidenceThreshold, &sBatchCreateFirewallRuleResult_createdAt, &sBatchCreateFirewallRuleResult_description, &sBatchCreateFirewallRuleResult_dnsAdvancedProtection, &sBatchCreateFirewallRuleResult_firewallDomainListId, &sBatchCreateFirewallRuleResult_id, &sBatchCreateFirewallRuleResult_managedDomainListName, &sBatchCreateFirewallRuleResult_name, &sBatchCreateFirewallRuleResult_priority, &sBatchCreateFirewallRuleResult_dnsViewId, &sBatchCreateFirewallRuleResult_queryType, &sBatchCreateFirewallRuleResult_status, &sBatchCreateFirewallRuleResult_updatedAt}, Hash: &hBatchCreateFirewallRuleResult}
 var mBatchDeleteFirewallRuleInputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteFirewallRuleInputItem_firewallRuleId}}
 var m_BatchDeleteFirewallRuleInputItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchDeleteFirewallRuleInputItems_member}}
 var mBatchDeleteFirewallRuleOutputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteFirewallRuleOutputItem_firewallRule, &sBatchDeleteFirewallRuleOutputItem_code, &sBatchDeleteFirewallRuleOutputItem_message}}
 var m_BatchDeleteFirewallRuleOutputItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchDeleteFirewallRuleOutputItems_member}}
 var mBatchDeleteFirewallRuleResult = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteFirewallRuleResult_clientToken, &sBatchDeleteFirewallRuleResult_id, &sBatchDeleteFirewallRuleResult_name, &sBatchDeleteFirewallRuleResult_status}}
-var mBatchUpdateFirewallRuleInputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateFirewallRuleInputItem_action, &sBatchUpdateFirewallRuleInputItem_blockOverrideDnsType, &sBatchUpdateFirewallRuleInputItem_blockOverrideDomain, &sBatchUpdateFirewallRuleInputItem_blockOverrideTtl, &sBatchUpdateFirewallRuleInputItem_blockResponse, &sBatchUpdateFirewallRuleInputItem_confidenceThreshold, &sBatchUpdateFirewallRuleInputItem_description, &sBatchUpdateFirewallRuleInputItem_dnsAdvancedProtection, &sBatchUpdateFirewallRuleInputItem_firewallRuleId, &sBatchUpdateFirewallRuleInputItem_name, &sBatchUpdateFirewallRuleInputItem_priority}, Seed: 16, Slots: []uint16{
-	5, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 9, 0, 8, 0, 2, 3, 0, 0, 0, 1, 6, 0, 0,
-	0, 10, 4, 0, 0, 0, 0, 11,
-}}
+var mBatchUpdateFirewallRuleInputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateFirewallRuleInputItem_action, &sBatchUpdateFirewallRuleInputItem_blockOverrideDnsType, &sBatchUpdateFirewallRuleInputItem_blockOverrideDomain, &sBatchUpdateFirewallRuleInputItem_blockOverrideTtl, &sBatchUpdateFirewallRuleInputItem_blockResponse, &sBatchUpdateFirewallRuleInputItem_confidenceThreshold, &sBatchUpdateFirewallRuleInputItem_description, &sBatchUpdateFirewallRuleInputItem_dnsAdvancedProtection, &sBatchUpdateFirewallRuleInputItem_firewallRuleId, &sBatchUpdateFirewallRuleInputItem_name, &sBatchUpdateFirewallRuleInputItem_priority}, Hash: &hBatchUpdateFirewallRuleInputItem}
 var m_BatchUpdateFirewallRuleInputItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchUpdateFirewallRuleInputItems_member}}
 var mBatchUpdateFirewallRuleOutputItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateFirewallRuleOutputItem_firewallRule, &sBatchUpdateFirewallRuleOutputItem_code, &sBatchUpdateFirewallRuleOutputItem_message}}
 var m_BatchUpdateFirewallRuleOutputItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchUpdateFirewallRuleOutputItems_member}}
-var mBatchUpdateFirewallRuleResult = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateFirewallRuleResult_action, &sBatchUpdateFirewallRuleResult_blockOverrideDnsType, &sBatchUpdateFirewallRuleResult_blockOverrideDomain, &sBatchUpdateFirewallRuleResult_blockOverrideTtl, &sBatchUpdateFirewallRuleResult_blockResponse, &sBatchUpdateFirewallRuleResult_clientToken, &sBatchUpdateFirewallRuleResult_confidenceThreshold, &sBatchUpdateFirewallRuleResult_createdAt, &sBatchUpdateFirewallRuleResult_description, &sBatchUpdateFirewallRuleResult_dnsAdvancedProtection, &sBatchUpdateFirewallRuleResult_firewallDomainListId, &sBatchUpdateFirewallRuleResult_id, &sBatchUpdateFirewallRuleResult_name, &sBatchUpdateFirewallRuleResult_priority, &sBatchUpdateFirewallRuleResult_dnsViewId, &sBatchUpdateFirewallRuleResult_queryType, &sBatchUpdateFirewallRuleResult_status, &sBatchUpdateFirewallRuleResult_updatedAt}, Seed: 20, Slots: []uint16{
-	10, 0, 0, 0, 0, 0, 0, 3, 9, 0, 11, 7, 0, 4, 12, 0, 0, 0, 0, 8, 0, 15, 0, 0,
-	0, 0, 0, 13, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 16, 0, 0, 0,
-	0, 5, 0, 0, 0, 0, 18, 2, 0, 0, 0, 0, 6, 0, 0, 1,
-}}
+var mBatchUpdateFirewallRuleResult = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateFirewallRuleResult_action, &sBatchUpdateFirewallRuleResult_blockOverrideDnsType, &sBatchUpdateFirewallRuleResult_blockOverrideDomain, &sBatchUpdateFirewallRuleResult_blockOverrideTtl, &sBatchUpdateFirewallRuleResult_blockResponse, &sBatchUpdateFirewallRuleResult_clientToken, &sBatchUpdateFirewallRuleResult_confidenceThreshold, &sBatchUpdateFirewallRuleResult_createdAt, &sBatchUpdateFirewallRuleResult_description, &sBatchUpdateFirewallRuleResult_dnsAdvancedProtection, &sBatchUpdateFirewallRuleResult_firewallDomainListId, &sBatchUpdateFirewallRuleResult_id, &sBatchUpdateFirewallRuleResult_name, &sBatchUpdateFirewallRuleResult_priority, &sBatchUpdateFirewallRuleResult_dnsViewId, &sBatchUpdateFirewallRuleResult_queryType, &sBatchUpdateFirewallRuleResult_status, &sBatchUpdateFirewallRuleResult_updatedAt}, Hash: &hBatchUpdateFirewallRuleResult}
 var mBlockOverrideDnsQueryType = smithy.SchemaMembers{List: []*smithy.Schema{&sBlockOverrideDnsQueryType_CNAME}}
 var mConfidenceThreshold = smithy.SchemaMembers{List: []*smithy.Schema{&sConfidenceThreshold_LOW, &sConfidenceThreshold_MEDIUM, &sConfidenceThreshold_HIGH}}
 var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
@@ -1459,10 +1439,7 @@ var mDnsAdvancedProtection = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsAd
 var mDnsProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsProtocol_DO53, &sDnsProtocol_DOH, &sDnsProtocol_DOT}}
 var mDnsSecValidationType = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsSecValidationType_ENABLED, &sDnsSecValidationType_DISABLED}}
 var m_DNSViews = smithy.SchemaMembers{List: []*smithy.Schema{&s_DNSViews_member}}
-var mDNSViewSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDNSViewSummary_id, &sDNSViewSummary_arn, &sDNSViewSummary_clientToken, &sDNSViewSummary_dnssecValidation, &sDNSViewSummary_ednsClientSubnet, &sDNSViewSummary_firewallRulesFailOpen, &sDNSViewSummary_name, &sDNSViewSummary_description, &sDNSViewSummary_globalResolverId, &sDNSViewSummary_createdAt, &sDNSViewSummary_updatedAt, &sDNSViewSummary_status}, Seed: 5, Slots: []uint16{
-	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 3, 5, 0, 0, 0,
-	0, 0, 0, 0, 0, 11, 1, 7,
-}}
+var mDNSViewSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDNSViewSummary_id, &sDNSViewSummary_arn, &sDNSViewSummary_clientToken, &sDNSViewSummary_dnssecValidation, &sDNSViewSummary_ednsClientSubnet, &sDNSViewSummary_firewallRulesFailOpen, &sDNSViewSummary_name, &sDNSViewSummary_description, &sDNSViewSummary_globalResolverId, &sDNSViewSummary_createdAt, &sDNSViewSummary_updatedAt, &sDNSViewSummary_status}, Hash: &hDNSViewSummary}
 var m_Domains = smithy.SchemaMembers{List: []*smithy.Schema{&s_Domains_member}}
 var mEdnsClientSubnetType = smithy.SchemaMembers{List: []*smithy.Schema{&sEdnsClientSubnetType_ENABLED, &sEdnsClientSubnetType_DISABLED}}
 var m_Filters = smithy.SchemaMembers{List: []*smithy.Schema{&s_Filters_key, &s_Filters_value}}
@@ -1472,17 +1449,10 @@ var mFirewallDomainListsItem = smithy.SchemaMembers{List: []*smithy.Schema{&sFir
 var mFirewallRuleAction = smithy.SchemaMembers{List: []*smithy.Schema{&sFirewallRuleAction_ALLOW, &sFirewallRuleAction_ALERT, &sFirewallRuleAction_BLOCK}}
 var m_FirewallRules = smithy.SchemaMembers{List: []*smithy.Schema{&s_FirewallRules_member}}
 var mFirewallRulesFailOpenType = smithy.SchemaMembers{List: []*smithy.Schema{&sFirewallRulesFailOpenType_ENABLED, &sFirewallRulesFailOpenType_DISABLED}}
-var mFirewallRulesItem = smithy.SchemaMembers{List: []*smithy.Schema{&sFirewallRulesItem_action, &sFirewallRulesItem_blockOverrideDnsType, &sFirewallRulesItem_blockOverrideDomain, &sFirewallRulesItem_blockOverrideTtl, &sFirewallRulesItem_blockResponse, &sFirewallRulesItem_confidenceThreshold, &sFirewallRulesItem_createdAt, &sFirewallRulesItem_description, &sFirewallRulesItem_dnsAdvancedProtection, &sFirewallRulesItem_firewallDomainListId, &sFirewallRulesItem_id, &sFirewallRulesItem_name, &sFirewallRulesItem_priority, &sFirewallRulesItem_dnsViewId, &sFirewallRulesItem_queryType, &sFirewallRulesItem_status, &sFirewallRulesItem_updatedAt}, Seed: 20, Slots: []uint16{
-	9, 0, 0, 0, 0, 0, 0, 3, 8, 0, 10, 6, 0, 4, 11, 0, 0, 0, 0, 7, 0, 14, 0, 0,
-	0, 0, 0, 12, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 15, 0, 0, 0,
-	0, 5, 0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 0, 1,
-}}
+var mFirewallRulesItem = smithy.SchemaMembers{List: []*smithy.Schema{&sFirewallRulesItem_action, &sFirewallRulesItem_blockOverrideDnsType, &sFirewallRulesItem_blockOverrideDomain, &sFirewallRulesItem_blockOverrideTtl, &sFirewallRulesItem_blockResponse, &sFirewallRulesItem_confidenceThreshold, &sFirewallRulesItem_createdAt, &sFirewallRulesItem_description, &sFirewallRulesItem_dnsAdvancedProtection, &sFirewallRulesItem_firewallDomainListId, &sFirewallRulesItem_id, &sFirewallRulesItem_name, &sFirewallRulesItem_priority, &sFirewallRulesItem_dnsViewId, &sFirewallRulesItem_queryType, &sFirewallRulesItem_status, &sFirewallRulesItem_updatedAt}, Hash: &hFirewallRulesItem}
 var mGlobalResolverIpAddressType = smithy.SchemaMembers{List: []*smithy.Schema{&sGlobalResolverIpAddressType_IPV4, &sGlobalResolverIpAddressType_DUAL_STACK}}
 var m_GlobalResolvers = smithy.SchemaMembers{List: []*smithy.Schema{&s_GlobalResolvers_member}}
-var mGlobalResolversItem = smithy.SchemaMembers{List: []*smithy.Schema{&sGlobalResolversItem_id, &sGlobalResolversItem_arn, &sGlobalResolversItem_clientToken, &sGlobalResolversItem_dnsName, &sGlobalResolversItem_observabilityRegion, &sGlobalResolversItem_name, &sGlobalResolversItem_description, &sGlobalResolversItem_regions, &sGlobalResolversItem_createdAt, &sGlobalResolversItem_updatedAt, &sGlobalResolversItem_status, &sGlobalResolversItem_ipv4Addresses, &sGlobalResolversItem_ipv6Addresses, &sGlobalResolversItem_ipAddressType}, Seed: 42, Slots: []uint16{
-	0, 11, 3, 0, 0, 0, 0, 8, 0, 14, 0, 7, 0, 0, 0, 0, 4, 2, 6, 12, 5, 0, 0, 0,
-	0, 13, 0, 0, 9, 1, 0, 10,
-}}
+var mGlobalResolversItem = smithy.SchemaMembers{List: []*smithy.Schema{&sGlobalResolversItem_id, &sGlobalResolversItem_arn, &sGlobalResolversItem_clientToken, &sGlobalResolversItem_dnsName, &sGlobalResolversItem_observabilityRegion, &sGlobalResolversItem_name, &sGlobalResolversItem_description, &sGlobalResolversItem_regions, &sGlobalResolversItem_createdAt, &sGlobalResolversItem_updatedAt, &sGlobalResolversItem_status, &sGlobalResolversItem_ipv4Addresses, &sGlobalResolversItem_ipv6Addresses, &sGlobalResolversItem_ipAddressType}, Hash: &hGlobalResolversItem}
 var m_HostedZoneAssociations = smithy.SchemaMembers{List: []*smithy.Schema{&s_HostedZoneAssociations_member}}
 var mHostedZoneAssociationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sHostedZoneAssociationStatus_CREATING, &sHostedZoneAssociationStatus_OPERATIONAL, &sHostedZoneAssociationStatus_DELETING}}
 var mHostedZoneAssociationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sHostedZoneAssociationSummary_id, &sHostedZoneAssociationSummary_resourceArn, &sHostedZoneAssociationSummary_hostedZoneId, &sHostedZoneAssociationSummary_hostedZoneName, &sHostedZoneAssociationSummary_name, &sHostedZoneAssociationSummary_createdAt, &sHostedZoneAssociationSummary_updatedAt, &sHostedZoneAssociationSummary_status}}
@@ -1497,10 +1467,7 @@ var m_Regions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Regions_member}}
 var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
 var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
 var m_SharedDNSViews = smithy.SchemaMembers{List: []*smithy.Schema{&s_SharedDNSViews_member}}
-var mSharedDNSViewSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSharedDNSViewSummary_id, &sSharedDNSViewSummary_arn, &sSharedDNSViewSummary_clientToken, &sSharedDNSViewSummary_dnssecValidation, &sSharedDNSViewSummary_ednsClientSubnet, &sSharedDNSViewSummary_firewallRulesFailOpen, &sSharedDNSViewSummary_name, &sSharedDNSViewSummary_description, &sSharedDNSViewSummary_globalResolverId, &sSharedDNSViewSummary_createdAt, &sSharedDNSViewSummary_updatedAt, &sSharedDNSViewSummary_status, &sSharedDNSViewSummary_ownerAccountId}, Seed: 5, Slots: []uint16{
-	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 13, 0, 3, 5, 0, 0, 0,
-	0, 0, 0, 0, 0, 11, 1, 7,
-}}
+var mSharedDNSViewSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSharedDNSViewSummary_id, &sSharedDNSViewSummary_arn, &sSharedDNSViewSummary_clientToken, &sSharedDNSViewSummary_dnssecValidation, &sSharedDNSViewSummary_ednsClientSubnet, &sSharedDNSViewSummary_firewallRulesFailOpen, &sSharedDNSViewSummary_name, &sSharedDNSViewSummary_description, &sSharedDNSViewSummary_globalResolverId, &sSharedDNSViewSummary_createdAt, &sSharedDNSViewSummary_updatedAt, &sSharedDNSViewSummary_status, &sSharedDNSViewSummary_ownerAccountId}, Hash: &hSharedDNSViewSummary}
 var m_Strings = smithy.SchemaMembers{List: []*smithy.Schema{&s_Strings_member}}
 var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
 var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
@@ -1519,107 +1486,47 @@ var mBatchDeleteFirewallRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema
 var mBatchUpdateFirewallRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateFirewallRuleInput_firewallRules}}
 var mBatchUpdateFirewallRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateFirewallRuleOutput_failures, &sBatchUpdateFirewallRuleOutput_successes}}
 var mCreateAccessSourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessSourceInput_cidr, &sCreateAccessSourceInput_clientToken, &sCreateAccessSourceInput_ipAddressType, &sCreateAccessSourceInput_name, &sCreateAccessSourceInput_dnsViewId, &sCreateAccessSourceInput_protocol, &sCreateAccessSourceInput_tags}}
-var mCreateAccessSourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessSourceOutput_arn, &sCreateAccessSourceOutput_cidr, &sCreateAccessSourceOutput_createdAt, &sCreateAccessSourceOutput_id, &sCreateAccessSourceOutput_ipAddressType, &sCreateAccessSourceOutput_name, &sCreateAccessSourceOutput_dnsViewId, &sCreateAccessSourceOutput_protocol, &sCreateAccessSourceOutput_status, &sCreateAccessSourceOutput_updatedAt}, Seed: 1, Slots: []uint16{
-	1, 4, 0, 3, 7, 0, 6, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 9, 0,
-	5, 0, 2, 0, 0, 0, 0, 0,
-}}
+var mCreateAccessSourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessSourceOutput_arn, &sCreateAccessSourceOutput_cidr, &sCreateAccessSourceOutput_createdAt, &sCreateAccessSourceOutput_id, &sCreateAccessSourceOutput_ipAddressType, &sCreateAccessSourceOutput_name, &sCreateAccessSourceOutput_dnsViewId, &sCreateAccessSourceOutput_protocol, &sCreateAccessSourceOutput_status, &sCreateAccessSourceOutput_updatedAt}, Hash: &hCreateAccessSourceOutput}
 var mCreateAccessTokenInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessTokenInput_clientToken, &sCreateAccessTokenInput_dnsViewId, &sCreateAccessTokenInput_expiresAt, &sCreateAccessTokenInput_name, &sCreateAccessTokenInput_tags}}
-var mCreateAccessTokenOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessTokenOutput_id, &sCreateAccessTokenOutput_arn, &sCreateAccessTokenOutput_clientToken, &sCreateAccessTokenOutput_createdAt, &sCreateAccessTokenOutput_dnsViewId, &sCreateAccessTokenOutput_expiresAt, &sCreateAccessTokenOutput_name, &sCreateAccessTokenOutput_status, &sCreateAccessTokenOutput_value}, Seed: 2, Slots: []uint16{
-	2, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 8, 0, 9, 6, 4, 0,
-	0, 5, 0, 0, 0, 0, 0, 0,
-}}
+var mCreateAccessTokenOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessTokenOutput_id, &sCreateAccessTokenOutput_arn, &sCreateAccessTokenOutput_clientToken, &sCreateAccessTokenOutput_createdAt, &sCreateAccessTokenOutput_dnsViewId, &sCreateAccessTokenOutput_expiresAt, &sCreateAccessTokenOutput_name, &sCreateAccessTokenOutput_status, &sCreateAccessTokenOutput_value}, Hash: &hCreateAccessTokenOutput}
 var mCreateDNSViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDNSViewInput_globalResolverId, &sCreateDNSViewInput_clientToken, &sCreateDNSViewInput_name, &sCreateDNSViewInput_dnssecValidation, &sCreateDNSViewInput_ednsClientSubnet, &sCreateDNSViewInput_firewallRulesFailOpen, &sCreateDNSViewInput_description, &sCreateDNSViewInput_tags}}
-var mCreateDNSViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDNSViewOutput_id, &sCreateDNSViewOutput_arn, &sCreateDNSViewOutput_clientToken, &sCreateDNSViewOutput_dnssecValidation, &sCreateDNSViewOutput_ednsClientSubnet, &sCreateDNSViewOutput_firewallRulesFailOpen, &sCreateDNSViewOutput_name, &sCreateDNSViewOutput_description, &sCreateDNSViewOutput_globalResolverId, &sCreateDNSViewOutput_createdAt, &sCreateDNSViewOutput_updatedAt, &sCreateDNSViewOutput_status}, Seed: 5, Slots: []uint16{
-	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 3, 5, 0, 0, 0,
-	0, 0, 0, 0, 0, 11, 1, 7,
-}}
+var mCreateDNSViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDNSViewOutput_id, &sCreateDNSViewOutput_arn, &sCreateDNSViewOutput_clientToken, &sCreateDNSViewOutput_dnssecValidation, &sCreateDNSViewOutput_ednsClientSubnet, &sCreateDNSViewOutput_firewallRulesFailOpen, &sCreateDNSViewOutput_name, &sCreateDNSViewOutput_description, &sCreateDNSViewOutput_globalResolverId, &sCreateDNSViewOutput_createdAt, &sCreateDNSViewOutput_updatedAt, &sCreateDNSViewOutput_status}, Hash: &hCreateDNSViewOutput}
 var mCreateFirewallDomainListInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFirewallDomainListInput_clientToken, &sCreateFirewallDomainListInput_globalResolverId, &sCreateFirewallDomainListInput_description, &sCreateFirewallDomainListInput_name, &sCreateFirewallDomainListInput_tags}}
-var mCreateFirewallDomainListOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFirewallDomainListOutput_arn, &sCreateFirewallDomainListOutput_globalResolverId, &sCreateFirewallDomainListOutput_createdAt, &sCreateFirewallDomainListOutput_description, &sCreateFirewallDomainListOutput_domainCount, &sCreateFirewallDomainListOutput_id, &sCreateFirewallDomainListOutput_name, &sCreateFirewallDomainListOutput_status, &sCreateFirewallDomainListOutput_updatedAt}, Seed: 5, Slots: []uint16{
-	4, 1, 0, 0, 8, 0, 0, 0, 0, 5, 0, 0, 0, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 9, 6, 7,
-}}
-var mCreateFirewallRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFirewallRuleInput_action, &sCreateFirewallRuleInput_blockOverrideDnsType, &sCreateFirewallRuleInput_blockOverrideDomain, &sCreateFirewallRuleInput_blockOverrideTtl, &sCreateFirewallRuleInput_blockResponse, &sCreateFirewallRuleInput_clientToken, &sCreateFirewallRuleInput_confidenceThreshold, &sCreateFirewallRuleInput_description, &sCreateFirewallRuleInput_dnsAdvancedProtection, &sCreateFirewallRuleInput_firewallDomainListId, &sCreateFirewallRuleInput_name, &sCreateFirewallRuleInput_priority, &sCreateFirewallRuleInput_dnsViewId, &sCreateFirewallRuleInput_qType}, Seed: 1, Slots: []uint16{
-	6, 0, 9, 4, 13, 7, 11, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 12, 0, 5, 0, 1, 3, 0,
-	8, 0, 0, 2, 0, 0, 0, 0,
-}}
-var mCreateFirewallRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFirewallRuleOutput_action, &sCreateFirewallRuleOutput_blockOverrideDnsType, &sCreateFirewallRuleOutput_blockOverrideDomain, &sCreateFirewallRuleOutput_blockOverrideTtl, &sCreateFirewallRuleOutput_blockResponse, &sCreateFirewallRuleOutput_confidenceThreshold, &sCreateFirewallRuleOutput_createdAt, &sCreateFirewallRuleOutput_description, &sCreateFirewallRuleOutput_dnsAdvancedProtection, &sCreateFirewallRuleOutput_firewallDomainListId, &sCreateFirewallRuleOutput_id, &sCreateFirewallRuleOutput_name, &sCreateFirewallRuleOutput_priority, &sCreateFirewallRuleOutput_dnsViewId, &sCreateFirewallRuleOutput_queryType, &sCreateFirewallRuleOutput_status, &sCreateFirewallRuleOutput_updatedAt}, Seed: 20, Slots: []uint16{
-	9, 0, 0, 0, 0, 0, 0, 3, 8, 0, 10, 6, 0, 4, 11, 0, 0, 0, 0, 7, 0, 14, 0, 0,
-	0, 0, 0, 12, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 15, 0, 0, 0,
-	0, 5, 0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 0, 1,
-}}
+var mCreateFirewallDomainListOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFirewallDomainListOutput_arn, &sCreateFirewallDomainListOutput_globalResolverId, &sCreateFirewallDomainListOutput_createdAt, &sCreateFirewallDomainListOutput_description, &sCreateFirewallDomainListOutput_domainCount, &sCreateFirewallDomainListOutput_id, &sCreateFirewallDomainListOutput_name, &sCreateFirewallDomainListOutput_status, &sCreateFirewallDomainListOutput_updatedAt}, Hash: &hCreateFirewallDomainListOutput}
+var mCreateFirewallRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFirewallRuleInput_action, &sCreateFirewallRuleInput_blockOverrideDnsType, &sCreateFirewallRuleInput_blockOverrideDomain, &sCreateFirewallRuleInput_blockOverrideTtl, &sCreateFirewallRuleInput_blockResponse, &sCreateFirewallRuleInput_clientToken, &sCreateFirewallRuleInput_confidenceThreshold, &sCreateFirewallRuleInput_description, &sCreateFirewallRuleInput_dnsAdvancedProtection, &sCreateFirewallRuleInput_firewallDomainListId, &sCreateFirewallRuleInput_name, &sCreateFirewallRuleInput_priority, &sCreateFirewallRuleInput_dnsViewId, &sCreateFirewallRuleInput_qType}, Hash: &hCreateFirewallRuleInput}
+var mCreateFirewallRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFirewallRuleOutput_action, &sCreateFirewallRuleOutput_blockOverrideDnsType, &sCreateFirewallRuleOutput_blockOverrideDomain, &sCreateFirewallRuleOutput_blockOverrideTtl, &sCreateFirewallRuleOutput_blockResponse, &sCreateFirewallRuleOutput_confidenceThreshold, &sCreateFirewallRuleOutput_createdAt, &sCreateFirewallRuleOutput_description, &sCreateFirewallRuleOutput_dnsAdvancedProtection, &sCreateFirewallRuleOutput_firewallDomainListId, &sCreateFirewallRuleOutput_id, &sCreateFirewallRuleOutput_name, &sCreateFirewallRuleOutput_priority, &sCreateFirewallRuleOutput_dnsViewId, &sCreateFirewallRuleOutput_queryType, &sCreateFirewallRuleOutput_status, &sCreateFirewallRuleOutput_updatedAt}, Hash: &hCreateFirewallRuleOutput}
 var mCreateGlobalResolverInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGlobalResolverInput_clientToken, &sCreateGlobalResolverInput_description, &sCreateGlobalResolverInput_ipAddressType, &sCreateGlobalResolverInput_name, &sCreateGlobalResolverInput_observabilityRegion, &sCreateGlobalResolverInput_regions, &sCreateGlobalResolverInput_tags}}
-var mCreateGlobalResolverOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGlobalResolverOutput_id, &sCreateGlobalResolverOutput_arn, &sCreateGlobalResolverOutput_clientToken, &sCreateGlobalResolverOutput_createdAt, &sCreateGlobalResolverOutput_description, &sCreateGlobalResolverOutput_dnsName, &sCreateGlobalResolverOutput_ipAddressType, &sCreateGlobalResolverOutput_ipv4Addresses, &sCreateGlobalResolverOutput_ipv6Addresses, &sCreateGlobalResolverOutput_name, &sCreateGlobalResolverOutput_observabilityRegion, &sCreateGlobalResolverOutput_regions, &sCreateGlobalResolverOutput_status, &sCreateGlobalResolverOutput_updatedAt}, Seed: 42, Slots: []uint16{
-	0, 13, 3, 0, 0, 0, 0, 12, 0, 7, 0, 5, 0, 0, 0, 0, 6, 2, 10, 8, 11, 0, 0, 0,
-	0, 9, 0, 0, 4, 1, 0, 14,
-}}
+var mCreateGlobalResolverOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGlobalResolverOutput_id, &sCreateGlobalResolverOutput_arn, &sCreateGlobalResolverOutput_clientToken, &sCreateGlobalResolverOutput_createdAt, &sCreateGlobalResolverOutput_description, &sCreateGlobalResolverOutput_dnsName, &sCreateGlobalResolverOutput_ipAddressType, &sCreateGlobalResolverOutput_ipv4Addresses, &sCreateGlobalResolverOutput_ipv6Addresses, &sCreateGlobalResolverOutput_name, &sCreateGlobalResolverOutput_observabilityRegion, &sCreateGlobalResolverOutput_regions, &sCreateGlobalResolverOutput_status, &sCreateGlobalResolverOutput_updatedAt}, Hash: &hCreateGlobalResolverOutput}
 var mDeleteAccessSourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccessSourceInput_accessSourceId}}
-var mDeleteAccessSourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccessSourceOutput_arn, &sDeleteAccessSourceOutput_cidr, &sDeleteAccessSourceOutput_createdAt, &sDeleteAccessSourceOutput_id, &sDeleteAccessSourceOutput_ipAddressType, &sDeleteAccessSourceOutput_name, &sDeleteAccessSourceOutput_dnsViewId, &sDeleteAccessSourceOutput_protocol, &sDeleteAccessSourceOutput_status, &sDeleteAccessSourceOutput_updatedAt}, Seed: 1, Slots: []uint16{
-	1, 4, 0, 3, 7, 0, 6, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 9, 0,
-	5, 0, 2, 0, 0, 0, 0, 0,
-}}
+var mDeleteAccessSourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccessSourceOutput_arn, &sDeleteAccessSourceOutput_cidr, &sDeleteAccessSourceOutput_createdAt, &sDeleteAccessSourceOutput_id, &sDeleteAccessSourceOutput_ipAddressType, &sDeleteAccessSourceOutput_name, &sDeleteAccessSourceOutput_dnsViewId, &sDeleteAccessSourceOutput_protocol, &sDeleteAccessSourceOutput_status, &sDeleteAccessSourceOutput_updatedAt}, Hash: &hDeleteAccessSourceOutput}
 var mDeleteAccessTokenInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccessTokenInput_accessTokenId}}
 var mDeleteAccessTokenOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccessTokenOutput_id, &sDeleteAccessTokenOutput_status, &sDeleteAccessTokenOutput_deletedAt}}
 var mDeleteDNSViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDNSViewInput_dnsViewId}}
-var mDeleteDNSViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDNSViewOutput_id, &sDeleteDNSViewOutput_arn, &sDeleteDNSViewOutput_clientToken, &sDeleteDNSViewOutput_dnssecValidation, &sDeleteDNSViewOutput_ednsClientSubnet, &sDeleteDNSViewOutput_firewallRulesFailOpen, &sDeleteDNSViewOutput_name, &sDeleteDNSViewOutput_description, &sDeleteDNSViewOutput_globalResolverId, &sDeleteDNSViewOutput_createdAt, &sDeleteDNSViewOutput_updatedAt, &sDeleteDNSViewOutput_status}, Seed: 5, Slots: []uint16{
-	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 3, 5, 0, 0, 0,
-	0, 0, 0, 0, 0, 11, 1, 7,
-}}
+var mDeleteDNSViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDNSViewOutput_id, &sDeleteDNSViewOutput_arn, &sDeleteDNSViewOutput_clientToken, &sDeleteDNSViewOutput_dnssecValidation, &sDeleteDNSViewOutput_ednsClientSubnet, &sDeleteDNSViewOutput_firewallRulesFailOpen, &sDeleteDNSViewOutput_name, &sDeleteDNSViewOutput_description, &sDeleteDNSViewOutput_globalResolverId, &sDeleteDNSViewOutput_createdAt, &sDeleteDNSViewOutput_updatedAt, &sDeleteDNSViewOutput_status}, Hash: &hDeleteDNSViewOutput}
 var mDeleteFirewallDomainListInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFirewallDomainListInput_firewallDomainListId}}
 var mDeleteFirewallDomainListOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFirewallDomainListOutput_arn, &sDeleteFirewallDomainListOutput_id, &sDeleteFirewallDomainListOutput_name, &sDeleteFirewallDomainListOutput_status}}
 var mDeleteFirewallRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFirewallRuleInput_firewallRuleId}}
-var mDeleteFirewallRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFirewallRuleOutput_action, &sDeleteFirewallRuleOutput_blockOverrideDnsType, &sDeleteFirewallRuleOutput_blockOverrideDomain, &sDeleteFirewallRuleOutput_blockOverrideTtl, &sDeleteFirewallRuleOutput_blockResponse, &sDeleteFirewallRuleOutput_confidenceThreshold, &sDeleteFirewallRuleOutput_createdAt, &sDeleteFirewallRuleOutput_description, &sDeleteFirewallRuleOutput_dnsAdvancedProtection, &sDeleteFirewallRuleOutput_firewallDomainListId, &sDeleteFirewallRuleOutput_id, &sDeleteFirewallRuleOutput_name, &sDeleteFirewallRuleOutput_priority, &sDeleteFirewallRuleOutput_dnsViewId, &sDeleteFirewallRuleOutput_queryType, &sDeleteFirewallRuleOutput_status, &sDeleteFirewallRuleOutput_updatedAt}, Seed: 20, Slots: []uint16{
-	9, 0, 0, 0, 0, 0, 0, 3, 8, 0, 10, 6, 0, 4, 11, 0, 0, 0, 0, 7, 0, 14, 0, 0,
-	0, 0, 0, 12, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 15, 0, 0, 0,
-	0, 5, 0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 0, 1,
-}}
+var mDeleteFirewallRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFirewallRuleOutput_action, &sDeleteFirewallRuleOutput_blockOverrideDnsType, &sDeleteFirewallRuleOutput_blockOverrideDomain, &sDeleteFirewallRuleOutput_blockOverrideTtl, &sDeleteFirewallRuleOutput_blockResponse, &sDeleteFirewallRuleOutput_confidenceThreshold, &sDeleteFirewallRuleOutput_createdAt, &sDeleteFirewallRuleOutput_description, &sDeleteFirewallRuleOutput_dnsAdvancedProtection, &sDeleteFirewallRuleOutput_firewallDomainListId, &sDeleteFirewallRuleOutput_id, &sDeleteFirewallRuleOutput_name, &sDeleteFirewallRuleOutput_priority, &sDeleteFirewallRuleOutput_dnsViewId, &sDeleteFirewallRuleOutput_queryType, &sDeleteFirewallRuleOutput_status, &sDeleteFirewallRuleOutput_updatedAt}, Hash: &hDeleteFirewallRuleOutput}
 var mDeleteGlobalResolverInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGlobalResolverInput_globalResolverId}}
-var mDeleteGlobalResolverOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGlobalResolverOutput_id, &sDeleteGlobalResolverOutput_arn, &sDeleteGlobalResolverOutput_clientToken, &sDeleteGlobalResolverOutput_dnsName, &sDeleteGlobalResolverOutput_observabilityRegion, &sDeleteGlobalResolverOutput_name, &sDeleteGlobalResolverOutput_description, &sDeleteGlobalResolverOutput_regions, &sDeleteGlobalResolverOutput_createdAt, &sDeleteGlobalResolverOutput_updatedAt, &sDeleteGlobalResolverOutput_status, &sDeleteGlobalResolverOutput_ipv4Addresses, &sDeleteGlobalResolverOutput_ipv6Addresses, &sDeleteGlobalResolverOutput_ipAddressType}, Seed: 42, Slots: []uint16{
-	0, 11, 3, 0, 0, 0, 0, 8, 0, 14, 0, 7, 0, 0, 0, 0, 4, 2, 6, 12, 5, 0, 0, 0,
-	0, 13, 0, 0, 9, 1, 0, 10,
-}}
+var mDeleteGlobalResolverOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGlobalResolverOutput_id, &sDeleteGlobalResolverOutput_arn, &sDeleteGlobalResolverOutput_clientToken, &sDeleteGlobalResolverOutput_dnsName, &sDeleteGlobalResolverOutput_observabilityRegion, &sDeleteGlobalResolverOutput_name, &sDeleteGlobalResolverOutput_description, &sDeleteGlobalResolverOutput_regions, &sDeleteGlobalResolverOutput_createdAt, &sDeleteGlobalResolverOutput_updatedAt, &sDeleteGlobalResolverOutput_status, &sDeleteGlobalResolverOutput_ipv4Addresses, &sDeleteGlobalResolverOutput_ipv6Addresses, &sDeleteGlobalResolverOutput_ipAddressType}, Hash: &hDeleteGlobalResolverOutput}
 var mDisableDNSViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableDNSViewInput_dnsViewId}}
-var mDisableDNSViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableDNSViewOutput_id, &sDisableDNSViewOutput_arn, &sDisableDNSViewOutput_clientToken, &sDisableDNSViewOutput_dnssecValidation, &sDisableDNSViewOutput_ednsClientSubnet, &sDisableDNSViewOutput_firewallRulesFailOpen, &sDisableDNSViewOutput_name, &sDisableDNSViewOutput_description, &sDisableDNSViewOutput_globalResolverId, &sDisableDNSViewOutput_createdAt, &sDisableDNSViewOutput_updatedAt, &sDisableDNSViewOutput_status}, Seed: 5, Slots: []uint16{
-	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 3, 5, 0, 0, 0,
-	0, 0, 0, 0, 0, 11, 1, 7,
-}}
+var mDisableDNSViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableDNSViewOutput_id, &sDisableDNSViewOutput_arn, &sDisableDNSViewOutput_clientToken, &sDisableDNSViewOutput_dnssecValidation, &sDisableDNSViewOutput_ednsClientSubnet, &sDisableDNSViewOutput_firewallRulesFailOpen, &sDisableDNSViewOutput_name, &sDisableDNSViewOutput_description, &sDisableDNSViewOutput_globalResolverId, &sDisableDNSViewOutput_createdAt, &sDisableDNSViewOutput_updatedAt, &sDisableDNSViewOutput_status}, Hash: &hDisableDNSViewOutput}
 var mDisassociateHostedZoneInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateHostedZoneInput_hostedZoneId, &sDisassociateHostedZoneInput_resourceArn}}
 var mDisassociateHostedZoneOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateHostedZoneOutput_id, &sDisassociateHostedZoneOutput_resourceArn, &sDisassociateHostedZoneOutput_hostedZoneId, &sDisassociateHostedZoneOutput_hostedZoneName, &sDisassociateHostedZoneOutput_name, &sDisassociateHostedZoneOutput_createdAt, &sDisassociateHostedZoneOutput_updatedAt, &sDisassociateHostedZoneOutput_status}}
 var mEnableDNSViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableDNSViewInput_dnsViewId}}
-var mEnableDNSViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableDNSViewOutput_id, &sEnableDNSViewOutput_arn, &sEnableDNSViewOutput_clientToken, &sEnableDNSViewOutput_dnssecValidation, &sEnableDNSViewOutput_ednsClientSubnet, &sEnableDNSViewOutput_firewallRulesFailOpen, &sEnableDNSViewOutput_name, &sEnableDNSViewOutput_description, &sEnableDNSViewOutput_globalResolverId, &sEnableDNSViewOutput_createdAt, &sEnableDNSViewOutput_updatedAt, &sEnableDNSViewOutput_status}, Seed: 5, Slots: []uint16{
-	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 3, 5, 0, 0, 0,
-	0, 0, 0, 0, 0, 11, 1, 7,
-}}
+var mEnableDNSViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableDNSViewOutput_id, &sEnableDNSViewOutput_arn, &sEnableDNSViewOutput_clientToken, &sEnableDNSViewOutput_dnssecValidation, &sEnableDNSViewOutput_ednsClientSubnet, &sEnableDNSViewOutput_firewallRulesFailOpen, &sEnableDNSViewOutput_name, &sEnableDNSViewOutput_description, &sEnableDNSViewOutput_globalResolverId, &sEnableDNSViewOutput_createdAt, &sEnableDNSViewOutput_updatedAt, &sEnableDNSViewOutput_status}, Hash: &hEnableDNSViewOutput}
 var mGetAccessSourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessSourceInput_accessSourceId}}
-var mGetAccessSourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessSourceOutput_arn, &sGetAccessSourceOutput_cidr, &sGetAccessSourceOutput_createdAt, &sGetAccessSourceOutput_id, &sGetAccessSourceOutput_ipAddressType, &sGetAccessSourceOutput_name, &sGetAccessSourceOutput_dnsViewId, &sGetAccessSourceOutput_protocol, &sGetAccessSourceOutput_status, &sGetAccessSourceOutput_updatedAt}, Seed: 1, Slots: []uint16{
-	1, 4, 0, 3, 7, 0, 6, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 9, 0,
-	5, 0, 2, 0, 0, 0, 0, 0,
-}}
+var mGetAccessSourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessSourceOutput_arn, &sGetAccessSourceOutput_cidr, &sGetAccessSourceOutput_createdAt, &sGetAccessSourceOutput_id, &sGetAccessSourceOutput_ipAddressType, &sGetAccessSourceOutput_name, &sGetAccessSourceOutput_dnsViewId, &sGetAccessSourceOutput_protocol, &sGetAccessSourceOutput_status, &sGetAccessSourceOutput_updatedAt}, Hash: &hGetAccessSourceOutput}
 var mGetAccessTokenInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessTokenInput_accessTokenId}}
-var mGetAccessTokenOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessTokenOutput_id, &sGetAccessTokenOutput_arn, &sGetAccessTokenOutput_clientToken, &sGetAccessTokenOutput_createdAt, &sGetAccessTokenOutput_dnsViewId, &sGetAccessTokenOutput_expiresAt, &sGetAccessTokenOutput_globalResolverId, &sGetAccessTokenOutput_name, &sGetAccessTokenOutput_status, &sGetAccessTokenOutput_updatedAt, &sGetAccessTokenOutput_value}, Seed: 5, Slots: []uint16{
-	0, 2, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 6, 0, 7, 0, 4, 0, 0, 3, 5, 11, 0, 0,
-	0, 0, 0, 0, 0, 10, 1, 8,
-}}
+var mGetAccessTokenOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessTokenOutput_id, &sGetAccessTokenOutput_arn, &sGetAccessTokenOutput_clientToken, &sGetAccessTokenOutput_createdAt, &sGetAccessTokenOutput_dnsViewId, &sGetAccessTokenOutput_expiresAt, &sGetAccessTokenOutput_globalResolverId, &sGetAccessTokenOutput_name, &sGetAccessTokenOutput_status, &sGetAccessTokenOutput_updatedAt, &sGetAccessTokenOutput_value}, Hash: &hGetAccessTokenOutput}
 var mGetDNSViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDNSViewInput_dnsViewId}}
-var mGetDNSViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDNSViewOutput_id, &sGetDNSViewOutput_arn, &sGetDNSViewOutput_clientToken, &sGetDNSViewOutput_dnssecValidation, &sGetDNSViewOutput_ednsClientSubnet, &sGetDNSViewOutput_firewallRulesFailOpen, &sGetDNSViewOutput_name, &sGetDNSViewOutput_description, &sGetDNSViewOutput_globalResolverId, &sGetDNSViewOutput_createdAt, &sGetDNSViewOutput_updatedAt, &sGetDNSViewOutput_status}, Seed: 5, Slots: []uint16{
-	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 3, 5, 0, 0, 0,
-	0, 0, 0, 0, 0, 11, 1, 7,
-}}
+var mGetDNSViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDNSViewOutput_id, &sGetDNSViewOutput_arn, &sGetDNSViewOutput_clientToken, &sGetDNSViewOutput_dnssecValidation, &sGetDNSViewOutput_ednsClientSubnet, &sGetDNSViewOutput_firewallRulesFailOpen, &sGetDNSViewOutput_name, &sGetDNSViewOutput_description, &sGetDNSViewOutput_globalResolverId, &sGetDNSViewOutput_createdAt, &sGetDNSViewOutput_updatedAt, &sGetDNSViewOutput_status}, Hash: &hGetDNSViewOutput}
 var mGetFirewallDomainListInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFirewallDomainListInput_firewallDomainListId}}
-var mGetFirewallDomainListOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFirewallDomainListOutput_arn, &sGetFirewallDomainListOutput_globalResolverId, &sGetFirewallDomainListOutput_clientToken, &sGetFirewallDomainListOutput_createdAt, &sGetFirewallDomainListOutput_description, &sGetFirewallDomainListOutput_domainCount, &sGetFirewallDomainListOutput_id, &sGetFirewallDomainListOutput_name, &sGetFirewallDomainListOutput_status, &sGetFirewallDomainListOutput_statusMessage, &sGetFirewallDomainListOutput_updatedAt}, Seed: 13, Slots: []uint16{
-	0, 0, 0, 0, 1, 10, 11, 0, 0, 0, 0, 0, 8, 0, 0, 9, 0, 5, 0, 0, 2, 0, 0, 6,
-	0, 4, 3, 7, 0, 0, 0, 0,
-}}
+var mGetFirewallDomainListOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFirewallDomainListOutput_arn, &sGetFirewallDomainListOutput_globalResolverId, &sGetFirewallDomainListOutput_clientToken, &sGetFirewallDomainListOutput_createdAt, &sGetFirewallDomainListOutput_description, &sGetFirewallDomainListOutput_domainCount, &sGetFirewallDomainListOutput_id, &sGetFirewallDomainListOutput_name, &sGetFirewallDomainListOutput_status, &sGetFirewallDomainListOutput_statusMessage, &sGetFirewallDomainListOutput_updatedAt}, Hash: &hGetFirewallDomainListOutput}
 var mGetFirewallRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFirewallRuleInput_firewallRuleId}}
-var mGetFirewallRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFirewallRuleOutput_action, &sGetFirewallRuleOutput_blockOverrideDnsType, &sGetFirewallRuleOutput_blockOverrideDomain, &sGetFirewallRuleOutput_blockOverrideTtl, &sGetFirewallRuleOutput_blockResponse, &sGetFirewallRuleOutput_confidenceThreshold, &sGetFirewallRuleOutput_createdAt, &sGetFirewallRuleOutput_description, &sGetFirewallRuleOutput_dnsAdvancedProtection, &sGetFirewallRuleOutput_firewallDomainListId, &sGetFirewallRuleOutput_id, &sGetFirewallRuleOutput_name, &sGetFirewallRuleOutput_priority, &sGetFirewallRuleOutput_dnsViewId, &sGetFirewallRuleOutput_queryType, &sGetFirewallRuleOutput_status, &sGetFirewallRuleOutput_updatedAt}, Seed: 20, Slots: []uint16{
-	9, 0, 0, 0, 0, 0, 0, 3, 8, 0, 10, 6, 0, 4, 11, 0, 0, 0, 0, 7, 0, 14, 0, 0,
-	0, 0, 0, 12, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 15, 0, 0, 0,
-	0, 5, 0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 0, 1,
-}}
+var mGetFirewallRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFirewallRuleOutput_action, &sGetFirewallRuleOutput_blockOverrideDnsType, &sGetFirewallRuleOutput_blockOverrideDomain, &sGetFirewallRuleOutput_blockOverrideTtl, &sGetFirewallRuleOutput_blockResponse, &sGetFirewallRuleOutput_confidenceThreshold, &sGetFirewallRuleOutput_createdAt, &sGetFirewallRuleOutput_description, &sGetFirewallRuleOutput_dnsAdvancedProtection, &sGetFirewallRuleOutput_firewallDomainListId, &sGetFirewallRuleOutput_id, &sGetFirewallRuleOutput_name, &sGetFirewallRuleOutput_priority, &sGetFirewallRuleOutput_dnsViewId, &sGetFirewallRuleOutput_queryType, &sGetFirewallRuleOutput_status, &sGetFirewallRuleOutput_updatedAt}, Hash: &hGetFirewallRuleOutput}
 var mGetGlobalResolverInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGlobalResolverInput_globalResolverId}}
-var mGetGlobalResolverOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGlobalResolverOutput_id, &sGetGlobalResolverOutput_arn, &sGetGlobalResolverOutput_clientToken, &sGetGlobalResolverOutput_dnsName, &sGetGlobalResolverOutput_observabilityRegion, &sGetGlobalResolverOutput_name, &sGetGlobalResolverOutput_description, &sGetGlobalResolverOutput_regions, &sGetGlobalResolverOutput_createdAt, &sGetGlobalResolverOutput_updatedAt, &sGetGlobalResolverOutput_status, &sGetGlobalResolverOutput_ipv4Addresses, &sGetGlobalResolverOutput_ipv6Addresses, &sGetGlobalResolverOutput_ipAddressType}, Seed: 42, Slots: []uint16{
-	0, 11, 3, 0, 0, 0, 0, 8, 0, 14, 0, 7, 0, 0, 0, 0, 4, 2, 6, 12, 5, 0, 0, 0,
-	0, 13, 0, 0, 9, 1, 0, 10,
-}}
+var mGetGlobalResolverOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGlobalResolverOutput_id, &sGetGlobalResolverOutput_arn, &sGetGlobalResolverOutput_clientToken, &sGetGlobalResolverOutput_dnsName, &sGetGlobalResolverOutput_observabilityRegion, &sGetGlobalResolverOutput_name, &sGetGlobalResolverOutput_description, &sGetGlobalResolverOutput_regions, &sGetGlobalResolverOutput_createdAt, &sGetGlobalResolverOutput_updatedAt, &sGetGlobalResolverOutput_status, &sGetGlobalResolverOutput_ipv4Addresses, &sGetGlobalResolverOutput_ipv6Addresses, &sGetGlobalResolverOutput_ipAddressType}, Hash: &hGetGlobalResolverOutput}
 var mGetHostedZoneAssociationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHostedZoneAssociationInput_hostedZoneAssociationId}}
 var mGetHostedZoneAssociationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHostedZoneAssociationOutput_id, &sGetHostedZoneAssociationOutput_resourceArn, &sGetHostedZoneAssociationOutput_hostedZoneId, &sGetHostedZoneAssociationOutput_hostedZoneName, &sGetHostedZoneAssociationOutput_name, &sGetHostedZoneAssociationOutput_createdAt, &sGetHostedZoneAssociationOutput_updatedAt, &sGetHostedZoneAssociationOutput_status}}
 var mGetManagedFirewallDomainListInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetManagedFirewallDomainListInput_managedFirewallDomainListId}}
@@ -1651,35 +1558,163 @@ var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&
 var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
 var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
 var mUpdateAccessSourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccessSourceInput_accessSourceId, &sUpdateAccessSourceInput_cidr, &sUpdateAccessSourceInput_ipAddressType, &sUpdateAccessSourceInput_name, &sUpdateAccessSourceInput_protocol}}
-var mUpdateAccessSourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccessSourceOutput_arn, &sUpdateAccessSourceOutput_cidr, &sUpdateAccessSourceOutput_createdAt, &sUpdateAccessSourceOutput_id, &sUpdateAccessSourceOutput_ipAddressType, &sUpdateAccessSourceOutput_name, &sUpdateAccessSourceOutput_dnsViewId, &sUpdateAccessSourceOutput_protocol, &sUpdateAccessSourceOutput_status, &sUpdateAccessSourceOutput_updatedAt}, Seed: 1, Slots: []uint16{
-	1, 4, 0, 3, 7, 0, 6, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 9, 0,
-	5, 0, 2, 0, 0, 0, 0, 0,
-}}
+var mUpdateAccessSourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccessSourceOutput_arn, &sUpdateAccessSourceOutput_cidr, &sUpdateAccessSourceOutput_createdAt, &sUpdateAccessSourceOutput_id, &sUpdateAccessSourceOutput_ipAddressType, &sUpdateAccessSourceOutput_name, &sUpdateAccessSourceOutput_dnsViewId, &sUpdateAccessSourceOutput_protocol, &sUpdateAccessSourceOutput_status, &sUpdateAccessSourceOutput_updatedAt}, Hash: &hUpdateAccessSourceOutput}
 var mUpdateAccessTokenInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccessTokenInput_accessTokenId, &sUpdateAccessTokenInput_name}}
 var mUpdateAccessTokenOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccessTokenOutput_id, &sUpdateAccessTokenOutput_name}}
 var mUpdateDNSViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDNSViewInput_dnsViewId, &sUpdateDNSViewInput_name, &sUpdateDNSViewInput_description, &sUpdateDNSViewInput_dnssecValidation, &sUpdateDNSViewInput_ednsClientSubnet, &sUpdateDNSViewInput_firewallRulesFailOpen}}
-var mUpdateDNSViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDNSViewOutput_id, &sUpdateDNSViewOutput_arn, &sUpdateDNSViewOutput_clientToken, &sUpdateDNSViewOutput_dnssecValidation, &sUpdateDNSViewOutput_ednsClientSubnet, &sUpdateDNSViewOutput_firewallRulesFailOpen, &sUpdateDNSViewOutput_name, &sUpdateDNSViewOutput_description, &sUpdateDNSViewOutput_globalResolverId, &sUpdateDNSViewOutput_createdAt, &sUpdateDNSViewOutput_updatedAt, &sUpdateDNSViewOutput_status}, Seed: 5, Slots: []uint16{
+var mUpdateDNSViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDNSViewOutput_id, &sUpdateDNSViewOutput_arn, &sUpdateDNSViewOutput_clientToken, &sUpdateDNSViewOutput_dnssecValidation, &sUpdateDNSViewOutput_ednsClientSubnet, &sUpdateDNSViewOutput_firewallRulesFailOpen, &sUpdateDNSViewOutput_name, &sUpdateDNSViewOutput_description, &sUpdateDNSViewOutput_globalResolverId, &sUpdateDNSViewOutput_createdAt, &sUpdateDNSViewOutput_updatedAt, &sUpdateDNSViewOutput_status}, Hash: &hUpdateDNSViewOutput}
+var mUpdateFirewallDomainsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFirewallDomainsInput_domains, &sUpdateFirewallDomainsInput_firewallDomainListId, &sUpdateFirewallDomainsInput_operation}}
+var mUpdateFirewallDomainsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFirewallDomainsOutput_id, &sUpdateFirewallDomainsOutput_name, &sUpdateFirewallDomainsOutput_status}}
+var mUpdateFirewallRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFirewallRuleInput_action, &sUpdateFirewallRuleInput_blockOverrideDnsType, &sUpdateFirewallRuleInput_blockOverrideDomain, &sUpdateFirewallRuleInput_blockOverrideTtl, &sUpdateFirewallRuleInput_blockResponse, &sUpdateFirewallRuleInput_clientToken, &sUpdateFirewallRuleInput_confidenceThreshold, &sUpdateFirewallRuleInput_description, &sUpdateFirewallRuleInput_dnsAdvancedProtection, &sUpdateFirewallRuleInput_firewallRuleId, &sUpdateFirewallRuleInput_name, &sUpdateFirewallRuleInput_priority}, Hash: &hUpdateFirewallRuleInput}
+var mUpdateFirewallRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFirewallRuleOutput_action, &sUpdateFirewallRuleOutput_blockOverrideDnsType, &sUpdateFirewallRuleOutput_blockOverrideDomain, &sUpdateFirewallRuleOutput_blockOverrideTtl, &sUpdateFirewallRuleOutput_blockResponse, &sUpdateFirewallRuleOutput_confidenceThreshold, &sUpdateFirewallRuleOutput_createdAt, &sUpdateFirewallRuleOutput_description, &sUpdateFirewallRuleOutput_dnsAdvancedProtection, &sUpdateFirewallRuleOutput_firewallDomainListId, &sUpdateFirewallRuleOutput_id, &sUpdateFirewallRuleOutput_name, &sUpdateFirewallRuleOutput_priority, &sUpdateFirewallRuleOutput_dnsViewId, &sUpdateFirewallRuleOutput_queryType, &sUpdateFirewallRuleOutput_status, &sUpdateFirewallRuleOutput_updatedAt}, Hash: &hUpdateFirewallRuleOutput}
+var mUpdateGlobalResolverInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGlobalResolverInput_globalResolverId, &sUpdateGlobalResolverInput_name, &sUpdateGlobalResolverInput_observabilityRegion, &sUpdateGlobalResolverInput_description, &sUpdateGlobalResolverInput_ipAddressType, &sUpdateGlobalResolverInput_regions}}
+var mUpdateGlobalResolverOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGlobalResolverOutput_id, &sUpdateGlobalResolverOutput_arn, &sUpdateGlobalResolverOutput_clientToken, &sUpdateGlobalResolverOutput_dnsName, &sUpdateGlobalResolverOutput_observabilityRegion, &sUpdateGlobalResolverOutput_name, &sUpdateGlobalResolverOutput_description, &sUpdateGlobalResolverOutput_regions, &sUpdateGlobalResolverOutput_createdAt, &sUpdateGlobalResolverOutput_updatedAt, &sUpdateGlobalResolverOutput_status, &sUpdateGlobalResolverOutput_ipv4Addresses, &sUpdateGlobalResolverOutput_ipv6Addresses, &sUpdateGlobalResolverOutput_ipAddressType}, Hash: &hUpdateGlobalResolverOutput}
+var mUpdateHostedZoneAssociationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateHostedZoneAssociationInput_hostedZoneAssociationId, &sUpdateHostedZoneAssociationInput_name}}
+var mUpdateHostedZoneAssociationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateHostedZoneAssociationOutput_id, &sUpdateHostedZoneAssociationOutput_resourceArn, &sUpdateHostedZoneAssociationOutput_hostedZoneId, &sUpdateHostedZoneAssociationOutput_hostedZoneName, &sUpdateHostedZoneAssociationOutput_name, &sUpdateHostedZoneAssociationOutput_createdAt, &sUpdateHostedZoneAssociationOutput_updatedAt, &sUpdateHostedZoneAssociationOutput_status}}
+
+var hAccessSourcesItem = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 4, 0, 3, 7, 0, 6, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 9, 0,
+	5, 0, 2, 0, 0, 0, 0, 0,
+}}
+var hAccessTokenItem = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	2, 1, 0, 3, 4, 0, 7, 0, 0, 9, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0,
+	5, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hBatchCreateFirewallRuleInputItem = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	6, 0, 9, 4, 13, 7, 11, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 12, 0, 5, 0, 1, 3, 0,
+	8, 0, 0, 2, 0, 0, 0, 0,
+}}
+var hBatchCreateFirewallRuleResult = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	10, 0, 0, 0, 0, 0, 0, 3, 9, 0, 11, 7, 0, 4, 12, 0, 0, 0, 0, 8, 0, 16, 0, 0,
+	0, 0, 0, 14, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 17, 0, 0, 13,
+	0, 5, 0, 0, 0, 0, 19, 2, 0, 0, 0, 0, 6, 0, 0, 1,
+}}
+var hBatchUpdateFirewallRuleInputItem = smithy.MemberHash{Seed: 16, Slots: []uint16{
+	5, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 9, 0, 8, 0, 2, 3, 0, 0, 0, 1, 6, 0, 0,
+	0, 10, 4, 0, 0, 0, 0, 11,
+}}
+var hBatchUpdateFirewallRuleResult = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	10, 0, 0, 0, 0, 0, 0, 3, 9, 0, 11, 7, 0, 4, 12, 0, 0, 0, 0, 8, 0, 15, 0, 0,
+	0, 0, 0, 13, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 16, 0, 0, 0,
+	0, 5, 0, 0, 0, 0, 18, 2, 0, 0, 0, 0, 6, 0, 0, 1,
+}}
+var hDNSViewSummary = smithy.MemberHash{Seed: 5, Slots: []uint16{
 	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 3, 5, 0, 0, 0,
 	0, 0, 0, 0, 0, 11, 1, 7,
 }}
-var mUpdateFirewallDomainsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFirewallDomainsInput_domains, &sUpdateFirewallDomainsInput_firewallDomainListId, &sUpdateFirewallDomainsInput_operation}}
-var mUpdateFirewallDomainsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFirewallDomainsOutput_id, &sUpdateFirewallDomainsOutput_name, &sUpdateFirewallDomainsOutput_status}}
-var mUpdateFirewallRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFirewallRuleInput_action, &sUpdateFirewallRuleInput_blockOverrideDnsType, &sUpdateFirewallRuleInput_blockOverrideDomain, &sUpdateFirewallRuleInput_blockOverrideTtl, &sUpdateFirewallRuleInput_blockResponse, &sUpdateFirewallRuleInput_clientToken, &sUpdateFirewallRuleInput_confidenceThreshold, &sUpdateFirewallRuleInput_description, &sUpdateFirewallRuleInput_dnsAdvancedProtection, &sUpdateFirewallRuleInput_firewallRuleId, &sUpdateFirewallRuleInput_name, &sUpdateFirewallRuleInput_priority}, Seed: 16, Slots: []uint16{
-	5, 0, 0, 0, 0, 0, 0, 8, 6, 0, 0, 10, 0, 9, 0, 2, 3, 0, 0, 0, 1, 7, 0, 0,
-	0, 11, 4, 0, 0, 0, 0, 12,
-}}
-var mUpdateFirewallRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFirewallRuleOutput_action, &sUpdateFirewallRuleOutput_blockOverrideDnsType, &sUpdateFirewallRuleOutput_blockOverrideDomain, &sUpdateFirewallRuleOutput_blockOverrideTtl, &sUpdateFirewallRuleOutput_blockResponse, &sUpdateFirewallRuleOutput_confidenceThreshold, &sUpdateFirewallRuleOutput_createdAt, &sUpdateFirewallRuleOutput_description, &sUpdateFirewallRuleOutput_dnsAdvancedProtection, &sUpdateFirewallRuleOutput_firewallDomainListId, &sUpdateFirewallRuleOutput_id, &sUpdateFirewallRuleOutput_name, &sUpdateFirewallRuleOutput_priority, &sUpdateFirewallRuleOutput_dnsViewId, &sUpdateFirewallRuleOutput_queryType, &sUpdateFirewallRuleOutput_status, &sUpdateFirewallRuleOutput_updatedAt}, Seed: 20, Slots: []uint16{
+var hFirewallRulesItem = smithy.MemberHash{Seed: 20, Slots: []uint16{
 	9, 0, 0, 0, 0, 0, 0, 3, 8, 0, 10, 6, 0, 4, 11, 0, 0, 0, 0, 7, 0, 14, 0, 0,
 	0, 0, 0, 12, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 15, 0, 0, 0,
 	0, 5, 0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 0, 1,
 }}
-var mUpdateGlobalResolverInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGlobalResolverInput_globalResolverId, &sUpdateGlobalResolverInput_name, &sUpdateGlobalResolverInput_observabilityRegion, &sUpdateGlobalResolverInput_description, &sUpdateGlobalResolverInput_ipAddressType, &sUpdateGlobalResolverInput_regions}}
-var mUpdateGlobalResolverOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGlobalResolverOutput_id, &sUpdateGlobalResolverOutput_arn, &sUpdateGlobalResolverOutput_clientToken, &sUpdateGlobalResolverOutput_dnsName, &sUpdateGlobalResolverOutput_observabilityRegion, &sUpdateGlobalResolverOutput_name, &sUpdateGlobalResolverOutput_description, &sUpdateGlobalResolverOutput_regions, &sUpdateGlobalResolverOutput_createdAt, &sUpdateGlobalResolverOutput_updatedAt, &sUpdateGlobalResolverOutput_status, &sUpdateGlobalResolverOutput_ipv4Addresses, &sUpdateGlobalResolverOutput_ipv6Addresses, &sUpdateGlobalResolverOutput_ipAddressType}, Seed: 42, Slots: []uint16{
+var hGlobalResolversItem = smithy.MemberHash{Seed: 42, Slots: []uint16{
 	0, 11, 3, 0, 0, 0, 0, 8, 0, 14, 0, 7, 0, 0, 0, 0, 4, 2, 6, 12, 5, 0, 0, 0,
 	0, 13, 0, 0, 9, 1, 0, 10,
 }}
-var mUpdateHostedZoneAssociationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateHostedZoneAssociationInput_hostedZoneAssociationId, &sUpdateHostedZoneAssociationInput_name}}
-var mUpdateHostedZoneAssociationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateHostedZoneAssociationOutput_id, &sUpdateHostedZoneAssociationOutput_resourceArn, &sUpdateHostedZoneAssociationOutput_hostedZoneId, &sUpdateHostedZoneAssociationOutput_hostedZoneName, &sUpdateHostedZoneAssociationOutput_name, &sUpdateHostedZoneAssociationOutput_createdAt, &sUpdateHostedZoneAssociationOutput_updatedAt, &sUpdateHostedZoneAssociationOutput_status}}
+var hSharedDNSViewSummary = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 13, 0, 3, 5, 0, 0, 0,
+	0, 0, 0, 0, 0, 11, 1, 7,
+}}
+var hCreateAccessSourceOutput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 4, 0, 3, 7, 0, 6, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 9, 0,
+	5, 0, 2, 0, 0, 0, 0, 0,
+}}
+var hCreateAccessTokenOutput = smithy.MemberHash{Seed: 2, Slots: []uint16{
+	2, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 8, 0, 9, 6, 4, 0,
+	0, 5, 0, 0, 0, 0, 0, 0,
+}}
+var hCreateDNSViewOutput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 3, 5, 0, 0, 0,
+	0, 0, 0, 0, 0, 11, 1, 7,
+}}
+var hCreateFirewallDomainListOutput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	4, 1, 0, 0, 8, 0, 0, 0, 0, 5, 0, 0, 0, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 9, 6, 7,
+}}
+var hCreateFirewallRuleInput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	6, 0, 9, 4, 13, 7, 11, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 12, 0, 5, 0, 1, 3, 0,
+	8, 0, 0, 2, 0, 0, 0, 0,
+}}
+var hCreateFirewallRuleOutput = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	9, 0, 0, 0, 0, 0, 0, 3, 8, 0, 10, 6, 0, 4, 11, 0, 0, 0, 0, 7, 0, 14, 0, 0,
+	0, 0, 0, 12, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 15, 0, 0, 0,
+	0, 5, 0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 0, 1,
+}}
+var hCreateGlobalResolverOutput = smithy.MemberHash{Seed: 42, Slots: []uint16{
+	0, 13, 3, 0, 0, 0, 0, 12, 0, 7, 0, 5, 0, 0, 0, 0, 6, 2, 10, 8, 11, 0, 0, 0,
+	0, 9, 0, 0, 4, 1, 0, 14,
+}}
+var hDeleteAccessSourceOutput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 4, 0, 3, 7, 0, 6, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 9, 0,
+	5, 0, 2, 0, 0, 0, 0, 0,
+}}
+var hDeleteDNSViewOutput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 3, 5, 0, 0, 0,
+	0, 0, 0, 0, 0, 11, 1, 7,
+}}
+var hDeleteFirewallRuleOutput = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	9, 0, 0, 0, 0, 0, 0, 3, 8, 0, 10, 6, 0, 4, 11, 0, 0, 0, 0, 7, 0, 14, 0, 0,
+	0, 0, 0, 12, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 15, 0, 0, 0,
+	0, 5, 0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 0, 1,
+}}
+var hDeleteGlobalResolverOutput = smithy.MemberHash{Seed: 42, Slots: []uint16{
+	0, 11, 3, 0, 0, 0, 0, 8, 0, 14, 0, 7, 0, 0, 0, 0, 4, 2, 6, 12, 5, 0, 0, 0,
+	0, 13, 0, 0, 9, 1, 0, 10,
+}}
+var hDisableDNSViewOutput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 3, 5, 0, 0, 0,
+	0, 0, 0, 0, 0, 11, 1, 7,
+}}
+var hEnableDNSViewOutput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 3, 5, 0, 0, 0,
+	0, 0, 0, 0, 0, 11, 1, 7,
+}}
+var hGetAccessSourceOutput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 4, 0, 3, 7, 0, 6, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 9, 0,
+	5, 0, 2, 0, 0, 0, 0, 0,
+}}
+var hGetAccessTokenOutput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	0, 2, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 6, 0, 7, 0, 4, 0, 0, 3, 5, 11, 0, 0,
+	0, 0, 0, 0, 0, 10, 1, 8,
+}}
+var hGetDNSViewOutput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 3, 5, 0, 0, 0,
+	0, 0, 0, 0, 0, 11, 1, 7,
+}}
+var hGetFirewallDomainListOutput = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	0, 0, 0, 0, 1, 10, 11, 0, 0, 0, 0, 0, 8, 0, 0, 9, 0, 5, 0, 0, 2, 0, 0, 6,
+	0, 4, 3, 7, 0, 0, 0, 0,
+}}
+var hGetFirewallRuleOutput = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	9, 0, 0, 0, 0, 0, 0, 3, 8, 0, 10, 6, 0, 4, 11, 0, 0, 0, 0, 7, 0, 14, 0, 0,
+	0, 0, 0, 12, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 15, 0, 0, 0,
+	0, 5, 0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 0, 1,
+}}
+var hGetGlobalResolverOutput = smithy.MemberHash{Seed: 42, Slots: []uint16{
+	0, 11, 3, 0, 0, 0, 0, 8, 0, 14, 0, 7, 0, 0, 0, 0, 4, 2, 6, 12, 5, 0, 0, 0,
+	0, 13, 0, 0, 9, 1, 0, 10,
+}}
+var hUpdateAccessSourceOutput = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	1, 4, 0, 3, 7, 0, 6, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 9, 0,
+	5, 0, 2, 0, 0, 0, 0, 0,
+}}
+var hUpdateDNSViewOutput = smithy.MemberHash{Seed: 5, Slots: []uint16{
+	8, 2, 4, 0, 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 3, 5, 0, 0, 0,
+	0, 0, 0, 0, 0, 11, 1, 7,
+}}
+var hUpdateFirewallRuleInput = smithy.MemberHash{Seed: 16, Slots: []uint16{
+	5, 0, 0, 0, 0, 0, 0, 8, 6, 0, 0, 10, 0, 9, 0, 2, 3, 0, 0, 0, 1, 7, 0, 0,
+	0, 11, 4, 0, 0, 0, 0, 12,
+}}
+var hUpdateFirewallRuleOutput = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	9, 0, 0, 0, 0, 0, 0, 3, 8, 0, 10, 6, 0, 4, 11, 0, 0, 0, 0, 7, 0, 14, 0, 0,
+	0, 0, 0, 12, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 15, 0, 0, 0,
+	0, 5, 0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 0, 1,
+}}
+var hUpdateGlobalResolverOutput = smithy.MemberHash{Seed: 42, Slots: []uint16{
+	0, 11, 3, 0, 0, 0, 0, 8, 0, 14, 0, 7, 0, 0, 0, 0, 4, 2, 6, 12, 5, 0, 0, 0,
+	0, 13, 0, 0, 9, 1, 0, 10,
+}}
 
 var sAssociateHostedZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateHostedZone, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAssociateHostedZone})
 var sBatchCreateFirewallRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateFirewallRule, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eBatchCreateFirewallRule})
@@ -1731,192 +1766,10 @@ var sUpdateGlobalResolver = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpd
 var sUpdateHostedZoneAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHostedZoneAssociation, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &eUpdateHostedZoneAssociation})
 var s_EC2DNSGlobalResolverCustomerAPI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EC2DNSGlobalResolverCustomerAPI, Type: smithy.ShapeTypeService, Ext: &e_EC2DNSGlobalResolverCustomerAPI})
 var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t48, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
-var s_AccessSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessSources, Members: &m_AccessSources, Type: smithy.ShapeTypeList, Ext: &e_AccessSources})
-var sAccessSourcesItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessSourcesItem, Members: &mAccessSourcesItem, Type: smithy.ShapeTypeStructure, Ext: &eAccessSourcesItem})
-var sAccessTokenItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessTokenItem, Members: &mAccessTokenItem, Type: smithy.ShapeTypeStructure, Ext: &eAccessTokenItem})
-var s_AccessTokens = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessTokens, Members: &m_AccessTokens, Type: smithy.ShapeTypeList, Ext: &e_AccessTokens})
-var s_AccessTokenValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessTokenValue, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &e_AccessTokenValue})
-var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
-var sBatchCreateFirewallRuleInputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateFirewallRuleInputItem, Members: &mBatchCreateFirewallRuleInputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateFirewallRuleInputItem})
-var s_BatchCreateFirewallRuleInputItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchCreateFirewallRuleInputItems, Members: &m_BatchCreateFirewallRuleInputItems, Type: smithy.ShapeTypeList, Ext: &e_BatchCreateFirewallRuleInputItems})
-var sBatchCreateFirewallRuleOutputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateFirewallRuleOutputItem, Members: &mBatchCreateFirewallRuleOutputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateFirewallRuleOutputItem})
-var s_BatchCreateFirewallRuleOutputItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchCreateFirewallRuleOutputItems, Members: &m_BatchCreateFirewallRuleOutputItems, Type: smithy.ShapeTypeList, Ext: &e_BatchCreateFirewallRuleOutputItems})
-var sBatchCreateFirewallRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateFirewallRuleResult, Members: &mBatchCreateFirewallRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateFirewallRuleResult})
-var sBatchDeleteFirewallRuleInputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteFirewallRuleInputItem, Members: &mBatchDeleteFirewallRuleInputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteFirewallRuleInputItem})
-var s_BatchDeleteFirewallRuleInputItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDeleteFirewallRuleInputItems, Members: &m_BatchDeleteFirewallRuleInputItems, Type: smithy.ShapeTypeList, Ext: &e_BatchDeleteFirewallRuleInputItems})
-var sBatchDeleteFirewallRuleOutputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteFirewallRuleOutputItem, Members: &mBatchDeleteFirewallRuleOutputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteFirewallRuleOutputItem})
-var s_BatchDeleteFirewallRuleOutputItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDeleteFirewallRuleOutputItems, Members: &m_BatchDeleteFirewallRuleOutputItems, Type: smithy.ShapeTypeList, Ext: &e_BatchDeleteFirewallRuleOutputItems})
-var sBatchDeleteFirewallRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteFirewallRuleResult, Members: &mBatchDeleteFirewallRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteFirewallRuleResult})
-var sBatchUpdateFirewallRuleInputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateFirewallRuleInputItem, Members: &mBatchUpdateFirewallRuleInputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateFirewallRuleInputItem})
-var s_BatchUpdateFirewallRuleInputItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchUpdateFirewallRuleInputItems, Members: &m_BatchUpdateFirewallRuleInputItems, Type: smithy.ShapeTypeList, Ext: &e_BatchUpdateFirewallRuleInputItems})
-var sBatchUpdateFirewallRuleOutputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateFirewallRuleOutputItem, Members: &mBatchUpdateFirewallRuleOutputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateFirewallRuleOutputItem})
-var s_BatchUpdateFirewallRuleOutputItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchUpdateFirewallRuleOutputItems, Members: &m_BatchUpdateFirewallRuleOutputItems, Type: smithy.ShapeTypeList, Ext: &e_BatchUpdateFirewallRuleOutputItems})
-var sBatchUpdateFirewallRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateFirewallRuleResult, Members: &mBatchUpdateFirewallRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateFirewallRuleResult})
-var sBlockOverrideDnsQueryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlockOverrideDnsQueryType, Members: &mBlockOverrideDnsQueryType, Type: smithy.ShapeTypeEnum, Ext: &eBlockOverrideDnsQueryType})
-var s_BlockOverrideTtl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockOverrideTtl, Type: smithy.ShapeTypeInteger, Ext: &e_BlockOverrideTtl})
-var s_Cidr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Cidr, Type: smithy.ShapeTypeString, Ext: &e_Cidr})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
-var sConfidenceThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfidenceThreshold, Members: &mConfidenceThreshold, Type: smithy.ShapeTypeEnum, Ext: &eConfidenceThreshold})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t51, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
-var sCRResourceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eCRResourceStatus})
-var sDnsAdvancedProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsAdvancedProtection, Members: &mDnsAdvancedProtection, Type: smithy.ShapeTypeEnum, Ext: &eDnsAdvancedProtection})
-var sDnsProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsProtocol, Members: &mDnsProtocol, Type: smithy.ShapeTypeEnum, Ext: &eDnsProtocol})
-var s_DnsQueryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsQueryType, Type: smithy.ShapeTypeString, Ext: &e_DnsQueryType})
-var sDnsSecValidationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsSecValidationType, Members: &mDnsSecValidationType, Type: smithy.ShapeTypeEnum, Ext: &eDnsSecValidationType})
-var s_DNSViews = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNSViews, Members: &m_DNSViews, Type: smithy.ShapeTypeList, Ext: &e_DNSViews})
-var sDNSViewSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDNSViewSummary, Members: &mDNSViewSummary, Type: smithy.ShapeTypeStructure, Ext: &eDNSViewSummary})
-var s_Domain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &e_Domain})
-var s_Domains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Domains, Members: &m_Domains, Type: smithy.ShapeTypeList, Ext: &e_Domains})
-var sEdnsClientSubnetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEdnsClientSubnetType, Members: &mEdnsClientSubnetType, Type: smithy.ShapeTypeEnum, Ext: &eEdnsClientSubnetType})
-var s_Filters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeMap, Ext: &e_Filters})
-var sFirewallBlockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallBlockResponse, Members: &mFirewallBlockResponse, Type: smithy.ShapeTypeEnum, Ext: &eFirewallBlockResponse})
-var s_FirewallDomainLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallDomainLists, Members: &m_FirewallDomainLists, Type: smithy.ShapeTypeList, Ext: &e_FirewallDomainLists})
-var sFirewallDomainListsItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallDomainListsItem, Members: &mFirewallDomainListsItem, Type: smithy.ShapeTypeStructure, Ext: &eFirewallDomainListsItem})
-var sFirewallRuleAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallRuleAction, Members: &mFirewallRuleAction, Type: smithy.ShapeTypeEnum, Ext: &eFirewallRuleAction})
-var s_FirewallRulePriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallRulePriority, Type: smithy.ShapeTypeLong, Ext: &e_FirewallRulePriority})
-var s_FirewallRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallRules, Members: &m_FirewallRules, Type: smithy.ShapeTypeList, Ext: &e_FirewallRules})
-var sFirewallRulesFailOpenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallRulesFailOpenType, Members: &mFirewallRulesFailOpenType, Type: smithy.ShapeTypeEnum, Ext: &eFirewallRulesFailOpenType})
-var sFirewallRulesItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallRulesItem, Members: &mFirewallRulesItem, Type: smithy.ShapeTypeStructure, Ext: &eFirewallRulesItem})
-var sGlobalResolverIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlobalResolverIpAddressType, Members: &mGlobalResolverIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eGlobalResolverIpAddressType})
-var s_GlobalResolvers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlobalResolvers, Members: &m_GlobalResolvers, Type: smithy.ShapeTypeList, Ext: &e_GlobalResolvers})
-var sGlobalResolversItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlobalResolversItem, Members: &mGlobalResolversItem, Type: smithy.ShapeTypeStructure, Ext: &eGlobalResolversItem})
-var s_HostedZoneAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostedZoneAssociations, Members: &m_HostedZoneAssociations, Type: smithy.ShapeTypeList, Ext: &e_HostedZoneAssociations})
-var sHostedZoneAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostedZoneAssociationStatus, Members: &mHostedZoneAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eHostedZoneAssociationStatus})
-var sHostedZoneAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostedZoneAssociationSummary, Members: &mHostedZoneAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &eHostedZoneAssociationSummary})
-var s_HostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostedZoneId, Type: smithy.ShapeTypeString, Ext: &e_HostedZoneId})
-var s_HostedZoneName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostedZoneName, Type: smithy.ShapeTypeString, Ext: &e_HostedZoneName})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t52, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
-var sIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eIpAddressType})
-var s_IPv4Address = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPv4Address, Type: smithy.ShapeTypeString, Ext: &e_IPv4Address})
-var s_IPv4Addresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPv4Addresses, Members: &m_IPv4Addresses, Type: smithy.ShapeTypeList, Ext: &e_IPv4Addresses})
-var s_IPv6Address = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPv6Address, Type: smithy.ShapeTypeString, Ext: &e_IPv6Address})
-var s_IPv6Addresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPv6Addresses, Members: &m_IPv6Addresses, Type: smithy.ShapeTypeList, Ext: &e_IPv6Addresses})
-var s_ISO8601TimeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ISO8601TimeString, Traits: &t54, Type: smithy.ShapeTypeTimestamp, Ext: &e_ISO8601TimeString})
-var s_ManagedFirewallDomainLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedFirewallDomainLists, Members: &m_ManagedFirewallDomainLists, Type: smithy.ShapeTypeList, Ext: &e_ManagedFirewallDomainLists})
-var sManagedFirewallDomainListsItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedFirewallDomainListsItem, Members: &mManagedFirewallDomainListsItem, Type: smithy.ShapeTypeStructure, Ext: &eManagedFirewallDomainListsItem})
-var sProfileResourceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProfileResourceStatus, Members: &mProfileResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eProfileResourceStatus})
-var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Region})
-var s_Regions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList, Ext: &e_Regions})
-var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
-var s_ResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &e_ResourceDescription})
-var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
-var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
-var s_ResourceNameShort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceNameShort, Type: smithy.ShapeTypeString, Ext: &e_ResourceNameShort})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t56, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
-var s_SharedDNSViews = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SharedDNSViews, Members: &m_SharedDNSViews, Type: smithy.ShapeTypeList, Ext: &e_SharedDNSViews})
-var sSharedDNSViewSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSharedDNSViewSummary, Members: &mSharedDNSViewSummary, Type: smithy.ShapeTypeStructure, Ext: &eSharedDNSViewSummary})
-var s_Sni = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Sni, Type: smithy.ShapeTypeString, Ext: &e_Sni})
-var s_Strings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Strings, Members: &m_Strings, Type: smithy.ShapeTypeList, Ext: &e_Strings})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
-var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
-var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t57, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
-var sTokenStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTokenStatus, Members: &mTokenStatus, Type: smithy.ShapeTypeEnum, Ext: &eTokenStatus})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t58, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
-var sAssociateHostedZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateHostedZoneInput, Members: &mAssociateHostedZoneInput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateHostedZoneInput})
-var sAssociateHostedZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateHostedZoneOutput, Members: &mAssociateHostedZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateHostedZoneOutput})
-var sBatchCreateFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateFirewallRuleInput, Members: &mBatchCreateFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateFirewallRuleInput})
-var sBatchCreateFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateFirewallRuleOutput, Members: &mBatchCreateFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateFirewallRuleOutput})
-var sBatchDeleteFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteFirewallRuleInput, Members: &mBatchDeleteFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteFirewallRuleInput})
-var sBatchDeleteFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteFirewallRuleOutput, Members: &mBatchDeleteFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteFirewallRuleOutput})
-var sBatchUpdateFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateFirewallRuleInput, Members: &mBatchUpdateFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateFirewallRuleInput})
-var sBatchUpdateFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateFirewallRuleOutput, Members: &mBatchUpdateFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateFirewallRuleOutput})
-var sCreateAccessSourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessSourceInput, Members: &mCreateAccessSourceInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessSourceInput})
-var sCreateAccessSourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessSourceOutput, Members: &mCreateAccessSourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessSourceOutput})
-var sCreateAccessTokenInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessTokenInput, Members: &mCreateAccessTokenInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessTokenInput})
-var sCreateAccessTokenOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessTokenOutput, Members: &mCreateAccessTokenOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessTokenOutput})
-var sCreateDNSViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDNSViewInput, Members: &mCreateDNSViewInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateDNSViewInput})
-var sCreateDNSViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDNSViewOutput, Members: &mCreateDNSViewOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateDNSViewOutput})
-var sCreateFirewallDomainListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallDomainListInput, Members: &mCreateFirewallDomainListInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallDomainListInput})
-var sCreateFirewallDomainListOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallDomainListOutput, Members: &mCreateFirewallDomainListOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallDomainListOutput})
-var sCreateFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallRuleInput, Members: &mCreateFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallRuleInput})
-var sCreateFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallRuleOutput, Members: &mCreateFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallRuleOutput})
-var sCreateGlobalResolverInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGlobalResolverInput, Members: &mCreateGlobalResolverInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateGlobalResolverInput})
-var sCreateGlobalResolverOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGlobalResolverOutput, Members: &mCreateGlobalResolverOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateGlobalResolverOutput})
-var sDeleteAccessSourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessSourceInput, Members: &mDeleteAccessSourceInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessSourceInput})
-var sDeleteAccessSourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessSourceOutput, Members: &mDeleteAccessSourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessSourceOutput})
-var sDeleteAccessTokenInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessTokenInput, Members: &mDeleteAccessTokenInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessTokenInput})
-var sDeleteAccessTokenOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessTokenOutput, Members: &mDeleteAccessTokenOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessTokenOutput})
-var sDeleteDNSViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDNSViewInput, Members: &mDeleteDNSViewInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDNSViewInput})
-var sDeleteDNSViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDNSViewOutput, Members: &mDeleteDNSViewOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDNSViewOutput})
-var sDeleteFirewallDomainListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallDomainListInput, Members: &mDeleteFirewallDomainListInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallDomainListInput})
-var sDeleteFirewallDomainListOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallDomainListOutput, Members: &mDeleteFirewallDomainListOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallDomainListOutput})
-var sDeleteFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallRuleInput, Members: &mDeleteFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallRuleInput})
-var sDeleteFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallRuleOutput, Members: &mDeleteFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallRuleOutput})
-var sDeleteGlobalResolverInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGlobalResolverInput, Members: &mDeleteGlobalResolverInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGlobalResolverInput})
-var sDeleteGlobalResolverOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGlobalResolverOutput, Members: &mDeleteGlobalResolverOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGlobalResolverOutput})
-var sDisableDNSViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDNSViewInput, Members: &mDisableDNSViewInput, Type: smithy.ShapeTypeStructure, Ext: &eDisableDNSViewInput})
-var sDisableDNSViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDNSViewOutput, Members: &mDisableDNSViewOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisableDNSViewOutput})
-var sDisassociateHostedZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateHostedZoneInput, Members: &mDisassociateHostedZoneInput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateHostedZoneInput})
-var sDisassociateHostedZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateHostedZoneOutput, Members: &mDisassociateHostedZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateHostedZoneOutput})
-var sEnableDNSViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDNSViewInput, Members: &mEnableDNSViewInput, Type: smithy.ShapeTypeStructure, Ext: &eEnableDNSViewInput})
-var sEnableDNSViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDNSViewOutput, Members: &mEnableDNSViewOutput, Type: smithy.ShapeTypeStructure, Ext: &eEnableDNSViewOutput})
-var sGetAccessSourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessSourceInput, Members: &mGetAccessSourceInput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessSourceInput})
-var sGetAccessSourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessSourceOutput, Members: &mGetAccessSourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessSourceOutput})
-var sGetAccessTokenInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessTokenInput, Members: &mGetAccessTokenInput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessTokenInput})
-var sGetAccessTokenOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessTokenOutput, Members: &mGetAccessTokenOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessTokenOutput})
-var sGetDNSViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDNSViewInput, Members: &mGetDNSViewInput, Type: smithy.ShapeTypeStructure, Ext: &eGetDNSViewInput})
-var sGetDNSViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDNSViewOutput, Members: &mGetDNSViewOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetDNSViewOutput})
-var sGetFirewallDomainListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFirewallDomainListInput, Members: &mGetFirewallDomainListInput, Type: smithy.ShapeTypeStructure, Ext: &eGetFirewallDomainListInput})
-var sGetFirewallDomainListOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFirewallDomainListOutput, Members: &mGetFirewallDomainListOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetFirewallDomainListOutput})
-var sGetFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFirewallRuleInput, Members: &mGetFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eGetFirewallRuleInput})
-var sGetFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFirewallRuleOutput, Members: &mGetFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetFirewallRuleOutput})
-var sGetGlobalResolverInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGlobalResolverInput, Members: &mGetGlobalResolverInput, Type: smithy.ShapeTypeStructure, Ext: &eGetGlobalResolverInput})
-var sGetGlobalResolverOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGlobalResolverOutput, Members: &mGetGlobalResolverOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetGlobalResolverOutput})
-var sGetHostedZoneAssociationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHostedZoneAssociationInput, Members: &mGetHostedZoneAssociationInput, Type: smithy.ShapeTypeStructure, Ext: &eGetHostedZoneAssociationInput})
-var sGetHostedZoneAssociationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHostedZoneAssociationOutput, Members: &mGetHostedZoneAssociationOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetHostedZoneAssociationOutput})
-var sGetManagedFirewallDomainListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedFirewallDomainListInput, Members: &mGetManagedFirewallDomainListInput, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedFirewallDomainListInput})
-var sGetManagedFirewallDomainListOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedFirewallDomainListOutput, Members: &mGetManagedFirewallDomainListOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedFirewallDomainListOutput})
-var sImportFirewallDomainsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportFirewallDomainsInput, Members: &mImportFirewallDomainsInput, Type: smithy.ShapeTypeStructure, Ext: &eImportFirewallDomainsInput})
-var sImportFirewallDomainsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportFirewallDomainsOutput, Members: &mImportFirewallDomainsOutput, Type: smithy.ShapeTypeStructure, Ext: &eImportFirewallDomainsOutput})
-var sListAccessSourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessSourcesInput, Members: &mListAccessSourcesInput, Type: smithy.ShapeTypeStructure, Ext: &eListAccessSourcesInput})
-var sListAccessSourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessSourcesOutput, Members: &mListAccessSourcesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListAccessSourcesOutput})
-var sListAccessTokensInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessTokensInput, Members: &mListAccessTokensInput, Type: smithy.ShapeTypeStructure, Ext: &eListAccessTokensInput})
-var sListAccessTokensOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessTokensOutput, Members: &mListAccessTokensOutput, Type: smithy.ShapeTypeStructure, Ext: &eListAccessTokensOutput})
-var sListDNSViewsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDNSViewsInput, Members: &mListDNSViewsInput, Type: smithy.ShapeTypeStructure, Ext: &eListDNSViewsInput})
-var sListDNSViewsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDNSViewsOutput, Members: &mListDNSViewsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListDNSViewsOutput})
-var sListFirewallDomainListsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallDomainListsInput, Members: &mListFirewallDomainListsInput, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallDomainListsInput})
-var sListFirewallDomainListsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallDomainListsOutput, Members: &mListFirewallDomainListsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallDomainListsOutput})
-var sListFirewallDomainsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallDomainsInput, Members: &mListFirewallDomainsInput, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallDomainsInput})
-var sListFirewallDomainsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallDomainsOutput, Members: &mListFirewallDomainsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallDomainsOutput})
-var sListFirewallRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallRulesInput, Members: &mListFirewallRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallRulesInput})
-var sListFirewallRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallRulesOutput, Members: &mListFirewallRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallRulesOutput})
-var sListGlobalResolversInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGlobalResolversInput, Members: &mListGlobalResolversInput, Type: smithy.ShapeTypeStructure, Ext: &eListGlobalResolversInput})
-var sListGlobalResolversOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGlobalResolversOutput, Members: &mListGlobalResolversOutput, Type: smithy.ShapeTypeStructure, Ext: &eListGlobalResolversOutput})
-var sListHostedZoneAssociationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHostedZoneAssociationsInput, Members: &mListHostedZoneAssociationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListHostedZoneAssociationsInput})
-var sListHostedZoneAssociationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHostedZoneAssociationsOutput, Members: &mListHostedZoneAssociationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListHostedZoneAssociationsOutput})
-var sListManagedFirewallDomainListsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedFirewallDomainListsInput, Members: &mListManagedFirewallDomainListsInput, Type: smithy.ShapeTypeStructure, Ext: &eListManagedFirewallDomainListsInput})
-var sListManagedFirewallDomainListsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedFirewallDomainListsOutput, Members: &mListManagedFirewallDomainListsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListManagedFirewallDomainListsOutput})
-var sListSharedDNSViewsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedDNSViewsInput, Members: &mListSharedDNSViewsInput, Type: smithy.ShapeTypeStructure, Ext: &eListSharedDNSViewsInput})
-var sListSharedDNSViewsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedDNSViewsOutput, Members: &mListSharedDNSViewsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListSharedDNSViewsOutput})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
-var sUpdateAccessSourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccessSourceInput, Members: &mUpdateAccessSourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccessSourceInput})
-var sUpdateAccessSourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccessSourceOutput, Members: &mUpdateAccessSourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccessSourceOutput})
-var sUpdateAccessTokenInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccessTokenInput, Members: &mUpdateAccessTokenInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccessTokenInput})
-var sUpdateAccessTokenOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccessTokenOutput, Members: &mUpdateAccessTokenOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccessTokenOutput})
-var sUpdateDNSViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDNSViewInput, Members: &mUpdateDNSViewInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDNSViewInput})
-var sUpdateDNSViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDNSViewOutput, Members: &mUpdateDNSViewOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDNSViewOutput})
-var sUpdateFirewallDomainsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDomainsInput, Members: &mUpdateFirewallDomainsInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallDomainsInput})
-var sUpdateFirewallDomainsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDomainsOutput, Members: &mUpdateFirewallDomainsOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallDomainsOutput})
-var sUpdateFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallRuleInput, Members: &mUpdateFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallRuleInput})
-var sUpdateFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallRuleOutput, Members: &mUpdateFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallRuleOutput})
-var sUpdateGlobalResolverInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGlobalResolverInput, Members: &mUpdateGlobalResolverInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGlobalResolverInput})
-var sUpdateGlobalResolverOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGlobalResolverOutput, Members: &mUpdateGlobalResolverOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGlobalResolverOutput})
-var sUpdateHostedZoneAssociationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHostedZoneAssociationInput, Members: &mUpdateHostedZoneAssociationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateHostedZoneAssociationInput})
-var sUpdateHostedZoneAssociationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHostedZoneAssociationOutput, Members: &mUpdateHostedZoneAssociationOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateHostedZoneAssociationOutput})
-
 var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AccessSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessSources, Members: &m_AccessSources, Type: smithy.ShapeTypeList, Ext: &e_AccessSources})
 var s_AccessSources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessSourcesItem, Members: &mAccessSourcesItem, Type: smithy.ShapeTypeStructure, Ext: &e_AccessSources_member})
+var sAccessSourcesItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessSourcesItem, Members: &mAccessSourcesItem, Type: smithy.ShapeTypeStructure, Ext: &eAccessSourcesItem})
 var sAccessSourcesItem_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAccessSourcesItem_arn})
 var sAccessSourcesItem_cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cidr", ID: &i_Cidr, Type: smithy.ShapeTypeString, Ext: &eAccessSourcesItem_cidr})
 var sAccessSourcesItem_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eAccessSourcesItem_createdAt})
@@ -1927,6 +1780,7 @@ var sAccessSourcesItem_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchema{Me
 var sAccessSourcesItem_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iDnsProtocol, Members: &mDnsProtocol, Type: smithy.ShapeTypeEnum, Ext: &eAccessSourcesItem_protocol})
 var sAccessSourcesItem_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eAccessSourcesItem_status})
 var sAccessSourcesItem_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eAccessSourcesItem_updatedAt})
+var sAccessTokenItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessTokenItem, Members: &mAccessTokenItem, Type: smithy.ShapeTypeStructure, Ext: &eAccessTokenItem})
 var sAccessTokenItem_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eAccessTokenItem_id})
 var sAccessTokenItem_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAccessTokenItem_arn})
 var sAccessTokenItem_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eAccessTokenItem_createdAt})
@@ -1936,7 +1790,11 @@ var sAccessTokenItem_globalResolverId = smithy.NewStaticSchema(smithy.StaticSche
 var sAccessTokenItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceNameShort, Type: smithy.ShapeTypeString, Ext: &eAccessTokenItem_name})
 var sAccessTokenItem_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTokenStatus, Members: &mTokenStatus, Type: smithy.ShapeTypeEnum, Ext: &eAccessTokenItem_status})
 var sAccessTokenItem_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eAccessTokenItem_updatedAt})
+var s_AccessTokens = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessTokens, Members: &m_AccessTokens, Type: smithy.ShapeTypeList, Ext: &e_AccessTokens})
 var s_AccessTokens_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessTokenItem, Members: &mAccessTokenItem, Type: smithy.ShapeTypeStructure, Ext: &e_AccessTokens_member})
+var s_AccessTokenValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessTokenValue, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &e_AccessTokenValue})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var sBatchCreateFirewallRuleInputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateFirewallRuleInputItem, Members: &mBatchCreateFirewallRuleInputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateFirewallRuleInputItem})
 var sBatchCreateFirewallRuleInputItem_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iFirewallRuleAction, Members: &mFirewallRuleAction, Type: smithy.ShapeTypeEnum, Ext: &eBatchCreateFirewallRuleInputItem_action})
 var sBatchCreateFirewallRuleInputItem_blockOverrideDnsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDnsType", ID: &iBlockOverrideDnsQueryType, Members: &mBlockOverrideDnsQueryType, Type: smithy.ShapeTypeEnum, Ext: &eBatchCreateFirewallRuleInputItem_blockOverrideDnsType})
 var sBatchCreateFirewallRuleInputItem_blockOverrideDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDomain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &eBatchCreateFirewallRuleInputItem_blockOverrideDomain})
@@ -1951,11 +1809,15 @@ var sBatchCreateFirewallRuleInputItem_name = smithy.NewStaticSchema(smithy.Stati
 var sBatchCreateFirewallRuleInputItem_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_FirewallRulePriority, Type: smithy.ShapeTypeLong, Ext: &eBatchCreateFirewallRuleInputItem_priority})
 var sBatchCreateFirewallRuleInputItem_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsViewId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eBatchCreateFirewallRuleInputItem_dnsViewId})
 var sBatchCreateFirewallRuleInputItem_qType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "qType", ID: &i_DnsQueryType, Type: smithy.ShapeTypeString, Ext: &eBatchCreateFirewallRuleInputItem_qType})
+var s_BatchCreateFirewallRuleInputItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchCreateFirewallRuleInputItems, Members: &m_BatchCreateFirewallRuleInputItems, Type: smithy.ShapeTypeList, Ext: &e_BatchCreateFirewallRuleInputItems})
 var s_BatchCreateFirewallRuleInputItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchCreateFirewallRuleInputItem, Members: &mBatchCreateFirewallRuleInputItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchCreateFirewallRuleInputItems_member})
+var sBatchCreateFirewallRuleOutputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateFirewallRuleOutputItem, Members: &mBatchCreateFirewallRuleOutputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateFirewallRuleOutputItem})
 var sBatchCreateFirewallRuleOutputItem_firewallRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRule", ID: &iBatchCreateFirewallRuleResult, Members: &mBatchCreateFirewallRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateFirewallRuleOutputItem_firewallRule})
 var sBatchCreateFirewallRuleOutputItem_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eBatchCreateFirewallRuleOutputItem_code})
 var sBatchCreateFirewallRuleOutputItem_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchCreateFirewallRuleOutputItem_message})
+var s_BatchCreateFirewallRuleOutputItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchCreateFirewallRuleOutputItems, Members: &m_BatchCreateFirewallRuleOutputItems, Type: smithy.ShapeTypeList, Ext: &e_BatchCreateFirewallRuleOutputItems})
 var s_BatchCreateFirewallRuleOutputItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchCreateFirewallRuleOutputItem, Members: &mBatchCreateFirewallRuleOutputItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchCreateFirewallRuleOutputItems_member})
+var sBatchCreateFirewallRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateFirewallRuleResult, Members: &mBatchCreateFirewallRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateFirewallRuleResult})
 var sBatchCreateFirewallRuleResult_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iFirewallRuleAction, Members: &mFirewallRuleAction, Type: smithy.ShapeTypeEnum, Ext: &eBatchCreateFirewallRuleResult_action})
 var sBatchCreateFirewallRuleResult_blockOverrideDnsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDnsType", ID: &iBlockOverrideDnsQueryType, Members: &mBlockOverrideDnsQueryType, Type: smithy.ShapeTypeEnum, Ext: &eBatchCreateFirewallRuleResult_blockOverrideDnsType})
 var sBatchCreateFirewallRuleResult_blockOverrideDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDomain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &eBatchCreateFirewallRuleResult_blockOverrideDomain})
@@ -1975,16 +1837,22 @@ var sBatchCreateFirewallRuleResult_dnsViewId = smithy.NewStaticSchema(smithy.Sta
 var sBatchCreateFirewallRuleResult_queryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryType", ID: &i_DnsQueryType, Type: smithy.ShapeTypeString, Ext: &eBatchCreateFirewallRuleResult_queryType})
 var sBatchCreateFirewallRuleResult_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eBatchCreateFirewallRuleResult_status})
 var sBatchCreateFirewallRuleResult_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eBatchCreateFirewallRuleResult_updatedAt})
+var sBatchDeleteFirewallRuleInputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteFirewallRuleInputItem, Members: &mBatchDeleteFirewallRuleInputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteFirewallRuleInputItem})
 var sBatchDeleteFirewallRuleInputItem_firewallRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteFirewallRuleInputItem_firewallRuleId})
+var s_BatchDeleteFirewallRuleInputItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDeleteFirewallRuleInputItems, Members: &m_BatchDeleteFirewallRuleInputItems, Type: smithy.ShapeTypeList, Ext: &e_BatchDeleteFirewallRuleInputItems})
 var s_BatchDeleteFirewallRuleInputItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchDeleteFirewallRuleInputItem, Members: &mBatchDeleteFirewallRuleInputItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchDeleteFirewallRuleInputItems_member})
+var sBatchDeleteFirewallRuleOutputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteFirewallRuleOutputItem, Members: &mBatchDeleteFirewallRuleOutputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteFirewallRuleOutputItem})
 var sBatchDeleteFirewallRuleOutputItem_firewallRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRule", ID: &iBatchDeleteFirewallRuleResult, Members: &mBatchDeleteFirewallRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteFirewallRuleOutputItem_firewallRule})
 var sBatchDeleteFirewallRuleOutputItem_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eBatchDeleteFirewallRuleOutputItem_code})
 var sBatchDeleteFirewallRuleOutputItem_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteFirewallRuleOutputItem_message})
+var s_BatchDeleteFirewallRuleOutputItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDeleteFirewallRuleOutputItems, Members: &m_BatchDeleteFirewallRuleOutputItems, Type: smithy.ShapeTypeList, Ext: &e_BatchDeleteFirewallRuleOutputItems})
 var s_BatchDeleteFirewallRuleOutputItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchDeleteFirewallRuleOutputItem, Members: &mBatchDeleteFirewallRuleOutputItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchDeleteFirewallRuleOutputItems_member})
+var sBatchDeleteFirewallRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteFirewallRuleResult, Members: &mBatchDeleteFirewallRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteFirewallRuleResult})
 var sBatchDeleteFirewallRuleResult_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteFirewallRuleResult_clientToken})
 var sBatchDeleteFirewallRuleResult_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteFirewallRuleResult_id})
 var sBatchDeleteFirewallRuleResult_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eBatchDeleteFirewallRuleResult_name})
 var sBatchDeleteFirewallRuleResult_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eBatchDeleteFirewallRuleResult_status})
+var sBatchUpdateFirewallRuleInputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateFirewallRuleInputItem, Members: &mBatchUpdateFirewallRuleInputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateFirewallRuleInputItem})
 var sBatchUpdateFirewallRuleInputItem_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iFirewallRuleAction, Members: &mFirewallRuleAction, Type: smithy.ShapeTypeEnum, Ext: &eBatchUpdateFirewallRuleInputItem_action})
 var sBatchUpdateFirewallRuleInputItem_blockOverrideDnsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDnsType", ID: &iBlockOverrideDnsQueryType, Members: &mBlockOverrideDnsQueryType, Type: smithy.ShapeTypeEnum, Ext: &eBatchUpdateFirewallRuleInputItem_blockOverrideDnsType})
 var sBatchUpdateFirewallRuleInputItem_blockOverrideDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDomain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &eBatchUpdateFirewallRuleInputItem_blockOverrideDomain})
@@ -1996,11 +1864,15 @@ var sBatchUpdateFirewallRuleInputItem_dnsAdvancedProtection = smithy.NewStaticSc
 var sBatchUpdateFirewallRuleInputItem_firewallRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRuleId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eBatchUpdateFirewallRuleInputItem_firewallRuleId})
 var sBatchUpdateFirewallRuleInputItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eBatchUpdateFirewallRuleInputItem_name})
 var sBatchUpdateFirewallRuleInputItem_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_FirewallRulePriority, Type: smithy.ShapeTypeLong, Ext: &eBatchUpdateFirewallRuleInputItem_priority})
+var s_BatchUpdateFirewallRuleInputItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchUpdateFirewallRuleInputItems, Members: &m_BatchUpdateFirewallRuleInputItems, Type: smithy.ShapeTypeList, Ext: &e_BatchUpdateFirewallRuleInputItems})
 var s_BatchUpdateFirewallRuleInputItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchUpdateFirewallRuleInputItem, Members: &mBatchUpdateFirewallRuleInputItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchUpdateFirewallRuleInputItems_member})
+var sBatchUpdateFirewallRuleOutputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateFirewallRuleOutputItem, Members: &mBatchUpdateFirewallRuleOutputItem, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateFirewallRuleOutputItem})
 var sBatchUpdateFirewallRuleOutputItem_firewallRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRule", ID: &iBatchUpdateFirewallRuleResult, Members: &mBatchUpdateFirewallRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateFirewallRuleOutputItem_firewallRule})
 var sBatchUpdateFirewallRuleOutputItem_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eBatchUpdateFirewallRuleOutputItem_code})
 var sBatchUpdateFirewallRuleOutputItem_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchUpdateFirewallRuleOutputItem_message})
+var s_BatchUpdateFirewallRuleOutputItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchUpdateFirewallRuleOutputItems, Members: &m_BatchUpdateFirewallRuleOutputItems, Type: smithy.ShapeTypeList, Ext: &e_BatchUpdateFirewallRuleOutputItems})
 var s_BatchUpdateFirewallRuleOutputItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchUpdateFirewallRuleOutputItem, Members: &mBatchUpdateFirewallRuleOutputItem, Type: smithy.ShapeTypeStructure, Ext: &e_BatchUpdateFirewallRuleOutputItems_member})
+var sBatchUpdateFirewallRuleResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateFirewallRuleResult, Members: &mBatchUpdateFirewallRuleResult, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateFirewallRuleResult})
 var sBatchUpdateFirewallRuleResult_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iFirewallRuleAction, Members: &mFirewallRuleAction, Type: smithy.ShapeTypeEnum, Ext: &eBatchUpdateFirewallRuleResult_action})
 var sBatchUpdateFirewallRuleResult_blockOverrideDnsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDnsType", ID: &iBlockOverrideDnsQueryType, Members: &mBlockOverrideDnsQueryType, Type: smithy.ShapeTypeEnum, Ext: &eBatchUpdateFirewallRuleResult_blockOverrideDnsType})
 var sBatchUpdateFirewallRuleResult_blockOverrideDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDomain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &eBatchUpdateFirewallRuleResult_blockOverrideDomain})
@@ -2019,26 +1891,39 @@ var sBatchUpdateFirewallRuleResult_dnsViewId = smithy.NewStaticSchema(smithy.Sta
 var sBatchUpdateFirewallRuleResult_queryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryType", ID: &i_DnsQueryType, Type: smithy.ShapeTypeString, Ext: &eBatchUpdateFirewallRuleResult_queryType})
 var sBatchUpdateFirewallRuleResult_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eBatchUpdateFirewallRuleResult_status})
 var sBatchUpdateFirewallRuleResult_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eBatchUpdateFirewallRuleResult_updatedAt})
+var sBlockOverrideDnsQueryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlockOverrideDnsQueryType, Members: &mBlockOverrideDnsQueryType, Type: smithy.ShapeTypeEnum, Ext: &eBlockOverrideDnsQueryType})
 var sBlockOverrideDnsQueryType_CNAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CNAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBlockOverrideDnsQueryType_CNAME})
+var s_BlockOverrideTtl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockOverrideTtl, Type: smithy.ShapeTypeInteger, Ext: &e_BlockOverrideTtl})
+var s_Cidr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Cidr, Type: smithy.ShapeTypeString, Ext: &e_Cidr})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sConfidenceThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfidenceThreshold, Members: &mConfidenceThreshold, Type: smithy.ShapeTypeEnum, Ext: &eConfidenceThreshold})
 var sConfidenceThreshold_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfidenceThreshold_LOW})
 var sConfidenceThreshold_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfidenceThreshold_MEDIUM})
 var sConfidenceThreshold_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfidenceThreshold_HIGH})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t51, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
 var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
 var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
 var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sCRResourceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eCRResourceStatus})
 var sCRResourceStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCRResourceStatus_CREATING})
 var sCRResourceStatus_OPERATIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCRResourceStatus_OPERATIONAL})
 var sCRResourceStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCRResourceStatus_UPDATING})
 var sCRResourceStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCRResourceStatus_DELETING})
+var sDnsAdvancedProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsAdvancedProtection, Members: &mDnsAdvancedProtection, Type: smithy.ShapeTypeEnum, Ext: &eDnsAdvancedProtection})
 var sDnsAdvancedProtection_DGA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DGA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDnsAdvancedProtection_DGA})
 var sDnsAdvancedProtection_DNS_TUNNELING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNS_TUNNELING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDnsAdvancedProtection_DNS_TUNNELING})
 var sDnsAdvancedProtection_DICTIONARY_DGA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DICTIONARY_DGA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDnsAdvancedProtection_DICTIONARY_DGA})
+var sDnsProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsProtocol, Members: &mDnsProtocol, Type: smithy.ShapeTypeEnum, Ext: &eDnsProtocol})
 var sDnsProtocol_DO53 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DO53", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDnsProtocol_DO53})
 var sDnsProtocol_DOH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDnsProtocol_DOH})
 var sDnsProtocol_DOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDnsProtocol_DOT})
+var s_DnsQueryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsQueryType, Type: smithy.ShapeTypeString, Ext: &e_DnsQueryType})
+var sDnsSecValidationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsSecValidationType, Members: &mDnsSecValidationType, Type: smithy.ShapeTypeEnum, Ext: &eDnsSecValidationType})
 var sDnsSecValidationType_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDnsSecValidationType_ENABLED})
 var sDnsSecValidationType_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDnsSecValidationType_DISABLED})
+var s_DNSViews = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNSViews, Members: &m_DNSViews, Type: smithy.ShapeTypeList, Ext: &e_DNSViews})
 var s_DNSViews_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDNSViewSummary, Members: &mDNSViewSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DNSViews_member})
+var sDNSViewSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDNSViewSummary, Members: &mDNSViewSummary, Type: smithy.ShapeTypeStructure, Ext: &eDNSViewSummary})
 var sDNSViewSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDNSViewSummary_id})
 var sDNSViewSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDNSViewSummary_arn})
 var sDNSViewSummary_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDNSViewSummary_clientToken})
@@ -2051,15 +1936,22 @@ var sDNSViewSummary_globalResolverId = smithy.NewStaticSchema(smithy.StaticSchem
 var sDNSViewSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDNSViewSummary_createdAt})
 var sDNSViewSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDNSViewSummary_updatedAt})
 var sDNSViewSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iProfileResourceStatus, Members: &mProfileResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eDNSViewSummary_status})
+var s_Domain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &e_Domain})
+var s_Domains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Domains, Members: &m_Domains, Type: smithy.ShapeTypeList, Ext: &e_Domains})
 var s_Domains_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &e_Domains_member})
+var sEdnsClientSubnetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEdnsClientSubnetType, Members: &mEdnsClientSubnetType, Type: smithy.ShapeTypeEnum, Ext: &eEdnsClientSubnetType})
 var sEdnsClientSubnetType_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEdnsClientSubnetType_ENABLED})
 var sEdnsClientSubnetType_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEdnsClientSubnetType_DISABLED})
+var s_Filters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeMap, Ext: &e_Filters})
 var s_Filters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Filters_key})
 var s_Filters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Strings, Members: &m_Strings, Type: smithy.ShapeTypeList, Ext: &e_Filters_value})
+var sFirewallBlockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallBlockResponse, Members: &mFirewallBlockResponse, Type: smithy.ShapeTypeEnum, Ext: &eFirewallBlockResponse})
 var sFirewallBlockResponse_NODATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NODATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallBlockResponse_NODATA})
 var sFirewallBlockResponse_NXDOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NXDOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallBlockResponse_NXDOMAIN})
 var sFirewallBlockResponse_OVERRIDE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERRIDE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallBlockResponse_OVERRIDE})
+var s_FirewallDomainLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallDomainLists, Members: &m_FirewallDomainLists, Type: smithy.ShapeTypeList, Ext: &e_FirewallDomainLists})
 var s_FirewallDomainLists_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFirewallDomainListsItem, Members: &mFirewallDomainListsItem, Type: smithy.ShapeTypeStructure, Ext: &e_FirewallDomainLists_member})
+var sFirewallDomainListsItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallDomainListsItem, Members: &mFirewallDomainListsItem, Type: smithy.ShapeTypeStructure, Ext: &eFirewallDomainListsItem})
 var sFirewallDomainListsItem_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eFirewallDomainListsItem_arn})
 var sFirewallDomainListsItem_globalResolverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalResolverId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eFirewallDomainListsItem_globalResolverId})
 var sFirewallDomainListsItem_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eFirewallDomainListsItem_createdAt})
@@ -2068,12 +1960,17 @@ var sFirewallDomainListsItem_id = smithy.NewStaticSchema(smithy.StaticSchema{Mem
 var sFirewallDomainListsItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eFirewallDomainListsItem_name})
 var sFirewallDomainListsItem_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eFirewallDomainListsItem_status})
 var sFirewallDomainListsItem_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eFirewallDomainListsItem_updatedAt})
+var sFirewallRuleAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallRuleAction, Members: &mFirewallRuleAction, Type: smithy.ShapeTypeEnum, Ext: &eFirewallRuleAction})
 var sFirewallRuleAction_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallRuleAction_ALLOW})
 var sFirewallRuleAction_ALERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallRuleAction_ALERT})
 var sFirewallRuleAction_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallRuleAction_BLOCK})
+var s_FirewallRulePriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallRulePriority, Type: smithy.ShapeTypeLong, Ext: &e_FirewallRulePriority})
+var s_FirewallRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallRules, Members: &m_FirewallRules, Type: smithy.ShapeTypeList, Ext: &e_FirewallRules})
 var s_FirewallRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFirewallRulesItem, Members: &mFirewallRulesItem, Type: smithy.ShapeTypeStructure, Ext: &e_FirewallRules_member})
+var sFirewallRulesFailOpenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallRulesFailOpenType, Members: &mFirewallRulesFailOpenType, Type: smithy.ShapeTypeEnum, Ext: &eFirewallRulesFailOpenType})
 var sFirewallRulesFailOpenType_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallRulesFailOpenType_ENABLED})
 var sFirewallRulesFailOpenType_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallRulesFailOpenType_DISABLED})
+var sFirewallRulesItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallRulesItem, Members: &mFirewallRulesItem, Type: smithy.ShapeTypeStructure, Ext: &eFirewallRulesItem})
 var sFirewallRulesItem_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iFirewallRuleAction, Members: &mFirewallRuleAction, Type: smithy.ShapeTypeEnum, Ext: &eFirewallRulesItem_action})
 var sFirewallRulesItem_blockOverrideDnsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDnsType", ID: &iBlockOverrideDnsQueryType, Members: &mBlockOverrideDnsQueryType, Type: smithy.ShapeTypeEnum, Ext: &eFirewallRulesItem_blockOverrideDnsType})
 var sFirewallRulesItem_blockOverrideDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDomain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &eFirewallRulesItem_blockOverrideDomain})
@@ -2091,9 +1988,12 @@ var sFirewallRulesItem_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchema{Me
 var sFirewallRulesItem_queryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryType", ID: &i_DnsQueryType, Type: smithy.ShapeTypeString, Ext: &eFirewallRulesItem_queryType})
 var sFirewallRulesItem_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eFirewallRulesItem_status})
 var sFirewallRulesItem_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eFirewallRulesItem_updatedAt})
+var sGlobalResolverIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlobalResolverIpAddressType, Members: &mGlobalResolverIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eGlobalResolverIpAddressType})
 var sGlobalResolverIpAddressType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGlobalResolverIpAddressType_IPV4})
 var sGlobalResolverIpAddressType_DUAL_STACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUAL_STACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGlobalResolverIpAddressType_DUAL_STACK})
+var s_GlobalResolvers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlobalResolvers, Members: &m_GlobalResolvers, Type: smithy.ShapeTypeList, Ext: &e_GlobalResolvers})
 var s_GlobalResolvers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGlobalResolversItem, Members: &mGlobalResolversItem, Type: smithy.ShapeTypeStructure, Ext: &e_GlobalResolvers_member})
+var sGlobalResolversItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlobalResolversItem, Members: &mGlobalResolversItem, Type: smithy.ShapeTypeStructure, Ext: &eGlobalResolversItem})
 var sGlobalResolversItem_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGlobalResolversItem_id})
 var sGlobalResolversItem_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGlobalResolversItem_arn})
 var sGlobalResolversItem_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eGlobalResolversItem_clientToken})
@@ -2108,10 +2008,13 @@ var sGlobalResolversItem_status = smithy.NewStaticSchema(smithy.StaticSchema{Mem
 var sGlobalResolversItem_ipv4Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv4Addresses", ID: &i_IPv4Addresses, Members: &m_IPv4Addresses, Type: smithy.ShapeTypeList, Ext: &eGlobalResolversItem_ipv4Addresses})
 var sGlobalResolversItem_ipv6Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv6Addresses", ID: &i_IPv6Addresses, Members: &m_IPv6Addresses, Type: smithy.ShapeTypeList, Ext: &eGlobalResolversItem_ipv6Addresses})
 var sGlobalResolversItem_ipAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddressType", ID: &iGlobalResolverIpAddressType, Members: &mGlobalResolverIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eGlobalResolversItem_ipAddressType})
+var s_HostedZoneAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostedZoneAssociations, Members: &m_HostedZoneAssociations, Type: smithy.ShapeTypeList, Ext: &e_HostedZoneAssociations})
 var s_HostedZoneAssociations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHostedZoneAssociationSummary, Members: &mHostedZoneAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_HostedZoneAssociations_member})
+var sHostedZoneAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostedZoneAssociationStatus, Members: &mHostedZoneAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eHostedZoneAssociationStatus})
 var sHostedZoneAssociationStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHostedZoneAssociationStatus_CREATING})
 var sHostedZoneAssociationStatus_OPERATIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHostedZoneAssociationStatus_OPERATIONAL})
 var sHostedZoneAssociationStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHostedZoneAssociationStatus_DELETING})
+var sHostedZoneAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostedZoneAssociationSummary, Members: &mHostedZoneAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &eHostedZoneAssociationSummary})
 var sHostedZoneAssociationSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eHostedZoneAssociationSummary_id})
 var sHostedZoneAssociationSummary_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eHostedZoneAssociationSummary_resourceArn})
 var sHostedZoneAssociationSummary_hostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostedZoneId", ID: &i_HostedZoneId, Type: smithy.ShapeTypeString, Ext: &eHostedZoneAssociationSummary_hostedZoneId})
@@ -2120,17 +2023,29 @@ var sHostedZoneAssociationSummary_name = smithy.NewStaticSchema(smithy.StaticSch
 var sHostedZoneAssociationSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eHostedZoneAssociationSummary_createdAt})
 var sHostedZoneAssociationSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eHostedZoneAssociationSummary_updatedAt})
 var sHostedZoneAssociationSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iHostedZoneAssociationStatus, Members: &mHostedZoneAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eHostedZoneAssociationSummary_status})
+var s_HostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostedZoneId, Type: smithy.ShapeTypeString, Ext: &e_HostedZoneId})
+var s_HostedZoneName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostedZoneName, Type: smithy.ShapeTypeString, Ext: &e_HostedZoneName})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t52, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
 var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
 var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t53, Type: smithy.ShapeTypeInteger, Ext: &eInternalServerException_retryAfterSeconds})
+var sIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eIpAddressType})
 var sIpAddressType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIpAddressType_IPV4})
 var sIpAddressType_IPV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIpAddressType_IPV6})
+var s_IPv4Address = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPv4Address, Type: smithy.ShapeTypeString, Ext: &e_IPv4Address})
+var s_IPv4Addresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPv4Addresses, Members: &m_IPv4Addresses, Type: smithy.ShapeTypeList, Ext: &e_IPv4Addresses})
 var s_IPv4Addresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IPv4Address, Type: smithy.ShapeTypeString, Ext: &e_IPv4Addresses_member})
+var s_IPv6Address = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPv6Address, Type: smithy.ShapeTypeString, Ext: &e_IPv6Address})
+var s_IPv6Addresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPv6Addresses, Members: &m_IPv6Addresses, Type: smithy.ShapeTypeList, Ext: &e_IPv6Addresses})
 var s_IPv6Addresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IPv6Address, Type: smithy.ShapeTypeString, Ext: &e_IPv6Addresses_member})
+var s_ISO8601TimeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ISO8601TimeString, Traits: &t54, Type: smithy.ShapeTypeTimestamp, Ext: &e_ISO8601TimeString})
+var s_ManagedFirewallDomainLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedFirewallDomainLists, Members: &m_ManagedFirewallDomainLists, Type: smithy.ShapeTypeList, Ext: &e_ManagedFirewallDomainLists})
 var s_ManagedFirewallDomainLists_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedFirewallDomainListsItem, Members: &mManagedFirewallDomainListsItem, Type: smithy.ShapeTypeStructure, Ext: &e_ManagedFirewallDomainLists_member})
+var sManagedFirewallDomainListsItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedFirewallDomainListsItem, Members: &mManagedFirewallDomainListsItem, Type: smithy.ShapeTypeStructure, Ext: &eManagedFirewallDomainListsItem})
 var sManagedFirewallDomainListsItem_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eManagedFirewallDomainListsItem_description})
 var sManagedFirewallDomainListsItem_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eManagedFirewallDomainListsItem_id})
 var sManagedFirewallDomainListsItem_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eManagedFirewallDomainListsItem_name})
 var sManagedFirewallDomainListsItem_managedListType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedListType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eManagedFirewallDomainListsItem_managedListType})
+var sProfileResourceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProfileResourceStatus, Members: &mProfileResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eProfileResourceStatus})
 var sProfileResourceStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProfileResourceStatus_CREATING})
 var sProfileResourceStatus_OPERATIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProfileResourceStatus_OPERATIONAL})
 var sProfileResourceStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProfileResourceStatus_UPDATING})
@@ -2138,16 +2053,27 @@ var sProfileResourceStatus_ENABLING = smithy.NewStaticSchema(smithy.StaticSchema
 var sProfileResourceStatus_DISABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProfileResourceStatus_DISABLING})
 var sProfileResourceStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProfileResourceStatus_DISABLED})
 var sProfileResourceStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProfileResourceStatus_DELETING})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Region})
+var s_Regions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList, Ext: &e_Regions})
 var s_Regions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Regions_member})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var s_ResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &e_ResourceDescription})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var s_ResourceNameShort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceNameShort, Type: smithy.ShapeTypeString, Ext: &e_ResourceNameShort})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t55, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
 var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
 var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
 var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t56, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
 var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
 var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
 var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
 var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
 var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var s_SharedDNSViews = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SharedDNSViews, Members: &m_SharedDNSViews, Type: smithy.ShapeTypeList, Ext: &e_SharedDNSViews})
 var s_SharedDNSViews_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSharedDNSViewSummary, Members: &mSharedDNSViewSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SharedDNSViews_member})
+var sSharedDNSViewSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSharedDNSViewSummary, Members: &mSharedDNSViewSummary, Type: smithy.ShapeTypeStructure, Ext: &eSharedDNSViewSummary})
 var sSharedDNSViewSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eSharedDNSViewSummary_id})
 var sSharedDNSViewSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eSharedDNSViewSummary_arn})
 var sSharedDNSViewSummary_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eSharedDNSViewSummary_clientToken})
@@ -2161,30 +2087,44 @@ var sSharedDNSViewSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema
 var sSharedDNSViewSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eSharedDNSViewSummary_updatedAt})
 var sSharedDNSViewSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iProfileResourceStatus, Members: &mProfileResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eSharedDNSViewSummary_status})
 var sSharedDNSViewSummary_ownerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eSharedDNSViewSummary_ownerAccountId})
+var s_Sni = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Sni, Type: smithy.ShapeTypeString, Ext: &e_Sni})
+var s_Strings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Strings, Members: &m_Strings, Type: smithy.ShapeTypeList, Ext: &e_Strings})
 var s_Strings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Strings_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
 var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
 var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
 var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t57, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
 var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
 var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
 var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
 var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t53, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var sTokenStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTokenStatus, Members: &mTokenStatus, Type: smithy.ShapeTypeEnum, Ext: &eTokenStatus})
 var sTokenStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTokenStatus_CREATING})
 var sTokenStatus_OPERATIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTokenStatus_OPERATIONAL})
 var sTokenStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTokenStatus_DELETING})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t58, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
 var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
 var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
 var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
 var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
 var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
 var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
 var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
 var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
 var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
 var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sAssociateHostedZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateHostedZoneInput, Members: &mAssociateHostedZoneInput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateHostedZoneInput})
 var sAssociateHostedZoneInput_hostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostedZoneId", ID: &i_HostedZoneId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eAssociateHostedZoneInput_hostedZoneId})
 var sAssociateHostedZoneInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAssociateHostedZoneInput_resourceArn})
 var sAssociateHostedZoneInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eAssociateHostedZoneInput_name})
+var sAssociateHostedZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateHostedZoneOutput, Members: &mAssociateHostedZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateHostedZoneOutput})
 var sAssociateHostedZoneOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eAssociateHostedZoneOutput_id})
 var sAssociateHostedZoneOutput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAssociateHostedZoneOutput_resourceArn})
 var sAssociateHostedZoneOutput_hostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostedZoneId", ID: &i_HostedZoneId, Type: smithy.ShapeTypeString, Ext: &eAssociateHostedZoneOutput_hostedZoneId})
@@ -2193,15 +2133,22 @@ var sAssociateHostedZoneOutput_name = smithy.NewStaticSchema(smithy.StaticSchema
 var sAssociateHostedZoneOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eAssociateHostedZoneOutput_createdAt})
 var sAssociateHostedZoneOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eAssociateHostedZoneOutput_updatedAt})
 var sAssociateHostedZoneOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iHostedZoneAssociationStatus, Members: &mHostedZoneAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssociateHostedZoneOutput_status})
+var sBatchCreateFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateFirewallRuleInput, Members: &mBatchCreateFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateFirewallRuleInput})
 var sBatchCreateFirewallRuleInput_firewallRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRules", ID: &i_BatchCreateFirewallRuleInputItems, Members: &m_BatchCreateFirewallRuleInputItems, Type: smithy.ShapeTypeList, Ext: &eBatchCreateFirewallRuleInput_firewallRules})
+var sBatchCreateFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateFirewallRuleOutput, Members: &mBatchCreateFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchCreateFirewallRuleOutput})
 var sBatchCreateFirewallRuleOutput_failures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failures", ID: &i_BatchCreateFirewallRuleOutputItems, Members: &m_BatchCreateFirewallRuleOutputItems, Type: smithy.ShapeTypeList, Ext: &eBatchCreateFirewallRuleOutput_failures})
 var sBatchCreateFirewallRuleOutput_successes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successes", ID: &i_BatchCreateFirewallRuleOutputItems, Members: &m_BatchCreateFirewallRuleOutputItems, Type: smithy.ShapeTypeList, Ext: &eBatchCreateFirewallRuleOutput_successes})
+var sBatchDeleteFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteFirewallRuleInput, Members: &mBatchDeleteFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteFirewallRuleInput})
 var sBatchDeleteFirewallRuleInput_firewallRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRules", ID: &i_BatchDeleteFirewallRuleInputItems, Members: &m_BatchDeleteFirewallRuleInputItems, Type: smithy.ShapeTypeList, Ext: &eBatchDeleteFirewallRuleInput_firewallRules})
+var sBatchDeleteFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteFirewallRuleOutput, Members: &mBatchDeleteFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeleteFirewallRuleOutput})
 var sBatchDeleteFirewallRuleOutput_failures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failures", ID: &i_BatchDeleteFirewallRuleOutputItems, Members: &m_BatchDeleteFirewallRuleOutputItems, Type: smithy.ShapeTypeList, Ext: &eBatchDeleteFirewallRuleOutput_failures})
 var sBatchDeleteFirewallRuleOutput_successes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successes", ID: &i_BatchDeleteFirewallRuleOutputItems, Members: &m_BatchDeleteFirewallRuleOutputItems, Type: smithy.ShapeTypeList, Ext: &eBatchDeleteFirewallRuleOutput_successes})
+var sBatchUpdateFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateFirewallRuleInput, Members: &mBatchUpdateFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateFirewallRuleInput})
 var sBatchUpdateFirewallRuleInput_firewallRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRules", ID: &i_BatchUpdateFirewallRuleInputItems, Members: &m_BatchUpdateFirewallRuleInputItems, Type: smithy.ShapeTypeList, Ext: &eBatchUpdateFirewallRuleInput_firewallRules})
+var sBatchUpdateFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateFirewallRuleOutput, Members: &mBatchUpdateFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdateFirewallRuleOutput})
 var sBatchUpdateFirewallRuleOutput_failures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failures", ID: &i_BatchUpdateFirewallRuleOutputItems, Members: &m_BatchUpdateFirewallRuleOutputItems, Type: smithy.ShapeTypeList, Ext: &eBatchUpdateFirewallRuleOutput_failures})
 var sBatchUpdateFirewallRuleOutput_successes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successes", ID: &i_BatchUpdateFirewallRuleOutputItems, Members: &m_BatchUpdateFirewallRuleOutputItems, Type: smithy.ShapeTypeList, Ext: &eBatchUpdateFirewallRuleOutput_successes})
+var sCreateAccessSourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessSourceInput, Members: &mCreateAccessSourceInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessSourceInput})
 var sCreateAccessSourceInput_cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cidr", ID: &i_Cidr, Type: smithy.ShapeTypeString, Ext: &eCreateAccessSourceInput_cidr})
 var sCreateAccessSourceInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateAccessSourceInput_clientToken})
 var sCreateAccessSourceInput_ipAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eCreateAccessSourceInput_ipAddressType})
@@ -2209,6 +2156,7 @@ var sCreateAccessSourceInput_name = smithy.NewStaticSchema(smithy.StaticSchema{M
 var sCreateAccessSourceInput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsViewId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreateAccessSourceInput_dnsViewId})
 var sCreateAccessSourceInput_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iDnsProtocol, Members: &mDnsProtocol, Type: smithy.ShapeTypeEnum, Ext: &eCreateAccessSourceInput_protocol})
 var sCreateAccessSourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateAccessSourceInput_tags})
+var sCreateAccessSourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessSourceOutput, Members: &mCreateAccessSourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessSourceOutput})
 var sCreateAccessSourceOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateAccessSourceOutput_arn})
 var sCreateAccessSourceOutput_cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cidr", ID: &i_Cidr, Type: smithy.ShapeTypeString, Ext: &eCreateAccessSourceOutput_cidr})
 var sCreateAccessSourceOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateAccessSourceOutput_createdAt})
@@ -2219,11 +2167,13 @@ var sCreateAccessSourceOutput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSc
 var sCreateAccessSourceOutput_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iDnsProtocol, Members: &mDnsProtocol, Type: smithy.ShapeTypeEnum, Ext: &eCreateAccessSourceOutput_protocol})
 var sCreateAccessSourceOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateAccessSourceOutput_status})
 var sCreateAccessSourceOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateAccessSourceOutput_updatedAt})
+var sCreateAccessTokenInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessTokenInput, Members: &mCreateAccessTokenInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessTokenInput})
 var sCreateAccessTokenInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateAccessTokenInput_clientToken})
 var sCreateAccessTokenInput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsViewId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eCreateAccessTokenInput_dnsViewId})
 var sCreateAccessTokenInput_expiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateAccessTokenInput_expiresAt})
 var sCreateAccessTokenInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceNameShort, Type: smithy.ShapeTypeString, Ext: &eCreateAccessTokenInput_name})
 var sCreateAccessTokenInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateAccessTokenInput_tags})
+var sCreateAccessTokenOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessTokenOutput, Members: &mCreateAccessTokenOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateAccessTokenOutput})
 var sCreateAccessTokenOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreateAccessTokenOutput_id})
 var sCreateAccessTokenOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateAccessTokenOutput_arn})
 var sCreateAccessTokenOutput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateAccessTokenOutput_clientToken})
@@ -2233,6 +2183,7 @@ var sCreateAccessTokenOutput_expiresAt = smithy.NewStaticSchema(smithy.StaticSch
 var sCreateAccessTokenOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceNameShort, Type: smithy.ShapeTypeString, Ext: &eCreateAccessTokenOutput_name})
 var sCreateAccessTokenOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTokenStatus, Members: &mTokenStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateAccessTokenOutput_status})
 var sCreateAccessTokenOutput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AccessTokenValue, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eCreateAccessTokenOutput_value})
+var sCreateDNSViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDNSViewInput, Members: &mCreateDNSViewInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateDNSViewInput})
 var sCreateDNSViewInput_globalResolverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalResolverId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eCreateDNSViewInput_globalResolverId})
 var sCreateDNSViewInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateDNSViewInput_clientToken})
 var sCreateDNSViewInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateDNSViewInput_name})
@@ -2241,6 +2192,7 @@ var sCreateDNSViewInput_ednsClientSubnet = smithy.NewStaticSchema(smithy.StaticS
 var sCreateDNSViewInput_firewallRulesFailOpen = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRulesFailOpen", ID: &iFirewallRulesFailOpenType, Members: &mFirewallRulesFailOpenType, Type: smithy.ShapeTypeEnum, Ext: &eCreateDNSViewInput_firewallRulesFailOpen})
 var sCreateDNSViewInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eCreateDNSViewInput_description})
 var sCreateDNSViewInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateDNSViewInput_tags})
+var sCreateDNSViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDNSViewOutput, Members: &mCreateDNSViewOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateDNSViewOutput})
 var sCreateDNSViewOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreateDNSViewOutput_id})
 var sCreateDNSViewOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateDNSViewOutput_arn})
 var sCreateDNSViewOutput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateDNSViewOutput_clientToken})
@@ -2253,11 +2205,13 @@ var sCreateDNSViewOutput_globalResolverId = smithy.NewStaticSchema(smithy.Static
 var sCreateDNSViewOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateDNSViewOutput_createdAt})
 var sCreateDNSViewOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateDNSViewOutput_updatedAt})
 var sCreateDNSViewOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iProfileResourceStatus, Members: &mProfileResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateDNSViewOutput_status})
+var sCreateFirewallDomainListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallDomainListInput, Members: &mCreateFirewallDomainListInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallDomainListInput})
 var sCreateFirewallDomainListInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallDomainListInput_clientToken})
 var sCreateFirewallDomainListInput_globalResolverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalResolverId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallDomainListInput_globalResolverId})
 var sCreateFirewallDomainListInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallDomainListInput_description})
 var sCreateFirewallDomainListInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallDomainListInput_name})
 var sCreateFirewallDomainListInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateFirewallDomainListInput_tags})
+var sCreateFirewallDomainListOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallDomainListOutput, Members: &mCreateFirewallDomainListOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallDomainListOutput})
 var sCreateFirewallDomainListOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallDomainListOutput_arn})
 var sCreateFirewallDomainListOutput_globalResolverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalResolverId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallDomainListOutput_globalResolverId})
 var sCreateFirewallDomainListOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateFirewallDomainListOutput_createdAt})
@@ -2267,6 +2221,7 @@ var sCreateFirewallDomainListOutput_id = smithy.NewStaticSchema(smithy.StaticSch
 var sCreateFirewallDomainListOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallDomainListOutput_name})
 var sCreateFirewallDomainListOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateFirewallDomainListOutput_status})
 var sCreateFirewallDomainListOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateFirewallDomainListOutput_updatedAt})
+var sCreateFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallRuleInput, Members: &mCreateFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallRuleInput})
 var sCreateFirewallRuleInput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iFirewallRuleAction, Members: &mFirewallRuleAction, Type: smithy.ShapeTypeEnum, Ext: &eCreateFirewallRuleInput_action})
 var sCreateFirewallRuleInput_blockOverrideDnsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDnsType", ID: &iBlockOverrideDnsQueryType, Members: &mBlockOverrideDnsQueryType, Type: smithy.ShapeTypeEnum, Ext: &eCreateFirewallRuleInput_blockOverrideDnsType})
 var sCreateFirewallRuleInput_blockOverrideDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDomain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallRuleInput_blockOverrideDomain})
@@ -2281,6 +2236,7 @@ var sCreateFirewallRuleInput_name = smithy.NewStaticSchema(smithy.StaticSchema{M
 var sCreateFirewallRuleInput_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_FirewallRulePriority, Type: smithy.ShapeTypeLong, Ext: &eCreateFirewallRuleInput_priority})
 var sCreateFirewallRuleInput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsViewId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallRuleInput_dnsViewId})
 var sCreateFirewallRuleInput_qType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "qType", ID: &i_DnsQueryType, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallRuleInput_qType})
+var sCreateFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallRuleOutput, Members: &mCreateFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallRuleOutput})
 var sCreateFirewallRuleOutput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iFirewallRuleAction, Members: &mFirewallRuleAction, Type: smithy.ShapeTypeEnum, Ext: &eCreateFirewallRuleOutput_action})
 var sCreateFirewallRuleOutput_blockOverrideDnsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDnsType", ID: &iBlockOverrideDnsQueryType, Members: &mBlockOverrideDnsQueryType, Type: smithy.ShapeTypeEnum, Ext: &eCreateFirewallRuleOutput_blockOverrideDnsType})
 var sCreateFirewallRuleOutput_blockOverrideDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDomain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallRuleOutput_blockOverrideDomain})
@@ -2298,6 +2254,7 @@ var sCreateFirewallRuleOutput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSc
 var sCreateFirewallRuleOutput_queryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryType", ID: &i_DnsQueryType, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallRuleOutput_queryType})
 var sCreateFirewallRuleOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateFirewallRuleOutput_status})
 var sCreateFirewallRuleOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateFirewallRuleOutput_updatedAt})
+var sCreateGlobalResolverInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGlobalResolverInput, Members: &mCreateGlobalResolverInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateGlobalResolverInput})
 var sCreateGlobalResolverInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateGlobalResolverInput_clientToken})
 var sCreateGlobalResolverInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eCreateGlobalResolverInput_description})
 var sCreateGlobalResolverInput_ipAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddressType", ID: &iGlobalResolverIpAddressType, Members: &mGlobalResolverIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eCreateGlobalResolverInput_ipAddressType})
@@ -2305,6 +2262,7 @@ var sCreateGlobalResolverInput_name = smithy.NewStaticSchema(smithy.StaticSchema
 var sCreateGlobalResolverInput_observabilityRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "observabilityRegion", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eCreateGlobalResolverInput_observabilityRegion})
 var sCreateGlobalResolverInput_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList, Ext: &eCreateGlobalResolverInput_regions})
 var sCreateGlobalResolverInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateGlobalResolverInput_tags})
+var sCreateGlobalResolverOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGlobalResolverOutput, Members: &mCreateGlobalResolverOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateGlobalResolverOutput})
 var sCreateGlobalResolverOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eCreateGlobalResolverOutput_id})
 var sCreateGlobalResolverOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateGlobalResolverOutput_arn})
 var sCreateGlobalResolverOutput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateGlobalResolverOutput_clientToken})
@@ -2319,7 +2277,9 @@ var sCreateGlobalResolverOutput_observabilityRegion = smithy.NewStaticSchema(smi
 var sCreateGlobalResolverOutput_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList, Ext: &eCreateGlobalResolverOutput_regions})
 var sCreateGlobalResolverOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateGlobalResolverOutput_status})
 var sCreateGlobalResolverOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateGlobalResolverOutput_updatedAt})
+var sDeleteAccessSourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessSourceInput, Members: &mDeleteAccessSourceInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessSourceInput})
 var sDeleteAccessSourceInput_accessSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessSourceId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDeleteAccessSourceInput_accessSourceId})
+var sDeleteAccessSourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessSourceOutput, Members: &mDeleteAccessSourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessSourceOutput})
 var sDeleteAccessSourceOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteAccessSourceOutput_arn})
 var sDeleteAccessSourceOutput_cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cidr", ID: &i_Cidr, Type: smithy.ShapeTypeString, Ext: &eDeleteAccessSourceOutput_cidr})
 var sDeleteAccessSourceOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDeleteAccessSourceOutput_createdAt})
@@ -2330,11 +2290,15 @@ var sDeleteAccessSourceOutput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSc
 var sDeleteAccessSourceOutput_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iDnsProtocol, Members: &mDnsProtocol, Type: smithy.ShapeTypeEnum, Ext: &eDeleteAccessSourceOutput_protocol})
 var sDeleteAccessSourceOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteAccessSourceOutput_status})
 var sDeleteAccessSourceOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDeleteAccessSourceOutput_updatedAt})
+var sDeleteAccessTokenInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessTokenInput, Members: &mDeleteAccessTokenInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessTokenInput})
 var sDeleteAccessTokenInput_accessTokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessTokenId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDeleteAccessTokenInput_accessTokenId})
+var sDeleteAccessTokenOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessTokenOutput, Members: &mDeleteAccessTokenOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAccessTokenOutput})
 var sDeleteAccessTokenOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteAccessTokenOutput_id})
 var sDeleteAccessTokenOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTokenStatus, Members: &mTokenStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteAccessTokenOutput_status})
 var sDeleteAccessTokenOutput_deletedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDeleteAccessTokenOutput_deletedAt})
+var sDeleteDNSViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDNSViewInput, Members: &mDeleteDNSViewInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDNSViewInput})
 var sDeleteDNSViewInput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsViewId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDeleteDNSViewInput_dnsViewId})
+var sDeleteDNSViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDNSViewOutput, Members: &mDeleteDNSViewOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDNSViewOutput})
 var sDeleteDNSViewOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteDNSViewOutput_id})
 var sDeleteDNSViewOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteDNSViewOutput_arn})
 var sDeleteDNSViewOutput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDeleteDNSViewOutput_clientToken})
@@ -2347,12 +2311,16 @@ var sDeleteDNSViewOutput_globalResolverId = smithy.NewStaticSchema(smithy.Static
 var sDeleteDNSViewOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDeleteDNSViewOutput_createdAt})
 var sDeleteDNSViewOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDeleteDNSViewOutput_updatedAt})
 var sDeleteDNSViewOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iProfileResourceStatus, Members: &mProfileResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteDNSViewOutput_status})
+var sDeleteFirewallDomainListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallDomainListInput, Members: &mDeleteFirewallDomainListInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallDomainListInput})
 var sDeleteFirewallDomainListInput_firewallDomainListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallDomainListId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDeleteFirewallDomainListInput_firewallDomainListId})
+var sDeleteFirewallDomainListOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallDomainListOutput, Members: &mDeleteFirewallDomainListOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallDomainListOutput})
 var sDeleteFirewallDomainListOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteFirewallDomainListOutput_arn})
 var sDeleteFirewallDomainListOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteFirewallDomainListOutput_id})
 var sDeleteFirewallDomainListOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteFirewallDomainListOutput_name})
 var sDeleteFirewallDomainListOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteFirewallDomainListOutput_status})
+var sDeleteFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallRuleInput, Members: &mDeleteFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallRuleInput})
 var sDeleteFirewallRuleInput_firewallRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRuleId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDeleteFirewallRuleInput_firewallRuleId})
+var sDeleteFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallRuleOutput, Members: &mDeleteFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallRuleOutput})
 var sDeleteFirewallRuleOutput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iFirewallRuleAction, Members: &mFirewallRuleAction, Type: smithy.ShapeTypeEnum, Ext: &eDeleteFirewallRuleOutput_action})
 var sDeleteFirewallRuleOutput_blockOverrideDnsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDnsType", ID: &iBlockOverrideDnsQueryType, Members: &mBlockOverrideDnsQueryType, Type: smithy.ShapeTypeEnum, Ext: &eDeleteFirewallRuleOutput_blockOverrideDnsType})
 var sDeleteFirewallRuleOutput_blockOverrideDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDomain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &eDeleteFirewallRuleOutput_blockOverrideDomain})
@@ -2370,7 +2338,9 @@ var sDeleteFirewallRuleOutput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSc
 var sDeleteFirewallRuleOutput_queryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryType", ID: &i_DnsQueryType, Type: smithy.ShapeTypeString, Ext: &eDeleteFirewallRuleOutput_queryType})
 var sDeleteFirewallRuleOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteFirewallRuleOutput_status})
 var sDeleteFirewallRuleOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDeleteFirewallRuleOutput_updatedAt})
+var sDeleteGlobalResolverInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGlobalResolverInput, Members: &mDeleteGlobalResolverInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGlobalResolverInput})
 var sDeleteGlobalResolverInput_globalResolverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalResolverId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDeleteGlobalResolverInput_globalResolverId})
+var sDeleteGlobalResolverOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGlobalResolverOutput, Members: &mDeleteGlobalResolverOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGlobalResolverOutput})
 var sDeleteGlobalResolverOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDeleteGlobalResolverOutput_id})
 var sDeleteGlobalResolverOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteGlobalResolverOutput_arn})
 var sDeleteGlobalResolverOutput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDeleteGlobalResolverOutput_clientToken})
@@ -2385,7 +2355,9 @@ var sDeleteGlobalResolverOutput_status = smithy.NewStaticSchema(smithy.StaticSch
 var sDeleteGlobalResolverOutput_ipv4Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv4Addresses", ID: &i_IPv4Addresses, Members: &m_IPv4Addresses, Type: smithy.ShapeTypeList, Ext: &eDeleteGlobalResolverOutput_ipv4Addresses})
 var sDeleteGlobalResolverOutput_ipv6Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv6Addresses", ID: &i_IPv6Addresses, Members: &m_IPv6Addresses, Type: smithy.ShapeTypeList, Ext: &eDeleteGlobalResolverOutput_ipv6Addresses})
 var sDeleteGlobalResolverOutput_ipAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddressType", ID: &iGlobalResolverIpAddressType, Members: &mGlobalResolverIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eDeleteGlobalResolverOutput_ipAddressType})
+var sDisableDNSViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDNSViewInput, Members: &mDisableDNSViewInput, Type: smithy.ShapeTypeStructure, Ext: &eDisableDNSViewInput})
 var sDisableDNSViewInput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsViewId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDisableDNSViewInput_dnsViewId})
+var sDisableDNSViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDNSViewOutput, Members: &mDisableDNSViewOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisableDNSViewOutput})
 var sDisableDNSViewOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDisableDNSViewOutput_id})
 var sDisableDNSViewOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDisableDNSViewOutput_arn})
 var sDisableDNSViewOutput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDisableDNSViewOutput_clientToken})
@@ -2398,8 +2370,10 @@ var sDisableDNSViewOutput_globalResolverId = smithy.NewStaticSchema(smithy.Stati
 var sDisableDNSViewOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDisableDNSViewOutput_createdAt})
 var sDisableDNSViewOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDisableDNSViewOutput_updatedAt})
 var sDisableDNSViewOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iProfileResourceStatus, Members: &mProfileResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eDisableDNSViewOutput_status})
+var sDisassociateHostedZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateHostedZoneInput, Members: &mDisassociateHostedZoneInput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateHostedZoneInput})
 var sDisassociateHostedZoneInput_hostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostedZoneId", ID: &i_HostedZoneId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDisassociateHostedZoneInput_hostedZoneId})
 var sDisassociateHostedZoneInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eDisassociateHostedZoneInput_resourceArn})
+var sDisassociateHostedZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateHostedZoneOutput, Members: &mDisassociateHostedZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateHostedZoneOutput})
 var sDisassociateHostedZoneOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eDisassociateHostedZoneOutput_id})
 var sDisassociateHostedZoneOutput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateHostedZoneOutput_resourceArn})
 var sDisassociateHostedZoneOutput_hostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostedZoneId", ID: &i_HostedZoneId, Type: smithy.ShapeTypeString, Ext: &eDisassociateHostedZoneOutput_hostedZoneId})
@@ -2408,7 +2382,9 @@ var sDisassociateHostedZoneOutput_name = smithy.NewStaticSchema(smithy.StaticSch
 var sDisassociateHostedZoneOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDisassociateHostedZoneOutput_createdAt})
 var sDisassociateHostedZoneOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eDisassociateHostedZoneOutput_updatedAt})
 var sDisassociateHostedZoneOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iHostedZoneAssociationStatus, Members: &mHostedZoneAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eDisassociateHostedZoneOutput_status})
+var sEnableDNSViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDNSViewInput, Members: &mEnableDNSViewInput, Type: smithy.ShapeTypeStructure, Ext: &eEnableDNSViewInput})
 var sEnableDNSViewInput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsViewId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eEnableDNSViewInput_dnsViewId})
+var sEnableDNSViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDNSViewOutput, Members: &mEnableDNSViewOutput, Type: smithy.ShapeTypeStructure, Ext: &eEnableDNSViewOutput})
 var sEnableDNSViewOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eEnableDNSViewOutput_id})
 var sEnableDNSViewOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eEnableDNSViewOutput_arn})
 var sEnableDNSViewOutput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eEnableDNSViewOutput_clientToken})
@@ -2421,7 +2397,9 @@ var sEnableDNSViewOutput_globalResolverId = smithy.NewStaticSchema(smithy.Static
 var sEnableDNSViewOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eEnableDNSViewOutput_createdAt})
 var sEnableDNSViewOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eEnableDNSViewOutput_updatedAt})
 var sEnableDNSViewOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iProfileResourceStatus, Members: &mProfileResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eEnableDNSViewOutput_status})
+var sGetAccessSourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessSourceInput, Members: &mGetAccessSourceInput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessSourceInput})
 var sGetAccessSourceInput_accessSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessSourceId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eGetAccessSourceInput_accessSourceId})
+var sGetAccessSourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessSourceOutput, Members: &mGetAccessSourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessSourceOutput})
 var sGetAccessSourceOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetAccessSourceOutput_arn})
 var sGetAccessSourceOutput_cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cidr", ID: &i_Cidr, Type: smithy.ShapeTypeString, Ext: &eGetAccessSourceOutput_cidr})
 var sGetAccessSourceOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAccessSourceOutput_createdAt})
@@ -2432,7 +2410,9 @@ var sGetAccessSourceOutput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchem
 var sGetAccessSourceOutput_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iDnsProtocol, Members: &mDnsProtocol, Type: smithy.ShapeTypeEnum, Ext: &eGetAccessSourceOutput_protocol})
 var sGetAccessSourceOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetAccessSourceOutput_status})
 var sGetAccessSourceOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAccessSourceOutput_updatedAt})
+var sGetAccessTokenInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessTokenInput, Members: &mGetAccessTokenInput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessTokenInput})
 var sGetAccessTokenInput_accessTokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessTokenId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eGetAccessTokenInput_accessTokenId})
+var sGetAccessTokenOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessTokenOutput, Members: &mGetAccessTokenOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccessTokenOutput})
 var sGetAccessTokenOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetAccessTokenOutput_id})
 var sGetAccessTokenOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetAccessTokenOutput_arn})
 var sGetAccessTokenOutput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eGetAccessTokenOutput_clientToken})
@@ -2444,7 +2424,9 @@ var sGetAccessTokenOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Memb
 var sGetAccessTokenOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTokenStatus, Members: &mTokenStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetAccessTokenOutput_status})
 var sGetAccessTokenOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAccessTokenOutput_updatedAt})
 var sGetAccessTokenOutput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AccessTokenValue, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eGetAccessTokenOutput_value})
+var sGetDNSViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDNSViewInput, Members: &mGetDNSViewInput, Type: smithy.ShapeTypeStructure, Ext: &eGetDNSViewInput})
 var sGetDNSViewInput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsViewId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eGetDNSViewInput_dnsViewId})
+var sGetDNSViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDNSViewOutput, Members: &mGetDNSViewOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetDNSViewOutput})
 var sGetDNSViewOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetDNSViewOutput_id})
 var sGetDNSViewOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetDNSViewOutput_arn})
 var sGetDNSViewOutput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eGetDNSViewOutput_clientToken})
@@ -2457,7 +2439,9 @@ var sGetDNSViewOutput_globalResolverId = smithy.NewStaticSchema(smithy.StaticSch
 var sGetDNSViewOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDNSViewOutput_createdAt})
 var sGetDNSViewOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDNSViewOutput_updatedAt})
 var sGetDNSViewOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iProfileResourceStatus, Members: &mProfileResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetDNSViewOutput_status})
+var sGetFirewallDomainListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFirewallDomainListInput, Members: &mGetFirewallDomainListInput, Type: smithy.ShapeTypeStructure, Ext: &eGetFirewallDomainListInput})
 var sGetFirewallDomainListInput_firewallDomainListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallDomainListId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eGetFirewallDomainListInput_firewallDomainListId})
+var sGetFirewallDomainListOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFirewallDomainListOutput, Members: &mGetFirewallDomainListOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetFirewallDomainListOutput})
 var sGetFirewallDomainListOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetFirewallDomainListOutput_arn})
 var sGetFirewallDomainListOutput_globalResolverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalResolverId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetFirewallDomainListOutput_globalResolverId})
 var sGetFirewallDomainListOutput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eGetFirewallDomainListOutput_clientToken})
@@ -2469,7 +2453,9 @@ var sGetFirewallDomainListOutput_name = smithy.NewStaticSchema(smithy.StaticSche
 var sGetFirewallDomainListOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetFirewallDomainListOutput_status})
 var sGetFirewallDomainListOutput_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetFirewallDomainListOutput_statusMessage})
 var sGetFirewallDomainListOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eGetFirewallDomainListOutput_updatedAt})
+var sGetFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFirewallRuleInput, Members: &mGetFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eGetFirewallRuleInput})
 var sGetFirewallRuleInput_firewallRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRuleId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eGetFirewallRuleInput_firewallRuleId})
+var sGetFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFirewallRuleOutput, Members: &mGetFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetFirewallRuleOutput})
 var sGetFirewallRuleOutput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iFirewallRuleAction, Members: &mFirewallRuleAction, Type: smithy.ShapeTypeEnum, Ext: &eGetFirewallRuleOutput_action})
 var sGetFirewallRuleOutput_blockOverrideDnsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDnsType", ID: &iBlockOverrideDnsQueryType, Members: &mBlockOverrideDnsQueryType, Type: smithy.ShapeTypeEnum, Ext: &eGetFirewallRuleOutput_blockOverrideDnsType})
 var sGetFirewallRuleOutput_blockOverrideDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDomain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &eGetFirewallRuleOutput_blockOverrideDomain})
@@ -2487,7 +2473,9 @@ var sGetFirewallRuleOutput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchem
 var sGetFirewallRuleOutput_queryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryType", ID: &i_DnsQueryType, Type: smithy.ShapeTypeString, Ext: &eGetFirewallRuleOutput_queryType})
 var sGetFirewallRuleOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetFirewallRuleOutput_status})
 var sGetFirewallRuleOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eGetFirewallRuleOutput_updatedAt})
+var sGetGlobalResolverInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGlobalResolverInput, Members: &mGetGlobalResolverInput, Type: smithy.ShapeTypeStructure, Ext: &eGetGlobalResolverInput})
 var sGetGlobalResolverInput_globalResolverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalResolverId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eGetGlobalResolverInput_globalResolverId})
+var sGetGlobalResolverOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGlobalResolverOutput, Members: &mGetGlobalResolverOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetGlobalResolverOutput})
 var sGetGlobalResolverOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetGlobalResolverOutput_id})
 var sGetGlobalResolverOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetGlobalResolverOutput_arn})
 var sGetGlobalResolverOutput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eGetGlobalResolverOutput_clientToken})
@@ -2502,7 +2490,9 @@ var sGetGlobalResolverOutput_status = smithy.NewStaticSchema(smithy.StaticSchema
 var sGetGlobalResolverOutput_ipv4Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv4Addresses", ID: &i_IPv4Addresses, Members: &m_IPv4Addresses, Type: smithy.ShapeTypeList, Ext: &eGetGlobalResolverOutput_ipv4Addresses})
 var sGetGlobalResolverOutput_ipv6Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv6Addresses", ID: &i_IPv6Addresses, Members: &m_IPv6Addresses, Type: smithy.ShapeTypeList, Ext: &eGetGlobalResolverOutput_ipv6Addresses})
 var sGetGlobalResolverOutput_ipAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddressType", ID: &iGlobalResolverIpAddressType, Members: &mGlobalResolverIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eGetGlobalResolverOutput_ipAddressType})
+var sGetHostedZoneAssociationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHostedZoneAssociationInput, Members: &mGetHostedZoneAssociationInput, Type: smithy.ShapeTypeStructure, Ext: &eGetHostedZoneAssociationInput})
 var sGetHostedZoneAssociationInput_hostedZoneAssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostedZoneAssociationId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eGetHostedZoneAssociationInput_hostedZoneAssociationId})
+var sGetHostedZoneAssociationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHostedZoneAssociationOutput, Members: &mGetHostedZoneAssociationOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetHostedZoneAssociationOutput})
 var sGetHostedZoneAssociationOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetHostedZoneAssociationOutput_id})
 var sGetHostedZoneAssociationOutput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetHostedZoneAssociationOutput_resourceArn})
 var sGetHostedZoneAssociationOutput_hostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostedZoneId", ID: &i_HostedZoneId, Type: smithy.ShapeTypeString, Ext: &eGetHostedZoneAssociationOutput_hostedZoneId})
@@ -2511,78 +2501,110 @@ var sGetHostedZoneAssociationOutput_name = smithy.NewStaticSchema(smithy.StaticS
 var sGetHostedZoneAssociationOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eGetHostedZoneAssociationOutput_createdAt})
 var sGetHostedZoneAssociationOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eGetHostedZoneAssociationOutput_updatedAt})
 var sGetHostedZoneAssociationOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iHostedZoneAssociationStatus, Members: &mHostedZoneAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetHostedZoneAssociationOutput_status})
+var sGetManagedFirewallDomainListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedFirewallDomainListInput, Members: &mGetManagedFirewallDomainListInput, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedFirewallDomainListInput})
 var sGetManagedFirewallDomainListInput_managedFirewallDomainListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedFirewallDomainListId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eGetManagedFirewallDomainListInput_managedFirewallDomainListId})
+var sGetManagedFirewallDomainListOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedFirewallDomainListOutput, Members: &mGetManagedFirewallDomainListOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedFirewallDomainListOutput})
 var sGetManagedFirewallDomainListOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eGetManagedFirewallDomainListOutput_description})
 var sGetManagedFirewallDomainListOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eGetManagedFirewallDomainListOutput_id})
 var sGetManagedFirewallDomainListOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGetManagedFirewallDomainListOutput_name})
 var sGetManagedFirewallDomainListOutput_managedListType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedListType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetManagedFirewallDomainListOutput_managedListType})
+var sImportFirewallDomainsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportFirewallDomainsInput, Members: &mImportFirewallDomainsInput, Type: smithy.ShapeTypeStructure, Ext: &eImportFirewallDomainsInput})
 var sImportFirewallDomainsInput_domainFileUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainFileUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImportFirewallDomainsInput_domainFileUrl})
 var sImportFirewallDomainsInput_firewallDomainListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallDomainListId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eImportFirewallDomainsInput_firewallDomainListId})
 var sImportFirewallDomainsInput_operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImportFirewallDomainsInput_operation})
+var sImportFirewallDomainsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportFirewallDomainsOutput, Members: &mImportFirewallDomainsOutput, Type: smithy.ShapeTypeStructure, Ext: &eImportFirewallDomainsOutput})
 var sImportFirewallDomainsOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eImportFirewallDomainsOutput_id})
 var sImportFirewallDomainsOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eImportFirewallDomainsOutput_name})
 var sImportFirewallDomainsOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eImportFirewallDomainsOutput_status})
+var sListAccessSourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessSourcesInput, Members: &mListAccessSourcesInput, Type: smithy.ShapeTypeStructure, Ext: &eListAccessSourcesInput})
 var sListAccessSourcesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t61, Type: smithy.ShapeTypeInteger, Ext: &eListAccessSourcesInput_maxResults})
 var sListAccessSourcesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListAccessSourcesInput_nextToken})
 var sListAccessSourcesInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_Filters, Members: &m_Filters, Traits: &t63, Type: smithy.ShapeTypeMap, Ext: &eListAccessSourcesInput_filters})
+var sListAccessSourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessSourcesOutput, Members: &mListAccessSourcesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListAccessSourcesOutput})
 var sListAccessSourcesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAccessSourcesOutput_nextToken})
 var sListAccessSourcesOutput_accessSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessSources", ID: &i_AccessSources, Members: &m_AccessSources, Type: smithy.ShapeTypeList, Ext: &eListAccessSourcesOutput_accessSources})
+var sListAccessTokensInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessTokensInput, Members: &mListAccessTokensInput, Type: smithy.ShapeTypeStructure, Ext: &eListAccessTokensInput})
 var sListAccessTokensInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t61, Type: smithy.ShapeTypeInteger, Ext: &eListAccessTokensInput_maxResults})
 var sListAccessTokensInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListAccessTokensInput_nextToken})
 var sListAccessTokensInput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsViewId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eListAccessTokensInput_dnsViewId})
 var sListAccessTokensInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_Filters, Members: &m_Filters, Traits: &t63, Type: smithy.ShapeTypeMap, Ext: &eListAccessTokensInput_filters})
+var sListAccessTokensOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessTokensOutput, Members: &mListAccessTokensOutput, Type: smithy.ShapeTypeStructure, Ext: &eListAccessTokensOutput})
 var sListAccessTokensOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAccessTokensOutput_nextToken})
 var sListAccessTokensOutput_accessTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessTokens", ID: &i_AccessTokens, Members: &m_AccessTokens, Type: smithy.ShapeTypeList, Ext: &eListAccessTokensOutput_accessTokens})
+var sListDNSViewsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDNSViewsInput, Members: &mListDNSViewsInput, Type: smithy.ShapeTypeStructure, Ext: &eListDNSViewsInput})
 var sListDNSViewsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t61, Type: smithy.ShapeTypeInteger, Ext: &eListDNSViewsInput_maxResults})
 var sListDNSViewsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListDNSViewsInput_nextToken})
 var sListDNSViewsInput_globalResolverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalResolverId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eListDNSViewsInput_globalResolverId})
+var sListDNSViewsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDNSViewsOutput, Members: &mListDNSViewsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListDNSViewsOutput})
 var sListDNSViewsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListDNSViewsOutput_nextToken})
 var sListDNSViewsOutput_dnsViews = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsViews", ID: &i_DNSViews, Members: &m_DNSViews, Type: smithy.ShapeTypeList, Ext: &eListDNSViewsOutput_dnsViews})
+var sListFirewallDomainListsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallDomainListsInput, Members: &mListFirewallDomainListsInput, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallDomainListsInput})
 var sListFirewallDomainListsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t61, Type: smithy.ShapeTypeInteger, Ext: &eListFirewallDomainListsInput_maxResults})
 var sListFirewallDomainListsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListFirewallDomainListsInput_nextToken})
 var sListFirewallDomainListsInput_globalResolverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalResolverId", ID: &i_ResourceId, Traits: &t64, Type: smithy.ShapeTypeString, Ext: &eListFirewallDomainListsInput_globalResolverId})
+var sListFirewallDomainListsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallDomainListsOutput, Members: &mListFirewallDomainListsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallDomainListsOutput})
 var sListFirewallDomainListsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListFirewallDomainListsOutput_nextToken})
 var sListFirewallDomainListsOutput_firewallDomainLists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallDomainLists", ID: &i_FirewallDomainLists, Members: &m_FirewallDomainLists, Type: smithy.ShapeTypeList, Ext: &eListFirewallDomainListsOutput_firewallDomainLists})
+var sListFirewallDomainsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallDomainsInput, Members: &mListFirewallDomainsInput, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallDomainsInput})
 var sListFirewallDomainsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t61, Type: smithy.ShapeTypeInteger, Ext: &eListFirewallDomainsInput_maxResults})
 var sListFirewallDomainsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListFirewallDomainsInput_nextToken})
 var sListFirewallDomainsInput_firewallDomainListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallDomainListId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eListFirewallDomainsInput_firewallDomainListId})
+var sListFirewallDomainsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallDomainsOutput, Members: &mListFirewallDomainsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallDomainsOutput})
 var sListFirewallDomainsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListFirewallDomainsOutput_nextToken})
 var sListFirewallDomainsOutput_domains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domains", ID: &i_Domains, Members: &m_Domains, Type: smithy.ShapeTypeList, Ext: &eListFirewallDomainsOutput_domains})
+var sListFirewallRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallRulesInput, Members: &mListFirewallRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallRulesInput})
 var sListFirewallRulesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t61, Type: smithy.ShapeTypeInteger, Ext: &eListFirewallRulesInput_maxResults})
 var sListFirewallRulesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListFirewallRulesInput_nextToken})
 var sListFirewallRulesInput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsViewId", ID: &i_ResourceId, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eListFirewallRulesInput_dnsViewId})
 var sListFirewallRulesInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_Filters, Members: &m_Filters, Traits: &t63, Type: smithy.ShapeTypeMap, Ext: &eListFirewallRulesInput_filters})
+var sListFirewallRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallRulesOutput, Members: &mListFirewallRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallRulesOutput})
 var sListFirewallRulesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListFirewallRulesOutput_nextToken})
 var sListFirewallRulesOutput_firewallRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRules", ID: &i_FirewallRules, Members: &m_FirewallRules, Type: smithy.ShapeTypeList, Ext: &eListFirewallRulesOutput_firewallRules})
+var sListGlobalResolversInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGlobalResolversInput, Members: &mListGlobalResolversInput, Type: smithy.ShapeTypeStructure, Ext: &eListGlobalResolversInput})
 var sListGlobalResolversInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t61, Type: smithy.ShapeTypeInteger, Ext: &eListGlobalResolversInput_maxResults})
 var sListGlobalResolversInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListGlobalResolversInput_nextToken})
+var sListGlobalResolversOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGlobalResolversOutput, Members: &mListGlobalResolversOutput, Type: smithy.ShapeTypeStructure, Ext: &eListGlobalResolversOutput})
 var sListGlobalResolversOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListGlobalResolversOutput_nextToken})
 var sListGlobalResolversOutput_globalResolvers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalResolvers", ID: &i_GlobalResolvers, Members: &m_GlobalResolvers, Type: smithy.ShapeTypeList, Ext: &eListGlobalResolversOutput_globalResolvers})
+var sListHostedZoneAssociationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHostedZoneAssociationsInput, Members: &mListHostedZoneAssociationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListHostedZoneAssociationsInput})
 var sListHostedZoneAssociationsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t61, Type: smithy.ShapeTypeInteger, Ext: &eListHostedZoneAssociationsInput_maxResults})
 var sListHostedZoneAssociationsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListHostedZoneAssociationsInput_nextToken})
 var sListHostedZoneAssociationsInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t66, Type: smithy.ShapeTypeString, Ext: &eListHostedZoneAssociationsInput_resourceArn})
+var sListHostedZoneAssociationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHostedZoneAssociationsOutput, Members: &mListHostedZoneAssociationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListHostedZoneAssociationsOutput})
 var sListHostedZoneAssociationsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListHostedZoneAssociationsOutput_nextToken})
 var sListHostedZoneAssociationsOutput_hostedZoneAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostedZoneAssociations", ID: &i_HostedZoneAssociations, Members: &m_HostedZoneAssociations, Type: smithy.ShapeTypeList, Ext: &eListHostedZoneAssociationsOutput_hostedZoneAssociations})
+var sListManagedFirewallDomainListsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedFirewallDomainListsInput, Members: &mListManagedFirewallDomainListsInput, Type: smithy.ShapeTypeStructure, Ext: &eListManagedFirewallDomainListsInput})
 var sListManagedFirewallDomainListsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t61, Type: smithy.ShapeTypeInteger, Ext: &eListManagedFirewallDomainListsInput_maxResults})
 var sListManagedFirewallDomainListsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListManagedFirewallDomainListsInput_nextToken})
 var sListManagedFirewallDomainListsInput_managedFirewallDomainListType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedFirewallDomainListType", ID: &pString, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eListManagedFirewallDomainListsInput_managedFirewallDomainListType})
+var sListManagedFirewallDomainListsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedFirewallDomainListsOutput, Members: &mListManagedFirewallDomainListsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListManagedFirewallDomainListsOutput})
 var sListManagedFirewallDomainListsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListManagedFirewallDomainListsOutput_nextToken})
 var sListManagedFirewallDomainListsOutput_managedFirewallDomainLists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedFirewallDomainLists", ID: &i_ManagedFirewallDomainLists, Members: &m_ManagedFirewallDomainLists, Type: smithy.ShapeTypeList, Ext: &eListManagedFirewallDomainListsOutput_managedFirewallDomainLists})
+var sListSharedDNSViewsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedDNSViewsInput, Members: &mListSharedDNSViewsInput, Type: smithy.ShapeTypeStructure, Ext: &eListSharedDNSViewsInput})
 var sListSharedDNSViewsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t61, Type: smithy.ShapeTypeInteger, Ext: &eListSharedDNSViewsInput_maxResults})
 var sListSharedDNSViewsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t62, Type: smithy.ShapeTypeString, Ext: &eListSharedDNSViewsInput_nextToken})
+var sListSharedDNSViewsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedDNSViewsOutput, Members: &mListSharedDNSViewsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListSharedDNSViewsOutput})
 var sListSharedDNSViewsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListSharedDNSViewsOutput_nextToken})
 var sListSharedDNSViewsOutput_dnsViews = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsViews", ID: &i_SharedDNSViews, Members: &m_SharedDNSViews, Type: smithy.ShapeTypeList, Ext: &eListSharedDNSViewsOutput_dnsViews})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
 var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
 var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
 var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
 var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
 var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
 var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateAccessSourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccessSourceInput, Members: &mUpdateAccessSourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccessSourceInput})
 var sUpdateAccessSourceInput_accessSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessSourceId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eUpdateAccessSourceInput_accessSourceId})
 var sUpdateAccessSourceInput_cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cidr", ID: &i_Cidr, Type: smithy.ShapeTypeString, Ext: &eUpdateAccessSourceInput_cidr})
 var sUpdateAccessSourceInput_ipAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAccessSourceInput_ipAddressType})
 var sUpdateAccessSourceInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceNameShort, Type: smithy.ShapeTypeString, Ext: &eUpdateAccessSourceInput_name})
 var sUpdateAccessSourceInput_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iDnsProtocol, Members: &mDnsProtocol, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAccessSourceInput_protocol})
+var sUpdateAccessSourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccessSourceOutput, Members: &mUpdateAccessSourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccessSourceOutput})
 var sUpdateAccessSourceOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateAccessSourceOutput_arn})
 var sUpdateAccessSourceOutput_cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cidr", ID: &i_Cidr, Type: smithy.ShapeTypeString, Ext: &eUpdateAccessSourceOutput_cidr})
 var sUpdateAccessSourceOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateAccessSourceOutput_createdAt})
@@ -2593,16 +2615,20 @@ var sUpdateAccessSourceOutput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSc
 var sUpdateAccessSourceOutput_protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protocol", ID: &iDnsProtocol, Members: &mDnsProtocol, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAccessSourceOutput_protocol})
 var sUpdateAccessSourceOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAccessSourceOutput_status})
 var sUpdateAccessSourceOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateAccessSourceOutput_updatedAt})
+var sUpdateAccessTokenInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccessTokenInput, Members: &mUpdateAccessTokenInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccessTokenInput})
 var sUpdateAccessTokenInput_accessTokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessTokenId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eUpdateAccessTokenInput_accessTokenId})
 var sUpdateAccessTokenInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceNameShort, Type: smithy.ShapeTypeString, Ext: &eUpdateAccessTokenInput_name})
+var sUpdateAccessTokenOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccessTokenOutput, Members: &mUpdateAccessTokenOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccessTokenOutput})
 var sUpdateAccessTokenOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateAccessTokenOutput_id})
 var sUpdateAccessTokenOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceNameShort, Type: smithy.ShapeTypeString, Ext: &eUpdateAccessTokenOutput_name})
+var sUpdateDNSViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDNSViewInput, Members: &mUpdateDNSViewInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDNSViewInput})
 var sUpdateDNSViewInput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsViewId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eUpdateDNSViewInput_dnsViewId})
 var sUpdateDNSViewInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateDNSViewInput_name})
 var sUpdateDNSViewInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateDNSViewInput_description})
 var sUpdateDNSViewInput_dnssecValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnssecValidation", ID: &iDnsSecValidationType, Members: &mDnsSecValidationType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateDNSViewInput_dnssecValidation})
 var sUpdateDNSViewInput_ednsClientSubnet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ednsClientSubnet", ID: &iEdnsClientSubnetType, Members: &mEdnsClientSubnetType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateDNSViewInput_ednsClientSubnet})
 var sUpdateDNSViewInput_firewallRulesFailOpen = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRulesFailOpen", ID: &iFirewallRulesFailOpenType, Members: &mFirewallRulesFailOpenType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateDNSViewInput_firewallRulesFailOpen})
+var sUpdateDNSViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDNSViewOutput, Members: &mUpdateDNSViewOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDNSViewOutput})
 var sUpdateDNSViewOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateDNSViewOutput_id})
 var sUpdateDNSViewOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateDNSViewOutput_arn})
 var sUpdateDNSViewOutput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateDNSViewOutput_clientToken})
@@ -2615,12 +2641,15 @@ var sUpdateDNSViewOutput_globalResolverId = smithy.NewStaticSchema(smithy.Static
 var sUpdateDNSViewOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateDNSViewOutput_createdAt})
 var sUpdateDNSViewOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateDNSViewOutput_updatedAt})
 var sUpdateDNSViewOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iProfileResourceStatus, Members: &mProfileResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateDNSViewOutput_status})
+var sUpdateFirewallDomainsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDomainsInput, Members: &mUpdateFirewallDomainsInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallDomainsInput})
 var sUpdateFirewallDomainsInput_domains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domains", ID: &i_Domains, Members: &m_Domains, Type: smithy.ShapeTypeList, Ext: &eUpdateFirewallDomainsInput_domains})
 var sUpdateFirewallDomainsInput_firewallDomainListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallDomainListId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDomainsInput_firewallDomainListId})
 var sUpdateFirewallDomainsInput_operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDomainsInput_operation})
+var sUpdateFirewallDomainsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDomainsOutput, Members: &mUpdateFirewallDomainsOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallDomainsOutput})
 var sUpdateFirewallDomainsOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDomainsOutput_id})
 var sUpdateFirewallDomainsOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDomainsOutput_name})
 var sUpdateFirewallDomainsOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateFirewallDomainsOutput_status})
+var sUpdateFirewallRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallRuleInput, Members: &mUpdateFirewallRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallRuleInput})
 var sUpdateFirewallRuleInput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iFirewallRuleAction, Members: &mFirewallRuleAction, Type: smithy.ShapeTypeEnum, Ext: &eUpdateFirewallRuleInput_action})
 var sUpdateFirewallRuleInput_blockOverrideDnsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDnsType", ID: &iBlockOverrideDnsQueryType, Members: &mBlockOverrideDnsQueryType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateFirewallRuleInput_blockOverrideDnsType})
 var sUpdateFirewallRuleInput_blockOverrideDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDomain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallRuleInput_blockOverrideDomain})
@@ -2633,6 +2662,7 @@ var sUpdateFirewallRuleInput_dnsAdvancedProtection = smithy.NewStaticSchema(smit
 var sUpdateFirewallRuleInput_firewallRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firewallRuleId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallRuleInput_firewallRuleId})
 var sUpdateFirewallRuleInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallRuleInput_name})
 var sUpdateFirewallRuleInput_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_FirewallRulePriority, Type: smithy.ShapeTypeLong, Ext: &eUpdateFirewallRuleInput_priority})
+var sUpdateFirewallRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallRuleOutput, Members: &mUpdateFirewallRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallRuleOutput})
 var sUpdateFirewallRuleOutput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iFirewallRuleAction, Members: &mFirewallRuleAction, Type: smithy.ShapeTypeEnum, Ext: &eUpdateFirewallRuleOutput_action})
 var sUpdateFirewallRuleOutput_blockOverrideDnsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDnsType", ID: &iBlockOverrideDnsQueryType, Members: &mBlockOverrideDnsQueryType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateFirewallRuleOutput_blockOverrideDnsType})
 var sUpdateFirewallRuleOutput_blockOverrideDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockOverrideDomain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallRuleOutput_blockOverrideDomain})
@@ -2650,12 +2680,14 @@ var sUpdateFirewallRuleOutput_dnsViewId = smithy.NewStaticSchema(smithy.StaticSc
 var sUpdateFirewallRuleOutput_queryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryType", ID: &i_DnsQueryType, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallRuleOutput_queryType})
 var sUpdateFirewallRuleOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCRResourceStatus, Members: &mCRResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateFirewallRuleOutput_status})
 var sUpdateFirewallRuleOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_ISO8601TimeString, Traits: &t49, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateFirewallRuleOutput_updatedAt})
+var sUpdateGlobalResolverInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGlobalResolverInput, Members: &mUpdateGlobalResolverInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGlobalResolverInput})
 var sUpdateGlobalResolverInput_globalResolverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalResolverId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eUpdateGlobalResolverInput_globalResolverId})
 var sUpdateGlobalResolverInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateGlobalResolverInput_name})
 var sUpdateGlobalResolverInput_observabilityRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "observabilityRegion", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eUpdateGlobalResolverInput_observabilityRegion})
 var sUpdateGlobalResolverInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateGlobalResolverInput_description})
 var sUpdateGlobalResolverInput_ipAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddressType", ID: &iGlobalResolverIpAddressType, Members: &mGlobalResolverIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateGlobalResolverInput_ipAddressType})
 var sUpdateGlobalResolverInput_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList, Ext: &eUpdateGlobalResolverInput_regions})
+var sUpdateGlobalResolverOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGlobalResolverOutput, Members: &mUpdateGlobalResolverOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGlobalResolverOutput})
 var sUpdateGlobalResolverOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateGlobalResolverOutput_id})
 var sUpdateGlobalResolverOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateGlobalResolverOutput_arn})
 var sUpdateGlobalResolverOutput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateGlobalResolverOutput_clientToken})
@@ -2670,8 +2702,10 @@ var sUpdateGlobalResolverOutput_status = smithy.NewStaticSchema(smithy.StaticSch
 var sUpdateGlobalResolverOutput_ipv4Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv4Addresses", ID: &i_IPv4Addresses, Members: &m_IPv4Addresses, Type: smithy.ShapeTypeList, Ext: &eUpdateGlobalResolverOutput_ipv4Addresses})
 var sUpdateGlobalResolverOutput_ipv6Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv6Addresses", ID: &i_IPv6Addresses, Members: &m_IPv6Addresses, Type: smithy.ShapeTypeList, Ext: &eUpdateGlobalResolverOutput_ipv6Addresses})
 var sUpdateGlobalResolverOutput_ipAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddressType", ID: &iGlobalResolverIpAddressType, Members: &mGlobalResolverIpAddressType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateGlobalResolverOutput_ipAddressType})
+var sUpdateHostedZoneAssociationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHostedZoneAssociationInput, Members: &mUpdateHostedZoneAssociationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateHostedZoneAssociationInput})
 var sUpdateHostedZoneAssociationInput_hostedZoneAssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostedZoneAssociationId", ID: &i_ResourceId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eUpdateHostedZoneAssociationInput_hostedZoneAssociationId})
 var sUpdateHostedZoneAssociationInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateHostedZoneAssociationInput_name})
+var sUpdateHostedZoneAssociationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHostedZoneAssociationOutput, Members: &mUpdateHostedZoneAssociationOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateHostedZoneAssociationOutput})
 var sUpdateHostedZoneAssociationOutput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eUpdateHostedZoneAssociationOutput_id})
 var sUpdateHostedZoneAssociationOutput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateHostedZoneAssociationOutput_resourceArn})
 var sUpdateHostedZoneAssociationOutput_hostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostedZoneId", ID: &i_HostedZoneId, Type: smithy.ShapeTypeString, Ext: &eUpdateHostedZoneAssociationOutput_hostedZoneId})

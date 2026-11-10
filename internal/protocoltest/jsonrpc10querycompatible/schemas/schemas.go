@@ -16,11 +16,11 @@ var (
 )
 
 var (
-	iGetItem                = smithy.ShapeID{Namespace: "aws.protocoltests.json", Name: "GetItem"}
-	i_Json10QueryCompatible = smithy.ShapeID{Namespace: "aws.protocoltests.json", Name: "Json10QueryCompatible"}
-	iItemNotFound           = smithy.ShapeID{Namespace: "aws.protocoltests.json", Name: "ItemNotFound"}
-	iGetItemInput           = smithy.ShapeID{Namespace: "aws.protocoltests.json", Name: "GetItemInput"}
-	iGetItemOutput          = smithy.ShapeID{Namespace: "aws.protocoltests.json", Name: "GetItemOutput"}
+	iGetItem                = smithy.ShapeName{Namespace: "aws.protocoltests.json", Name: "GetItem"}
+	i_Json10QueryCompatible = smithy.ShapeName{Namespace: "aws.protocoltests.json", Name: "Json10QueryCompatible"}
+	iItemNotFound           = smithy.ShapeName{Namespace: "aws.protocoltests.json", Name: "ItemNotFound"}
+	iGetItemInput           = smithy.ShapeName{Namespace: "aws.protocoltests.json", Name: "GetItemInput"}
+	iGetItemOutput          = smithy.ShapeName{Namespace: "aws.protocoltests.json", Name: "GetItemOutput"}
 )
 
 var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.AWSQueryCompatible{}}}

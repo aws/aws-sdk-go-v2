@@ -114,37 +114,37 @@ var (
 )
 
 var (
-	iListRecommendedActions                         = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ListRecommendedActions"}
-	i_AWSBillingAndCostManagementRecommendedActions = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "AWSBillingAndCostManagementRecommendedActions"}
-	iAccessDeniedException                          = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "AccessDeniedException"}
-	i_AccountId                                     = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "AccountId"}
-	iActionFilter                                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ActionFilter"}
-	i_ActionFilterList                              = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ActionFilterList"}
-	iActionType                                     = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ActionType"}
-	i_Context                                       = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "Context"}
-	iFeature                                        = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "Feature"}
-	iFilterName                                     = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "FilterName"}
-	i_FilterValue                                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "FilterValue"}
-	i_FilterValues                                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "FilterValues"}
-	iInternalServerException                        = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "InternalServerException"}
-	iMatchOption                                    = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "MatchOption"}
-	i_MaxResults                                    = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "MaxResults"}
-	i_NextStep                                      = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "NextStep"}
-	i_NextSteps                                     = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "NextSteps"}
-	i_NextToken                                     = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "NextToken"}
-	iRecommendedAction                              = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "RecommendedAction"}
-	i_RecommendedActions                            = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "RecommendedActions"}
-	iRequestFilter                                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "RequestFilter"}
-	iSeverity                                       = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "Severity"}
-	iThrottlingException                            = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ThrottlingException"}
-	iValidationException                            = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ValidationException"}
-	iValidationExceptionField                       = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ValidationExceptionField"}
-	i_ValidationExceptionFieldList                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ValidationExceptionFieldList"}
-	iValidationExceptionReason                      = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ValidationExceptionReason"}
-	iListRecommendedActionsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ListRecommendedActionsRequest"}
-	iListRecommendedActionsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ListRecommendedActionsResponse"}
-	pString                                         = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
-	pUnit                                           = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	iListRecommendedActions                         = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ListRecommendedActions"}
+	i_AWSBillingAndCostManagementRecommendedActions = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "AWSBillingAndCostManagementRecommendedActions"}
+	iAccessDeniedException                          = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "AccessDeniedException"}
+	i_AccountId                                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "AccountId"}
+	iActionFilter                                   = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ActionFilter"}
+	i_ActionFilterList                              = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ActionFilterList"}
+	iActionType                                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ActionType"}
+	i_Context                                       = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "Context"}
+	iFeature                                        = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "Feature"}
+	iFilterName                                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "FilterName"}
+	i_FilterValue                                   = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "FilterValue"}
+	i_FilterValues                                  = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "FilterValues"}
+	iInternalServerException                        = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "InternalServerException"}
+	iMatchOption                                    = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "MatchOption"}
+	i_MaxResults                                    = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "MaxResults"}
+	i_NextStep                                      = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "NextStep"}
+	i_NextSteps                                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "NextSteps"}
+	i_NextToken                                     = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "NextToken"}
+	iRecommendedAction                              = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "RecommendedAction"}
+	i_RecommendedActions                            = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "RecommendedActions"}
+	iRequestFilter                                  = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "RequestFilter"}
+	iSeverity                                       = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "Severity"}
+	iThrottlingException                            = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ThrottlingException"}
+	iValidationException                            = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ValidationException"}
+	iValidationExceptionField                       = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList                  = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason                      = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ValidationExceptionReason"}
+	iListRecommendedActionsRequest                  = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ListRecommendedActionsRequest"}
+	iListRecommendedActionsResponse                 = smithy.ShapeName{Namespace: "com.amazonaws.bcmrecommendedactions", Name: "ListRecommendedActionsResponse"}
+	pString                                         = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pUnit                                           = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
 )
 
 var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "BCMRecommendedActionsAccessDenied",
@@ -159,16 +159,9 @@ var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &
 var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
 var mActionFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sActionFilter_key, &sActionFilter_matchOption, &sActionFilter_values}}
 var m_ActionFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActionFilterList_member}}
-var mActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sActionType_ADD_ALTERNATE_BILLING_CONTACT, &sActionType_CREATE_ANOMALY_MONITOR, &sActionType_CREATE_BUDGET, &sActionType_ENABLE_COST_OPTIMIZATION_HUB, &sActionType_MIGRATE_TO_GRANULAR_PERMISSIONS, &sActionType_PAYMENTS_DUE, &sActionType_PAYMENTS_PAST_DUE, &sActionType_REVIEW_ANOMALIES, &sActionType_REVIEW_BUDGET_ALERTS, &sActionType_REVIEW_BUDGETS_EXCEEDED, &sActionType_REVIEW_EXPIRING_RI, &sActionType_REVIEW_EXPIRING_SP, &sActionType_REVIEW_FREETIER_USAGE_ALERTS, &sActionType_REVIEW_FREETIER_CREDITS_REMAINING, &sActionType_REVIEW_FREETIER_DAYS_REMAINING, &sActionType_REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS, &sActionType_UPDATE_EXPIRED_PAYMENT_METHOD, &sActionType_UPDATE_INVALID_PAYMENT_METHOD, &sActionType_UPDATE_TAX_EXEMPTION_CERTIFICATE, &sActionType_UPDATE_TAX_REGISTRATION_NUMBER}, Seed: 21, Slots: []uint16{
-	0, 0, 0, 0, 3, 0, 7, 10, 0, 19, 0, 0, 0, 0, 16, 14, 18, 0, 0, 0, 0, 0, 5, 0,
-	4, 1, 0, 0, 0, 6, 17, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 9,
-	0, 0, 0, 0, 0, 15, 12, 20, 0, 0, 0, 0, 0, 0, 2, 8,
-}}
+var mActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sActionType_ADD_ALTERNATE_BILLING_CONTACT, &sActionType_CREATE_ANOMALY_MONITOR, &sActionType_CREATE_BUDGET, &sActionType_ENABLE_COST_OPTIMIZATION_HUB, &sActionType_MIGRATE_TO_GRANULAR_PERMISSIONS, &sActionType_PAYMENTS_DUE, &sActionType_PAYMENTS_PAST_DUE, &sActionType_REVIEW_ANOMALIES, &sActionType_REVIEW_BUDGET_ALERTS, &sActionType_REVIEW_BUDGETS_EXCEEDED, &sActionType_REVIEW_EXPIRING_RI, &sActionType_REVIEW_EXPIRING_SP, &sActionType_REVIEW_FREETIER_USAGE_ALERTS, &sActionType_REVIEW_FREETIER_CREDITS_REMAINING, &sActionType_REVIEW_FREETIER_DAYS_REMAINING, &sActionType_REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS, &sActionType_UPDATE_EXPIRED_PAYMENT_METHOD, &sActionType_UPDATE_INVALID_PAYMENT_METHOD, &sActionType_UPDATE_TAX_EXEMPTION_CERTIFICATE, &sActionType_UPDATE_TAX_REGISTRATION_NUMBER}, Hash: &hActionType}
 var m_Context = smithy.SchemaMembers{List: []*smithy.Schema{&s_Context_key, &s_Context_value}}
-var mFeature = smithy.SchemaMembers{List: []*smithy.Schema{&sFeature_ACCOUNT, &sFeature_BUDGETS, &sFeature_COST_ANOMALY_DETECTION, &sFeature_COST_OPTIMIZATION_HUB, &sFeature_FREE_TIER, &sFeature_IAM, &sFeature_PAYMENTS, &sFeature_RESERVATIONS, &sFeature_SAVINGS_PLANS, &sFeature_TAX_SETTINGS}, Seed: 18, Slots: []uint16{
-	0, 0, 0, 6, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 8, 7, 9, 2,
-	4, 0, 0, 1, 0, 5, 0, 0,
-}}
+var mFeature = smithy.SchemaMembers{List: []*smithy.Schema{&sFeature_ACCOUNT, &sFeature_BUDGETS, &sFeature_COST_ANOMALY_DETECTION, &sFeature_COST_OPTIMIZATION_HUB, &sFeature_FREE_TIER, &sFeature_IAM, &sFeature_PAYMENTS, &sFeature_RESERVATIONS, &sFeature_SAVINGS_PLANS, &sFeature_TAX_SETTINGS}, Hash: &hFeature}
 var mFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterName_FEATURE, &sFilterName_SEVERITY, &sFilterName_TYPE}}
 var m_FilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterValues_member}}
 var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
@@ -186,41 +179,28 @@ var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sV
 var mListRecommendedActionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecommendedActionsRequest_filter, &sListRecommendedActionsRequest_maxResults, &sListRecommendedActionsRequest_nextToken}}
 var mListRecommendedActionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecommendedActionsResponse_recommendedActions, &sListRecommendedActionsResponse_nextToken}}
 
+var hActionType = smithy.MemberHash{Seed: 21, Slots: []uint16{
+	0, 0, 0, 0, 3, 0, 7, 10, 0, 19, 0, 0, 0, 0, 16, 14, 18, 0, 0, 0, 0, 0, 5, 0,
+	4, 1, 0, 0, 0, 6, 17, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 9,
+	0, 0, 0, 0, 0, 15, 12, 20, 0, 0, 0, 0, 0, 0, 2, 8,
+}}
+var hFeature = smithy.MemberHash{Seed: 18, Slots: []uint16{
+	0, 0, 0, 6, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 8, 7, 9, 2,
+	4, 0, 0, 1, 0, 5, 0, 0,
+}}
+
 var sListRecommendedActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendedActions, Type: smithy.ShapeTypeOperation, Ext: &eListRecommendedActions})
 var s_AWSBillingAndCostManagementRecommendedActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSBillingAndCostManagementRecommendedActions, Type: smithy.ShapeTypeService, Ext: &e_AWSBillingAndCostManagementRecommendedActions})
 var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
 var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
 var sActionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionFilter, Members: &mActionFilter, Type: smithy.ShapeTypeStructure, Ext: &eActionFilter})
-var s_ActionFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionFilterList, Members: &m_ActionFilterList, Type: smithy.ShapeTypeList, Ext: &e_ActionFilterList})
-var sActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeEnum, Ext: &eActionType})
-var s_Context = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Context, Members: &m_Context, Type: smithy.ShapeTypeMap, Ext: &e_Context})
-var sFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeature, Members: &mFeature, Type: smithy.ShapeTypeEnum, Ext: &eFeature})
-var sFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterName, Members: &mFilterName, Type: smithy.ShapeTypeEnum, Ext: &eFilterName})
-var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &e_FilterValue})
-var s_FilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &e_FilterValues})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
-var sMatchOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum, Ext: &eMatchOption})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
-var s_NextStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextStep, Type: smithy.ShapeTypeString, Ext: &e_NextStep})
-var s_NextSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextSteps, Members: &m_NextSteps, Type: smithy.ShapeTypeList, Ext: &e_NextSteps})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
-var sRecommendedAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendedAction, Members: &mRecommendedAction, Type: smithy.ShapeTypeStructure, Ext: &eRecommendedAction})
-var s_RecommendedActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendedActions, Members: &m_RecommendedActions, Type: smithy.ShapeTypeList, Ext: &e_RecommendedActions})
-var sRequestFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestFilter, Members: &mRequestFilter, Type: smithy.ShapeTypeStructure, Ext: &eRequestFilter})
-var sSeverity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSeverity, Members: &mSeverity, Type: smithy.ShapeTypeEnum, Ext: &eSeverity})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
-var sListRecommendedActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendedActionsRequest, Members: &mListRecommendedActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRecommendedActionsRequest})
-var sListRecommendedActionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendedActionsResponse, Members: &mListRecommendedActionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRecommendedActionsResponse})
-
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
 var sActionFilter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iFilterName, Members: &mFilterName, Type: smithy.ShapeTypeEnum, Ext: &eActionFilter_key})
 var sActionFilter_matchOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "matchOption", ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum, Ext: &eActionFilter_matchOption})
 var sActionFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &eActionFilter_values})
+var s_ActionFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionFilterList, Members: &m_ActionFilterList, Type: smithy.ShapeTypeList, Ext: &e_ActionFilterList})
 var s_ActionFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionFilter, Members: &mActionFilter, Type: smithy.ShapeTypeStructure, Ext: &e_ActionFilterList_member})
+var sActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeEnum, Ext: &eActionType})
 var sActionType_ADD_ALTERNATE_BILLING_CONTACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADD_ALTERNATE_BILLING_CONTACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionType_ADD_ALTERNATE_BILLING_CONTACT})
 var sActionType_CREATE_ANOMALY_MONITOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_ANOMALY_MONITOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionType_CREATE_ANOMALY_MONITOR})
 var sActionType_CREATE_BUDGET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_BUDGET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionType_CREATE_BUDGET})
@@ -241,8 +221,10 @@ var sActionType_UPDATE_EXPIRED_PAYMENT_METHOD = smithy.NewStaticSchema(smithy.St
 var sActionType_UPDATE_INVALID_PAYMENT_METHOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_INVALID_PAYMENT_METHOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionType_UPDATE_INVALID_PAYMENT_METHOD})
 var sActionType_UPDATE_TAX_EXEMPTION_CERTIFICATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_TAX_EXEMPTION_CERTIFICATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionType_UPDATE_TAX_EXEMPTION_CERTIFICATE})
 var sActionType_UPDATE_TAX_REGISTRATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_TAX_REGISTRATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionType_UPDATE_TAX_REGISTRATION_NUMBER})
+var s_Context = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Context, Members: &m_Context, Type: smithy.ShapeTypeMap, Ext: &e_Context})
 var s_Context_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Context_key})
 var s_Context_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Context_value})
+var sFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeature, Members: &mFeature, Type: smithy.ShapeTypeEnum, Ext: &eFeature})
 var sFeature_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFeature_ACCOUNT})
 var sFeature_BUDGETS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUDGETS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFeature_BUDGETS})
 var sFeature_COST_ANOMALY_DETECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COST_ANOMALY_DETECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFeature_COST_ANOMALY_DETECTION})
@@ -253,14 +235,24 @@ var sFeature_PAYMENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAYM
 var sFeature_RESERVATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESERVATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFeature_RESERVATIONS})
 var sFeature_SAVINGS_PLANS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAVINGS_PLANS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFeature_SAVINGS_PLANS})
 var sFeature_TAX_SETTINGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAX_SETTINGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFeature_TAX_SETTINGS})
+var sFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterName, Members: &mFilterName, Type: smithy.ShapeTypeEnum, Ext: &eFilterName})
 var sFilterName_FEATURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FEATURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterName_FEATURE})
 var sFilterName_SEVERITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEVERITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterName_SEVERITY})
 var sFilterName_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterName_TYPE})
+var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &e_FilterValue})
+var s_FilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList, Ext: &e_FilterValues})
 var s_FilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &e_FilterValues_member})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
 var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sMatchOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum, Ext: &eMatchOption})
 var sMatchOption_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_EQUALS})
 var sMatchOption_NOT_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_NOT_EQUALS})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextStep, Type: smithy.ShapeTypeString, Ext: &e_NextStep})
+var s_NextSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextSteps, Members: &m_NextSteps, Type: smithy.ShapeTypeList, Ext: &e_NextSteps})
 var s_NextSteps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NextStep, Type: smithy.ShapeTypeString, Ext: &e_NextSteps_member})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sRecommendedAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendedAction, Members: &mRecommendedAction, Type: smithy.ShapeTypeStructure, Ext: &eRecommendedAction})
 var sRecommendedAction_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRecommendedAction_id})
 var sRecommendedAction_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeEnum, Ext: &eRecommendedAction_type})
 var sRecommendedAction_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eRecommendedAction_accountId})
@@ -269,25 +261,35 @@ var sRecommendedAction_feature = smithy.NewStaticSchema(smithy.StaticSchema{Memb
 var sRecommendedAction_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &i_Context, Members: &m_Context, Type: smithy.ShapeTypeMap, Ext: &eRecommendedAction_context})
 var sRecommendedAction_nextSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextSteps", ID: &i_NextSteps, Members: &m_NextSteps, Type: smithy.ShapeTypeList, Ext: &eRecommendedAction_nextSteps})
 var sRecommendedAction_lastUpdatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTimeStamp", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRecommendedAction_lastUpdatedTimeStamp})
+var s_RecommendedActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendedActions, Members: &m_RecommendedActions, Type: smithy.ShapeTypeList, Ext: &e_RecommendedActions})
 var s_RecommendedActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecommendedAction, Members: &mRecommendedAction, Type: smithy.ShapeTypeStructure, Ext: &e_RecommendedActions_member})
+var sRequestFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestFilter, Members: &mRequestFilter, Type: smithy.ShapeTypeStructure, Ext: &eRequestFilter})
 var sRequestFilter_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ActionFilterList, Members: &m_ActionFilterList, Type: smithy.ShapeTypeList, Ext: &eRequestFilter_actions})
+var sSeverity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSeverity, Members: &mSeverity, Type: smithy.ShapeTypeEnum, Ext: &eSeverity})
 var sSeverity_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_INFO})
 var sSeverity_WARNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_WARNING})
 var sSeverity_CRITICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRITICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_CRITICAL})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
 var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
 var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
 var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
 var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
 var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
 var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
 var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
 var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
 var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
 var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
 var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sListRecommendedActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendedActionsRequest, Members: &mListRecommendedActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRecommendedActionsRequest})
 var sListRecommendedActionsRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iRequestFilter, Members: &mRequestFilter, Type: smithy.ShapeTypeStructure, Ext: &eListRecommendedActionsRequest_filter})
 var sListRecommendedActionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRecommendedActionsRequest_maxResults})
 var sListRecommendedActionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRecommendedActionsRequest_nextToken})
+var sListRecommendedActionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendedActionsResponse, Members: &mListRecommendedActionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRecommendedActionsResponse})
 var sListRecommendedActionsResponse_recommendedActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActions", ID: &i_RecommendedActions, Members: &m_RecommendedActions, Type: smithy.ShapeTypeList, Ext: &eListRecommendedActionsResponse_recommendedActions})
 var sListRecommendedActionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRecommendedActionsResponse_nextToken})
 

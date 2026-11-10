@@ -12,8 +12,8 @@ var (
 )
 
 var (
-	iNonQueryCompatibleOperation      = smithy.ShapeID{Namespace: "aws.protocoltests.rpcv2cbor", Name: "NonQueryCompatibleOperation"}
-	i_NonQueryCompatibleRpcV2Protocol = smithy.ShapeID{Namespace: "aws.protocoltests.rpcv2cbor", Name: "NonQueryCompatibleRpcV2Protocol"}
+	iNonQueryCompatibleOperation      = smithy.ShapeName{Namespace: "aws.protocoltests.rpcv2cbor", Name: "NonQueryCompatibleOperation"}
+	i_NonQueryCompatibleRpcV2Protocol = smithy.ShapeName{Namespace: "aws.protocoltests.rpcv2cbor", Name: "NonQueryCompatibleRpcV2Protocol"}
 )
 
 var sNonQueryCompatibleOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNonQueryCompatibleOperation, Type: smithy.ShapeTypeOperation, Ext: &eNonQueryCompatibleOperation})

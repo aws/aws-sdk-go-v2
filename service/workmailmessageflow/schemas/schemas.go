@@ -42,25 +42,25 @@ var (
 )
 
 var (
-	iGetRawMessageContent            = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "GetRawMessageContent"}
-	iPutRawMessageContent            = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "PutRawMessageContent"}
-	i_GiraffeMessageInTransitService = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "GiraffeMessageInTransitService"}
-	i_errorMessage                   = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "errorMessage"}
-	iInvalidContentLocation          = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "InvalidContentLocation"}
-	i_messageContentBlob             = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "messageContentBlob"}
-	iMessageFrozen                   = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "MessageFrozen"}
-	i_messageIdType                  = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "messageIdType"}
-	iMessageRejected                 = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "MessageRejected"}
-	iRawMessageContent               = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "RawMessageContent"}
-	iResourceNotFoundException       = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "ResourceNotFoundException"}
-	i_s3BucketIdType                 = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "s3BucketIdType"}
-	i_s3KeyIdType                    = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "s3KeyIdType"}
-	iS3Reference                     = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "S3Reference"}
-	i_s3VersionType                  = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "s3VersionType"}
-	iGetRawMessageContentRequest     = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "GetRawMessageContentRequest"}
-	iGetRawMessageContentResponse    = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "GetRawMessageContentResponse"}
-	iPutRawMessageContentRequest     = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "PutRawMessageContentRequest"}
-	iPutRawMessageContentResponse    = smithy.ShapeID{Namespace: "com.amazonaws.workmailmessageflow", Name: "PutRawMessageContentResponse"}
+	iGetRawMessageContent            = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "GetRawMessageContent"}
+	iPutRawMessageContent            = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "PutRawMessageContent"}
+	i_GiraffeMessageInTransitService = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "GiraffeMessageInTransitService"}
+	i_errorMessage                   = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "errorMessage"}
+	iInvalidContentLocation          = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "InvalidContentLocation"}
+	i_messageContentBlob             = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "messageContentBlob"}
+	iMessageFrozen                   = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "MessageFrozen"}
+	i_messageIdType                  = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "messageIdType"}
+	iMessageRejected                 = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "MessageRejected"}
+	iRawMessageContent               = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "RawMessageContent"}
+	iResourceNotFoundException       = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "ResourceNotFoundException"}
+	i_s3BucketIdType                 = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "s3BucketIdType"}
+	i_s3KeyIdType                    = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "s3KeyIdType"}
+	iS3Reference                     = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "S3Reference"}
+	i_s3VersionType                  = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "s3VersionType"}
+	iGetRawMessageContentRequest     = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "GetRawMessageContentRequest"}
+	iGetRawMessageContentResponse    = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "GetRawMessageContentResponse"}
+	iPutRawMessageContentRequest     = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "PutRawMessageContentRequest"}
+	iPutRawMessageContentResponse    = smithy.ShapeName{Namespace: "com.amazonaws.workmailmessageflow", Name: "PutRawMessageContentResponse"}
 )
 
 var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
@@ -90,33 +90,32 @@ var sPutRawMessageContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPut
 var s_GiraffeMessageInTransitService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GiraffeMessageInTransitService, Type: smithy.ShapeTypeService, Ext: &e_GiraffeMessageInTransitService})
 var s_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &e_errorMessage})
 var sInvalidContentLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidContentLocation, Members: &mInvalidContentLocation, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidContentLocation})
+var sInvalidContentLocation_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidContentLocation_message})
 var s_messageContentBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_messageContentBlob, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &e_messageContentBlob})
 var sMessageFrozen = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageFrozen, Members: &mMessageFrozen, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eMessageFrozen})
+var sMessageFrozen_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eMessageFrozen_message})
 var s_messageIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_messageIdType, Type: smithy.ShapeTypeString, Ext: &e_messageIdType})
 var sMessageRejected = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageRejected, Members: &mMessageRejected, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eMessageRejected})
+var sMessageRejected_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eMessageRejected_message})
 var sRawMessageContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRawMessageContent, Members: &mRawMessageContent, Type: smithy.ShapeTypeStructure, Ext: &eRawMessageContent})
+var sRawMessageContent_s3Reference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Reference", ID: &iS3Reference, Members: &mS3Reference, Type: smithy.ShapeTypeStructure, Ext: &eRawMessageContent_s3Reference})
 var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
 var s_s3BucketIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_s3BucketIdType, Type: smithy.ShapeTypeString, Ext: &e_s3BucketIdType})
 var s_s3KeyIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_s3KeyIdType, Type: smithy.ShapeTypeString, Ext: &e_s3KeyIdType})
 var sS3Reference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Reference, Members: &mS3Reference, Type: smithy.ShapeTypeStructure, Ext: &eS3Reference})
-var s_s3VersionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_s3VersionType, Type: smithy.ShapeTypeString, Ext: &e_s3VersionType})
-var sGetRawMessageContentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRawMessageContentRequest, Members: &mGetRawMessageContentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRawMessageContentRequest})
-var sGetRawMessageContentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRawMessageContentResponse, Members: &mGetRawMessageContentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRawMessageContentResponse})
-var sPutRawMessageContentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRawMessageContentRequest, Members: &mPutRawMessageContentRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutRawMessageContentRequest})
-var sPutRawMessageContentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRawMessageContentResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutRawMessageContentResponse})
-
-var sInvalidContentLocation_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidContentLocation_message})
-var sMessageFrozen_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eMessageFrozen_message})
-var sMessageRejected_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eMessageRejected_message})
-var sRawMessageContent_s3Reference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Reference", ID: &iS3Reference, Members: &mS3Reference, Type: smithy.ShapeTypeStructure, Ext: &eRawMessageContent_s3Reference})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
 var sS3Reference_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_s3BucketIdType, Type: smithy.ShapeTypeString, Ext: &eS3Reference_bucket})
 var sS3Reference_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_s3KeyIdType, Type: smithy.ShapeTypeString, Ext: &eS3Reference_key})
 var sS3Reference_objectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectVersion", ID: &i_s3VersionType, Type: smithy.ShapeTypeString, Ext: &eS3Reference_objectVersion})
+var s_s3VersionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_s3VersionType, Type: smithy.ShapeTypeString, Ext: &e_s3VersionType})
+var sGetRawMessageContentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRawMessageContentRequest, Members: &mGetRawMessageContentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRawMessageContentRequest})
 var sGetRawMessageContentRequest_messageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageId", ID: &i_messageIdType, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eGetRawMessageContentRequest_messageId})
+var sGetRawMessageContentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRawMessageContentResponse, Members: &mGetRawMessageContentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRawMessageContentResponse})
 var sGetRawMessageContentResponse_messageContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageContent", ID: &i_messageContentBlob, Traits: &t6, Type: smithy.ShapeTypeBlob, Ext: &eGetRawMessageContentResponse_messageContent})
+var sPutRawMessageContentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRawMessageContentRequest, Members: &mPutRawMessageContentRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutRawMessageContentRequest})
 var sPutRawMessageContentRequest_messageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageId", ID: &i_messageIdType, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &ePutRawMessageContentRequest_messageId})
 var sPutRawMessageContentRequest_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &iRawMessageContent, Members: &mRawMessageContent, Type: smithy.ShapeTypeStructure, Ext: &ePutRawMessageContentRequest_content})
+var sPutRawMessageContentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRawMessageContentResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutRawMessageContentResponse})
 
 var GetRawMessageContent = &sGetRawMessageContent
 

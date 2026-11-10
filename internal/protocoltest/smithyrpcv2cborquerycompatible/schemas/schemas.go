@@ -16,11 +16,11 @@ var (
 )
 
 var (
-	iGetItem                   = smithy.ShapeID{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "GetItem"}
-	i_RpcV2CborQueryCompatible = smithy.ShapeID{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "RpcV2CborQueryCompatible"}
-	iGetItemInput              = smithy.ShapeID{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "GetItemInput"}
-	iGetItemOutput             = smithy.ShapeID{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "GetItemOutput"}
-	iItemNotFound              = smithy.ShapeID{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "ItemNotFound"}
+	iGetItem                   = smithy.ShapeName{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "GetItem"}
+	i_RpcV2CborQueryCompatible = smithy.ShapeName{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "RpcV2CborQueryCompatible"}
+	iGetItemInput              = smithy.ShapeName{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "GetItemInput"}
+	iGetItemOutput             = smithy.ShapeName{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "GetItemOutput"}
+	iItemNotFound              = smithy.ShapeName{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "ItemNotFound"}
 )
 
 var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.AWSQueryCompatible{}}}

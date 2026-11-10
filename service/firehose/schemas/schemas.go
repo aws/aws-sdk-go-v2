@@ -1106,317 +1106,317 @@ var (
 )
 
 var (
-	iCreateDeliveryStream                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "CreateDeliveryStream"}
-	iDeleteDeliveryStream                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeleteDeliveryStream"}
-	iDescribeDeliveryStream                                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DescribeDeliveryStream"}
-	iListDeliveryStreams                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ListDeliveryStreams"}
-	iListTagsForDeliveryStream                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ListTagsForDeliveryStream"}
-	iPutRecord                                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "PutRecord"}
-	iPutRecordBatch                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "PutRecordBatch"}
-	iStartDeliveryStreamEncryption                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "StartDeliveryStreamEncryption"}
-	iStopDeliveryStreamEncryption                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "StopDeliveryStreamEncryption"}
-	iTagDeliveryStream                                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "TagDeliveryStream"}
-	iUntagDeliveryStream                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "UntagDeliveryStream"}
-	iUpdateDestination                                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "UpdateDestination"}
-	i_Firehose_20150804                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "Firehose_20150804"}
-	iAmazonOpenSearchServerlessBufferingHints              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessBufferingHints"}
-	i_AmazonOpenSearchServerlessBufferingIntervalInSeconds = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessBufferingIntervalInSeconds"}
-	i_AmazonOpenSearchServerlessBufferingSizeInMBs         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessBufferingSizeInMBs"}
-	i_AmazonOpenSearchServerlessCollectionEndpoint         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessCollectionEndpoint"}
-	iAmazonOpenSearchServerlessDestinationConfiguration    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessDestinationConfiguration"}
-	iAmazonOpenSearchServerlessDestinationDescription      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessDestinationDescription"}
-	iAmazonOpenSearchServerlessDestinationUpdate           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessDestinationUpdate"}
-	i_AmazonOpenSearchServerlessIndexName                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessIndexName"}
-	i_AmazonOpenSearchServerlessRetryDurationInSeconds     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessRetryDurationInSeconds"}
-	iAmazonOpenSearchServerlessRetryOptions                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessRetryOptions"}
-	iAmazonOpenSearchServerlessS3BackupMode                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessS3BackupMode"}
-	iAmazonopensearchserviceBufferingHints                 = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceBufferingHints"}
-	i_AmazonopensearchserviceBufferingIntervalInSeconds    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceBufferingIntervalInSeconds"}
-	i_AmazonopensearchserviceBufferingSizeInMBs            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceBufferingSizeInMBs"}
-	i_AmazonopensearchserviceClusterEndpoint               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceClusterEndpoint"}
-	iAmazonopensearchserviceDestinationConfiguration       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceDestinationConfiguration"}
-	iAmazonopensearchserviceDestinationDescription         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceDestinationDescription"}
-	iAmazonopensearchserviceDestinationUpdate              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceDestinationUpdate"}
-	i_AmazonopensearchserviceDomainARN                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceDomainARN"}
-	i_AmazonopensearchserviceIndexName                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceIndexName"}
-	iAmazonopensearchserviceIndexRotationPeriod            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceIndexRotationPeriod"}
-	i_AmazonopensearchserviceRetryDurationInSeconds        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceRetryDurationInSeconds"}
-	iAmazonopensearchserviceRetryOptions                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceRetryOptions"}
-	iAmazonopensearchserviceS3BackupMode                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceS3BackupMode"}
-	i_AmazonopensearchserviceTypeName                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceTypeName"}
-	iAuthenticationConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AuthenticationConfiguration"}
-	i_AWSKMSKeyARN                                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AWSKMSKeyARN"}
-	i_AWSKMSKeyARNForSSE                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "AWSKMSKeyARNForSSE"}
-	i_BlockSizeBytes                                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "BlockSizeBytes"}
-	i_BooleanObject                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "BooleanObject"}
-	i_BucketARN                                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "BucketARN"}
-	iBufferingHints                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "BufferingHints"}
-	iCatalogConfiguration                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "CatalogConfiguration"}
-	iCloudWatchLoggingOptions                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "CloudWatchLoggingOptions"}
-	i_ClusterJDBCURL                                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ClusterJDBCURL"}
-	i_ColumnToJsonKeyMappings                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ColumnToJsonKeyMappings"}
-	iCompressionFormat                                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "CompressionFormat"}
-	iConcurrentModificationException                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ConcurrentModificationException"}
-	iConnectivity                                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "Connectivity"}
-	iContentEncoding                                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ContentEncoding"}
-	iCopyCommand                                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "CopyCommand"}
-	i_CopyOptions                                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "CopyOptions"}
-	i_CustomTimeZone                                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "CustomTimeZone"}
-	i_Data                                                 = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "Data"}
-	i_DatabaseColumnIncludeOrExcludeList                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseColumnIncludeOrExcludeList"}
-	iDatabaseColumnList                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseColumnList"}
-	i_DatabaseColumnName                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseColumnName"}
-	i_DatabaseEndpoint                                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseEndpoint"}
-	i_DatabaseIncludeOrExcludeList                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseIncludeOrExcludeList"}
-	iDatabaseList                                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseList"}
-	i_DatabaseName                                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseName"}
-	i_DatabasePort                                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabasePort"}
-	iDatabaseSnapshotInfo                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseSnapshotInfo"}
-	i_DatabaseSnapshotInfoList                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseSnapshotInfoList"}
-	iDatabaseSourceAuthenticationConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseSourceAuthenticationConfiguration"}
-	iDatabaseSourceConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseSourceConfiguration"}
-	iDatabaseSourceDescription                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseSourceDescription"}
-	iDatabaseSourceVPCConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseSourceVPCConfiguration"}
-	i_DatabaseSurrogateKeyList                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseSurrogateKeyList"}
-	i_DatabaseTableIncludeOrExcludeList                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseTableIncludeOrExcludeList"}
-	iDatabaseTableList                                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseTableList"}
-	i_DatabaseTableName                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseTableName"}
-	iDatabaseType                                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DatabaseType"}
-	iDataFormatConversionConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DataFormatConversionConfiguration"}
-	i_DataTableColumns                                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DataTableColumns"}
-	i_DataTableName                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DataTableName"}
-	iDefaultDocumentIdFormat                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DefaultDocumentIdFormat"}
-	i_DeliveryStartTimestamp                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeliveryStartTimestamp"}
-	i_DeliveryStreamARN                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamARN"}
-	iDeliveryStreamDescription                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamDescription"}
-	iDeliveryStreamEncryptionConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamEncryptionConfiguration"}
-	iDeliveryStreamEncryptionConfigurationInput            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamEncryptionConfigurationInput"}
-	iDeliveryStreamEncryptionStatus                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamEncryptionStatus"}
-	iDeliveryStreamFailureType                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamFailureType"}
-	i_DeliveryStreamName                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamName"}
-	i_DeliveryStreamNameList                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamNameList"}
-	iDeliveryStreamStatus                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamStatus"}
-	iDeliveryStreamType                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamType"}
-	i_DeliveryStreamVersionId                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamVersionId"}
-	i_DescribeDeliveryStreamInputLimit                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DescribeDeliveryStreamInputLimit"}
-	iDeserializer                                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "Deserializer"}
-	iDestinationDescription                                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DestinationDescription"}
-	i_DestinationDescriptionList                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DestinationDescriptionList"}
-	i_DestinationId                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DestinationId"}
-	iDestinationTableConfiguration                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DestinationTableConfiguration"}
-	i_DestinationTableConfigurationList                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DestinationTableConfigurationList"}
-	iDirectPutSourceConfiguration                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DirectPutSourceConfiguration"}
-	iDirectPutSourceDescription                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DirectPutSourceDescription"}
-	iDocumentIdOptions                                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DocumentIdOptions"}
-	iDynamicPartitioningConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DynamicPartitioningConfiguration"}
-	iElasticsearchBufferingHints                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchBufferingHints"}
-	i_ElasticsearchBufferingIntervalInSeconds              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchBufferingIntervalInSeconds"}
-	i_ElasticsearchBufferingSizeInMBs                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchBufferingSizeInMBs"}
-	i_ElasticsearchClusterEndpoint                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchClusterEndpoint"}
-	iElasticsearchDestinationConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchDestinationConfiguration"}
-	iElasticsearchDestinationDescription                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchDestinationDescription"}
-	iElasticsearchDestinationUpdate                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchDestinationUpdate"}
-	i_ElasticsearchDomainARN                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchDomainARN"}
-	i_ElasticsearchIndexName                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchIndexName"}
-	iElasticsearchIndexRotationPeriod                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchIndexRotationPeriod"}
-	i_ElasticsearchRetryDurationInSeconds                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchRetryDurationInSeconds"}
-	iElasticsearchRetryOptions                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchRetryOptions"}
-	iElasticsearchS3BackupMode                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchS3BackupMode"}
-	i_ElasticsearchTypeName                                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchTypeName"}
-	iEncryptionConfiguration                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "EncryptionConfiguration"}
-	i_ErrorCode                                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ErrorCode"}
-	i_ErrorMessage                                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ErrorMessage"}
-	i_ErrorOutputPrefix                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ErrorOutputPrefix"}
-	iExtendedS3DestinationConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ExtendedS3DestinationConfiguration"}
-	iExtendedS3DestinationDescription                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ExtendedS3DestinationDescription"}
-	iExtendedS3DestinationUpdate                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ExtendedS3DestinationUpdate"}
-	iFailureDescription                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "FailureDescription"}
-	i_FileExtension                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "FileExtension"}
-	i_GlueDataCatalogARN                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "GlueDataCatalogARN"}
-	i_HECAcknowledgmentTimeoutInSeconds                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HECAcknowledgmentTimeoutInSeconds"}
-	i_HECEndpoint                                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HECEndpoint"}
-	iHECEndpointType                                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HECEndpointType"}
-	i_HECToken                                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HECToken"}
-	iHiveJsonSerDe                                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HiveJsonSerDe"}
-	i_HttpEndpointAccessKey                                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointAccessKey"}
-	i_HttpEndpointAttributeName                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointAttributeName"}
-	i_HttpEndpointAttributeValue                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointAttributeValue"}
-	iHttpEndpointBufferingHints                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointBufferingHints"}
-	i_HttpEndpointBufferingIntervalInSeconds               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointBufferingIntervalInSeconds"}
-	i_HttpEndpointBufferingSizeInMBs                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointBufferingSizeInMBs"}
-	iHttpEndpointCommonAttribute                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointCommonAttribute"}
-	i_HttpEndpointCommonAttributesList                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointCommonAttributesList"}
-	iHttpEndpointConfiguration                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointConfiguration"}
-	iHttpEndpointDescription                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointDescription"}
-	iHttpEndpointDestinationConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointDestinationConfiguration"}
-	iHttpEndpointDestinationDescription                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointDestinationDescription"}
-	iHttpEndpointDestinationUpdate                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointDestinationUpdate"}
-	i_HttpEndpointName                                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointName"}
-	iHttpEndpointRequestConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointRequestConfiguration"}
-	i_HttpEndpointRetryDurationInSeconds                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointRetryDurationInSeconds"}
-	iHttpEndpointRetryOptions                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointRetryOptions"}
-	iHttpEndpointS3BackupMode                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointS3BackupMode"}
-	i_HttpEndpointUrl                                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointUrl"}
-	iIcebergDestinationConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "IcebergDestinationConfiguration"}
-	iIcebergDestinationDescription                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "IcebergDestinationDescription"}
-	iIcebergDestinationUpdate                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "IcebergDestinationUpdate"}
-	iIcebergS3BackupMode                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "IcebergS3BackupMode"}
-	iInputFormatConfiguration                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "InputFormatConfiguration"}
-	i_IntervalInSeconds                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "IntervalInSeconds"}
-	iInvalidArgumentException                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "InvalidArgumentException"}
-	iInvalidKMSResourceException                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "InvalidKMSResourceException"}
-	iInvalidSourceException                                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "InvalidSourceException"}
-	iKeyType                                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "KeyType"}
-	i_KinesisStreamARN                                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "KinesisStreamARN"}
-	iKinesisStreamSourceConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "KinesisStreamSourceConfiguration"}
-	iKinesisStreamSourceDescription                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "KinesisStreamSourceDescription"}
-	iKMSEncryptionConfig                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "KMSEncryptionConfig"}
-	iLimitExceededException                                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "LimitExceededException"}
-	i_ListDeliveryStreamsInputLimit                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ListDeliveryStreamsInputLimit"}
-	i_ListOfNonEmptyStrings                                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ListOfNonEmptyStrings"}
-	i_ListOfNonEmptyStringsWithoutWhitespace               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ListOfNonEmptyStringsWithoutWhitespace"}
-	i_ListTagsForDeliveryStreamInputLimit                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ListTagsForDeliveryStreamInputLimit"}
-	i_ListTagsForDeliveryStreamOutputTagList               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ListTagsForDeliveryStreamOutputTagList"}
-	i_LogGroupName                                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "LogGroupName"}
-	i_LogStreamName                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "LogStreamName"}
-	i_MSKClusterARN                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "MSKClusterARN"}
-	iMSKSourceConfiguration                                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "MSKSourceConfiguration"}
-	iMSKSourceDescription                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "MSKSourceDescription"}
-	iNoEncryptionConfig                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "NoEncryptionConfig"}
-	i_NonEmptyString                                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "NonEmptyString"}
-	i_NonEmptyStringWithoutWhitespace                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "NonEmptyStringWithoutWhitespace"}
-	i_NonNegativeIntegerObject                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "NonNegativeIntegerObject"}
-	iOpenXJsonSerDe                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "OpenXJsonSerDe"}
-	iOrcCompression                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "OrcCompression"}
-	iOrcFormatVersion                                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "OrcFormatVersion"}
-	i_OrcRowIndexStride                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "OrcRowIndexStride"}
-	iOrcSerDe                                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "OrcSerDe"}
-	i_OrcStripeSizeBytes                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "OrcStripeSizeBytes"}
-	iOutputFormatConfiguration                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "OutputFormatConfiguration"}
-	iParquetCompression                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ParquetCompression"}
-	i_ParquetPageSizeBytes                                 = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ParquetPageSizeBytes"}
-	iParquetSerDe                                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ParquetSerDe"}
-	iParquetWriterVersion                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ParquetWriterVersion"}
-	iPartitionField                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "PartitionField"}
-	i_PartitionFields                                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "PartitionFields"}
-	iPartitionSpec                                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "PartitionSpec"}
-	i_Password                                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "Password"}
-	i_Prefix                                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "Prefix"}
-	iProcessingConfiguration                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ProcessingConfiguration"}
-	iProcessor                                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "Processor"}
-	i_ProcessorList                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ProcessorList"}
-	iProcessorParameter                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ProcessorParameter"}
-	i_ProcessorParameterList                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ProcessorParameterList"}
-	iProcessorParameterName                                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ProcessorParameterName"}
-	i_ProcessorParameterValue                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ProcessorParameterValue"}
-	iProcessorType                                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ProcessorType"}
-	i_Proportion                                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "Proportion"}
-	i_PutRecordBatchRequestEntryList                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "PutRecordBatchRequestEntryList"}
-	iPutRecordBatchResponseEntry                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "PutRecordBatchResponseEntry"}
-	i_PutRecordBatchResponseEntryList                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "PutRecordBatchResponseEntryList"}
-	i_PutResponseRecordId                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "PutResponseRecordId"}
-	i_ReadFromTimestamp                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ReadFromTimestamp"}
-	iRecord                                                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "Record"}
-	iRedshiftDestinationConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "RedshiftDestinationConfiguration"}
-	iRedshiftDestinationDescription                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "RedshiftDestinationDescription"}
-	iRedshiftDestinationUpdate                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "RedshiftDestinationUpdate"}
-	i_RedshiftRetryDurationInSeconds                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "RedshiftRetryDurationInSeconds"}
-	iRedshiftRetryOptions                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "RedshiftRetryOptions"}
-	iRedshiftS3BackupMode                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "RedshiftS3BackupMode"}
-	iResourceInUseException                                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ResourceInUseException"}
-	iResourceNotFoundException                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ResourceNotFoundException"}
-	i_RetryDurationInSeconds                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "RetryDurationInSeconds"}
-	iRetryOptions                                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "RetryOptions"}
-	i_RoleARN                                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "RoleARN"}
-	iS3BackupMode                                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "S3BackupMode"}
-	iS3DestinationConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "S3DestinationConfiguration"}
-	iS3DestinationDescription                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "S3DestinationDescription"}
-	iS3DestinationUpdate                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "S3DestinationUpdate"}
-	iSchemaConfiguration                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SchemaConfiguration"}
-	iSchemaEvolutionConfiguration                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SchemaEvolutionConfiguration"}
-	i_SecretARN                                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SecretARN"}
-	iSecretsManagerConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SecretsManagerConfiguration"}
-	i_SecurityGroupIdList                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SecurityGroupIdList"}
-	iSerializer                                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "Serializer"}
-	iServiceUnavailableException                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ServiceUnavailableException"}
-	i_SizeInMBs                                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SizeInMBs"}
-	iSnapshotRequestedBy                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnapshotRequestedBy"}
-	iSnapshotStatus                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnapshotStatus"}
-	i_SnowflakeAccountUrl                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeAccountUrl"}
-	iSnowflakeBufferingHints                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeBufferingHints"}
-	i_SnowflakeBufferingIntervalInSeconds                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeBufferingIntervalInSeconds"}
-	i_SnowflakeBufferingSizeInMBs                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeBufferingSizeInMBs"}
-	i_SnowflakeContentColumnName                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeContentColumnName"}
-	i_SnowflakeDatabase                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeDatabase"}
-	iSnowflakeDataLoadingOption                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeDataLoadingOption"}
-	iSnowflakeDestinationConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeDestinationConfiguration"}
-	iSnowflakeDestinationDescription                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeDestinationDescription"}
-	iSnowflakeDestinationUpdate                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeDestinationUpdate"}
-	i_SnowflakeKeyPassphrase                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeKeyPassphrase"}
-	i_SnowflakeMetaDataColumnName                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeMetaDataColumnName"}
-	i_SnowflakePrivateKey                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakePrivateKey"}
-	i_SnowflakePrivateLinkVpceId                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakePrivateLinkVpceId"}
-	i_SnowflakeRetryDurationInSeconds                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeRetryDurationInSeconds"}
-	iSnowflakeRetryOptions                                 = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeRetryOptions"}
-	i_SnowflakeRole                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeRole"}
-	iSnowflakeRoleConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeRoleConfiguration"}
-	iSnowflakeS3BackupMode                                 = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeS3BackupMode"}
-	i_SnowflakeSchema                                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeSchema"}
-	i_SnowflakeTable                                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeTable"}
-	i_SnowflakeUser                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeUser"}
-	iSnowflakeVpcConfiguration                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SnowflakeVpcConfiguration"}
-	iSourceDescription                                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SourceDescription"}
-	iSplunkBufferingHints                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SplunkBufferingHints"}
-	i_SplunkBufferingIntervalInSeconds                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SplunkBufferingIntervalInSeconds"}
-	i_SplunkBufferingSizeInMBs                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SplunkBufferingSizeInMBs"}
-	iSplunkDestinationConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SplunkDestinationConfiguration"}
-	iSplunkDestinationDescription                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SplunkDestinationDescription"}
-	iSplunkDestinationUpdate                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SplunkDestinationUpdate"}
-	i_SplunkRetryDurationInSeconds                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SplunkRetryDurationInSeconds"}
-	iSplunkRetryOptions                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SplunkRetryOptions"}
-	iSplunkS3BackupMode                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SplunkS3BackupMode"}
-	iSSLMode                                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SSLMode"}
-	i_StringWithLettersDigitsUnderscoresDots               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "StringWithLettersDigitsUnderscoresDots"}
-	i_SubnetIdList                                         = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "SubnetIdList"}
-	iTableCreationConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "TableCreationConfiguration"}
-	iTag                                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "Tag"}
-	i_TagDeliveryStreamInputTagList                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "TagDeliveryStreamInputTagList"}
-	i_TagKey                                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "TagKey"}
-	i_TagKeyList                                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "TagKeyList"}
-	i_TagValue                                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "TagValue"}
-	i_ThroughputHintInMBs                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ThroughputHintInMBs"}
-	i_Timestamp                                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "Timestamp"}
-	i_TopicName                                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "TopicName"}
-	i_Username                                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "Username"}
-	iVpcConfiguration                                      = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "VpcConfiguration"}
-	iVpcConfigurationDescription                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "VpcConfigurationDescription"}
-	i_VpcEndpointServiceName                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "VpcEndpointServiceName"}
-	i_WarehouseLocation                                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "WarehouseLocation"}
-	iCreateDeliveryStreamInput                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "CreateDeliveryStreamInput"}
-	iCreateDeliveryStreamOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "CreateDeliveryStreamOutput"}
-	iDeleteDeliveryStreamInput                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeleteDeliveryStreamInput"}
-	iDeleteDeliveryStreamOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DeleteDeliveryStreamOutput"}
-	iDescribeDeliveryStreamInput                           = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DescribeDeliveryStreamInput"}
-	iDescribeDeliveryStreamOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "DescribeDeliveryStreamOutput"}
-	iListDeliveryStreamsInput                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ListDeliveryStreamsInput"}
-	iListDeliveryStreamsOutput                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ListDeliveryStreamsOutput"}
-	iListTagsForDeliveryStreamInput                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ListTagsForDeliveryStreamInput"}
-	iListTagsForDeliveryStreamOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "ListTagsForDeliveryStreamOutput"}
-	iPutRecordBatchInput                                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "PutRecordBatchInput"}
-	iPutRecordBatchOutput                                  = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "PutRecordBatchOutput"}
-	iPutRecordInput                                        = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "PutRecordInput"}
-	iPutRecordOutput                                       = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "PutRecordOutput"}
-	iStartDeliveryStreamEncryptionInput                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "StartDeliveryStreamEncryptionInput"}
-	iStartDeliveryStreamEncryptionOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "StartDeliveryStreamEncryptionOutput"}
-	iStopDeliveryStreamEncryptionInput                     = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "StopDeliveryStreamEncryptionInput"}
-	iStopDeliveryStreamEncryptionOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "StopDeliveryStreamEncryptionOutput"}
-	iTagDeliveryStreamInput                                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "TagDeliveryStreamInput"}
-	iTagDeliveryStreamOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "TagDeliveryStreamOutput"}
-	iUntagDeliveryStreamInput                              = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "UntagDeliveryStreamInput"}
-	iUntagDeliveryStreamOutput                             = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "UntagDeliveryStreamOutput"}
-	iUpdateDestinationInput                                = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "UpdateDestinationInput"}
-	iUpdateDestinationOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.firehose", Name: "UpdateDestinationOutput"}
-	pUnit                                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	iCreateDeliveryStream                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "CreateDeliveryStream"}
+	iDeleteDeliveryStream                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeleteDeliveryStream"}
+	iDescribeDeliveryStream                                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DescribeDeliveryStream"}
+	iListDeliveryStreams                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ListDeliveryStreams"}
+	iListTagsForDeliveryStream                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ListTagsForDeliveryStream"}
+	iPutRecord                                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "PutRecord"}
+	iPutRecordBatch                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "PutRecordBatch"}
+	iStartDeliveryStreamEncryption                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "StartDeliveryStreamEncryption"}
+	iStopDeliveryStreamEncryption                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "StopDeliveryStreamEncryption"}
+	iTagDeliveryStream                                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "TagDeliveryStream"}
+	iUntagDeliveryStream                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "UntagDeliveryStream"}
+	iUpdateDestination                                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "UpdateDestination"}
+	i_Firehose_20150804                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "Firehose_20150804"}
+	iAmazonOpenSearchServerlessBufferingHints              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessBufferingHints"}
+	i_AmazonOpenSearchServerlessBufferingIntervalInSeconds = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessBufferingIntervalInSeconds"}
+	i_AmazonOpenSearchServerlessBufferingSizeInMBs         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessBufferingSizeInMBs"}
+	i_AmazonOpenSearchServerlessCollectionEndpoint         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessCollectionEndpoint"}
+	iAmazonOpenSearchServerlessDestinationConfiguration    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessDestinationConfiguration"}
+	iAmazonOpenSearchServerlessDestinationDescription      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessDestinationDescription"}
+	iAmazonOpenSearchServerlessDestinationUpdate           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessDestinationUpdate"}
+	i_AmazonOpenSearchServerlessIndexName                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessIndexName"}
+	i_AmazonOpenSearchServerlessRetryDurationInSeconds     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessRetryDurationInSeconds"}
+	iAmazonOpenSearchServerlessRetryOptions                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessRetryOptions"}
+	iAmazonOpenSearchServerlessS3BackupMode                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonOpenSearchServerlessS3BackupMode"}
+	iAmazonopensearchserviceBufferingHints                 = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceBufferingHints"}
+	i_AmazonopensearchserviceBufferingIntervalInSeconds    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceBufferingIntervalInSeconds"}
+	i_AmazonopensearchserviceBufferingSizeInMBs            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceBufferingSizeInMBs"}
+	i_AmazonopensearchserviceClusterEndpoint               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceClusterEndpoint"}
+	iAmazonopensearchserviceDestinationConfiguration       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceDestinationConfiguration"}
+	iAmazonopensearchserviceDestinationDescription         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceDestinationDescription"}
+	iAmazonopensearchserviceDestinationUpdate              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceDestinationUpdate"}
+	i_AmazonopensearchserviceDomainARN                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceDomainARN"}
+	i_AmazonopensearchserviceIndexName                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceIndexName"}
+	iAmazonopensearchserviceIndexRotationPeriod            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceIndexRotationPeriod"}
+	i_AmazonopensearchserviceRetryDurationInSeconds        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceRetryDurationInSeconds"}
+	iAmazonopensearchserviceRetryOptions                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceRetryOptions"}
+	iAmazonopensearchserviceS3BackupMode                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceS3BackupMode"}
+	i_AmazonopensearchserviceTypeName                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AmazonopensearchserviceTypeName"}
+	iAuthenticationConfiguration                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AuthenticationConfiguration"}
+	i_AWSKMSKeyARN                                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AWSKMSKeyARN"}
+	i_AWSKMSKeyARNForSSE                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "AWSKMSKeyARNForSSE"}
+	i_BlockSizeBytes                                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "BlockSizeBytes"}
+	i_BooleanObject                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "BooleanObject"}
+	i_BucketARN                                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "BucketARN"}
+	iBufferingHints                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "BufferingHints"}
+	iCatalogConfiguration                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "CatalogConfiguration"}
+	iCloudWatchLoggingOptions                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "CloudWatchLoggingOptions"}
+	i_ClusterJDBCURL                                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ClusterJDBCURL"}
+	i_ColumnToJsonKeyMappings                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ColumnToJsonKeyMappings"}
+	iCompressionFormat                                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "CompressionFormat"}
+	iConcurrentModificationException                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ConcurrentModificationException"}
+	iConnectivity                                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "Connectivity"}
+	iContentEncoding                                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ContentEncoding"}
+	iCopyCommand                                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "CopyCommand"}
+	i_CopyOptions                                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "CopyOptions"}
+	i_CustomTimeZone                                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "CustomTimeZone"}
+	i_Data                                                 = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "Data"}
+	i_DatabaseColumnIncludeOrExcludeList                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseColumnIncludeOrExcludeList"}
+	iDatabaseColumnList                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseColumnList"}
+	i_DatabaseColumnName                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseColumnName"}
+	i_DatabaseEndpoint                                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseEndpoint"}
+	i_DatabaseIncludeOrExcludeList                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseIncludeOrExcludeList"}
+	iDatabaseList                                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseList"}
+	i_DatabaseName                                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseName"}
+	i_DatabasePort                                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabasePort"}
+	iDatabaseSnapshotInfo                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseSnapshotInfo"}
+	i_DatabaseSnapshotInfoList                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseSnapshotInfoList"}
+	iDatabaseSourceAuthenticationConfiguration             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseSourceAuthenticationConfiguration"}
+	iDatabaseSourceConfiguration                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseSourceConfiguration"}
+	iDatabaseSourceDescription                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseSourceDescription"}
+	iDatabaseSourceVPCConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseSourceVPCConfiguration"}
+	i_DatabaseSurrogateKeyList                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseSurrogateKeyList"}
+	i_DatabaseTableIncludeOrExcludeList                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseTableIncludeOrExcludeList"}
+	iDatabaseTableList                                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseTableList"}
+	i_DatabaseTableName                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseTableName"}
+	iDatabaseType                                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DatabaseType"}
+	iDataFormatConversionConfiguration                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DataFormatConversionConfiguration"}
+	i_DataTableColumns                                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DataTableColumns"}
+	i_DataTableName                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DataTableName"}
+	iDefaultDocumentIdFormat                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DefaultDocumentIdFormat"}
+	i_DeliveryStartTimestamp                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeliveryStartTimestamp"}
+	i_DeliveryStreamARN                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamARN"}
+	iDeliveryStreamDescription                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamDescription"}
+	iDeliveryStreamEncryptionConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamEncryptionConfiguration"}
+	iDeliveryStreamEncryptionConfigurationInput            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamEncryptionConfigurationInput"}
+	iDeliveryStreamEncryptionStatus                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamEncryptionStatus"}
+	iDeliveryStreamFailureType                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamFailureType"}
+	i_DeliveryStreamName                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamName"}
+	i_DeliveryStreamNameList                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamNameList"}
+	iDeliveryStreamStatus                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamStatus"}
+	iDeliveryStreamType                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamType"}
+	i_DeliveryStreamVersionId                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeliveryStreamVersionId"}
+	i_DescribeDeliveryStreamInputLimit                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DescribeDeliveryStreamInputLimit"}
+	iDeserializer                                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "Deserializer"}
+	iDestinationDescription                                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DestinationDescription"}
+	i_DestinationDescriptionList                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DestinationDescriptionList"}
+	i_DestinationId                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DestinationId"}
+	iDestinationTableConfiguration                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DestinationTableConfiguration"}
+	i_DestinationTableConfigurationList                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DestinationTableConfigurationList"}
+	iDirectPutSourceConfiguration                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DirectPutSourceConfiguration"}
+	iDirectPutSourceDescription                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DirectPutSourceDescription"}
+	iDocumentIdOptions                                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DocumentIdOptions"}
+	iDynamicPartitioningConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DynamicPartitioningConfiguration"}
+	iElasticsearchBufferingHints                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchBufferingHints"}
+	i_ElasticsearchBufferingIntervalInSeconds              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchBufferingIntervalInSeconds"}
+	i_ElasticsearchBufferingSizeInMBs                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchBufferingSizeInMBs"}
+	i_ElasticsearchClusterEndpoint                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchClusterEndpoint"}
+	iElasticsearchDestinationConfiguration                 = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchDestinationConfiguration"}
+	iElasticsearchDestinationDescription                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchDestinationDescription"}
+	iElasticsearchDestinationUpdate                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchDestinationUpdate"}
+	i_ElasticsearchDomainARN                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchDomainARN"}
+	i_ElasticsearchIndexName                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchIndexName"}
+	iElasticsearchIndexRotationPeriod                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchIndexRotationPeriod"}
+	i_ElasticsearchRetryDurationInSeconds                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchRetryDurationInSeconds"}
+	iElasticsearchRetryOptions                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchRetryOptions"}
+	iElasticsearchS3BackupMode                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchS3BackupMode"}
+	i_ElasticsearchTypeName                                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ElasticsearchTypeName"}
+	iEncryptionConfiguration                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "EncryptionConfiguration"}
+	i_ErrorCode                                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ErrorCode"}
+	i_ErrorMessage                                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ErrorMessage"}
+	i_ErrorOutputPrefix                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ErrorOutputPrefix"}
+	iExtendedS3DestinationConfiguration                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ExtendedS3DestinationConfiguration"}
+	iExtendedS3DestinationDescription                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ExtendedS3DestinationDescription"}
+	iExtendedS3DestinationUpdate                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ExtendedS3DestinationUpdate"}
+	iFailureDescription                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "FailureDescription"}
+	i_FileExtension                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "FileExtension"}
+	i_GlueDataCatalogARN                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "GlueDataCatalogARN"}
+	i_HECAcknowledgmentTimeoutInSeconds                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HECAcknowledgmentTimeoutInSeconds"}
+	i_HECEndpoint                                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HECEndpoint"}
+	iHECEndpointType                                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HECEndpointType"}
+	i_HECToken                                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HECToken"}
+	iHiveJsonSerDe                                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HiveJsonSerDe"}
+	i_HttpEndpointAccessKey                                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointAccessKey"}
+	i_HttpEndpointAttributeName                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointAttributeName"}
+	i_HttpEndpointAttributeValue                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointAttributeValue"}
+	iHttpEndpointBufferingHints                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointBufferingHints"}
+	i_HttpEndpointBufferingIntervalInSeconds               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointBufferingIntervalInSeconds"}
+	i_HttpEndpointBufferingSizeInMBs                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointBufferingSizeInMBs"}
+	iHttpEndpointCommonAttribute                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointCommonAttribute"}
+	i_HttpEndpointCommonAttributesList                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointCommonAttributesList"}
+	iHttpEndpointConfiguration                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointConfiguration"}
+	iHttpEndpointDescription                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointDescription"}
+	iHttpEndpointDestinationConfiguration                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointDestinationConfiguration"}
+	iHttpEndpointDestinationDescription                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointDestinationDescription"}
+	iHttpEndpointDestinationUpdate                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointDestinationUpdate"}
+	i_HttpEndpointName                                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointName"}
+	iHttpEndpointRequestConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointRequestConfiguration"}
+	i_HttpEndpointRetryDurationInSeconds                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointRetryDurationInSeconds"}
+	iHttpEndpointRetryOptions                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointRetryOptions"}
+	iHttpEndpointS3BackupMode                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointS3BackupMode"}
+	i_HttpEndpointUrl                                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "HttpEndpointUrl"}
+	iIcebergDestinationConfiguration                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "IcebergDestinationConfiguration"}
+	iIcebergDestinationDescription                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "IcebergDestinationDescription"}
+	iIcebergDestinationUpdate                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "IcebergDestinationUpdate"}
+	iIcebergS3BackupMode                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "IcebergS3BackupMode"}
+	iInputFormatConfiguration                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "InputFormatConfiguration"}
+	i_IntervalInSeconds                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "IntervalInSeconds"}
+	iInvalidArgumentException                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "InvalidArgumentException"}
+	iInvalidKMSResourceException                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "InvalidKMSResourceException"}
+	iInvalidSourceException                                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "InvalidSourceException"}
+	iKeyType                                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "KeyType"}
+	i_KinesisStreamARN                                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "KinesisStreamARN"}
+	iKinesisStreamSourceConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "KinesisStreamSourceConfiguration"}
+	iKinesisStreamSourceDescription                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "KinesisStreamSourceDescription"}
+	iKMSEncryptionConfig                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "KMSEncryptionConfig"}
+	iLimitExceededException                                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "LimitExceededException"}
+	i_ListDeliveryStreamsInputLimit                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ListDeliveryStreamsInputLimit"}
+	i_ListOfNonEmptyStrings                                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ListOfNonEmptyStrings"}
+	i_ListOfNonEmptyStringsWithoutWhitespace               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ListOfNonEmptyStringsWithoutWhitespace"}
+	i_ListTagsForDeliveryStreamInputLimit                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ListTagsForDeliveryStreamInputLimit"}
+	i_ListTagsForDeliveryStreamOutputTagList               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ListTagsForDeliveryStreamOutputTagList"}
+	i_LogGroupName                                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "LogGroupName"}
+	i_LogStreamName                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "LogStreamName"}
+	i_MSKClusterARN                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "MSKClusterARN"}
+	iMSKSourceConfiguration                                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "MSKSourceConfiguration"}
+	iMSKSourceDescription                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "MSKSourceDescription"}
+	iNoEncryptionConfig                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "NoEncryptionConfig"}
+	i_NonEmptyString                                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "NonEmptyString"}
+	i_NonEmptyStringWithoutWhitespace                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "NonEmptyStringWithoutWhitespace"}
+	i_NonNegativeIntegerObject                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "NonNegativeIntegerObject"}
+	iOpenXJsonSerDe                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "OpenXJsonSerDe"}
+	iOrcCompression                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "OrcCompression"}
+	iOrcFormatVersion                                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "OrcFormatVersion"}
+	i_OrcRowIndexStride                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "OrcRowIndexStride"}
+	iOrcSerDe                                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "OrcSerDe"}
+	i_OrcStripeSizeBytes                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "OrcStripeSizeBytes"}
+	iOutputFormatConfiguration                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "OutputFormatConfiguration"}
+	iParquetCompression                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ParquetCompression"}
+	i_ParquetPageSizeBytes                                 = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ParquetPageSizeBytes"}
+	iParquetSerDe                                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ParquetSerDe"}
+	iParquetWriterVersion                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ParquetWriterVersion"}
+	iPartitionField                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "PartitionField"}
+	i_PartitionFields                                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "PartitionFields"}
+	iPartitionSpec                                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "PartitionSpec"}
+	i_Password                                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "Password"}
+	i_Prefix                                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "Prefix"}
+	iProcessingConfiguration                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ProcessingConfiguration"}
+	iProcessor                                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "Processor"}
+	i_ProcessorList                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ProcessorList"}
+	iProcessorParameter                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ProcessorParameter"}
+	i_ProcessorParameterList                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ProcessorParameterList"}
+	iProcessorParameterName                                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ProcessorParameterName"}
+	i_ProcessorParameterValue                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ProcessorParameterValue"}
+	iProcessorType                                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ProcessorType"}
+	i_Proportion                                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "Proportion"}
+	i_PutRecordBatchRequestEntryList                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "PutRecordBatchRequestEntryList"}
+	iPutRecordBatchResponseEntry                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "PutRecordBatchResponseEntry"}
+	i_PutRecordBatchResponseEntryList                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "PutRecordBatchResponseEntryList"}
+	i_PutResponseRecordId                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "PutResponseRecordId"}
+	i_ReadFromTimestamp                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ReadFromTimestamp"}
+	iRecord                                                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "Record"}
+	iRedshiftDestinationConfiguration                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "RedshiftDestinationConfiguration"}
+	iRedshiftDestinationDescription                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "RedshiftDestinationDescription"}
+	iRedshiftDestinationUpdate                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "RedshiftDestinationUpdate"}
+	i_RedshiftRetryDurationInSeconds                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "RedshiftRetryDurationInSeconds"}
+	iRedshiftRetryOptions                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "RedshiftRetryOptions"}
+	iRedshiftS3BackupMode                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "RedshiftS3BackupMode"}
+	iResourceInUseException                                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ResourceInUseException"}
+	iResourceNotFoundException                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ResourceNotFoundException"}
+	i_RetryDurationInSeconds                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "RetryDurationInSeconds"}
+	iRetryOptions                                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "RetryOptions"}
+	i_RoleARN                                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "RoleARN"}
+	iS3BackupMode                                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "S3BackupMode"}
+	iS3DestinationConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "S3DestinationConfiguration"}
+	iS3DestinationDescription                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "S3DestinationDescription"}
+	iS3DestinationUpdate                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "S3DestinationUpdate"}
+	iSchemaConfiguration                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SchemaConfiguration"}
+	iSchemaEvolutionConfiguration                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SchemaEvolutionConfiguration"}
+	i_SecretARN                                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SecretARN"}
+	iSecretsManagerConfiguration                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SecretsManagerConfiguration"}
+	i_SecurityGroupIdList                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SecurityGroupIdList"}
+	iSerializer                                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "Serializer"}
+	iServiceUnavailableException                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ServiceUnavailableException"}
+	i_SizeInMBs                                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SizeInMBs"}
+	iSnapshotRequestedBy                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnapshotRequestedBy"}
+	iSnapshotStatus                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnapshotStatus"}
+	i_SnowflakeAccountUrl                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeAccountUrl"}
+	iSnowflakeBufferingHints                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeBufferingHints"}
+	i_SnowflakeBufferingIntervalInSeconds                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeBufferingIntervalInSeconds"}
+	i_SnowflakeBufferingSizeInMBs                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeBufferingSizeInMBs"}
+	i_SnowflakeContentColumnName                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeContentColumnName"}
+	i_SnowflakeDatabase                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeDatabase"}
+	iSnowflakeDataLoadingOption                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeDataLoadingOption"}
+	iSnowflakeDestinationConfiguration                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeDestinationConfiguration"}
+	iSnowflakeDestinationDescription                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeDestinationDescription"}
+	iSnowflakeDestinationUpdate                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeDestinationUpdate"}
+	i_SnowflakeKeyPassphrase                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeKeyPassphrase"}
+	i_SnowflakeMetaDataColumnName                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeMetaDataColumnName"}
+	i_SnowflakePrivateKey                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakePrivateKey"}
+	i_SnowflakePrivateLinkVpceId                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakePrivateLinkVpceId"}
+	i_SnowflakeRetryDurationInSeconds                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeRetryDurationInSeconds"}
+	iSnowflakeRetryOptions                                 = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeRetryOptions"}
+	i_SnowflakeRole                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeRole"}
+	iSnowflakeRoleConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeRoleConfiguration"}
+	iSnowflakeS3BackupMode                                 = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeS3BackupMode"}
+	i_SnowflakeSchema                                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeSchema"}
+	i_SnowflakeTable                                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeTable"}
+	i_SnowflakeUser                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeUser"}
+	iSnowflakeVpcConfiguration                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SnowflakeVpcConfiguration"}
+	iSourceDescription                                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SourceDescription"}
+	iSplunkBufferingHints                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SplunkBufferingHints"}
+	i_SplunkBufferingIntervalInSeconds                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SplunkBufferingIntervalInSeconds"}
+	i_SplunkBufferingSizeInMBs                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SplunkBufferingSizeInMBs"}
+	iSplunkDestinationConfiguration                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SplunkDestinationConfiguration"}
+	iSplunkDestinationDescription                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SplunkDestinationDescription"}
+	iSplunkDestinationUpdate                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SplunkDestinationUpdate"}
+	i_SplunkRetryDurationInSeconds                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SplunkRetryDurationInSeconds"}
+	iSplunkRetryOptions                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SplunkRetryOptions"}
+	iSplunkS3BackupMode                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SplunkS3BackupMode"}
+	iSSLMode                                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SSLMode"}
+	i_StringWithLettersDigitsUnderscoresDots               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "StringWithLettersDigitsUnderscoresDots"}
+	i_SubnetIdList                                         = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "SubnetIdList"}
+	iTableCreationConfiguration                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "TableCreationConfiguration"}
+	iTag                                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "Tag"}
+	i_TagDeliveryStreamInputTagList                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "TagDeliveryStreamInputTagList"}
+	i_TagKey                                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "TagKey"}
+	i_TagKeyList                                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "TagKeyList"}
+	i_TagValue                                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "TagValue"}
+	i_ThroughputHintInMBs                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ThroughputHintInMBs"}
+	i_Timestamp                                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "Timestamp"}
+	i_TopicName                                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "TopicName"}
+	i_Username                                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "Username"}
+	iVpcConfiguration                                      = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "VpcConfiguration"}
+	iVpcConfigurationDescription                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "VpcConfigurationDescription"}
+	i_VpcEndpointServiceName                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "VpcEndpointServiceName"}
+	i_WarehouseLocation                                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "WarehouseLocation"}
+	iCreateDeliveryStreamInput                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "CreateDeliveryStreamInput"}
+	iCreateDeliveryStreamOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "CreateDeliveryStreamOutput"}
+	iDeleteDeliveryStreamInput                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeleteDeliveryStreamInput"}
+	iDeleteDeliveryStreamOutput                            = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DeleteDeliveryStreamOutput"}
+	iDescribeDeliveryStreamInput                           = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DescribeDeliveryStreamInput"}
+	iDescribeDeliveryStreamOutput                          = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "DescribeDeliveryStreamOutput"}
+	iListDeliveryStreamsInput                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ListDeliveryStreamsInput"}
+	iListDeliveryStreamsOutput                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ListDeliveryStreamsOutput"}
+	iListTagsForDeliveryStreamInput                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ListTagsForDeliveryStreamInput"}
+	iListTagsForDeliveryStreamOutput                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "ListTagsForDeliveryStreamOutput"}
+	iPutRecordBatchInput                                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "PutRecordBatchInput"}
+	iPutRecordBatchOutput                                  = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "PutRecordBatchOutput"}
+	iPutRecordInput                                        = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "PutRecordInput"}
+	iPutRecordOutput                                       = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "PutRecordOutput"}
+	iStartDeliveryStreamEncryptionInput                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "StartDeliveryStreamEncryptionInput"}
+	iStartDeliveryStreamEncryptionOutput                   = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "StartDeliveryStreamEncryptionOutput"}
+	iStopDeliveryStreamEncryptionInput                     = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "StopDeliveryStreamEncryptionInput"}
+	iStopDeliveryStreamEncryptionOutput                    = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "StopDeliveryStreamEncryptionOutput"}
+	iTagDeliveryStreamInput                                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "TagDeliveryStreamInput"}
+	iTagDeliveryStreamOutput                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "TagDeliveryStreamOutput"}
+	iUntagDeliveryStreamInput                              = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "UntagDeliveryStreamInput"}
+	iUntagDeliveryStreamOutput                             = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "UntagDeliveryStreamOutput"}
+	iUpdateDestinationInput                                = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "UpdateDestinationInput"}
+	iUpdateDestinationOutput                               = smithy.ShapeName{Namespace: "com.amazonaws.firehose", Name: "UpdateDestinationOutput"}
+	pUnit                                                  = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
 )
 
 var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://firehose.amazonaws.com/doc/2015-08-04"}}, DirectMask: 0x8000}
@@ -1426,30 +1426,15 @@ var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, n
 var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
 
 var mAmazonOpenSearchServerlessBufferingHints = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonOpenSearchServerlessBufferingHints_IntervalInSeconds, &sAmazonOpenSearchServerlessBufferingHints_SizeInMBs}}
-var mAmazonOpenSearchServerlessDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonOpenSearchServerlessDestinationConfiguration_RoleARN, &sAmazonOpenSearchServerlessDestinationConfiguration_CollectionEndpoint, &sAmazonOpenSearchServerlessDestinationConfiguration_IndexName, &sAmazonOpenSearchServerlessDestinationConfiguration_BufferingHints, &sAmazonOpenSearchServerlessDestinationConfiguration_RetryOptions, &sAmazonOpenSearchServerlessDestinationConfiguration_S3BackupMode, &sAmazonOpenSearchServerlessDestinationConfiguration_S3Configuration, &sAmazonOpenSearchServerlessDestinationConfiguration_ProcessingConfiguration, &sAmazonOpenSearchServerlessDestinationConfiguration_CloudWatchLoggingOptions, &sAmazonOpenSearchServerlessDestinationConfiguration_VpcConfiguration}, Seed: 1, Slots: []uint16{
-	0, 0, 4, 9, 0, 0, 0, 0, 0, 6, 3, 8, 0, 2, 0, 1, 5, 0, 0, 10, 0, 7, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,
-}}
-var mAmazonOpenSearchServerlessDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonOpenSearchServerlessDestinationDescription_RoleARN, &sAmazonOpenSearchServerlessDestinationDescription_CollectionEndpoint, &sAmazonOpenSearchServerlessDestinationDescription_IndexName, &sAmazonOpenSearchServerlessDestinationDescription_BufferingHints, &sAmazonOpenSearchServerlessDestinationDescription_RetryOptions, &sAmazonOpenSearchServerlessDestinationDescription_S3BackupMode, &sAmazonOpenSearchServerlessDestinationDescription_S3DestinationDescription, &sAmazonOpenSearchServerlessDestinationDescription_ProcessingConfiguration, &sAmazonOpenSearchServerlessDestinationDescription_CloudWatchLoggingOptions, &sAmazonOpenSearchServerlessDestinationDescription_VpcConfigurationDescription}, Seed: 10, Slots: []uint16{
-	0, 7, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 9, 0, 0, 6, 0, 0,
-	10, 0, 3, 1, 8, 5, 0, 0,
-}}
+var mAmazonOpenSearchServerlessDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonOpenSearchServerlessDestinationConfiguration_RoleARN, &sAmazonOpenSearchServerlessDestinationConfiguration_CollectionEndpoint, &sAmazonOpenSearchServerlessDestinationConfiguration_IndexName, &sAmazonOpenSearchServerlessDestinationConfiguration_BufferingHints, &sAmazonOpenSearchServerlessDestinationConfiguration_RetryOptions, &sAmazonOpenSearchServerlessDestinationConfiguration_S3BackupMode, &sAmazonOpenSearchServerlessDestinationConfiguration_S3Configuration, &sAmazonOpenSearchServerlessDestinationConfiguration_ProcessingConfiguration, &sAmazonOpenSearchServerlessDestinationConfiguration_CloudWatchLoggingOptions, &sAmazonOpenSearchServerlessDestinationConfiguration_VpcConfiguration}, Hash: &hAmazonOpenSearchServerlessDestinationConfiguration}
+var mAmazonOpenSearchServerlessDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonOpenSearchServerlessDestinationDescription_RoleARN, &sAmazonOpenSearchServerlessDestinationDescription_CollectionEndpoint, &sAmazonOpenSearchServerlessDestinationDescription_IndexName, &sAmazonOpenSearchServerlessDestinationDescription_BufferingHints, &sAmazonOpenSearchServerlessDestinationDescription_RetryOptions, &sAmazonOpenSearchServerlessDestinationDescription_S3BackupMode, &sAmazonOpenSearchServerlessDestinationDescription_S3DestinationDescription, &sAmazonOpenSearchServerlessDestinationDescription_ProcessingConfiguration, &sAmazonOpenSearchServerlessDestinationDescription_CloudWatchLoggingOptions, &sAmazonOpenSearchServerlessDestinationDescription_VpcConfigurationDescription}, Hash: &hAmazonOpenSearchServerlessDestinationDescription}
 var mAmazonOpenSearchServerlessDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonOpenSearchServerlessDestinationUpdate_RoleARN, &sAmazonOpenSearchServerlessDestinationUpdate_CollectionEndpoint, &sAmazonOpenSearchServerlessDestinationUpdate_IndexName, &sAmazonOpenSearchServerlessDestinationUpdate_BufferingHints, &sAmazonOpenSearchServerlessDestinationUpdate_RetryOptions, &sAmazonOpenSearchServerlessDestinationUpdate_S3Update, &sAmazonOpenSearchServerlessDestinationUpdate_ProcessingConfiguration, &sAmazonOpenSearchServerlessDestinationUpdate_CloudWatchLoggingOptions}}
 var mAmazonOpenSearchServerlessRetryOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonOpenSearchServerlessRetryOptions_DurationInSeconds}}
 var mAmazonOpenSearchServerlessS3BackupMode = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonOpenSearchServerlessS3BackupMode_FailedDocumentsOnly, &sAmazonOpenSearchServerlessS3BackupMode_AllDocuments}}
 var mAmazonopensearchserviceBufferingHints = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonopensearchserviceBufferingHints_IntervalInSeconds, &sAmazonopensearchserviceBufferingHints_SizeInMBs}}
-var mAmazonopensearchserviceDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonopensearchserviceDestinationConfiguration_RoleARN, &sAmazonopensearchserviceDestinationConfiguration_DomainARN, &sAmazonopensearchserviceDestinationConfiguration_ClusterEndpoint, &sAmazonopensearchserviceDestinationConfiguration_IndexName, &sAmazonopensearchserviceDestinationConfiguration_TypeName, &sAmazonopensearchserviceDestinationConfiguration_IndexRotationPeriod, &sAmazonopensearchserviceDestinationConfiguration_BufferingHints, &sAmazonopensearchserviceDestinationConfiguration_RetryOptions, &sAmazonopensearchserviceDestinationConfiguration_S3BackupMode, &sAmazonopensearchserviceDestinationConfiguration_S3Configuration, &sAmazonopensearchserviceDestinationConfiguration_ProcessingConfiguration, &sAmazonopensearchserviceDestinationConfiguration_CloudWatchLoggingOptions, &sAmazonopensearchserviceDestinationConfiguration_VpcConfiguration, &sAmazonopensearchserviceDestinationConfiguration_DocumentIdOptions}, Seed: 48, Slots: []uint16{
-	0, 0, 0, 3, 0, 2, 4, 0, 7, 14, 9, 0, 8, 0, 0, 0, 12, 0, 0, 6, 0, 10, 0, 5,
-	0, 11, 0, 1, 0, 0, 0, 13,
-}}
-var mAmazonopensearchserviceDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonopensearchserviceDestinationDescription_RoleARN, &sAmazonopensearchserviceDestinationDescription_DomainARN, &sAmazonopensearchserviceDestinationDescription_ClusterEndpoint, &sAmazonopensearchserviceDestinationDescription_IndexName, &sAmazonopensearchserviceDestinationDescription_TypeName, &sAmazonopensearchserviceDestinationDescription_IndexRotationPeriod, &sAmazonopensearchserviceDestinationDescription_BufferingHints, &sAmazonopensearchserviceDestinationDescription_RetryOptions, &sAmazonopensearchserviceDestinationDescription_S3BackupMode, &sAmazonopensearchserviceDestinationDescription_S3DestinationDescription, &sAmazonopensearchserviceDestinationDescription_ProcessingConfiguration, &sAmazonopensearchserviceDestinationDescription_CloudWatchLoggingOptions, &sAmazonopensearchserviceDestinationDescription_VpcConfigurationDescription, &sAmazonopensearchserviceDestinationDescription_DocumentIdOptions}, Seed: 18, Slots: []uint16{
-	0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 12, 0, 6, 2, 14, 11, 3, 5,
-	0, 7, 0, 10, 1, 0, 4, 9,
-}}
-var mAmazonopensearchserviceDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonopensearchserviceDestinationUpdate_RoleARN, &sAmazonopensearchserviceDestinationUpdate_DomainARN, &sAmazonopensearchserviceDestinationUpdate_ClusterEndpoint, &sAmazonopensearchserviceDestinationUpdate_IndexName, &sAmazonopensearchserviceDestinationUpdate_TypeName, &sAmazonopensearchserviceDestinationUpdate_IndexRotationPeriod, &sAmazonopensearchserviceDestinationUpdate_BufferingHints, &sAmazonopensearchserviceDestinationUpdate_RetryOptions, &sAmazonopensearchserviceDestinationUpdate_S3Update, &sAmazonopensearchserviceDestinationUpdate_ProcessingConfiguration, &sAmazonopensearchserviceDestinationUpdate_CloudWatchLoggingOptions, &sAmazonopensearchserviceDestinationUpdate_DocumentIdOptions}, Seed: 17, Slots: []uint16{
-	0, 1, 6, 0, 12, 0, 0, 7, 9, 0, 0, 0, 0, 0, 0, 11, 0, 0, 5, 0, 2, 4, 8, 10,
-	0, 0, 0, 0, 3, 0, 0, 0,
-}}
+var mAmazonopensearchserviceDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonopensearchserviceDestinationConfiguration_RoleARN, &sAmazonopensearchserviceDestinationConfiguration_DomainARN, &sAmazonopensearchserviceDestinationConfiguration_ClusterEndpoint, &sAmazonopensearchserviceDestinationConfiguration_IndexName, &sAmazonopensearchserviceDestinationConfiguration_TypeName, &sAmazonopensearchserviceDestinationConfiguration_IndexRotationPeriod, &sAmazonopensearchserviceDestinationConfiguration_BufferingHints, &sAmazonopensearchserviceDestinationConfiguration_RetryOptions, &sAmazonopensearchserviceDestinationConfiguration_S3BackupMode, &sAmazonopensearchserviceDestinationConfiguration_S3Configuration, &sAmazonopensearchserviceDestinationConfiguration_ProcessingConfiguration, &sAmazonopensearchserviceDestinationConfiguration_CloudWatchLoggingOptions, &sAmazonopensearchserviceDestinationConfiguration_VpcConfiguration, &sAmazonopensearchserviceDestinationConfiguration_DocumentIdOptions}, Hash: &hAmazonopensearchserviceDestinationConfiguration}
+var mAmazonopensearchserviceDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonopensearchserviceDestinationDescription_RoleARN, &sAmazonopensearchserviceDestinationDescription_DomainARN, &sAmazonopensearchserviceDestinationDescription_ClusterEndpoint, &sAmazonopensearchserviceDestinationDescription_IndexName, &sAmazonopensearchserviceDestinationDescription_TypeName, &sAmazonopensearchserviceDestinationDescription_IndexRotationPeriod, &sAmazonopensearchserviceDestinationDescription_BufferingHints, &sAmazonopensearchserviceDestinationDescription_RetryOptions, &sAmazonopensearchserviceDestinationDescription_S3BackupMode, &sAmazonopensearchserviceDestinationDescription_S3DestinationDescription, &sAmazonopensearchserviceDestinationDescription_ProcessingConfiguration, &sAmazonopensearchserviceDestinationDescription_CloudWatchLoggingOptions, &sAmazonopensearchserviceDestinationDescription_VpcConfigurationDescription, &sAmazonopensearchserviceDestinationDescription_DocumentIdOptions}, Hash: &hAmazonopensearchserviceDestinationDescription}
+var mAmazonopensearchserviceDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonopensearchserviceDestinationUpdate_RoleARN, &sAmazonopensearchserviceDestinationUpdate_DomainARN, &sAmazonopensearchserviceDestinationUpdate_ClusterEndpoint, &sAmazonopensearchserviceDestinationUpdate_IndexName, &sAmazonopensearchserviceDestinationUpdate_TypeName, &sAmazonopensearchserviceDestinationUpdate_IndexRotationPeriod, &sAmazonopensearchserviceDestinationUpdate_BufferingHints, &sAmazonopensearchserviceDestinationUpdate_RetryOptions, &sAmazonopensearchserviceDestinationUpdate_S3Update, &sAmazonopensearchserviceDestinationUpdate_ProcessingConfiguration, &sAmazonopensearchserviceDestinationUpdate_CloudWatchLoggingOptions, &sAmazonopensearchserviceDestinationUpdate_DocumentIdOptions}, Hash: &hAmazonopensearchserviceDestinationUpdate}
 var mAmazonopensearchserviceIndexRotationPeriod = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonopensearchserviceIndexRotationPeriod_NoRotation, &sAmazonopensearchserviceIndexRotationPeriod_OneHour, &sAmazonopensearchserviceIndexRotationPeriod_OneDay, &sAmazonopensearchserviceIndexRotationPeriod_OneWeek, &sAmazonopensearchserviceIndexRotationPeriod_OneMonth}}
 var mAmazonopensearchserviceRetryOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonopensearchserviceRetryOptions_DurationInSeconds}}
 var mAmazonopensearchserviceS3BackupMode = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonopensearchserviceS3BackupMode_FailedDocumentsOnly, &sAmazonopensearchserviceS3BackupMode_AllDocuments}}
@@ -1470,14 +1455,8 @@ var mDatabaseList = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseList_I
 var mDatabaseSnapshotInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseSnapshotInfo_Id, &sDatabaseSnapshotInfo_Table, &sDatabaseSnapshotInfo_RequestTimestamp, &sDatabaseSnapshotInfo_RequestedBy, &sDatabaseSnapshotInfo_Status, &sDatabaseSnapshotInfo_FailureDescription}}
 var m_DatabaseSnapshotInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatabaseSnapshotInfoList_member}}
 var mDatabaseSourceAuthenticationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseSourceAuthenticationConfiguration_SecretsManagerConfiguration}}
-var mDatabaseSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseSourceConfiguration_Type, &sDatabaseSourceConfiguration_Endpoint, &sDatabaseSourceConfiguration_Port, &sDatabaseSourceConfiguration_SSLMode, &sDatabaseSourceConfiguration_Databases, &sDatabaseSourceConfiguration_Tables, &sDatabaseSourceConfiguration_Columns, &sDatabaseSourceConfiguration_SurrogateKeys, &sDatabaseSourceConfiguration_SnapshotWatermarkTable, &sDatabaseSourceConfiguration_DatabaseSourceAuthenticationConfiguration, &sDatabaseSourceConfiguration_DatabaseSourceVPCConfiguration}, Seed: 10, Slots: []uint16{
-	0, 11, 0, 0, 0, 0, 0, 6, 7, 2, 0, 0, 1, 8, 0, 0, 0, 5, 4, 0, 0, 9, 0, 0,
-	0, 3, 0, 0, 0, 0, 10, 0,
-}}
-var mDatabaseSourceDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseSourceDescription_Type, &sDatabaseSourceDescription_Endpoint, &sDatabaseSourceDescription_Port, &sDatabaseSourceDescription_SSLMode, &sDatabaseSourceDescription_Databases, &sDatabaseSourceDescription_Tables, &sDatabaseSourceDescription_Columns, &sDatabaseSourceDescription_SurrogateKeys, &sDatabaseSourceDescription_SnapshotWatermarkTable, &sDatabaseSourceDescription_SnapshotInfo, &sDatabaseSourceDescription_DatabaseSourceAuthenticationConfiguration, &sDatabaseSourceDescription_DatabaseSourceVPCConfiguration}, Seed: 10, Slots: []uint16{
-	0, 12, 0, 0, 0, 0, 0, 6, 7, 2, 0, 0, 1, 8, 0, 0, 0, 5, 4, 0, 0, 9, 0, 0,
-	10, 3, 0, 0, 0, 0, 11, 0,
-}}
+var mDatabaseSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseSourceConfiguration_Type, &sDatabaseSourceConfiguration_Endpoint, &sDatabaseSourceConfiguration_Port, &sDatabaseSourceConfiguration_SSLMode, &sDatabaseSourceConfiguration_Databases, &sDatabaseSourceConfiguration_Tables, &sDatabaseSourceConfiguration_Columns, &sDatabaseSourceConfiguration_SurrogateKeys, &sDatabaseSourceConfiguration_SnapshotWatermarkTable, &sDatabaseSourceConfiguration_DatabaseSourceAuthenticationConfiguration, &sDatabaseSourceConfiguration_DatabaseSourceVPCConfiguration}, Hash: &hDatabaseSourceConfiguration}
+var mDatabaseSourceDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseSourceDescription_Type, &sDatabaseSourceDescription_Endpoint, &sDatabaseSourceDescription_Port, &sDatabaseSourceDescription_SSLMode, &sDatabaseSourceDescription_Databases, &sDatabaseSourceDescription_Tables, &sDatabaseSourceDescription_Columns, &sDatabaseSourceDescription_SurrogateKeys, &sDatabaseSourceDescription_SnapshotWatermarkTable, &sDatabaseSourceDescription_SnapshotInfo, &sDatabaseSourceDescription_DatabaseSourceAuthenticationConfiguration, &sDatabaseSourceDescription_DatabaseSourceVPCConfiguration}, Hash: &hDatabaseSourceDescription}
 var mDatabaseSourceVPCConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseSourceVPCConfiguration_VpcEndpointServiceName}}
 var m_DatabaseSurrogateKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatabaseSurrogateKeyList_member}}
 var m_DatabaseTableIncludeOrExcludeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatabaseTableIncludeOrExcludeList_member}}
@@ -1485,26 +1464,16 @@ var mDatabaseTableList = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseT
 var mDatabaseType = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseType_MySQL, &sDatabaseType_PostgreSQL}}
 var mDataFormatConversionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataFormatConversionConfiguration_SchemaConfiguration, &sDataFormatConversionConfiguration_InputFormatConfiguration, &sDataFormatConversionConfiguration_OutputFormatConfiguration, &sDataFormatConversionConfiguration_Enabled}}
 var mDefaultDocumentIdFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sDefaultDocumentIdFormat_FIREHOSE_DEFAULT, &sDefaultDocumentIdFormat_NO_DOCUMENT_ID}}
-var mDeliveryStreamDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryStreamDescription_DeliveryStreamName, &sDeliveryStreamDescription_DeliveryStreamARN, &sDeliveryStreamDescription_DeliveryStreamStatus, &sDeliveryStreamDescription_FailureDescription, &sDeliveryStreamDescription_DeliveryStreamEncryptionConfiguration, &sDeliveryStreamDescription_DeliveryStreamType, &sDeliveryStreamDescription_VersionId, &sDeliveryStreamDescription_CreateTimestamp, &sDeliveryStreamDescription_LastUpdateTimestamp, &sDeliveryStreamDescription_Source, &sDeliveryStreamDescription_Destinations, &sDeliveryStreamDescription_HasMoreDestinations}, Seed: 9, Slots: []uint16{
-	0, 0, 0, 0, 0, 0, 0, 12, 2, 0, 0, 0, 11, 1, 0, 10, 0, 4, 0, 8, 0, 6, 0, 5,
-	0, 0, 9, 0, 7, 0, 3, 0,
-}}
+var mDeliveryStreamDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryStreamDescription_DeliveryStreamName, &sDeliveryStreamDescription_DeliveryStreamARN, &sDeliveryStreamDescription_DeliveryStreamStatus, &sDeliveryStreamDescription_FailureDescription, &sDeliveryStreamDescription_DeliveryStreamEncryptionConfiguration, &sDeliveryStreamDescription_DeliveryStreamType, &sDeliveryStreamDescription_VersionId, &sDeliveryStreamDescription_CreateTimestamp, &sDeliveryStreamDescription_LastUpdateTimestamp, &sDeliveryStreamDescription_Source, &sDeliveryStreamDescription_Destinations, &sDeliveryStreamDescription_HasMoreDestinations}, Hash: &hDeliveryStreamDescription}
 var mDeliveryStreamEncryptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryStreamEncryptionConfiguration_KeyARN, &sDeliveryStreamEncryptionConfiguration_KeyType, &sDeliveryStreamEncryptionConfiguration_Status, &sDeliveryStreamEncryptionConfiguration_FailureDescription}}
 var mDeliveryStreamEncryptionConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryStreamEncryptionConfigurationInput_KeyARN, &sDeliveryStreamEncryptionConfigurationInput_KeyType}}
 var mDeliveryStreamEncryptionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryStreamEncryptionStatus_ENABLED, &sDeliveryStreamEncryptionStatus_ENABLING, &sDeliveryStreamEncryptionStatus_ENABLING_FAILED, &sDeliveryStreamEncryptionStatus_DISABLED, &sDeliveryStreamEncryptionStatus_DISABLING, &sDeliveryStreamEncryptionStatus_DISABLING_FAILED}}
-var mDeliveryStreamFailureType = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryStreamFailureType_VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND, &sDeliveryStreamFailureType_VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED, &sDeliveryStreamFailureType_RETIRE_KMS_GRANT_FAILED, &sDeliveryStreamFailureType_CREATE_KMS_GRANT_FAILED, &sDeliveryStreamFailureType_KMS_ACCESS_DENIED, &sDeliveryStreamFailureType_DISABLED_KMS_KEY, &sDeliveryStreamFailureType_INVALID_KMS_KEY, &sDeliveryStreamFailureType_KMS_KEY_NOT_FOUND, &sDeliveryStreamFailureType_KMS_OPT_IN_REQUIRED, &sDeliveryStreamFailureType_CREATE_ENI_FAILED, &sDeliveryStreamFailureType_DELETE_ENI_FAILED, &sDeliveryStreamFailureType_SUBNET_NOT_FOUND, &sDeliveryStreamFailureType_SECURITY_GROUP_NOT_FOUND, &sDeliveryStreamFailureType_ENI_ACCESS_DENIED, &sDeliveryStreamFailureType_SUBNET_ACCESS_DENIED, &sDeliveryStreamFailureType_SECURITY_GROUP_ACCESS_DENIED, &sDeliveryStreamFailureType_UNKNOWN_ERROR}, Seed: 3, Slots: []uint16{
-	0, 0, 11, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 14, 9, 0, 0,
-	0, 0, 0, 0, 0, 6, 0, 0, 0, 12, 0, 15, 3, 0, 0, 0, 5, 0, 10, 8, 0, 4, 0, 0,
-	7, 0, 0, 0, 0, 0, 0, 2, 0, 0, 17, 0, 13, 0, 0, 0,
-}}
+var mDeliveryStreamFailureType = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryStreamFailureType_VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND, &sDeliveryStreamFailureType_VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED, &sDeliveryStreamFailureType_RETIRE_KMS_GRANT_FAILED, &sDeliveryStreamFailureType_CREATE_KMS_GRANT_FAILED, &sDeliveryStreamFailureType_KMS_ACCESS_DENIED, &sDeliveryStreamFailureType_DISABLED_KMS_KEY, &sDeliveryStreamFailureType_INVALID_KMS_KEY, &sDeliveryStreamFailureType_KMS_KEY_NOT_FOUND, &sDeliveryStreamFailureType_KMS_OPT_IN_REQUIRED, &sDeliveryStreamFailureType_CREATE_ENI_FAILED, &sDeliveryStreamFailureType_DELETE_ENI_FAILED, &sDeliveryStreamFailureType_SUBNET_NOT_FOUND, &sDeliveryStreamFailureType_SECURITY_GROUP_NOT_FOUND, &sDeliveryStreamFailureType_ENI_ACCESS_DENIED, &sDeliveryStreamFailureType_SUBNET_ACCESS_DENIED, &sDeliveryStreamFailureType_SECURITY_GROUP_ACCESS_DENIED, &sDeliveryStreamFailureType_UNKNOWN_ERROR}, Hash: &hDeliveryStreamFailureType}
 var m_DeliveryStreamNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeliveryStreamNameList_member}}
 var mDeliveryStreamStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryStreamStatus_CREATING, &sDeliveryStreamStatus_CREATING_FAILED, &sDeliveryStreamStatus_DELETING, &sDeliveryStreamStatus_DELETING_FAILED, &sDeliveryStreamStatus_ACTIVE}}
 var mDeliveryStreamType = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryStreamType_DirectPut, &sDeliveryStreamType_KinesisStreamAsSource, &sDeliveryStreamType_MSKAsSource, &sDeliveryStreamType_DatabaseAsSource}}
 var mDeserializer = smithy.SchemaMembers{List: []*smithy.Schema{&sDeserializer_OpenXJsonSerDe, &sDeserializer_HiveJsonSerDe}}
-var mDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationDescription_DestinationId, &sDestinationDescription_S3DestinationDescription, &sDestinationDescription_ExtendedS3DestinationDescription, &sDestinationDescription_RedshiftDestinationDescription, &sDestinationDescription_ElasticsearchDestinationDescription, &sDestinationDescription_AmazonopensearchserviceDestinationDescription, &sDestinationDescription_SplunkDestinationDescription, &sDestinationDescription_HttpEndpointDestinationDescription, &sDestinationDescription_SnowflakeDestinationDescription, &sDestinationDescription_AmazonOpenSearchServerlessDestinationDescription, &sDestinationDescription_IcebergDestinationDescription}, Seed: 3, Slots: []uint16{
-	10, 7, 0, 0, 0, 4, 8, 1, 0, 11, 0, 5, 0, 0, 0, 6, 9, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 2, 0, 3, 0, 0, 0,
-}}
+var mDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationDescription_DestinationId, &sDestinationDescription_S3DestinationDescription, &sDestinationDescription_ExtendedS3DestinationDescription, &sDestinationDescription_RedshiftDestinationDescription, &sDestinationDescription_ElasticsearchDestinationDescription, &sDestinationDescription_AmazonopensearchserviceDestinationDescription, &sDestinationDescription_SplunkDestinationDescription, &sDestinationDescription_HttpEndpointDestinationDescription, &sDestinationDescription_SnowflakeDestinationDescription, &sDestinationDescription_AmazonOpenSearchServerlessDestinationDescription, &sDestinationDescription_IcebergDestinationDescription}, Hash: &hDestinationDescription}
 var m_DestinationDescriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DestinationDescriptionList_member}}
 var mDestinationTableConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationTableConfiguration_DestinationTableName, &sDestinationTableConfiguration_DestinationDatabaseName, &sDestinationTableConfiguration_UniqueKeys, &sDestinationTableConfiguration_PartitionSpec, &sDestinationTableConfiguration_S3ErrorOutputPrefix}}
 var m_DestinationTableConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DestinationTableConfigurationList_member}}
@@ -1513,34 +1482,16 @@ var mDirectPutSourceDescription = smithy.SchemaMembers{List: []*smithy.Schema{&s
 var mDocumentIdOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentIdOptions_DefaultDocumentIdFormat}}
 var mDynamicPartitioningConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDynamicPartitioningConfiguration_RetryOptions, &sDynamicPartitioningConfiguration_Enabled}}
 var mElasticsearchBufferingHints = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchBufferingHints_IntervalInSeconds, &sElasticsearchBufferingHints_SizeInMBs}}
-var mElasticsearchDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchDestinationConfiguration_RoleARN, &sElasticsearchDestinationConfiguration_DomainARN, &sElasticsearchDestinationConfiguration_ClusterEndpoint, &sElasticsearchDestinationConfiguration_IndexName, &sElasticsearchDestinationConfiguration_TypeName, &sElasticsearchDestinationConfiguration_IndexRotationPeriod, &sElasticsearchDestinationConfiguration_BufferingHints, &sElasticsearchDestinationConfiguration_RetryOptions, &sElasticsearchDestinationConfiguration_S3BackupMode, &sElasticsearchDestinationConfiguration_S3Configuration, &sElasticsearchDestinationConfiguration_ProcessingConfiguration, &sElasticsearchDestinationConfiguration_CloudWatchLoggingOptions, &sElasticsearchDestinationConfiguration_VpcConfiguration, &sElasticsearchDestinationConfiguration_DocumentIdOptions}, Seed: 48, Slots: []uint16{
-	0, 0, 0, 3, 0, 2, 4, 0, 7, 14, 9, 0, 8, 0, 0, 0, 12, 0, 0, 6, 0, 10, 0, 5,
-	0, 11, 0, 1, 0, 0, 0, 13,
-}}
-var mElasticsearchDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchDestinationDescription_RoleARN, &sElasticsearchDestinationDescription_DomainARN, &sElasticsearchDestinationDescription_ClusterEndpoint, &sElasticsearchDestinationDescription_IndexName, &sElasticsearchDestinationDescription_TypeName, &sElasticsearchDestinationDescription_IndexRotationPeriod, &sElasticsearchDestinationDescription_BufferingHints, &sElasticsearchDestinationDescription_RetryOptions, &sElasticsearchDestinationDescription_S3BackupMode, &sElasticsearchDestinationDescription_S3DestinationDescription, &sElasticsearchDestinationDescription_ProcessingConfiguration, &sElasticsearchDestinationDescription_CloudWatchLoggingOptions, &sElasticsearchDestinationDescription_VpcConfigurationDescription, &sElasticsearchDestinationDescription_DocumentIdOptions}, Seed: 18, Slots: []uint16{
-	0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 12, 0, 6, 2, 14, 11, 3, 5,
-	0, 7, 0, 10, 1, 0, 4, 9,
-}}
-var mElasticsearchDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchDestinationUpdate_RoleARN, &sElasticsearchDestinationUpdate_DomainARN, &sElasticsearchDestinationUpdate_ClusterEndpoint, &sElasticsearchDestinationUpdate_IndexName, &sElasticsearchDestinationUpdate_TypeName, &sElasticsearchDestinationUpdate_IndexRotationPeriod, &sElasticsearchDestinationUpdate_BufferingHints, &sElasticsearchDestinationUpdate_RetryOptions, &sElasticsearchDestinationUpdate_S3Update, &sElasticsearchDestinationUpdate_ProcessingConfiguration, &sElasticsearchDestinationUpdate_CloudWatchLoggingOptions, &sElasticsearchDestinationUpdate_DocumentIdOptions}, Seed: 17, Slots: []uint16{
-	0, 1, 6, 0, 12, 0, 0, 7, 9, 0, 0, 0, 0, 0, 0, 11, 0, 0, 5, 0, 2, 4, 8, 10,
-	0, 0, 0, 0, 3, 0, 0, 0,
-}}
+var mElasticsearchDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchDestinationConfiguration_RoleARN, &sElasticsearchDestinationConfiguration_DomainARN, &sElasticsearchDestinationConfiguration_ClusterEndpoint, &sElasticsearchDestinationConfiguration_IndexName, &sElasticsearchDestinationConfiguration_TypeName, &sElasticsearchDestinationConfiguration_IndexRotationPeriod, &sElasticsearchDestinationConfiguration_BufferingHints, &sElasticsearchDestinationConfiguration_RetryOptions, &sElasticsearchDestinationConfiguration_S3BackupMode, &sElasticsearchDestinationConfiguration_S3Configuration, &sElasticsearchDestinationConfiguration_ProcessingConfiguration, &sElasticsearchDestinationConfiguration_CloudWatchLoggingOptions, &sElasticsearchDestinationConfiguration_VpcConfiguration, &sElasticsearchDestinationConfiguration_DocumentIdOptions}, Hash: &hElasticsearchDestinationConfiguration}
+var mElasticsearchDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchDestinationDescription_RoleARN, &sElasticsearchDestinationDescription_DomainARN, &sElasticsearchDestinationDescription_ClusterEndpoint, &sElasticsearchDestinationDescription_IndexName, &sElasticsearchDestinationDescription_TypeName, &sElasticsearchDestinationDescription_IndexRotationPeriod, &sElasticsearchDestinationDescription_BufferingHints, &sElasticsearchDestinationDescription_RetryOptions, &sElasticsearchDestinationDescription_S3BackupMode, &sElasticsearchDestinationDescription_S3DestinationDescription, &sElasticsearchDestinationDescription_ProcessingConfiguration, &sElasticsearchDestinationDescription_CloudWatchLoggingOptions, &sElasticsearchDestinationDescription_VpcConfigurationDescription, &sElasticsearchDestinationDescription_DocumentIdOptions}, Hash: &hElasticsearchDestinationDescription}
+var mElasticsearchDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchDestinationUpdate_RoleARN, &sElasticsearchDestinationUpdate_DomainARN, &sElasticsearchDestinationUpdate_ClusterEndpoint, &sElasticsearchDestinationUpdate_IndexName, &sElasticsearchDestinationUpdate_TypeName, &sElasticsearchDestinationUpdate_IndexRotationPeriod, &sElasticsearchDestinationUpdate_BufferingHints, &sElasticsearchDestinationUpdate_RetryOptions, &sElasticsearchDestinationUpdate_S3Update, &sElasticsearchDestinationUpdate_ProcessingConfiguration, &sElasticsearchDestinationUpdate_CloudWatchLoggingOptions, &sElasticsearchDestinationUpdate_DocumentIdOptions}, Hash: &hElasticsearchDestinationUpdate}
 var mElasticsearchIndexRotationPeriod = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchIndexRotationPeriod_NoRotation, &sElasticsearchIndexRotationPeriod_OneHour, &sElasticsearchIndexRotationPeriod_OneDay, &sElasticsearchIndexRotationPeriod_OneWeek, &sElasticsearchIndexRotationPeriod_OneMonth}}
 var mElasticsearchRetryOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchRetryOptions_DurationInSeconds}}
 var mElasticsearchS3BackupMode = smithy.SchemaMembers{List: []*smithy.Schema{&sElasticsearchS3BackupMode_FailedDocumentsOnly, &sElasticsearchS3BackupMode_AllDocuments}}
 var mEncryptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionConfiguration_NoEncryptionConfig, &sEncryptionConfiguration_KMSEncryptionConfig}}
-var mExtendedS3DestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sExtendedS3DestinationConfiguration_RoleARN, &sExtendedS3DestinationConfiguration_BucketARN, &sExtendedS3DestinationConfiguration_Prefix, &sExtendedS3DestinationConfiguration_ErrorOutputPrefix, &sExtendedS3DestinationConfiguration_BufferingHints, &sExtendedS3DestinationConfiguration_CompressionFormat, &sExtendedS3DestinationConfiguration_EncryptionConfiguration, &sExtendedS3DestinationConfiguration_CloudWatchLoggingOptions, &sExtendedS3DestinationConfiguration_ProcessingConfiguration, &sExtendedS3DestinationConfiguration_S3BackupMode, &sExtendedS3DestinationConfiguration_S3BackupConfiguration, &sExtendedS3DestinationConfiguration_DataFormatConversionConfiguration, &sExtendedS3DestinationConfiguration_DynamicPartitioningConfiguration, &sExtendedS3DestinationConfiguration_FileExtension, &sExtendedS3DestinationConfiguration_CustomTimeZone}, Seed: 8, Slots: []uint16{
-	8, 0, 6, 0, 0, 0, 0, 0, 14, 9, 3, 0, 15, 0, 13, 0, 0, 0, 12, 0, 0, 5, 0, 4,
-	0, 0, 11, 2, 0, 7, 1, 10,
-}}
-var mExtendedS3DestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sExtendedS3DestinationDescription_RoleARN, &sExtendedS3DestinationDescription_BucketARN, &sExtendedS3DestinationDescription_Prefix, &sExtendedS3DestinationDescription_ErrorOutputPrefix, &sExtendedS3DestinationDescription_BufferingHints, &sExtendedS3DestinationDescription_CompressionFormat, &sExtendedS3DestinationDescription_EncryptionConfiguration, &sExtendedS3DestinationDescription_CloudWatchLoggingOptions, &sExtendedS3DestinationDescription_ProcessingConfiguration, &sExtendedS3DestinationDescription_S3BackupMode, &sExtendedS3DestinationDescription_S3BackupDescription, &sExtendedS3DestinationDescription_DataFormatConversionConfiguration, &sExtendedS3DestinationDescription_DynamicPartitioningConfiguration, &sExtendedS3DestinationDescription_FileExtension, &sExtendedS3DestinationDescription_CustomTimeZone}, Seed: 22, Slots: []uint16{
-	7, 0, 0, 6, 0, 1, 0, 0, 4, 0, 0, 13, 10, 0, 9, 14, 3, 8, 0, 15, 11, 0, 0, 0,
-	5, 0, 0, 12, 0, 0, 2, 0,
-}}
-var mExtendedS3DestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sExtendedS3DestinationUpdate_RoleARN, &sExtendedS3DestinationUpdate_BucketARN, &sExtendedS3DestinationUpdate_Prefix, &sExtendedS3DestinationUpdate_ErrorOutputPrefix, &sExtendedS3DestinationUpdate_BufferingHints, &sExtendedS3DestinationUpdate_CompressionFormat, &sExtendedS3DestinationUpdate_EncryptionConfiguration, &sExtendedS3DestinationUpdate_CloudWatchLoggingOptions, &sExtendedS3DestinationUpdate_ProcessingConfiguration, &sExtendedS3DestinationUpdate_S3BackupMode, &sExtendedS3DestinationUpdate_S3BackupUpdate, &sExtendedS3DestinationUpdate_DataFormatConversionConfiguration, &sExtendedS3DestinationUpdate_DynamicPartitioningConfiguration, &sExtendedS3DestinationUpdate_FileExtension, &sExtendedS3DestinationUpdate_CustomTimeZone}, Seed: 3, Slots: []uint16{
-	0, 15, 3, 0, 0, 0, 9, 12, 13, 2, 4, 7, 0, 0, 5, 10, 0, 0, 14, 1, 0, 0, 0, 0,
-	6, 0, 0, 11, 0, 0, 0, 8,
-}}
+var mExtendedS3DestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sExtendedS3DestinationConfiguration_RoleARN, &sExtendedS3DestinationConfiguration_BucketARN, &sExtendedS3DestinationConfiguration_Prefix, &sExtendedS3DestinationConfiguration_ErrorOutputPrefix, &sExtendedS3DestinationConfiguration_BufferingHints, &sExtendedS3DestinationConfiguration_CompressionFormat, &sExtendedS3DestinationConfiguration_EncryptionConfiguration, &sExtendedS3DestinationConfiguration_CloudWatchLoggingOptions, &sExtendedS3DestinationConfiguration_ProcessingConfiguration, &sExtendedS3DestinationConfiguration_S3BackupMode, &sExtendedS3DestinationConfiguration_S3BackupConfiguration, &sExtendedS3DestinationConfiguration_DataFormatConversionConfiguration, &sExtendedS3DestinationConfiguration_DynamicPartitioningConfiguration, &sExtendedS3DestinationConfiguration_FileExtension, &sExtendedS3DestinationConfiguration_CustomTimeZone}, Hash: &hExtendedS3DestinationConfiguration}
+var mExtendedS3DestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sExtendedS3DestinationDescription_RoleARN, &sExtendedS3DestinationDescription_BucketARN, &sExtendedS3DestinationDescription_Prefix, &sExtendedS3DestinationDescription_ErrorOutputPrefix, &sExtendedS3DestinationDescription_BufferingHints, &sExtendedS3DestinationDescription_CompressionFormat, &sExtendedS3DestinationDescription_EncryptionConfiguration, &sExtendedS3DestinationDescription_CloudWatchLoggingOptions, &sExtendedS3DestinationDescription_ProcessingConfiguration, &sExtendedS3DestinationDescription_S3BackupMode, &sExtendedS3DestinationDescription_S3BackupDescription, &sExtendedS3DestinationDescription_DataFormatConversionConfiguration, &sExtendedS3DestinationDescription_DynamicPartitioningConfiguration, &sExtendedS3DestinationDescription_FileExtension, &sExtendedS3DestinationDescription_CustomTimeZone}, Hash: &hExtendedS3DestinationDescription}
+var mExtendedS3DestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sExtendedS3DestinationUpdate_RoleARN, &sExtendedS3DestinationUpdate_BucketARN, &sExtendedS3DestinationUpdate_Prefix, &sExtendedS3DestinationUpdate_ErrorOutputPrefix, &sExtendedS3DestinationUpdate_BufferingHints, &sExtendedS3DestinationUpdate_CompressionFormat, &sExtendedS3DestinationUpdate_EncryptionConfiguration, &sExtendedS3DestinationUpdate_CloudWatchLoggingOptions, &sExtendedS3DestinationUpdate_ProcessingConfiguration, &sExtendedS3DestinationUpdate_S3BackupMode, &sExtendedS3DestinationUpdate_S3BackupUpdate, &sExtendedS3DestinationUpdate_DataFormatConversionConfiguration, &sExtendedS3DestinationUpdate_DynamicPartitioningConfiguration, &sExtendedS3DestinationUpdate_FileExtension, &sExtendedS3DestinationUpdate_CustomTimeZone}, Hash: &hExtendedS3DestinationUpdate}
 var mFailureDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sFailureDescription_Type, &sFailureDescription_Details}}
 var mHECEndpointType = smithy.SchemaMembers{List: []*smithy.Schema{&sHECEndpointType_Raw, &sHECEndpointType_Event}}
 var mHiveJsonSerDe = smithy.SchemaMembers{List: []*smithy.Schema{&sHiveJsonSerDe_TimestampFormats}}
@@ -1549,33 +1500,15 @@ var mHttpEndpointCommonAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&
 var m_HttpEndpointCommonAttributesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HttpEndpointCommonAttributesList_member}}
 var mHttpEndpointConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpEndpointConfiguration_Url, &sHttpEndpointConfiguration_Name, &sHttpEndpointConfiguration_AccessKey}}
 var mHttpEndpointDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpEndpointDescription_Url, &sHttpEndpointDescription_Name}}
-var mHttpEndpointDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpEndpointDestinationConfiguration_EndpointConfiguration, &sHttpEndpointDestinationConfiguration_BufferingHints, &sHttpEndpointDestinationConfiguration_CloudWatchLoggingOptions, &sHttpEndpointDestinationConfiguration_RequestConfiguration, &sHttpEndpointDestinationConfiguration_ProcessingConfiguration, &sHttpEndpointDestinationConfiguration_RoleARN, &sHttpEndpointDestinationConfiguration_RetryOptions, &sHttpEndpointDestinationConfiguration_S3BackupMode, &sHttpEndpointDestinationConfiguration_S3Configuration, &sHttpEndpointDestinationConfiguration_SecretsManagerConfiguration}, Seed: 1, Slots: []uint16{
-	0, 0, 2, 3, 0, 0, 0, 0, 4, 8, 0, 5, 0, 1, 0, 6, 7, 0, 0, 0, 0, 9, 0, 0,
-	0, 0, 10, 0, 0, 0, 0, 0,
-}}
-var mHttpEndpointDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpEndpointDestinationDescription_EndpointConfiguration, &sHttpEndpointDestinationDescription_BufferingHints, &sHttpEndpointDestinationDescription_CloudWatchLoggingOptions, &sHttpEndpointDestinationDescription_RequestConfiguration, &sHttpEndpointDestinationDescription_ProcessingConfiguration, &sHttpEndpointDestinationDescription_RoleARN, &sHttpEndpointDestinationDescription_RetryOptions, &sHttpEndpointDestinationDescription_S3BackupMode, &sHttpEndpointDestinationDescription_S3DestinationDescription, &sHttpEndpointDestinationDescription_SecretsManagerConfiguration}, Seed: 3, Slots: []uint16{
-	0, 0, 0, 10, 0, 0, 5, 0, 7, 0, 0, 1, 0, 0, 2, 8, 0, 0, 4, 6, 0, 0, 0, 0,
-	0, 0, 9, 0, 0, 0, 0, 3,
-}}
-var mHttpEndpointDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpEndpointDestinationUpdate_EndpointConfiguration, &sHttpEndpointDestinationUpdate_BufferingHints, &sHttpEndpointDestinationUpdate_CloudWatchLoggingOptions, &sHttpEndpointDestinationUpdate_RequestConfiguration, &sHttpEndpointDestinationUpdate_ProcessingConfiguration, &sHttpEndpointDestinationUpdate_RoleARN, &sHttpEndpointDestinationUpdate_RetryOptions, &sHttpEndpointDestinationUpdate_S3BackupMode, &sHttpEndpointDestinationUpdate_S3Update, &sHttpEndpointDestinationUpdate_SecretsManagerConfiguration}, Seed: 1, Slots: []uint16{
-	0, 0, 2, 3, 9, 0, 0, 0, 4, 8, 0, 5, 0, 1, 0, 6, 7, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 10, 0, 0, 0, 0, 0,
-}}
+var mHttpEndpointDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpEndpointDestinationConfiguration_EndpointConfiguration, &sHttpEndpointDestinationConfiguration_BufferingHints, &sHttpEndpointDestinationConfiguration_CloudWatchLoggingOptions, &sHttpEndpointDestinationConfiguration_RequestConfiguration, &sHttpEndpointDestinationConfiguration_ProcessingConfiguration, &sHttpEndpointDestinationConfiguration_RoleARN, &sHttpEndpointDestinationConfiguration_RetryOptions, &sHttpEndpointDestinationConfiguration_S3BackupMode, &sHttpEndpointDestinationConfiguration_S3Configuration, &sHttpEndpointDestinationConfiguration_SecretsManagerConfiguration}, Hash: &hHttpEndpointDestinationConfiguration}
+var mHttpEndpointDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpEndpointDestinationDescription_EndpointConfiguration, &sHttpEndpointDestinationDescription_BufferingHints, &sHttpEndpointDestinationDescription_CloudWatchLoggingOptions, &sHttpEndpointDestinationDescription_RequestConfiguration, &sHttpEndpointDestinationDescription_ProcessingConfiguration, &sHttpEndpointDestinationDescription_RoleARN, &sHttpEndpointDestinationDescription_RetryOptions, &sHttpEndpointDestinationDescription_S3BackupMode, &sHttpEndpointDestinationDescription_S3DestinationDescription, &sHttpEndpointDestinationDescription_SecretsManagerConfiguration}, Hash: &hHttpEndpointDestinationDescription}
+var mHttpEndpointDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpEndpointDestinationUpdate_EndpointConfiguration, &sHttpEndpointDestinationUpdate_BufferingHints, &sHttpEndpointDestinationUpdate_CloudWatchLoggingOptions, &sHttpEndpointDestinationUpdate_RequestConfiguration, &sHttpEndpointDestinationUpdate_ProcessingConfiguration, &sHttpEndpointDestinationUpdate_RoleARN, &sHttpEndpointDestinationUpdate_RetryOptions, &sHttpEndpointDestinationUpdate_S3BackupMode, &sHttpEndpointDestinationUpdate_S3Update, &sHttpEndpointDestinationUpdate_SecretsManagerConfiguration}, Hash: &hHttpEndpointDestinationUpdate}
 var mHttpEndpointRequestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpEndpointRequestConfiguration_ContentEncoding, &sHttpEndpointRequestConfiguration_CommonAttributes}}
 var mHttpEndpointRetryOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpEndpointRetryOptions_DurationInSeconds}}
 var mHttpEndpointS3BackupMode = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpEndpointS3BackupMode_FailedDataOnly, &sHttpEndpointS3BackupMode_AllData}}
-var mIcebergDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergDestinationConfiguration_DestinationTableConfigurationList, &sIcebergDestinationConfiguration_SchemaEvolutionConfiguration, &sIcebergDestinationConfiguration_TableCreationConfiguration, &sIcebergDestinationConfiguration_BufferingHints, &sIcebergDestinationConfiguration_CloudWatchLoggingOptions, &sIcebergDestinationConfiguration_ProcessingConfiguration, &sIcebergDestinationConfiguration_S3BackupMode, &sIcebergDestinationConfiguration_RetryOptions, &sIcebergDestinationConfiguration_RoleARN, &sIcebergDestinationConfiguration_AppendOnly, &sIcebergDestinationConfiguration_CatalogConfiguration, &sIcebergDestinationConfiguration_S3Configuration}, Seed: 22, Slots: []uint16{
-	0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 7, 0, 6, 0, 11, 5, 0, 12, 1, 0, 8, 0,
-	4, 3, 2, 0, 10, 0, 0, 0,
-}}
-var mIcebergDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergDestinationDescription_DestinationTableConfigurationList, &sIcebergDestinationDescription_SchemaEvolutionConfiguration, &sIcebergDestinationDescription_TableCreationConfiguration, &sIcebergDestinationDescription_BufferingHints, &sIcebergDestinationDescription_CloudWatchLoggingOptions, &sIcebergDestinationDescription_ProcessingConfiguration, &sIcebergDestinationDescription_S3BackupMode, &sIcebergDestinationDescription_RetryOptions, &sIcebergDestinationDescription_RoleARN, &sIcebergDestinationDescription_AppendOnly, &sIcebergDestinationDescription_CatalogConfiguration, &sIcebergDestinationDescription_S3DestinationDescription}, Seed: 7, Slots: []uint16{
-	11, 0, 5, 0, 3, 0, 0, 4, 0, 0, 12, 0, 2, 6, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-	0, 8, 0, 0, 7, 9, 10, 0,
-}}
-var mIcebergDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergDestinationUpdate_DestinationTableConfigurationList, &sIcebergDestinationUpdate_SchemaEvolutionConfiguration, &sIcebergDestinationUpdate_TableCreationConfiguration, &sIcebergDestinationUpdate_BufferingHints, &sIcebergDestinationUpdate_CloudWatchLoggingOptions, &sIcebergDestinationUpdate_ProcessingConfiguration, &sIcebergDestinationUpdate_S3BackupMode, &sIcebergDestinationUpdate_RetryOptions, &sIcebergDestinationUpdate_RoleARN, &sIcebergDestinationUpdate_AppendOnly, &sIcebergDestinationUpdate_CatalogConfiguration, &sIcebergDestinationUpdate_S3Configuration}, Seed: 22, Slots: []uint16{
-	0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 7, 0, 6, 0, 11, 5, 0, 12, 1, 0, 8, 0,
-	4, 3, 2, 0, 10, 0, 0, 0,
-}}
+var mIcebergDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergDestinationConfiguration_DestinationTableConfigurationList, &sIcebergDestinationConfiguration_SchemaEvolutionConfiguration, &sIcebergDestinationConfiguration_TableCreationConfiguration, &sIcebergDestinationConfiguration_BufferingHints, &sIcebergDestinationConfiguration_CloudWatchLoggingOptions, &sIcebergDestinationConfiguration_ProcessingConfiguration, &sIcebergDestinationConfiguration_S3BackupMode, &sIcebergDestinationConfiguration_RetryOptions, &sIcebergDestinationConfiguration_RoleARN, &sIcebergDestinationConfiguration_AppendOnly, &sIcebergDestinationConfiguration_CatalogConfiguration, &sIcebergDestinationConfiguration_S3Configuration}, Hash: &hIcebergDestinationConfiguration}
+var mIcebergDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergDestinationDescription_DestinationTableConfigurationList, &sIcebergDestinationDescription_SchemaEvolutionConfiguration, &sIcebergDestinationDescription_TableCreationConfiguration, &sIcebergDestinationDescription_BufferingHints, &sIcebergDestinationDescription_CloudWatchLoggingOptions, &sIcebergDestinationDescription_ProcessingConfiguration, &sIcebergDestinationDescription_S3BackupMode, &sIcebergDestinationDescription_RetryOptions, &sIcebergDestinationDescription_RoleARN, &sIcebergDestinationDescription_AppendOnly, &sIcebergDestinationDescription_CatalogConfiguration, &sIcebergDestinationDescription_S3DestinationDescription}, Hash: &hIcebergDestinationDescription}
+var mIcebergDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergDestinationUpdate_DestinationTableConfigurationList, &sIcebergDestinationUpdate_SchemaEvolutionConfiguration, &sIcebergDestinationUpdate_TableCreationConfiguration, &sIcebergDestinationUpdate_BufferingHints, &sIcebergDestinationUpdate_CloudWatchLoggingOptions, &sIcebergDestinationUpdate_ProcessingConfiguration, &sIcebergDestinationUpdate_S3BackupMode, &sIcebergDestinationUpdate_RetryOptions, &sIcebergDestinationUpdate_RoleARN, &sIcebergDestinationUpdate_AppendOnly, &sIcebergDestinationUpdate_CatalogConfiguration, &sIcebergDestinationUpdate_S3Configuration}, Hash: &hIcebergDestinationUpdate}
 var mIcebergS3BackupMode = smithy.SchemaMembers{List: []*smithy.Schema{&sIcebergS3BackupMode_FailedDataOnly, &sIcebergS3BackupMode_AllData}}
 var mInputFormatConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sInputFormatConfiguration_Deserializer}}
 var mInvalidArgumentException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidArgumentException_message}}
@@ -1595,10 +1528,7 @@ var mNoEncryptionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sNoEncryp
 var mOpenXJsonSerDe = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenXJsonSerDe_ConvertDotsInJsonKeysToUnderscores, &sOpenXJsonSerDe_CaseInsensitive, &sOpenXJsonSerDe_ColumnToJsonKeyMappings}}
 var mOrcCompression = smithy.SchemaMembers{List: []*smithy.Schema{&sOrcCompression_NONE, &sOrcCompression_ZLIB, &sOrcCompression_SNAPPY}}
 var mOrcFormatVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sOrcFormatVersion_V0_11, &sOrcFormatVersion_V0_12}}
-var mOrcSerDe = smithy.SchemaMembers{List: []*smithy.Schema{&sOrcSerDe_StripeSizeBytes, &sOrcSerDe_BlockSizeBytes, &sOrcSerDe_RowIndexStride, &sOrcSerDe_EnablePadding, &sOrcSerDe_PaddingTolerance, &sOrcSerDe_Compression, &sOrcSerDe_BloomFilterColumns, &sOrcSerDe_BloomFilterFalsePositiveProbability, &sOrcSerDe_DictionaryKeyThreshold, &sOrcSerDe_FormatVersion}, Seed: 3, Slots: []uint16{
-	0, 5, 0, 7, 0, 0, 0, 0, 0, 0, 0, 4, 3, 0, 8, 0, 0, 9, 0, 0, 0, 0, 10, 0,
-	0, 6, 0, 1, 0, 0, 2, 0,
-}}
+var mOrcSerDe = smithy.SchemaMembers{List: []*smithy.Schema{&sOrcSerDe_StripeSizeBytes, &sOrcSerDe_BlockSizeBytes, &sOrcSerDe_RowIndexStride, &sOrcSerDe_EnablePadding, &sOrcSerDe_PaddingTolerance, &sOrcSerDe_Compression, &sOrcSerDe_BloomFilterColumns, &sOrcSerDe_BloomFilterFalsePositiveProbability, &sOrcSerDe_DictionaryKeyThreshold, &sOrcSerDe_FormatVersion}, Hash: &hOrcSerDe}
 var mOutputFormatConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputFormatConfiguration_Serializer}}
 var mParquetCompression = smithy.SchemaMembers{List: []*smithy.Schema{&sParquetCompression_UNCOMPRESSED, &sParquetCompression_GZIP, &sParquetCompression_SNAPPY}}
 var mParquetSerDe = smithy.SchemaMembers{List: []*smithy.Schema{&sParquetSerDe_BlockSizeBytes, &sParquetSerDe_PageSizeBytes, &sParquetSerDe_Compression, &sParquetSerDe_EnableDictionaryCompression, &sParquetSerDe_MaxPaddingBytes, &sParquetSerDe_WriterVersion}}
@@ -1611,27 +1541,15 @@ var mProcessor = smithy.SchemaMembers{List: []*smithy.Schema{&sProcessor_Type, &
 var m_ProcessorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProcessorList_member}}
 var mProcessorParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sProcessorParameter_ParameterName, &sProcessorParameter_ParameterValue}}
 var m_ProcessorParameterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProcessorParameterList_member}}
-var mProcessorParameterName = smithy.SchemaMembers{List: []*smithy.Schema{&sProcessorParameterName_LAMBDA_ARN, &sProcessorParameterName_LAMBDA_NUMBER_OF_RETRIES, &sProcessorParameterName_METADATA_EXTRACTION_QUERY, &sProcessorParameterName_JSON_PARSING_ENGINE, &sProcessorParameterName_ROLE_ARN, &sProcessorParameterName_BUFFER_SIZE_IN_MB, &sProcessorParameterName_BUFFER_INTERVAL_IN_SECONDS, &sProcessorParameterName_SUB_RECORD_TYPE, &sProcessorParameterName_Delimiter, &sProcessorParameterName_COMPRESSION_FORMAT, &sProcessorParameterName_DATA_MESSAGE_EXTRACTION}, Seed: 16, Slots: []uint16{
-	0, 0, 0, 0, 3, 0, 0, 9, 0, 0, 0, 0, 5, 0, 0, 0, 7, 0, 2, 0, 6, 0, 11, 4,
-	0, 0, 10, 0, 0, 0, 8, 1,
-}}
+var mProcessorParameterName = smithy.SchemaMembers{List: []*smithy.Schema{&sProcessorParameterName_LAMBDA_ARN, &sProcessorParameterName_LAMBDA_NUMBER_OF_RETRIES, &sProcessorParameterName_METADATA_EXTRACTION_QUERY, &sProcessorParameterName_JSON_PARSING_ENGINE, &sProcessorParameterName_ROLE_ARN, &sProcessorParameterName_BUFFER_SIZE_IN_MB, &sProcessorParameterName_BUFFER_INTERVAL_IN_SECONDS, &sProcessorParameterName_SUB_RECORD_TYPE, &sProcessorParameterName_Delimiter, &sProcessorParameterName_COMPRESSION_FORMAT, &sProcessorParameterName_DATA_MESSAGE_EXTRACTION}, Hash: &hProcessorParameterName}
 var mProcessorType = smithy.SchemaMembers{List: []*smithy.Schema{&sProcessorType_RecordDeAggregation, &sProcessorType_Decompression, &sProcessorType_CloudWatchLogProcessing, &sProcessorType_Lambda, &sProcessorType_MetadataExtraction, &sProcessorType_AppendDelimiterToRecord}}
 var m_PutRecordBatchRequestEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutRecordBatchRequestEntryList_member}}
 var mPutRecordBatchResponseEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRecordBatchResponseEntry_RecordId, &sPutRecordBatchResponseEntry_ErrorCode, &sPutRecordBatchResponseEntry_ErrorMessage}}
 var m_PutRecordBatchResponseEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutRecordBatchResponseEntryList_member}}
 var mRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sRecord_Data}}
-var mRedshiftDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftDestinationConfiguration_RoleARN, &sRedshiftDestinationConfiguration_ClusterJDBCURL, &sRedshiftDestinationConfiguration_CopyCommand, &sRedshiftDestinationConfiguration_Username, &sRedshiftDestinationConfiguration_Password, &sRedshiftDestinationConfiguration_RetryOptions, &sRedshiftDestinationConfiguration_S3Configuration, &sRedshiftDestinationConfiguration_ProcessingConfiguration, &sRedshiftDestinationConfiguration_S3BackupMode, &sRedshiftDestinationConfiguration_S3BackupConfiguration, &sRedshiftDestinationConfiguration_CloudWatchLoggingOptions, &sRedshiftDestinationConfiguration_SecretsManagerConfiguration}, Seed: 13, Slots: []uint16{
-	6, 0, 0, 0, 0, 0, 8, 0, 2, 10, 0, 0, 7, 5, 0, 9, 0, 4, 0, 0, 3, 0, 0, 0,
-	0, 1, 0, 0, 12, 0, 11, 0,
-}}
-var mRedshiftDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftDestinationDescription_RoleARN, &sRedshiftDestinationDescription_ClusterJDBCURL, &sRedshiftDestinationDescription_CopyCommand, &sRedshiftDestinationDescription_Username, &sRedshiftDestinationDescription_RetryOptions, &sRedshiftDestinationDescription_S3DestinationDescription, &sRedshiftDestinationDescription_ProcessingConfiguration, &sRedshiftDestinationDescription_S3BackupMode, &sRedshiftDestinationDescription_S3BackupDescription, &sRedshiftDestinationDescription_CloudWatchLoggingOptions, &sRedshiftDestinationDescription_SecretsManagerConfiguration}, Seed: 1, Slots: []uint16{
-	9, 0, 4, 10, 0, 0, 0, 0, 0, 8, 0, 7, 0, 6, 3, 1, 5, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 11, 0, 0, 2, 0, 0,
-}}
-var mRedshiftDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftDestinationUpdate_RoleARN, &sRedshiftDestinationUpdate_ClusterJDBCURL, &sRedshiftDestinationUpdate_CopyCommand, &sRedshiftDestinationUpdate_Username, &sRedshiftDestinationUpdate_Password, &sRedshiftDestinationUpdate_RetryOptions, &sRedshiftDestinationUpdate_S3Update, &sRedshiftDestinationUpdate_ProcessingConfiguration, &sRedshiftDestinationUpdate_S3BackupMode, &sRedshiftDestinationUpdate_S3BackupUpdate, &sRedshiftDestinationUpdate_CloudWatchLoggingOptions, &sRedshiftDestinationUpdate_SecretsManagerConfiguration}, Seed: 20, Slots: []uint16{
-	0, 8, 6, 12, 0, 9, 4, 0, 0, 0, 0, 5, 0, 2, 0, 0, 7, 3, 11, 0, 0, 0, 0, 10,
-	0, 0, 0, 0, 0, 1, 0, 0,
-}}
+var mRedshiftDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftDestinationConfiguration_RoleARN, &sRedshiftDestinationConfiguration_ClusterJDBCURL, &sRedshiftDestinationConfiguration_CopyCommand, &sRedshiftDestinationConfiguration_Username, &sRedshiftDestinationConfiguration_Password, &sRedshiftDestinationConfiguration_RetryOptions, &sRedshiftDestinationConfiguration_S3Configuration, &sRedshiftDestinationConfiguration_ProcessingConfiguration, &sRedshiftDestinationConfiguration_S3BackupMode, &sRedshiftDestinationConfiguration_S3BackupConfiguration, &sRedshiftDestinationConfiguration_CloudWatchLoggingOptions, &sRedshiftDestinationConfiguration_SecretsManagerConfiguration}, Hash: &hRedshiftDestinationConfiguration}
+var mRedshiftDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftDestinationDescription_RoleARN, &sRedshiftDestinationDescription_ClusterJDBCURL, &sRedshiftDestinationDescription_CopyCommand, &sRedshiftDestinationDescription_Username, &sRedshiftDestinationDescription_RetryOptions, &sRedshiftDestinationDescription_S3DestinationDescription, &sRedshiftDestinationDescription_ProcessingConfiguration, &sRedshiftDestinationDescription_S3BackupMode, &sRedshiftDestinationDescription_S3BackupDescription, &sRedshiftDestinationDescription_CloudWatchLoggingOptions, &sRedshiftDestinationDescription_SecretsManagerConfiguration}, Hash: &hRedshiftDestinationDescription}
+var mRedshiftDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftDestinationUpdate_RoleARN, &sRedshiftDestinationUpdate_ClusterJDBCURL, &sRedshiftDestinationUpdate_CopyCommand, &sRedshiftDestinationUpdate_Username, &sRedshiftDestinationUpdate_Password, &sRedshiftDestinationUpdate_RetryOptions, &sRedshiftDestinationUpdate_S3Update, &sRedshiftDestinationUpdate_ProcessingConfiguration, &sRedshiftDestinationUpdate_S3BackupMode, &sRedshiftDestinationUpdate_S3BackupUpdate, &sRedshiftDestinationUpdate_CloudWatchLoggingOptions, &sRedshiftDestinationUpdate_SecretsManagerConfiguration}, Hash: &hRedshiftDestinationUpdate}
 var mRedshiftRetryOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftRetryOptions_DurationInSeconds}}
 var mRedshiftS3BackupMode = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftS3BackupMode_Disabled, &sRedshiftS3BackupMode_Enabled}}
 var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_message}}
@@ -1651,39 +1569,18 @@ var mSnapshotRequestedBy = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapsho
 var mSnapshotStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshotStatus_IN_PROGRESS, &sSnapshotStatus_COMPLETE, &sSnapshotStatus_SUSPENDED}}
 var mSnowflakeBufferingHints = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeBufferingHints_SizeInMBs, &sSnowflakeBufferingHints_IntervalInSeconds}}
 var mSnowflakeDataLoadingOption = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeDataLoadingOption_JSON_MAPPING, &sSnowflakeDataLoadingOption_VARIANT_CONTENT_MAPPING, &sSnowflakeDataLoadingOption_VARIANT_CONTENT_AND_METADATA_MAPPING}}
-var mSnowflakeDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeDestinationConfiguration_AccountUrl, &sSnowflakeDestinationConfiguration_PrivateKey, &sSnowflakeDestinationConfiguration_KeyPassphrase, &sSnowflakeDestinationConfiguration_User, &sSnowflakeDestinationConfiguration_Database, &sSnowflakeDestinationConfiguration_Schema, &sSnowflakeDestinationConfiguration_Table, &sSnowflakeDestinationConfiguration_SnowflakeRoleConfiguration, &sSnowflakeDestinationConfiguration_DataLoadingOption, &sSnowflakeDestinationConfiguration_MetaDataColumnName, &sSnowflakeDestinationConfiguration_ContentColumnName, &sSnowflakeDestinationConfiguration_SnowflakeVpcConfiguration, &sSnowflakeDestinationConfiguration_CloudWatchLoggingOptions, &sSnowflakeDestinationConfiguration_ProcessingConfiguration, &sSnowflakeDestinationConfiguration_RoleARN, &sSnowflakeDestinationConfiguration_RetryOptions, &sSnowflakeDestinationConfiguration_S3BackupMode, &sSnowflakeDestinationConfiguration_S3Configuration, &sSnowflakeDestinationConfiguration_SecretsManagerConfiguration, &sSnowflakeDestinationConfiguration_BufferingHints}, Seed: 1, Slots: []uint16{
-	8, 0, 20, 0, 0, 0, 0, 0, 0, 17, 0, 14, 0, 0, 0, 0, 7, 0, 12, 1, 0, 18, 0, 0,
-	0, 0, 19, 0, 0, 0, 0, 3, 2, 4, 0, 13, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 15,
-	16, 0, 10, 0, 0, 0, 6, 0, 0, 0, 0, 0, 5, 0, 11, 0,
-}}
-var mSnowflakeDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeDestinationDescription_AccountUrl, &sSnowflakeDestinationDescription_User, &sSnowflakeDestinationDescription_Database, &sSnowflakeDestinationDescription_Schema, &sSnowflakeDestinationDescription_Table, &sSnowflakeDestinationDescription_SnowflakeRoleConfiguration, &sSnowflakeDestinationDescription_DataLoadingOption, &sSnowflakeDestinationDescription_MetaDataColumnName, &sSnowflakeDestinationDescription_ContentColumnName, &sSnowflakeDestinationDescription_SnowflakeVpcConfiguration, &sSnowflakeDestinationDescription_CloudWatchLoggingOptions, &sSnowflakeDestinationDescription_ProcessingConfiguration, &sSnowflakeDestinationDescription_RoleARN, &sSnowflakeDestinationDescription_RetryOptions, &sSnowflakeDestinationDescription_S3BackupMode, &sSnowflakeDestinationDescription_S3DestinationDescription, &sSnowflakeDestinationDescription_SecretsManagerConfiguration, &sSnowflakeDestinationDescription_BufferingHints}, Seed: 1, Slots: []uint16{
-	6, 0, 18, 0, 0, 0, 0, 0, 0, 15, 0, 12, 0, 16, 0, 0, 5, 0, 10, 1, 0, 0, 0, 0,
-	0, 0, 17, 0, 0, 0, 0, 0, 0, 2, 0, 11, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 13,
-	14, 0, 8, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3, 0, 9, 0,
-}}
-var mSnowflakeDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeDestinationUpdate_AccountUrl, &sSnowflakeDestinationUpdate_PrivateKey, &sSnowflakeDestinationUpdate_KeyPassphrase, &sSnowflakeDestinationUpdate_User, &sSnowflakeDestinationUpdate_Database, &sSnowflakeDestinationUpdate_Schema, &sSnowflakeDestinationUpdate_Table, &sSnowflakeDestinationUpdate_SnowflakeRoleConfiguration, &sSnowflakeDestinationUpdate_DataLoadingOption, &sSnowflakeDestinationUpdate_MetaDataColumnName, &sSnowflakeDestinationUpdate_ContentColumnName, &sSnowflakeDestinationUpdate_CloudWatchLoggingOptions, &sSnowflakeDestinationUpdate_ProcessingConfiguration, &sSnowflakeDestinationUpdate_RoleARN, &sSnowflakeDestinationUpdate_RetryOptions, &sSnowflakeDestinationUpdate_S3BackupMode, &sSnowflakeDestinationUpdate_S3Update, &sSnowflakeDestinationUpdate_SecretsManagerConfiguration, &sSnowflakeDestinationUpdate_BufferingHints}, Seed: 1, Slots: []uint16{
-	8, 0, 19, 0, 0, 0, 0, 0, 0, 16, 0, 13, 0, 0, 0, 0, 7, 0, 0, 1, 0, 0, 0, 0,
-	0, 0, 18, 0, 0, 0, 0, 3, 2, 4, 0, 12, 17, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 14,
-	15, 0, 10, 0, 0, 0, 6, 0, 0, 0, 0, 0, 5, 0, 11, 0,
-}}
+var mSnowflakeDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeDestinationConfiguration_AccountUrl, &sSnowflakeDestinationConfiguration_PrivateKey, &sSnowflakeDestinationConfiguration_KeyPassphrase, &sSnowflakeDestinationConfiguration_User, &sSnowflakeDestinationConfiguration_Database, &sSnowflakeDestinationConfiguration_Schema, &sSnowflakeDestinationConfiguration_Table, &sSnowflakeDestinationConfiguration_SnowflakeRoleConfiguration, &sSnowflakeDestinationConfiguration_DataLoadingOption, &sSnowflakeDestinationConfiguration_MetaDataColumnName, &sSnowflakeDestinationConfiguration_ContentColumnName, &sSnowflakeDestinationConfiguration_SnowflakeVpcConfiguration, &sSnowflakeDestinationConfiguration_CloudWatchLoggingOptions, &sSnowflakeDestinationConfiguration_ProcessingConfiguration, &sSnowflakeDestinationConfiguration_RoleARN, &sSnowflakeDestinationConfiguration_RetryOptions, &sSnowflakeDestinationConfiguration_S3BackupMode, &sSnowflakeDestinationConfiguration_S3Configuration, &sSnowflakeDestinationConfiguration_SecretsManagerConfiguration, &sSnowflakeDestinationConfiguration_BufferingHints}, Hash: &hSnowflakeDestinationConfiguration}
+var mSnowflakeDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeDestinationDescription_AccountUrl, &sSnowflakeDestinationDescription_User, &sSnowflakeDestinationDescription_Database, &sSnowflakeDestinationDescription_Schema, &sSnowflakeDestinationDescription_Table, &sSnowflakeDestinationDescription_SnowflakeRoleConfiguration, &sSnowflakeDestinationDescription_DataLoadingOption, &sSnowflakeDestinationDescription_MetaDataColumnName, &sSnowflakeDestinationDescription_ContentColumnName, &sSnowflakeDestinationDescription_SnowflakeVpcConfiguration, &sSnowflakeDestinationDescription_CloudWatchLoggingOptions, &sSnowflakeDestinationDescription_ProcessingConfiguration, &sSnowflakeDestinationDescription_RoleARN, &sSnowflakeDestinationDescription_RetryOptions, &sSnowflakeDestinationDescription_S3BackupMode, &sSnowflakeDestinationDescription_S3DestinationDescription, &sSnowflakeDestinationDescription_SecretsManagerConfiguration, &sSnowflakeDestinationDescription_BufferingHints}, Hash: &hSnowflakeDestinationDescription}
+var mSnowflakeDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeDestinationUpdate_AccountUrl, &sSnowflakeDestinationUpdate_PrivateKey, &sSnowflakeDestinationUpdate_KeyPassphrase, &sSnowflakeDestinationUpdate_User, &sSnowflakeDestinationUpdate_Database, &sSnowflakeDestinationUpdate_Schema, &sSnowflakeDestinationUpdate_Table, &sSnowflakeDestinationUpdate_SnowflakeRoleConfiguration, &sSnowflakeDestinationUpdate_DataLoadingOption, &sSnowflakeDestinationUpdate_MetaDataColumnName, &sSnowflakeDestinationUpdate_ContentColumnName, &sSnowflakeDestinationUpdate_CloudWatchLoggingOptions, &sSnowflakeDestinationUpdate_ProcessingConfiguration, &sSnowflakeDestinationUpdate_RoleARN, &sSnowflakeDestinationUpdate_RetryOptions, &sSnowflakeDestinationUpdate_S3BackupMode, &sSnowflakeDestinationUpdate_S3Update, &sSnowflakeDestinationUpdate_SecretsManagerConfiguration, &sSnowflakeDestinationUpdate_BufferingHints}, Hash: &hSnowflakeDestinationUpdate}
 var mSnowflakeRetryOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeRetryOptions_DurationInSeconds}}
 var mSnowflakeRoleConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeRoleConfiguration_Enabled, &sSnowflakeRoleConfiguration_SnowflakeRole}}
 var mSnowflakeS3BackupMode = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeS3BackupMode_FailedDataOnly, &sSnowflakeS3BackupMode_AllData}}
 var mSnowflakeVpcConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeVpcConfiguration_PrivateLinkVpceId}}
 var mSourceDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceDescription_DirectPutSourceDescription, &sSourceDescription_KinesisStreamSourceDescription, &sSourceDescription_MSKSourceDescription, &sSourceDescription_DatabaseSourceDescription}}
 var mSplunkBufferingHints = smithy.SchemaMembers{List: []*smithy.Schema{&sSplunkBufferingHints_IntervalInSeconds, &sSplunkBufferingHints_SizeInMBs}}
-var mSplunkDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSplunkDestinationConfiguration_HECEndpoint, &sSplunkDestinationConfiguration_HECEndpointType, &sSplunkDestinationConfiguration_HECToken, &sSplunkDestinationConfiguration_HECAcknowledgmentTimeoutInSeconds, &sSplunkDestinationConfiguration_RetryOptions, &sSplunkDestinationConfiguration_S3BackupMode, &sSplunkDestinationConfiguration_S3Configuration, &sSplunkDestinationConfiguration_ProcessingConfiguration, &sSplunkDestinationConfiguration_CloudWatchLoggingOptions, &sSplunkDestinationConfiguration_BufferingHints, &sSplunkDestinationConfiguration_SecretsManagerConfiguration}, Seed: 4, Slots: []uint16{
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 4, 0, 3, 0, 2, 0, 1, 0, 0, 0, 7, 0,
-	8, 11, 0, 9, 0, 0, 10, 5,
-}}
-var mSplunkDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sSplunkDestinationDescription_HECEndpoint, &sSplunkDestinationDescription_HECEndpointType, &sSplunkDestinationDescription_HECToken, &sSplunkDestinationDescription_HECAcknowledgmentTimeoutInSeconds, &sSplunkDestinationDescription_RetryOptions, &sSplunkDestinationDescription_S3BackupMode, &sSplunkDestinationDescription_S3DestinationDescription, &sSplunkDestinationDescription_ProcessingConfiguration, &sSplunkDestinationDescription_CloudWatchLoggingOptions, &sSplunkDestinationDescription_BufferingHints, &sSplunkDestinationDescription_SecretsManagerConfiguration}, Seed: 10, Slots: []uint16{
-	0, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 3, 9, 11, 0, 6, 0, 0,
-	0, 0, 4, 0, 8, 5, 2, 0,
-}}
-var mSplunkDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sSplunkDestinationUpdate_HECEndpoint, &sSplunkDestinationUpdate_HECEndpointType, &sSplunkDestinationUpdate_HECToken, &sSplunkDestinationUpdate_HECAcknowledgmentTimeoutInSeconds, &sSplunkDestinationUpdate_RetryOptions, &sSplunkDestinationUpdate_S3BackupMode, &sSplunkDestinationUpdate_S3Update, &sSplunkDestinationUpdate_ProcessingConfiguration, &sSplunkDestinationUpdate_CloudWatchLoggingOptions, &sSplunkDestinationUpdate_BufferingHints, &sSplunkDestinationUpdate_SecretsManagerConfiguration}, Seed: 4, Slots: []uint16{
-	0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 6, 0, 4, 0, 3, 0, 2, 0, 1, 0, 0, 0, 0, 0,
-	8, 11, 0, 9, 0, 0, 10, 5,
-}}
+var mSplunkDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSplunkDestinationConfiguration_HECEndpoint, &sSplunkDestinationConfiguration_HECEndpointType, &sSplunkDestinationConfiguration_HECToken, &sSplunkDestinationConfiguration_HECAcknowledgmentTimeoutInSeconds, &sSplunkDestinationConfiguration_RetryOptions, &sSplunkDestinationConfiguration_S3BackupMode, &sSplunkDestinationConfiguration_S3Configuration, &sSplunkDestinationConfiguration_ProcessingConfiguration, &sSplunkDestinationConfiguration_CloudWatchLoggingOptions, &sSplunkDestinationConfiguration_BufferingHints, &sSplunkDestinationConfiguration_SecretsManagerConfiguration}, Hash: &hSplunkDestinationConfiguration}
+var mSplunkDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sSplunkDestinationDescription_HECEndpoint, &sSplunkDestinationDescription_HECEndpointType, &sSplunkDestinationDescription_HECToken, &sSplunkDestinationDescription_HECAcknowledgmentTimeoutInSeconds, &sSplunkDestinationDescription_RetryOptions, &sSplunkDestinationDescription_S3BackupMode, &sSplunkDestinationDescription_S3DestinationDescription, &sSplunkDestinationDescription_ProcessingConfiguration, &sSplunkDestinationDescription_CloudWatchLoggingOptions, &sSplunkDestinationDescription_BufferingHints, &sSplunkDestinationDescription_SecretsManagerConfiguration}, Hash: &hSplunkDestinationDescription}
+var mSplunkDestinationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sSplunkDestinationUpdate_HECEndpoint, &sSplunkDestinationUpdate_HECEndpointType, &sSplunkDestinationUpdate_HECToken, &sSplunkDestinationUpdate_HECAcknowledgmentTimeoutInSeconds, &sSplunkDestinationUpdate_RetryOptions, &sSplunkDestinationUpdate_S3BackupMode, &sSplunkDestinationUpdate_S3Update, &sSplunkDestinationUpdate_ProcessingConfiguration, &sSplunkDestinationUpdate_CloudWatchLoggingOptions, &sSplunkDestinationUpdate_BufferingHints, &sSplunkDestinationUpdate_SecretsManagerConfiguration}, Hash: &hSplunkDestinationUpdate}
 var mSplunkRetryOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sSplunkRetryOptions_DurationInSeconds}}
 var mSplunkS3BackupMode = smithy.SchemaMembers{List: []*smithy.Schema{&sSplunkS3BackupMode_FailedEventsOnly, &sSplunkS3BackupMode_AllEvents}}
 var mSSLMode = smithy.SchemaMembers{List: []*smithy.Schema{&sSSLMode_Disabled, &sSSLMode_Enabled}}
@@ -1694,11 +1591,7 @@ var m_TagDeliveryStreamInputTagList = smithy.SchemaMembers{List: []*smithy.Schem
 var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
 var mVpcConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConfiguration_SubnetIds, &sVpcConfiguration_RoleARN, &sVpcConfiguration_SecurityGroupIds}}
 var mVpcConfigurationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConfigurationDescription_SubnetIds, &sVpcConfigurationDescription_RoleARN, &sVpcConfigurationDescription_SecurityGroupIds, &sVpcConfigurationDescription_VpcId}}
-var mCreateDeliveryStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeliveryStreamInput_DeliveryStreamName, &sCreateDeliveryStreamInput_DeliveryStreamType, &sCreateDeliveryStreamInput_DirectPutSourceConfiguration, &sCreateDeliveryStreamInput_KinesisStreamSourceConfiguration, &sCreateDeliveryStreamInput_DeliveryStreamEncryptionConfigurationInput, &sCreateDeliveryStreamInput_S3DestinationConfiguration, &sCreateDeliveryStreamInput_ExtendedS3DestinationConfiguration, &sCreateDeliveryStreamInput_RedshiftDestinationConfiguration, &sCreateDeliveryStreamInput_ElasticsearchDestinationConfiguration, &sCreateDeliveryStreamInput_AmazonopensearchserviceDestinationConfiguration, &sCreateDeliveryStreamInput_SplunkDestinationConfiguration, &sCreateDeliveryStreamInput_HttpEndpointDestinationConfiguration, &sCreateDeliveryStreamInput_Tags, &sCreateDeliveryStreamInput_AmazonOpenSearchServerlessDestinationConfiguration, &sCreateDeliveryStreamInput_MSKSourceConfiguration, &sCreateDeliveryStreamInput_SnowflakeDestinationConfiguration, &sCreateDeliveryStreamInput_IcebergDestinationConfiguration, &sCreateDeliveryStreamInput_DatabaseSourceConfiguration}, Seed: 8, Slots: []uint16{
-	18, 0, 0, 0, 0, 2, 4, 13, 0, 0, 0, 0, 0, 0, 9, 6, 0, 0, 0, 0, 0, 0, 0, 1,
-	12, 15, 0, 17, 8, 0, 0, 0, 10, 0, 0, 16, 0, 11, 0, 0, 7, 0, 0, 0, 0, 0, 14, 0,
-	0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 3, 0,
-}}
+var mCreateDeliveryStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeliveryStreamInput_DeliveryStreamName, &sCreateDeliveryStreamInput_DeliveryStreamType, &sCreateDeliveryStreamInput_DirectPutSourceConfiguration, &sCreateDeliveryStreamInput_KinesisStreamSourceConfiguration, &sCreateDeliveryStreamInput_DeliveryStreamEncryptionConfigurationInput, &sCreateDeliveryStreamInput_S3DestinationConfiguration, &sCreateDeliveryStreamInput_ExtendedS3DestinationConfiguration, &sCreateDeliveryStreamInput_RedshiftDestinationConfiguration, &sCreateDeliveryStreamInput_ElasticsearchDestinationConfiguration, &sCreateDeliveryStreamInput_AmazonopensearchserviceDestinationConfiguration, &sCreateDeliveryStreamInput_SplunkDestinationConfiguration, &sCreateDeliveryStreamInput_HttpEndpointDestinationConfiguration, &sCreateDeliveryStreamInput_Tags, &sCreateDeliveryStreamInput_AmazonOpenSearchServerlessDestinationConfiguration, &sCreateDeliveryStreamInput_MSKSourceConfiguration, &sCreateDeliveryStreamInput_SnowflakeDestinationConfiguration, &sCreateDeliveryStreamInput_IcebergDestinationConfiguration, &sCreateDeliveryStreamInput_DatabaseSourceConfiguration}, Hash: &hCreateDeliveryStreamInput}
 var mCreateDeliveryStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeliveryStreamOutput_DeliveryStreamARN}}
 var mDeleteDeliveryStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDeliveryStreamInput_DeliveryStreamName, &sDeleteDeliveryStreamInput_AllowForceDelete}}
 var mDescribeDeliveryStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDeliveryStreamInput_DeliveryStreamName, &sDescribeDeliveryStreamInput_Limit, &sDescribeDeliveryStreamInput_ExclusiveStartDestinationId}}
@@ -1715,7 +1608,150 @@ var mStartDeliveryStreamEncryptionInput = smithy.SchemaMembers{List: []*smithy.S
 var mStopDeliveryStreamEncryptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopDeliveryStreamEncryptionInput_DeliveryStreamName}}
 var mTagDeliveryStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagDeliveryStreamInput_DeliveryStreamName, &sTagDeliveryStreamInput_Tags}}
 var mUntagDeliveryStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagDeliveryStreamInput_DeliveryStreamName, &sUntagDeliveryStreamInput_TagKeys}}
-var mUpdateDestinationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDestinationInput_DeliveryStreamName, &sUpdateDestinationInput_CurrentDeliveryStreamVersionId, &sUpdateDestinationInput_DestinationId, &sUpdateDestinationInput_S3DestinationUpdate, &sUpdateDestinationInput_ExtendedS3DestinationUpdate, &sUpdateDestinationInput_RedshiftDestinationUpdate, &sUpdateDestinationInput_ElasticsearchDestinationUpdate, &sUpdateDestinationInput_AmazonopensearchserviceDestinationUpdate, &sUpdateDestinationInput_SplunkDestinationUpdate, &sUpdateDestinationInput_HttpEndpointDestinationUpdate, &sUpdateDestinationInput_AmazonOpenSearchServerlessDestinationUpdate, &sUpdateDestinationInput_SnowflakeDestinationUpdate, &sUpdateDestinationInput_IcebergDestinationUpdate}, Seed: 1, Slots: []uint16{
+var mUpdateDestinationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDestinationInput_DeliveryStreamName, &sUpdateDestinationInput_CurrentDeliveryStreamVersionId, &sUpdateDestinationInput_DestinationId, &sUpdateDestinationInput_S3DestinationUpdate, &sUpdateDestinationInput_ExtendedS3DestinationUpdate, &sUpdateDestinationInput_RedshiftDestinationUpdate, &sUpdateDestinationInput_ElasticsearchDestinationUpdate, &sUpdateDestinationInput_AmazonopensearchserviceDestinationUpdate, &sUpdateDestinationInput_SplunkDestinationUpdate, &sUpdateDestinationInput_HttpEndpointDestinationUpdate, &sUpdateDestinationInput_AmazonOpenSearchServerlessDestinationUpdate, &sUpdateDestinationInput_SnowflakeDestinationUpdate, &sUpdateDestinationInput_IcebergDestinationUpdate}, Hash: &hUpdateDestinationInput}
+
+var hAmazonOpenSearchServerlessDestinationConfiguration = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 4, 9, 0, 0, 0, 0, 0, 6, 3, 8, 0, 2, 0, 1, 5, 0, 0, 10, 0, 7, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var hAmazonOpenSearchServerlessDestinationDescription = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	0, 7, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 9, 0, 0, 6, 0, 0,
+	10, 0, 3, 1, 8, 5, 0, 0,
+}}
+var hAmazonopensearchserviceDestinationConfiguration = smithy.MemberHash{Seed: 48, Slots: []uint16{
+	0, 0, 0, 3, 0, 2, 4, 0, 7, 14, 9, 0, 8, 0, 0, 0, 12, 0, 0, 6, 0, 10, 0, 5,
+	0, 11, 0, 1, 0, 0, 0, 13,
+}}
+var hAmazonopensearchserviceDestinationDescription = smithy.MemberHash{Seed: 18, Slots: []uint16{
+	0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 12, 0, 6, 2, 14, 11, 3, 5,
+	0, 7, 0, 10, 1, 0, 4, 9,
+}}
+var hAmazonopensearchserviceDestinationUpdate = smithy.MemberHash{Seed: 17, Slots: []uint16{
+	0, 1, 6, 0, 12, 0, 0, 7, 9, 0, 0, 0, 0, 0, 0, 11, 0, 0, 5, 0, 2, 4, 8, 10,
+	0, 0, 0, 0, 3, 0, 0, 0,
+}}
+var hDatabaseSourceConfiguration = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	0, 11, 0, 0, 0, 0, 0, 6, 7, 2, 0, 0, 1, 8, 0, 0, 0, 5, 4, 0, 0, 9, 0, 0,
+	0, 3, 0, 0, 0, 0, 10, 0,
+}}
+var hDatabaseSourceDescription = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	0, 12, 0, 0, 0, 0, 0, 6, 7, 2, 0, 0, 1, 8, 0, 0, 0, 5, 4, 0, 0, 9, 0, 0,
+	10, 3, 0, 0, 0, 0, 11, 0,
+}}
+var hDeliveryStreamDescription = smithy.MemberHash{Seed: 9, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 12, 2, 0, 0, 0, 11, 1, 0, 10, 0, 4, 0, 8, 0, 6, 0, 5,
+	0, 0, 9, 0, 7, 0, 3, 0,
+}}
+var hDeliveryStreamFailureType = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 11, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 14, 9, 0, 0,
+	0, 0, 0, 0, 0, 6, 0, 0, 0, 12, 0, 15, 3, 0, 0, 0, 5, 0, 10, 8, 0, 4, 0, 0,
+	7, 0, 0, 0, 0, 0, 0, 2, 0, 0, 17, 0, 13, 0, 0, 0,
+}}
+var hDestinationDescription = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	10, 7, 0, 0, 0, 4, 8, 1, 0, 11, 0, 5, 0, 0, 0, 6, 9, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 2, 0, 3, 0, 0, 0,
+}}
+var hElasticsearchDestinationConfiguration = smithy.MemberHash{Seed: 48, Slots: []uint16{
+	0, 0, 0, 3, 0, 2, 4, 0, 7, 14, 9, 0, 8, 0, 0, 0, 12, 0, 0, 6, 0, 10, 0, 5,
+	0, 11, 0, 1, 0, 0, 0, 13,
+}}
+var hElasticsearchDestinationDescription = smithy.MemberHash{Seed: 18, Slots: []uint16{
+	0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 12, 0, 6, 2, 14, 11, 3, 5,
+	0, 7, 0, 10, 1, 0, 4, 9,
+}}
+var hElasticsearchDestinationUpdate = smithy.MemberHash{Seed: 17, Slots: []uint16{
+	0, 1, 6, 0, 12, 0, 0, 7, 9, 0, 0, 0, 0, 0, 0, 11, 0, 0, 5, 0, 2, 4, 8, 10,
+	0, 0, 0, 0, 3, 0, 0, 0,
+}}
+var hExtendedS3DestinationConfiguration = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	8, 0, 6, 0, 0, 0, 0, 0, 14, 9, 3, 0, 15, 0, 13, 0, 0, 0, 12, 0, 0, 5, 0, 4,
+	0, 0, 11, 2, 0, 7, 1, 10,
+}}
+var hExtendedS3DestinationDescription = smithy.MemberHash{Seed: 22, Slots: []uint16{
+	7, 0, 0, 6, 0, 1, 0, 0, 4, 0, 0, 13, 10, 0, 9, 14, 3, 8, 0, 15, 11, 0, 0, 0,
+	5, 0, 0, 12, 0, 0, 2, 0,
+}}
+var hExtendedS3DestinationUpdate = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 15, 3, 0, 0, 0, 9, 12, 13, 2, 4, 7, 0, 0, 5, 10, 0, 0, 14, 1, 0, 0, 0, 0,
+	6, 0, 0, 11, 0, 0, 0, 8,
+}}
+var hHttpEndpointDestinationConfiguration = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 2, 3, 0, 0, 0, 0, 4, 8, 0, 5, 0, 1, 0, 6, 7, 0, 0, 0, 0, 9, 0, 0,
+	0, 0, 10, 0, 0, 0, 0, 0,
+}}
+var hHttpEndpointDestinationDescription = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 0, 0, 10, 0, 0, 5, 0, 7, 0, 0, 1, 0, 0, 2, 8, 0, 0, 4, 6, 0, 0, 0, 0,
+	0, 0, 9, 0, 0, 0, 0, 3,
+}}
+var hHttpEndpointDestinationUpdate = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	0, 0, 2, 3, 9, 0, 0, 0, 4, 8, 0, 5, 0, 1, 0, 6, 7, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 10, 0, 0, 0, 0, 0,
+}}
+var hIcebergDestinationConfiguration = smithy.MemberHash{Seed: 22, Slots: []uint16{
+	0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 7, 0, 6, 0, 11, 5, 0, 12, 1, 0, 8, 0,
+	4, 3, 2, 0, 10, 0, 0, 0,
+}}
+var hIcebergDestinationDescription = smithy.MemberHash{Seed: 7, Slots: []uint16{
+	11, 0, 5, 0, 3, 0, 0, 4, 0, 0, 12, 0, 2, 6, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+	0, 8, 0, 0, 7, 9, 10, 0,
+}}
+var hIcebergDestinationUpdate = smithy.MemberHash{Seed: 22, Slots: []uint16{
+	0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 7, 0, 6, 0, 11, 5, 0, 12, 1, 0, 8, 0,
+	4, 3, 2, 0, 10, 0, 0, 0,
+}}
+var hOrcSerDe = smithy.MemberHash{Seed: 3, Slots: []uint16{
+	0, 5, 0, 7, 0, 0, 0, 0, 0, 0, 0, 4, 3, 0, 8, 0, 0, 9, 0, 0, 0, 0, 10, 0,
+	0, 6, 0, 1, 0, 0, 2, 0,
+}}
+var hProcessorParameterName = smithy.MemberHash{Seed: 16, Slots: []uint16{
+	0, 0, 0, 0, 3, 0, 0, 9, 0, 0, 0, 0, 5, 0, 0, 0, 7, 0, 2, 0, 6, 0, 11, 4,
+	0, 0, 10, 0, 0, 0, 8, 1,
+}}
+var hRedshiftDestinationConfiguration = smithy.MemberHash{Seed: 13, Slots: []uint16{
+	6, 0, 0, 0, 0, 0, 8, 0, 2, 10, 0, 0, 7, 5, 0, 9, 0, 4, 0, 0, 3, 0, 0, 0,
+	0, 1, 0, 0, 12, 0, 11, 0,
+}}
+var hRedshiftDestinationDescription = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	9, 0, 4, 10, 0, 0, 0, 0, 0, 8, 0, 7, 0, 6, 3, 1, 5, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 11, 0, 0, 2, 0, 0,
+}}
+var hRedshiftDestinationUpdate = smithy.MemberHash{Seed: 20, Slots: []uint16{
+	0, 8, 6, 12, 0, 9, 4, 0, 0, 0, 0, 5, 0, 2, 0, 0, 7, 3, 11, 0, 0, 0, 0, 10,
+	0, 0, 0, 0, 0, 1, 0, 0,
+}}
+var hSnowflakeDestinationConfiguration = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	8, 0, 20, 0, 0, 0, 0, 0, 0, 17, 0, 14, 0, 0, 0, 0, 7, 0, 12, 1, 0, 18, 0, 0,
+	0, 0, 19, 0, 0, 0, 0, 3, 2, 4, 0, 13, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 15,
+	16, 0, 10, 0, 0, 0, 6, 0, 0, 0, 0, 0, 5, 0, 11, 0,
+}}
+var hSnowflakeDestinationDescription = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	6, 0, 18, 0, 0, 0, 0, 0, 0, 15, 0, 12, 0, 16, 0, 0, 5, 0, 10, 1, 0, 0, 0, 0,
+	0, 0, 17, 0, 0, 0, 0, 0, 0, 2, 0, 11, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 13,
+	14, 0, 8, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3, 0, 9, 0,
+}}
+var hSnowflakeDestinationUpdate = smithy.MemberHash{Seed: 1, Slots: []uint16{
+	8, 0, 19, 0, 0, 0, 0, 0, 0, 16, 0, 13, 0, 0, 0, 0, 7, 0, 0, 1, 0, 0, 0, 0,
+	0, 0, 18, 0, 0, 0, 0, 3, 2, 4, 0, 12, 17, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 14,
+	15, 0, 10, 0, 0, 0, 6, 0, 0, 0, 0, 0, 5, 0, 11, 0,
+}}
+var hSplunkDestinationConfiguration = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 4, 0, 3, 0, 2, 0, 1, 0, 0, 0, 7, 0,
+	8, 11, 0, 9, 0, 0, 10, 5,
+}}
+var hSplunkDestinationDescription = smithy.MemberHash{Seed: 10, Slots: []uint16{
+	0, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 3, 9, 11, 0, 6, 0, 0,
+	0, 0, 4, 0, 8, 5, 2, 0,
+}}
+var hSplunkDestinationUpdate = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 6, 0, 4, 0, 3, 0, 2, 0, 1, 0, 0, 0, 0, 0,
+	8, 11, 0, 9, 0, 0, 10, 5,
+}}
+var hCreateDeliveryStreamInput = smithy.MemberHash{Seed: 8, Slots: []uint16{
+	18, 0, 0, 0, 0, 2, 4, 13, 0, 0, 0, 0, 0, 0, 9, 6, 0, 0, 0, 0, 0, 0, 0, 1,
+	12, 15, 0, 17, 8, 0, 0, 0, 10, 0, 0, 16, 0, 11, 0, 0, 7, 0, 0, 0, 0, 0, 14, 0,
+	0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 3, 0,
+}}
+var hUpdateDestinationInput = smithy.MemberHash{Seed: 1, Slots: []uint16{
 	4, 5, 2, 0, 0, 0, 0, 0, 12, 0, 0, 8, 6, 0, 1, 0, 13, 0, 0, 0, 0, 0, 10, 0,
 	11, 0, 7, 0, 0, 0, 9, 3,
 }}
@@ -1734,305 +1770,12 @@ var sUntagDeliveryStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnta
 var sUpdateDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDestination, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDestination})
 var s_Firehose_20150804 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Firehose_20150804, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_Firehose_20150804})
 var sAmazonOpenSearchServerlessBufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonOpenSearchServerlessBufferingHints, Members: &mAmazonOpenSearchServerlessBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessBufferingHints})
+var sAmazonOpenSearchServerlessBufferingHints_IntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalInSeconds", ID: &i_AmazonOpenSearchServerlessBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eAmazonOpenSearchServerlessBufferingHints_IntervalInSeconds})
+var sAmazonOpenSearchServerlessBufferingHints_SizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInMBs", ID: &i_AmazonOpenSearchServerlessBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &eAmazonOpenSearchServerlessBufferingHints_SizeInMBs})
 var s_AmazonOpenSearchServerlessBufferingIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonOpenSearchServerlessBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_AmazonOpenSearchServerlessBufferingIntervalInSeconds})
 var s_AmazonOpenSearchServerlessBufferingSizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonOpenSearchServerlessBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_AmazonOpenSearchServerlessBufferingSizeInMBs})
 var s_AmazonOpenSearchServerlessCollectionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonOpenSearchServerlessCollectionEndpoint, Type: smithy.ShapeTypeString, Ext: &e_AmazonOpenSearchServerlessCollectionEndpoint})
 var sAmazonOpenSearchServerlessDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonOpenSearchServerlessDestinationConfiguration, Members: &mAmazonOpenSearchServerlessDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationConfiguration})
-var sAmazonOpenSearchServerlessDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonOpenSearchServerlessDestinationDescription, Members: &mAmazonOpenSearchServerlessDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationDescription})
-var sAmazonOpenSearchServerlessDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonOpenSearchServerlessDestinationUpdate, Members: &mAmazonOpenSearchServerlessDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationUpdate})
-var s_AmazonOpenSearchServerlessIndexName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonOpenSearchServerlessIndexName, Type: smithy.ShapeTypeString, Ext: &e_AmazonOpenSearchServerlessIndexName})
-var s_AmazonOpenSearchServerlessRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonOpenSearchServerlessRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_AmazonOpenSearchServerlessRetryDurationInSeconds})
-var sAmazonOpenSearchServerlessRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonOpenSearchServerlessRetryOptions, Members: &mAmazonOpenSearchServerlessRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessRetryOptions})
-var sAmazonOpenSearchServerlessS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonOpenSearchServerlessS3BackupMode, Members: &mAmazonOpenSearchServerlessS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eAmazonOpenSearchServerlessS3BackupMode})
-var sAmazonopensearchserviceBufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceBufferingHints, Members: &mAmazonopensearchserviceBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceBufferingHints})
-var s_AmazonopensearchserviceBufferingIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_AmazonopensearchserviceBufferingIntervalInSeconds})
-var s_AmazonopensearchserviceBufferingSizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_AmazonopensearchserviceBufferingSizeInMBs})
-var s_AmazonopensearchserviceClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceClusterEndpoint, Type: smithy.ShapeTypeString, Ext: &e_AmazonopensearchserviceClusterEndpoint})
-var sAmazonopensearchserviceDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceDestinationConfiguration, Members: &mAmazonopensearchserviceDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationConfiguration})
-var sAmazonopensearchserviceDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceDestinationDescription, Members: &mAmazonopensearchserviceDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationDescription})
-var sAmazonopensearchserviceDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceDestinationUpdate, Members: &mAmazonopensearchserviceDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationUpdate})
-var s_AmazonopensearchserviceDomainARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceDomainARN, Type: smithy.ShapeTypeString, Ext: &e_AmazonopensearchserviceDomainARN})
-var s_AmazonopensearchserviceIndexName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceIndexName, Type: smithy.ShapeTypeString, Ext: &e_AmazonopensearchserviceIndexName})
-var sAmazonopensearchserviceIndexRotationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceIndexRotationPeriod, Members: &mAmazonopensearchserviceIndexRotationPeriod, Type: smithy.ShapeTypeEnum, Ext: &eAmazonopensearchserviceIndexRotationPeriod})
-var s_AmazonopensearchserviceRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_AmazonopensearchserviceRetryDurationInSeconds})
-var sAmazonopensearchserviceRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceRetryOptions, Members: &mAmazonopensearchserviceRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceRetryOptions})
-var sAmazonopensearchserviceS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceS3BackupMode, Members: &mAmazonopensearchserviceS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eAmazonopensearchserviceS3BackupMode})
-var s_AmazonopensearchserviceTypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceTypeName, Type: smithy.ShapeTypeString, Ext: &e_AmazonopensearchserviceTypeName})
-var sAuthenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationConfiguration, Members: &mAuthenticationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationConfiguration})
-var s_AWSKMSKeyARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSKMSKeyARN, Type: smithy.ShapeTypeString, Ext: &e_AWSKMSKeyARN})
-var s_AWSKMSKeyARNForSSE = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSKMSKeyARNForSSE, Type: smithy.ShapeTypeString, Ext: &e_AWSKMSKeyARNForSSE})
-var s_BlockSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &e_BlockSizeBytes})
-var s_BooleanObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanObject})
-var s_BucketARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketARN, Type: smithy.ShapeTypeString, Ext: &e_BucketARN})
-var sBufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBufferingHints, Members: &mBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eBufferingHints})
-var sCatalogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCatalogConfiguration, Members: &mCatalogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCatalogConfiguration})
-var sCloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchLoggingOptions})
-var s_ClusterJDBCURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterJDBCURL, Type: smithy.ShapeTypeString, Ext: &e_ClusterJDBCURL})
-var s_ColumnToJsonKeyMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnToJsonKeyMappings, Members: &m_ColumnToJsonKeyMappings, Type: smithy.ShapeTypeMap, Ext: &e_ColumnToJsonKeyMappings})
-var sCompressionFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompressionFormat, Members: &mCompressionFormat, Type: smithy.ShapeTypeEnum, Ext: &eCompressionFormat})
-var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentModificationException})
-var sConnectivity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectivity, Members: &mConnectivity, Type: smithy.ShapeTypeEnum, Ext: &eConnectivity})
-var sContentEncoding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentEncoding, Members: &mContentEncoding, Type: smithy.ShapeTypeEnum, Ext: &eContentEncoding})
-var sCopyCommand = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyCommand, Members: &mCopyCommand, Type: smithy.ShapeTypeStructure, Ext: &eCopyCommand})
-var s_CopyOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CopyOptions, Type: smithy.ShapeTypeString, Ext: &e_CopyOptions})
-var s_CustomTimeZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomTimeZone, Type: smithy.ShapeTypeString, Ext: &e_CustomTimeZone})
-var s_Data = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Data, Type: smithy.ShapeTypeBlob, Ext: &e_Data})
-var s_DatabaseColumnIncludeOrExcludeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseColumnIncludeOrExcludeList, Members: &m_DatabaseColumnIncludeOrExcludeList, Type: smithy.ShapeTypeList, Ext: &e_DatabaseColumnIncludeOrExcludeList})
-var sDatabaseColumnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseColumnList, Members: &mDatabaseColumnList, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseColumnList})
-var s_DatabaseColumnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseColumnName, Type: smithy.ShapeTypeString, Ext: &e_DatabaseColumnName})
-var s_DatabaseEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseEndpoint, Type: smithy.ShapeTypeString, Ext: &e_DatabaseEndpoint})
-var s_DatabaseIncludeOrExcludeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseIncludeOrExcludeList, Members: &m_DatabaseIncludeOrExcludeList, Type: smithy.ShapeTypeList, Ext: &e_DatabaseIncludeOrExcludeList})
-var sDatabaseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseList, Members: &mDatabaseList, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseList})
-var s_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseName, Type: smithy.ShapeTypeString, Ext: &e_DatabaseName})
-var s_DatabasePort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabasePort, Type: smithy.ShapeTypeInteger, Ext: &e_DatabasePort})
-var sDatabaseSnapshotInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseSnapshotInfo, Members: &mDatabaseSnapshotInfo, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSnapshotInfo})
-var s_DatabaseSnapshotInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseSnapshotInfoList, Members: &m_DatabaseSnapshotInfoList, Type: smithy.ShapeTypeList, Ext: &e_DatabaseSnapshotInfoList})
-var sDatabaseSourceAuthenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseSourceAuthenticationConfiguration, Members: &mDatabaseSourceAuthenticationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSourceAuthenticationConfiguration})
-var sDatabaseSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseSourceConfiguration, Members: &mDatabaseSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSourceConfiguration})
-var sDatabaseSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseSourceDescription, Members: &mDatabaseSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSourceDescription})
-var sDatabaseSourceVPCConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseSourceVPCConfiguration, Members: &mDatabaseSourceVPCConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSourceVPCConfiguration})
-var s_DatabaseSurrogateKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseSurrogateKeyList, Members: &m_DatabaseSurrogateKeyList, Type: smithy.ShapeTypeList, Ext: &e_DatabaseSurrogateKeyList})
-var s_DatabaseTableIncludeOrExcludeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseTableIncludeOrExcludeList, Members: &m_DatabaseTableIncludeOrExcludeList, Type: smithy.ShapeTypeList, Ext: &e_DatabaseTableIncludeOrExcludeList})
-var sDatabaseTableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseTableList, Members: &mDatabaseTableList, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseTableList})
-var s_DatabaseTableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseTableName, Type: smithy.ShapeTypeString, Ext: &e_DatabaseTableName})
-var sDatabaseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseType, Members: &mDatabaseType, Type: smithy.ShapeTypeEnum, Ext: &eDatabaseType})
-var sDataFormatConversionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataFormatConversionConfiguration, Members: &mDataFormatConversionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataFormatConversionConfiguration})
-var s_DataTableColumns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataTableColumns, Type: smithy.ShapeTypeString, Ext: &e_DataTableColumns})
-var s_DataTableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataTableName, Type: smithy.ShapeTypeString, Ext: &e_DataTableName})
-var sDefaultDocumentIdFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultDocumentIdFormat, Members: &mDefaultDocumentIdFormat, Type: smithy.ShapeTypeEnum, Ext: &eDefaultDocumentIdFormat})
-var s_DeliveryStartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryStartTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_DeliveryStartTimestamp})
-var s_DeliveryStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryStreamARN, Type: smithy.ShapeTypeString, Ext: &e_DeliveryStreamARN})
-var sDeliveryStreamDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamDescription, Members: &mDeliveryStreamDescription, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamDescription})
-var sDeliveryStreamEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamEncryptionConfiguration, Members: &mDeliveryStreamEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamEncryptionConfiguration})
-var sDeliveryStreamEncryptionConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamEncryptionConfigurationInput, Members: &mDeliveryStreamEncryptionConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamEncryptionConfigurationInput})
-var sDeliveryStreamEncryptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamEncryptionStatus, Members: &mDeliveryStreamEncryptionStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryStreamEncryptionStatus})
-var sDeliveryStreamFailureType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamFailureType, Members: &mDeliveryStreamFailureType, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryStreamFailureType})
-var s_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &e_DeliveryStreamName})
-var s_DeliveryStreamNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryStreamNameList, Members: &m_DeliveryStreamNameList, Type: smithy.ShapeTypeList, Ext: &e_DeliveryStreamNameList})
-var sDeliveryStreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamStatus, Members: &mDeliveryStreamStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryStreamStatus})
-var sDeliveryStreamType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamType, Members: &mDeliveryStreamType, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryStreamType})
-var s_DeliveryStreamVersionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryStreamVersionId, Type: smithy.ShapeTypeString, Ext: &e_DeliveryStreamVersionId})
-var s_DescribeDeliveryStreamInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeDeliveryStreamInputLimit, Type: smithy.ShapeTypeInteger, Ext: &e_DescribeDeliveryStreamInputLimit})
-var sDeserializer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeserializer, Members: &mDeserializer, Type: smithy.ShapeTypeStructure, Ext: &eDeserializer})
-var sDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationDescription, Members: &mDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eDestinationDescription})
-var s_DestinationDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationDescriptionList, Members: &m_DestinationDescriptionList, Type: smithy.ShapeTypeList, Ext: &e_DestinationDescriptionList})
-var s_DestinationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationId, Type: smithy.ShapeTypeString, Ext: &e_DestinationId})
-var sDestinationTableConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationTableConfiguration, Members: &mDestinationTableConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDestinationTableConfiguration})
-var s_DestinationTableConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationTableConfigurationList, Members: &m_DestinationTableConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_DestinationTableConfigurationList})
-var sDirectPutSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectPutSourceConfiguration, Members: &mDirectPutSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDirectPutSourceConfiguration})
-var sDirectPutSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectPutSourceDescription, Members: &mDirectPutSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eDirectPutSourceDescription})
-var sDocumentIdOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentIdOptions, Members: &mDocumentIdOptions, Type: smithy.ShapeTypeStructure, Ext: &eDocumentIdOptions})
-var sDynamicPartitioningConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDynamicPartitioningConfiguration, Members: &mDynamicPartitioningConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDynamicPartitioningConfiguration})
-var sElasticsearchBufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchBufferingHints, Members: &mElasticsearchBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchBufferingHints})
-var s_ElasticsearchBufferingIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_ElasticsearchBufferingIntervalInSeconds})
-var s_ElasticsearchBufferingSizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_ElasticsearchBufferingSizeInMBs})
-var s_ElasticsearchClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchClusterEndpoint, Type: smithy.ShapeTypeString, Ext: &e_ElasticsearchClusterEndpoint})
-var sElasticsearchDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchDestinationConfiguration, Members: &mElasticsearchDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationConfiguration})
-var sElasticsearchDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchDestinationDescription, Members: &mElasticsearchDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationDescription})
-var sElasticsearchDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchDestinationUpdate, Members: &mElasticsearchDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationUpdate})
-var s_ElasticsearchDomainARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchDomainARN, Type: smithy.ShapeTypeString, Ext: &e_ElasticsearchDomainARN})
-var s_ElasticsearchIndexName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchIndexName, Type: smithy.ShapeTypeString, Ext: &e_ElasticsearchIndexName})
-var sElasticsearchIndexRotationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchIndexRotationPeriod, Members: &mElasticsearchIndexRotationPeriod, Type: smithy.ShapeTypeEnum, Ext: &eElasticsearchIndexRotationPeriod})
-var s_ElasticsearchRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_ElasticsearchRetryDurationInSeconds})
-var sElasticsearchRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchRetryOptions, Members: &mElasticsearchRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchRetryOptions})
-var sElasticsearchS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchS3BackupMode, Members: &mElasticsearchS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eElasticsearchS3BackupMode})
-var s_ElasticsearchTypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchTypeName, Type: smithy.ShapeTypeString, Ext: &e_ElasticsearchTypeName})
-var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfiguration})
-var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ErrorCode})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
-var s_ErrorOutputPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorOutputPrefix, Type: smithy.ShapeTypeString, Ext: &e_ErrorOutputPrefix})
-var sExtendedS3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtendedS3DestinationConfiguration, Members: &mExtendedS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExtendedS3DestinationConfiguration})
-var sExtendedS3DestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtendedS3DestinationDescription, Members: &mExtendedS3DestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eExtendedS3DestinationDescription})
-var sExtendedS3DestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtendedS3DestinationUpdate, Members: &mExtendedS3DestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eExtendedS3DestinationUpdate})
-var sFailureDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureDescription, Members: &mFailureDescription, Type: smithy.ShapeTypeStructure, Ext: &eFailureDescription})
-var s_FileExtension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileExtension, Type: smithy.ShapeTypeString, Ext: &e_FileExtension})
-var s_GlueDataCatalogARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlueDataCatalogARN, Type: smithy.ShapeTypeString, Ext: &e_GlueDataCatalogARN})
-var s_HECAcknowledgmentTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HECAcknowledgmentTimeoutInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_HECAcknowledgmentTimeoutInSeconds})
-var s_HECEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HECEndpoint, Type: smithy.ShapeTypeString, Ext: &e_HECEndpoint})
-var sHECEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHECEndpointType, Members: &mHECEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eHECEndpointType})
-var s_HECToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HECToken, Type: smithy.ShapeTypeString, Ext: &e_HECToken})
-var sHiveJsonSerDe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHiveJsonSerDe, Members: &mHiveJsonSerDe, Type: smithy.ShapeTypeStructure, Ext: &eHiveJsonSerDe})
-var s_HttpEndpointAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointAccessKey, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_HttpEndpointAccessKey})
-var s_HttpEndpointAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointAttributeName, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_HttpEndpointAttributeName})
-var s_HttpEndpointAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointAttributeValue, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_HttpEndpointAttributeValue})
-var sHttpEndpointBufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointBufferingHints, Members: &mHttpEndpointBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointBufferingHints})
-var s_HttpEndpointBufferingIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_HttpEndpointBufferingIntervalInSeconds})
-var s_HttpEndpointBufferingSizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_HttpEndpointBufferingSizeInMBs})
-var sHttpEndpointCommonAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointCommonAttribute, Members: &mHttpEndpointCommonAttribute, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointCommonAttribute})
-var s_HttpEndpointCommonAttributesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointCommonAttributesList, Members: &m_HttpEndpointCommonAttributesList, Type: smithy.ShapeTypeList, Ext: &e_HttpEndpointCommonAttributesList})
-var sHttpEndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointConfiguration, Members: &mHttpEndpointConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointConfiguration})
-var sHttpEndpointDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointDescription, Members: &mHttpEndpointDescription, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDescription})
-var sHttpEndpointDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointDestinationConfiguration, Members: &mHttpEndpointDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationConfiguration})
-var sHttpEndpointDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointDestinationDescription, Members: &mHttpEndpointDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationDescription})
-var sHttpEndpointDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointDestinationUpdate, Members: &mHttpEndpointDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationUpdate})
-var s_HttpEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointName, Type: smithy.ShapeTypeString, Ext: &e_HttpEndpointName})
-var sHttpEndpointRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointRequestConfiguration, Members: &mHttpEndpointRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointRequestConfiguration})
-var s_HttpEndpointRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_HttpEndpointRetryDurationInSeconds})
-var sHttpEndpointRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointRetryOptions, Members: &mHttpEndpointRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointRetryOptions})
-var sHttpEndpointS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointS3BackupMode, Members: &mHttpEndpointS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eHttpEndpointS3BackupMode})
-var s_HttpEndpointUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointUrl, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_HttpEndpointUrl})
-var sIcebergDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergDestinationConfiguration, Members: &mIcebergDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationConfiguration})
-var sIcebergDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergDestinationDescription, Members: &mIcebergDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationDescription})
-var sIcebergDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergDestinationUpdate, Members: &mIcebergDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationUpdate})
-var sIcebergS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergS3BackupMode, Members: &mIcebergS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eIcebergS3BackupMode})
-var sInputFormatConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputFormatConfiguration, Members: &mInputFormatConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInputFormatConfiguration})
-var s_IntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_IntervalInSeconds})
-var sInvalidArgumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArgumentException, Members: &mInvalidArgumentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidArgumentException})
-var sInvalidKMSResourceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidKMSResourceException, Members: &mInvalidKMSResourceException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidKMSResourceException})
-var sInvalidSourceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSourceException, Members: &mInvalidSourceException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSourceException})
-var sKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyType, Members: &mKeyType, Type: smithy.ShapeTypeEnum, Ext: &eKeyType})
-var s_KinesisStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KinesisStreamARN, Type: smithy.ShapeTypeString, Ext: &e_KinesisStreamARN})
-var sKinesisStreamSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisStreamSourceConfiguration, Members: &mKinesisStreamSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eKinesisStreamSourceConfiguration})
-var sKinesisStreamSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisStreamSourceDescription, Members: &mKinesisStreamSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eKinesisStreamSourceDescription})
-var sKMSEncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSEncryptionConfig, Members: &mKMSEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eKMSEncryptionConfig})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
-var s_ListDeliveryStreamsInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListDeliveryStreamsInputLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListDeliveryStreamsInputLimit})
-var s_ListOfNonEmptyStrings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfNonEmptyStrings, Members: &m_ListOfNonEmptyStrings, Type: smithy.ShapeTypeList, Ext: &e_ListOfNonEmptyStrings})
-var s_ListOfNonEmptyStringsWithoutWhitespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfNonEmptyStringsWithoutWhitespace, Members: &m_ListOfNonEmptyStringsWithoutWhitespace, Type: smithy.ShapeTypeList, Ext: &e_ListOfNonEmptyStringsWithoutWhitespace})
-var s_ListTagsForDeliveryStreamInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTagsForDeliveryStreamInputLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListTagsForDeliveryStreamInputLimit})
-var s_ListTagsForDeliveryStreamOutputTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTagsForDeliveryStreamOutputTagList, Members: &m_ListTagsForDeliveryStreamOutputTagList, Type: smithy.ShapeTypeList, Ext: &e_ListTagsForDeliveryStreamOutputTagList})
-var s_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupName, Type: smithy.ShapeTypeString, Ext: &e_LogGroupName})
-var s_LogStreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogStreamName, Type: smithy.ShapeTypeString, Ext: &e_LogStreamName})
-var s_MSKClusterARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MSKClusterARN, Type: smithy.ShapeTypeString, Ext: &e_MSKClusterARN})
-var sMSKSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMSKSourceConfiguration, Members: &mMSKSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMSKSourceConfiguration})
-var sMSKSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMSKSourceDescription, Members: &mMSKSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eMSKSourceDescription})
-var sNoEncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoEncryptionConfig, Members: &mNoEncryptionConfig, Type: smithy.ShapeTypeEnum, Ext: &eNoEncryptionConfig})
-var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString})
-var s_NonEmptyStringWithoutWhitespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyStringWithoutWhitespace})
-var s_NonNegativeIntegerObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonNegativeIntegerObject, Type: smithy.ShapeTypeInteger, Ext: &e_NonNegativeIntegerObject})
-var sOpenXJsonSerDe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenXJsonSerDe, Members: &mOpenXJsonSerDe, Type: smithy.ShapeTypeStructure, Ext: &eOpenXJsonSerDe})
-var sOrcCompression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrcCompression, Members: &mOrcCompression, Type: smithy.ShapeTypeEnum, Ext: &eOrcCompression})
-var sOrcFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrcFormatVersion, Members: &mOrcFormatVersion, Type: smithy.ShapeTypeEnum, Ext: &eOrcFormatVersion})
-var s_OrcRowIndexStride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrcRowIndexStride, Type: smithy.ShapeTypeInteger, Ext: &e_OrcRowIndexStride})
-var sOrcSerDe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrcSerDe, Members: &mOrcSerDe, Type: smithy.ShapeTypeStructure, Ext: &eOrcSerDe})
-var s_OrcStripeSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrcStripeSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &e_OrcStripeSizeBytes})
-var sOutputFormatConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputFormatConfiguration, Members: &mOutputFormatConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormatConfiguration})
-var sParquetCompression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParquetCompression, Members: &mParquetCompression, Type: smithy.ShapeTypeEnum, Ext: &eParquetCompression})
-var s_ParquetPageSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParquetPageSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &e_ParquetPageSizeBytes})
-var sParquetSerDe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParquetSerDe, Members: &mParquetSerDe, Type: smithy.ShapeTypeStructure, Ext: &eParquetSerDe})
-var sParquetWriterVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParquetWriterVersion, Members: &mParquetWriterVersion, Type: smithy.ShapeTypeEnum, Ext: &eParquetWriterVersion})
-var sPartitionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionField, Members: &mPartitionField, Type: smithy.ShapeTypeStructure, Ext: &ePartitionField})
-var s_PartitionFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionFields, Members: &m_PartitionFields, Type: smithy.ShapeTypeList, Ext: &e_PartitionFields})
-var sPartitionSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionSpec, Members: &mPartitionSpec, Type: smithy.ShapeTypeStructure, Ext: &ePartitionSpec})
-var s_Password = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Password, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_Password})
-var s_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Prefix, Type: smithy.ShapeTypeString, Ext: &e_Prefix})
-var sProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessingConfiguration, Members: &mProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eProcessingConfiguration})
-var sProcessor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessor, Members: &mProcessor, Type: smithy.ShapeTypeStructure, Ext: &eProcessor})
-var s_ProcessorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcessorList, Members: &m_ProcessorList, Type: smithy.ShapeTypeList, Ext: &e_ProcessorList})
-var sProcessorParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessorParameter, Members: &mProcessorParameter, Type: smithy.ShapeTypeStructure, Ext: &eProcessorParameter})
-var s_ProcessorParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcessorParameterList, Members: &m_ProcessorParameterList, Type: smithy.ShapeTypeList, Ext: &e_ProcessorParameterList})
-var sProcessorParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessorParameterName, Members: &mProcessorParameterName, Type: smithy.ShapeTypeEnum, Ext: &eProcessorParameterName})
-var s_ProcessorParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcessorParameterValue, Type: smithy.ShapeTypeString, Ext: &e_ProcessorParameterValue})
-var sProcessorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessorType, Members: &mProcessorType, Type: smithy.ShapeTypeEnum, Ext: &eProcessorType})
-var s_Proportion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Proportion, Type: smithy.ShapeTypeDouble, Ext: &e_Proportion})
-var s_PutRecordBatchRequestEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutRecordBatchRequestEntryList, Members: &m_PutRecordBatchRequestEntryList, Type: smithy.ShapeTypeList, Ext: &e_PutRecordBatchRequestEntryList})
-var sPutRecordBatchResponseEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordBatchResponseEntry, Members: &mPutRecordBatchResponseEntry, Type: smithy.ShapeTypeStructure, Ext: &ePutRecordBatchResponseEntry})
-var s_PutRecordBatchResponseEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutRecordBatchResponseEntryList, Members: &m_PutRecordBatchResponseEntryList, Type: smithy.ShapeTypeList, Ext: &e_PutRecordBatchResponseEntryList})
-var s_PutResponseRecordId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutResponseRecordId, Type: smithy.ShapeTypeString, Ext: &e_PutResponseRecordId})
-var s_ReadFromTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReadFromTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_ReadFromTimestamp})
-var sRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &eRecord})
-var sRedshiftDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftDestinationConfiguration, Members: &mRedshiftDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationConfiguration})
-var sRedshiftDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftDestinationDescription, Members: &mRedshiftDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationDescription})
-var sRedshiftDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftDestinationUpdate, Members: &mRedshiftDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationUpdate})
-var s_RedshiftRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedshiftRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_RedshiftRetryDurationInSeconds})
-var sRedshiftRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftRetryOptions, Members: &mRedshiftRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftRetryOptions})
-var sRedshiftS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftS3BackupMode, Members: &mRedshiftS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eRedshiftS3BackupMode})
-var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUseException})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
-var s_RetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_RetryDurationInSeconds})
-var sRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryOptions, Members: &mRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eRetryOptions})
-var s_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &e_RoleARN})
-var sS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3BackupMode, Members: &mS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eS3BackupMode})
-var sS3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationConfiguration})
-var sS3DestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationDescription, Members: &mS3DestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationDescription})
-var sS3DestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationUpdate, Members: &mS3DestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationUpdate})
-var sSchemaConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaConfiguration, Members: &mSchemaConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSchemaConfiguration})
-var sSchemaEvolutionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaEvolutionConfiguration, Members: &mSchemaEvolutionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSchemaEvolutionConfiguration})
-var s_SecretARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretARN, Type: smithy.ShapeTypeString, Ext: &e_SecretARN})
-var sSecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSecretsManagerConfiguration})
-var s_SecurityGroupIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &e_SecurityGroupIdList})
-var sSerializer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSerializer, Members: &mSerializer, Type: smithy.ShapeTypeStructure, Ext: &eSerializer})
-var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
-var s_SizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_SizeInMBs})
-var sSnapshotRequestedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotRequestedBy, Members: &mSnapshotRequestedBy, Type: smithy.ShapeTypeEnum, Ext: &eSnapshotRequestedBy})
-var sSnapshotStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotStatus, Members: &mSnapshotStatus, Type: smithy.ShapeTypeEnum, Ext: &eSnapshotStatus})
-var s_SnowflakeAccountUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeAccountUrl, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeAccountUrl})
-var sSnowflakeBufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeBufferingHints, Members: &mSnowflakeBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeBufferingHints})
-var s_SnowflakeBufferingIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_SnowflakeBufferingIntervalInSeconds})
-var s_SnowflakeBufferingSizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_SnowflakeBufferingSizeInMBs})
-var s_SnowflakeContentColumnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeContentColumnName, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeContentColumnName})
-var s_SnowflakeDatabase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeDatabase, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeDatabase})
-var sSnowflakeDataLoadingOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeDataLoadingOption, Members: &mSnowflakeDataLoadingOption, Type: smithy.ShapeTypeEnum, Ext: &eSnowflakeDataLoadingOption})
-var sSnowflakeDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeDestinationConfiguration, Members: &mSnowflakeDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationConfiguration})
-var sSnowflakeDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeDestinationDescription, Members: &mSnowflakeDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationDescription})
-var sSnowflakeDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeDestinationUpdate, Members: &mSnowflakeDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationUpdate})
-var s_SnowflakeKeyPassphrase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeKeyPassphrase, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeKeyPassphrase})
-var s_SnowflakeMetaDataColumnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeMetaDataColumnName, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeMetaDataColumnName})
-var s_SnowflakePrivateKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakePrivateKey, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakePrivateKey})
-var s_SnowflakePrivateLinkVpceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakePrivateLinkVpceId, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakePrivateLinkVpceId})
-var s_SnowflakeRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_SnowflakeRetryDurationInSeconds})
-var sSnowflakeRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeRetryOptions, Members: &mSnowflakeRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeRetryOptions})
-var s_SnowflakeRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeRole, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeRole})
-var sSnowflakeRoleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeRoleConfiguration, Members: &mSnowflakeRoleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeRoleConfiguration})
-var sSnowflakeS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeS3BackupMode, Members: &mSnowflakeS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eSnowflakeS3BackupMode})
-var s_SnowflakeSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeSchema, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeSchema})
-var s_SnowflakeTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeTable, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeTable})
-var s_SnowflakeUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeUser, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeUser})
-var sSnowflakeVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeVpcConfiguration, Members: &mSnowflakeVpcConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeVpcConfiguration})
-var sSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceDescription, Members: &mSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eSourceDescription})
-var sSplunkBufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplunkBufferingHints, Members: &mSplunkBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eSplunkBufferingHints})
-var s_SplunkBufferingIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SplunkBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_SplunkBufferingIntervalInSeconds})
-var s_SplunkBufferingSizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SplunkBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_SplunkBufferingSizeInMBs})
-var sSplunkDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplunkDestinationConfiguration, Members: &mSplunkDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationConfiguration})
-var sSplunkDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplunkDestinationDescription, Members: &mSplunkDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationDescription})
-var sSplunkDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplunkDestinationUpdate, Members: &mSplunkDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationUpdate})
-var s_SplunkRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SplunkRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_SplunkRetryDurationInSeconds})
-var sSplunkRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplunkRetryOptions, Members: &mSplunkRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eSplunkRetryOptions})
-var sSplunkS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplunkS3BackupMode, Members: &mSplunkS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eSplunkS3BackupMode})
-var sSSLMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSSLMode, Members: &mSSLMode, Type: smithy.ShapeTypeEnum, Ext: &eSSLMode})
-var s_StringWithLettersDigitsUnderscoresDots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLettersDigitsUnderscoresDots, Type: smithy.ShapeTypeString, Ext: &e_StringWithLettersDigitsUnderscoresDots})
-var s_SubnetIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &e_SubnetIdList})
-var sTableCreationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableCreationConfiguration, Members: &mTableCreationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTableCreationConfiguration})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
-var s_TagDeliveryStreamInputTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagDeliveryStreamInputTagList, Members: &m_TagDeliveryStreamInputTagList, Type: smithy.ShapeTypeList, Ext: &e_TagDeliveryStreamInputTagList})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
-var s_ThroughputHintInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThroughputHintInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_ThroughputHintInMBs})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
-var s_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopicName, Type: smithy.ShapeTypeString, Ext: &e_TopicName})
-var s_Username = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Username, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_Username})
-var sVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConfiguration, Members: &mVpcConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eVpcConfiguration})
-var sVpcConfigurationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConfigurationDescription, Members: &mVpcConfigurationDescription, Type: smithy.ShapeTypeStructure, Ext: &eVpcConfigurationDescription})
-var s_VpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointServiceName, Type: smithy.ShapeTypeString, Ext: &e_VpcEndpointServiceName})
-var s_WarehouseLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WarehouseLocation, Type: smithy.ShapeTypeString, Ext: &e_WarehouseLocation})
-var sCreateDeliveryStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeliveryStreamInput, Members: &mCreateDeliveryStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeliveryStreamInput})
-var sCreateDeliveryStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeliveryStreamOutput, Members: &mCreateDeliveryStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeliveryStreamOutput})
-var sDeleteDeliveryStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeliveryStreamInput, Members: &mDeleteDeliveryStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDeliveryStreamInput})
-var sDeleteDeliveryStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeliveryStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDeliveryStreamOutput})
-var sDescribeDeliveryStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDeliveryStreamInput, Members: &mDescribeDeliveryStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDeliveryStreamInput})
-var sDescribeDeliveryStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDeliveryStreamOutput, Members: &mDescribeDeliveryStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDeliveryStreamOutput})
-var sListDeliveryStreamsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeliveryStreamsInput, Members: &mListDeliveryStreamsInput, Type: smithy.ShapeTypeStructure, Ext: &eListDeliveryStreamsInput})
-var sListDeliveryStreamsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeliveryStreamsOutput, Members: &mListDeliveryStreamsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListDeliveryStreamsOutput})
-var sListTagsForDeliveryStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForDeliveryStreamInput, Members: &mListTagsForDeliveryStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForDeliveryStreamInput})
-var sListTagsForDeliveryStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForDeliveryStreamOutput, Members: &mListTagsForDeliveryStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForDeliveryStreamOutput})
-var sPutRecordBatchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordBatchInput, Members: &mPutRecordBatchInput, Type: smithy.ShapeTypeStructure, Ext: &ePutRecordBatchInput})
-var sPutRecordBatchOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordBatchOutput, Members: &mPutRecordBatchOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutRecordBatchOutput})
-var sPutRecordInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordInput, Members: &mPutRecordInput, Type: smithy.ShapeTypeStructure, Ext: &ePutRecordInput})
-var sPutRecordOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordOutput, Members: &mPutRecordOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutRecordOutput})
-var sStartDeliveryStreamEncryptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDeliveryStreamEncryptionInput, Members: &mStartDeliveryStreamEncryptionInput, Type: smithy.ShapeTypeStructure, Ext: &eStartDeliveryStreamEncryptionInput})
-var sStartDeliveryStreamEncryptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDeliveryStreamEncryptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartDeliveryStreamEncryptionOutput})
-var sStopDeliveryStreamEncryptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDeliveryStreamEncryptionInput, Members: &mStopDeliveryStreamEncryptionInput, Type: smithy.ShapeTypeStructure, Ext: &eStopDeliveryStreamEncryptionInput})
-var sStopDeliveryStreamEncryptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDeliveryStreamEncryptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopDeliveryStreamEncryptionOutput})
-var sTagDeliveryStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagDeliveryStreamInput, Members: &mTagDeliveryStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eTagDeliveryStreamInput})
-var sTagDeliveryStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagDeliveryStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagDeliveryStreamOutput})
-var sUntagDeliveryStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagDeliveryStreamInput, Members: &mUntagDeliveryStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagDeliveryStreamInput})
-var sUntagDeliveryStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagDeliveryStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagDeliveryStreamOutput})
-var sUpdateDestinationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDestinationInput, Members: &mUpdateDestinationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDestinationInput})
-var sUpdateDestinationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDestinationOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDestinationOutput})
-
-var sAmazonOpenSearchServerlessBufferingHints_IntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalInSeconds", ID: &i_AmazonOpenSearchServerlessBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eAmazonOpenSearchServerlessBufferingHints_IntervalInSeconds})
-var sAmazonOpenSearchServerlessBufferingHints_SizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInMBs", ID: &i_AmazonOpenSearchServerlessBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &eAmazonOpenSearchServerlessBufferingHints_SizeInMBs})
 var sAmazonOpenSearchServerlessDestinationConfiguration_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eAmazonOpenSearchServerlessDestinationConfiguration_RoleARN})
 var sAmazonOpenSearchServerlessDestinationConfiguration_CollectionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CollectionEndpoint", ID: &i_AmazonOpenSearchServerlessCollectionEndpoint, Type: smithy.ShapeTypeString, Ext: &eAmazonOpenSearchServerlessDestinationConfiguration_CollectionEndpoint})
 var sAmazonOpenSearchServerlessDestinationConfiguration_IndexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexName", ID: &i_AmazonOpenSearchServerlessIndexName, Type: smithy.ShapeTypeString, Ext: &eAmazonOpenSearchServerlessDestinationConfiguration_IndexName})
@@ -2043,6 +1786,7 @@ var sAmazonOpenSearchServerlessDestinationConfiguration_S3Configuration = smithy
 var sAmazonOpenSearchServerlessDestinationConfiguration_ProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingConfiguration", ID: &iProcessingConfiguration, Members: &mProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationConfiguration_ProcessingConfiguration})
 var sAmazonOpenSearchServerlessDestinationConfiguration_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationConfiguration_CloudWatchLoggingOptions})
 var sAmazonOpenSearchServerlessDestinationConfiguration_VpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfiguration", ID: &iVpcConfiguration, Members: &mVpcConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationConfiguration_VpcConfiguration})
+var sAmazonOpenSearchServerlessDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonOpenSearchServerlessDestinationDescription, Members: &mAmazonOpenSearchServerlessDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationDescription})
 var sAmazonOpenSearchServerlessDestinationDescription_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eAmazonOpenSearchServerlessDestinationDescription_RoleARN})
 var sAmazonOpenSearchServerlessDestinationDescription_CollectionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CollectionEndpoint", ID: &i_AmazonOpenSearchServerlessCollectionEndpoint, Type: smithy.ShapeTypeString, Ext: &eAmazonOpenSearchServerlessDestinationDescription_CollectionEndpoint})
 var sAmazonOpenSearchServerlessDestinationDescription_IndexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexName", ID: &i_AmazonOpenSearchServerlessIndexName, Type: smithy.ShapeTypeString, Ext: &eAmazonOpenSearchServerlessDestinationDescription_IndexName})
@@ -2053,6 +1797,7 @@ var sAmazonOpenSearchServerlessDestinationDescription_S3DestinationDescription =
 var sAmazonOpenSearchServerlessDestinationDescription_ProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingConfiguration", ID: &iProcessingConfiguration, Members: &mProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationDescription_ProcessingConfiguration})
 var sAmazonOpenSearchServerlessDestinationDescription_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationDescription_CloudWatchLoggingOptions})
 var sAmazonOpenSearchServerlessDestinationDescription_VpcConfigurationDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfigurationDescription", ID: &iVpcConfigurationDescription, Members: &mVpcConfigurationDescription, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationDescription_VpcConfigurationDescription})
+var sAmazonOpenSearchServerlessDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonOpenSearchServerlessDestinationUpdate, Members: &mAmazonOpenSearchServerlessDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationUpdate})
 var sAmazonOpenSearchServerlessDestinationUpdate_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eAmazonOpenSearchServerlessDestinationUpdate_RoleARN})
 var sAmazonOpenSearchServerlessDestinationUpdate_CollectionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CollectionEndpoint", ID: &i_AmazonOpenSearchServerlessCollectionEndpoint, Type: smithy.ShapeTypeString, Ext: &eAmazonOpenSearchServerlessDestinationUpdate_CollectionEndpoint})
 var sAmazonOpenSearchServerlessDestinationUpdate_IndexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexName", ID: &i_AmazonOpenSearchServerlessIndexName, Type: smithy.ShapeTypeString, Ext: &eAmazonOpenSearchServerlessDestinationUpdate_IndexName})
@@ -2061,11 +1806,20 @@ var sAmazonOpenSearchServerlessDestinationUpdate_RetryOptions = smithy.NewStatic
 var sAmazonOpenSearchServerlessDestinationUpdate_S3Update = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Update", ID: &iS3DestinationUpdate, Members: &mS3DestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationUpdate_S3Update})
 var sAmazonOpenSearchServerlessDestinationUpdate_ProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingConfiguration", ID: &iProcessingConfiguration, Members: &mProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationUpdate_ProcessingConfiguration})
 var sAmazonOpenSearchServerlessDestinationUpdate_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessDestinationUpdate_CloudWatchLoggingOptions})
+var s_AmazonOpenSearchServerlessIndexName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonOpenSearchServerlessIndexName, Type: smithy.ShapeTypeString, Ext: &e_AmazonOpenSearchServerlessIndexName})
+var s_AmazonOpenSearchServerlessRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonOpenSearchServerlessRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_AmazonOpenSearchServerlessRetryDurationInSeconds})
+var sAmazonOpenSearchServerlessRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonOpenSearchServerlessRetryOptions, Members: &mAmazonOpenSearchServerlessRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessRetryOptions})
 var sAmazonOpenSearchServerlessRetryOptions_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &i_AmazonOpenSearchServerlessRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eAmazonOpenSearchServerlessRetryOptions_DurationInSeconds})
+var sAmazonOpenSearchServerlessS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonOpenSearchServerlessS3BackupMode, Members: &mAmazonOpenSearchServerlessS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eAmazonOpenSearchServerlessS3BackupMode})
 var sAmazonOpenSearchServerlessS3BackupMode_FailedDocumentsOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedDocumentsOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessS3BackupMode_FailedDocumentsOnly})
 var sAmazonOpenSearchServerlessS3BackupMode_AllDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllDocuments", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAmazonOpenSearchServerlessS3BackupMode_AllDocuments})
+var sAmazonopensearchserviceBufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceBufferingHints, Members: &mAmazonopensearchserviceBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceBufferingHints})
 var sAmazonopensearchserviceBufferingHints_IntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalInSeconds", ID: &i_AmazonopensearchserviceBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eAmazonopensearchserviceBufferingHints_IntervalInSeconds})
 var sAmazonopensearchserviceBufferingHints_SizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInMBs", ID: &i_AmazonopensearchserviceBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &eAmazonopensearchserviceBufferingHints_SizeInMBs})
+var s_AmazonopensearchserviceBufferingIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_AmazonopensearchserviceBufferingIntervalInSeconds})
+var s_AmazonopensearchserviceBufferingSizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_AmazonopensearchserviceBufferingSizeInMBs})
+var s_AmazonopensearchserviceClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceClusterEndpoint, Type: smithy.ShapeTypeString, Ext: &e_AmazonopensearchserviceClusterEndpoint})
+var sAmazonopensearchserviceDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceDestinationConfiguration, Members: &mAmazonopensearchserviceDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationConfiguration})
 var sAmazonopensearchserviceDestinationConfiguration_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eAmazonopensearchserviceDestinationConfiguration_RoleARN})
 var sAmazonopensearchserviceDestinationConfiguration_DomainARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainARN", ID: &i_AmazonopensearchserviceDomainARN, Type: smithy.ShapeTypeString, Ext: &eAmazonopensearchserviceDestinationConfiguration_DomainARN})
 var sAmazonopensearchserviceDestinationConfiguration_ClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterEndpoint", ID: &i_AmazonopensearchserviceClusterEndpoint, Type: smithy.ShapeTypeString, Ext: &eAmazonopensearchserviceDestinationConfiguration_ClusterEndpoint})
@@ -2080,6 +1834,7 @@ var sAmazonopensearchserviceDestinationConfiguration_ProcessingConfiguration = s
 var sAmazonopensearchserviceDestinationConfiguration_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationConfiguration_CloudWatchLoggingOptions})
 var sAmazonopensearchserviceDestinationConfiguration_VpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfiguration", ID: &iVpcConfiguration, Members: &mVpcConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationConfiguration_VpcConfiguration})
 var sAmazonopensearchserviceDestinationConfiguration_DocumentIdOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentIdOptions", ID: &iDocumentIdOptions, Members: &mDocumentIdOptions, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationConfiguration_DocumentIdOptions})
+var sAmazonopensearchserviceDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceDestinationDescription, Members: &mAmazonopensearchserviceDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationDescription})
 var sAmazonopensearchserviceDestinationDescription_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eAmazonopensearchserviceDestinationDescription_RoleARN})
 var sAmazonopensearchserviceDestinationDescription_DomainARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainARN", ID: &i_AmazonopensearchserviceDomainARN, Type: smithy.ShapeTypeString, Ext: &eAmazonopensearchserviceDestinationDescription_DomainARN})
 var sAmazonopensearchserviceDestinationDescription_ClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterEndpoint", ID: &i_AmazonopensearchserviceClusterEndpoint, Type: smithy.ShapeTypeString, Ext: &eAmazonopensearchserviceDestinationDescription_ClusterEndpoint})
@@ -2094,6 +1849,7 @@ var sAmazonopensearchserviceDestinationDescription_ProcessingConfiguration = smi
 var sAmazonopensearchserviceDestinationDescription_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationDescription_CloudWatchLoggingOptions})
 var sAmazonopensearchserviceDestinationDescription_VpcConfigurationDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfigurationDescription", ID: &iVpcConfigurationDescription, Members: &mVpcConfigurationDescription, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationDescription_VpcConfigurationDescription})
 var sAmazonopensearchserviceDestinationDescription_DocumentIdOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentIdOptions", ID: &iDocumentIdOptions, Members: &mDocumentIdOptions, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationDescription_DocumentIdOptions})
+var sAmazonopensearchserviceDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceDestinationUpdate, Members: &mAmazonopensearchserviceDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationUpdate})
 var sAmazonopensearchserviceDestinationUpdate_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eAmazonopensearchserviceDestinationUpdate_RoleARN})
 var sAmazonopensearchserviceDestinationUpdate_DomainARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainARN", ID: &i_AmazonopensearchserviceDomainARN, Type: smithy.ShapeTypeString, Ext: &eAmazonopensearchserviceDestinationUpdate_DomainARN})
 var sAmazonopensearchserviceDestinationUpdate_ClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterEndpoint", ID: &i_AmazonopensearchserviceClusterEndpoint, Type: smithy.ShapeTypeString, Ext: &eAmazonopensearchserviceDestinationUpdate_ClusterEndpoint})
@@ -2106,52 +1862,90 @@ var sAmazonopensearchserviceDestinationUpdate_S3Update = smithy.NewStaticSchema(
 var sAmazonopensearchserviceDestinationUpdate_ProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingConfiguration", ID: &iProcessingConfiguration, Members: &mProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationUpdate_ProcessingConfiguration})
 var sAmazonopensearchserviceDestinationUpdate_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationUpdate_CloudWatchLoggingOptions})
 var sAmazonopensearchserviceDestinationUpdate_DocumentIdOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentIdOptions", ID: &iDocumentIdOptions, Members: &mDocumentIdOptions, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceDestinationUpdate_DocumentIdOptions})
+var s_AmazonopensearchserviceDomainARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceDomainARN, Type: smithy.ShapeTypeString, Ext: &e_AmazonopensearchserviceDomainARN})
+var s_AmazonopensearchserviceIndexName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceIndexName, Type: smithy.ShapeTypeString, Ext: &e_AmazonopensearchserviceIndexName})
+var sAmazonopensearchserviceIndexRotationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceIndexRotationPeriod, Members: &mAmazonopensearchserviceIndexRotationPeriod, Type: smithy.ShapeTypeEnum, Ext: &eAmazonopensearchserviceIndexRotationPeriod})
 var sAmazonopensearchserviceIndexRotationPeriod_NoRotation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoRotation", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceIndexRotationPeriod_NoRotation})
 var sAmazonopensearchserviceIndexRotationPeriod_OneHour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OneHour", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceIndexRotationPeriod_OneHour})
 var sAmazonopensearchserviceIndexRotationPeriod_OneDay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OneDay", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceIndexRotationPeriod_OneDay})
 var sAmazonopensearchserviceIndexRotationPeriod_OneWeek = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OneWeek", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceIndexRotationPeriod_OneWeek})
 var sAmazonopensearchserviceIndexRotationPeriod_OneMonth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OneMonth", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceIndexRotationPeriod_OneMonth})
+var s_AmazonopensearchserviceRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_AmazonopensearchserviceRetryDurationInSeconds})
+var sAmazonopensearchserviceRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceRetryOptions, Members: &mAmazonopensearchserviceRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceRetryOptions})
 var sAmazonopensearchserviceRetryOptions_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &i_AmazonopensearchserviceRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eAmazonopensearchserviceRetryOptions_DurationInSeconds})
+var sAmazonopensearchserviceS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonopensearchserviceS3BackupMode, Members: &mAmazonopensearchserviceS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eAmazonopensearchserviceS3BackupMode})
 var sAmazonopensearchserviceS3BackupMode_FailedDocumentsOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedDocumentsOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceS3BackupMode_FailedDocumentsOnly})
 var sAmazonopensearchserviceS3BackupMode_AllDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllDocuments", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAmazonopensearchserviceS3BackupMode_AllDocuments})
+var s_AmazonopensearchserviceTypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonopensearchserviceTypeName, Type: smithy.ShapeTypeString, Ext: &e_AmazonopensearchserviceTypeName})
+var sAuthenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationConfiguration, Members: &mAuthenticationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationConfiguration})
 var sAuthenticationConfiguration_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eAuthenticationConfiguration_RoleARN})
 var sAuthenticationConfiguration_Connectivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connectivity", ID: &iConnectivity, Members: &mConnectivity, Type: smithy.ShapeTypeEnum, Ext: &eAuthenticationConfiguration_Connectivity})
+var s_AWSKMSKeyARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSKMSKeyARN, Type: smithy.ShapeTypeString, Ext: &e_AWSKMSKeyARN})
+var s_AWSKMSKeyARNForSSE = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSKMSKeyARNForSSE, Type: smithy.ShapeTypeString, Ext: &e_AWSKMSKeyARNForSSE})
+var s_BlockSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &e_BlockSizeBytes})
+var s_BooleanObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanObject})
+var s_BucketARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketARN, Type: smithy.ShapeTypeString, Ext: &e_BucketARN})
+var sBufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBufferingHints, Members: &mBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eBufferingHints})
 var sBufferingHints_SizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInMBs", ID: &i_SizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &eBufferingHints_SizeInMBs})
 var sBufferingHints_IntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalInSeconds", ID: &i_IntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eBufferingHints_IntervalInSeconds})
+var sCatalogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCatalogConfiguration, Members: &mCatalogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCatalogConfiguration})
 var sCatalogConfiguration_CatalogARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogARN", ID: &i_GlueDataCatalogARN, Type: smithy.ShapeTypeString, Ext: &eCatalogConfiguration_CatalogARN})
 var sCatalogConfiguration_WarehouseLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarehouseLocation", ID: &i_WarehouseLocation, Type: smithy.ShapeTypeString, Ext: &eCatalogConfiguration_WarehouseLocation})
+var sCloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchLoggingOptions})
 var sCloudWatchLoggingOptions_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eCloudWatchLoggingOptions_Enabled})
 var sCloudWatchLoggingOptions_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupName", ID: &i_LogGroupName, Type: smithy.ShapeTypeString, Ext: &eCloudWatchLoggingOptions_LogGroupName})
 var sCloudWatchLoggingOptions_LogStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogStreamName", ID: &i_LogStreamName, Type: smithy.ShapeTypeString, Ext: &eCloudWatchLoggingOptions_LogStreamName})
+var s_ClusterJDBCURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterJDBCURL, Type: smithy.ShapeTypeString, Ext: &e_ClusterJDBCURL})
+var s_ColumnToJsonKeyMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnToJsonKeyMappings, Members: &m_ColumnToJsonKeyMappings, Type: smithy.ShapeTypeMap, Ext: &e_ColumnToJsonKeyMappings})
 var s_ColumnToJsonKeyMappings_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &e_ColumnToJsonKeyMappings_key})
 var s_ColumnToJsonKeyMappings_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_ColumnToJsonKeyMappings_value})
+var sCompressionFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompressionFormat, Members: &mCompressionFormat, Type: smithy.ShapeTypeEnum, Ext: &eCompressionFormat})
 var sCompressionFormat_UNCOMPRESSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNCOMPRESSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionFormat_UNCOMPRESSED})
 var sCompressionFormat_GZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionFormat_GZIP})
 var sCompressionFormat_ZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionFormat_ZIP})
 var sCompressionFormat_SNAPPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPPY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionFormat_SNAPPY})
 var sCompressionFormat_HADOOP_SNAPPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HADOOP_SNAPPY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCompressionFormat_HADOOP_SNAPPY})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentModificationException})
 var sConcurrentModificationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConcurrentModificationException_message})
+var sConnectivity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectivity, Members: &mConnectivity, Type: smithy.ShapeTypeEnum, Ext: &eConnectivity})
 var sConnectivity_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectivity_PUBLIC})
 var sConnectivity_PRIVATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectivity_PRIVATE})
+var sContentEncoding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentEncoding, Members: &mContentEncoding, Type: smithy.ShapeTypeEnum, Ext: &eContentEncoding})
 var sContentEncoding_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContentEncoding_NONE})
 var sContentEncoding_GZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContentEncoding_GZIP})
+var sCopyCommand = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyCommand, Members: &mCopyCommand, Type: smithy.ShapeTypeStructure, Ext: &eCopyCommand})
 var sCopyCommand_DataTableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataTableName", ID: &i_DataTableName, Type: smithy.ShapeTypeString, Ext: &eCopyCommand_DataTableName})
 var sCopyCommand_DataTableColumns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataTableColumns", ID: &i_DataTableColumns, Type: smithy.ShapeTypeString, Ext: &eCopyCommand_DataTableColumns})
 var sCopyCommand_CopyOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyOptions", ID: &i_CopyOptions, Type: smithy.ShapeTypeString, Ext: &eCopyCommand_CopyOptions})
+var s_CopyOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CopyOptions, Type: smithy.ShapeTypeString, Ext: &e_CopyOptions})
+var s_CustomTimeZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomTimeZone, Type: smithy.ShapeTypeString, Ext: &e_CustomTimeZone})
+var s_Data = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Data, Type: smithy.ShapeTypeBlob, Ext: &e_Data})
+var s_DatabaseColumnIncludeOrExcludeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseColumnIncludeOrExcludeList, Members: &m_DatabaseColumnIncludeOrExcludeList, Type: smithy.ShapeTypeList, Ext: &e_DatabaseColumnIncludeOrExcludeList})
 var s_DatabaseColumnIncludeOrExcludeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DatabaseColumnName, Type: smithy.ShapeTypeString, Ext: &e_DatabaseColumnIncludeOrExcludeList_member})
+var sDatabaseColumnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseColumnList, Members: &mDatabaseColumnList, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseColumnList})
 var sDatabaseColumnList_Include = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Include", ID: &i_DatabaseColumnIncludeOrExcludeList, Members: &m_DatabaseColumnIncludeOrExcludeList, Type: smithy.ShapeTypeList, Ext: &eDatabaseColumnList_Include})
 var sDatabaseColumnList_Exclude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exclude", ID: &i_DatabaseColumnIncludeOrExcludeList, Members: &m_DatabaseColumnIncludeOrExcludeList, Type: smithy.ShapeTypeList, Ext: &eDatabaseColumnList_Exclude})
+var s_DatabaseColumnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseColumnName, Type: smithy.ShapeTypeString, Ext: &e_DatabaseColumnName})
+var s_DatabaseEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseEndpoint, Type: smithy.ShapeTypeString, Ext: &e_DatabaseEndpoint})
+var s_DatabaseIncludeOrExcludeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseIncludeOrExcludeList, Members: &m_DatabaseIncludeOrExcludeList, Type: smithy.ShapeTypeList, Ext: &e_DatabaseIncludeOrExcludeList})
 var s_DatabaseIncludeOrExcludeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DatabaseName, Type: smithy.ShapeTypeString, Ext: &e_DatabaseIncludeOrExcludeList_member})
+var sDatabaseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseList, Members: &mDatabaseList, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseList})
 var sDatabaseList_Include = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Include", ID: &i_DatabaseIncludeOrExcludeList, Members: &m_DatabaseIncludeOrExcludeList, Type: smithy.ShapeTypeList, Ext: &eDatabaseList_Include})
 var sDatabaseList_Exclude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exclude", ID: &i_DatabaseIncludeOrExcludeList, Members: &m_DatabaseIncludeOrExcludeList, Type: smithy.ShapeTypeList, Ext: &eDatabaseList_Exclude})
+var s_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseName, Type: smithy.ShapeTypeString, Ext: &e_DatabaseName})
+var s_DatabasePort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabasePort, Type: smithy.ShapeTypeInteger, Ext: &e_DatabasePort})
+var sDatabaseSnapshotInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseSnapshotInfo, Members: &mDatabaseSnapshotInfo, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSnapshotInfo})
 var sDatabaseSnapshotInfo_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &eDatabaseSnapshotInfo_Id})
 var sDatabaseSnapshotInfo_Table = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Table", ID: &i_DatabaseTableName, Type: smithy.ShapeTypeString, Ext: &eDatabaseSnapshotInfo_Table})
 var sDatabaseSnapshotInfo_RequestTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDatabaseSnapshotInfo_RequestTimestamp})
 var sDatabaseSnapshotInfo_RequestedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedBy", ID: &iSnapshotRequestedBy, Members: &mSnapshotRequestedBy, Type: smithy.ShapeTypeEnum, Ext: &eDatabaseSnapshotInfo_RequestedBy})
 var sDatabaseSnapshotInfo_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSnapshotStatus, Members: &mSnapshotStatus, Type: smithy.ShapeTypeEnum, Ext: &eDatabaseSnapshotInfo_Status})
 var sDatabaseSnapshotInfo_FailureDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDescription", ID: &iFailureDescription, Members: &mFailureDescription, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSnapshotInfo_FailureDescription})
+var s_DatabaseSnapshotInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseSnapshotInfoList, Members: &m_DatabaseSnapshotInfoList, Type: smithy.ShapeTypeList, Ext: &e_DatabaseSnapshotInfoList})
 var s_DatabaseSnapshotInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatabaseSnapshotInfo, Members: &mDatabaseSnapshotInfo, Type: smithy.ShapeTypeStructure, Ext: &e_DatabaseSnapshotInfoList_member})
+var sDatabaseSourceAuthenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseSourceAuthenticationConfiguration, Members: &mDatabaseSourceAuthenticationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSourceAuthenticationConfiguration})
 var sDatabaseSourceAuthenticationConfiguration_SecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerConfiguration", ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSourceAuthenticationConfiguration_SecretsManagerConfiguration})
+var sDatabaseSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseSourceConfiguration, Members: &mDatabaseSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSourceConfiguration})
 var sDatabaseSourceConfiguration_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDatabaseType, Members: &mDatabaseType, Type: smithy.ShapeTypeEnum, Ext: &eDatabaseSourceConfiguration_Type})
 var sDatabaseSourceConfiguration_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_DatabaseEndpoint, Type: smithy.ShapeTypeString, Ext: &eDatabaseSourceConfiguration_Endpoint})
 var sDatabaseSourceConfiguration_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_DatabasePort, Type: smithy.ShapeTypeInteger, Ext: &eDatabaseSourceConfiguration_Port})
@@ -2163,6 +1957,7 @@ var sDatabaseSourceConfiguration_SurrogateKeys = smithy.NewStaticSchema(smithy.S
 var sDatabaseSourceConfiguration_SnapshotWatermarkTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotWatermarkTable", ID: &i_DatabaseTableName, Type: smithy.ShapeTypeString, Ext: &eDatabaseSourceConfiguration_SnapshotWatermarkTable})
 var sDatabaseSourceConfiguration_DatabaseSourceAuthenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseSourceAuthenticationConfiguration", ID: &iDatabaseSourceAuthenticationConfiguration, Members: &mDatabaseSourceAuthenticationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSourceConfiguration_DatabaseSourceAuthenticationConfiguration})
 var sDatabaseSourceConfiguration_DatabaseSourceVPCConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseSourceVPCConfiguration", ID: &iDatabaseSourceVPCConfiguration, Members: &mDatabaseSourceVPCConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSourceConfiguration_DatabaseSourceVPCConfiguration})
+var sDatabaseSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseSourceDescription, Members: &mDatabaseSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSourceDescription})
 var sDatabaseSourceDescription_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDatabaseType, Members: &mDatabaseType, Type: smithy.ShapeTypeEnum, Ext: &eDatabaseSourceDescription_Type})
 var sDatabaseSourceDescription_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_DatabaseEndpoint, Type: smithy.ShapeTypeString, Ext: &eDatabaseSourceDescription_Endpoint})
 var sDatabaseSourceDescription_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_DatabasePort, Type: smithy.ShapeTypeInteger, Ext: &eDatabaseSourceDescription_Port})
@@ -2175,19 +1970,32 @@ var sDatabaseSourceDescription_SnapshotWatermarkTable = smithy.NewStaticSchema(s
 var sDatabaseSourceDescription_SnapshotInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotInfo", ID: &i_DatabaseSnapshotInfoList, Members: &m_DatabaseSnapshotInfoList, Type: smithy.ShapeTypeList, Ext: &eDatabaseSourceDescription_SnapshotInfo})
 var sDatabaseSourceDescription_DatabaseSourceAuthenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseSourceAuthenticationConfiguration", ID: &iDatabaseSourceAuthenticationConfiguration, Members: &mDatabaseSourceAuthenticationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSourceDescription_DatabaseSourceAuthenticationConfiguration})
 var sDatabaseSourceDescription_DatabaseSourceVPCConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseSourceVPCConfiguration", ID: &iDatabaseSourceVPCConfiguration, Members: &mDatabaseSourceVPCConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSourceDescription_DatabaseSourceVPCConfiguration})
+var sDatabaseSourceVPCConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseSourceVPCConfiguration, Members: &mDatabaseSourceVPCConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseSourceVPCConfiguration})
 var sDatabaseSourceVPCConfiguration_VpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointServiceName", ID: &i_VpcEndpointServiceName, Type: smithy.ShapeTypeString, Ext: &eDatabaseSourceVPCConfiguration_VpcEndpointServiceName})
+var s_DatabaseSurrogateKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseSurrogateKeyList, Members: &m_DatabaseSurrogateKeyList, Type: smithy.ShapeTypeList, Ext: &e_DatabaseSurrogateKeyList})
 var s_DatabaseSurrogateKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &e_DatabaseSurrogateKeyList_member})
+var s_DatabaseTableIncludeOrExcludeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseTableIncludeOrExcludeList, Members: &m_DatabaseTableIncludeOrExcludeList, Type: smithy.ShapeTypeList, Ext: &e_DatabaseTableIncludeOrExcludeList})
 var s_DatabaseTableIncludeOrExcludeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DatabaseTableName, Type: smithy.ShapeTypeString, Ext: &e_DatabaseTableIncludeOrExcludeList_member})
+var sDatabaseTableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseTableList, Members: &mDatabaseTableList, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseTableList})
 var sDatabaseTableList_Include = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Include", ID: &i_DatabaseTableIncludeOrExcludeList, Members: &m_DatabaseTableIncludeOrExcludeList, Type: smithy.ShapeTypeList, Ext: &eDatabaseTableList_Include})
 var sDatabaseTableList_Exclude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exclude", ID: &i_DatabaseTableIncludeOrExcludeList, Members: &m_DatabaseTableIncludeOrExcludeList, Type: smithy.ShapeTypeList, Ext: &eDatabaseTableList_Exclude})
+var s_DatabaseTableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseTableName, Type: smithy.ShapeTypeString, Ext: &e_DatabaseTableName})
+var sDatabaseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseType, Members: &mDatabaseType, Type: smithy.ShapeTypeEnum, Ext: &eDatabaseType})
 var sDatabaseType_MySQL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MySQL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseType_MySQL})
 var sDatabaseType_PostgreSQL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostgreSQL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDatabaseType_PostgreSQL})
+var sDataFormatConversionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataFormatConversionConfiguration, Members: &mDataFormatConversionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataFormatConversionConfiguration})
 var sDataFormatConversionConfiguration_SchemaConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaConfiguration", ID: &iSchemaConfiguration, Members: &mSchemaConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataFormatConversionConfiguration_SchemaConfiguration})
 var sDataFormatConversionConfiguration_InputFormatConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputFormatConfiguration", ID: &iInputFormatConfiguration, Members: &mInputFormatConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataFormatConversionConfiguration_InputFormatConfiguration})
 var sDataFormatConversionConfiguration_OutputFormatConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormatConfiguration", ID: &iOutputFormatConfiguration, Members: &mOutputFormatConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataFormatConversionConfiguration_OutputFormatConfiguration})
 var sDataFormatConversionConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eDataFormatConversionConfiguration_Enabled})
+var s_DataTableColumns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataTableColumns, Type: smithy.ShapeTypeString, Ext: &e_DataTableColumns})
+var s_DataTableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataTableName, Type: smithy.ShapeTypeString, Ext: &e_DataTableName})
+var sDefaultDocumentIdFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultDocumentIdFormat, Members: &mDefaultDocumentIdFormat, Type: smithy.ShapeTypeEnum, Ext: &eDefaultDocumentIdFormat})
 var sDefaultDocumentIdFormat_FIREHOSE_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIREHOSE_DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDefaultDocumentIdFormat_FIREHOSE_DEFAULT})
 var sDefaultDocumentIdFormat_NO_DOCUMENT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_DOCUMENT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDefaultDocumentIdFormat_NO_DOCUMENT_ID})
+var s_DeliveryStartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryStartTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_DeliveryStartTimestamp})
+var s_DeliveryStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryStreamARN, Type: smithy.ShapeTypeString, Ext: &e_DeliveryStreamARN})
+var sDeliveryStreamDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamDescription, Members: &mDeliveryStreamDescription, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamDescription})
 var sDeliveryStreamDescription_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &eDeliveryStreamDescription_DeliveryStreamName})
 var sDeliveryStreamDescription_DeliveryStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamARN", ID: &i_DeliveryStreamARN, Type: smithy.ShapeTypeString, Ext: &eDeliveryStreamDescription_DeliveryStreamARN})
 var sDeliveryStreamDescription_DeliveryStreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamStatus", ID: &iDeliveryStreamStatus, Members: &mDeliveryStreamStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryStreamDescription_DeliveryStreamStatus})
@@ -2200,18 +2008,22 @@ var sDeliveryStreamDescription_LastUpdateTimestamp = smithy.NewStaticSchema(smit
 var sDeliveryStreamDescription_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &iSourceDescription, Members: &mSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamDescription_Source})
 var sDeliveryStreamDescription_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_DestinationDescriptionList, Members: &m_DestinationDescriptionList, Type: smithy.ShapeTypeList, Ext: &eDeliveryStreamDescription_Destinations})
 var sDeliveryStreamDescription_HasMoreDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HasMoreDestinations", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eDeliveryStreamDescription_HasMoreDestinations})
+var sDeliveryStreamEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamEncryptionConfiguration, Members: &mDeliveryStreamEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamEncryptionConfiguration})
 var sDeliveryStreamEncryptionConfiguration_KeyARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyARN", ID: &i_AWSKMSKeyARNForSSE, Type: smithy.ShapeTypeString, Ext: &eDeliveryStreamEncryptionConfiguration_KeyARN})
 var sDeliveryStreamEncryptionConfiguration_KeyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyType", ID: &iKeyType, Members: &mKeyType, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryStreamEncryptionConfiguration_KeyType})
 var sDeliveryStreamEncryptionConfiguration_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDeliveryStreamEncryptionStatus, Members: &mDeliveryStreamEncryptionStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryStreamEncryptionConfiguration_Status})
 var sDeliveryStreamEncryptionConfiguration_FailureDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDescription", ID: &iFailureDescription, Members: &mFailureDescription, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamEncryptionConfiguration_FailureDescription})
+var sDeliveryStreamEncryptionConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamEncryptionConfigurationInput, Members: &mDeliveryStreamEncryptionConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamEncryptionConfigurationInput})
 var sDeliveryStreamEncryptionConfigurationInput_KeyARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyARN", ID: &i_AWSKMSKeyARNForSSE, Type: smithy.ShapeTypeString, Ext: &eDeliveryStreamEncryptionConfigurationInput_KeyARN})
 var sDeliveryStreamEncryptionConfigurationInput_KeyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyType", ID: &iKeyType, Members: &mKeyType, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryStreamEncryptionConfigurationInput_KeyType})
+var sDeliveryStreamEncryptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamEncryptionStatus, Members: &mDeliveryStreamEncryptionStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryStreamEncryptionStatus})
 var sDeliveryStreamEncryptionStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamEncryptionStatus_ENABLED})
 var sDeliveryStreamEncryptionStatus_ENABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamEncryptionStatus_ENABLING})
 var sDeliveryStreamEncryptionStatus_ENABLING_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLING_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamEncryptionStatus_ENABLING_FAILED})
 var sDeliveryStreamEncryptionStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamEncryptionStatus_DISABLED})
 var sDeliveryStreamEncryptionStatus_DISABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamEncryptionStatus_DISABLING})
 var sDeliveryStreamEncryptionStatus_DISABLING_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLING_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamEncryptionStatus_DISABLING_FAILED})
+var sDeliveryStreamFailureType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamFailureType, Members: &mDeliveryStreamFailureType, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryStreamFailureType})
 var sDeliveryStreamFailureType_VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamFailureType_VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND})
 var sDeliveryStreamFailureType_VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamFailureType_VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED})
 var sDeliveryStreamFailureType_RETIRE_KMS_GRANT_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETIRE_KMS_GRANT_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamFailureType_RETIRE_KMS_GRANT_FAILED})
@@ -2229,18 +2041,26 @@ var sDeliveryStreamFailureType_ENI_ACCESS_DENIED = smithy.NewStaticSchema(smithy
 var sDeliveryStreamFailureType_SUBNET_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBNET_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamFailureType_SUBNET_ACCESS_DENIED})
 var sDeliveryStreamFailureType_SECURITY_GROUP_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY_GROUP_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamFailureType_SECURITY_GROUP_ACCESS_DENIED})
 var sDeliveryStreamFailureType_UNKNOWN_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamFailureType_UNKNOWN_ERROR})
+var s_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &e_DeliveryStreamName})
+var s_DeliveryStreamNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryStreamNameList, Members: &m_DeliveryStreamNameList, Type: smithy.ShapeTypeList, Ext: &e_DeliveryStreamNameList})
 var s_DeliveryStreamNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &e_DeliveryStreamNameList_member})
+var sDeliveryStreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamStatus, Members: &mDeliveryStreamStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryStreamStatus})
 var sDeliveryStreamStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamStatus_CREATING})
 var sDeliveryStreamStatus_CREATING_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamStatus_CREATING_FAILED})
 var sDeliveryStreamStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamStatus_DELETING})
 var sDeliveryStreamStatus_DELETING_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamStatus_DELETING_FAILED})
 var sDeliveryStreamStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamStatus_ACTIVE})
+var sDeliveryStreamType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStreamType, Members: &mDeliveryStreamType, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryStreamType})
 var sDeliveryStreamType_DirectPut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectPut", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamType_DirectPut})
 var sDeliveryStreamType_KinesisStreamAsSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisStreamAsSource", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamType_KinesisStreamAsSource})
 var sDeliveryStreamType_MSKAsSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MSKAsSource", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamType_MSKAsSource})
 var sDeliveryStreamType_DatabaseAsSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseAsSource", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryStreamType_DatabaseAsSource})
+var s_DeliveryStreamVersionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryStreamVersionId, Type: smithy.ShapeTypeString, Ext: &e_DeliveryStreamVersionId})
+var s_DescribeDeliveryStreamInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeDeliveryStreamInputLimit, Type: smithy.ShapeTypeInteger, Ext: &e_DescribeDeliveryStreamInputLimit})
+var sDeserializer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeserializer, Members: &mDeserializer, Type: smithy.ShapeTypeStructure, Ext: &eDeserializer})
 var sDeserializer_OpenXJsonSerDe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenXJsonSerDe", ID: &iOpenXJsonSerDe, Members: &mOpenXJsonSerDe, Type: smithy.ShapeTypeStructure, Ext: &eDeserializer_OpenXJsonSerDe})
 var sDeserializer_HiveJsonSerDe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HiveJsonSerDe", ID: &iHiveJsonSerDe, Members: &mHiveJsonSerDe, Type: smithy.ShapeTypeStructure, Ext: &eDeserializer_HiveJsonSerDe})
+var sDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationDescription, Members: &mDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eDestinationDescription})
 var sDestinationDescription_DestinationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationId", ID: &i_DestinationId, Type: smithy.ShapeTypeString, Ext: &eDestinationDescription_DestinationId})
 var sDestinationDescription_S3DestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3DestinationDescription", ID: &iS3DestinationDescription, Members: &mS3DestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eDestinationDescription_S3DestinationDescription})
 var sDestinationDescription_ExtendedS3DestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendedS3DestinationDescription", ID: &iExtendedS3DestinationDescription, Members: &mExtendedS3DestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eDestinationDescription_ExtendedS3DestinationDescription})
@@ -2252,20 +2072,33 @@ var sDestinationDescription_HttpEndpointDestinationDescription = smithy.NewStati
 var sDestinationDescription_SnowflakeDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowflakeDestinationDescription", ID: &iSnowflakeDestinationDescription, Members: &mSnowflakeDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eDestinationDescription_SnowflakeDestinationDescription})
 var sDestinationDescription_AmazonOpenSearchServerlessDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmazonOpenSearchServerlessDestinationDescription", ID: &iAmazonOpenSearchServerlessDestinationDescription, Members: &mAmazonOpenSearchServerlessDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eDestinationDescription_AmazonOpenSearchServerlessDestinationDescription})
 var sDestinationDescription_IcebergDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IcebergDestinationDescription", ID: &iIcebergDestinationDescription, Members: &mIcebergDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eDestinationDescription_IcebergDestinationDescription})
+var s_DestinationDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationDescriptionList, Members: &m_DestinationDescriptionList, Type: smithy.ShapeTypeList, Ext: &e_DestinationDescriptionList})
 var s_DestinationDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDestinationDescription, Members: &mDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &e_DestinationDescriptionList_member})
+var s_DestinationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationId, Type: smithy.ShapeTypeString, Ext: &e_DestinationId})
+var sDestinationTableConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationTableConfiguration, Members: &mDestinationTableConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDestinationTableConfiguration})
 var sDestinationTableConfiguration_DestinationTableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationTableName", ID: &i_StringWithLettersDigitsUnderscoresDots, Type: smithy.ShapeTypeString, Ext: &eDestinationTableConfiguration_DestinationTableName})
 var sDestinationTableConfiguration_DestinationDatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationDatabaseName", ID: &i_StringWithLettersDigitsUnderscoresDots, Type: smithy.ShapeTypeString, Ext: &eDestinationTableConfiguration_DestinationDatabaseName})
 var sDestinationTableConfiguration_UniqueKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueKeys", ID: &i_ListOfNonEmptyStringsWithoutWhitespace, Members: &m_ListOfNonEmptyStringsWithoutWhitespace, Type: smithy.ShapeTypeList, Ext: &eDestinationTableConfiguration_UniqueKeys})
 var sDestinationTableConfiguration_PartitionSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionSpec", ID: &iPartitionSpec, Members: &mPartitionSpec, Type: smithy.ShapeTypeStructure, Ext: &eDestinationTableConfiguration_PartitionSpec})
 var sDestinationTableConfiguration_S3ErrorOutputPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3ErrorOutputPrefix", ID: &i_ErrorOutputPrefix, Type: smithy.ShapeTypeString, Ext: &eDestinationTableConfiguration_S3ErrorOutputPrefix})
+var s_DestinationTableConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationTableConfigurationList, Members: &m_DestinationTableConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_DestinationTableConfigurationList})
 var s_DestinationTableConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDestinationTableConfiguration, Members: &mDestinationTableConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_DestinationTableConfigurationList_member})
+var sDirectPutSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectPutSourceConfiguration, Members: &mDirectPutSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDirectPutSourceConfiguration})
 var sDirectPutSourceConfiguration_ThroughputHintInMBs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputHintInMBs", ID: &i_ThroughputHintInMBs, Type: smithy.ShapeTypeInteger, Ext: &eDirectPutSourceConfiguration_ThroughputHintInMBs})
+var sDirectPutSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectPutSourceDescription, Members: &mDirectPutSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eDirectPutSourceDescription})
 var sDirectPutSourceDescription_ThroughputHintInMBs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputHintInMBs", ID: &i_ThroughputHintInMBs, Type: smithy.ShapeTypeInteger, Ext: &eDirectPutSourceDescription_ThroughputHintInMBs})
+var sDocumentIdOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentIdOptions, Members: &mDocumentIdOptions, Type: smithy.ShapeTypeStructure, Ext: &eDocumentIdOptions})
 var sDocumentIdOptions_DefaultDocumentIdFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultDocumentIdFormat", ID: &iDefaultDocumentIdFormat, Members: &mDefaultDocumentIdFormat, Type: smithy.ShapeTypeEnum, Ext: &eDocumentIdOptions_DefaultDocumentIdFormat})
+var sDynamicPartitioningConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDynamicPartitioningConfiguration, Members: &mDynamicPartitioningConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDynamicPartitioningConfiguration})
 var sDynamicPartitioningConfiguration_RetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryOptions", ID: &iRetryOptions, Members: &mRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eDynamicPartitioningConfiguration_RetryOptions})
 var sDynamicPartitioningConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eDynamicPartitioningConfiguration_Enabled})
+var sElasticsearchBufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchBufferingHints, Members: &mElasticsearchBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchBufferingHints})
 var sElasticsearchBufferingHints_IntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalInSeconds", ID: &i_ElasticsearchBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eElasticsearchBufferingHints_IntervalInSeconds})
 var sElasticsearchBufferingHints_SizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInMBs", ID: &i_ElasticsearchBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &eElasticsearchBufferingHints_SizeInMBs})
+var s_ElasticsearchBufferingIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_ElasticsearchBufferingIntervalInSeconds})
+var s_ElasticsearchBufferingSizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_ElasticsearchBufferingSizeInMBs})
+var s_ElasticsearchClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchClusterEndpoint, Type: smithy.ShapeTypeString, Ext: &e_ElasticsearchClusterEndpoint})
+var sElasticsearchDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchDestinationConfiguration, Members: &mElasticsearchDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationConfiguration})
 var sElasticsearchDestinationConfiguration_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDestinationConfiguration_RoleARN})
 var sElasticsearchDestinationConfiguration_DomainARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainARN", ID: &i_ElasticsearchDomainARN, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDestinationConfiguration_DomainARN})
 var sElasticsearchDestinationConfiguration_ClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterEndpoint", ID: &i_ElasticsearchClusterEndpoint, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDestinationConfiguration_ClusterEndpoint})
@@ -2280,6 +2113,7 @@ var sElasticsearchDestinationConfiguration_ProcessingConfiguration = smithy.NewS
 var sElasticsearchDestinationConfiguration_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationConfiguration_CloudWatchLoggingOptions})
 var sElasticsearchDestinationConfiguration_VpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfiguration", ID: &iVpcConfiguration, Members: &mVpcConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationConfiguration_VpcConfiguration})
 var sElasticsearchDestinationConfiguration_DocumentIdOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentIdOptions", ID: &iDocumentIdOptions, Members: &mDocumentIdOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationConfiguration_DocumentIdOptions})
+var sElasticsearchDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchDestinationDescription, Members: &mElasticsearchDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationDescription})
 var sElasticsearchDestinationDescription_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDestinationDescription_RoleARN})
 var sElasticsearchDestinationDescription_DomainARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainARN", ID: &i_ElasticsearchDomainARN, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDestinationDescription_DomainARN})
 var sElasticsearchDestinationDescription_ClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterEndpoint", ID: &i_ElasticsearchClusterEndpoint, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDestinationDescription_ClusterEndpoint})
@@ -2294,6 +2128,7 @@ var sElasticsearchDestinationDescription_ProcessingConfiguration = smithy.NewSta
 var sElasticsearchDestinationDescription_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationDescription_CloudWatchLoggingOptions})
 var sElasticsearchDestinationDescription_VpcConfigurationDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfigurationDescription", ID: &iVpcConfigurationDescription, Members: &mVpcConfigurationDescription, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationDescription_VpcConfigurationDescription})
 var sElasticsearchDestinationDescription_DocumentIdOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentIdOptions", ID: &iDocumentIdOptions, Members: &mDocumentIdOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationDescription_DocumentIdOptions})
+var sElasticsearchDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchDestinationUpdate, Members: &mElasticsearchDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationUpdate})
 var sElasticsearchDestinationUpdate_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDestinationUpdate_RoleARN})
 var sElasticsearchDestinationUpdate_DomainARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainARN", ID: &i_ElasticsearchDomainARN, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDestinationUpdate_DomainARN})
 var sElasticsearchDestinationUpdate_ClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterEndpoint", ID: &i_ElasticsearchClusterEndpoint, Type: smithy.ShapeTypeString, Ext: &eElasticsearchDestinationUpdate_ClusterEndpoint})
@@ -2306,16 +2141,28 @@ var sElasticsearchDestinationUpdate_S3Update = smithy.NewStaticSchema(smithy.Sta
 var sElasticsearchDestinationUpdate_ProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingConfiguration", ID: &iProcessingConfiguration, Members: &mProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationUpdate_ProcessingConfiguration})
 var sElasticsearchDestinationUpdate_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationUpdate_CloudWatchLoggingOptions})
 var sElasticsearchDestinationUpdate_DocumentIdOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentIdOptions", ID: &iDocumentIdOptions, Members: &mDocumentIdOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchDestinationUpdate_DocumentIdOptions})
+var s_ElasticsearchDomainARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchDomainARN, Type: smithy.ShapeTypeString, Ext: &e_ElasticsearchDomainARN})
+var s_ElasticsearchIndexName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchIndexName, Type: smithy.ShapeTypeString, Ext: &e_ElasticsearchIndexName})
+var sElasticsearchIndexRotationPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchIndexRotationPeriod, Members: &mElasticsearchIndexRotationPeriod, Type: smithy.ShapeTypeEnum, Ext: &eElasticsearchIndexRotationPeriod})
 var sElasticsearchIndexRotationPeriod_NoRotation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoRotation", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchIndexRotationPeriod_NoRotation})
 var sElasticsearchIndexRotationPeriod_OneHour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OneHour", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchIndexRotationPeriod_OneHour})
 var sElasticsearchIndexRotationPeriod_OneDay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OneDay", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchIndexRotationPeriod_OneDay})
 var sElasticsearchIndexRotationPeriod_OneWeek = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OneWeek", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchIndexRotationPeriod_OneWeek})
 var sElasticsearchIndexRotationPeriod_OneMonth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OneMonth", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchIndexRotationPeriod_OneMonth})
+var s_ElasticsearchRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_ElasticsearchRetryDurationInSeconds})
+var sElasticsearchRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchRetryOptions, Members: &mElasticsearchRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchRetryOptions})
 var sElasticsearchRetryOptions_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &i_ElasticsearchRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eElasticsearchRetryOptions_DurationInSeconds})
+var sElasticsearchS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElasticsearchS3BackupMode, Members: &mElasticsearchS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eElasticsearchS3BackupMode})
 var sElasticsearchS3BackupMode_FailedDocumentsOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedDocumentsOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchS3BackupMode_FailedDocumentsOnly})
 var sElasticsearchS3BackupMode_AllDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllDocuments", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eElasticsearchS3BackupMode_AllDocuments})
+var s_ElasticsearchTypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ElasticsearchTypeName, Type: smithy.ShapeTypeString, Ext: &e_ElasticsearchTypeName})
+var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfiguration})
 var sEncryptionConfiguration_NoEncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoEncryptionConfig", ID: &iNoEncryptionConfig, Members: &mNoEncryptionConfig, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionConfiguration_NoEncryptionConfig})
 var sEncryptionConfiguration_KMSEncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSEncryptionConfig", ID: &iKMSEncryptionConfig, Members: &mKMSEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfiguration_KMSEncryptionConfig})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ErrorCode})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_ErrorOutputPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorOutputPrefix, Type: smithy.ShapeTypeString, Ext: &e_ErrorOutputPrefix})
+var sExtendedS3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtendedS3DestinationConfiguration, Members: &mExtendedS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExtendedS3DestinationConfiguration})
 var sExtendedS3DestinationConfiguration_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationConfiguration_RoleARN})
 var sExtendedS3DestinationConfiguration_BucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketARN", ID: &i_BucketARN, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationConfiguration_BucketARN})
 var sExtendedS3DestinationConfiguration_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_Prefix, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationConfiguration_Prefix})
@@ -2331,6 +2178,7 @@ var sExtendedS3DestinationConfiguration_DataFormatConversionConfiguration = smit
 var sExtendedS3DestinationConfiguration_DynamicPartitioningConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamicPartitioningConfiguration", ID: &iDynamicPartitioningConfiguration, Members: &mDynamicPartitioningConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExtendedS3DestinationConfiguration_DynamicPartitioningConfiguration})
 var sExtendedS3DestinationConfiguration_FileExtension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileExtension", ID: &i_FileExtension, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationConfiguration_FileExtension})
 var sExtendedS3DestinationConfiguration_CustomTimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomTimeZone", ID: &i_CustomTimeZone, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationConfiguration_CustomTimeZone})
+var sExtendedS3DestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtendedS3DestinationDescription, Members: &mExtendedS3DestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eExtendedS3DestinationDescription})
 var sExtendedS3DestinationDescription_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationDescription_RoleARN})
 var sExtendedS3DestinationDescription_BucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketARN", ID: &i_BucketARN, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationDescription_BucketARN})
 var sExtendedS3DestinationDescription_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_Prefix, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationDescription_Prefix})
@@ -2346,6 +2194,7 @@ var sExtendedS3DestinationDescription_DataFormatConversionConfiguration = smithy
 var sExtendedS3DestinationDescription_DynamicPartitioningConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamicPartitioningConfiguration", ID: &iDynamicPartitioningConfiguration, Members: &mDynamicPartitioningConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExtendedS3DestinationDescription_DynamicPartitioningConfiguration})
 var sExtendedS3DestinationDescription_FileExtension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileExtension", ID: &i_FileExtension, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationDescription_FileExtension})
 var sExtendedS3DestinationDescription_CustomTimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomTimeZone", ID: &i_CustomTimeZone, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationDescription_CustomTimeZone})
+var sExtendedS3DestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtendedS3DestinationUpdate, Members: &mExtendedS3DestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eExtendedS3DestinationUpdate})
 var sExtendedS3DestinationUpdate_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationUpdate_RoleARN})
 var sExtendedS3DestinationUpdate_BucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketARN", ID: &i_BucketARN, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationUpdate_BucketARN})
 var sExtendedS3DestinationUpdate_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_Prefix, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationUpdate_Prefix})
@@ -2361,21 +2210,40 @@ var sExtendedS3DestinationUpdate_DataFormatConversionConfiguration = smithy.NewS
 var sExtendedS3DestinationUpdate_DynamicPartitioningConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamicPartitioningConfiguration", ID: &iDynamicPartitioningConfiguration, Members: &mDynamicPartitioningConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExtendedS3DestinationUpdate_DynamicPartitioningConfiguration})
 var sExtendedS3DestinationUpdate_FileExtension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileExtension", ID: &i_FileExtension, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationUpdate_FileExtension})
 var sExtendedS3DestinationUpdate_CustomTimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomTimeZone", ID: &i_CustomTimeZone, Type: smithy.ShapeTypeString, Ext: &eExtendedS3DestinationUpdate_CustomTimeZone})
+var sFailureDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureDescription, Members: &mFailureDescription, Type: smithy.ShapeTypeStructure, Ext: &eFailureDescription})
 var sFailureDescription_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDeliveryStreamFailureType, Members: &mDeliveryStreamFailureType, Type: smithy.ShapeTypeEnum, Ext: &eFailureDescription_Type})
 var sFailureDescription_Details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Details", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eFailureDescription_Details})
+var s_FileExtension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileExtension, Type: smithy.ShapeTypeString, Ext: &e_FileExtension})
+var s_GlueDataCatalogARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlueDataCatalogARN, Type: smithy.ShapeTypeString, Ext: &e_GlueDataCatalogARN})
+var s_HECAcknowledgmentTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HECAcknowledgmentTimeoutInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_HECAcknowledgmentTimeoutInSeconds})
+var s_HECEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HECEndpoint, Type: smithy.ShapeTypeString, Ext: &e_HECEndpoint})
+var sHECEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHECEndpointType, Members: &mHECEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eHECEndpointType})
 var sHECEndpointType_Raw = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Raw", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHECEndpointType_Raw})
 var sHECEndpointType_Event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Event", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHECEndpointType_Event})
+var s_HECToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HECToken, Type: smithy.ShapeTypeString, Ext: &e_HECToken})
+var sHiveJsonSerDe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHiveJsonSerDe, Members: &mHiveJsonSerDe, Type: smithy.ShapeTypeStructure, Ext: &eHiveJsonSerDe})
 var sHiveJsonSerDe_TimestampFormats = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestampFormats", ID: &i_ListOfNonEmptyStrings, Members: &m_ListOfNonEmptyStrings, Type: smithy.ShapeTypeList, Ext: &eHiveJsonSerDe_TimestampFormats})
+var s_HttpEndpointAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointAccessKey, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_HttpEndpointAccessKey})
+var s_HttpEndpointAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointAttributeName, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_HttpEndpointAttributeName})
+var s_HttpEndpointAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointAttributeValue, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_HttpEndpointAttributeValue})
+var sHttpEndpointBufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointBufferingHints, Members: &mHttpEndpointBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointBufferingHints})
 var sHttpEndpointBufferingHints_SizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInMBs", ID: &i_HttpEndpointBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &eHttpEndpointBufferingHints_SizeInMBs})
 var sHttpEndpointBufferingHints_IntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalInSeconds", ID: &i_HttpEndpointBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eHttpEndpointBufferingHints_IntervalInSeconds})
+var s_HttpEndpointBufferingIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_HttpEndpointBufferingIntervalInSeconds})
+var s_HttpEndpointBufferingSizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_HttpEndpointBufferingSizeInMBs})
+var sHttpEndpointCommonAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointCommonAttribute, Members: &mHttpEndpointCommonAttribute, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointCommonAttribute})
 var sHttpEndpointCommonAttribute_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_HttpEndpointAttributeName, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eHttpEndpointCommonAttribute_AttributeName})
 var sHttpEndpointCommonAttribute_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValue", ID: &i_HttpEndpointAttributeValue, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eHttpEndpointCommonAttribute_AttributeValue})
+var s_HttpEndpointCommonAttributesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointCommonAttributesList, Members: &m_HttpEndpointCommonAttributesList, Type: smithy.ShapeTypeList, Ext: &e_HttpEndpointCommonAttributesList})
 var s_HttpEndpointCommonAttributesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHttpEndpointCommonAttribute, Members: &mHttpEndpointCommonAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_HttpEndpointCommonAttributesList_member})
+var sHttpEndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointConfiguration, Members: &mHttpEndpointConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointConfiguration})
 var sHttpEndpointConfiguration_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i_HttpEndpointUrl, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eHttpEndpointConfiguration_Url})
 var sHttpEndpointConfiguration_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HttpEndpointName, Type: smithy.ShapeTypeString, Ext: &eHttpEndpointConfiguration_Name})
 var sHttpEndpointConfiguration_AccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessKey", ID: &i_HttpEndpointAccessKey, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eHttpEndpointConfiguration_AccessKey})
+var sHttpEndpointDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointDescription, Members: &mHttpEndpointDescription, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDescription})
 var sHttpEndpointDescription_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i_HttpEndpointUrl, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eHttpEndpointDescription_Url})
 var sHttpEndpointDescription_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HttpEndpointName, Type: smithy.ShapeTypeString, Ext: &eHttpEndpointDescription_Name})
+var sHttpEndpointDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointDestinationConfiguration, Members: &mHttpEndpointDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationConfiguration})
 var sHttpEndpointDestinationConfiguration_EndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointConfiguration", ID: &iHttpEndpointConfiguration, Members: &mHttpEndpointConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationConfiguration_EndpointConfiguration})
 var sHttpEndpointDestinationConfiguration_BufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferingHints", ID: &iHttpEndpointBufferingHints, Members: &mHttpEndpointBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationConfiguration_BufferingHints})
 var sHttpEndpointDestinationConfiguration_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationConfiguration_CloudWatchLoggingOptions})
@@ -2386,6 +2254,7 @@ var sHttpEndpointDestinationConfiguration_RetryOptions = smithy.NewStaticSchema(
 var sHttpEndpointDestinationConfiguration_S3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BackupMode", ID: &iHttpEndpointS3BackupMode, Members: &mHttpEndpointS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eHttpEndpointDestinationConfiguration_S3BackupMode})
 var sHttpEndpointDestinationConfiguration_S3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Configuration", ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationConfiguration_S3Configuration})
 var sHttpEndpointDestinationConfiguration_SecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerConfiguration", ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationConfiguration_SecretsManagerConfiguration})
+var sHttpEndpointDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointDestinationDescription, Members: &mHttpEndpointDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationDescription})
 var sHttpEndpointDestinationDescription_EndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointConfiguration", ID: &iHttpEndpointDescription, Members: &mHttpEndpointDescription, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationDescription_EndpointConfiguration})
 var sHttpEndpointDestinationDescription_BufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferingHints", ID: &iHttpEndpointBufferingHints, Members: &mHttpEndpointBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationDescription_BufferingHints})
 var sHttpEndpointDestinationDescription_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationDescription_CloudWatchLoggingOptions})
@@ -2396,6 +2265,7 @@ var sHttpEndpointDestinationDescription_RetryOptions = smithy.NewStaticSchema(sm
 var sHttpEndpointDestinationDescription_S3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BackupMode", ID: &iHttpEndpointS3BackupMode, Members: &mHttpEndpointS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eHttpEndpointDestinationDescription_S3BackupMode})
 var sHttpEndpointDestinationDescription_S3DestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3DestinationDescription", ID: &iS3DestinationDescription, Members: &mS3DestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationDescription_S3DestinationDescription})
 var sHttpEndpointDestinationDescription_SecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerConfiguration", ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationDescription_SecretsManagerConfiguration})
+var sHttpEndpointDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointDestinationUpdate, Members: &mHttpEndpointDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationUpdate})
 var sHttpEndpointDestinationUpdate_EndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointConfiguration", ID: &iHttpEndpointConfiguration, Members: &mHttpEndpointConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationUpdate_EndpointConfiguration})
 var sHttpEndpointDestinationUpdate_BufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferingHints", ID: &iHttpEndpointBufferingHints, Members: &mHttpEndpointBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationUpdate_BufferingHints})
 var sHttpEndpointDestinationUpdate_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationUpdate_CloudWatchLoggingOptions})
@@ -2406,11 +2276,18 @@ var sHttpEndpointDestinationUpdate_RetryOptions = smithy.NewStaticSchema(smithy.
 var sHttpEndpointDestinationUpdate_S3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BackupMode", ID: &iHttpEndpointS3BackupMode, Members: &mHttpEndpointS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eHttpEndpointDestinationUpdate_S3BackupMode})
 var sHttpEndpointDestinationUpdate_S3Update = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Update", ID: &iS3DestinationUpdate, Members: &mS3DestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationUpdate_S3Update})
 var sHttpEndpointDestinationUpdate_SecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerConfiguration", ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointDestinationUpdate_SecretsManagerConfiguration})
+var s_HttpEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointName, Type: smithy.ShapeTypeString, Ext: &e_HttpEndpointName})
+var sHttpEndpointRequestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointRequestConfiguration, Members: &mHttpEndpointRequestConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointRequestConfiguration})
 var sHttpEndpointRequestConfiguration_ContentEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentEncoding", ID: &iContentEncoding, Members: &mContentEncoding, Type: smithy.ShapeTypeEnum, Ext: &eHttpEndpointRequestConfiguration_ContentEncoding})
 var sHttpEndpointRequestConfiguration_CommonAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommonAttributes", ID: &i_HttpEndpointCommonAttributesList, Members: &m_HttpEndpointCommonAttributesList, Type: smithy.ShapeTypeList, Ext: &eHttpEndpointRequestConfiguration_CommonAttributes})
+var s_HttpEndpointRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_HttpEndpointRetryDurationInSeconds})
+var sHttpEndpointRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointRetryOptions, Members: &mHttpEndpointRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointRetryOptions})
 var sHttpEndpointRetryOptions_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &i_HttpEndpointRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eHttpEndpointRetryOptions_DurationInSeconds})
+var sHttpEndpointS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointS3BackupMode, Members: &mHttpEndpointS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eHttpEndpointS3BackupMode})
 var sHttpEndpointS3BackupMode_FailedDataOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedDataOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointS3BackupMode_FailedDataOnly})
 var sHttpEndpointS3BackupMode_AllData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllData", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHttpEndpointS3BackupMode_AllData})
+var s_HttpEndpointUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpEndpointUrl, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_HttpEndpointUrl})
+var sIcebergDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergDestinationConfiguration, Members: &mIcebergDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationConfiguration})
 var sIcebergDestinationConfiguration_DestinationTableConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationTableConfigurationList", ID: &i_DestinationTableConfigurationList, Members: &m_DestinationTableConfigurationList, Type: smithy.ShapeTypeList, Ext: &eIcebergDestinationConfiguration_DestinationTableConfigurationList})
 var sIcebergDestinationConfiguration_SchemaEvolutionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaEvolutionConfiguration", ID: &iSchemaEvolutionConfiguration, Members: &mSchemaEvolutionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationConfiguration_SchemaEvolutionConfiguration})
 var sIcebergDestinationConfiguration_TableCreationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableCreationConfiguration", ID: &iTableCreationConfiguration, Members: &mTableCreationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationConfiguration_TableCreationConfiguration})
@@ -2423,6 +2300,7 @@ var sIcebergDestinationConfiguration_RoleARN = smithy.NewStaticSchema(smithy.Sta
 var sIcebergDestinationConfiguration_AppendOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppendOnly", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eIcebergDestinationConfiguration_AppendOnly})
 var sIcebergDestinationConfiguration_CatalogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogConfiguration", ID: &iCatalogConfiguration, Members: &mCatalogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationConfiguration_CatalogConfiguration})
 var sIcebergDestinationConfiguration_S3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Configuration", ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationConfiguration_S3Configuration})
+var sIcebergDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergDestinationDescription, Members: &mIcebergDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationDescription})
 var sIcebergDestinationDescription_DestinationTableConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationTableConfigurationList", ID: &i_DestinationTableConfigurationList, Members: &m_DestinationTableConfigurationList, Type: smithy.ShapeTypeList, Ext: &eIcebergDestinationDescription_DestinationTableConfigurationList})
 var sIcebergDestinationDescription_SchemaEvolutionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaEvolutionConfiguration", ID: &iSchemaEvolutionConfiguration, Members: &mSchemaEvolutionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationDescription_SchemaEvolutionConfiguration})
 var sIcebergDestinationDescription_TableCreationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableCreationConfiguration", ID: &iTableCreationConfiguration, Members: &mTableCreationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationDescription_TableCreationConfiguration})
@@ -2435,6 +2313,7 @@ var sIcebergDestinationDescription_RoleARN = smithy.NewStaticSchema(smithy.Stati
 var sIcebergDestinationDescription_AppendOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppendOnly", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eIcebergDestinationDescription_AppendOnly})
 var sIcebergDestinationDescription_CatalogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogConfiguration", ID: &iCatalogConfiguration, Members: &mCatalogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationDescription_CatalogConfiguration})
 var sIcebergDestinationDescription_S3DestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3DestinationDescription", ID: &iS3DestinationDescription, Members: &mS3DestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationDescription_S3DestinationDescription})
+var sIcebergDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergDestinationUpdate, Members: &mIcebergDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationUpdate})
 var sIcebergDestinationUpdate_DestinationTableConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationTableConfigurationList", ID: &i_DestinationTableConfigurationList, Members: &m_DestinationTableConfigurationList, Type: smithy.ShapeTypeList, Ext: &eIcebergDestinationUpdate_DestinationTableConfigurationList})
 var sIcebergDestinationUpdate_SchemaEvolutionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaEvolutionConfiguration", ID: &iSchemaEvolutionConfiguration, Members: &mSchemaEvolutionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationUpdate_SchemaEvolutionConfiguration})
 var sIcebergDestinationUpdate_TableCreationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableCreationConfiguration", ID: &iTableCreationConfiguration, Members: &mTableCreationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationUpdate_TableCreationConfiguration})
@@ -2447,44 +2326,75 @@ var sIcebergDestinationUpdate_RoleARN = smithy.NewStaticSchema(smithy.StaticSche
 var sIcebergDestinationUpdate_AppendOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppendOnly", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eIcebergDestinationUpdate_AppendOnly})
 var sIcebergDestinationUpdate_CatalogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogConfiguration", ID: &iCatalogConfiguration, Members: &mCatalogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationUpdate_CatalogConfiguration})
 var sIcebergDestinationUpdate_S3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Configuration", ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIcebergDestinationUpdate_S3Configuration})
+var sIcebergS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIcebergS3BackupMode, Members: &mIcebergS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eIcebergS3BackupMode})
 var sIcebergS3BackupMode_FailedDataOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedDataOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIcebergS3BackupMode_FailedDataOnly})
 var sIcebergS3BackupMode_AllData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllData", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIcebergS3BackupMode_AllData})
+var sInputFormatConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputFormatConfiguration, Members: &mInputFormatConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInputFormatConfiguration})
 var sInputFormatConfiguration_Deserializer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deserializer", ID: &iDeserializer, Members: &mDeserializer, Type: smithy.ShapeTypeStructure, Ext: &eInputFormatConfiguration_Deserializer})
+var s_IntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_IntervalInSeconds})
+var sInvalidArgumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArgumentException, Members: &mInvalidArgumentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidArgumentException})
 var sInvalidArgumentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidArgumentException_message})
+var sInvalidKMSResourceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidKMSResourceException, Members: &mInvalidKMSResourceException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidKMSResourceException})
 var sInvalidKMSResourceException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eInvalidKMSResourceException_code})
 var sInvalidKMSResourceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidKMSResourceException_message})
+var sInvalidSourceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSourceException, Members: &mInvalidSourceException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSourceException})
 var sInvalidSourceException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eInvalidSourceException_code})
 var sInvalidSourceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidSourceException_message})
+var sKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyType, Members: &mKeyType, Type: smithy.ShapeTypeEnum, Ext: &eKeyType})
 var sKeyType_AWS_OWNED_CMK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_OWNED_CMK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyType_AWS_OWNED_CMK})
 var sKeyType_CUSTOMER_MANAGED_CMK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_MANAGED_CMK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyType_CUSTOMER_MANAGED_CMK})
+var s_KinesisStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KinesisStreamARN, Type: smithy.ShapeTypeString, Ext: &e_KinesisStreamARN})
+var sKinesisStreamSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisStreamSourceConfiguration, Members: &mKinesisStreamSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eKinesisStreamSourceConfiguration})
 var sKinesisStreamSourceConfiguration_KinesisStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisStreamARN", ID: &i_KinesisStreamARN, Type: smithy.ShapeTypeString, Ext: &eKinesisStreamSourceConfiguration_KinesisStreamARN})
 var sKinesisStreamSourceConfiguration_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eKinesisStreamSourceConfiguration_RoleARN})
+var sKinesisStreamSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisStreamSourceDescription, Members: &mKinesisStreamSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eKinesisStreamSourceDescription})
 var sKinesisStreamSourceDescription_KinesisStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisStreamARN", ID: &i_KinesisStreamARN, Type: smithy.ShapeTypeString, Ext: &eKinesisStreamSourceDescription_KinesisStreamARN})
 var sKinesisStreamSourceDescription_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eKinesisStreamSourceDescription_RoleARN})
 var sKinesisStreamSourceDescription_DeliveryStartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStartTimestamp", ID: &i_DeliveryStartTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eKinesisStreamSourceDescription_DeliveryStartTimestamp})
+var sKMSEncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSEncryptionConfig, Members: &mKMSEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eKMSEncryptionConfig})
 var sKMSEncryptionConfig_AWSKMSKeyARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSKMSKeyARN", ID: &i_AWSKMSKeyARN, Type: smithy.ShapeTypeString, Ext: &eKMSEncryptionConfig_AWSKMSKeyARN})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
 var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var s_ListDeliveryStreamsInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListDeliveryStreamsInputLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListDeliveryStreamsInputLimit})
+var s_ListOfNonEmptyStrings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfNonEmptyStrings, Members: &m_ListOfNonEmptyStrings, Type: smithy.ShapeTypeList, Ext: &e_ListOfNonEmptyStrings})
 var s_ListOfNonEmptyStrings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_ListOfNonEmptyStrings_member})
+var s_ListOfNonEmptyStringsWithoutWhitespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfNonEmptyStringsWithoutWhitespace, Members: &m_ListOfNonEmptyStringsWithoutWhitespace, Type: smithy.ShapeTypeList, Ext: &e_ListOfNonEmptyStringsWithoutWhitespace})
 var s_ListOfNonEmptyStringsWithoutWhitespace_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &e_ListOfNonEmptyStringsWithoutWhitespace_member})
+var s_ListTagsForDeliveryStreamInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTagsForDeliveryStreamInputLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ListTagsForDeliveryStreamInputLimit})
+var s_ListTagsForDeliveryStreamOutputTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTagsForDeliveryStreamOutputTagList, Members: &m_ListTagsForDeliveryStreamOutputTagList, Type: smithy.ShapeTypeList, Ext: &e_ListTagsForDeliveryStreamOutputTagList})
 var s_ListTagsForDeliveryStreamOutputTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_ListTagsForDeliveryStreamOutputTagList_member})
+var s_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupName, Type: smithy.ShapeTypeString, Ext: &e_LogGroupName})
+var s_LogStreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogStreamName, Type: smithy.ShapeTypeString, Ext: &e_LogStreamName})
+var s_MSKClusterARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MSKClusterARN, Type: smithy.ShapeTypeString, Ext: &e_MSKClusterARN})
+var sMSKSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMSKSourceConfiguration, Members: &mMSKSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMSKSourceConfiguration})
 var sMSKSourceConfiguration_MSKClusterARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MSKClusterARN", ID: &i_MSKClusterARN, Type: smithy.ShapeTypeString, Ext: &eMSKSourceConfiguration_MSKClusterARN})
 var sMSKSourceConfiguration_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i_TopicName, Type: smithy.ShapeTypeString, Ext: &eMSKSourceConfiguration_TopicName})
 var sMSKSourceConfiguration_AuthenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationConfiguration", ID: &iAuthenticationConfiguration, Members: &mAuthenticationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMSKSourceConfiguration_AuthenticationConfiguration})
 var sMSKSourceConfiguration_ReadFromTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadFromTimestamp", ID: &i_ReadFromTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMSKSourceConfiguration_ReadFromTimestamp})
+var sMSKSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMSKSourceDescription, Members: &mMSKSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eMSKSourceDescription})
 var sMSKSourceDescription_MSKClusterARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MSKClusterARN", ID: &i_MSKClusterARN, Type: smithy.ShapeTypeString, Ext: &eMSKSourceDescription_MSKClusterARN})
 var sMSKSourceDescription_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i_TopicName, Type: smithy.ShapeTypeString, Ext: &eMSKSourceDescription_TopicName})
 var sMSKSourceDescription_AuthenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationConfiguration", ID: &iAuthenticationConfiguration, Members: &mAuthenticationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMSKSourceDescription_AuthenticationConfiguration})
 var sMSKSourceDescription_DeliveryStartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStartTimestamp", ID: &i_DeliveryStartTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMSKSourceDescription_DeliveryStartTimestamp})
 var sMSKSourceDescription_ReadFromTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadFromTimestamp", ID: &i_ReadFromTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMSKSourceDescription_ReadFromTimestamp})
+var sNoEncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoEncryptionConfig, Members: &mNoEncryptionConfig, Type: smithy.ShapeTypeEnum, Ext: &eNoEncryptionConfig})
 var sNoEncryptionConfig_NoEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoEncryption", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNoEncryptionConfig_NoEncryption})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString})
+var s_NonEmptyStringWithoutWhitespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyStringWithoutWhitespace})
+var s_NonNegativeIntegerObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonNegativeIntegerObject, Type: smithy.ShapeTypeInteger, Ext: &e_NonNegativeIntegerObject})
+var sOpenXJsonSerDe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenXJsonSerDe, Members: &mOpenXJsonSerDe, Type: smithy.ShapeTypeStructure, Ext: &eOpenXJsonSerDe})
 var sOpenXJsonSerDe_ConvertDotsInJsonKeysToUnderscores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConvertDotsInJsonKeysToUnderscores", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eOpenXJsonSerDe_ConvertDotsInJsonKeysToUnderscores})
 var sOpenXJsonSerDe_CaseInsensitive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaseInsensitive", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eOpenXJsonSerDe_CaseInsensitive})
 var sOpenXJsonSerDe_ColumnToJsonKeyMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ColumnToJsonKeyMappings", ID: &i_ColumnToJsonKeyMappings, Members: &m_ColumnToJsonKeyMappings, Type: smithy.ShapeTypeMap, Ext: &eOpenXJsonSerDe_ColumnToJsonKeyMappings})
+var sOrcCompression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrcCompression, Members: &mOrcCompression, Type: smithy.ShapeTypeEnum, Ext: &eOrcCompression})
 var sOrcCompression_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOrcCompression_NONE})
 var sOrcCompression_ZLIB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZLIB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOrcCompression_ZLIB})
 var sOrcCompression_SNAPPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPPY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOrcCompression_SNAPPY})
+var sOrcFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrcFormatVersion, Members: &mOrcFormatVersion, Type: smithy.ShapeTypeEnum, Ext: &eOrcFormatVersion})
 var sOrcFormatVersion_V0_11 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V0_11", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOrcFormatVersion_V0_11})
 var sOrcFormatVersion_V0_12 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V0_12", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOrcFormatVersion_V0_12})
+var s_OrcRowIndexStride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrcRowIndexStride, Type: smithy.ShapeTypeInteger, Ext: &e_OrcRowIndexStride})
+var sOrcSerDe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrcSerDe, Members: &mOrcSerDe, Type: smithy.ShapeTypeStructure, Ext: &eOrcSerDe})
 var sOrcSerDe_StripeSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StripeSizeBytes", ID: &i_OrcStripeSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &eOrcSerDe_StripeSizeBytes})
 var sOrcSerDe_BlockSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockSizeBytes", ID: &i_BlockSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &eOrcSerDe_BlockSizeBytes})
 var sOrcSerDe_RowIndexStride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RowIndexStride", ID: &i_OrcRowIndexStride, Type: smithy.ShapeTypeInteger, Ext: &eOrcSerDe_RowIndexStride})
@@ -2495,29 +2405,46 @@ var sOrcSerDe_BloomFilterColumns = smithy.NewStaticSchema(smithy.StaticSchema{Me
 var sOrcSerDe_BloomFilterFalsePositiveProbability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BloomFilterFalsePositiveProbability", ID: &i_Proportion, Type: smithy.ShapeTypeDouble, Ext: &eOrcSerDe_BloomFilterFalsePositiveProbability})
 var sOrcSerDe_DictionaryKeyThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DictionaryKeyThreshold", ID: &i_Proportion, Type: smithy.ShapeTypeDouble, Ext: &eOrcSerDe_DictionaryKeyThreshold})
 var sOrcSerDe_FormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FormatVersion", ID: &iOrcFormatVersion, Members: &mOrcFormatVersion, Type: smithy.ShapeTypeEnum, Ext: &eOrcSerDe_FormatVersion})
+var s_OrcStripeSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrcStripeSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &e_OrcStripeSizeBytes})
+var sOutputFormatConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputFormatConfiguration, Members: &mOutputFormatConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormatConfiguration})
 var sOutputFormatConfiguration_Serializer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Serializer", ID: &iSerializer, Members: &mSerializer, Type: smithy.ShapeTypeStructure, Ext: &eOutputFormatConfiguration_Serializer})
+var sParquetCompression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParquetCompression, Members: &mParquetCompression, Type: smithy.ShapeTypeEnum, Ext: &eParquetCompression})
 var sParquetCompression_UNCOMPRESSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNCOMPRESSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParquetCompression_UNCOMPRESSED})
 var sParquetCompression_GZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParquetCompression_GZIP})
 var sParquetCompression_SNAPPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPPY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParquetCompression_SNAPPY})
+var s_ParquetPageSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParquetPageSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &e_ParquetPageSizeBytes})
+var sParquetSerDe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParquetSerDe, Members: &mParquetSerDe, Type: smithy.ShapeTypeStructure, Ext: &eParquetSerDe})
 var sParquetSerDe_BlockSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockSizeBytes", ID: &i_BlockSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &eParquetSerDe_BlockSizeBytes})
 var sParquetSerDe_PageSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSizeBytes", ID: &i_ParquetPageSizeBytes, Type: smithy.ShapeTypeInteger, Ext: &eParquetSerDe_PageSizeBytes})
 var sParquetSerDe_Compression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Compression", ID: &iParquetCompression, Members: &mParquetCompression, Type: smithy.ShapeTypeEnum, Ext: &eParquetSerDe_Compression})
 var sParquetSerDe_EnableDictionaryCompression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableDictionaryCompression", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eParquetSerDe_EnableDictionaryCompression})
 var sParquetSerDe_MaxPaddingBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxPaddingBytes", ID: &i_NonNegativeIntegerObject, Type: smithy.ShapeTypeInteger, Ext: &eParquetSerDe_MaxPaddingBytes})
 var sParquetSerDe_WriterVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WriterVersion", ID: &iParquetWriterVersion, Members: &mParquetWriterVersion, Type: smithy.ShapeTypeEnum, Ext: &eParquetSerDe_WriterVersion})
+var sParquetWriterVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParquetWriterVersion, Members: &mParquetWriterVersion, Type: smithy.ShapeTypeEnum, Ext: &eParquetWriterVersion})
 var sParquetWriterVersion_V1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParquetWriterVersion_V1})
 var sParquetWriterVersion_V2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParquetWriterVersion_V2})
+var sPartitionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionField, Members: &mPartitionField, Type: smithy.ShapeTypeStructure, Ext: &ePartitionField})
 var sPartitionField_SourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceName", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &ePartitionField_SourceName})
+var s_PartitionFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionFields, Members: &m_PartitionFields, Type: smithy.ShapeTypeList, Ext: &e_PartitionFields})
 var s_PartitionFields_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPartitionField, Members: &mPartitionField, Type: smithy.ShapeTypeStructure, Ext: &e_PartitionFields_member})
+var sPartitionSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionSpec, Members: &mPartitionSpec, Type: smithy.ShapeTypeStructure, Ext: &ePartitionSpec})
 var sPartitionSpec_Identity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identity", ID: &i_PartitionFields, Members: &m_PartitionFields, Type: smithy.ShapeTypeList, Ext: &ePartitionSpec_Identity})
+var s_Password = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Password, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_Password})
+var s_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Prefix, Type: smithy.ShapeTypeString, Ext: &e_Prefix})
+var sProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessingConfiguration, Members: &mProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eProcessingConfiguration})
 var sProcessingConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eProcessingConfiguration_Enabled})
 var sProcessingConfiguration_Processors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processors", ID: &i_ProcessorList, Members: &m_ProcessorList, Type: smithy.ShapeTypeList, Ext: &eProcessingConfiguration_Processors})
+var sProcessor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessor, Members: &mProcessor, Type: smithy.ShapeTypeStructure, Ext: &eProcessor})
 var sProcessor_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iProcessorType, Members: &mProcessorType, Type: smithy.ShapeTypeEnum, Ext: &eProcessor_Type})
 var sProcessor_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ProcessorParameterList, Members: &m_ProcessorParameterList, Type: smithy.ShapeTypeList, Ext: &eProcessor_Parameters})
+var s_ProcessorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcessorList, Members: &m_ProcessorList, Type: smithy.ShapeTypeList, Ext: &e_ProcessorList})
 var s_ProcessorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProcessor, Members: &mProcessor, Type: smithy.ShapeTypeStructure, Ext: &e_ProcessorList_member})
+var sProcessorParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessorParameter, Members: &mProcessorParameter, Type: smithy.ShapeTypeStructure, Ext: &eProcessorParameter})
 var sProcessorParameter_ParameterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParameterName", ID: &iProcessorParameterName, Members: &mProcessorParameterName, Type: smithy.ShapeTypeEnum, Ext: &eProcessorParameter_ParameterName})
 var sProcessorParameter_ParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParameterValue", ID: &i_ProcessorParameterValue, Type: smithy.ShapeTypeString, Ext: &eProcessorParameter_ParameterValue})
+var s_ProcessorParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcessorParameterList, Members: &m_ProcessorParameterList, Type: smithy.ShapeTypeList, Ext: &e_ProcessorParameterList})
 var s_ProcessorParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProcessorParameter, Members: &mProcessorParameter, Type: smithy.ShapeTypeStructure, Ext: &e_ProcessorParameterList_member})
+var sProcessorParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessorParameterName, Members: &mProcessorParameterName, Type: smithy.ShapeTypeEnum, Ext: &eProcessorParameterName})
 var sProcessorParameterName_LAMBDA_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessorParameterName_LAMBDA_ARN})
 var sProcessorParameterName_LAMBDA_NUMBER_OF_RETRIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA_NUMBER_OF_RETRIES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessorParameterName_LAMBDA_NUMBER_OF_RETRIES})
 var sProcessorParameterName_METADATA_EXTRACTION_QUERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METADATA_EXTRACTION_QUERY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessorParameterName_METADATA_EXTRACTION_QUERY})
@@ -2529,18 +2456,28 @@ var sProcessorParameterName_SUB_RECORD_TYPE = smithy.NewStaticSchema(smithy.Stat
 var sProcessorParameterName_Delimiter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Delimiter", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessorParameterName_Delimiter})
 var sProcessorParameterName_COMPRESSION_FORMAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPRESSION_FORMAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessorParameterName_COMPRESSION_FORMAT})
 var sProcessorParameterName_DATA_MESSAGE_EXTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_MESSAGE_EXTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessorParameterName_DATA_MESSAGE_EXTRACTION})
+var s_ProcessorParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcessorParameterValue, Type: smithy.ShapeTypeString, Ext: &e_ProcessorParameterValue})
+var sProcessorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcessorType, Members: &mProcessorType, Type: smithy.ShapeTypeEnum, Ext: &eProcessorType})
 var sProcessorType_RecordDeAggregation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordDeAggregation", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessorType_RecordDeAggregation})
 var sProcessorType_Decompression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decompression", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessorType_Decompression})
 var sProcessorType_CloudWatchLogProcessing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogProcessing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessorType_CloudWatchLogProcessing})
 var sProcessorType_Lambda = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lambda", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessorType_Lambda})
 var sProcessorType_MetadataExtraction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetadataExtraction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessorType_MetadataExtraction})
 var sProcessorType_AppendDelimiterToRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppendDelimiterToRecord", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcessorType_AppendDelimiterToRecord})
+var s_Proportion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Proportion, Type: smithy.ShapeTypeDouble, Ext: &e_Proportion})
+var s_PutRecordBatchRequestEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutRecordBatchRequestEntryList, Members: &m_PutRecordBatchRequestEntryList, Type: smithy.ShapeTypeList, Ext: &e_PutRecordBatchRequestEntryList})
 var s_PutRecordBatchRequestEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &e_PutRecordBatchRequestEntryList_member})
+var sPutRecordBatchResponseEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordBatchResponseEntry, Members: &mPutRecordBatchResponseEntry, Type: smithy.ShapeTypeStructure, Ext: &ePutRecordBatchResponseEntry})
 var sPutRecordBatchResponseEntry_RecordId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordId", ID: &i_PutResponseRecordId, Type: smithy.ShapeTypeString, Ext: &ePutRecordBatchResponseEntry_RecordId})
 var sPutRecordBatchResponseEntry_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ePutRecordBatchResponseEntry_ErrorCode})
 var sPutRecordBatchResponseEntry_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ePutRecordBatchResponseEntry_ErrorMessage})
+var s_PutRecordBatchResponseEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutRecordBatchResponseEntryList, Members: &m_PutRecordBatchResponseEntryList, Type: smithy.ShapeTypeList, Ext: &e_PutRecordBatchResponseEntryList})
 var s_PutRecordBatchResponseEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutRecordBatchResponseEntry, Members: &mPutRecordBatchResponseEntry, Type: smithy.ShapeTypeStructure, Ext: &e_PutRecordBatchResponseEntryList_member})
+var s_PutResponseRecordId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutResponseRecordId, Type: smithy.ShapeTypeString, Ext: &e_PutResponseRecordId})
+var s_ReadFromTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReadFromTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_ReadFromTimestamp})
+var sRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &eRecord})
 var sRecord_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_Data, Type: smithy.ShapeTypeBlob, Ext: &eRecord_Data})
+var sRedshiftDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftDestinationConfiguration, Members: &mRedshiftDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationConfiguration})
 var sRedshiftDestinationConfiguration_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eRedshiftDestinationConfiguration_RoleARN})
 var sRedshiftDestinationConfiguration_ClusterJDBCURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterJDBCURL", ID: &i_ClusterJDBCURL, Type: smithy.ShapeTypeString, Ext: &eRedshiftDestinationConfiguration_ClusterJDBCURL})
 var sRedshiftDestinationConfiguration_CopyCommand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyCommand", ID: &iCopyCommand, Members: &mCopyCommand, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationConfiguration_CopyCommand})
@@ -2553,6 +2490,7 @@ var sRedshiftDestinationConfiguration_S3BackupMode = smithy.NewStaticSchema(smit
 var sRedshiftDestinationConfiguration_S3BackupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BackupConfiguration", ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationConfiguration_S3BackupConfiguration})
 var sRedshiftDestinationConfiguration_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationConfiguration_CloudWatchLoggingOptions})
 var sRedshiftDestinationConfiguration_SecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerConfiguration", ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationConfiguration_SecretsManagerConfiguration})
+var sRedshiftDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftDestinationDescription, Members: &mRedshiftDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationDescription})
 var sRedshiftDestinationDescription_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eRedshiftDestinationDescription_RoleARN})
 var sRedshiftDestinationDescription_ClusterJDBCURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterJDBCURL", ID: &i_ClusterJDBCURL, Type: smithy.ShapeTypeString, Ext: &eRedshiftDestinationDescription_ClusterJDBCURL})
 var sRedshiftDestinationDescription_CopyCommand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyCommand", ID: &iCopyCommand, Members: &mCopyCommand, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationDescription_CopyCommand})
@@ -2564,6 +2502,7 @@ var sRedshiftDestinationDescription_S3BackupMode = smithy.NewStaticSchema(smithy
 var sRedshiftDestinationDescription_S3BackupDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BackupDescription", ID: &iS3DestinationDescription, Members: &mS3DestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationDescription_S3BackupDescription})
 var sRedshiftDestinationDescription_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationDescription_CloudWatchLoggingOptions})
 var sRedshiftDestinationDescription_SecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerConfiguration", ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationDescription_SecretsManagerConfiguration})
+var sRedshiftDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftDestinationUpdate, Members: &mRedshiftDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationUpdate})
 var sRedshiftDestinationUpdate_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eRedshiftDestinationUpdate_RoleARN})
 var sRedshiftDestinationUpdate_ClusterJDBCURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterJDBCURL", ID: &i_ClusterJDBCURL, Type: smithy.ShapeTypeString, Ext: &eRedshiftDestinationUpdate_ClusterJDBCURL})
 var sRedshiftDestinationUpdate_CopyCommand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyCommand", ID: &iCopyCommand, Members: &mCopyCommand, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationUpdate_CopyCommand})
@@ -2576,14 +2515,24 @@ var sRedshiftDestinationUpdate_S3BackupMode = smithy.NewStaticSchema(smithy.Stat
 var sRedshiftDestinationUpdate_S3BackupUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BackupUpdate", ID: &iS3DestinationUpdate, Members: &mS3DestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationUpdate_S3BackupUpdate})
 var sRedshiftDestinationUpdate_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationUpdate_CloudWatchLoggingOptions})
 var sRedshiftDestinationUpdate_SecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerConfiguration", ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftDestinationUpdate_SecretsManagerConfiguration})
+var s_RedshiftRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedshiftRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_RedshiftRetryDurationInSeconds})
+var sRedshiftRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftRetryOptions, Members: &mRedshiftRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftRetryOptions})
 var sRedshiftRetryOptions_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &i_RedshiftRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eRedshiftRetryOptions_DurationInSeconds})
+var sRedshiftS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftS3BackupMode, Members: &mRedshiftS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eRedshiftS3BackupMode})
 var sRedshiftS3BackupMode_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftS3BackupMode_Disabled})
 var sRedshiftS3BackupMode_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRedshiftS3BackupMode_Enabled})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUseException})
 var sResourceInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceInUseException_message})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
 var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_RetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_RetryDurationInSeconds})
+var sRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryOptions, Members: &mRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eRetryOptions})
 var sRetryOptions_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &i_RetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eRetryOptions_DurationInSeconds})
+var s_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &e_RoleARN})
+var sS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3BackupMode, Members: &mS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eS3BackupMode})
 var sS3BackupMode_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3BackupMode_Disabled})
 var sS3BackupMode_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eS3BackupMode_Enabled})
+var sS3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationConfiguration})
 var sS3DestinationConfiguration_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eS3DestinationConfiguration_RoleARN})
 var sS3DestinationConfiguration_BucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketARN", ID: &i_BucketARN, Type: smithy.ShapeTypeString, Ext: &eS3DestinationConfiguration_BucketARN})
 var sS3DestinationConfiguration_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_Prefix, Type: smithy.ShapeTypeString, Ext: &eS3DestinationConfiguration_Prefix})
@@ -2592,6 +2541,7 @@ var sS3DestinationConfiguration_BufferingHints = smithy.NewStaticSchema(smithy.S
 var sS3DestinationConfiguration_CompressionFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompressionFormat", ID: &iCompressionFormat, Members: &mCompressionFormat, Type: smithy.ShapeTypeEnum, Ext: &eS3DestinationConfiguration_CompressionFormat})
 var sS3DestinationConfiguration_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationConfiguration_EncryptionConfiguration})
 var sS3DestinationConfiguration_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationConfiguration_CloudWatchLoggingOptions})
+var sS3DestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationDescription, Members: &mS3DestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationDescription})
 var sS3DestinationDescription_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eS3DestinationDescription_RoleARN})
 var sS3DestinationDescription_BucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketARN", ID: &i_BucketARN, Type: smithy.ShapeTypeString, Ext: &eS3DestinationDescription_BucketARN})
 var sS3DestinationDescription_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_Prefix, Type: smithy.ShapeTypeString, Ext: &eS3DestinationDescription_Prefix})
@@ -2600,6 +2550,7 @@ var sS3DestinationDescription_BufferingHints = smithy.NewStaticSchema(smithy.Sta
 var sS3DestinationDescription_CompressionFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompressionFormat", ID: &iCompressionFormat, Members: &mCompressionFormat, Type: smithy.ShapeTypeEnum, Ext: &eS3DestinationDescription_CompressionFormat})
 var sS3DestinationDescription_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationDescription_EncryptionConfiguration})
 var sS3DestinationDescription_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationDescription_CloudWatchLoggingOptions})
+var sS3DestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationUpdate, Members: &mS3DestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationUpdate})
 var sS3DestinationUpdate_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eS3DestinationUpdate_RoleARN})
 var sS3DestinationUpdate_BucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketARN", ID: &i_BucketARN, Type: smithy.ShapeTypeString, Ext: &eS3DestinationUpdate_BucketARN})
 var sS3DestinationUpdate_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_Prefix, Type: smithy.ShapeTypeString, Ext: &eS3DestinationUpdate_Prefix})
@@ -2608,30 +2559,48 @@ var sS3DestinationUpdate_BufferingHints = smithy.NewStaticSchema(smithy.StaticSc
 var sS3DestinationUpdate_CompressionFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompressionFormat", ID: &iCompressionFormat, Members: &mCompressionFormat, Type: smithy.ShapeTypeEnum, Ext: &eS3DestinationUpdate_CompressionFormat})
 var sS3DestinationUpdate_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationUpdate_EncryptionConfiguration})
 var sS3DestinationUpdate_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationUpdate_CloudWatchLoggingOptions})
+var sSchemaConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaConfiguration, Members: &mSchemaConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSchemaConfiguration})
 var sSchemaConfiguration_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &eSchemaConfiguration_RoleARN})
 var sSchemaConfiguration_CatalogId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogId", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &eSchemaConfiguration_CatalogId})
 var sSchemaConfiguration_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &eSchemaConfiguration_DatabaseName})
 var sSchemaConfiguration_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &eSchemaConfiguration_TableName})
 var sSchemaConfiguration_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &eSchemaConfiguration_Region})
 var sSchemaConfiguration_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &eSchemaConfiguration_VersionId})
+var sSchemaEvolutionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaEvolutionConfiguration, Members: &mSchemaEvolutionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSchemaEvolutionConfiguration})
 var sSchemaEvolutionConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eSchemaEvolutionConfiguration_Enabled})
+var s_SecretARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretARN, Type: smithy.ShapeTypeString, Ext: &e_SecretARN})
+var sSecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSecretsManagerConfiguration})
 var sSecretsManagerConfiguration_SecretARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretARN", ID: &i_SecretARN, Type: smithy.ShapeTypeString, Ext: &eSecretsManagerConfiguration_SecretARN})
 var sSecretsManagerConfiguration_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eSecretsManagerConfiguration_RoleARN})
 var sSecretsManagerConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eSecretsManagerConfiguration_Enabled})
+var s_SecurityGroupIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &e_SecurityGroupIdList})
 var s_SecurityGroupIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupIdList_member})
+var sSerializer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSerializer, Members: &mSerializer, Type: smithy.ShapeTypeStructure, Ext: &eSerializer})
 var sSerializer_ParquetSerDe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParquetSerDe", ID: &iParquetSerDe, Members: &mParquetSerDe, Type: smithy.ShapeTypeStructure, Ext: &eSerializer_ParquetSerDe})
 var sSerializer_OrcSerDe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrcSerDe", ID: &iOrcSerDe, Members: &mOrcSerDe, Type: smithy.ShapeTypeStructure, Ext: &eSerializer_OrcSerDe})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
 var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_message})
+var s_SizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_SizeInMBs})
+var sSnapshotRequestedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotRequestedBy, Members: &mSnapshotRequestedBy, Type: smithy.ShapeTypeEnum, Ext: &eSnapshotRequestedBy})
 var sSnapshotRequestedBy_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnapshotRequestedBy_USER})
 var sSnapshotRequestedBy_FIREHOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIREHOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnapshotRequestedBy_FIREHOSE})
+var sSnapshotStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotStatus, Members: &mSnapshotStatus, Type: smithy.ShapeTypeEnum, Ext: &eSnapshotStatus})
 var sSnapshotStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnapshotStatus_IN_PROGRESS})
 var sSnapshotStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnapshotStatus_COMPLETE})
 var sSnapshotStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnapshotStatus_SUSPENDED})
+var s_SnowflakeAccountUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeAccountUrl, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeAccountUrl})
+var sSnowflakeBufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeBufferingHints, Members: &mSnowflakeBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeBufferingHints})
 var sSnowflakeBufferingHints_SizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInMBs", ID: &i_SnowflakeBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &eSnowflakeBufferingHints_SizeInMBs})
 var sSnowflakeBufferingHints_IntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalInSeconds", ID: &i_SnowflakeBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eSnowflakeBufferingHints_IntervalInSeconds})
+var s_SnowflakeBufferingIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_SnowflakeBufferingIntervalInSeconds})
+var s_SnowflakeBufferingSizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_SnowflakeBufferingSizeInMBs})
+var s_SnowflakeContentColumnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeContentColumnName, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeContentColumnName})
+var s_SnowflakeDatabase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeDatabase, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeDatabase})
+var sSnowflakeDataLoadingOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeDataLoadingOption, Members: &mSnowflakeDataLoadingOption, Type: smithy.ShapeTypeEnum, Ext: &eSnowflakeDataLoadingOption})
 var sSnowflakeDataLoadingOption_JSON_MAPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON_MAPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDataLoadingOption_JSON_MAPPING})
 var sSnowflakeDataLoadingOption_VARIANT_CONTENT_MAPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VARIANT_CONTENT_MAPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDataLoadingOption_VARIANT_CONTENT_MAPPING})
 var sSnowflakeDataLoadingOption_VARIANT_CONTENT_AND_METADATA_MAPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VARIANT_CONTENT_AND_METADATA_MAPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDataLoadingOption_VARIANT_CONTENT_AND_METADATA_MAPPING})
+var sSnowflakeDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeDestinationConfiguration, Members: &mSnowflakeDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationConfiguration})
 var sSnowflakeDestinationConfiguration_AccountUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountUrl", ID: &i_SnowflakeAccountUrl, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSnowflakeDestinationConfiguration_AccountUrl})
 var sSnowflakeDestinationConfiguration_PrivateKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKey", ID: &i_SnowflakePrivateKey, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSnowflakeDestinationConfiguration_PrivateKey})
 var sSnowflakeDestinationConfiguration_KeyPassphrase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyPassphrase", ID: &i_SnowflakeKeyPassphrase, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSnowflakeDestinationConfiguration_KeyPassphrase})
@@ -2652,6 +2621,7 @@ var sSnowflakeDestinationConfiguration_S3BackupMode = smithy.NewStaticSchema(smi
 var sSnowflakeDestinationConfiguration_S3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Configuration", ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationConfiguration_S3Configuration})
 var sSnowflakeDestinationConfiguration_SecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerConfiguration", ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationConfiguration_SecretsManagerConfiguration})
 var sSnowflakeDestinationConfiguration_BufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferingHints", ID: &iSnowflakeBufferingHints, Members: &mSnowflakeBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationConfiguration_BufferingHints})
+var sSnowflakeDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeDestinationDescription, Members: &mSnowflakeDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationDescription})
 var sSnowflakeDestinationDescription_AccountUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountUrl", ID: &i_SnowflakeAccountUrl, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSnowflakeDestinationDescription_AccountUrl})
 var sSnowflakeDestinationDescription_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &i_SnowflakeUser, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSnowflakeDestinationDescription_User})
 var sSnowflakeDestinationDescription_Database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Database", ID: &i_SnowflakeDatabase, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSnowflakeDestinationDescription_Database})
@@ -2670,6 +2640,7 @@ var sSnowflakeDestinationDescription_S3BackupMode = smithy.NewStaticSchema(smith
 var sSnowflakeDestinationDescription_S3DestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3DestinationDescription", ID: &iS3DestinationDescription, Members: &mS3DestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationDescription_S3DestinationDescription})
 var sSnowflakeDestinationDescription_SecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerConfiguration", ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationDescription_SecretsManagerConfiguration})
 var sSnowflakeDestinationDescription_BufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferingHints", ID: &iSnowflakeBufferingHints, Members: &mSnowflakeBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationDescription_BufferingHints})
+var sSnowflakeDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeDestinationUpdate, Members: &mSnowflakeDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationUpdate})
 var sSnowflakeDestinationUpdate_AccountUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountUrl", ID: &i_SnowflakeAccountUrl, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSnowflakeDestinationUpdate_AccountUrl})
 var sSnowflakeDestinationUpdate_PrivateKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKey", ID: &i_SnowflakePrivateKey, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSnowflakeDestinationUpdate_PrivateKey})
 var sSnowflakeDestinationUpdate_KeyPassphrase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyPassphrase", ID: &i_SnowflakeKeyPassphrase, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSnowflakeDestinationUpdate_KeyPassphrase})
@@ -2689,18 +2660,36 @@ var sSnowflakeDestinationUpdate_S3BackupMode = smithy.NewStaticSchema(smithy.Sta
 var sSnowflakeDestinationUpdate_S3Update = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Update", ID: &iS3DestinationUpdate, Members: &mS3DestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationUpdate_S3Update})
 var sSnowflakeDestinationUpdate_SecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerConfiguration", ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationUpdate_SecretsManagerConfiguration})
 var sSnowflakeDestinationUpdate_BufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferingHints", ID: &iSnowflakeBufferingHints, Members: &mSnowflakeBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeDestinationUpdate_BufferingHints})
+var s_SnowflakeKeyPassphrase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeKeyPassphrase, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeKeyPassphrase})
+var s_SnowflakeMetaDataColumnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeMetaDataColumnName, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeMetaDataColumnName})
+var s_SnowflakePrivateKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakePrivateKey, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakePrivateKey})
+var s_SnowflakePrivateLinkVpceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakePrivateLinkVpceId, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakePrivateLinkVpceId})
+var s_SnowflakeRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_SnowflakeRetryDurationInSeconds})
+var sSnowflakeRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeRetryOptions, Members: &mSnowflakeRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeRetryOptions})
 var sSnowflakeRetryOptions_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &i_SnowflakeRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eSnowflakeRetryOptions_DurationInSeconds})
+var s_SnowflakeRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeRole, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeRole})
+var sSnowflakeRoleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeRoleConfiguration, Members: &mSnowflakeRoleConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeRoleConfiguration})
 var sSnowflakeRoleConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eSnowflakeRoleConfiguration_Enabled})
 var sSnowflakeRoleConfiguration_SnowflakeRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowflakeRole", ID: &i_SnowflakeRole, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSnowflakeRoleConfiguration_SnowflakeRole})
+var sSnowflakeS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeS3BackupMode, Members: &mSnowflakeS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eSnowflakeS3BackupMode})
 var sSnowflakeS3BackupMode_FailedDataOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedDataOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeS3BackupMode_FailedDataOnly})
 var sSnowflakeS3BackupMode_AllData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllData", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeS3BackupMode_AllData})
+var s_SnowflakeSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeSchema, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeSchema})
+var s_SnowflakeTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeTable, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeTable})
+var s_SnowflakeUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnowflakeUser, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SnowflakeUser})
+var sSnowflakeVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeVpcConfiguration, Members: &mSnowflakeVpcConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSnowflakeVpcConfiguration})
 var sSnowflakeVpcConfiguration_PrivateLinkVpceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateLinkVpceId", ID: &i_SnowflakePrivateLinkVpceId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSnowflakeVpcConfiguration_PrivateLinkVpceId})
+var sSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceDescription, Members: &mSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eSourceDescription})
 var sSourceDescription_DirectPutSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectPutSourceDescription", ID: &iDirectPutSourceDescription, Members: &mDirectPutSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eSourceDescription_DirectPutSourceDescription})
 var sSourceDescription_KinesisStreamSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisStreamSourceDescription", ID: &iKinesisStreamSourceDescription, Members: &mKinesisStreamSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eSourceDescription_KinesisStreamSourceDescription})
 var sSourceDescription_MSKSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MSKSourceDescription", ID: &iMSKSourceDescription, Members: &mMSKSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eSourceDescription_MSKSourceDescription})
 var sSourceDescription_DatabaseSourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseSourceDescription", ID: &iDatabaseSourceDescription, Members: &mDatabaseSourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eSourceDescription_DatabaseSourceDescription})
+var sSplunkBufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplunkBufferingHints, Members: &mSplunkBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eSplunkBufferingHints})
 var sSplunkBufferingHints_IntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalInSeconds", ID: &i_SplunkBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eSplunkBufferingHints_IntervalInSeconds})
 var sSplunkBufferingHints_SizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInMBs", ID: &i_SplunkBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &eSplunkBufferingHints_SizeInMBs})
+var s_SplunkBufferingIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SplunkBufferingIntervalInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_SplunkBufferingIntervalInSeconds})
+var s_SplunkBufferingSizeInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SplunkBufferingSizeInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_SplunkBufferingSizeInMBs})
+var sSplunkDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplunkDestinationConfiguration, Members: &mSplunkDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationConfiguration})
 var sSplunkDestinationConfiguration_HECEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HECEndpoint", ID: &i_HECEndpoint, Type: smithy.ShapeTypeString, Ext: &eSplunkDestinationConfiguration_HECEndpoint})
 var sSplunkDestinationConfiguration_HECEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HECEndpointType", ID: &iHECEndpointType, Members: &mHECEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eSplunkDestinationConfiguration_HECEndpointType})
 var sSplunkDestinationConfiguration_HECToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HECToken", ID: &i_HECToken, Type: smithy.ShapeTypeString, Ext: &eSplunkDestinationConfiguration_HECToken})
@@ -2712,6 +2701,7 @@ var sSplunkDestinationConfiguration_ProcessingConfiguration = smithy.NewStaticSc
 var sSplunkDestinationConfiguration_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationConfiguration_CloudWatchLoggingOptions})
 var sSplunkDestinationConfiguration_BufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferingHints", ID: &iSplunkBufferingHints, Members: &mSplunkBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationConfiguration_BufferingHints})
 var sSplunkDestinationConfiguration_SecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerConfiguration", ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationConfiguration_SecretsManagerConfiguration})
+var sSplunkDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplunkDestinationDescription, Members: &mSplunkDestinationDescription, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationDescription})
 var sSplunkDestinationDescription_HECEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HECEndpoint", ID: &i_HECEndpoint, Type: smithy.ShapeTypeString, Ext: &eSplunkDestinationDescription_HECEndpoint})
 var sSplunkDestinationDescription_HECEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HECEndpointType", ID: &iHECEndpointType, Members: &mHECEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eSplunkDestinationDescription_HECEndpointType})
 var sSplunkDestinationDescription_HECToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HECToken", ID: &i_HECToken, Type: smithy.ShapeTypeString, Ext: &eSplunkDestinationDescription_HECToken})
@@ -2723,6 +2713,7 @@ var sSplunkDestinationDescription_ProcessingConfiguration = smithy.NewStaticSche
 var sSplunkDestinationDescription_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationDescription_CloudWatchLoggingOptions})
 var sSplunkDestinationDescription_BufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferingHints", ID: &iSplunkBufferingHints, Members: &mSplunkBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationDescription_BufferingHints})
 var sSplunkDestinationDescription_SecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerConfiguration", ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationDescription_SecretsManagerConfiguration})
+var sSplunkDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplunkDestinationUpdate, Members: &mSplunkDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationUpdate})
 var sSplunkDestinationUpdate_HECEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HECEndpoint", ID: &i_HECEndpoint, Type: smithy.ShapeTypeString, Ext: &eSplunkDestinationUpdate_HECEndpoint})
 var sSplunkDestinationUpdate_HECEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HECEndpointType", ID: &iHECEndpointType, Members: &mHECEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eSplunkDestinationUpdate_HECEndpointType})
 var sSplunkDestinationUpdate_HECToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HECToken", ID: &i_HECToken, Type: smithy.ShapeTypeString, Ext: &eSplunkDestinationUpdate_HECToken})
@@ -2734,24 +2725,45 @@ var sSplunkDestinationUpdate_ProcessingConfiguration = smithy.NewStaticSchema(sm
 var sSplunkDestinationUpdate_CloudWatchLoggingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingOptions", ID: &iCloudWatchLoggingOptions, Members: &mCloudWatchLoggingOptions, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationUpdate_CloudWatchLoggingOptions})
 var sSplunkDestinationUpdate_BufferingHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferingHints", ID: &iSplunkBufferingHints, Members: &mSplunkBufferingHints, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationUpdate_BufferingHints})
 var sSplunkDestinationUpdate_SecretsManagerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsManagerConfiguration", ID: &iSecretsManagerConfiguration, Members: &mSecretsManagerConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSplunkDestinationUpdate_SecretsManagerConfiguration})
+var s_SplunkRetryDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SplunkRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_SplunkRetryDurationInSeconds})
+var sSplunkRetryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplunkRetryOptions, Members: &mSplunkRetryOptions, Type: smithy.ShapeTypeStructure, Ext: &eSplunkRetryOptions})
 var sSplunkRetryOptions_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &i_SplunkRetryDurationInSeconds, Type: smithy.ShapeTypeInteger, Ext: &eSplunkRetryOptions_DurationInSeconds})
+var sSplunkS3BackupMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplunkS3BackupMode, Members: &mSplunkS3BackupMode, Type: smithy.ShapeTypeEnum, Ext: &eSplunkS3BackupMode})
 var sSplunkS3BackupMode_FailedEventsOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedEventsOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSplunkS3BackupMode_FailedEventsOnly})
 var sSplunkS3BackupMode_AllEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllEvents", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSplunkS3BackupMode_AllEvents})
+var sSSLMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSSLMode, Members: &mSSLMode, Type: smithy.ShapeTypeEnum, Ext: &eSSLMode})
 var sSSLMode_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSSLMode_Disabled})
 var sSSLMode_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSSLMode_Enabled})
+var s_StringWithLettersDigitsUnderscoresDots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLettersDigitsUnderscoresDots, Type: smithy.ShapeTypeString, Ext: &e_StringWithLettersDigitsUnderscoresDots})
+var s_SubnetIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &e_SubnetIdList})
 var s_SubnetIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &e_SubnetIdList_member})
+var sTableCreationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableCreationConfiguration, Members: &mTableCreationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTableCreationConfiguration})
 var sTableCreationConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eTableCreationConfiguration_Enabled})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
 var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
 var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagDeliveryStreamInputTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagDeliveryStreamInputTagList, Members: &m_TagDeliveryStreamInputTagList, Type: smithy.ShapeTypeList, Ext: &e_TagDeliveryStreamInputTagList})
 var s_TagDeliveryStreamInputTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagDeliveryStreamInputTagList_member})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
 var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_ThroughputHintInMBs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThroughputHintInMBs, Type: smithy.ShapeTypeInteger, Ext: &e_ThroughputHintInMBs})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopicName, Type: smithy.ShapeTypeString, Ext: &e_TopicName})
+var s_Username = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Username, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_Username})
+var sVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConfiguration, Members: &mVpcConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eVpcConfiguration})
 var sVpcConfiguration_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &eVpcConfiguration_SubnetIds})
 var sVpcConfiguration_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eVpcConfiguration_RoleARN})
 var sVpcConfiguration_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &eVpcConfiguration_SecurityGroupIds})
+var sVpcConfigurationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConfigurationDescription, Members: &mVpcConfigurationDescription, Type: smithy.ShapeTypeStructure, Ext: &eVpcConfigurationDescription})
 var sVpcConfigurationDescription_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &eVpcConfigurationDescription_SubnetIds})
 var sVpcConfigurationDescription_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString, Ext: &eVpcConfigurationDescription_RoleARN})
 var sVpcConfigurationDescription_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &eVpcConfigurationDescription_SecurityGroupIds})
 var sVpcConfigurationDescription_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_NonEmptyStringWithoutWhitespace, Type: smithy.ShapeTypeString, Ext: &eVpcConfigurationDescription_VpcId})
+var s_VpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointServiceName, Type: smithy.ShapeTypeString, Ext: &e_VpcEndpointServiceName})
+var s_WarehouseLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WarehouseLocation, Type: smithy.ShapeTypeString, Ext: &e_WarehouseLocation})
+var sCreateDeliveryStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeliveryStreamInput, Members: &mCreateDeliveryStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeliveryStreamInput})
 var sCreateDeliveryStreamInput_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &eCreateDeliveryStreamInput_DeliveryStreamName})
 var sCreateDeliveryStreamInput_DeliveryStreamType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamType", ID: &iDeliveryStreamType, Members: &mDeliveryStreamType, Type: smithy.ShapeTypeEnum, Ext: &eCreateDeliveryStreamInput_DeliveryStreamType})
 var sCreateDeliveryStreamInput_DirectPutSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectPutSourceConfiguration", ID: &iDirectPutSourceConfiguration, Members: &mDirectPutSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeliveryStreamInput_DirectPutSourceConfiguration})
@@ -2770,39 +2782,61 @@ var sCreateDeliveryStreamInput_MSKSourceConfiguration = smithy.NewStaticSchema(s
 var sCreateDeliveryStreamInput_SnowflakeDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowflakeDestinationConfiguration", ID: &iSnowflakeDestinationConfiguration, Members: &mSnowflakeDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeliveryStreamInput_SnowflakeDestinationConfiguration})
 var sCreateDeliveryStreamInput_IcebergDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IcebergDestinationConfiguration", ID: &iIcebergDestinationConfiguration, Members: &mIcebergDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeliveryStreamInput_IcebergDestinationConfiguration})
 var sCreateDeliveryStreamInput_DatabaseSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseSourceConfiguration", ID: &iDatabaseSourceConfiguration, Members: &mDatabaseSourceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeliveryStreamInput_DatabaseSourceConfiguration})
+var sCreateDeliveryStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeliveryStreamOutput, Members: &mCreateDeliveryStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeliveryStreamOutput})
 var sCreateDeliveryStreamOutput_DeliveryStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamARN", ID: &i_DeliveryStreamARN, Type: smithy.ShapeTypeString, Ext: &eCreateDeliveryStreamOutput_DeliveryStreamARN})
+var sDeleteDeliveryStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeliveryStreamInput, Members: &mDeleteDeliveryStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDeliveryStreamInput})
 var sDeleteDeliveryStreamInput_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &eDeleteDeliveryStreamInput_DeliveryStreamName})
 var sDeleteDeliveryStreamInput_AllowForceDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowForceDelete", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteDeliveryStreamInput_AllowForceDelete})
+var sDeleteDeliveryStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeliveryStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDeliveryStreamOutput})
+var sDescribeDeliveryStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDeliveryStreamInput, Members: &mDescribeDeliveryStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDeliveryStreamInput})
 var sDescribeDeliveryStreamInput_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &eDescribeDeliveryStreamInput_DeliveryStreamName})
 var sDescribeDeliveryStreamInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_DescribeDeliveryStreamInputLimit, Type: smithy.ShapeTypeInteger, Ext: &eDescribeDeliveryStreamInput_Limit})
 var sDescribeDeliveryStreamInput_ExclusiveStartDestinationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveStartDestinationId", ID: &i_DestinationId, Type: smithy.ShapeTypeString, Ext: &eDescribeDeliveryStreamInput_ExclusiveStartDestinationId})
+var sDescribeDeliveryStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDeliveryStreamOutput, Members: &mDescribeDeliveryStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDeliveryStreamOutput})
 var sDescribeDeliveryStreamOutput_DeliveryStreamDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamDescription", ID: &iDeliveryStreamDescription, Members: &mDeliveryStreamDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDeliveryStreamOutput_DeliveryStreamDescription})
+var sListDeliveryStreamsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeliveryStreamsInput, Members: &mListDeliveryStreamsInput, Type: smithy.ShapeTypeStructure, Ext: &eListDeliveryStreamsInput})
 var sListDeliveryStreamsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_ListDeliveryStreamsInputLimit, Type: smithy.ShapeTypeInteger, Ext: &eListDeliveryStreamsInput_Limit})
 var sListDeliveryStreamsInput_DeliveryStreamType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamType", ID: &iDeliveryStreamType, Members: &mDeliveryStreamType, Type: smithy.ShapeTypeEnum, Ext: &eListDeliveryStreamsInput_DeliveryStreamType})
 var sListDeliveryStreamsInput_ExclusiveStartDeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveStartDeliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &eListDeliveryStreamsInput_ExclusiveStartDeliveryStreamName})
+var sListDeliveryStreamsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeliveryStreamsOutput, Members: &mListDeliveryStreamsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListDeliveryStreamsOutput})
 var sListDeliveryStreamsOutput_DeliveryStreamNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamNames", ID: &i_DeliveryStreamNameList, Members: &m_DeliveryStreamNameList, Type: smithy.ShapeTypeList, Ext: &eListDeliveryStreamsOutput_DeliveryStreamNames})
 var sListDeliveryStreamsOutput_HasMoreDeliveryStreams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HasMoreDeliveryStreams", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eListDeliveryStreamsOutput_HasMoreDeliveryStreams})
+var sListTagsForDeliveryStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForDeliveryStreamInput, Members: &mListTagsForDeliveryStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForDeliveryStreamInput})
 var sListTagsForDeliveryStreamInput_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &eListTagsForDeliveryStreamInput_DeliveryStreamName})
 var sListTagsForDeliveryStreamInput_ExclusiveStartTagKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveStartTagKey", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eListTagsForDeliveryStreamInput_ExclusiveStartTagKey})
 var sListTagsForDeliveryStreamInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_ListTagsForDeliveryStreamInputLimit, Type: smithy.ShapeTypeInteger, Ext: &eListTagsForDeliveryStreamInput_Limit})
+var sListTagsForDeliveryStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForDeliveryStreamOutput, Members: &mListTagsForDeliveryStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForDeliveryStreamOutput})
 var sListTagsForDeliveryStreamOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_ListTagsForDeliveryStreamOutputTagList, Members: &m_ListTagsForDeliveryStreamOutputTagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForDeliveryStreamOutput_Tags})
 var sListTagsForDeliveryStreamOutput_HasMoreTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HasMoreTags", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &eListTagsForDeliveryStreamOutput_HasMoreTags})
+var sPutRecordBatchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordBatchInput, Members: &mPutRecordBatchInput, Type: smithy.ShapeTypeStructure, Ext: &ePutRecordBatchInput})
 var sPutRecordBatchInput_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &ePutRecordBatchInput_DeliveryStreamName})
 var sPutRecordBatchInput_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_PutRecordBatchRequestEntryList, Members: &m_PutRecordBatchRequestEntryList, Type: smithy.ShapeTypeList, Ext: &ePutRecordBatchInput_Records})
+var sPutRecordBatchOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordBatchOutput, Members: &mPutRecordBatchOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutRecordBatchOutput})
 var sPutRecordBatchOutput_FailedPutCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedPutCount", ID: &i_NonNegativeIntegerObject, Type: smithy.ShapeTypeInteger, Ext: &ePutRecordBatchOutput_FailedPutCount})
 var sPutRecordBatchOutput_Encrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encrypted", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &ePutRecordBatchOutput_Encrypted})
 var sPutRecordBatchOutput_RequestResponses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestResponses", ID: &i_PutRecordBatchResponseEntryList, Members: &m_PutRecordBatchResponseEntryList, Type: smithy.ShapeTypeList, Ext: &ePutRecordBatchOutput_RequestResponses})
+var sPutRecordInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordInput, Members: &mPutRecordInput, Type: smithy.ShapeTypeStructure, Ext: &ePutRecordInput})
 var sPutRecordInput_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &ePutRecordInput_DeliveryStreamName})
 var sPutRecordInput_Record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Record", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &ePutRecordInput_Record})
+var sPutRecordOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordOutput, Members: &mPutRecordOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutRecordOutput})
 var sPutRecordOutput_RecordId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordId", ID: &i_PutResponseRecordId, Type: smithy.ShapeTypeString, Ext: &ePutRecordOutput_RecordId})
 var sPutRecordOutput_Encrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encrypted", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean, Ext: &ePutRecordOutput_Encrypted})
+var sStartDeliveryStreamEncryptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDeliveryStreamEncryptionInput, Members: &mStartDeliveryStreamEncryptionInput, Type: smithy.ShapeTypeStructure, Ext: &eStartDeliveryStreamEncryptionInput})
 var sStartDeliveryStreamEncryptionInput_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &eStartDeliveryStreamEncryptionInput_DeliveryStreamName})
 var sStartDeliveryStreamEncryptionInput_DeliveryStreamEncryptionConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamEncryptionConfigurationInput", ID: &iDeliveryStreamEncryptionConfigurationInput, Members: &mDeliveryStreamEncryptionConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eStartDeliveryStreamEncryptionInput_DeliveryStreamEncryptionConfigurationInput})
+var sStartDeliveryStreamEncryptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDeliveryStreamEncryptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartDeliveryStreamEncryptionOutput})
+var sStopDeliveryStreamEncryptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDeliveryStreamEncryptionInput, Members: &mStopDeliveryStreamEncryptionInput, Type: smithy.ShapeTypeStructure, Ext: &eStopDeliveryStreamEncryptionInput})
 var sStopDeliveryStreamEncryptionInput_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &eStopDeliveryStreamEncryptionInput_DeliveryStreamName})
+var sStopDeliveryStreamEncryptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDeliveryStreamEncryptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopDeliveryStreamEncryptionOutput})
+var sTagDeliveryStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagDeliveryStreamInput, Members: &mTagDeliveryStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eTagDeliveryStreamInput})
 var sTagDeliveryStreamInput_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &eTagDeliveryStreamInput_DeliveryStreamName})
 var sTagDeliveryStreamInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagDeliveryStreamInputTagList, Members: &m_TagDeliveryStreamInputTagList, Type: smithy.ShapeTypeList, Ext: &eTagDeliveryStreamInput_Tags})
+var sTagDeliveryStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagDeliveryStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagDeliveryStreamOutput})
+var sUntagDeliveryStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagDeliveryStreamInput, Members: &mUntagDeliveryStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagDeliveryStreamInput})
 var sUntagDeliveryStreamInput_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &eUntagDeliveryStreamInput_DeliveryStreamName})
 var sUntagDeliveryStreamInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagDeliveryStreamInput_TagKeys})
+var sUntagDeliveryStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagDeliveryStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagDeliveryStreamOutput})
+var sUpdateDestinationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDestinationInput, Members: &mUpdateDestinationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDestinationInput})
 var sUpdateDestinationInput_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &eUpdateDestinationInput_DeliveryStreamName})
 var sUpdateDestinationInput_CurrentDeliveryStreamVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentDeliveryStreamVersionId", ID: &i_DeliveryStreamVersionId, Type: smithy.ShapeTypeString, Ext: &eUpdateDestinationInput_CurrentDeliveryStreamVersionId})
 var sUpdateDestinationInput_DestinationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationId", ID: &i_DestinationId, Type: smithy.ShapeTypeString, Ext: &eUpdateDestinationInput_DestinationId})
@@ -2816,6 +2850,7 @@ var sUpdateDestinationInput_HttpEndpointDestinationUpdate = smithy.NewStaticSche
 var sUpdateDestinationInput_AmazonOpenSearchServerlessDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmazonOpenSearchServerlessDestinationUpdate", ID: &iAmazonOpenSearchServerlessDestinationUpdate, Members: &mAmazonOpenSearchServerlessDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDestinationInput_AmazonOpenSearchServerlessDestinationUpdate})
 var sUpdateDestinationInput_SnowflakeDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnowflakeDestinationUpdate", ID: &iSnowflakeDestinationUpdate, Members: &mSnowflakeDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDestinationInput_SnowflakeDestinationUpdate})
 var sUpdateDestinationInput_IcebergDestinationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IcebergDestinationUpdate", ID: &iIcebergDestinationUpdate, Members: &mIcebergDestinationUpdate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDestinationInput_IcebergDestinationUpdate})
+var sUpdateDestinationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDestinationOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDestinationOutput})
 
 var CreateDeliveryStream = &sCreateDeliveryStream
 

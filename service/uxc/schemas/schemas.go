@@ -67,31 +67,31 @@ var (
 )
 
 var (
-	iGetAccountCustomizations          = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "GetAccountCustomizations"}
-	iListServices                      = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "ListServices"}
-	iUpdateAccountCustomizations       = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "UpdateAccountCustomizations"}
-	i_AWSAccountUXSetting              = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "AWSAccountUXSetting"}
-	iAccessDeniedException             = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "AccessDeniedException"}
-	iAccountColor                      = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "AccountColor"}
-	iInternalServerException           = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "InternalServerException"}
-	i_MaxResults                       = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "MaxResults"}
-	i_NextToken                        = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "NextToken"}
-	i_Region                           = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "Region"}
-	i_RegionsList                      = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "RegionsList"}
-	i_Service                          = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "Service"}
-	i_ServiceList                      = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "ServiceList"}
-	iThrottlingException               = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "ThrottlingException"}
-	iValidationException               = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "ValidationException"}
-	iValidationExceptionField          = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "ValidationExceptionField"}
-	i_ValidationExceptionFieldList     = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "ValidationExceptionFieldList"}
-	iGetAccountCustomizationsInput     = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "GetAccountCustomizationsInput"}
-	iGetAccountCustomizationsOutput    = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "GetAccountCustomizationsOutput"}
-	iListServicesInput                 = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "ListServicesInput"}
-	iListServicesOutput                = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "ListServicesOutput"}
-	iUpdateAccountCustomizationsInput  = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "UpdateAccountCustomizationsInput"}
-	iUpdateAccountCustomizationsOutput = smithy.ShapeID{Namespace: "com.amazonaws.uxc", Name: "UpdateAccountCustomizationsOutput"}
-	pString                            = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
-	pUnit                              = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	iGetAccountCustomizations          = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "GetAccountCustomizations"}
+	iListServices                      = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "ListServices"}
+	iUpdateAccountCustomizations       = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "UpdateAccountCustomizations"}
+	i_AWSAccountUXSetting              = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "AWSAccountUXSetting"}
+	iAccessDeniedException             = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "AccessDeniedException"}
+	iAccountColor                      = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "AccountColor"}
+	iInternalServerException           = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "InternalServerException"}
+	i_MaxResults                       = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "MaxResults"}
+	i_NextToken                        = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "NextToken"}
+	i_Region                           = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "Region"}
+	i_RegionsList                      = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "RegionsList"}
+	i_Service                          = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "Service"}
+	i_ServiceList                      = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "ServiceList"}
+	iThrottlingException               = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "ThrottlingException"}
+	iValidationException               = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "ValidationException"}
+	iValidationExceptionField          = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList     = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "ValidationExceptionFieldList"}
+	iGetAccountCustomizationsInput     = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "GetAccountCustomizationsInput"}
+	iGetAccountCustomizationsOutput    = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "GetAccountCustomizationsOutput"}
+	iListServicesInput                 = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "ListServicesInput"}
+	iListServicesOutput                = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "ListServicesOutput"}
+	iUpdateAccountCustomizationsInput  = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "UpdateAccountCustomizationsInput"}
+	iUpdateAccountCustomizationsOutput = smithy.ShapeName{Namespace: "com.amazonaws.uxc", Name: "UpdateAccountCustomizationsOutput"}
+	pString                            = smithy.ShapeName{Namespace: "smithy.api", Name: "String"}
+	pUnit                              = smithy.ShapeName{Namespace: "smithy.api", Name: "Unit"}
 )
 
 var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
@@ -111,10 +111,7 @@ var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytrai
 var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
 
 var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
-var mAccountColor = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountColor_NONE, &sAccountColor_PINK, &sAccountColor_PURPLE, &sAccountColor_DARKBLUE, &sAccountColor_LIGHTBLUE, &sAccountColor_TEAL, &sAccountColor_GREEN, &sAccountColor_YELLOW, &sAccountColor_ORANGE, &sAccountColor_RED}, Seed: 4, Slots: []uint16{
-	8, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, 0, 0, 0, 0, 0, 6, 2, 4, 0, 5, 0, 10, 0,
-	1, 0, 0, 0, 9, 0, 0, 0,
-}}
+var mAccountColor = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountColor_NONE, &sAccountColor_PINK, &sAccountColor_PURPLE, &sAccountColor_DARKBLUE, &sAccountColor_LIGHTBLUE, &sAccountColor_TEAL, &sAccountColor_GREEN, &sAccountColor_YELLOW, &sAccountColor_ORANGE, &sAccountColor_RED}, Hash: &hAccountColor}
 var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
 var m_RegionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegionsList_member}}
 var m_ServiceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceList_member}}
@@ -128,31 +125,18 @@ var mListServicesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServ
 var mUpdateAccountCustomizationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountCustomizationsInput_accountColor, &sUpdateAccountCustomizationsInput_visibleServices, &sUpdateAccountCustomizationsInput_visibleRegions}}
 var mUpdateAccountCustomizationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountCustomizationsOutput_accountColor, &sUpdateAccountCustomizationsOutput_visibleServices, &sUpdateAccountCustomizationsOutput_visibleRegions}}
 
+var hAccountColor = smithy.MemberHash{Seed: 4, Slots: []uint16{
+	8, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, 0, 0, 0, 0, 0, 6, 2, 4, 0, 5, 0, 10, 0,
+	1, 0, 0, 0, 9, 0, 0, 0,
+}}
+
 var sGetAccountCustomizations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountCustomizations, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eGetAccountCustomizations})
 var sListServices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServices, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eListServices})
 var sUpdateAccountCustomizations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountCustomizations, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAccountCustomizations})
 var s_AWSAccountUXSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAccountUXSetting, Type: smithy.ShapeTypeService, Ext: &e_AWSAccountUXSetting})
 var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
-var sAccountColor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountColor, Members: &mAccountColor, Type: smithy.ShapeTypeEnum, Ext: &eAccountColor})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
-var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Region})
-var s_RegionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionsList, Members: &m_RegionsList, Type: smithy.ShapeTypeList, Ext: &e_RegionsList})
-var s_Service = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &e_Service})
-var s_ServiceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &e_ServiceList})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
-var sGetAccountCustomizationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountCustomizationsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountCustomizationsInput})
-var sGetAccountCustomizationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountCustomizationsOutput, Members: &mGetAccountCustomizationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountCustomizationsOutput})
-var sListServicesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesInput, Members: &mListServicesInput, Type: smithy.ShapeTypeStructure, Ext: &eListServicesInput})
-var sListServicesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesOutput, Members: &mListServicesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListServicesOutput})
-var sUpdateAccountCustomizationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountCustomizationsInput, Members: &mUpdateAccountCustomizationsInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccountCustomizationsInput})
-var sUpdateAccountCustomizationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountCustomizationsOutput, Members: &mUpdateAccountCustomizationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccountCustomizationsOutput})
-
 var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccountColor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountColor, Members: &mAccountColor, Type: smithy.ShapeTypeEnum, Ext: &eAccountColor})
 var sAccountColor_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountColor_NONE})
 var sAccountColor_PINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountColor_PINK})
 var sAccountColor_PURPLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PURPLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountColor_PURPLE})
@@ -163,25 +147,42 @@ var sAccountColor_GREEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GR
 var sAccountColor_YELLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YELLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountColor_YELLOW})
 var sAccountColor_ORANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountColor_ORANGE})
 var sAccountColor_RED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountColor_RED})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
 var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Region})
+var s_RegionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionsList, Members: &m_RegionsList, Type: smithy.ShapeTypeList, Ext: &e_RegionsList})
 var s_RegionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_RegionsList_member})
+var s_Service = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &e_Service})
+var s_ServiceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &e_ServiceList})
 var s_ServiceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &e_ServiceList_member})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
 var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
 var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
 var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
 var sValidationExceptionField_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_path})
 var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
 var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sGetAccountCustomizationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountCustomizationsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountCustomizationsInput})
+var sGetAccountCustomizationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountCustomizationsOutput, Members: &mGetAccountCustomizationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountCustomizationsOutput})
 var sGetAccountCustomizationsOutput_accountColor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountColor", ID: &iAccountColor, Members: &mAccountColor, Type: smithy.ShapeTypeEnum, Ext: &eGetAccountCustomizationsOutput_accountColor})
 var sGetAccountCustomizationsOutput_visibleServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibleServices", ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &eGetAccountCustomizationsOutput_visibleServices})
 var sGetAccountCustomizationsOutput_visibleRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibleRegions", ID: &i_RegionsList, Members: &m_RegionsList, Type: smithy.ShapeTypeList, Ext: &eGetAccountCustomizationsOutput_visibleRegions})
+var sListServicesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesInput, Members: &mListServicesInput, Type: smithy.ShapeTypeStructure, Ext: &eListServicesInput})
 var sListServicesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eListServicesInput_nextToken})
 var sListServicesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t8, Type: smithy.ShapeTypeInteger, Ext: &eListServicesInput_maxResults})
+var sListServicesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesOutput, Members: &mListServicesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListServicesOutput})
 var sListServicesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServicesOutput_nextToken})
 var sListServicesOutput_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &eListServicesOutput_services})
+var sUpdateAccountCustomizationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountCustomizationsInput, Members: &mUpdateAccountCustomizationsInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccountCustomizationsInput})
 var sUpdateAccountCustomizationsInput_accountColor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountColor", ID: &iAccountColor, Members: &mAccountColor, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAccountCustomizationsInput_accountColor})
 var sUpdateAccountCustomizationsInput_visibleServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibleServices", ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &eUpdateAccountCustomizationsInput_visibleServices})
 var sUpdateAccountCustomizationsInput_visibleRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibleRegions", ID: &i_RegionsList, Members: &m_RegionsList, Type: smithy.ShapeTypeList, Ext: &eUpdateAccountCustomizationsInput_visibleRegions})
+var sUpdateAccountCustomizationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountCustomizationsOutput, Members: &mUpdateAccountCustomizationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccountCustomizationsOutput})
 var sUpdateAccountCustomizationsOutput_accountColor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountColor", ID: &iAccountColor, Members: &mAccountColor, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAccountCustomizationsOutput_accountColor})
 var sUpdateAccountCustomizationsOutput_visibleServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibleServices", ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &eUpdateAccountCustomizationsOutput_visibleServices})
 var sUpdateAccountCustomizationsOutput_visibleRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visibleRegions", ID: &i_RegionsList, Members: &m_RegionsList, Type: smithy.ShapeTypeList, Ext: &eUpdateAccountCustomizationsOutput_visibleRegions})
